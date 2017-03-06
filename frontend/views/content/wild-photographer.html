@@ -1,0 +1,108 @@
+<div class="container-fluid pad0 mg_t75">
+    <img src="frontend/img/dd.jpg" alt="" class="img-full img-responsive">
+</div>
+<div class="black-back">
+    <div class="container">
+        <div class="f-photo-div">
+            <h2 class="head-f white-color">Featured <br> &nbsp;&nbsp;Photographers</h2>
+            <div class="row pad-up100">
+                <div class="col-sm-4 col-md-3 pad5" ng-repeat="user in fpUser">
+                    <div class="thumbnail shadow">
+                        <img ng-src="{{user.background}}" alt="...">
+                        <div class="user-ab">
+                            <div class="border-half">
+                                <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                            </div>
+                            <div class="intro-profile">
+                                <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
+                                <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn whit-btn" role="button">View Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center ">
+                <a href="#" class="btn whit-btn view-a  white-color" role="button">View All</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="pull-right btn-marg">
+            <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>            <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
+            <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <h2 class="border-up">City</h2>
+            <div class="location">
+                <div class="checkbox checkboxing">
+                    <input value="" type="checkbox" id="d" ng-model="checkall" ng-click="toggleAll()">
+                    <label for="d"><span></span> all</label>
+                    <div ng-repeat="dataPoint in checkboxData">
+                        <input value="" type="checkbox" id="{{dataPoint.label}}" ng-model="dataPoint.label">
+                        <label for="{{dataPoint.label}}"><span></span> {{dataPoint.label}}</label>
+                    </div>
+                </div>
+            </div>
+            <h2 class="border-up text-capitalize">Price <small>(per day)</small></h2>
+            <div class="price">
+                <div class="checkbox checkboxing">
+                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="price"><span></span><i class="fa fa-inr"></i> 1000 - <i class="fa fa-inr"></i> 15000</label><br>
+                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price1" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="price1"><span></span><i class="fa fa-inr"></i> 15000 - <i class="fa fa-inr"></i> 250000</label><br>
+                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price2" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="price2"><span></span><i class="fa fa-inr"></i> 250000 - <i class="fa fa-inr"></i> 50000</label><br>
+                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price3" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="price3" class="text-lowercase"><span></span><i class="fa fa-inr"></i> 50000 and above</label><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 users">
+            <div class="col-sm-6 col-md-4" ng-repeat="list in data  |  startFrom:currentPage*pageSize | limitTo:pageSize">
+                <div class="thumbnail">
+                    <img ng-src="{{list.background}}" alt="..." class="img-full img-min-h">
+                    <div class="user-icon">
+                        <div class="border-half">
+                            <img ng-src="{{list.profile}}" alt="" class="img-responsive profile-f-img">
+                        </div>
+                    </div>
+                    <hr class="border-line2 text-center">
+                    <div class="caption googleb">
+                        <p class="title text-capitalize">{{list.name}} {{list.surName}} | {{list.place}}</p>
+                        <p class="title-intro">{{list.content}}</p>
+                        <p class="text-center"><a ui-sref="user-profile" class="btn whit-btn" type="button"> Read More</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>                <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
+                <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="marg-rel">
+            <h2 class="head-f">View other <br> &nbsp;&nbsp;Catergories</h2>
+            <div class="row pad-up100">
+                <div class="col-sm-6 col-md-3 pad5" ng-repeat="user in categories">
+                    <div class="thumbnail shadow">
+                        <img ng-src="{{user.background}}" alt="...">
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center ">
+                <a href="#" class="btn whit-btn view-orang" role="button">View All</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,346 @@
+<div class="container-fluid pad0 ">
+    <div class="head-section relative mg_t75">
+        <img src="frontend/img/clickm/5.jpg" alt="" class="img-full img-responsive">
+        <img src="frontend/img/fh.png" alt="" class="img-responsive img-left">
+        <div class="ab">
+            <div class="border-profile">
+                <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive profile-user">
+                <img src="{{userHead.profile}}" alt="" class="img-responsive profile-f-img">
+            </div>
+            <div class="user-name inline">
+                <h1>{{userHead.name}} {{userHead.surName}}</h1>
+                <p>Location: <span ng-repeat="loc in userHead.location">{{loc}}</p>
+                <p>Speciality: wildlife , wedding , travel</p>
+            </div>
+        </div>
+        <div class="row googleb">
+            <div class="col-md-12 text-center">
+                <ul class="full-tabs2 list-inline">
+                    <li ng-class="{'active': activeTab == 1}" ng-click="toggleTab(1)">ABOUT
+                        <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                    </li>
+                    <span class="border-line"></span>
+                    <li ng-class="{'active': activeTab == 2}" ng-click="toggleTab(2)">WORK
+                        <img src="frontend/img/photographer/under.png" alt="" class="img-responsive"></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- dosis-medium for categories -->
+<div class="grey-back">
+    <div class="container ">
+        <div class="row">
+            <div class="" ng-if="activeTab == 1">
+                <div class="main-cont whit-back">
+                    <div class="about-head text-capitalize">about asmara khan <span class="pull-right"><a href="#" class="whit-color"><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline"> Edit</a></span></div>
+                    <div class="abt-form">
+                        <form action="" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="name" class="">
+                          <img src="frontend/img/photographer/form/user.png" alt="" class="img-responsive display-inline">Name:</label>
+                                <div class="w77">
+                                    <input type="text" class="form-control" id="name" placeholder="Please enter your full name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="">
+                            <img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline">
+                            Location:</label>
+                                <div class="selected-option display-inline">
+                                    <span>Mumbai</span>
+                                    <div class="close-btn">x</div>
+                                </div>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </div>
+                            <div class="form-group box custom-check">
+                                <label for="speciality" class="">
+                          <img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">
+                          Speciality:</label>
+                                <p class="check-box">
+                                    <input type="checkbox" id="test1" />
+                                    <label for="test1" class="check-label">Underwater</label>
+                                </p>
+                                <p class="check-box">
+                                    <input type="checkbox" id="test2" />
+                                    <label for="test2" class="check-label">Wedding</label>
+                                </p>
+                                <p class="check-box">
+                                    <input type="checkbox" id="test3" />
+                                    <label for="test3" class="check-label">Food</label>
+                                </p>
+                                <p class="check-box">
+                                    <input type="checkbox" id="test4" />
+                                    <label for="test4" class="check-label">Wildlife</label>
+                                </p>
+                                <p class="check-box">
+                                    <input type="checkbox" id="test5" />
+                                    <label for="test5" class="check-label">Others</label>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="bio" class="vat">
+                            <img src="frontend/img/photographer/form/edit.png" alt="" class="img-responsive display-inline">Bio:</label>
+                                <div class="inline">
+                                    <textarea class="form-control text-set" id="bio" rows="5" placeholder="Describe yourself as a photographer in less than 250 characters"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Pricing" class="">
+                            <img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">
+                            Pricing:</label><i class="fa fa-inr"></i>
+                                <div class="display-inline">
+                                    <input type="text" class="form-control" id="pricing" placeholder="5000">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="main-cont so-nam">
+                    <span>Share this Profile on </span><span><img src="frontend/img/social/4.png" alt=""></span><span><img src="frontend/img/social/3.png" alt=""></span><span><img src="frontend/img/social/2.png" alt=""></span><span><img src="frontend/img/social/1.png" alt=""></span>
+                </div>
+                <div class="main-cont whit-back">
+                    <div class="about-head text-capitalize">REVIEWS</div>
+                    <div class="abt-form">
+                        <div class="input-group pad25">
+                            <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">
+                            <span class="input-group-addon pub-btn" id="basic-addon2">Publish review</span>
+                        </div>
+                        <div class="user-section" ng-repeat="data in reviewList">
+                            <div class="profile-img"><img ng-src="{{data.profile}}" alt=""></div>
+                            <div class="profile-intro">
+                                <p class="intro">{{data.name}} {{data.surName}}</p>
+                                <p>{{data.days}} Day ago</p>
+                            </div>
+                            <p class="inline-block">{{data.content}}</p>
+                            <textarea name="name" class="input-border" placeholder="Write a comment..."></textarea>
+                        </div>
+                        <div class="input-group pad25">
+                            <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">
+                            <span class="input-group-addon pub-btn" id="basic-addon2">Publish review</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="other-section">
+
+                    <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
+                    <div class="row pad-up100">
+                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in fpUser">
+                            <div class="thumbnail shadow">
+                                <img ng-src="{{user.background}}" alt="...">
+                                <div class="user-ab">
+                                    <div class="border-half">
+                                        <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                    </div>
+                                    <div class="intro-profile">
+                                        <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="" ng-if="activeTab == 2">
+                <div class="main-cont damionr sec-tab" ng-hide="showMe">
+                    <h1 class="orange-color sech  ft100 text-capitalize ng-binding">asmara</h1>
+                    <p>has not uploaded any photos</p>
+                    <div class="text-center">
+                        <a href="#" class="btn orange-btn" role="button" ng-click="showMe=true">Ask her</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" ng-show="showMe" style="position: relative;" ng-init="content=wildlife">
+                        <div class="radioBtn_cat">
+                            <!--used for categories radio buttons-->
+                            <div class="inline-block">
+                                <h2>Zohn Photos</h2>
+                            </div>
+                            <div class="radioBtn_wdt inline-block">
+                                <form>
+                                    <input type="radio" name="wildlife" id="radio_01" ng-model="content" value="wildlife" ng-click="showData();">
+                                    <label class="radio-inline" for="radio_01"><span></span> Wildlife
+                            </label>
+                                    <input type="radio" name="wildlife" id="radio_02" ng-model="content" value="wedding">
+                                    <label class="radio-inline" for="radio_02"><span></span> Wedding
+                            </label>
+                                    <input type="radio" name="wildlife" id="radio_03" ng-model="content" value="travel">
+                                    <label class="radio-inline" for="radio_03"><span></span>
+                                Travel
+                            </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block  pad25 all_cat">
+                    <!--used for categories-->
+                    <div ng-show="content == 'wildlife'">
+                        <div class="col-md-4 padd15" ng-repeat="imgs in wildlife track by $index">
+                            <div class="fp_innerPadd ">
+                                <img ng-src="{{imgs}}" class="img-responsive">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 padd15" ng-show="content == 'wedding'" ng-repeat="imgs in wedding track by $index">
+                        <div class="fp_innerPadd ">
+                            <img ng-src="{{imgs}}" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-md-4 padd15" ng-show="content == 'travel'" ng-repeat="imgs in travel track by $index">
+                        <div class="fp_innerPadd ">
+                            <img ng-src="{{imgs}}" class="img-responsive">
+                        </div>
+                    </div>
+                    <div ng-show="showSocial" class="row">
+                        <div class="col-md-12">
+                            <div class="row share_profile">
+                                <div class="col-md-8">
+                                    <ul class=" list-unstyled list-inline">
+                                        <li>Share this profile on</li>
+                                        <li>
+                                            <a href=""><img src="frontend/img/social/4.png" alt="" class="img-responsive"></a>
+                                        </li>
+                                        <li>
+                                            <a href=""><img src="frontend/img/social/3.png" alt="" class="img-responsive"></a>
+                                        </li>
+                                        <li>
+                                            <a href=""><img src="frontend/img/social/2.png" alt="" class="img-responsive"></a>
+                                        </li>
+                                        <li>
+                                            <a href=""><img src="frontend/img/social/1.png" alt="" class="img-responsive"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 pull-right">
+                                    <div class="load_more_btn">
+                                        <p class="text-right"><a class="btn orange-btn" type="button">Load More</a></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- for shar profile link-->
+
+                <div class="other-section">
+                    <!--ng-hide="showMe"-->
+                    <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
+                    <div class="row pad-up100">
+                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in fpUser">
+                            <div class="thumbnail shadow">
+                                <img ng-src="{{user.background}}" alt="...">
+                                <div class="user-ab">
+                                    <div class="border-half">
+                                        <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                    </div>
+                                    <div class="intro-profile">
+                                        <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="other-section" ng-show="showMe">
+                   
+                    <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
+                    <div class="row pad-up100">
+                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in fpUser">
+                            <div class="thumbnail shadow">
+                                <img ng-src="{{user.background}}" alt="...">
+                                <div class="user-ab">
+                                    <div class="border-half">
+                                        <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                    </div>
+                                    <div class="intro-profile">
+                                        <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <!-- for send enquiry popup-->
+
+
+            <div class="send_enquirySlidebar" enquiry-directive="slide">
+                <div class="send_enquiry">
+                    <p>
+                        <a class="btn orange-btn " type="button" href="#" ng-click="sendEnquiry()"> Send an enquiry</a>
+                    </p>
+                </div>
+
+                <div class="col-md-12 padd35">
+                    <form name="formEnquiry" ng-submit="dataSubmit(enquiryData)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="userName" placeholder="Full Name" name="userName" ng-model="enquiryData.name"
+                                        required>
+                                    <div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required ng-model="enquiryData.email">
+                                </div>
+                                <!--<p>Please Enter Your Email</p>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="mobNo" placeholder="Mobile No" name="mobNo" required ng-model="enquiryData.mobNo">
+                                </div>
+                                <!--<p>Please Enter Your Mobile No</p>-->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown">Needed on <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Needed on</a></li>
+                                            <li><a href="#">Needed on</a></li>
+                                            <li><a href="#">Needed on</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" cols="30" rows="5" name="comment" id="comment" required ng-model="enquiryData.comment"></textarea>
+                                </div>
+                                <!--<p>Please Enter Some Comments</p>-->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <p class="text-center"><a class="btn orange-btn" type="button" ng-click="openModal('sm');">Send</a></p>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- end of send enquiry popup-->
+        </div>
+    </div>
+</div>

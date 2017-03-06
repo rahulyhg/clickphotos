@@ -1,0 +1,43 @@
+{
+    "title": "Featured Photographer",
+    "description": "List of Featured Photographers",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "name"
+    }, {
+        "name": "Package",
+        "isSort": "",
+        "tableRef": "package"
+    },{
+        "name": "Location",
+        "type":"fkListView",
+        "tableRef": "location"
+    }, {
+        "name": "Speciality",
+        "type":"enumdisplay",
+        "isSort": "",
+        "tableRef": "speciality"
+    }],
+    "action": [{
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Photographer",
+        "content": "Are you sure you want to delete Photographer?",
+        "api": "Photographer/deleteFeaturedPhotographer",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+
+    "apiCall": {
+        "url": "Photographer/getPhotographers",
+        "params": "_id"
+    }
+}

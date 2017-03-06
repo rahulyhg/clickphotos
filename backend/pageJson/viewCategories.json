@@ -1,0 +1,55 @@
+{
+    "title": "Categories",
+    "description": "List of Categories",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "name"
+    }, {
+        "name": "Image1",
+        "type": "image",
+        "isSort": "",
+        "tableRef": "bigimage"
+    }, {
+        "name": "Image2",
+        "type": "image",
+        "isSort": "",
+        "tableRef": "smallimage"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editCategories",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Categories",
+        "content": "Are you sure you want to delete Categories?",
+        "api": "Categories/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createCategories"
+    }],
+    "apiCall": {
+        "url": "Categories/search",
+        "params": "_id"
+    }
+}

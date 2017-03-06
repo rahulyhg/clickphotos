@@ -1,0 +1,4 @@
+<span ng-repeat="city in form.model">
+      <span ng-if="$index<form.model.length-1">{{city.city}},</span>
+  <span ng-if="$index==form.model.length-1">{{city.city}}</span>
+</span>

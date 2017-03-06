@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="head-name pad60">
+        <div class="ht30">
+            <img src="frontend/img/clickm/6.png" class="imgwt" alt="">
+            <h1 class="fith damionr ft100 text-capitalize">{{tileList.titleOne}}</h1>
+        </div>
+        <h1 class="sech damionr ft100 text-capitalize">{{tileList.titleTwo}}</h1>
+    </div>
+    <div class="row users pad100">
+        <div class="col-sm-6 col-md-4" ng-repeat="list in usersList">
+            <div class="thumbnail">
+                <img ng-src="{{list.background}}" alt="..." class="img-full img-min-h">
+                <div class="user-icon">
+                    <div class="border-half">
+                        <img ng-src="{{list.profile}}" alt="" class="img-responsive profile-f-img">
+                    </div>
+                </div>
+                <hr class="border-line2 text-center">
+                <div class="caption googleb">
+                    <p class="title text-capitalize">{{list.name}} {{list.surName}} | {{list.place}}</p>
+                    <p class="title-intro">{{list.content}}</p>
+                    <p class="text-center"><a ui-sref="user-profile" class="btn whit-btn" type="button"> Read More</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="sub-main">
+                <img ng-src="{{subclick.background}}" alt="..." class="img-full img-min-h">
+                <div class="sub-title text-right">
+                    <h1 class="fith damionr font70 white-color">{{subclick.titleOne}}</h1>
+                    <h1 class="sech damionr font70 orange-color">{{subclick.titleTwo}}</h1>
+                    <p class="text-center"><a class="btn orange-btn" type="button">Click here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

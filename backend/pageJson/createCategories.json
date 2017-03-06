@@ -1,0 +1,59 @@
+{
+    "title": "Create Categories",
+    "name": "Categories",
+    "jsonPage": "viewCategories",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Categories"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Name",
+        "id": "input1",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Image1",
+        "type": "image",
+        "tableRef": "bigimage",
+        "option": "single",
+        "size": "416 x 300px",
+        "placeholder": "Enter image",
+        "id": "input1",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Image2",
+        "type": "image",
+        "tableRef": "smallimage",
+        "option": "single",
+        "size": "1027 x 553px",
+        "placeholder": "Enter Image",
+        "id": "input1",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitWhatsHot",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewCategories"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewCategories"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Categories/save"
+    }
+}

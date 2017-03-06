@@ -1,0 +1,49 @@
+{
+    "title": "Edit FeaturedPhotographer",
+    "name": "FeaturedPhotographer",
+    "jsonPage": "viewFeaturedPhotographer",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Photographer to display",
+        "type": "tags",
+        "tableRef": "isactive",
+        "placeholder": "Enter isactive",
+        "id": "isactive",
+        "validation": ["", "trim", ""],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": [true, false]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitFeaturedPhotographer",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewFeaturedPhotographer"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewFeaturedPhotographer"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Photographer/updatePhotographer",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "Photographer/getOne",
+        "params": "_id"
+    }
+
+}

@@ -1,0 +1,62 @@
+{
+    "title": "Photographers",
+    "description": "List of Photographers",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "name"
+    }, {
+        "name": "Package",
+        "isSort": "",
+        "tableRef": "package"
+    }, {
+        "name": "Location",
+        "type":"fkListView",
+        "tableRef": "location"
+    }, {
+        "name": "Speciality",
+        "type":"enumdisplay",
+        "isSort": "",
+        "tableRef": "speciality"
+    }, {
+        "name": "Status",
+        "isSort": "",
+        "tableRef": "status"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editPhotographer",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Photographer",
+        "content": "Are you sure you want to delete Photographer?",
+        "api": "Photographer/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createPhotographer"
+    }],
+    "apiCall": {
+        "url": "Photographer/search",
+        "params": "_id"
+    }
+}

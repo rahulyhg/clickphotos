@@ -1,0 +1,58 @@
+{
+    "title": "Artist Of The Month",
+    "description": "List of Artist Of The Month",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "name"
+    }, {
+        "name": "Image",
+        "type": "image",
+        "isSort": "",
+        "tableRef": "image"
+    },{
+        "name": "Start Date",
+        "isSort": "",
+        "tableRef": "startdate"
+    },{
+        "name": "End Date",
+        "isSort": "",
+        "tableRef": "enddate"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editArtistOfMonth",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete ArtistOfMonth",
+        "content": "Are you sure you want to delete ArtistOfMonth?",
+        "api": "ArtistOfMonth/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createArtistOfMonth"
+    }],
+    "apiCall": {
+        "url": "ArtistOfMonth/search",
+        "params": "_id"
+    }
+}
