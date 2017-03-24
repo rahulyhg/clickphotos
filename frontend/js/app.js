@@ -159,6 +159,16 @@ firstapp.config(function ($translateProvider) {
     $translateProvider.preferredLanguage('en');
 });
 
+firstapp.filter('serverimage', function () {
+   return function (image) {
+       if (image && image !== null) {
+           return adminurl + "upload/readFile?file=" + image;
+       } else {
+           return undefined;
+       }
+   }
+});
+
 firstapp.service('anchorSmoothScroll', function () {
 
     this.scrollTo = function (eID) {

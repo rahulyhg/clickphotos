@@ -6,6 +6,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
+        NavigationService.callApi("ArtistOfMonth/search", function (data) {
+            if (data.value === true) {
+                console.log(data)
+                $scope.artistOfMonth = data.data.results[0];
+                console.log("$scope.ArtistOfMonth--", $scope.artistOfMonth)
+            }
+        });
+
+        // NavigationService.callApi("Categories/search", function (data) {
+        //             if (data.value === true) {
+        //                 console.log(data)
+        //                 $scope.Categories = data.data.results;
+        //             console.log("$scope.Categories--", $scope.Categories)}
+        // });
+
+        NavigationService.callApi("Categories/search", function (data) {
+            if (data.value === true) {
+                console.log(data)
+                $scope.category = data.data.results;
+                //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
+                $scope.cat = _.chunk($scope.category, 3);
+                console.log("$scope.categocacatry--.....", $scope.cat);
+                // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
+                //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
+                // });
+                // console.log($scope.categoryLvl2)
+                // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
+            } else {
+                //  toastr.warning('Error submitting the form', 'Please try again');
+            }
+        });
+
         $scope.mySlides = [
             // 'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
             // 'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
@@ -296,6 +328,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Categories"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
+        NavigationService.callApi("Categories/search", function (data) {
+            if (data.value === true) {
+                console.log(data)
+                $scope.category = data.data.results;
+                //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
+                $scope.cat = _.chunk($scope.category, 3);
+                console.log("$scope.categocacatry--.....", $scope.cat);
+                // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
+                //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
+                // });
+                // console.log($scope.categoryLvl2)
+                // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
+            } else {
+                //  toastr.warning('Error submitting the form', 'Please try again');
+            }
+        });
 
     })
     .controller('UserProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {

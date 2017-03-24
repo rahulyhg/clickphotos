@@ -5,20 +5,29 @@
             <div class="col-md-12 text-center">
                 <div class="ht30 mt_103">
                     <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
-                    <h2>Categories</h2>
+                    <h3>Categories</h3>
                 </div>
             </div>
-            <div class="all_cate">
-                <div class=" col-md-12">
-                    <img src="frontend/img/cat2.jpg" class="img-responsive" alt="">
+            <div class="all_cate" ng-repeat="catEl in cat">
+                <div class=" col-md-12" ng-if="catEl[0]">
+                    <img ng-src="{{catEl[0].bigimage | serverimage}}" class="img-responsive" alt="">
+                    <div class="img-section__text">
+                        <h3>{{catEl[0].name}}</h3>
+                    </div>
                 </div>
-                <div class=" col-md-6  col-xs-12 padd_rt">
-                    <img src="frontend/img/cat3.jpg" class="img-responsive" alt="">
+                <div ng-if="catEl[1]" class=" col-md-6  col-xs-12 padd_rt">
+                    <img ng-src="{{catEl[1].bigimage | serverimage}}" class="img-responsive" alt="">
+                    <div class="img-section__text">
+                        <h3>{{catEl[1].name}}</h3>
+                    </div>
                 </div>
-                <div class=" col-md-6 padd_lt">
-                    <img src="frontend/img/cat4.jpg" class="img-responsive" alt="">
+                <div ng-if="catEl[2]" class=" col-md-6 padd_lt">
+                    <img ng-src="{{catEl[2].bigimage | serverimage}}" class="img-responsive" alt="">
+                    <div class="img-section__text">
+                        <h3>{{catEl[2].name}}</h3>
+                    </div>
                 </div>
-                <div class=" col-md-12">
+                <!--<div class=" col-md-12">
                     <img src="frontend/img/cat5.jpg" class="img-responsive" alt="">
                 </div>
 
@@ -30,12 +39,11 @@
                 </div>
                 <div class=" col-md-12">
                     <img src="frontend/img/cat6.jpg" class="img-responsive" alt="">
-                </div>
-
-                <div class="col-md-2 col-md-push-5 ">
-                    <button class="btn btn-block">Load More</button>
-                </div>
+                </div>-->
             </div>
+        </div>
+        <div class="col-md-2 col-md-push-5 ">
+            <button class="btn btn-block">Load More</button>
         </div>
     </div>
 </section>

@@ -280,6 +280,13 @@
     .light-grey {
         background-color: #f6f6f6;
     }
+   .img-section__text{ // used for abslt position
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
+   }
     
     // end of @extend classes
     // CSS transition effects
@@ -1017,7 +1024,9 @@
                 // need to change in col-xs 
                 padding-left: 0;
             }
-            button {
+           
+        }
+         button {
                 margin-top: 50px;
                 height: 39px;
                 @extend .myBtnOrange;
@@ -1025,7 +1034,6 @@
             .btn:hover {
                 @extend .myBtnOrange;
             }
-        }
     }
     
     // end of section categories

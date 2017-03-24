@@ -97,7 +97,7 @@
     </div>
 </section>
 <!--flex slider for featured photographer-->
-<section class="featu_photo_caraso" >
+<section class="featu_photo_caraso">
     <div class="container">
         <div class="col-md-12">
             <div class="fp_padd_rl">
@@ -177,25 +177,33 @@
                     <h2>Categories</h2>
                 </div>
             </div>
-            <div class="all_cate">
-                <div class=" col-md-12">
-                    <a ui-sref="wild-photographer"><img src="frontend/img/cat2.jpg" class="img-responsive" alt=""></a>
+            <div class="all_cate" ng-repeat="catEl in cat">
+                <div class=" col-md-12" ng-if="catEl[0]">
+                    <a ui-sref="wild-photographer"><img ng-src="{{catEl[0].bigimage | serverimage}}" class="img-responsive" alt=""></a>
+                    <div class="img-section__text">
+                        <h3>{{catEl[0].name}}</h3>
+                    </div>
                 </div>
-                <div class=" col-md-6  col-xs-12 padd_rt">
-                    <a href="#"> <img src="frontend/img/cat3.jpg" class="img-responsive" alt=""></a>
+                <div class=" col-md-6  col-xs-12 padd_rt" ng-if="catEl[1]">
+                    <a href="#"> <img ng-src="{{catEl[1].bigimage | serverimage}}" class="img-responsive" alt=""></a>
+                    <div class="img-section__text">
+                        <h3>{{catEl[1].name}}</h3>
+                    </div>
                 </div>
-                <div class=" col-md-6 padd_lt">
-                    <a href="#"> <img src="frontend/img/cat4.jpg" class="img-responsive" alt=""></a>
+                <div class=" col-md-6 padd_lt" ng-if="catEl[2]">
+                    <a href="#"> <img ng-src="{{catEl[2].bigimage | serverimage}}" class="img-responsive" alt=""></a>
+                    <div class="img-section__text">
+                        <h3>{{catEl[2].name}}</h3>
+                    </div>
                 </div>
-                <div class=" col-md-12">
+                <!--<div class=" col-md-12">
                     <a href="#"> <img src="frontend/img/cat5.jpg" class="img-responsive" alt=""></a>
-                </div>
-                <div class="col-md-2 col-md-push-5 ">
-                    <button class="btn btn-block" ui-sref="categories">View All</button>
-                </div>
+                </div>-->
+            </div>
+            <div class="col-md-2 col-md-push-5 ">
+                <button class="btn btn-block" ui-sref="categories">View All</button>
             </div>
         </div>
-    </div>
 </section>
 <!--end of categories section-->
 <!-- start of signup section-->
@@ -232,9 +240,10 @@
                 <h2 class="head-f">Artist of <br> &nbsp the month</h2>
                 <div class="bg_img">
                     <img src="frontend/img/atm0.jpg" class="img-responsive" alt="">
+                    <!--<img src="{{ArtistOfMonth.image | serverimage}}" class="img-responsive" alt="">-->
                     <div class="user-ab">
                         <div class="border-half">
-                            <img src="frontend/img/clickm/pic1.png" alt="" class="img-responsive profile-f-img doneLoading">
+                            <img ng-src="{{artistOfMonth.image | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
                         </div>
                         <!--<div class="intro-profile">
                             <p class="name-loc ng-binding">Zaroon Jaffrani | Pune</p>
@@ -246,10 +255,8 @@
             </div>
             <div class="col-md-5">
                 <div class="user_info">
-                    <h2>Zaroon Jaffrani | Pune<br><span>wild life</span></h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                        it to make a type specimen book. It has survived not only five centuries </p>
+                    <h2>{{artistOfMonth.name}}</h2>
+                    <p ng-bind-html="artistOfMonth.content">{{artistOfMonth.content}}</p>
                     <p class="text-left"><a class="btn whit-btn" type="button" href="#"> Read More</a></p>
                 </div>
             </div>
