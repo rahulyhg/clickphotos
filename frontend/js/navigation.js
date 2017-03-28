@@ -1,4 +1,7 @@
+var adminurl = "http://wohlig.io/api/";
+
 var navigationservice = angular.module('navigationservice', [])
+
 
     .factory('NavigationService', function ($http) {
         var navigation = [{
@@ -43,6 +46,28 @@ var navigationservice = angular.module('navigationservice', [])
             callApi: function (url, callback) {
                 $http.post(adminurl + url).then(function (data) {
                     data = data.data;
+                    callback(data);
+                });
+            },
+
+            sendLogin: function (formdata, callback) {
+                $http({
+                    url: adminurl + 'Photographer/registerUser',
+                    method: 'POST',
+                    data: formdata,
+                    withCredentials: true
+                }).then(function (data) {
+                    callback(data);
+                });
+            },
+
+            checkLogin: function (formdata, callback) {
+                $http({
+                    url: adminurl + 'Photographer/doLogin',
+                    method: 'POST',
+                    data: formdata,
+                    withCredentials: true
+                }).then(function (data) {
                     callback(data);
                 });
             },

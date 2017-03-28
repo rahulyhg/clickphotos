@@ -48,7 +48,11 @@
                         <div class="photographer_img">
                             <img src="frontend/img/user.png" alt="UserImage" class="img-responsive">
                         </div>
-                        <span ng-click="uploadSignup()">Sign up as photographer</span>
+                        <span ng-if="!template.profile" ng-click="uploadSignup()">Sign up as photographer</span>
+                        <span ng-if="template.profile">{{template.profile.name}}</span>
+                        
+                        <button ng-if="template.profile" ng-click="logout()" >Logout</span>
+                        
                     </div>
                     <!--photographer-->
                 </div>

@@ -3,6 +3,15 @@ var schema = new Schema({
         type: String,
         default: ""
     },
+    email: {
+        type: String,
+        validate: validators.isEmail(),
+        unique: true
+    },
+    password: {
+        type: String,
+        default: ""
+    },
     package: {
         type: String,
         enum: ["Gold", "Silver"]
@@ -36,8 +45,8 @@ schema.plugin(deepPopulate, {
         location: {
             select: ""
         },
-        speciality:{
-            select:""
+        speciality: {
+            select: ""
         }
     }
 });
@@ -127,6 +136,44 @@ var model = {
                 callback(err, null);
             } else {
                 callback(null, updated);
+            }
+        });
+    },
+
+    doLogin: function (data, callback) {
+        console.log("data", data)
+        Photographer.findOne({
+            email: data.email,
+            password: md5(data.password)
+        }).exec(function (err, found) {
+            if (err) {
+
+                callback(err, null);
+            } else {
+                if (found) {
+                    var foundObj = found.toObject();
+                    delete foundObj.password;
+                    callback(null, foundObj);
+                } else {
+                    callback({
+                        message: "Incorrect Credentials!"
+                    }, null);
+                }
+            }
+
+        });
+    },
+
+    registerUser: function (data, callback) {
+        var photographer = this(data);
+        photographer.password = md5(photographer.password);
+        photographer.save(function (err, created) {
+            if (err) {
+                callback(err, null);
+            } else if (created) {
+                callback(null, created);
+            } else {
+                callback(null, {});
             }
         });
     }

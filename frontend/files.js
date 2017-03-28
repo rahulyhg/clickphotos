@@ -5,7 +5,7 @@ module.exports = [
   'bower_components/flexslider/jquery.flexslider-min.js',
   'bower_components/fancyBox/source/jquery.fancybox.js',
   'bower_components/smart-app-banner/smart-app-banner.js',
-
+  'bower_components/jStorage/jstorage.js',
   //Angular Libs
   'bower_components/angular/angular.min.js',
   'bower_components/angular-sanitize/angular-sanitize.min.js',

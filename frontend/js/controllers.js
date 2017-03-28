@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ui.swiper'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper'])
 
     .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll) {
         $scope.template = TemplateService.changecontent("home"); //Use same name of .html file
@@ -710,15 +710,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }];
 
     })
-    .controller('headerctrl', function ($scope, TemplateService, $uibModal) {
+    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService,$state) {
         $scope.template = TemplateService;
+
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
         });
         $.fancybox.close(true);
         $scope.uploadSignup = function () {
             console.log("signup");
-            $uibModal.open({
+            $scope.loginModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/signup-profile.html",
                 scope: $scope,
@@ -727,8 +728,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
         $scope.logIn = function () {
+            if ($scope.loginModal) {
+                $scope.loginModal.close();
+            }
             console.log("login");
-            $uibModal.open({
+            $scope.signupModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/login.html",
                 scope: $scope,
@@ -737,6 +741,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+        $scope.signUp = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.sendLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.value);
+                        $scope.loginModal.close();
+                    }
+                });
+            },
+
+            $scope.login = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.checkLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.data);
+                        $.jStorage.set("photographer", data.data.data);
+                        $scope.template.profile = data.data.data;
+                        $scope.signupModal.close();
+                         $state.go("photographer");
+                    }
+                });
+            }
+
+        if ($.jStorage.get("photographer")) {
+            $scope.template.profile = $.jStorage.get("photographer");
+        }
+
+        $scope.logout = function () {
+            $.jStorage.flush();
+            $scope.template.profile = {};
+            $state.go("home");
+        }
         //     $scope.signUp = function() {
         //       console.log(modal);
         //         $uibModal.open({

@@ -38,6 +38,32 @@ var controller = {
                 }
             })
         }
+    },
+
+    registerUser: function (req, res) {
+        if (req.body) {
+            Photographer.registerUser(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    doLogin: function (req, res) {
+        if (req.body) {
+            Photographer.doLogin(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 
