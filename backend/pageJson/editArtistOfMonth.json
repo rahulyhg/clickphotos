@@ -18,7 +18,7 @@
         "type": "image",
         "tableRef": "image",
         "option": "single",
-        "size": "416 x 300px",
+        "size": "500 x 500px",
         "placeholder": "Enter ArtistOfMonth Image",
         "id": "input1",
         "validation": ["", "trim", ""],
@@ -31,7 +31,7 @@
         "id": "input1",
         "validation": ["", "trim", ""],
         "url": ""
-    },{
+    }, {
         "name": "URL",
         "type": "text",
         "tableRef": "url",
@@ -39,7 +39,29 @@
         "id": "input1",
         "validation": ["", "trim", ""],
         "url": ""
-    },{
+    }, {
+        "name": "Location",
+        "type": "tags",
+        "tableRef": "location",
+        "placeholder": "Enter Location",
+        "id": "location",
+        "validation": ["", "trim", ""],
+        "url": "Location/search",
+        "dropDownField": "city",
+        "dropDownType": "multiple",
+        "onView": true
+    }, {
+        "name": "Speciality",
+        "type": "tags",
+        "tableRef": "speciality",
+        "placeholder": "Enter speciality",
+        "id": "speciality",
+        "validation": ["", "trim", ""],
+        "url": "Categories/search",
+        "dropDownField": "name",
+        "dropDownType": "multiple",
+        "onView": true
+    }, {
         "name": "Start Date",
         "type": "date",
         "tableRef": "startdate",
@@ -47,7 +69,7 @@
         "id": "input1",
         "validation": ["", "trim", ""],
         "url": ""
-    },{
+    }, {
         "name": "End Date",
         "type": "date",
         "tableRef": "enddate",

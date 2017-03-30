@@ -1,5 +1,7 @@
 var adminurl = "http://wohlig.io/api/";
 
+var uploadurl = adminurl + "upload/";
+
 var navigationservice = angular.module('navigationservice', [])
 
 

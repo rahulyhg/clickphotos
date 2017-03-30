@@ -13,11 +13,20 @@
         "type": "image",
         "isSort": "",
         "tableRef": "image"
-    },{
+    }, {
+        "name": "Location",
+        "type": "fkListView",
+        "tableRef": "location"
+    }, {
+        "name": "Speciality",
+        "type": "enumdisplay",
+        "isSort": "",
+        "tableRef": "speciality"
+    }, {
         "name": "Start Date",
         "isSort": "",
         "tableRef": "startdate"
-    },{
+    }, {
         "name": "End Date",
         "isSort": "",
         "tableRef": "enddate"

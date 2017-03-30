@@ -18,7 +18,7 @@
         "type": "image",
         "tableRef": "bigimage",
         "option": "single",
-        "size": "416 x 300px",
+        "size": "1622 x 517px",
         "placeholder": "Enter Categories Image",
         "id": "input1",
         "validation": ["", "trim", ""],
@@ -28,8 +28,16 @@
         "type": "image",
         "tableRef": "smallimage",
         "option": "single",
-        "size": "1027 x 553px",
+        "size": "812 x 517px",
         "placeholder": "Enter Categories Image",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": ""
+    },{
+        "name": "Order",
+        "type": "text",
+        "tableRef": "order",
+        "placeholder": "Enter Order",
         "id": "input1",
         "validation": ["", "trim", ""],
         "url": ""

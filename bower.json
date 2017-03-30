@@ -38,7 +38,7 @@
     "angular-ui-swiper": "^2.3.6",
     "angular-ui-tinymce": "https://github.com/angular-ui/ui-tinymce.git#^0.0.16",
     "angular-ui": "~0.4.0",
-    "angularjs-imageupload-directive": "https://github.com/Mischi/angularjs-imageupload-directive.git",
+    "angularjs-imageupload-directive": "*",
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
     "angulartics-google-analytics": "^0.3.0",
     "animate.css": "^3.5.2",

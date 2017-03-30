@@ -180,21 +180,21 @@
             <div class="all_cate" ng-repeat="catEl in cat">
                 <div class=" col-md-12" ng-if="catEl[0]">
                     <a ui-sref="wild-photographer"><img ng-src="{{catEl[0].bigimage | serverimage}}" class="img-responsive" alt=""></a>
-                    <div class="img-section__text">
+                    <!--<div class="img-section__text">
                         <h3>{{catEl[0].name}}</h3>
-                    </div>
+                    </div>-->
                 </div>
                 <div class=" col-md-6  col-xs-12 padd_rt" ng-if="catEl[1]">
-                    <a href="#"> <img ng-src="{{catEl[1].bigimage | serverimage}}" class="img-responsive" alt=""></a>
-                    <div class="img-section__text">
+                    <a href="#"> <img ng-src="{{catEl[1].smallimage | serverimage}}" class="img-responsive" alt=""></a>
+                    <!--<div class="img-section__text">
                         <h3>{{catEl[1].name}}</h3>
-                    </div>
+                    </div>-->
                 </div>
                 <div class=" col-md-6 padd_lt" ng-if="catEl[2]">
-                    <a href="#"> <img ng-src="{{catEl[2].bigimage | serverimage}}" class="img-responsive" alt=""></a>
-                    <div class="img-section__text">
+                    <a href="#"> <img ng-src="{{catEl[2].smallimage | serverimage}}" class="img-responsive" alt=""></a>
+                    <!--<div class="img-section__text">
                         <h3>{{catEl[2].name}}</h3>
-                    </div>
+                    </div>-->
                 </div>
                 <!--<div class=" col-md-12">
                     <a href="#"> <img src="frontend/img/cat5.jpg" class="img-responsive" alt=""></a>

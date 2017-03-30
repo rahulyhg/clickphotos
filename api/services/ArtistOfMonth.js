@@ -23,14 +23,37 @@ var schema = new Schema({
     enddate: {
         type: Date,
         default: 0
+    },
+    location: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: "Location"
+        }],
+        index: true
+    },
+    speciality: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: "Categories"
+        }],
+        index: true
     }
 });
 
-schema.plugin(deepPopulate, {});
+schema.plugin(deepPopulate, {
+    populate: {
+        location: {
+            select: ""
+        },
+        speciality: {
+            select: ""
+        }
+    }
+});
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('ArtistOfMonth', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "location speciality", "location speciality"));
 var model = {};
 module.exports = _.assign(module.exports, exports, model);

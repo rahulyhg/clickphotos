@@ -6,7 +6,8 @@ var firstapp = angular.module('firstapp', [
     'navigationservice',
     'pascalprecht.translate',
     'angulartics',
-    'angulartics.google.analytics'
+    'angulartics.google.analytics',
+    'imageupload'
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
@@ -78,6 +79,86 @@ firstapp.directive('img', function ($compile, $parse) {
             } else {
                 $($element).addClass("doneLoading");
             }
+        }
+    };
+});
+
+//image upload
+
+firstapp.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                scope.$apply(attrs.imageonload);
+            });
+        }
+    };
+});
+
+firstapp.directive('uploadImage', function($http, $filter) {
+    return {
+        templateUrl: 'frontend/views/directive/uploadFile.html',
+        scope: {
+            model: '=ngModel',
+            callback: "=ngCallback"
+        },
+        link: function($scope, element, attrs) {
+            $scope.isMultiple = false;
+            $scope.inObject = false;
+            if (attrs.multiple || attrs.multiple === "") {
+                $scope.isMultiple = true;
+                $("#inputImage").attr("multiple", "ADD");
+            }
+            if (attrs.noView || attrs.noView === "") {
+                $scope.noShow = true;
+            }
+            if ($scope.model) {
+                if (_.isArray($scope.model)) {
+                    $scope.image = [];
+                    _.each($scope.model, function(n) {
+                        $scope.image.push({
+                            url: $filter("uploadpath")(n)
+                        });
+                    });
+                }
+
+            }
+            if (attrs.inobj || attrs.inobj === "") {
+                $scope.inObject = true;
+            }
+            $scope.clearOld = function() {
+                $scope.model = [];
+            };
+            $scope.uploadNow = function(image) {
+                var Template = this;
+                image.hide = true;
+                var formData = new FormData();
+                formData.append('file', image.file, image.name);
+                $http.post(uploadurl, formData, {
+                    headers: {
+                        'Content-Type': undefined
+                    },
+                    transformRequest: angular.identity
+                }).then(function(data) {
+                    console.log("success");
+                    if ($scope.callback) {
+                        $scope.callback(data);
+                    } else {
+                        if ($scope.isMultiple) {
+                            if ($scope.inObject) {
+                                $scope.model.push({
+                                    "image": data.data[0]
+                                });
+                            } else {
+                                $scope.model.push(data.data[0]);
+                            }
+                        } else {
+                            $scope.model = data.data[0];
+                        }
+                    }
+                });
+            };
         }
     };
 });
@@ -160,13 +241,13 @@ firstapp.config(function ($translateProvider) {
 });
 
 firstapp.filter('serverimage', function () {
-   return function (image) {
-       if (image && image !== null) {
-           return adminurl + "upload/readFile?file=" + image;
-       } else {
-           return undefined;
-       }
-   }
+    return function (image) {
+        if (image && image !== null) {
+            return adminurl + "upload/readFile?file=" + image;
+        } else {
+            return undefined;
+        }
+    }
 });
 
 firstapp.service('anchorSmoothScroll', function () {
@@ -290,22 +371,21 @@ firstapp.directive('sidebarDirective', function () {
 });
 
 // This function is used to show sibar menu for send enquiry 
-firstapp.directive('enquiryDirective', function(){
+firstapp.directive('enquiryDirective', function () {
 
-    return{
-        link: function(scope, element, attr){
-             scope.$watch(attr.enquiryDirective, function (newVal) {
-                 if(newVal){
-                     //console.log('new value', newVal);
-                   element.addClass('showEnquery');
-                   return;
-                 }else{
-                   element.removeClass('showEnquery');
-                 }
+    return {
+        link: function (scope, element, attr) {
+            scope.$watch(attr.enquiryDirective, function (newVal) {
+                if (newVal) {
+                    //console.log('new value', newVal);
+                    element.addClass('showEnquery');
+                    return;
+                } else {
+                    element.removeClass('showEnquery');
+                }
 
-             });
+            });
         }
-    
+
     }
 });
-

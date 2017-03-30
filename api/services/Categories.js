@@ -10,6 +10,9 @@ var schema = new Schema({
     smallimage: {
         type: String,
         default: ""
+    },
+    order: {
+        type: Number
     }
 });
 

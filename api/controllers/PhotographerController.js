@@ -13,7 +13,7 @@ var controller = {
             })
         }
     },
-    
+
     updatePhotographer: function (req, res) {
         if (req.body) {
             Photographer.updatePhotographer(req.body, res.callback);
@@ -26,7 +26,46 @@ var controller = {
             })
         }
     },
-    
+
+    updatePhotographerPackage: function (req, res) {
+        if (req.body) {
+            Photographer.updatePhotographerPackage(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    updatePhotographerDetail: function (req, res) {
+        if (req.body) {
+            Photographer.updatePhotographerDetail(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    uploadPhotos: function (req, res) {
+        if (req.body) {
+            Photographer.uploadPhotos(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
     deleteFeaturedPhotographer: function (req, res) {
         if (req.body) {
             Photographer.deleteFeaturedPhotographer(req.body, res.callback);

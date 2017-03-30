@@ -18,6 +18,10 @@
         "type": "image",
         "isSort": "",
         "tableRef": "smallimage"
+    },{
+        "name": "Order",
+        "isSort": "",
+        "tableRef": "order"
     }],
     "action": [{
         "name": "edit",

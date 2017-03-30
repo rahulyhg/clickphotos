@@ -1,8 +1,19 @@
 var schema = new Schema({
-    name: {
-        type: String,
-        default: ""
-    },
+    name: String,
+    profilePic: String,
+    coverPic: String,
+    uploadedImages: [{
+        image: {
+            type: String,
+            default: ""
+        },
+        category: {
+            type: String,
+            default: ""
+        }
+    }],
+    bio: String,
+    pricing: String,
     email: {
         type: String,
         validate: validators.isEmail(),
@@ -176,7 +187,107 @@ var model = {
                 callback(null, {});
             }
         });
+    },
+
+    updatePhotographerPackage: function (data, callback) {
+        var packageType = data.package;
+        console.log("DATA", data);
+        Photographer.update({
+            _id: data._id
+        }, {
+            package: packageType
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
+        });
+    },
+
+    updatePhotographerDetail: function (data, callback) {
+
+        console.log("DATA", data);
+
+        Photographer.update({
+            _id: data._id
+        }, {
+            name: data.name,
+            location: data.location,
+            speciality: data.speciality,
+            bio: data.bio,
+            pricing: data.pricing
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
+        });
+    },
+
+    // uploadPhotos: function (data, callback) {
+
+    //     console.log("DATA", data);
+
+    //     Photographer.update({
+    //         _id: data._id,
+    //     }), {
+    //         $push: {
+    //             uploadedImages: {
+    //                 $each: data.photos
+    //             }
+    //         }
+
+    //     }.exec(function (err, updated) {
+    //         console.log(updated);
+    //         if (err) {
+    //             console.log(err);
+    //             callback(err, null);
+    //         } else {
+    //             callback(null, updated);
+    //         }
+    //     });
+    // },
+
+    uploadPhotos: function (data, callback) {
+        console.log(data);
+        Photographer.update({
+            _id: data._id
+        }, {
+            $push: {
+
+                uploadedImages: {
+                    $each: [{
+                        image: data.image,
+                        category: data.category
+                    }]
+                }
+            }
+        }).exec(function (err, found) {
+
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+
+                if (found) {
+
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+
+        })
     }
+
 
 };
 module.exports = _.assign(module.exports, exports, model);
