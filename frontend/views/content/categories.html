@@ -3,12 +3,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <div class="ht30 mt_103">
+                <div class="ht30 mt_103 categories_title">
                     <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
                     <h3>Categories</h3>
                 </div>
             </div>
-            <div class="all_cate" ng-repeat="catEl in bigImageCategory track by $index">
+            <div class="all_cate">
+            <div ng-repeat="catEl in bigImageCategory track by $index">
                 <div class=" col-md-12" ng-if="catEl">
                     <img ng-src="{{catEl.bigimage | serverimage}}" class="img-responsive" alt="">
                     <!--<div class="img-section__text">
@@ -42,6 +43,7 @@
                 <div class=" col-md-12">
                     <img src="frontend/img/cat6.jpg" class="img-responsive" alt="">
                 </div>-->
+            </div>
             </div>
         </div>
         <!--<div class="col-md-2 col-md-push-5 ">

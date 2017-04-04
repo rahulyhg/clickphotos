@@ -446,17 +446,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             }
 
-        // if ($.jStorage.get("photographer")) {
-        //     formdata = {};
-        //     formdata._id = $.jStorage.get("photographer")._id;
-        //     NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
-        //         if (data.value === true) {
-        //             console.log(data)
-        //             $scope.photographerData = data.data;
-        //             console.log("$scope.photographerData--", $scope.photographerData)
-        //         }
-        //     });
-        // }
+        if ($.jStorage.get("photographer")) {
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                if (data.value === true) {
+                    console.log(data)
+                    $scope.photographerData = data.data;
+                    console.log("$scope.photographerData--", $scope.photographerData)
+                }
+            });
+        }
 
         $scope.updateToFeature = function () {
             // formdata.serviceRequest = $scope.serviceList;
@@ -512,7 +512,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($.jStorage.get("photographer")) {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/findPhotographer", formdata, function (data) {
                 if (data.value === true) {
                     console.log(data)
                     $scope.photographerData = data.data;

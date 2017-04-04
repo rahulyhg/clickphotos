@@ -7,18 +7,18 @@
         <h1 class="sech damionr ft100 text-capitalize">{{tileList.titleTwo}}</h1>
     </div>
     <div class="row users pad100">
-        <div class="col-sm-6 col-md-4" ng-repeat="list in usersList">
+        <div class="col-sm-6 col-md-4" ng-repeat="list in photographerData">
             <div class="thumbnail">
                 <img ng-src="{{list.background}}" alt="..." class="img-full img-min-h">
                 <div class="user-icon">
                     <div class="border-half">
-                        <img ng-src="{{list.profile}}" alt="" class="img-responsive profile-f-img">
+                        <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img">
                     </div>
                 </div>
                 <hr class="border-line2 text-center">
                 <div class="caption googleb">
-                    <p class="title text-capitalize">{{list.name}} {{list.surName}} | {{list.place}}</p>
-                    <p class="title-intro">{{list.content}}</p>
+                    <p class="title text-capitalize">{{list.name}} | {{list.place}}</p>
+                    <p class="title-intro">{{list.bio}}</p>
                     <p class="text-center"><a ui-sref="user-profile" class="btn whit-btn" type="button"> Read More</a></p>
                 </div>
             </div>

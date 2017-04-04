@@ -46,8 +46,7 @@ var schema = new Schema({
         default: false
     },
     isactive: {
-        type: Boolean,
-        default: false
+        type: Boolean
     }
 });
 
@@ -322,7 +321,7 @@ var model = {
         });
     },
 
-     updateToFeaturePhotographer: function (data, callback) {
+    updateToFeaturePhotographer: function (data, callback) {
         console.log("DATA", data);
         Photographer.update({
             _id: data._id
@@ -336,6 +335,26 @@ var model = {
             } else {
                 callback(null, updated);
             }
+        });
+    },
+
+    findPhotographer: function (data, callback) {
+        console.log("data", data)
+        Photographer.find({
+            status: true
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback({
+                        message: "Incorrect Credentials!"
+                    }, null);
+                }
+            }
+
         });
     }
 
