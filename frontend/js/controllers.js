@@ -268,15 +268,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $scope.id = $.jStorage.get("photographer")._id;
         // console.log("$scope.id ", $scope.id);
 
+        $scope.profilePhoto = {};
         $scope.coverPhoto = {};
-        if ($.jStorage.get('user')!=null) {
+
+        if ($.jStorage.get('photographer') != null) {
             $scope.coverPhoto._id = $.jStorage.get("photographer")._id;
             $scope.profilePhoto._id = $.jStorage.get("photographer")._id;
-
         }
-
-        $scope.profilePhoto = {};
-
+        $scope.myPic = {
+            coverPic: ""
+        };
+        $scope.$watch("myPic.coverPic", function (newImage, oldImage) {
+            console.log("Change in image", newImage, oldImage);
+        });
         $scope.coverPicture = function (formdata) {
             console.log("coverpic", formdata);
             // formdata._id = $scope.id
@@ -417,7 +421,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
     })
-    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,  $rootScope) {
+    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -444,10 +448,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 NavigationService.checkLogin(formdata, function (data) {
                     if (data.data.value) {
                         console.log(data.data.data);
-                          $rootScope.showStep = 2;
+                        $rootScope.showStep = 2;
                         $.jStorage.set("photographer", data.data.data);
                         $scope.template.profile = data.data.data;
                         // $state.go("photographer");
+                        $state.reload();
 
                         console.log("im in");
                     }
@@ -479,7 +484,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         }
 
-        if ($.jStorage.get("photographer")) {
+        // if ($.jStorage.get("photographer")) {
+        //     $scope.template.profile = $.jStorage.get("photographer");
+        // }
+
+        if ($.jStorage.get('photographer') != null) {
             $scope.template.profile = $.jStorage.get("photographer");
         }
 
@@ -499,8 +508,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         if ($.jStorage.get("photographer")) {
             $scope.template.profile = $.jStorage.get("photographer");
-              $rootScope.showStep = 2;
-          } else {
+            $rootScope.showStep = 2;
+        } else {
             $rootScope.showStep = 1;
         }
     })
@@ -1006,7 +1015,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }];
 
     })
-    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state,$rootScope) {
+    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $rootScope) {
         $scope.template = TemplateService;
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -1056,7 +1065,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     if (data.data.value) {
                         console.log(data.data.data);
                         $.jStorage.set("photographer", data.data.data);
-                          $rootScope.showStep=2;
+                        $rootScope.showStep = 2;
                         $scope.template.profile = data.data.data;
                         $scope.signupModal.close();
                         $state.go("photographer");

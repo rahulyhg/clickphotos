@@ -2,11 +2,12 @@
     <form>
         <div class="profile-banner">
             <img src="frontend/img/photographer/prof-bg.jpg" alt="" class="img-responsive">
-            <span class="change-cover" ng-click="coverPicture(coverPhoto)">
+            <span class="change-cover">
                 <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
-                <upload-image ng-model="coverPhoto.coverPic" no-view></upload-image>
-                Upload Cover Photo
+                <upload-image ng-model="myPic.coverPic" no-view></upload-image>
+              <!--<button type="button" ng-click="coverPicture(myPic)" >  Upload Cover Photo</button>-->
             </span>
+            <span> {{myPic.coverPic}} </span>
             <div class="select-box">
                 <div class="container">
                     <div class="profile-block">
