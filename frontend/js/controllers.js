@@ -267,6 +267,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // };
         // $scope.id = $.jStorage.get("photographer")._id;
         // console.log("$scope.id ", $scope.id);
+
         $scope.coverPhoto = {};
         $scope.coverPhoto._id = $.jStorage.get("photographer")._id;
         $scope.profilePhoto = {};
@@ -412,7 +413,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
     })
-    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -432,10 +433,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             },
 
-            $scope.data = {
-                "intro": "You could be a featured photographer on Clickmania and come under the lens of those who would love to harness your services. For as low as Rs. 1000 you could shoecase your work for a month.",
-                "name": "Manan",
-            };
+            $scope.login = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.checkLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.data);
+                        $.jStorage.set("photographer", data.data.data);
+                        $scope.template.profile = data.data.data;
+                        $state.go("photographer");
+                    }
+                });
+            }
+
+        // if ($.jStorage.get("photographer")) {
+        //     formdata = {};
+        //     formdata._id = $.jStorage.get("photographer")._id;
+        //     NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+        //         if (data.value === true) {
+        //             console.log(data)
+        //             $scope.photographerData = data.data;
+        //             console.log("$scope.photographerData--", $scope.photographerData)
+        //         }
+        //     });
+        // }
+
+        $scope.updateToFeature = function () {
+            // formdata.serviceRequest = $scope.serviceList;
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            console.log(formdata);
+            NavigationService.updateTofeaPho(formdata, function (data) {
+                if (data.data.value) {
+                    console.log(data.data.data);
+                    $state.go("users");
+                }
+            });
+        }
+
+        if ($.jStorage.get("photographer")) {
+            $scope.template.profile = $.jStorage.get("photographer");
+        }
+
+        $scope.data = {
+            "intro": "You could be a featured photographer on Clickmania and come under the lens of those who would love to harness your services. For as low as Rs. 1000 you could shoecase your work for a month.",
+            "name": "Manan",
+        };
         $scope.benefits = [{
             "list": "100 photos",
         }, {
@@ -448,10 +491,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         if ($.jStorage.get("photographer")) {
             $scope.template.profile = $.jStorage.get("photographer");
-            $scope.isLoggedIn=true;
-            activeTab=2;
-        }else{
-             $scope.isLoggedIn=false;
+            $scope.isLoggedIn = true;
+            activeTab = 2;
+        } else {
+            $scope.isLoggedIn = false;
         }
     })
 
@@ -465,6 +508,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             "titleTwo": "Time freezers",
 
         };
+
+        if ($.jStorage.get("photographer")) {
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                if (data.value === true) {
+                    console.log(data)
+                    $scope.photographerData = data.data;
+                    console.log("$scope.photographerData--", $scope.photographerData)
+                }
+            });
+        }
 
         $scope.usersList = [{
             "profile": "frontend/img/pic/pic1.jpg",

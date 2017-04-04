@@ -15,36 +15,33 @@
                 <li ng-class="{'active': activeTab == 2}" ng-click="toggleTab(2)" ng-if="isLoggedIn">STEP 2</li>
             </ul>-->
             <ul class="full-tabs pad60 list-inline">
-                <li ng-class="{'active': activeTab == 1}" ng-click="activeTab=1" >STEP 1</li>
-                <li ng-class="{'active': activeTab == 2}"   ng-click="activeTab=2" >STEP 2</li>
+                <li ng-class="{'active': activeTab == 1}" ng-click="activeTab=1">STEP 1</li>
+                <li ng-class="{'active': activeTab == 2}" ng-click="activeTab=2">STEP 2</li>
             </ul>
         </div>
     </div>
     <!-- end section tab -->
     <!-- start first tab -->
-    <form ng-submit="signUp(formData)" name="loginForm" ng-if="activeTab == 1" >
-        <!--<div class="row" ng-if="activeTab == 1">-->
-        <div class="row">
+
+    <!--<div class="row" ng-if="activeTab == 1">-->
+    <div class="row">
+        <form ng-submit="signUp(formData)" name="loginForm" ng-if="activeTab == 1">
             <div class="col-md-6 pad-right5">
                 <div class="row mr15 light-grey min-h">
                     <div class="col-md-12 text-center">
                         <h1 class="damionr orange-color forml">Sign up</h1>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="reg-btn form-control" aria-label="..." placeholder="First Name" ng-model="formData.name" name="name"
-                            required>
+                       <input type="text" class="form-control" id="name" placeholder="First Name" ng-model="formData.name" name="name" required><br>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="reg-btn form-control" aria-label="..." placeholder="Email id" ng-model="formData.email" name="email"
-                            required>
+                        <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required><br>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="reg-btn form-control" aria-label="..." placeholder="Password" ng-model="formData.password" name="passsword"
-                            required>
+                        <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword" required> 
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="reg-btn form-control" aria-label="..." placeholder="Confirm" ng-model="ConfirmPassword" name="ConfirmPassword"
-                            required>
+                         <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword" required>
                     </div>
                     <div>
                         <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
@@ -71,20 +68,22 @@
                     </div>
                 </div>
             </div>
+        </form>
+        <form ng-submit="login(formData)">
             <div class="col-md-6 pad-right5">
                 <div class="row mr15 light-grey min-h">
                     <div class="col-md-12 text-center">
                         <h1 class="damionr orange-color forml">Login</h1>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="reg-btn form-control" aria-label="..." placeholder="First Name">
+                        <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" required>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="reg-btn form-control" aria-label="..." placeholder="Email id">
+                        <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" required><br>
                         <a class="flink"> Forgot Password?</a>
                     </div>
                     <div class="col-xs-12 mr40 text-center">
-                        <button class="btn orange-btn" type="button"> Login</button>
+                        <button class="btn orange-btn" type="submit"> Login</button>
                         <br>
                         <hr class="border-hr text-center">
                         <br>
@@ -97,15 +96,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
     <!-- end first tab -->
     <!-- start second tab -->
     <!--<div class="row" ng-if="activeTab == 2">-->
     <div class="row" ng-if="activeTab == 2">
         <div class="col-md-12">
             <div class="intro hctl">
-                <strong class="intro-con">Hi {{data.name}},</strong>
+                <strong class="intro-con">Hi {{photographerData.name}},</strong>
                 <p class="intro-con">You can become a featured photographer for the month of <strong>March</strong> by only paying <i class="fa fa-inr"></i><strong>1150.</strong></p>
                 <p class="intro-con">Inorder to become a featured photographer you need to subscribe.</p>
             </div>
@@ -114,7 +114,7 @@
                 <li class="intro-con" ng-repeat="data in benefits">{{data.list}}</li>
             </ul>
             <div class="pay_btn text-center">
-                <p><a href="#" class="btn orange-btn" role="button">Proceed to Pay</a></p>
+                <p><a href="#" class="btn orange-btn" role="button" ng-click="updateToFeature()">Proceed to Pay</a></p>
             </div>
         </div>
     </div>
