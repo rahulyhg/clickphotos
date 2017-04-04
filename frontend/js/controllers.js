@@ -121,7 +121,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             anchorSmoothScroll.scrollTo(eID);
         };
 
-        // this function is used to move <div class="scroll_down"> bottom to the img when user scrolls down 
+        // this function is used to move <div class="scroll_down"> bottom to the img when user scrolls down
         var container = angular.element(document);
         container.on('scroll', function () {
 
@@ -269,9 +269,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // console.log("$scope.id ", $scope.id);
 
         $scope.coverPhoto = {};
-        $scope.coverPhoto._id = $.jStorage.get("photographer")._id;
+        if ($.jStorage.get('user')!=null) {
+            $scope.coverPhoto._id = $.jStorage.get("photographer")._id;
+            $scope.profilePhoto._id = $.jStorage.get("photographer")._id;
+
+        }
+
         $scope.profilePhoto = {};
-        $scope.profilePhoto._id = $.jStorage.get("photographer")._id;
 
         $scope.coverPicture = function (formdata) {
             console.log("coverpic", formdata);
@@ -413,11 +417,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
     })
-    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,  $rootScope) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        // $rootScope.showStep="";
         $scope.activeTab = 1;
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
@@ -439,9 +444,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 NavigationService.checkLogin(formdata, function (data) {
                     if (data.data.value) {
                         console.log(data.data.data);
+                          $rootScope.showStep = 2;
                         $.jStorage.set("photographer", data.data.data);
                         $scope.template.profile = data.data.data;
-                        $state.go("photographer");
+                        // $state.go("photographer");
+
+                        console.log("im in");
                     }
                 });
             }
@@ -491,10 +499,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         if ($.jStorage.get("photographer")) {
             $scope.template.profile = $.jStorage.get("photographer");
-            $scope.isLoggedIn = true;
-            activeTab = 2;
-        } else {
-            $scope.isLoggedIn = false;
+              $rootScope.showStep = 2;
+          } else {
+            $rootScope.showStep = 1;
         }
     })
 
@@ -644,7 +651,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.activeTab = 1;
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
-            $scope.showSocial = false; // here showSocial will be display: none; 
+            $scope.showSocial = false; // here showSocial will be display: none;
         };
         $scope.userHead = {
             profile: "frontend/img/pic/pic1.jpg",
@@ -999,7 +1006,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }];
 
     })
-    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state) {
+    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state,$rootScope) {
         $scope.template = TemplateService;
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -1035,6 +1042,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log(formdata);
                 NavigationService.sendLogin(formdata, function (data) {
                     if (data.data.value) {
+
                         console.log(data.data.value);
                         $scope.loginModal.close();
                     }
@@ -1048,6 +1056,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     if (data.data.value) {
                         console.log(data.data.data);
                         $.jStorage.set("photographer", data.data.data);
+                          $rootScope.showStep=2;
                         $scope.template.profile = data.data.data;
                         $scope.signupModal.close();
                         $state.go("photographer");
