@@ -103,6 +103,45 @@ var controller = {
                 }
             })
         }
+    },
+
+    updateCoverPic: function (req, res) {
+        if (req.body) {
+            Photographer.updateCoverPic(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    updateProfilePic: function (req, res) {
+        if (req.body) {
+            Photographer.updateProfilePic(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    updateToFeaturePhotographer: function (req, res) {
+        if (req.body) {
+            Photographer.updateToFeaturePhotographer(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 

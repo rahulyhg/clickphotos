@@ -286,6 +286,57 @@ var model = {
             }
 
         })
+    },
+
+    updateCoverPic: function (data, callback) {
+        console.log("DATA", data);
+        Photographer.update({
+            _id: data._id
+        }, {
+            coverPic: data.coverPic
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
+        });
+    },
+
+    updateProfilePic: function (data, callback) {
+        console.log("DATA", data);
+        Photographer.update({
+            _id: data._id
+        }, {
+            profilePic: data.profilePic
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
+        });
+    },
+
+     updateToFeaturePhotographer: function (data, callback) {
+        console.log("DATA", data);
+        Photographer.update({
+            _id: data._id
+        }, {
+            status: true
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
+        });
     }
 
 

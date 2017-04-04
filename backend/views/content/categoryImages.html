@@ -1,0 +1,67 @@
+<div class="heading-sec">
+    <div class="row">
+        <div class="col-md-12 column">
+            <div class="heading-profile">
+                <h2>Create Categories</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="widget">
+    <div class="form-elements-sec">
+        <div class="sec">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Category Name</label>
+                        <input type="text" name="category" ng-model="formdata.name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Order</label>
+                        <input type="number" name="category" ng-model="formdata.order" class="form-control" required>
+                    </div>
+                    {{formdata.order}}
+                    <div ng-if="(formdata.order-1)%3==0">
+                        <label>Choose image1 to upload(1622 x 517px)</label>
+                        <upload-image ng-model="formdata.bigimage" ng-disabled="type.disabled" no-view="" ng-if="!type.view" class="ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope ng-empty"
+                            style="">
+                            <div class="form-group">
+                                <div class="btn-upload btn btn-primary btn-outline btn-small create-btn" ng-hide="disabled">
+                                    <input id="inputImage" ng-show="!isMultiple" type="file" accept="image/*,application/pdf" image="image" title="Choose Files"
+                                        class="btn-primary ng-isolate-scope">
+                                    <input id="inputImage" ng-show="isMultiple" type="file" accept="image/*,application/pdf" image="image" title="Choose Multiple Files"
+                                        class="btn-primary ng-isolate-scope ng-hide" onchange="angular.element(this).scope().clearOld()"
+                                        multiple="" style="">
+                                    <span>CHOOSE FILE</span>
+                                </div>
+                            </div>
+                        </upload-image>
+                    </div>
+                    <div ng-if="(formdata.order-1)%3==1 || (formdata.order-1)%3==2">
+                        <label>Choose image2 to upload(812 x 517px)</label>
+                        <upload-image ng-model="formdata.smallimage" ng-disabled="type.disabled" no-view="" ng-if="!type.view" class="ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope ng-empty"
+                            style="">
+                            <div class="form-group">
+                                <div class="btn-upload btn btn-primary btn-outline btn-small create-btn" ng-hide="disabled">
+                                    <input id="ThumbImage" ng-show="!isMultiple" type="file" accept="image/*,application/pdf" image="thumbimage" title="Choose Files"
+                                        class="btn-primary ng-isolate-scope">
+                                    <input id="ThumbImage" ng-show="isMultiple" type="file" accept="image/*,application/pdf" image="thumbimage" title="Choose Multiple Files"
+                                        class="btn-primary ng-isolate-scope ng-hide" onchange="angular.element(this).scope().clearOld()"
+                                        multiple="" style="">
+                                    <span>CHOOSE FILE</span>
+                                </div>
+                            </div>
+                        </upload-image>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="text-center mt20 odd-even-button">
+    <button class="btn btn-default" type="button" ng-click="saveCategory(formdata)">Save</button>
+    <a class="btn btn-danger" href="#!/page/viewCategories//">Cancel</a>
+
+</div>
+</div>

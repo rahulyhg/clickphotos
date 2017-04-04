@@ -1195,4 +1195,90 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             //  $rootScope.$apply();
         };
+    })
+
+    .controller('categoryCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $stateParams, $state, toastr, $uibModal) {
+        //Used to name the .html file
+        $scope.template = TemplateService.changecontent("categoryImages");
+        $scope.menutitle = NavigationService.makeactive("categoryImages");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+        $scope.Questionindex = null;
+        $scope.dataList = {
+            answers: [{}]
+        };
+        console.log("$stateParams---", JSON.stringify($stateParams.keyword));
+        if (!_.isEmpty($stateParams.keyword)) {
+            $scope.json = JsonService;
+            JsonService.setKeyword($stateParams.keyword);
+            console.log("$scope.json.keyword._id", $scope.json.keyword.id);
+            NavigationService.getOneMasterReform($scope.json.keyword.id, function (data) {
+                $scope.formData = data.data;
+                if (_.isEmpty($scope.formData.questionAnswerList)) {
+                    $scope.formData.questionAnswerList = [];
+
+                } else {
+                    $scope.dataList = $scope.formData.questionAnswerList;
+                }
+                console.log('formData-----', $scope.formData);
+
+            });
+        } else {
+            $scope.formData = {};
+            $scope.formData.questionAnswerList = [];
+        }
+
+        $scope.addAnswer = function () {
+            $scope.dataList.answers.push({});
+        };
+        $scope.addQuestion = function (dataList) {
+            if ($scope.Questionindex != null) {
+                $scope.formData.questionAnswerList[$scope.Questionindex] = dataList;
+            } else {
+                $scope.formData.questionAnswerList.push(dataList);
+            }
+            $scope.dataList = {
+                answers: [{}]
+            };
+        };
+        $scope.saveCategory = function (formData) {
+            console.log($scope.formData);
+            NavigationService.saveCategory($scope.formData, function (data) {
+                console.log("data---", data);
+                if (data.value === true) {
+                    $state.go('page', {
+                        "id": "viewCategories"
+                    });
+                    toastr.success("Master Reform  created successfully.", "Master Reform Created");
+                } else {
+                    toastr.error("Master Reform creation failed.", "Master Reform creation error");
+                }
+            });
+        };
+
+        $scope.modalQuestion = function (data) {
+            if (data != null) {
+                if (!_.isEmpty($scope.formData.questionAnswerList)) {
+                    $scope.Questionindex = $scope.formData.questionAnswerList.indexOf(data);
+                    console.log("$scope.Questionindex--", $scope.Questionindex)
+                }
+                $scope.dataList = data;
+            } else {
+                $scope.dataList = {
+                    answers: [{}]
+                };
+            }
+
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: '/backend/views/modal/add-question.html',
+                size: 'lg',
+                scope: $scope
+            });
+        };
+        $scope.deleteAnswer = function (indexItem) {
+            $scope.dataList.answers.splice(indexItem, 1);
+        };
+
+
     });

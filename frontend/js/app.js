@@ -142,6 +142,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
                     transformRequest: angular.identity
                 }).then(function(data) {
                     console.log("success");
+                    console.log("data",data);
                     if ($scope.callback) {
                         $scope.callback(data);
                     } else {

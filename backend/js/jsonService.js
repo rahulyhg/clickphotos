@@ -34,6 +34,12 @@ jsonservicemod.service('JsonService', function ($http, TemplateService, $state, 
             TemplateService.changecontent("detail");
           }
           break;
+
+        case "categoryImages":
+          {
+            TemplateService.changecontent("categoryImages");
+          }
+          break;
       }
       callback();
     });
@@ -106,6 +112,8 @@ jsonservicemod.service('JsonService', function ($http, TemplateService, $state, 
               if (data.value) {
                 toastr.success(JsonService.json.title + " deleted successfully.", JsonService.json.title + " deleted");
                 JsonService.refreshView();
+              } else if (action && action.type == "categoryImages") {
+                $state.go("categoryImages", sendTo);
               } else {
                 toastr.error("There was an error while deleting " + JsonService.json.title, JsonService.json.title + " deleting error");
               }

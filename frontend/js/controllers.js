@@ -21,20 +21,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //             console.log("$scope.Categories--", $scope.Categories)}
         // });
 
+
         NavigationService.callApi("Categories/search", function (data) {
             if (data.value === true) {
                 console.log(data)
                 $scope.category = data.data.results;
-                //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
-                $scope.cat = _.chunk($scope.category, 3);
-                console.log("$scope.categocacatry--.....", $scope.cat);
-                // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
-                //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
-                // });
-                // console.log($scope.categoryLvl2)
-                // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
+                $scope.bigImageCategory = [];
+                $scope.smallImageCategory = [];
+
+                i = 0;
+                _.forEach($scope.category, function (value) {
+                        i++;
+                        console.log("i", i);
+                        console.log("cat", value);
+                        if (value.bigimage) {
+                            $scope.bigImageCategory.push(value);
+                            // console.log("$scope.bigImageCategory.", $scope.bigImageCategory);
+                        } else {
+                            $scope.smallImageCategory.push(value);
+                            // console.log(" $scope.smallImageCategory", $scope.smallImageCategory);
+                        }
+                    }
+                    //     //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
+                    //     // $scope.cat = _.chunk($scope.category, 3);
+                    //     // console.log("$scope.categocacatry--.....", $scope.cat);
+                    //     // // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
+                    //     //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
+                    //     // });
+                    //     // console.log($scope.categoryLvl2)
+                    //     // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
+                    // } else {
+                    //     //  toastr.warning('Error submitting the form', 'Please try again');
+                )
+                $scope.bigImageCategory = _.orderBy($scope.bigImageCategory, ['order'], ['asc']);
+                $scope.smallImageCategory = _.orderBy($scope.smallImageCategory, ['order'], ['asc']);
+                console.log("$scope.bigImageCategory.", $scope.bigImageCategory);
+                console.log(" $scope.smallImageCategory", $scope.smallImageCategory);
+                $scope.smallCat = _.chunk($scope.smallImageCategory, 2);
+                console.log(" $scope.smallCat", $scope.smallCat)
             } else {
-                //  toastr.warning('Error submitting the form', 'Please try again');
+                toastr.warning('Error submitting the form', 'Please try again');
             }
         });
 
@@ -239,16 +265,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //     });
         // };
+        // $scope.id = $.jStorage.get("photographer")._id;
+        // console.log("$scope.id ", $scope.id);
+        $scope.coverPhoto = {};
+        $scope.coverPhoto._id = $.jStorage.get("photographer")._id;
+        $scope.profilePhoto = {};
+        $scope.profilePhoto._id = $.jStorage.get("photographer")._id;
 
-        $scope.uploadPhotos = function (formdata) {
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            formdata.package = Gold;
-            NavigationService.apiCallWithData("Photographer/uploadPhotos", formdata, function (data) {
-
+        $scope.coverPicture = function (formdata) {
+            console.log("coverpic", formdata);
+            // formdata._id = $scope.id
+            // formdata.package = Gold;
+            NavigationService.apiCallWithData("Photographer/updateCoverPic", formdata, function (data) {
                 console.log("dataaaaaaaaaa", data);
-                $scope.about = true;
+            });
+        };
 
+        $scope.profilePicture = function (formdata) {
+            // formdata._id = $.jStorage.get("photographer")._id;
+            // formdata.package = Gold;
+            NavigationService.apiCallWithData("Photographer/updateProfilePic", formdata, function (data) {
+                console.log("dataaaaaaaaaa", data);
             });
         };
 
@@ -316,7 +353,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.uploadImg = function () {
-          $scope.imgModal = $uibModal.open({
+            $scope.imgModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/upload-photo.html",
                 scope: $scope,
@@ -326,15 +363,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+
+
         $scope.uploadImage = function (formdata) {
-            console.log("im in upload image");
+            console.log("im in upload image", formdata);
             formdata._id = $.jStorage.get("photographer")._id;
             NavigationService.apiCallWithData("Photographer/uploadPhotos", formdata, function (data) {
-                console.log("data",data);
+                console.log("data", data);
                 if (data.value) {
                     console.log("dataaaaaaaaaa", data);
-                   $scope.imgModal.close();
-                   console.log("modal close");
+                    $scope.imgModal.close();
+                    console.log("modal close");
                 }
             });
         };
@@ -382,10 +421,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
         };
-        $scope.data = {
-            "intro": "You could be a featured photographer on Clickmania and come under the lens of those who would love to harness your services. For as low as Rs. 1000 you could shoecase your work for a month.",
-            "name": "Manan",
-        };
+
+        $scope.signUp = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.sendLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.value);
+                    }
+                });
+            },
+
+            $scope.data = {
+                "intro": "You could be a featured photographer on Clickmania and come under the lens of those who would love to harness your services. For as low as Rs. 1000 you could shoecase your work for a month.",
+                "name": "Manan",
+            };
         $scope.benefits = [{
             "list": "100 photos",
         }, {
@@ -395,6 +445,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }, {
             "list": "Valid till 1 year.",
         }];
+
+        if ($.jStorage.get("photographer")) {
+            $scope.template.profile = $.jStorage.get("photographer");
+            $scope.isLoggedIn=true;
+            activeTab=2;
+        }else{
+             $scope.isLoggedIn=false;
+        }
     })
 
     .controller('UsersCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -466,22 +524,61 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
+        // NavigationService.callApi("Categories/search", function (data) {
+        //     if (data.value === true) {
+        //         console.log(data)
+        //         $scope.category = data.data.results;
+        //         //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
+        //         $scope.cat = _.chunk($scope.category, 3);
+        //         console.log("$scope.categocacatry--.....", $scope.cat);
+        //         // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
+        //         //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
+        //         // });
+        //         // console.log($scope.categoryLvl2)
+        //         // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
+        //     } else {
+        //         //  toastr.warning('Error submitting the form', 'Please try again');
+        //     }
+        // });
+
         NavigationService.callApi("Categories/search", function (data) {
             if (data.value === true) {
                 console.log(data)
                 $scope.category = data.data.results;
-                //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
-                $scope.cat = _.chunk($scope.category, 3);
-                console.log("$scope.categocacatry--.....", $scope.cat);
-                // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
-                //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
-                // });
-                // console.log($scope.categoryLvl2)
-                // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
-            } else {
-                //  toastr.warning('Error submitting the form', 'Please try again');
+                $scope.bigImageCategory = [];
+                $scope.smallImageCategory = [];
+
+                i = 0;
+                _.forEach($scope.category, function (value) {
+                        i++;
+                        console.log("i", i);
+                        console.log("cat", value);
+                        if (value.bigimage) {
+                            $scope.bigImageCategory.push(value);
+                            console.log("$scope.bigImageCategory.", $scope.bigImageCategory);
+                        } else {
+                            $scope.smallImageCategory.push(value);
+                            console.log(" $scope.smallImageCategory", $scope.smallImageCategory);
+                        }
+                    }
+                    //     //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
+                    //     // $scope.cat = _.chunk($scope.category, 3);
+                    //     // console.log("$scope.categocacatry--.....", $scope.cat);
+                    //     // // $scope.categoryLvl2 = _.remove($scope.category2, function (n) {
+                    //     //     return n.name != $scope.categoryLevel3[0][0].categoryLevel2.name;
+                    //     // });
+                    //     // console.log($scope.categoryLvl2)
+                    //     // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
+                    // } else {
+                    //     //  toastr.warning('Error submitting the form', 'Please try again');
+                )
+                $scope.bigImageCategory = _.orderBy($scope.bigImageCategory, ['order'], ['asc']);
+                $scope.smallImageCategory = _.orderBy($scope.smallImageCategory, ['order'], ['asc']);
+                $scope.smallCat = _.chunk($scope.smallImageCategory, 2);
+                console.log(" $scope.smallCat", $scope.smallCat)
             }
         });
+
 
     })
     .controller('UserProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
@@ -909,7 +1006,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.logout = function () {
             $.jStorage.flush();
-            $scope.template.profile = {};
+            $scope.template.profile = null;
             $state.go("home");
         }
         //     $scope.signUp = function() {

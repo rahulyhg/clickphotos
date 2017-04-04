@@ -36,6 +36,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
         controller: 'PageJsonCtrl'
     })
 
+    .state('categoryImages', {
+        url: "/page/:id/{page:.*}/{keyword:.*}",
+        templateUrl: "views/template.html",
+        controller: 'categoryCtrl'
+    })
+
     .state('loginapp', {
         url: "/login/:id",
         templateUrl: "views/login.html",

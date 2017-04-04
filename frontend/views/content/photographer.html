@@ -2,7 +2,13 @@
     <form>
         <div class="profile-banner">
             <img src="frontend/img/photographer/prof-bg.jpg" alt="" class="img-responsive">
-            <span class="change-cover"><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">Upload Cover Photo</span>
+            <span class="change-cover" ng-click="coverPicture(coverPhoto)">
+                <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
+                <upload-image ng-model="coverPhoto.coverPic" no-view></upload-image>
+                Upload Cover Photo
+
+                {{coverPhoto.coverPic}}
+            </span>
             <div class="select-box">
                 <div class="container">
                     <div class="profile-block">
@@ -10,7 +16,13 @@
                             <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive sm-logo">
                             <div class="profile-holder" ng-repeat="item in profileList track by $index">
                                 <img src="{{item}}" alt="" class="img-responsive prof-img">
-                                <div class="upload-trans" type="button" ng-hide="profileSelect"><span><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">Upload Profile Pic</span></div>
+                                <div class="upload-trans" type="button" ng-hide="profileSelect">
+                                    <span ng-click="profilePicture(profilePhoto)">
+                                        <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
+                                        <upload-image ng-model="profilePhoto.profilePic" no-view></upload-image>
+                                        Upload Profile Pic
+                                        </span>
+                                </div>
                             </div>
                             <div class="quarter-circle"></div>
                         </div>
@@ -42,9 +54,9 @@
                     <!-- //form-input -->
                     <div class="part-1" ng-if="tab == 1">
                         <div class="about-part">
-                            <div  class="about-desc" ng-if="!about">
+                            <div class="about-desc" ng-if="!about">
 
-<!--edit-->
+                                <!--edit-->
                                 <div class="about-head text-capitalize">about {{photographerData.name}}
                                     <!--<img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline pull-right img-edit">-->
                                 </div>
@@ -68,8 +80,9 @@
                                         <div class="form-group custom-check">
                                             <label for="speciality" class=""> <img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
                                             <p class="check-box" ng-repeat="speciality in specialityData">
-                                                <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)"/>
-                                                <label  for="{{speciality.name}}"  class="check-label">{{speciality.name}}</label>
+                                                <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)"
+                                                />
+                                                <label for="{{speciality.name}}" class="check-label">{{speciality.name}}</label>
                                             </p>
                                             <!--<p class="check-box">
                                                 <input type="checkbox" id="test2" />
@@ -92,7 +105,8 @@
                                         <div class="form-group">
                                             <label for="bio" class="vat"><img src="frontend/img/photographer/form/edit.png" alt="" class="img-responsive display-inline">Bio:</label>
                                             <div class="inline">
-                                                <textarea class="form-control text-set" id="bio" rows="5" placeholder="Describe yourself as a photographer in less than 250 characters" ng-model="photographerData.bio"></textarea>
+                                                <textarea class="form-control text-set" id="bio" rows="5" placeholder="Describe yourself as a photographer in less than 250 characters"
+                                                    ng-model="photographerData.bio"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -110,7 +124,7 @@
                             <!-- /form-submit -->
                             <div class="about-desc" ng-if="about">
 
-<!--display-->
+                                <!--display-->
 
                                 <div class="about-head text-capitalize">about {{photographerData.name}} test
                                     <div class="edit-pencil display-inline pull-right" ng-click="showabout()">
@@ -138,7 +152,7 @@
                                         <div class="form-group">
                                             <label for="speciality" class=""><img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
                                             <div class="selected-option display-inline" ng-repeat="speciality in photographerData.speciality">
-                                              <span>{{speciality.name}}</span>
+                                                <span>{{speciality.name}}</span>
                                             </div>
                                             <!--<div class="selected-option display-inline">
                                                 <span>Wedding</span>
