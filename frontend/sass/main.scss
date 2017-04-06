@@ -7,7 +7,7 @@
     @import "../../bower_components/fancyBox/source/jquery.fancybox";
     @import "../../bower_components/smart-app-banner/smart-app-banner";
     /* Bootstrap Variables Goes Here */
-    
+
     $brand-primary: #0d9dff !default;
     $brand-success: #84ce3c !default;
     $brand-warning: #ffec39 !default;
@@ -23,172 +23,170 @@
         src: url("../fonts/glyphicons-halflings-regular.eot");
         src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
     }
-    
+
     @font-face {
         font-family: 'hs-semiBold';
         src: url("../fonts/HoneyScript-SemiBold.ttf");
     }
-    
+
     @font-face {
         font-family: 'alegreya-light';
         src: url("../fonts/AlegreyaSans-Light.otf");
     }
-    
+
     @font-face {
         font-family: 'hs-light';
         src: url("../fonts/HoneyScript-Light.ttf");
     }
-    
+
     @font-face {
         font-family: 'damion-regular';
         src: url("../fonts/Damion-Regular.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-bold';
         src: url("../fonts/Dosis-Bold_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-extraBold';
         src: url("../fonts/Dosis-ExtraBold_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-extraLight';
         src: url("../fonts/Dosis-ExtraLight_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-light';
         src: url("../fonts/Dosis-Light_1.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-medium';
         src: url("../fonts/Dosis-Medium_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-regular';
         src: url("../fonts/Dosis-Regular_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'helveticalt';
         src: url("../fonts/HELVETICALT.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-black';
         src: url("../fonts/HELVETICALT-BLACK.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-bold';
         src: url("../fonts/HELVETICALT-BOLD.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-boldoblique';
         src: url("../fonts/HELVETICALT-BOLDOBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-compressed';
         src: url("../fonts/HELVETICALT-COMPRESSED.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed';
         src: url("../fonts/HELVETICALT-CONDENSED.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-black';
         src: url("../fonts/HELVETICALT-CONDENSED-BLACK.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-bold';
         src: url("../fonts/HELVETICALT-CONDENSED-BOLD.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-light';
         src: url("../fonts/HELVETICALT-CONDENSED-LIGHT.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-oblique';
         src: url("../fonts/HELVETICALT-CONDENSED-OBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-light';
         src: url("../fonts/HELVETICALT-LIGHT.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-lightOblique';
         src: url("../fonts/HELVETICALT-LIGHTOBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-narrow';
         src: url("../fonts/HELVETICALT-NARROW.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-narrow-boldOblique';
         src: url("../fonts/HELVETICALT-NARROW-BOLDOBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-narrow-oblique';
         src: url("../fonts/HELVETICALT-NARROW-OBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-oblique';
         src: url("../fonts/HELVETICALT-OBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-ultraCompressed';
         src: url("../fonts/HELVETICALT-ULTRACOMPRESSED.OTF");
     }
-    
+
     @font-face {
         font-family: 'hctl';
         src: url("../fonts/HELVETICALT-LIGHT.OTF");
     }
-    
+
     @font-face {
         font-family: 'Dosis-Regular';
         src: url("../fonts/Dosis-Regular_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'Foradian';
         src: url("../fonts/Rupee.ttf");
     }
-    
+
     body {
         //padding-top: 70px;
         font-family: 'dosis-regular';
         font-size: 16px; // default size is 16px
         @include transition(background-color .5s);
         overflow-x: hidden!important; // It is must to keep it as an imp
-    }
-    
-    // used for scroll Bar design
+    } // used for scroll Bar design
      ::-webkit-scrollbar {
         width: 5px;
         background-color: rgba(0, 0, 0, 0.80);
     }
     /* Track */
-    
+
      ::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -196,149 +194,145 @@
         border-radius: 10px;
     }
     /* Handle */
-    
+
      ::-webkit-scrollbar-thumb {
         background: $orangeColor;
         -webkit-box-shadow: inset 0 0 6px rgba(244, 81, 30, 0.5);
         box-shadow: inset 0 0 6px rgba(244, 81, 30, 0.5);
     }
-    
+
      ::-webkit-scrollbar-thumb:window-inactive {
         background: $orangeColor;
-    }
-    
-    //used for @extend
+    } //used for @extend
     .myBtnOrange {
         background-color: $orangeColor;
         color: $whiteColor;
         border-radius: $borderRadius;
         border-color: $orangeColor;
     }
-    
+
     .myBtnDarkGray {
         background-color: $lightBlackColor;
         color: $whiteColor;
         border-radius: $borderRadius;
         border-color: $lightBlackColor;
     }
-    
+
     .myBtnWhite {
         background-color: $whiteColor;
         color: $orangeColor;
         border-radius: $borderRadius;
         border-color: $whiteColor;
     }
-    
+
     .myJumbotron {
         color: $whiteColor;
         background-color: transparent;
     }
-    
+
     .mg {
         // margin top and bottom
         margin-top: 53px;
         margin-bottom: 53px;
     }
-    
+
     .mg_t75 {
         // this class is given kz the navbar is at fixed position.
         margin-top: 76px;
     }
-    
+
     .dosis-medium {
         font-family: 'dosis-medium';
     }
-    
+
     .rupee {
         font-family: 'Foradian';
     }
-    
+
     .dosis-light {
         font-family: 'dosis-light';
     }
-    
+
     .damoin {
         font-family: 'damion-regular';
     }
-    
+
     .orange-color {
         color: #f1592a;
     }
-    
+
     .damionr {
         font-family: 'Damion-Regular';
     }
-    
+
     .dosisl {
         font-family: dosis-Light;
     }
-    
+
     .hctl {
         font-family: hctl;
     }
-    
+
     .light-grey {
         background-color: #f6f6f6;
     }
-   .img-section__text{ // used for abslt position
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    right: 50%;
-    bottom: 50%;
-   }
-    
-    // end of @extend classes
+
+    .img-section__text {
+        // used for abslt position
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        right: 50%;
+        bottom: 50%;
+    } // end of @extend classes
     // CSS transition effects
     /*Pulse Grow*/
-    
+
     @include keyframes(pulse-grow) {
         to {
             @include transform(scale(1.1));
         }
     }
-    
+
     img.loading {
         text-align: center;
         opacity: 1;
         width: 32px !important;
         height: auto;
     }
-    
+
     img {
         opacity: 0;
         @include transition(all 300ms ease);
     }
-    
+
     img.doneLoading {
         opacity: 1;
     }
-    
+
     nav li:hover .dropdown-menu {
         display: block;
     }
-    
+
     #map img {
         opacity: 1;
     }
-    
+
     a,
     .btn,
     [ui-sref] {
         cursor: pointer;
         @include transition(all ease 300ms);
     }
-    
+
     .flexslider {
         .flex-direction-nav {
             a {
                 height: 100px;
                 width: 125px;
-                color: transparent;
-                //  top: 36%;
+                color: transparent; //  top: 36%;
                 top: 38%;
-            }
-            // .flex-prev {
+            } // .flex-prev {
             //     &:before {
             //         content: url("../img/prev.png");
             //         display: block;
@@ -349,8 +343,7 @@
                 &:before {
                     content: url("../img/previous1.png");
                     display: block;
-                    height: 50%;
-                    //   @include transform(scale(.4));
+                    height: 50%; //   @include transform(scale(.4));
                     @include transform(scale(.6));
                 }
             }
@@ -358,27 +351,23 @@
                 &:before {
                     content: url("../img/next1.png");
                     display: block;
-                    height: 50%;
-                    //@include transform(scale(.4));
+                    height: 50%; //@include transform(scale(.4));
                     @include transform(scale(.6));
                 }
             }
         }
     }
-    
+
     .flex-control-paging li a {
         background-color: rgba(255, 255, 255, 0.5);
     }
-    
+
     .flex-control-paging li a.flex-active {
         background-color: #fff;
-    }
-    
-    // footer section
+    } // footer section
     footer {
         // font-size: 12px;
-        color: $whiteColor;
-        // padding: 10px 0;
+        color: $whiteColor; // padding: 10px 0;
         a[target="_blank"] {
             color: $whiteColor;
             text-decoration: none;
@@ -446,9 +435,7 @@
                 }
             }
         }
-    }
-    
-    // end of footer section
+    } // end of footer section
     //bootstrap forms
     .input-lg,
     .input-group-lg>.form-control,
@@ -459,17 +446,17 @@
         border-radius: 0;
         @include box-shadow(none);
     }
-    
+
     .form-control:focus {
         border-color: $brand-primary;
         outline: 0;
         @include box-shadow(none);
     }
-    
+
     .form-group {
         position: relative;
     }
-    
+
     .form-invalid {
         color: $brand-danger;
         .form-control {
@@ -480,12 +467,10 @@
             }
         }
     }
-    
+
     .form-submission {
         min-height: 300px;
-    }
-    
-    //FLEX SLIDER FIXES
+    } //FLEX SLIDER FIXES
     .flex-direction-nav {
         a {
             height: auto;
@@ -500,31 +485,28 @@
         }
     }
     /* Start writing sass here */
-    
+
     .content {
         min-height: 450px;
     }
-    
+
     .img-full {
         width: 100%;
         display: block;
-    }
-    
-    // Header section which includes navbar design
+    } // Header section which includes navbar design
     header>nav.navbar {
         margin-bottom: 0!important;
     }
-    
+
     header>nav>div.navbar-header>button.navbar-toggle {
         display: none;
     }
-    
+
     .navbar-default {
         background-color: $whiteColor;
-        border: none;
-        // position: relative;
+        border: none; // position: relative;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle {
         width: 44px;
         position: relative;
@@ -534,15 +516,15 @@
         float: left;
         border: none;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle:hover {
         background-color: $whiteColor;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float {
         float: right;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar0 {
         float: right;
         width: 26px;
@@ -550,7 +532,7 @@
         background-color: $orangeColor;
         @include transition(all 300ms linear);
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar1 {
         float: right;
         width: 23px;
@@ -558,7 +540,7 @@
         background-color: $orangeColor;
         @include transition(all 300ms linear);
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar2 {
         float: right;
         width: 20px;
@@ -566,7 +548,7 @@
         background-color: $orangeColor;
         @include transition(all 300ms linear);
     }
-    
+
     .hamburger-cross {
         // this class is used for X button animation to close side nav
         span {
@@ -585,9 +567,7 @@
             bottom: 7px;
             @include transform(rotate(-45deg));
         }
-    }
-    
-    // for clickmania logo adjustment which includes boot strap's class navbar-brand
+    } // for clickmania logo adjustment which includes boot strap's class navbar-brand
     a.navbar-brand {
         height: auto;
         .navbar-toggle {
@@ -599,17 +579,14 @@
             // width: 230px;
             width: 70%;
         }
-    }
-    
-    // end of clickmania logo adjustment
+    } // end of clickmania logo adjustment
     // search bar
     .Search_bar {
         padding-top: 18px;
         padding-bottom: 15px;
         .input-group {
             input:focus {
-                border-color: $orangeColor;
-                // @include animation-name(pulse-grow);
+                border-color: $orangeColor; // @include animation-name(pulse-grow);
                 // @include animation-duration(0.3s);
                 // @include animation-timing-function(linear);
                 // @include animation-iteration-count(4);
@@ -629,9 +606,7 @@
                 }
             }
         }
-    }
-    
-    // end of search bar
+    } // end of search bar
     // To display photographer's image(user image)
     .photographer {
         padding-top: 18px;
@@ -652,9 +627,7 @@
             letter-spacing: 1px;
             text-align: justify;
         }
-    }
-    
-    //end display photographer's image(user image)
+    } //end display photographer's image(user image)
     // This section contains main background image with side nav menu
     .sliding_bg {
         position: relative;
@@ -694,8 +667,7 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                right: 0;
-                // height: 120vh;
+                right: 0; // height: 120vh;
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.5);
                 z-index: 110;
@@ -800,9 +772,7 @@
                 cursor: pointer;
             }
         }
-    }
-    
-    // It contains feature photographer flex-slider
+    } // It contains feature photographer flex-slider
     .fp_innerPadd {
         // kept this class outside for user-profile.html
         position: relative;
@@ -814,7 +784,7 @@
         -webkit-box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
     }
-    
+
     .featu_photo_caraso {
         @extend .mg;
         position: relative;
@@ -826,8 +796,7 @@
             padding: 0 25px;
             h2 {
                 font-family: 'damion-regular';
-                color: $orangeColor;
-                //  font-size: 57px;
+                color: $orangeColor; //  font-size: 57px;
                 font-size: 59.68px;
                 font-weight: 400;
                 margin-bottom: 24px;
@@ -848,8 +817,7 @@
                     -moz-box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
                     -ms-box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
                     -webkit-box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
-                    box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
-                    // box-shadow: inset 0 0 10px #000000;
+                    box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26); // box-shadow: inset 0 0 10px #000000;
                     .fp_user_icn {
                         position: absolute;
                         width: 80%;
@@ -910,9 +878,7 @@
         .flex-control-nav {
             display: none!important; // for dots navigation 
         }
-    }
-    
-    //end feature photographer flex-slider
+    } //end feature photographer flex-slider
     // start of photo contest section
     .pht_contest {
         position: relative;
@@ -921,8 +887,7 @@
         background-position: center center;
         background-size: cover;
         height: 400px;
-        background-repeat: no-repeat;
-        // .camera_img {
+        background-repeat: no-repeat; // .camera_img {
         //     background-image: url(../img/photo_contest1.png);
         //     width: 100px;
         //     height: 100px;
@@ -979,9 +944,7 @@
                 border: 1px solid $orangeColor;
             }
         }
-    }
-    
-    // end of photo contest section
+    } // end of photo contest section
     // start of section categories
     .categories {
         background-image: url(../img/cat1.jpg);
@@ -995,8 +958,7 @@
             margin-top: 103px;
         }
         .ht30 {
-            display: inline-block;
-            // height: 130px;
+            display: inline-block; // height: 130px;
             position: relative;
             .imgwt {
                 position: absolute;
@@ -1024,19 +986,17 @@
                 // need to change in col-xs 
                 padding-left: 0;
             }
-           
         }
-         button {
-                margin-top: 50px;
-                height: 39px;
-                @extend .myBtnOrange;
-            }
-            .btn:hover {
-                @extend .myBtnOrange;
-            }
-    }
-    
-    // end of section categories
+        button {
+            //  margin-top: 50px;
+            @include margin(null null 60px null);
+            height: 39px;
+            @extend .myBtnOrange;
+        }
+        .btn:hover {
+            @extend .myBtnOrange;
+        }
+    } // end of section categories
     //start of section sign up
     .signup {
         position: relative;
@@ -1083,8 +1043,7 @@
         }
         button:hover {
             @extend .myBtnOrange;
-        }
-        // h2:before {
+        } // h2:before {
         //     //   content: "Camera";
         //     color: $orangeColor;
         //     position: relative;
@@ -1102,9 +1061,7 @@
             right: -19px;
             display: inline-block;
         }
-    }
-    
-    //end of section sign up
+    } //end of section sign up
     // start of Artist of the month section
     .atm {
         // artist of the month
@@ -1154,9 +1111,7 @@
                 font-family: inherit;
             }
         }
-    }
-    
-    // end of Artist of the mont section
+    } // end of Artist of the mont section
     // start of testimonial
     .testimonial {
         position: relative;
@@ -1175,8 +1130,7 @@
             left: 34px;
             top: 90px;
             width: 53px;
-            z-index: 5;
-            // transform: rotate(-35deg);
+            z-index: 5; // transform: rotate(-35deg);
         }
         .abslt_rt {
             // used for downside logo image
@@ -1213,26 +1167,42 @@
                 text-transform: capitalize;
             }
         }
-    }
-    
-    // end of testimonial 
+    } // end of testimonial 
     /*Rishabh CSS started. CSS for photographer module*/
-    
+
     $brand-holder: #ccc !default;
     .photographer-page {
         background-color: #f1f1f1;
     }
-    
-    .change-cover {
-        position: absolute;
-        top: 15%;
-        right: 3%;
-        color: #fff;
-        font-size: 18px;
-        font-family: 'Dosis-Regular';
-        cursor: pointer;
+
+    .profile-banner {
+        .profile-banner__bg {
+            @include size(null,
+            440px);
+        }
+        .change-cover {
+            position: absolute;
+            top: 15%;
+            right: -8%;
+            color: #fff;
+            font-size: 18px;
+            font-family: 'Dosis-Regular';
+            cursor: pointer;
+            .change-cover__text {
+                span {
+                    cursor: pointer;
+                    @include position(absolute,
+                    -3px null null null);
+                    z-index: 10;
+                    pointer-events: none;
+                }
+                input[type='file'] {
+                    opacity: 0;
+                }
+            }
+        }
     }
-    
+
     .sm-logo {
         width: 40px;
         position: absolute;
@@ -1240,9 +1210,11 @@
         z-index: 9;
         top: 40px;
     }
-    
+
     .profile-holder {
         display: inline-block;
+        @include size(220px,
+        220px);
         border: 2px solid #f1592a;
         border-radius: 50%;
         position: relative;
@@ -1254,13 +1226,13 @@
             width: 220px;
         }
     }
-    
+
     .profile-block {
         bottom: -6px;
         left: 7%;
         position: absolute;
     }
-    
+
     .quarter-circle {
         height: 130px;
         top: 5px;
@@ -1272,7 +1244,7 @@
         position: absolute;
         top: -26px;
     }
-    
+
     .upload-trans {
         cursor: pointer;
         position: absolute;
@@ -1286,6 +1258,10 @@
         span {
             font-size: 16px;
             font-family: 'Dosis-Regular';
+            @include position(absolute,
+            38% null null null);
+            z-index: 10;
+            pointer-events: none;
             img {
                 border-radius: 0;
                 width: 16px;
@@ -1293,13 +1269,18 @@
                 margin-top: -6px;
             }
         }
+        .directive-opacity {
+            opacity: 0;
+            @include position(relative,
+            10px null null null);
+        }
     }
-    
+
     .select-box {
         background-color: #f1592a;
         position: relative;
     }
-    
+
     .btn-1 {
         position: relative;
         display: inline-block;
@@ -1327,7 +1308,7 @@
             }
         }
     }
-    
+
     .btn-1.active {
         button {
             border-bottom: 4px solid #191919;
@@ -1340,39 +1321,35 @@
             display: block;
         }
     }
-    
+
     .display-inline {
         display: inline-block;
     }
-    
+
     .holder1 {
         position: relative;
         vertical-align: middle;
     }
-    
+
     .name-sec {
         vertical-align: middle;
         color: #fff;
         padding: 0 20px;
         margin-bottom: 30px;
         span {
-            font-family: 'Dosis-Light';
-            // font-size: 34px;
+            font-family: 'Dosis-Light'; // font-size: 34px;
         }
         .name-part {
-            font-size: 36px;
-            // line-height: 1;
+            font-size: 36px; // line-height: 1;
         }
     }
-    
+
     .loc-span {
         display: block;
         font-size: 22px;
         line-height: 1;
         letter-spacing: 2px;
-    }
-    
-    //about desc
+    } //about desc
     .about-head {
         background-color: #5d5d5d;
         border-radius: 5px 5px 0 0;
@@ -1381,29 +1358,27 @@
         padding: 10px 30px;
         font-size: 22px;
     }
-    
+
     .about-desc {
         background-color: #fff;
         margin: 35px 150px;
-        border-radius: 5px;
-        // height: 140px;
+        border-radius: 5px; // height: 140px;
         .control-label {
             text-align: left;
         }
     }
-    
+
     .form-control[readonly],
     fieldset[disabled] .form-control {
         background-color: #fff;
         opacity: 1;
     }
-    
+
     .abt-form {
         .form-group {
             margin-bottom: 10px;
             label[for=name] {
-                float: left;
-                // width: 10%;
+                float: left; // width: 10%;
             }
             .w77 {
                 width: 77%;
@@ -1458,30 +1433,54 @@
             border-bottom: 0;
             padding: 0;
         }
+        .edit-tab {
+            .speciality {
+                vertical-align: top; // &:before {
+                //     background-image: url(../img/photographer/form/cam.png);
+                //     background-repeat: no-repeat;
+                //     background-size: contain;
+                //     height: 50px;
+                label[for="speciality"]:before {
+                    content: url(../img/photographer/form/cam.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    @include position(relative,
+                    5px null null);
+                    @include margin(null 5px null null);
+                }
+                label[for="speciality"] {
+                    @include margin(null 15px null null)
+                }
+            }
+        }
+        .speciality-list {
+            @include size(84%,
+            auto);
+        }
     }
-    
+
     .inline {
         display: inline;
     }
-    
+
     .display-block {
         display: block;
     }
-    
+
     .text-set {
         max-width: 75%;
         display: inline-block;
     }
-    
+
     .vat {
         vertical-align: top;
     }
-    
+
     .abt-sec2 {
         background-color: #fff;
         padding: 10px 40px 1px;
     }
-    
+
     .red-sec {
         background-color: #f1592a;
         padding: 10px 30px 1px;
@@ -1490,7 +1489,7 @@
             font-size: 18px;
         }
     }
-    
+
     .upgrade-sec {
         padding: 10px 30px 1px;
         text-align: center;
@@ -1500,24 +1499,24 @@
             letter-spacing: 0.5px;
         }
     }
-    
+
     .package-name {
         font-family: 'Dosis-Medium';
         font-size: 26px;
     }
-    
+
     .package-price {
         font-family: 'Dosis-Light';
         font-size: 26px;
     }
-    
+
     .pkg-info {
         vertical-align: -webkit-baseline-middle;
         text-align: left;
         margin-left: 30px;
         width: 45%;
     }
-    
+
     .upgrade-pkg {
         margin-left: -12px; // padding: 20px;
         background: #ccc;
@@ -1526,7 +1525,7 @@
             margin-top: 10px;
         }
     }
-    
+
     .upgrade-pkg:before {
         content: "";
         border-style: solid;
@@ -1536,7 +1535,7 @@
         left: -12px;
         top: -14px;
     }
-    
+
     .upgrade-pkg2 {
         margin-left: -12px; // padding: 20px;
         background: #f6ea74;
@@ -1545,7 +1544,7 @@
             margin-top: 10px;
         }
     }
-    
+
     .upgrade-pkg2:before {
         content: "";
         border-style: solid;
@@ -1555,7 +1554,7 @@
         left: -12px;
         top: -14px;
     }
-    
+
     .border-divider {
         border-left: 1px solid #000;
         ul>li {
@@ -1564,7 +1563,7 @@
             line-height: 1.3;
         }
     }
-    
+
     .upgrade-pkg,
     .upgrade-pkg2 {
         button {
@@ -1585,14 +1584,14 @@
             }
         }
     }
-    
+
     .btn-full {
         width: 100%;
         background-color: #f1592a;
         color: #fff;
         border: 0;
     }
-    
+
     .sub-sec {
         padding-bottom: 15px;
         .btn-default {
@@ -1603,9 +1602,7 @@
             font-family: 'dosis-regular';
             font-size: 18px;
         }
-    }
-    
-    //custom-check
+    } //custom-check
     .custom-check {
         /* Base for label styling */
         [type="checkbox"]:checked,
@@ -1654,9 +1651,7 @@
             color: #000;
             padding: 0 15px;
         }
-    }
-    
-    //end
+    } //end
     .selected-option {
         background-color: #f1592a;
         padding: 3px 10px;
@@ -1664,7 +1659,18 @@
         color: #fff;
         margin-right: 8px;
     }
-    
+
+    .city {
+        .city__name {
+            @include size(14%,
+            auto);
+        }
+        .city__add-icon {
+            cursor: pointer;
+            @include margin(null 15px null null);
+        }
+    }
+
     .close-btn {
         display: inline-block;
         color: #fff;
@@ -1673,36 +1679,33 @@
         vertical-align: text-bottom;
         cursor: pointer;
     }
-    
+
     .border-line {
         border: 1px solid;
         padding: 10px 0;
         color: #fff;
     }
-    
+
     .package-card {
         margin-top: 15px;
     }
-    
+
     .img-edit {
         margin-top: 5px;
     }
-    
+
     .edit-pencil {
         cursor: pointer;
         span {
             padding-right: 10px;
         }
     }
-    
+
     .wd70 {
         width: 70%;
-    }
-    
-    //work
+    } //work
     .free-member {
-        text-align: center;
-        // padding: 60px 10px 40px;
+        text-align: center; // padding: 60px 10px 40px;
         padding: 95px 10px 65px;
         width: 60%;
         margin: 0 auto;
@@ -1713,8 +1716,7 @@
         .small-font {
             font-size: 46px;
             line-height: 0;
-            margin-left: 7%;
-            // padding-top: 5px;
+            margin-left: 7%; // padding-top: 5px;
         }
         .big-font {
             line-height: 1;
@@ -1728,7 +1730,7 @@
             margin-bottom: -5px;
         }
     }
-    
+
     .package-block {
         padding-bottom: 60px;
         p {
@@ -1737,7 +1739,7 @@
             letter-spacing: 0.5px;
         }
     }
-    
+
     .silver-pack {
         padding: 0 30px;
         .package-head {
@@ -1759,7 +1761,7 @@
             margin-left: 15px;
         }
     }
-    
+
     .silver-content {
         // box-shadow: 1px 1px 6px #9E9E9E;
         box-shadow: 4px 4px 6px #ccc;
@@ -1773,7 +1775,7 @@
             font-size: 18px;
         }
     }
-    
+
     .package-specs {
         list-style: none;
         font-family: helvetica;
@@ -1788,7 +1790,7 @@
             }
         }
     }
-    
+
     .or-cont:before {
         content: "OR";
         top: 50%;
@@ -1798,7 +1800,7 @@
         left: -12px;
         font-family: Dosis-regular;
     }
-    
+
     .silver-subscribed {
         .big-font {
             font-size: 90px;
@@ -1810,7 +1812,7 @@
             font-size: 40px;
         }
     }
-    
+
     .upload-pic {
         button {
             font-size: 17px;
@@ -1824,7 +1826,7 @@
             }
         }
     }
-    
+
     .terms {
         box-shadow: 1px 1px 6px #9E9E9E;
         background-color: #fff;
@@ -1845,21 +1847,21 @@
             line-height: 1.8;
         }
     }
-    
+
     .upload-pic .modal-dialog {
         top: 25%;
     }
-    
+
     .upload-pic .modal-content {
         width: 91%;
         margin: 0 auto;
     }
-    
+
     .black-drop {
         background-color: #000;
         opacity: 0.8!important;
     }
-    
+
     .select_join {
         margin: 2px 0 6px;
         width: 220px;
@@ -1872,7 +1874,7 @@
         -webkit-box-shadow: inset 0 0 10px 1px #FEFEFE;
         box-shadow: inset 0 0 10px 1px #FEFEFE;
     }
-    
+
     .select_join select {
         background: transparent;
         width: 220px;
@@ -1884,11 +1886,11 @@
         height: 34px;
         -webkit-appearance: none;
     }
-    
+
     .select_join select:focus {
         outline: none;
     }
-    
+
     .upl-sec {
         margin-top: 22px;
         .upload-pic {
@@ -1903,8 +1905,7 @@
             font-size: 38px;
         }
         p {
-            font-family: 'dosis-regular';
-            // font-size: 20px;
+            font-family: 'dosis-regular'; // font-size: 20px;
             font-size: 16px;
             font-weight: 600;
             span {
@@ -1912,19 +1913,18 @@
             }
         }
     }
-    
+
     .img-holder {
         margin: 18px 5px;
         border: 10px solid #fff;
         box-shadow: 4px 5px 3px #c0c0c0;
     }
-    
+
     .upload-imageblock {
-        position: relative;
-        // width: 50%;
+        position: relative; // width: 50%;
         padding: 25px;
     }
-    
+
     .close-modal {
         position: absolute;
         top: -9px;
@@ -1938,11 +1938,9 @@
         color: #fff;
         line-height: 1.2;
         cursor: pointer;
-    }
-    
-    //
+    } //
     .uploaded-images {
-        padding: 0 30px;
+        padding: 20px 30px 0;
         .package-head {
             vertical-align: bottom;
             margin-right: 10px;
@@ -1968,13 +1966,13 @@
             }
         }
     }
-    
+
     .count-images {
         font-family: 'dosis-medium';
         font-size: 18px;
         vertical-align: -webkit-baseline-middle;
     }
-    
+
     .checkbox-form {
         margin-top: 15px;
         .upload-pic {
@@ -1982,15 +1980,13 @@
         }
         button {
             vertical-align: top;
-            font-size: 22px;
-            // padding: 12px 35px;
+            font-size: 22px; // padding: 12px 35px;
             padding: 5px 35px;
         }
     }
-    
+
     .circular-checkbox {
-        background-color: #5d5d5d;
-        // width: 75%;
+        background-color: #5d5d5d; // width: 75%;
         padding: 0 160px 0 10px;
         vertical-align: text-top;
         p {
@@ -2001,8 +1997,7 @@
             display: inline-block;
             font-family: 'dosis-regular';
             font-weight: 600;
-            margin-bottom: 0;
-            // letter-spacing: 1px;
+            margin-bottom: 0; // letter-spacing: 1px;
             // padding: 10px 26px 0;
             // font-size: 20px;
             // color: #fff;
@@ -2056,21 +2051,20 @@
             transform: scale(1);
         }
     }
-    
+
     .ld-more {
         margin: 20px 0 35px;
         button {
-            font-size: 20px;
-            // padding: 10px 70px;
+            font-size: 20px; // padding: 10px 70px;
             padding: 8px 65px;
         }
     }
-    
+
     .btn-fix {
         width: auto!important;
         float: none!important;
     }
-    
+
     .upgrade-gd {
         .upgrd-gold {
             margin: 0 auto;
@@ -2083,8 +2077,7 @@
             text-align: center;
         }
         .sech {
-            text-align: center;
-            // padding-right: 138px;
+            text-align: center; // padding-right: 138px;
         }
         .small-font {
             // font-size: 35px;
@@ -2110,7 +2103,7 @@
             font-size: 40px;
         }
     }
-    
+
     .img-holder {
         position: relative;
         &:hover {
@@ -2126,7 +2119,7 @@
             display: none;
         }
     }
-    
+
     .edit-uploaded {
         position: absolute;
         top: 50%;
@@ -2144,44 +2137,40 @@
             }
         }
     }
-    
+
     .head-gold {
         background: linear-gradient(to right, #c9b459, #f9ef76)!important;
-    }
-    
-    //history
+    } //history
     .history-sec {
         font-size: 19px;
         padding: 35px 30px 1px;
         text-align: left;
     }
-    
+
     .history-sec2 {
         font-size: 19px;
         padding: 5px 30px 1px;
         text-align: left;
     }
-    
+
     .his-under {
         border-bottom: 2px solid #e5e5e5;
         border-radius: 5px;
-    }
-    
-    //current package status
+    } //current package status
     .current-package {
         padding-top: 60px;
     }
-    
+
     .subs-info {
         p {
             font-size: 24px;
         }
     }
-    
+
     .valdidity {
         margin-left: 12px;
     }
-    
+
     .historypackage-card1,
     .historypackage-card2 {
         background: linear-gradient(to right, rgb(173, 173, 173), rgb(228, 228, 228));
@@ -2209,29 +2198,29 @@
             line-height: 1;
         }
     }
-    
+
     .vam {
         vertical-align: middle;
     }
-    
+
     .validity {
         vertical-align: top;
     }
-    
+
     .set-1 {
         line-height: 1;
         font-size: 20px;
         letter-spacing: 1px;
     }
-    
+
     .pdt10 {
         padding-top: 10px;
     }
-    
+
     .pdb-25 {
         padding-bottom: 25px;
     }
-    
+
     .upgrade-inner {
         display: inline-block;
         position: absolute;
@@ -2242,11 +2231,11 @@
         font-size: 25px;
         border-left: 1px solid;
     }
-    
+
     .historypackage-card2 {
         background: linear-gradient(to right, #c9b459, #f9ef76);
     }
-    
+
     .sign-up {
         .fcbk {
             background-color: #3b5998;
@@ -2302,21 +2291,21 @@
             margin: 10px 0 20px;
         }
     }
-    
+
     .mgt15 {
         margin-top: 15px;
     }
-    
+
     .mg10 {
         margin: 10px;
     }
-    
+
     .border-div {
         width: 20%;
         border: 1px solid #ccc;
         display: inline-block;
     }
-    
+
     .divide-or {
         .detail-text {
             font-size: 24px;
@@ -2324,13 +2313,13 @@
             vertical-align: -webkit-baseline-middle;
         }
     }
-    
+
     .exist-user {
         color: #000;
         margin-bottom: 5px;
         font-size: 17px;
     }
-    
+
     .condition-box {
         /* Base for label styling */
         [type="checkbox"]:checked,
@@ -2354,8 +2343,7 @@
             width: 1.25em;
             height: 1.25em;
             border: 1px solid $orangeColor;
-            background: #fff;
-            // border-radius: 4px;
+            background: #fff; // border-radius: 4px;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
         }
         /* checked mark aspect */
@@ -2399,88 +2387,88 @@
             }
         }
     }
-    
+
     .mgb0 {
         margin-bottom: 0;
         line-height: 1;
     }
-    
+
     .mgt-8 {
         margin-top: -8px;
         line-height: 1;
     }
     /* end of Photographer module*/
     /*Start of Future Photographer module (Antu Ram)*/
-    
+
     header {
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.51);
     }
-    
+
     .grey-back {
         background-color: #f1f1f1;
         position: relative;
     }
-    
+
     .orange-color {
         color: $orangeColor;
     }
-    
+
     .white-color {
         color: $whiteColor !important;
     }
-    
+
     .facek {
         background-color: #3b5997;
     }
-    
+
     .fspan {
         background-color: #354f88;
     }
-    
+
     .googleb {
         background-color: #f15a29;
     }
-    
+
     .google-back {
         background-color: #de4c33;
     }
-    
+
     .googlespan {
         background-color: #ce3e26;
     }
-    
+
     .black-back {
         background-color: #252525;
     }
-    
+
     .whit-back {
         background-color: #fff;
     }
-    
+
     .relative {
         position: relative;
     }
-    
+
     .text-lowercase {
         text-transform: lowercase !important;
     }
-    
+
     .inline-block {
         display: inline-block;
     }
-    
+
     .pad25 {
         padding: 25px 0;
     }
-    
+
     .padd15 {
         padding: 15px 0;
     }
-    
+
     .pad-up100 {
         padding-top: 83px;
     }
-    
+
     .border-up {
         border-top: 2px solid gray;
         margin-top: 50px;
@@ -2491,7 +2479,7 @@
             color: black;
         }
     }
-    
+
     .shadow {
         position: relative;
         border: none;
@@ -2499,42 +2487,42 @@
         box-shadow: 0 0 6px black;
         border-radius: 0;
     }
-    
+
     .pad5 {
         //  padding: 0 5px 60px;
         padding: 0 13px 60px;
     }
-    
+
     .img-left {
         position: absolute;
         top: -45px;
         left: -75px;
         width: 430px;
     }
-    
+
     .other-section {
         //  margin: 60px 150px 0;
         position: relative;
     }
-    
+
     .pad-border {
         padding: 0 0 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #cecece;
     }
-    
+
     .user-section {
         padding: 0 0 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #cecece;
     }
-    
+
     .input-border {
         width: 100%;
         border: 1px solid #cecece !important;
         height: auto;
     }
-    
+
     .pub-r {
         background-image: url("../img/pencil.png");
         background-color: #f4f4f4;
@@ -2545,7 +2533,7 @@
         font-size: 22px !important;
         height: auto;
     }
-    
+
     .pub-btn {
         font-size: 20px;
         color: #fff;
@@ -2553,75 +2541,75 @@
         padding: 9px 24px;
         border: 1px solid #f1592a;
     }
-    
+
     .profile-intro {
         margin-top: 17px;
         padding-left: 85px;
     }
-    
+
     .f-photo-div {
         position: relative;
         margin: 50px 0 0;
     }
-    
+
     .img-min-h {
         min-height: 160px;
     }
-    
+
     .forml {
         padding: 36px 0;
         margin: 0;
     }
-    
+
     .mr15 {
         margin: 0 3px;
     }
-    
+
     .pad-right5 {
         padding: 0 5px;
     }
-    
+
     .font70 {
         font-size: 70px;
     }
-    
+
     .ft100 {
         font-size: 100px;
     }
-    
+
     .pad60 {
         padding: 70px 0;
     }
-    
+
     .mr40 {
         margin: 40px 0;
     }
-    
+
     .min-h {
         //  min-height: 416px;
         min-height: 466px;
     }
-    
+
     .pad100 {
         padding: 0 100px;
     }
-    
+
     .marg-rel {
         position: relative;
         margin: 0 26px;
     }
-    
+
     .view-orang {
         margin-top: 0 !important;
         margin-bottom: 44px !important;
         background-color: transparent !important;
         border: 1px solid #f15a29 !important;
     }
-    
+
     .pad0 {
         padding: 0 !important;
     }
-    
+
     .ab {
         position: absolute;
         bottom: 0;
@@ -2654,7 +2642,7 @@
             }
         }
     }
-    
+
     .user-name {
         margin-left: 15px;
         position: absolute;
@@ -2674,7 +2662,7 @@
             text-transform: capitalize;
         }
     }
-    
+
     .profile-img {
         display: inline;
         float: left;
@@ -2683,7 +2671,7 @@
             width: 75px;
         }
     }
-    
+
     .head-f {
         font-family: 'damion-regular';
         color: #f4511e;
@@ -2695,7 +2683,7 @@
         left: 0;
         margin: 0;
     }
-    
+
     .user-ab {
         position: absolute;
         top: 50%;
@@ -2704,7 +2692,7 @@
         width: 100%;
         transform: translate(-50%, -50%);
     }
-    
+
     .intro-profile {
         margin-top: -11px;
         padding: 2px 15px;
@@ -2722,7 +2710,7 @@
             font-size: 16px;
         }
     }
-    
+
     .main-cont {
         border-radius: 5px;
         margin: 60px 150px;
@@ -2737,9 +2725,7 @@
             font-weight: 700;
             text-transform: capitalize;
         }
-    }
-    
-    // this class is used for send enquiry right side navigation
+    } // this class is used for send enquiry right side navigation
     .send_enquirySlidebar {
         position: fixed;
         top: 30%;
@@ -2747,8 +2733,7 @@
         width: 29%;
         min-height: 315px;
         background-color: #ffffff;
-        z-index: 120;
-        // transition: 300ms right;
+        z-index: 120; // transition: 300ms right;
         @include transition(300ms right ease);
         .send_enquiry {
             // used for static position
@@ -2799,13 +2784,11 @@
             }
         }
     }
-    
+
     .showEnquery {
         // this class is used to show an enquiry box from -29% to 0px
         right: 0;
-    }
-    
-    // .sendEenquiry modal design
+    } // .sendEenquiry modal design
     .modal-dialog {
         //  top: 50%;
         .modal-demo {
@@ -2822,14 +2805,13 @@
                     display: inline-block;
                     position: absolute;
                     top: -28px;
-                    left: 120px;
-                    // transform: rotate(125deg);
+                    left: 120px; // transform: rotate(125deg);
                     @include transform(rotate(125deg));
                 }
             }
         }
     }
-    
+
     .radioBtn_cat {
         position: relative;
         margin-top: 53px;
@@ -2874,7 +2856,7 @@
             }
         }
     }
-    
+
     .all_cat {
         // to display images categorie wise
         position: relative;
@@ -2884,9 +2866,7 @@
                 height: 226px;
             }
         }
-    }
-    
-    // used for share your profile on social sites
+    } // used for share your profile on social sites
     .share_profile {
         margin-top: 15px;
         margin-bottom: 54px;
@@ -2906,7 +2886,7 @@
             }
         }
     }
-    
+
     .so-nam {
         font-size: 36px;
         font-family: dosis-Light;
@@ -2917,14 +2897,14 @@
             margin: 0 15px;
         }
     }
-    
+
     .view-a {
         margin-top: -32px;
         margin-bottom: 29px;
         background-color: transparent !important;
         border: 1px solid white !important;
     }
-    
+
     .full-tabs {
         margin: 0;
         li {
@@ -2944,7 +2924,7 @@
             }
         }
     }
-    
+
     .full-tabs2 {
         margin: 0;
         .border-line {
@@ -2981,13 +2961,13 @@
             }
         }
     }
-    
+
     .border-hr {
         border-top: 1px solid #bfbfbf;
         margin-left: 32%;
         margin-right: 32%;
     }
-    
+
     hr.border-hr:after {
         content: 'or';
         display: inline-block;
@@ -2999,7 +2979,7 @@
         font-size: 18px;
         font-family: helveticalt-narrow;
     }
-    
+
     .head-name {
         text-align: center;
         @extend .mg_t75;
@@ -3032,7 +3012,7 @@
             color: $orangeColor;
         }
     }
-    
+
     .reg-btn {
         font-family: dosis-Light;
         border-bottom: 2px solid rgba(241, 90, 41, 0.19);
@@ -3051,12 +3031,12 @@
             border-color: #f15a29 !important;
         }
     }
-    
+
     .reg-btn:focus {
         box-shadow: none;
         border-color: #f15a29 !important;
     }
-    
+
     .orange-btn {
         font-family: hctl;
         color: #fff;
@@ -3065,7 +3045,7 @@
         border-radius: 4px;
         padding: 6px 30px;
     }
-    
+
     .orange-btn:focus,
     .orange-btn:hover {
         color: #fff;
@@ -3073,7 +3053,7 @@
         outline: none !important;
         box-shadow: none;
     }
-    
+
     .whit-btn {
         font-family: hctl;
         color: #f15a29;
@@ -3082,7 +3062,7 @@
         border-radius: 4px;
         padding: 6px 36px;
     }
-    
+
     .whit-btn:focus,
     .whit-btn:hover {
         color: #f15a29;
@@ -3090,17 +3070,17 @@
         outline: none !important;
         box-shadow: none;
     }
-    
+
     .whit-color {
         text-decoration: none;
         color: #fff;
     }
-    
+
     .whit-color:focus,
     .whit-color:hover {
         color: #fff;
     }
-    
+
     .btn-social {
         margin: 0 13px;
         position: relative;
@@ -3122,13 +3102,13 @@
             text-align: center;
         }
     }
-    
+
     .btn-social:focus,
     .btn-social:hover {
         color: #fff;
         outline: none;
     }
-    
+
     .flink {
         font-family: dosis-Light;
         float: right;
@@ -3137,7 +3117,7 @@
         margin-top: -13px;
         font-weight: 600;
     }
-    
+
     .list {
         list-style: none;
         li::before {
@@ -3147,21 +3127,21 @@
             padding-right: 3px;
         }
     }
-    
+
     .intro-con {
         margin: 0;
         font-size: 26px;
         text-align: justify;
         font-weight: 100;
     }
-    
+
     .pay_btn {
         padding-top: 60px;
         .orange-btn {
             padding: 10px 45px;
         }
     }
-    
+
     .intro {
         margin-top: -35px;
         strong {
@@ -3170,7 +3150,7 @@
             letter-spacing: 1px;
         }
     }
-    
+
     .black-btn {
         margin: 0 15px;
         width: 100px;
@@ -3182,13 +3162,13 @@
         font-family: dosis-Light;
         outline: none;
     }
-    
+
     .black-btn:focus,
     .black-btn:hover {
         color: #fff;
         outline: none;
     }
-    
+
     .tans-btn {
         padding: 8px 16px;
         font-family: dosis-Light;
@@ -3200,13 +3180,13 @@
         cursor: text;
         outline: none;
     }
-    
+
     .btn:focus,
     .btn:hover {
         outline: none !important;
         box-shadow: none !important;
     }
-    
+
     .sec-span {
         padding: 0 5px;
         outline: none;
@@ -3214,16 +3194,16 @@
         color: black;
         font-weight: 600;
     }
-    
+
     .btn-marg {
         margin: 60px 18px 21px;
     }
-    
+
     .location {
         height: 258px;
         overflow: auto;
     }
-    
+
     .list {
         min-height: 373px;
         background-image: url("/../frontend/img/clickm/11.png");
@@ -3241,7 +3221,7 @@
             margin: 0;
         }
     }
-    
+
     .users {
         .thumbnail {
             margin: 50px 0;
@@ -3305,7 +3285,7 @@
             }
         }
     }
-    
+
     .border-half {
         border: 9px solid #f15a29;
         border-radius: 50%;
@@ -3317,14 +3297,14 @@
         border-bottom: 9px solid transparent;
         transform: rotate(44deg);
     }
-    
+
     .profile-f-img {
         border-radius: 50%;
         width: 150px;
         border: 3px solid #f15a29;
         transform: rotate(-44deg);
     }
-    
+
     .sec-tab {
         padding-left: 20%;
         margin-top: 100px;
@@ -3341,7 +3321,7 @@
             margin-top: 20px;
         }
     }
-    
+
     .sub-main {
         position: relative;
         margin: 10px 0 60px;
@@ -3382,9 +3362,7 @@
                 }
             }
         }
-    }
-    
-    //checkbox
+    } //checkbox
     .checkboxing {
         li {
             list-style: none;
@@ -3420,9 +3398,7 @@
         input[type="checkbox"]:checked+label span {
             @include transition(background-color 0.4s linear);
         }
-    }
-    
-    // .checkboxdemoSelectAll .demo-legend {
+    } // .checkboxdemoSelectAll .demo-legend {
     //     color: #3F51B5;
     // }
     //
@@ -3437,23 +3413,23 @@
     // }
     /*End of Future Photographer (Antu Ram)*/
     /* fancybox-override */
-    
+
     #fancybox-loading,
     .fancybox-close,
     .fancybox-next span,
     .fancybox-prev span {
         background-image: url("../img/fancybox_sprite.png");
     }
-    
+
     .fancybox-overlay {
         background-color: rgba(0, 0, 0, 0.55);
     }
-    
+
     #fancybox-loading div {
         background: url('../img/fancybox_loading.gif') center center no-repeat;
     }
     /*Retina graphics!*/
-    
+
     @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
     only screen and (min--moz-device-pixel-ratio: 1.5),
     only screen and (min-device-pixel-ratio: 1.5) {
@@ -3467,31 +3443,31 @@
             background-image: url('../img/fancybox_loading@2x.gif');
         }
     }
-    
+
     .fancybox-nav {
         height: 100%;
         /* helps IE */
     }
-    
+
     .fancybox-image {
         opacity: 1 !important;
     }
-    
+
     .fancybox-nav span {
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
     }
-    
+
     .fancybox-nav.fancybox-next span {
         background-image: url(../img/next.png);
     }
-    
+
     .fancybox-nav.fancybox-prev span {
         background-image: url(../img/prev.png);
     }
     /* end of fancybox-override */
-    
+
     //@import "fancybox-override";
     // @import "rishabh";
     // @import "feature-photo";
