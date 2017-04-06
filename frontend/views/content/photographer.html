@@ -1,26 +1,35 @@
 <div class="photographer-page">
     <form>
         <div class="profile-banner">
-            <img src="frontend/img/photographer/prof-bg.jpg" alt="" class="img-responsive">
-            <span class="change-cover">
-                <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
-                <upload-image ng-model="myPic.coverPic" no-view></upload-image>
-              <!--<button type="button" ng-click="coverPicture(myPic)" >  Upload Cover Photo</button>-->
-            </span>
-            <span> {{myPic.coverPic}} </span>
+            <div class="profile-banner__bg">
+                <img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive">
+            </div>
+            <div class="change-cover">
+                <div class="inline-block change-cover__img">
+                    <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive">
+                </div>
+                <div class="inline-block change-cover__text">
+                    <span>Upload Cover Photo</span>
+                    <upload-image ng-model="photographerData.coverPic" no-view></upload-image>
+                </div>
+                <!--<button type="button" ng-click="coverPicture(myPic)" >  Upload Cover Photo</button>-->
+            </div>
             <div class="select-box">
                 <div class="container">
                     <div class="profile-block">
                         <div class="holder1 display-inline">
                             <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive sm-logo">
-                            <div class="profile-holder" ng-repeat="item in profileList track by $index">
-                                <img src="{{item}}" alt="" class="img-responsive prof-img">
+                            <div class="profile-holder">{{profilePhoto.profilePic }}
+                                <img ng-src="{{photographerData.profilePic | serverimage}}" alt="" class="img-responsive prof-img" ng-if="photographerData.profilePic">
+                                <img src="frontend/img/5.png" class="img-responsive prof-img" ng-if="!photographerData.profilePic">
                                 <div class="upload-trans" type="button" ng-hide="profileSelect">
-                                    <span ng-click="profilePicture(profilePhoto)">
+                                    <span>
                                         <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
-                                        <upload-image ng-model="profilePhoto.profilePic" no-view></upload-image>
                                         Upload Profile Pic
-                                        </span>
+                                    </span>
+                                    <div class="directive-opacity">
+                                        <upload-image ng-model="photographerData.profilePic" no-view></upload-image>
+                                    </div>
                                 </div>
                             </div>
                             <div class="quarter-circle"></div>
@@ -67,22 +76,29 @@
                                                 <input type="text" class="form-control" id="name" placeholder="Please enter your full name" ng-model="photographerData.name">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group location">
                                             <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline"> Location:</label>
-                                            <div class="selected-option display-inline">
+                                            <!--<div class="selected-option display-inline">
                                                 <span>Mumbai</span>
                                                 <div class="close-btn">x</div>
-                                            </div>
+                                            </div>-->
+                                            <input type="text" placeholder="Enter location">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                             <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
                                         </div>
-                                        <div class="form-group custom-check">
-                                            <label for="speciality" class=""> <img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
-                                            <p class="check-box" ng-repeat="speciality in specialityData">
-                                                <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)"
-                                                />
-                                                <label for="{{speciality.name}}" class="check-label">{{speciality.name}}</label>
-                                            </p>
+                                        <div class="form-group custom-check edit-tab">
+                                            <div class="inline-block speciality">
+                                                <label for="speciality" class=""> 
+                                                <!--<img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">-->
+                                            Speciality:</label>
+                                            </div>
+                                            <div class="inline-block speciality-list">
+                                                <p class="check-box" ng-repeat="speciality in specialityData">
+                                                    <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)"
+                                                    />
+                                                    <label for="{{speciality.name}}" class="check-label">{{speciality.name}}</label>
+                                                </p>
+                                            </div>
                                             <!--<p class="check-box">
                                                 <input type="checkbox" id="test2" />
                                                 <label for="test2" class="check-label">Wedding</label>
@@ -142,11 +158,19 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline">Location:</label>
-                                            <div class="selected-option display-inline">
+                                            <!--<div class="selected-option display-inline">
                                                 <span>Mumbai</span>
-                                            </div>
+                                            </div>-->
                                             <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
                                             <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
+                                            <div class="city">
+                                                <div class="display-inline city__name">
+                                                    <input type="text" class="form-control" id="locationCity">
+                                                </div>
+                                                <div class="display-inline city__add-icon" ng-click="test();">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="speciality" class=""><img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
@@ -352,6 +376,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--sliver subscribed-->
                     <div class="silver-subscribed" ng-hide="silverSub">
                         <div class="free-member">
                             <span class="small-font left-font">You are now</span>
@@ -359,7 +384,7 @@
                             <span class="small-font">to a silver package</span>
                         </div>
                         <div class="upload-pic text-center">
-                            <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()">Start uploading</button>
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="silverShow()">Start uploading</button>
                         </div>
                         <div class="terms">
                             <span class="text-center">Terms and conditions</span>
@@ -371,7 +396,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- //gold -->
+                    <!-- //gold subscribed-->
                     <div class="silver-subscribed" ng-hide="goldSub">
                         <div class="free-member">
                             <span class="small-font left-font">You are now</span>
@@ -379,7 +404,7 @@
                             <span class="small-font">to a gold package</span>
                         </div>
                         <div class="upload-pic text-center">
-                            <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()">Start uploading</button>
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="goldShow()">Start uploading</button>
                         </div>
                         <div class="terms">
                             <span class="text-center">Terms and conditions</span>
@@ -392,42 +417,43 @@
                         </div>
                     </div>
                     <!-- uploaded-images -->
-                    <div class="uploaded-images">
+                    <!--silver package-->
+                    <div class="uploaded-images" ng-hide="silverPackage">
                         <div class="package-head">
                             <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                             <div class="display-inline pkg-info">
                                 <span class="package-name">SILVER PACKAGE</span>
                             </div>
-                        </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">12 OUT OF 30 PHOTOS</span></span>
+                        </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 30 PHOTOS</span></span>
                         <div class="checkbox-form">
                             <form action="#" class="circular-checkbox display-inline">
                                 <p>My Photos</p>
-                                <p>
-                                    <input type="checkbox" id="underwater" />
-                                    <label for="underwater">Underwater</label>
+                                <p ng-repeat="list in uniqueCategory track by $index">
+                                    <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                    <label for="{{list.category}}">{{list.category}}</label>
                                 </p>
-                                <p>
+                                <!--<p>
                                     <input type="checkbox" id="chennai" />
                                     <label for="chennai">Chennai</label>
                                 </p>
                                 <p>
                                     <input type="checkbox" id="mumbai" />
                                     <label for="mumbai">Mumbai</label>
-                                </p>
+                                </p>-->
                             </form>
                             <div class="upload-pic display-inline">
-                                <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()">Upload picture</button>
+                                <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<=30">Upload picture</button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4" ng-repeat="item in uploadList track by $index">
+                            <div class="col-md-4" ng-repeat="item in uploadImgData track by $index">
                                 <div class="img-holder">
-                                    <img ng-src="{{item}}" alt="" class="img-responsive">
+                                    <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
                                             <a fancybox-box ng-href="{{item}}">
                                                 <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button>                                                </a>
-                                            <button type="button" class="btn btn-default">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+                                            <button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -436,7 +462,6 @@
                         <div class="upload-pic text-center ld-more">
                             <button type="button" class="btn btn-default text-uppercase" ng-click="">Load more</button>
                         </div>
-                        <!-- upgradegold -->
                         <div class="upgrade-gd">
                             <div class="free-member">
                                 <span class="small-font left-font">Want to</span>
@@ -460,7 +485,7 @@
                         </div>
                     </div>
                     <!-- gold-package -->
-                    <div class="uploaded-images">
+                    <div class="uploaded-images" ng-hide="goldPackage">
                         <div class="package-head head-gold">
                             <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                             <div class="display-inline pkg-info">
@@ -470,27 +495,27 @@
                         <div class="checkbox-form">
                             <form action="#" class="circular-checkbox display-inline">
                                 <p>My Photos</p>
-                                <p>
-                                    <input type="checkbox" id="underwater1" />
-                                    <label for="underwater1">Underwater</label>
+                                <p ng-repeat="list in uniqueCategory ">
+                                    <input type="checkbox" id="{{list.category}}" />
+                                    <label for="{{list.category}}">{{list.category}}</label>
                                 </p>
-                                <p>
+                                <!--<p>
                                     <input type="checkbox" id="chennai1" />
                                     <label for="chennai1">Chennai</label>
                                 </p>
                                 <p>
                                     <input type="checkbox" id="mumbai2" />
                                     <label for="mumbai2">Mumbai</label>
-                                </p>
+                                </p>-->
                             </form>
                             <div class="upload-pic display-inline">
-                                <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()">Upload picture</button>
+                                <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<=100">Upload picture</button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4" ng-repeat="item in uploadList track by $index">
+                            <div class="col-md-4" ng-repeat="item in uploadImgData">
                                 <div class="img-holder">
-                                    <img src="{{item}}" alt="" class="img-responsive">
+                                    <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
                                             <a fancybox-box ng-href="{{item}}">
@@ -506,6 +531,7 @@
                         </div>
                     </div>
                 </div>
+                <!--history-->
                 <div class="history-part" ng-if="tab == 3">
                     <div ng-hide="hideHistory">
                         <div class="row">
@@ -513,7 +539,7 @@
                                 <div class="about-head text-capitalize">Order History</div>
                                 <div class="abt-2">
                                     <div class="history-sec his-under">
-                                        <p class="">You joined Clickmania on {{photographerData.createdAt}}</p>
+                                        <p class="">You joined Clickmania on {{photographerData.createdAt | date}}</p>
                                     </div>
                                     <div class="history-sec2">
                                         <p class=""></p>

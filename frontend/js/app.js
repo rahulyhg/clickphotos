@@ -48,7 +48,9 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             url: "/user-profile",
             templateUrl: "frontend/views/template.html",
             controller: 'UserProfileCtrl'
-        }).state('wild-photographer', {
+        })
+        
+        .state('wild-photographer', {
             url: "/wild-photographer",
             templateUrl: "frontend/views/template.html",
             controller: 'WildPhotoCtrl'
@@ -63,6 +65,7 @@ firstapp.filter('startFrom', function () {
         return input.slice(start);
     }
 });
+
 firstapp.directive('img', function ($compile, $parse) {
     return {
         restrict: 'E',

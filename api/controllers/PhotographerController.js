@@ -14,45 +14,6 @@ var controller = {
         }
     },
 
-    updatePhotographer: function (req, res) {
-        if (req.body) {
-            Photographer.updatePhotographer(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
-        }
-    },
-
-    updatePhotographerPackage: function (req, res) {
-        if (req.body) {
-            Photographer.updatePhotographerPackage(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
-        }
-    },
-
-    updatePhotographerDetail: function (req, res) {
-        if (req.body) {
-            Photographer.updatePhotographerDetail(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
-        }
-    },
-
     uploadPhotos: function (req, res) {
         if (req.body) {
             Photographer.uploadPhotos(req.body, res.callback);
@@ -105,32 +66,6 @@ var controller = {
         }
     },
 
-    updateCoverPic: function (req, res) {
-        if (req.body) {
-            Photographer.updateCoverPic(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
-        }
-    },
-
-    updateProfilePic: function (req, res) {
-        if (req.body) {
-            Photographer.updateProfilePic(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
-        }
-    },
-
     updateToFeaturePhotographer: function (req, res) {
         if (req.body) {
             Photographer.updateToFeaturePhotographer(req.body, res.callback);
@@ -147,6 +82,32 @@ var controller = {
     findPhotographer: function (req, res) {
         if (req.body) {
             Photographer.findPhotographer(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    removeUpldImg: function (req, res) {
+        if (req.body) {
+            Photographer.removeUpldImg(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    saveData: function (req, res) {
+        if (req.body) {
+            Photographer.saveData(req.body, res.callback);
         } else {
             res.json({
                 value: false,

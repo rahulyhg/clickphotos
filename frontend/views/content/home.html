@@ -60,8 +60,8 @@
         <div id="sidenav-overlay" style="opacity: 1; display: none;"></div>
         <swiper autoplay="5000" effect="slide" loop="true">
             <slides>
-                <slide ng-repeat="s in mySlides track by $index">
-                    <img ng-src="{{s}}" class="img-full" noloading="true">
+                <slide ng-repeat="image in bannerImageData track by $index">
+                    <img ng-src="{{image.bannerImage | serverimage}}"  class="img-full" noloading="true">
                 </slide>
             </slides>
             <prev></prev>
@@ -258,6 +258,7 @@
             <div class="col-md-5">
                 <div class="user_info">
                     <h2>{{artistOfMonth.name}}</h2>
+                    <h3>{{specialityStr }}</h3>
                     <p ng-bind-html="artistOfMonth.content">{{artistOfMonth.content}}</p>
                     <p class="text-left"><a class="btn whit-btn" type="button" href="{{artistOfMonth.url}}" target="_blank"> Read More</a></p>
                 </div>

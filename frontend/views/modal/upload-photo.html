@@ -14,7 +14,7 @@
                     <div class="select_join">
                         <select name="txtCountry" ng-model="imagesData.category">
                               <option>Select Category</option>
-                              <option value="{{cat.name}}" ng-repeat="cat in specialityData">{{cat.name}}</option>
+                              <option value="{{cat.name}}" ng-repeat="cat in photographerData.speciality">{{cat.name}}</option>
                               <!--<option value="2">Scenery</option>-->
                             </select>
                     </div>
@@ -25,7 +25,6 @@
                         <!--<input type="file" value="" />-->
                         <upload-image ng-model="imagesData.image" no-view></upload-image>
                     </div>
-                    <p>{{imagesData.image}}</p>
                     <div>
                         <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImage(imagesData)">Upload Image</button>
                     </div>

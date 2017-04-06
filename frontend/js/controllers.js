@@ -10,22 +10,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 console.log(data)
                 $scope.artistOfMonth = data.data.results[0];
+                angular.forEach($scope.artistOfMonth.speciality, function (spec) {
+                    //only required the students avilable projects
+                    console.log("spec---", spec.name)
+                    if (_.isEmpty($scope.specialityStr)) {
+                        $scope.specialityStr = spec.name;
+                    } else {
+                        $scope.specialityStr = $scope.specialityStr + ' | ' + spec.name;
+                    }
+                })
                 console.log("$scope.ArtistOfMonth--", $scope.artistOfMonth)
             }
         });
 
-        // NavigationService.callApi("Categories/search", function (data) {
-        //             if (data.value === true) {
-        //                 console.log(data)
-        //                 $scope.Categories = data.data.results;
-        //             console.log("$scope.Categories--", $scope.Categories)}
-        // });
+        NavigationService.callApi("HomePage/getAll", function (data) {
+            console.log("catdata", data);
+            if (data.value === true) {
+                $scope.bannerImageData = data.data;
+                console.log("$scope.bannerImageData", $scope.bannerImageData);
+            }
+        });
 
-
-        NavigationService.callApi("Categories/search", function (data) {
+        NavigationService.callApi("Categories/getAll", function (data) {
+            console.log("catdata", data);
             if (data.value === true) {
                 console.log(data)
-                $scope.category = data.data.results;
+                $scope.category = data.data;
                 $scope.bigImageCategory = [];
                 $scope.smallImageCategory = [];
 
@@ -156,7 +166,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
     })
-    .controller('PhotographerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $http) {
+    .controller('PhotographerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $http, $state) {
         $scope.template = TemplateService.changecontent("photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -168,6 +178,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.profileSelect = false;
         $scope.freeMember = false;
         $scope.silverSub = true;
+        $scope.silverPackage = true;
+        $scope.goldPackage = true;
         $scope.hideHistory = false;
         $scope.packageStatus = true;
         $scope.serviceList = [];
@@ -179,6 +191,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (data.value === true) {
                     console.log(data)
                     $scope.photographerData = data.data;
+                    $scope.uploadImgData = $scope.photographerData.uploadedImages;
+                    console.log("$scope.uploadImgData", $scope.uploadImgData);
+                    $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
+                    console.log("$scope.uniqueCategory", $scope.uniqueCategory);
+                    $scope.uploadImgLength = $scope.uploadImgData.length;
+                    console.log("$scope.uploadImgLength", $scope.uploadImgLength);
                     angular.forEach($scope.photographerData.speciality, function (spec) {
                         //only required the students avilable projects
                         console.log("spec---", spec.name)
@@ -190,10 +208,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     })
                     console.log("$scope.photographerData--", $scope.photographerData)
                     $scope.formData = {}
-                    NavigationService.callApi("Categories/search", function (data) {
+                    NavigationService.callApi("Categories/getAll", function (data) {
                         if (data.value === true) {
                             console.log(data)
-                            $scope.specialityData = data.data.results;
+                            $scope.specialityData = data.data;
                             _.forEach($scope.specialityData, function (value1) {
                                 _.forEach($scope.photographerData.speciality, function (value2) {
                                     if (_.isEqual(value1.name, value2.name)) {
@@ -228,16 +246,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.about = true;
+
         $scope.done = function (formdata) {
             formdata.speciality = $scope.specialityList;
             console.log(formdata);
-            NavigationService.apiCallWithData("Photographer/updatePhotographerDetail", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 if (data.value) {
                     NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                         if (data.value === true) {
                             console.log(data)
                             $scope.photographerData = data.data;
-                            console.log("$scope.photographerData--", $scope.photographerData)
+                            console.log("$scope.photographerData--", $scope.photographerData);
+                            $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
+                            $state.reload();
                         }
                     });
                 }
@@ -251,54 +272,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.about = false;
         }
 
+        //cover and profile pic update and set
 
-
-
-        // $scope.goldMember = function (formdata) {
-        //     formdata = {};
-        //     formdata._id = $.jStorage.get("photographer")._id;
-        //     formdata.package = Gold;
-        //     NavigationService.apiCallWithData("Photographer/updatePhotographerPackage", formdata, function (data) {
-
-        //         console.log("dataaaaaaaaaa", data);
-        //         $scope.about = true;
-
-        //     });
-        // };
-        // $scope.id = $.jStorage.get("photographer")._id;
-        // console.log("$scope.id ", $scope.id);
-
-        $scope.profilePhoto = {};
+        $scope.photographerData = {};
         $scope.coverPhoto = {};
+        $scope.profilePic = {};
+
 
         if ($.jStorage.get('photographer') != null) {
             $scope.coverPhoto._id = $.jStorage.get("photographer")._id;
-            $scope.profilePhoto._id = $.jStorage.get("photographer")._id;
+            $scope.profilePic._id = $.jStorage.get("photographer")._id;
         }
-        $scope.myPic = {
+
+        $scope.photographerData = {
             coverPic: ""
         };
-        $scope.$watch("myPic.coverPic", function (newImage, oldImage) {
-            console.log("Change in image", newImage, oldImage);
+
+        $scope.photographerData = {
+            profilePic: ""
+        };
+
+        $scope.photographerData.coverPic = {};
+        $scope.photographerData.profilePic = {};
+
+        $scope.$watch("photographerData.coverPic", function (newImage, oldImage) {
+            //console.log("Change in image", newImage, oldImage);
+            $scope.photographerData._id = $.jStorage.get("photographer")._id;
+            $scope.photographerData.coverPic = newImage
+            NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
+                console.log("coverPhotoUpdate", data);
+            });
+
         });
-        $scope.coverPicture = function (formdata) {
-            console.log("coverpic", formdata);
-            // formdata._id = $scope.id
-            // formdata.package = Gold;
-            NavigationService.apiCallWithData("Photographer/updateCoverPic", formdata, function (data) {
-                console.log("dataaaaaaaaaa", data);
+
+        $scope.$watch("photographerData.profilePic", function (newImage, oldImage) {
+            //console.log("Change in image profile", newImage, oldImage);
+            $scope.photographerData._id = $.jStorage.get("photographer")._id;
+            $scope.photographerData.profilePic = newImage
+            NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
+                console.log("profilePhotoUpdate", data);
             });
-        };
 
-        $scope.profilePicture = function (formdata) {
-            // formdata._id = $.jStorage.get("photographer")._id;
-            // formdata.package = Gold;
-            NavigationService.apiCallWithData("Photographer/updateProfilePic", formdata, function (data) {
-                console.log("dataaaaaaaaaa", data);
-            });
-        };
+        });
 
-
+        //End cover and profile pic update and set//
 
         $scope.chooseSilverhis = function () {
             $scope.hideHistory = true;
@@ -321,6 +338,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.freeMember = true;
             $scope.goldSub = false;
         }
+        $scope.silverShow = function () {
+            $scope.silverSub = true;
+            $scope.silverPackage = false;
+        }
+        $scope.goldShow = function () {
+            $scope.goldSub = true;
+            $scope.goldPackage = false;
+        }
         $scope.showForm = function () {
             $scope.noEdit = false;
             $scope.showForm = false;
@@ -341,7 +366,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.package = 'Silver';
-            NavigationService.apiCallWithData("Photographer/updatePhotographerPackage", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 console.log("dataaaaaaaaaa", data);
             });
         }
@@ -356,9 +381,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.package = 'Gold';
-            NavigationService.apiCallWithData("Photographer/updatePhotographerPackage", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 console.log("dataaaaaaaaaa", data);
             });
+        }
+        $scope.dataArr = [];
+
+        $scope.fliterCheck = function (data) {
+            $scope.uploadImgData = [];
+            console.log("Doc", document.getElementById(data).checked);
+            if (document.getElementById(data).checked) {
+                $scope.dataArr.push(data);
+                _.forEach($scope.dataArr, function (value) {
+                    console.log("_.filter($scope.photographerData.uploadedImages, ['category', value])", _.filter($scope.photographerData.uploadedImages, ['category', value]).length)
+                    var filteredData = _.filter($scope.photographerData.uploadedImages, ['category', value])
+                    _.forEach(filteredData, function (value1) {
+                        $scope.uploadImgData.push(value1);
+                        console.log("$scope.uploadImgDataasdsdasds", $scope.uploadImgData);
+                    });
+                });
+            } else {
+                $scope.dataArr = _.remove($scope.dataArr, function (n) {
+                    return n != data;
+                });
+                _.forEach($scope.dataArr, function (value) {
+                    var filteredData = _.filter($scope.photographerData.uploadedImages, ['category', value])
+                    _.forEach(filteredData, function (value1) {
+                        $scope.uploadImgData.push(value1);
+                        console.log("$scope.uploadImgDataasdsdasds", $scope.uploadImgData);
+                    });
+                });
+            }
+            if (_.isEmpty($scope.dataArr)) {
+                $scope.uploadImgData = $scope.photographerData.uploadedImages;
+            }
         }
 
         $scope.uploadImg = function () {
@@ -373,7 +429,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
 
-
         $scope.uploadImage = function (formdata) {
             console.log("im in upload image", formdata);
             formdata._id = $.jStorage.get("photographer")._id;
@@ -383,6 +438,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log("dataaaaaaaaaa", data);
                     $scope.imgModal.close();
                     console.log("modal close");
+                    NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                        if (data.value === true) {
+                            $scope.photographerData = data.data;
+                            $scope.uploadImgData = $scope.photographerData.uploadedImages;
+                            $scope.uploadImgLength = $scope.uploadImgData.length;
+                            $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
+                            $scope.dataArr = [];
+                        }
+                    })
+                }
+            });
+        };
+
+        $scope.deleteUploadImage = function (index) {
+            var formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            formdata.id = index._id;
+            NavigationService.apiCallWithData("Photographer/removeUpldImg", formdata, function (data) {
+                console.log("data", data);
+                if (data.value) {
+                    console.log("dataaaaaaaaaa", data);
+                    NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                        if (data.value === true) {
+                            $scope.photographerData = data.data;
+                            $scope.uploadImgData = $scope.photographerData.uploadedImages;
+                            $scope.uploadImgLength = $scope.uploadImgData.length;
+                            $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
+                            $scope.dataArr = [];
+                        }
+                    })
                 }
             });
         };
@@ -405,6 +490,59 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             "titleOne": "Upgrade to",
             "titleTwo": "Gold"
         };
+
+        //sid code 
+        var counter = 1; // for city add button
+        $scope.test = function () // this function is used to add city chips
+        {
+            var x = counter++;
+            // console.log(x);
+            var elemArray = [];
+            var ipValue = document.getElementById('locationCity').value;
+            //  $('.city .city__add-icon').after().append('<div class="cool"></div>').text(ipValue);
+            var $d = $('<div class="selected-option display-inline"></div>').text(ipValue).insertAfter('.city__add-icon').append('<i class="fa fa-times"></i>');
+            $('.city .fa-times').css({
+                'margin-left': '5px'
+            })
+            // $('div.selected-option').attr('id', x);
+            $(x).each(function () {
+                elemArray.push($d.attr('id', x));
+            });
+            $('.city .fa-times').on('click', function () {
+                alert('remove');
+                var b;
+                // var b = $('div.selected-option').attr('id');;
+                // console.log($d.attr('id'));
+                // if (b == x) {
+                //     $(b).remove();
+                // }
+                $(x).each(function () {
+                    console.log('x', x);
+                    if ($d.attr('id') == x) {
+                        alert('id' + $d.attr('id'));
+                        b = $($d).attr('id');
+                        console.log('b', b);
+                        $($d).remove();
+                    }
+                });
+                // console.log('id', $d.attr('id'));
+            });
+            // console.log('index', elemArray[2]);
+            // $('.city .fa-times').css({
+            //     'margin-left': '5px'
+            // }).on('click', function () {
+            //     // for (var i = 0; i < x.length; i++) {
+            //     //     if ($('div.selected-option').attr('id') == x) {
+            //     //         $('div.selected-option').remove();
+            //     //     }
+            //     // }
+
+            //     console.log('ada');
+
+            // });
+
+        };
+        //sid code end
 
     })
 
@@ -612,10 +750,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //     }
         // });
 
-        NavigationService.callApi("Categories/search", function (data) {
+        NavigationService.callApi("Categories/getAll", function (data) {
             if (data.value === true) {
                 console.log(data)
-                $scope.category = data.data.results;
+                $scope.category = data.data;
                 $scope.bigImageCategory = [];
                 $scope.smallImageCategory = [];
 
@@ -1058,20 +1196,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             },
 
-            $scope.login = function (formdata) {
-                // formdata.serviceRequest = $scope.serviceList;
-                console.log(formdata);
-                NavigationService.checkLogin(formdata, function (data) {
-                    if (data.data.value) {
-                        console.log(data.data.data);
-                        $.jStorage.set("photographer", data.data.data);
-                        $rootScope.showStep = 2;
-                        $scope.template.profile = data.data.data;
-                        $scope.signupModal.close();
-                        $state.go("photographer");
+            $scope.subscribeData = function (formdata) {
+                console.log("formdatafsgdvtrhejy", formdata);
+                NavigationService.apiCallWithData("HomePage/save", formdata, function (data) {
+                    if (data.value === true) {
+                        console.log(data);
                     }
                 });
             }
+
+        $scope.login = function (formdata) {
+            // formdata.serviceRequest = $scope.serviceList;
+            console.log(formdata);
+            NavigationService.checkLogin(formdata, function (data) {
+                if (data.data.value) {
+                    console.log(data.data.data);
+                    $.jStorage.set("photographer", data.data.data);
+                    $rootScope.showStep = 2;
+                    $scope.template.profile = data.data.data;
+                    $scope.signupModal.close();
+                    $state.go("photographer");
+                }
+            });
+        }
 
         if ($.jStorage.get("photographer")) {
             $scope.template.profile = $.jStorage.get("photographer");
@@ -1113,8 +1260,4 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             //  $rootScope.$apply();
         };
-
-
     })
-
-;

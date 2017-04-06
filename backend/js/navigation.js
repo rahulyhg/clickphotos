@@ -30,6 +30,11 @@ var navigationservice = angular.module('navigationservice', [])
                 name: "Categories",
                 classis: "active",
                 sref: "#!/page/viewCategories//",
+            },
+             {
+                name: "Home Page Banner",
+                classis: "active",
+                sref: "#!/page/viewHomePage//",
             }
         ];
 

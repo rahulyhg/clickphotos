@@ -1,0 +1,49 @@
+{
+    "title": "Create Home Page",
+    "name": "HomePage",
+    "jsonPage": "viewHomePage",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["HomePage"],
+    "fields": [{
+        "name": "Email",
+        "type": "text",
+        "tableRef": "email",
+        "placeholder": "Enter Email",
+        "id": "email",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Image",
+        "type": "image",
+        "tableRef": "bannerImage",
+        "option": "single",
+        "size": "500 x 500px",
+        "placeholder": "Enter Logo",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitWhatsHot",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewHomePage"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewHomePage"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "HomePage/save"
+    }
+}

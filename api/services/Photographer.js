@@ -112,25 +112,6 @@ var model = {
     },
 
 
-    updatePhotographer: function (data, callback) {
-
-        console.log("DATA", data);
-
-        Photographer.update({
-            _id: data._id
-        }, {
-            isactive: data.isactive
-        }, function (err, updated) {
-            console.log(updated);
-            if (err) {
-                console.log(err);
-                callback(err, null);
-            } else {
-                callback(null, updated);
-            }
-        });
-    },
-
     deleteFeaturedPhotographer: function (data, callback) {
 
         console.log("DATA", data);
@@ -188,71 +169,6 @@ var model = {
         });
     },
 
-    updatePhotographerPackage: function (data, callback) {
-        var packageType = data.package;
-        console.log("DATA", data);
-        Photographer.update({
-            _id: data._id
-        }, {
-            package: packageType
-        }, function (err, updated) {
-            console.log(updated);
-            if (err) {
-                console.log(err);
-                callback(err, null);
-            } else {
-                callback(null, updated);
-            }
-        });
-    },
-
-    updatePhotographerDetail: function (data, callback) {
-
-        console.log("DATA", data);
-
-        Photographer.update({
-            _id: data._id
-        }, {
-            name: data.name,
-            location: data.location,
-            speciality: data.speciality,
-            bio: data.bio,
-            pricing: data.pricing
-        }, function (err, updated) {
-            console.log(updated);
-            if (err) {
-                console.log(err);
-                callback(err, null);
-            } else {
-                callback(null, updated);
-            }
-        });
-    },
-
-    // uploadPhotos: function (data, callback) {
-
-    //     console.log("DATA", data);
-
-    //     Photographer.update({
-    //         _id: data._id,
-    //     }), {
-    //         $push: {
-    //             uploadedImages: {
-    //                 $each: data.photos
-    //             }
-    //         }
-
-    //     }.exec(function (err, updated) {
-    //         console.log(updated);
-    //         if (err) {
-    //             console.log(err);
-    //             callback(err, null);
-    //         } else {
-    //             callback(null, updated);
-    //         }
-    //     });
-    // },
-
     uploadPhotos: function (data, callback) {
         console.log(data);
         Photographer.update({
@@ -287,39 +203,6 @@ var model = {
         })
     },
 
-    updateCoverPic: function (data, callback) {
-        console.log("DATA", data);
-        Photographer.update({
-            _id: data._id
-        }, {
-            coverPic: data.coverPic
-        }, function (err, updated) {
-            console.log(updated);
-            if (err) {
-                console.log(err);
-                callback(err, null);
-            } else {
-                callback(null, updated);
-            }
-        });
-    },
-
-    updateProfilePic: function (data, callback) {
-        console.log("DATA", data);
-        Photographer.update({
-            _id: data._id
-        }, {
-            profilePic: data.profilePic
-        }, function (err, updated) {
-            console.log(updated);
-            if (err) {
-                console.log(err);
-                callback(err, null);
-            } else {
-                callback(null, updated);
-            }
-        });
-    },
 
     updateToFeaturePhotographer: function (data, callback) {
         console.log("DATA", data);
@@ -355,6 +238,54 @@ var model = {
                 }
             }
 
+        });
+    },
+
+
+    saveData: function (data, callback) {
+        //        delete data.password;
+        var photographer = this(data);
+        if (data._id) {
+            this.findOneAndUpdate({
+                _id: data._id
+            }, data).exec(function (err, updated) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                } else if (updated) {
+                    callback(null, updated);
+                } else {
+                    callback(null, {});
+                }
+            });
+        }
+    },
+
+    removeUpldImg: function (data, callback) {
+
+        console.log("DATA", data);
+        Photographer.update({
+
+            "_id": data._id,
+            "uploadedImages": {
+                $elemMatch: {
+                    "_id": data.id
+                }
+            }
+        }, {
+            $pull: {
+                uploadedImages: {
+                    "_id": data.id
+                }
+            }
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
         });
     }
 

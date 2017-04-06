@@ -1,0 +1,55 @@
+{
+    "title": "Edit Home Page",
+    "name": "HomePage",
+    "jsonPage": "viewHomePage",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Email",
+        "type": "text",
+        "tableRef": "email",
+        "placeholder": "Enter Email",
+        "id": "email",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Image",
+        "type": "image",
+        "tableRef": "bannerImage",
+        "option": "single",
+        "size": "500 x 500px",
+        "placeholder": "Enter HomePage Image",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitHomePage",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewHomePage"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewHomePage"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "HomePage/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "HomePage/getOne",
+        "params": "_id"
+    }
+
+}
