@@ -1179,6 +1179,7 @@
         .profile-banner__bg {
             @include size(null,
             440px);
+            overflow-y: hidden;
         }
         .change-cover {
             position: absolute;
