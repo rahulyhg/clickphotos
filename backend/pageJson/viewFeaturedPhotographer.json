@@ -8,19 +8,14 @@
         "name": "Name",
         "isSort": "",
         "tableRef": "name"
-    }, {
-        "name": "Package",
-        "isSort": "",
-        "tableRef": "package"
     },{
-        "name": "Location",
-        "type":"fkListView",
-        "tableRef": "location"
-    }, {
-        "name": "Speciality",
-        "type":"enumdisplay",
+        "name": "Month",
         "isSort": "",
-        "tableRef": "speciality"
+        "tableRef": "month"
+    },{
+        "name": "Date of registration",
+        "isSort": "",
+        "tableRef": "dateOfRagister"
     }],
     "action": [{
         "name": "delete",

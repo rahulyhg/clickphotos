@@ -1,5 +1,5 @@
-<!--<div class="form-group">
-   <label for="exampleInputEmail1" style="margin:5px;">Image Upload</label> 
+<div class="form-group">
+  <!-- <label for="exampleInputEmail1" style="margin:5px;">Image Upload</label> -->
 
   <div class="img-box" ng-if="image && !isMultiple" ng-hide="noShow">
     <img ng-src="{{image.url}}" imageonload="uploadNow(image)" type="{{image.file.type}}"/>
@@ -10,55 +10,10 @@
     </div>
   </div>
 
-  <div class="btn-upload btn btn-primary btn-outline btn-small create-btn">
+  <div class="">
     <input id="inputImage" ng-show="!isMultiple" type="file" accept="image/*" image="image" title="Choose Files" class="btn-primary">
     <input id="inputImage" ng-show="isMultiple" type="file" accept="image/*" image="image" title="Choose Multiple Files" class="btn-primary" onchange="angular.element(this).scope().clearOld()" multiple>
-    <span>CHOOSE FILE</span>
-     <a class="btn btn-primary btn-outline btn-small create-btn" ng-if="!isMultiple">Choose File</a> 
-     <a class="btn btn-primary btn-outline btn-small create-btn" ng-if="isMultiple">Choose Files</a> 
-  </div>
-</div>-->
-<!--<style>
-  .inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-
-  .inputfile+label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-  }
-
-  .inputfile:focus+label,
-  .inputfile+label:hover {
-    background-color: red;
-  }
-</style>-->
-<div>
-  <!-- <label for="exampleInputEmail1" style="margin:5px;">Image Upload</label> -->
-
-  <div class="img-box" ng-if="image && !isMultiple" ng-hide="noShow">
-    <img ng-src="{{image.url}}" imageonload="uploadNow(image)" type="{{image.file.type}}" />
-  </div>
-  <div class="clearfix" ng-if="image && isMultiple" ng-hide="noShow">
-    <div class="img-box" style="float:left;" ng-repeat="sImage in image">
-      <img alt="" ng-src="{{sImage.url}}" imageonload="uploadNow(sImage)" type="{{sImage.file.type}}" />
-    </div>
-  </div>
-
-  <div class="">
-    <!--<label for="inputImage">Choose file</label>-->
-    <input id="inputImage" type="file" class="inputfile" style="">
-    <!--<input id="inputImage" ng-show="isMultiple" type="file" accept="image/*" image="image" title="Choose Multiple Files" class="btn-primary"
-      onchange="angular.element(this).scope().clearOld()" multiple>
-    <span>CHOOSE FILE</span>-->
+    <!--<span>CHOOSE FILE</span>-->
     <!-- <a class="btn btn-primary btn-outline btn-small create-btn" ng-if="!isMultiple">Choose File</a> -->
     <!-- <a class="btn btn-primary btn-outline btn-small create-btn" ng-if="isMultiple">Choose Files</a> -->
   </div>

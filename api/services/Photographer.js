@@ -12,6 +12,11 @@ var schema = new Schema({
             default: ""
         }
     }],
+    dateOfRagister: {
+        type: Date,
+        default: new Date()
+    },
+    month: String,
     bio: String,
     pricing: String,
     email: {
@@ -90,9 +95,7 @@ var model = {
         };
         Photographer.find({
                 status: true
-            })
-
-            .sort({
+            }).sort({
                 createdAt: -1
             })
             .deepPopulate("location speciality")
@@ -110,7 +113,6 @@ var model = {
                     }
                 });
     },
-
 
     deleteFeaturedPhotographer: function (data, callback) {
 
@@ -203,13 +205,19 @@ var model = {
         })
     },
 
-
     updateToFeaturePhotographer: function (data, callback) {
         console.log("DATA", data);
+        // var date = new Date();
+        // var monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        // var mon = monthNames[date.getMonth() + 1];
+        // var m = date.getMonth() + 1;
+        // console.log("month", mon);
         Photographer.update({
             _id: data._id
         }, {
-            status: true
+            status: true,
+            dateOfRagister: new Date(),
+            month: data.mon
         }, function (err, updated) {
             console.log(updated);
             if (err) {
@@ -240,7 +248,6 @@ var model = {
 
         });
     },
-
 
     saveData: function (data, callback) {
         //        delete data.password;
@@ -287,8 +294,27 @@ var model = {
                 callback(null, updated);
             }
         });
+    },
+
+    getFeaturePhotographer: function (data, callback) {
+        this.find({
+            month: data.mon,
+            status: true
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    console.log("Found", found);
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+        })
+
     }
-
-
 };
 module.exports = _.assign(module.exports, exports, model);
