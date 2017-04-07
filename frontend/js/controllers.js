@@ -74,6 +74,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
+        $scope.date = new Date();
+        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $scope.mon = $scope.monthNames[$scope.date.getMonth() + 1];
+        formdata = {};
+        formdata.mon = $scope.mon;
+        console.log("frrrrr", formdata);
+        NavigationService.apiCallWithData("Photographer/getFeaturePhotographer", formdata, function (data) {
+            console.log("getFeaturePhotographer", data);
+            if (data.value === true) {
+                $scope.featrData = data.data;
+                console.log("featuePhoto", $scope.featrData);
+                _.forEach($scope.featrData, function (spec) {
+                    //only required the students avilable projects
+                       _.forEach(spec.speciality, function (spec1) {
+                    //only required the students avilable projects
+                    console.log("spec---", spec1.name);
+                    if (_.isEmpty(spec.specialityString)) {
+                         console.log("$scope.specialityString---",spec.specialityString)
+                        spec.specialityString = spec1.name;
+                    } else {
+                        spec.specialityString = spec.specialityString + ' | ' + spec1.name;
+                          console.log("$scope.specialityString---",spec.specialityString)
+                    }
+                })
+                })
+            }
+        });
+
         $scope.mySlides = [
             // 'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
             // 'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
@@ -166,6 +194,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
     })
+
     .controller('PhotographerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $http, $state) {
         $scope.template = TemplateService.changecontent("photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer"); //This is the Title of the Website
@@ -566,6 +595,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
     })
+
     .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
@@ -616,18 +646,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         }
 
-        $scope.updateToFeature = function () {
-            // formdata.serviceRequest = $scope.serviceList;
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            console.log(formdata);
-            NavigationService.updateTofeaPho(formdata, function (data) {
-                if (data.data.value) {
-                    console.log(data.data.data);
-                    $state.go("users");
+        // $scope.updateToFeature = function () {
+        //     // formdata.serviceRequest = $scope.serviceList;
+        //     formdata = {};
+        //     formdata._id = $.jStorage.get("photographer")._id;
+        //     console.log(formdata);
+        //     NavigationService.updateTofeaPho(formdata, function (data) {
+        //         if (data.data.value) {
+        //             console.log(data.data.data);
+        //             $state.go("users");
+        //         }
+        //     });
+        // }
+
+        //feature-photographer date 
+
+        $scope.date = new Date();
+        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $scope.mon = $scope.monthNames[$scope.date.getMonth() + 1];
+        // var m = date.getMonth() + 1;
+        console.log("month", $scope.mon);
+        formdata = {};
+        formdata.mon = $scope.mon;
+        //console.log("frrrrr",formdata);
+        NavigationService.apiCallWithData("Photographer/getFeaturePhotographer", formdata, function (data) {
+            console.log("getFeaturePhotographer", data);
+            if (data.value === true) {
+                $scope.featrData = data.data;
+                $scope.featurePhoCount = $scope.featrData.length;
+                console.log("$scope.featurePhoCount--", $scope.featurePhoCount);
+                if ($scope.featurePhoCount <= 12) {
+                    $scope.updateToFeature = function () {
+                        formdata = {};
+                        formdata._id = $.jStorage.get("photographer")._id;
+                        formdata.mon = $scope.mon;
+                        console.log("frrrrr", formdata);
+                        NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
+                            console.log("updateToFeaturePhotographer", data);
+                            if (data.value === true) {
+                                //console.log(data.data.data);
+                                $state.go("users");
+                            }
+                        });
+                    }
                 }
-            });
-        }
+            }
+        });
+
+
+
+
+        //feature-photographer date end
 
         // if ($.jStorage.get("photographer")) {
         //     $scope.template.profile = $.jStorage.get("photographer");
@@ -734,6 +803,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
+
     .controller('CategoriesCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("categories"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Categories"); //This is the Title of the Website
@@ -797,6 +867,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
+
     .controller('UserProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.changecontent("user-profile"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("User Profile"); //This is the Title of the Website
@@ -940,6 +1011,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
     })
+
     .controller('WildPhotoCtrl', function ($scope, TemplateService, NavigationService, $timeout, $filter) {
         $scope.template = TemplateService.changecontent("wild-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Wild Photographer"); //This is the Title of the Website
@@ -1160,6 +1232,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }];
 
     })
+
     .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $rootScope) {
         $scope.template = TemplateService;
 

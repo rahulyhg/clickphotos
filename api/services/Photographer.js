@@ -300,7 +300,7 @@ var model = {
         this.find({
             month: data.mon,
             status: true
-        }).exec(function (err, found) {
+        }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {

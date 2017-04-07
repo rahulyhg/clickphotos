@@ -70,17 +70,6 @@ var navigationservice = angular.module('navigationservice', [])
                 }).then(function (data) {
                     callback(data);
                 });
-            },
-
-            updateTofeaPho: function (formdata, callback) {
-                $http({
-                    url: adminurl + 'Photographer/updateToFeaturePhotographer',
-                    method: 'POST',
-                    data: formdata,
-                    withCredentials: true
-                }).then(function (data) {
-                    callback(data);
-                });
             }
 
         };

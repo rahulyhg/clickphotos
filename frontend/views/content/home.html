@@ -104,19 +104,19 @@
                 <!--<h2>Featured</h2>-->
                 <h2 class="head-f">Featured <br> &nbsp; Photographers</h2>
                 <!--padding right & left-->
-                <flex-slider slide="user in fpUser track by $index" animation="slide" prev-text="" next-text="" item-margin="10" max-items="3"
+                <flex-slider slide="user in featrData track by $index" animation="slide" prev-text="" next-text="" item-margin="10" max-items="3"
                     item-width="250">
                     <!--ng-repeat="user in fpUser track by $index"-->
                     <li class="fp_width">
                         <div class="fp_innerPadd">
                             <!--inner padding for li-->
-                            <img ng-src="{{user.background}}" class="img-responsive" alt="">
+                            <img src="frontend/img/fp_bg1.png" class="img-responsive" alt="">
                             <div class="fp_user_icn text-center">
                                 <div class="border-half">
-                                    <img ng-src="{{user.profile}}" class="img-responsive" alt="">
+                                    <img ng-src="{{user.profilePic | serverimage}}" class="img-responsive" alt="">
                                 </div>
-                                <h3>{{user.title}}</h3>
-                                <p>Speciality: {{user.speciality}}</p>
+                                <h3>{{user.name}}</h3>
+                                <p>Speciality: {{user.specialityString}}</p>
                             </div>
                         </div>
                         <div class="col-md-8 col-md-push-2">
