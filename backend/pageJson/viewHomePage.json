@@ -5,10 +5,6 @@
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Email",
-        "isSort": "",
-        "tableRef": "email"
-    },{
         "name": "Image",
         "type": "image",
         "isSort": "",

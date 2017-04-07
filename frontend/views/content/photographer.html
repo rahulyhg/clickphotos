@@ -140,8 +140,8 @@
                             <div class="about-desc" ng-if="about">
 
                                 <!--display-->
-
-                                <div class="about-head text-capitalize">about {{photographerData.name}} test
+                                <!--without edit-->
+                                <div class="about-head text-capitalize">about {{photographerData.name}}
                                     <div class="edit-pencil display-inline pull-right" ng-click="showabout()">
                                         <span>Edit</span><img src="frontend/img/photographer/form/edit-white.png" alt=""
                                             class="img-responsive display-inline pull-right img-edit">
@@ -218,7 +218,7 @@
                                     <div class="upgrade-sec">
                                         <p class="text-uppercase">Upgrade to the following premium packages</p>
                                     </div>
-                                    <div class="upgrade-pkg">
+                                    <div class="upgrade-pkg" ng-hide="shSilver">
                                         <div class="row">
                                             <div class="col-md-6 text-center">
                                                 <div class="package-card">
@@ -242,14 +242,14 @@
                                         <button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>
                                     </div>
                                     <br>
-                                    <div class="upgrade-pkg2 gold">
+                                    <div class="upgrade-pkg2 gold" ng-hide="shGold">
                                         <div class="row">
                                             <div class="col-md-6 text-center">
                                                 <div class="package-card">
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price">    <span class="rupee">`</span>                                                        3400 plus taxes</span>
+                                                        <span class="display-block package-price"><span class="rupee">`</span>                                                        3400 plus taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -491,7 +491,7 @@
                             <div class="display-inline pkg-info">
                                 <span class="package-name">GOLD PACKAGE</span>
                             </div>
-                        </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">70 OUT OF 100 PHOTOS</span></span>
+                        </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 100 PHOTOS</span></span>
                         <div class="checkbox-form">
                             <form action="#" class="circular-checkbox display-inline">
                                 <p>My Photos</p>
@@ -520,7 +520,7 @@
                                         <div class="edit-uploaded">
                                             <a fancybox-box ng-href="{{item}}">
                                                 <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button>                                                </a>
-                                            <button type="button" class="btn btn-default">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+                                            <button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
                                         </div>
                                     </div>
                                 </div>

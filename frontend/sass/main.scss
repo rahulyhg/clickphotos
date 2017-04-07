@@ -1102,6 +1102,11 @@
             line-height: 20px;
             h2 {
                 color: $whiteColor;
+                 @include margin(null null 0 null);
+            }
+            h3{
+                color: $whiteColor;
+                @include margin(0 null 10px null);
             }
             p {
                 color: $lightBlackColor;

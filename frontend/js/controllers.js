@@ -181,6 +181,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.silverPackage = true;
         $scope.goldPackage = true;
         $scope.hideHistory = false;
+        $scope.shSilver = false;
+        $scope.shGold = false;
         $scope.packageStatus = true;
         $scope.serviceList = [];
         $scope.specialityList = [];
@@ -359,6 +361,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.profileSelect = true;
             $scope.noEdit = false;
             $scope.showMembership = true;
+            $scope.freeMember = true;
+            $scope.silverSub = false;
+            $scope.shGold = true;
             $scope.silverMember = false;
             $scope.goldenMember = true;
             $scope.showForm = false;
@@ -372,8 +377,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
         $scope.goldMember = function () {
             $scope.noEdit = false;
+            $scope.freeMember = true;
             $scope.profileSelect = false;
             $scope.showMembership = true;
+            $scope.goldSub = false;
             $scope.goldenMember = false;
             $scope.silverMember = true;
             $scope.showForm = false;
@@ -1198,27 +1205,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             $scope.subscribeData = function (formdata) {
                 console.log("formdatafsgdvtrhejy", formdata);
-                NavigationService.apiCallWithData("HomePage/save", formdata, function (data) {
+                NavigationService.apiCallWithData("SubscribeEmail/save", formdata, function (data) {
                     if (data.value === true) {
                         console.log(data);
+                        $scope.subscribeModal = $uibModal.open({
+                            animation: true,
+                            templateUrl: "frontend/views/modal/subscribe.html",
+                            scope: $scope,
+                            windowClass: '',
+                            size: 'sm',
+                            backdropClass: 'black-drop'
+                        });
+                    }
+                });
+            },
+
+
+
+            $scope.login = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.checkLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.data);
+                        $.jStorage.set("photographer", data.data.data);
+                        $rootScope.showStep = 2;
+                        $scope.template.profile = data.data.data;
+                        $scope.signupModal.close();
+                        $state.go("photographer");
                     }
                 });
             }
-
-        $scope.login = function (formdata) {
-            // formdata.serviceRequest = $scope.serviceList;
-            console.log(formdata);
-            NavigationService.checkLogin(formdata, function (data) {
-                if (data.data.value) {
-                    console.log(data.data.data);
-                    $.jStorage.set("photographer", data.data.data);
-                    $rootScope.showStep = 2;
-                    $scope.template.profile = data.data.data;
-                    $scope.signupModal.close();
-                    $state.go("photographer");
-                }
-            });
-        }
 
         if ($.jStorage.get("photographer")) {
             $scope.template.profile = $.jStorage.get("photographer");

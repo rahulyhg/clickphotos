@@ -1,6 +1,5 @@
 var schema = new Schema({
-    bannerImage: String,
-    email:String
+    bannerImage: String
 });
 
 schema.plugin(deepPopulate, {});

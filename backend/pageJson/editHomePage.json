@@ -6,19 +6,11 @@
     "pageType": "edit",
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Email",
-        "type": "text",
-        "tableRef": "email",
-        "placeholder": "Enter Email",
-        "id": "email",
-        "validation": ["", "trim", ""],
-        "url": ""
-    }, {
         "name": "Image",
         "type": "image",
         "tableRef": "bannerImage",
         "option": "single",
-        "size": "500 x 500px",
+        "size": "1940 x 954px",
         "placeholder": "Enter HomePage Image",
         "id": "input1",
         "validation": ["", "trim", ""],
