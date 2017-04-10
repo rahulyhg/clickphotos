@@ -32,13 +32,7 @@ var schema = new Schema({
         type: String,
         enum: ["Gold", "Silver"]
     },
-    location: {
-        type: [{
-            type: Schema.Types.ObjectId,
-            ref: "Location",
-        }],
-        index: true
-    },
+    location: [String],
     speciality: {
         type: [{
             type: Schema.Types.ObjectId,
@@ -57,9 +51,6 @@ var schema = new Schema({
 
 schema.plugin(deepPopulate, {
     populate: {
-        location: {
-            select: ""
-        },
         speciality: {
             select: ""
         }
@@ -69,7 +60,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Photographer', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "location speciality", "location speciality"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "speciality", " speciality"));
 var model = {
 
     getPhotographers: function (data, callback) {
@@ -297,8 +288,15 @@ var model = {
     },
 
     getFeaturePhotographer: function (data, callback) {
+        var date = new Date();
+        var currentYear = date.getFullYear();
+        var checkmonth = moment(data.dateOfRagister).format();
+        var dor = moment(checkmonth).year();
+        console.log("dateeee", currentYear);
+        console.log("checkmonth", dor);
         this.find({
             month: data.mon,
+            dor: currentYear,
             status: true
         }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {

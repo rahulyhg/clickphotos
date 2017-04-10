@@ -27,7 +27,7 @@ var schema = new Schema({
     location: {
         type: [{
             type: Schema.Types.ObjectId,
-            ref: "Location"
+            ref: "Locations"
         }],
         index: true
     },
