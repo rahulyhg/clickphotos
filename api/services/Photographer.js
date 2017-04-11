@@ -251,6 +251,7 @@ var model = {
                     console.log(err);
                     callback(err, null);
                 } else if (updated) {
+                    console.log("hey",updated);
                     callback(null, updated);
                 } else {
                     callback(null, {});
@@ -290,14 +291,19 @@ var model = {
     getFeaturePhotographer: function (data, callback) {
         var date = new Date();
         var currentYear = date.getFullYear();
+        var nextYear = currentYear + 1;
+        console.log("nextYear", nextYear);
         var checkmonth = moment(data.dateOfRagister).format();
         var dor = moment(checkmonth).year();
         console.log("dateeee", currentYear);
-        console.log("checkmonth", dor);
+        console.log("checkmonth", checkmonth);
         this.find({
             month: data.mon,
-            dor: currentYear,
-            status: true
+            status: true,
+            dateOfRagister: {
+                $gte: new Date(currentYear,01,01) ,
+                $lt: new Date(nextYear,12,31) 
+            }
         }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);

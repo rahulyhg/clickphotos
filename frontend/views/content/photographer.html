@@ -2,7 +2,8 @@
     <form>
         <div class="profile-banner">
             <div class="profile-banner__bg">
-                <img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive" height="440">
+                <img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive" height="440" ng-if="photographerData.coverPic">
+                <img src="frontend/img/photographer/back.jpg" class="img-responsive prof-img" ng-if="!photographerData.coverPic" height="440">
             </div>
             <div class="change-cover">
                 <div class="inline-block change-cover__img">
@@ -21,7 +22,7 @@
                             <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive sm-logo">
                             <div class="profile-holder">{{profilePhoto.profilePic }}
                                 <img ng-src="{{photographerData.profilePic | serverimage}}" alt="" class="img-responsive prof-img" ng-if="photographerData.profilePic">
-                                <img src="frontend/img/5.png" class="img-responsive prof-img" ng-if="!photographerData.profilePic">
+                                <img src="frontend/img/photographer/profile.jpg" class="img-responsive prof-img" ng-if="!photographerData.profilePic">
                                 <div class="upload-trans" type="button" ng-hide="profileSelect">
                                     <span>
                                         <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
@@ -145,32 +146,6 @@
                                         <div class="form-group">
                                             <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
                                             <div class="display-inline wd70">
-                                                <div class="dropdown custom-check">
-                                                    <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown">Give an estimate of the fee you charge
-                                                      <span class="caret"></span>
-                                                             </button>
-                                                    <ul class="dropdown-menu">
-
-                                                        <li>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="a1">
-                                                                <label for="a1"><i class="fa fa-inr" aria-hidden="true"></i><span>1000</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>15000</span></label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="a2">
-                                                                <label for="a1"><i class="fa fa-inr" aria-hidden="true"></i><span>15000</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>250000</span></label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="a3">
-                                                                <label for="a1"><i class="fa fa-inr" aria-hidden="true"></i><span>250000</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>500000</span></label>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
                                                 <input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">
                                             </div>
                                         </div>
@@ -512,13 +487,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4" ng-repeat="item in uploadImgData track by $index">
+                            <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
                                 <div class="img-holder">
                                     <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
-                                            <a fancybox-box ng-href="{{item}}">
-                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button>                                                </a>
+                                            <a ng-href="{{item.image | serverimage}}" fancybox-box >
+                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
                                             <button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
                                         </div>
                                     </div>
@@ -526,7 +501,7 @@
                             </div>
                         </div>
                         <div class="upload-pic text-center ld-more">
-                            <button type="button" class="btn btn-default text-uppercase" ng-click="">Load more</button>
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()">Load more</button>
                         </div>
                         <div class="upgrade-gd">
                             <div class="free-member">
@@ -580,13 +555,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4" ng-repeat="item in uploadImgData">
+                            <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
                                 <div class="img-holder">
                                     <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
-                                            <a fancybox-box ng-href="{{item}}">
-                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button>                                                </a>
+                                            <a ng-href="{{item.image | serverimage}}" fancybox-box>
+                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
                                             <button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
                                         </div>
                                     </div>
@@ -594,7 +569,7 @@
                             </div>
                         </div>
                         <div class="upload-pic text-center ld-more">
-                            <button type="button" class="btn btn-default text-uppercase" ng-click="">Load more</button>
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()">Load more</button>
                         </div>
                     </div>
                 </div>
@@ -614,10 +589,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="package-block">
+                        <div class="package-block" ng-if="packageShow==''">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="silver-pack" ng-if="packageShow!='Silver' && packageShow!='Gold' ">
+                                    <div class="silver-pack" ng-if="packageShow!='Silver' && packageShow!='Gold'">
                                         <div class="silver-content text-center">
                                             <div class="package-head">
                                                 <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
@@ -656,18 +631,18 @@
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
-                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember()" ">UPGRADE NOW</button>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember()" >UPGRADE NOW</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="current-package " ng-hide="packageStatus ">
-                        <div class="subs-info pdb-25 ">
+                    <div class="current-package " >
+                        <div class="subs-info pdb-25 " ng-if="packageShow=='Silver' || packageShow=='Gold'">
                             <p class="text-uppercase text-center ">you are currently subscribed to </p>
                         </div>
-                        <div class="row ">
+                        <div class="row " ng-if="packageShow=='Silver'">
                             <div class="col-md-10 col-md-offset-1 ">
                                 <div class="historypackage-card1 " ng-hide="silverStatus ">
                                     <div class="display-inline pkg-info ">
@@ -691,7 +666,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row " ng-if="packageShow=='Gold'">
                             <div class="col-md-10 col-md-offset-1 ">
                                 <div class="historypackage-card2 " ng-hide="goldStatus ">
                                     <div class="display-inline pkg-info ">
@@ -716,7 +691,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row " ng-if="packageShow=='Silver'">
                             <div class="col-md-12 ">
                                 <!-- <div class="sub-main ">
                                 <img src="{{subclick.background}} " alt="... " class="img-full img-min-h "> </div> -->
@@ -738,9 +713,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="subs-info pdb-25 ">
+                        <!--<div class="subs-info pdb-25 ">
                             <p class="text-uppercase text-center ">Gold package starting from 10/11/2017 to 09/01/2018 for &#8377; 200/- </p>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

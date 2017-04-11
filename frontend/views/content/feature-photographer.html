@@ -109,7 +109,7 @@
         <div class="col-md-12">
             <div class="intro hctl">
                 <strong class="intro-con">Hi {{photographerData.name}},</strong>
-                <p class="intro-con">You can become a featured photographer for the month of <strong>{{mon}}</strong> by only paying <i class="fa fa-inr"></i><strong>1150.</strong></p>
+                <p class="intro-con">You can become a featured photographer for the month of <strong>{{finalMonth}}</strong> by only paying <i class="fa fa-inr"></i><strong>1150.</strong></p>
                 <p class="intro-con">Inorder to become a featured photographer you need to subscribe.</p>
             </div>
             <ul class="list pad60">
@@ -117,7 +117,7 @@
                 <li class="intro-con" ng-repeat="data in benefits">{{data.list}}</li>
             </ul>
             <div class="pay_btn text-center">
-                <p><a href="#" class="btn orange-btn" role="button" ng-click="updateToFeature()">Proceed to Pay</a></p>
+                <p><a href="#" class="btn orange-btn" role="button" ng-click="updateToFeature(finalMonth)">Proceed to Pay</a></p>
             </div>
         </div>
     </div>

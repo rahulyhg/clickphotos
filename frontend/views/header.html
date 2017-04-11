@@ -46,10 +46,12 @@
                     <!--user name with img-->
                     <div class="photographer text-right">
                         <div class="photographer_img">
-                            <img src="frontend/img/user.png" alt="UserImage" class="img-responsive">
+                            <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="!template.profile.profilePic">
+                            <img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="template.profile.profilePic">
+
                         </div>
                         <span ng-if="!template.profile" ng-click="uploadSignup()">Sign up as photographer</span>
-                        <span ng-if="template.profile">{{template.profile.name}}</span>
+                        <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
                         
                         <button ng-if="template.profile" ng-click="logout()" >Logout</span>
                         

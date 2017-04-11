@@ -12,8 +12,8 @@
                 <div class="upl-sec">
                     <span class="upload-head">Upload Picture</span>
                     <div class="select_join">
-                        <select name="txtCountry" ng-model="imagesData.category">
-                              <option>Select Category</option>
+                        <select name="txtCountry" ng-model="imagesData.category" required>
+                              <option ng-selected="true" value="">Select Category</option>
                               <option value="{{cat.name}}" ng-repeat="cat in photographerData.speciality">{{cat.name}}</option>
                               <!--<option value="2">Scenery</option>-->
                             </select>
