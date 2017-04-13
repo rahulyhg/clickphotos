@@ -320,7 +320,7 @@ var model = {
                         if(found){
                         console.log("found ", found);
                         }
-                        newreturns.lastDateOfRegister = found[0].dateOfRagister;
+                        newreturns.lastDateOfRegister = found.dateOfRagister;
                         newreturns.totalItems = count;
                         console.log("newreturns", newreturns);
                         callback(null, newreturns);
