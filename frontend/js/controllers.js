@@ -74,13 +74,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
-        $scope.date = new Date();
-        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        $scope.mon = $scope.monthNames[$scope.date.getMonth() + 1];
-        formdata = {};
-        formdata.mon = $scope.mon;
-        console.log("frrrrr", formdata);
-        NavigationService.apiCallWithData("Photographer/getFeaturePhotographer", formdata, function (data) {
+      
+        NavigationService.callApi("Photographer/getFeaturePhotographer",function (data) {
             console.log("getFeaturePhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
@@ -714,7 +709,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         console.log("$scope.finalMonth", $scope.finalMonth);
                     }
                 } else {
-                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
+                    $scope.finalMonth = $scope.monthNames[ $scope.nextMonth+ 1];
                     console.log("$scope.finalMonth", $scope.finalMonth);
                 }
             }

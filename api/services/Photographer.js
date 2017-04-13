@@ -332,22 +332,10 @@ var model = {
     },
 
     getFeaturePhotographer: function (data, callback) {
-        var date = new Date();
-        var currentYear = data.currentYear;
-        console.log("currentYear", data);
-        var nextYear = Number(currentYear) + 1;
-        console.log("nextYear", nextYear);
-        // var checkmonth = moment(data.dateOfRagister).format();
-        // var dor = moment(checkmonth).year();
-        // console.log("dateeee", currentYear);
-        // console.log("checkmonth", checkmonth);
         this.find({
-            month: data.mon,
-            status: true,
-            dateOfRagister: {
-                $gte: new Date(currentYear, 01, 01),
-                $lt: new Date(nextYear, 12, 31)
-            }
+            status: true   
+        }).sort({
+            month: -1
         }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
@@ -364,7 +352,6 @@ var model = {
                 });
             }
         })
-
     },
 
     getAllPhotographers: function (data, callback) {
