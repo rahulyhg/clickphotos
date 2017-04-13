@@ -11,6 +11,10 @@ var schema = new Schema({
         type: String,
         default: ""
     },
+    insideImage: {
+        type: String,
+        default: ""
+    },
     order: {
         type: Number
     }

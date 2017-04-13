@@ -13,8 +13,7 @@ var schema = new Schema({
         }
     }],
     dateOfRagister: {
-        type: Date,
-        default: new Date()
+        type: Date
     },
     month: String,
     bio: String,
@@ -251,7 +250,7 @@ var model = {
                     console.log(err);
                     callback(err, null);
                 } else if (updated) {
-                    console.log("hey",updated);
+                    console.log("hey", updated);
                     callback(null, updated);
                 } else {
                     callback(null, {});
@@ -288,26 +287,92 @@ var model = {
         });
     },
 
+    getLastFeaturedPhotographer: function (data, callback) {
+
+        Photographer.find({
+            status: true,
+        }).sort({
+            dateOfRagister: -1
+        }).limit(1).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else if (found) {
+                console.log("found", found);
+                var newreturns = {};
+                var checkmonth = moment(found.dateOfRagister).format();
+                var currentYear = moment(checkmonth).year();
+                var nextYear = Number(currentYear) + 1;
+                console.log("checkmonth",checkmonth);
+                console.log("currentYear",currentYear);
+                console.log("nextYear",nextYear);
+                Photographer.find({
+                    month: data.month,
+                    dateOfRagister: {
+                        $gte: new Date(currentYear, 01, 01),
+                        $lt: new Date(nextYear, 12, 31)
+                    }
+                }).count(function (err, count) {
+                    if (err) {
+                        console.log(err);
+                        callback(err, null);
+                    } else {
+                        console.log("Number of docs: ", count);
+                        //newreturns.totalpages = Math.ceil(count / data.pagesize);
+                        newreturns.lastDateOfRegister=found;
+                        newreturns.totalItems = count;
+                        callback(null, newreturns);
+                    }
+                })
+            } else {
+                callback(null, {
+                    message: "No Data Found"
+                });
+            }
+        })
+    },
+
     getFeaturePhotographer: function (data, callback) {
         var date = new Date();
-        var currentYear = date.getFullYear();
-        var nextYear = currentYear + 1;
+        var currentYear = data.currentYear;
+        console.log("currentYear", data);
+        var nextYear = Number(currentYear) + 1;
         console.log("nextYear", nextYear);
-        var checkmonth = moment(data.dateOfRagister).format();
-        var dor = moment(checkmonth).year();
-        console.log("dateeee", currentYear);
-        console.log("checkmonth", checkmonth);
+        // var checkmonth = moment(data.dateOfRagister).format();
+        // var dor = moment(checkmonth).year();
+        // console.log("dateeee", currentYear);
+        // console.log("checkmonth", checkmonth);
         this.find({
             month: data.mon,
             status: true,
             dateOfRagister: {
-                $gte: new Date(currentYear,01,01) ,
-                $lt: new Date(nextYear,12,31) 
+                $gte: new Date(currentYear, 01, 01),
+                $lt: new Date(nextYear, 12, 31)
             }
         }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
+            } else if (found) {
+                if (_.isEmpty(found)) {
+                    callback(null, {});
+                } else {
+                    console.log("Found", found);
+                    callback(null, found);
+                }
             } else {
+                callback(null, {
+                    message: "No Data Found"
+                });
+            }
+        })
+
+    },
+
+    getAllPhotographers: function (data, callback) {
+        Photographer.find({}).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+
                 if (found) {
                     console.log("Found", found);
                     callback(null, found);
@@ -318,7 +383,6 @@ var model = {
                 }
             }
         })
-
     }
 };
 module.exports = _.assign(module.exports, exports, model);

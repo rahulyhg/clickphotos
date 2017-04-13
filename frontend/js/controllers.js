@@ -681,57 +681,60 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //     });
         // }
 
-        //feature-photographer date 
-        var i = 0;
-        $scope.date = new Date();
-        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        $scope.finalMonth = {};
-        _.findIndex(monthNames, function (o) {
-            return o.user == 'barney';
-        });
-        //console.log("frrrrr",formdata);
-        for (i = 1; i <= 12; i++) {
-            $scope.nextMonth = $scope.date.getMonth() + i;
-            $scope.mon = $scope.monthNames[$scope.nextMonth];
-            // var m = date.getMonth() + 1;
-            console.log("month", $scope.mon);
-            formdata = {};
-            formdata.mon = $scope.mon;
-            NavigationService.apiCallWithData("Photographer/getFeaturePhotographer", formdata, function (data) {
-                console.log("getFeaturePhotographer", data);
-                if (data.value === true) {
-                    if (data.data.length > 0) {
-                        $scope.featrData = data.data;
-                        $scope.featurePhoCount = $scope.featrData.length;
-                        console.log("$scope.featurePhoCount--", $scope.featurePhoCount);
-                        if ($scope.featurePhoCount <= 12 && $scope.mon) {
-                            $scope.finalMonth = $scope.mon;
-                            console.log("$scope.finalMonth", $scope.finalMonth);
-                        }
-                    } else {
-                        $scope.finalMonth = $scope.mon;
+        //feature 
+        $scope.getFeaturedOnes = function () {
 
-                    }
 
-                }
-            });
         }
-        $scope.updateToFeature = function (mon) {
+
+        $scope.date = new Date();
+        var valMon = $scope.date.getMonth();
+        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $scope.nextMonth = valMon + 1;
+        $scope.mon = $scope.monthNames[$scope.nextMonth];
+        console.log("$scope.mon", $scope.mon);
+
+        formdata = {};
+        formdata.month = $scope.mon;
+        //console.log("frrrrr", formdata);
+        NavigationService.apiCallWithData("Photographer/getLastFeaturedPhotographer", formdata, function (data) {
+            // console.log("getLastFeaturedPhotographer", data);
+            if (data.value == true) {
+                $scope.lastDateOfRegister = data.data.lastDateOfRegister[0].dateOfRagister;
+                $scope.totalCountOfLastDate = data.data.totalItems;
+                $scope.date = new Date();
+                //console.log("$scope.lastDateOfRegister", $scope.lastDateOfRegister);
+                //console.log("$scope.totalCountOfLastDate", $scope.totalCountOfLastDate);
+                if ($scope.lastDateOfRegister > $scope.date) {
+                    if (totalCountOfLastDate >= 12) {
+                        $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
+                        console.log("$scope.finalMonth", $scope.finalMonth);
+                    } else {
+                        $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
+                        console.log("$scope.finalMonth", $scope.finalMonth);
+                    }
+                } else {
+                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
+                    console.log("$scope.finalMonth", $scope.finalMonth);
+                }
+            }
+        });
+
+        $scope.updateToFeature = function () {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
-            formdata.mon = mon;
+            formdata.mon = $scope.finalMonth;
             console.log("frrrrr", formdata);
             NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
                 console.log("updateToFeaturePhotographer", data);
                 if (data.value === true) {
                     //console.log(data.data.data);
                     $state.go("users");
-
                 }
             });
         }
 
-        //feature-photographer date end
+        //feature end
 
         // if ($.jStorage.get("photographer")) {
         //     $scope.template.profile = $.jStorage.get("photographer");
@@ -903,7 +906,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('UserProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+    .controller('UserProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
         $scope.template = TemplateService.changecontent("user-profile"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("User Profile"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -913,6 +916,86 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.activeTab = val;
             $scope.showSocial = false; // here showSocial will be display: none;
         };
+
+        //get single user
+        formData = {};
+        formData._id = $stateParams.userid;
+        NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+            console.log("catdata", data);
+            if (data.value === true) {
+                console.log(data)
+                $scope.userData = data.data;
+                console.log(" $scope.userData", $scope.userData);
+                $scope.uploadImgData = $scope.userData.uploadedImages;
+                console.log(" $scope.uploadImgData", $scope.uploadImgData);
+                $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
+                console.log(" $scope.uniqueCategory", $scope.uniqueCategory);
+                _.forEach($scope.userData.speciality, function (spec) {
+                    //only required the students avilable projects
+                    console.log("spec---", spec.name)
+                    if (_.isEmpty($scope.specialityString)) {
+                        $scope.specialityString = spec.name;
+                    } else {
+                        $scope.specialityString = $scope.specialityString + ' | ' + spec.name;
+                    }
+                })
+            }
+        });
+        //get single user end
+
+        //all Photographers
+        NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
+            if (data.value === true) {
+                console.log(data)
+                $scope.photographerData = data.data;
+                console.log("$scope.photographerData--", $scope.photographerData);
+                _.forEach($scope.photographerData.speciality, function (spec) {
+                    //only required the students avilable projects
+                    console.log("spec---", spec.name)
+                    if (_.isEmpty($scope.specialityString)) {
+                        $scope.specialityString = spec.name;
+                    } else {
+                        $scope.specialityString = $scope.specialityString + ' | ' + spec.name;
+                    }
+                })
+
+            }
+        });
+        //all Photographers end
+
+        //filter
+        $scope.fliterCheck = function (data) {
+            $scope.uploadImgData = [];
+            console.log("Doc", document.getElementById(data).checked);
+            if (document.getElementById(data).checked) {
+                $scope.dataArr.push(data);
+                _.forEach($scope.dataArr, function (value) {
+                    console.log("_.filter($scope.photographerData.uploadedImages, ['category', value])", _.filter($scope.photographerData.uploadedImages, ['category', value]).length)
+                    var filteredData = _.filter($scope.photographerData.uploadedImages, ['category', value])
+                    _.forEach(filteredData, function (value1) {
+                        $scope.uploadImgData.push(value1);
+                        console.log("$scope.uploadImgDataasdsdasds", $scope.uploadImgData);
+                    });
+                });
+            } else {
+                $scope.dataArr = _.remove($scope.dataArr, function (n) {
+                    return n != data;
+                });
+                _.forEach($scope.dataArr, function (value) {
+                    var filteredData = _.filter($scope.photographerData.uploadedImages, ['category', value])
+                    _.forEach(filteredData, function (value1) {
+                        $scope.uploadImgData.push(value1);
+                        console.log("$scope.uploadImgDataasdsdasds", $scope.uploadImgData);
+                    });
+                });
+            }
+            if (_.isEmpty($scope.dataArr)) {
+                $scope.uploadImgData = $scope.photographerData.uploadedImages;
+                $scope.showSixPhotos = _.slice($scope.uploadImgData, 0, 6);
+            }
+        }
+
+        //filter end
         $scope.userHead = {
             profile: "frontend/img/pic/pic1.jpg",
             background: "frontend/img/clickm/5.jpg",
@@ -1047,11 +1130,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('WildPhotoCtrl', function ($scope, TemplateService, NavigationService, $timeout, $filter) {
+    .controller('WildPhotoCtrl', function ($scope, TemplateService, NavigationService, $timeout, $filter, $stateParams) {
         $scope.template = TemplateService.changecontent("wild-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Wild Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
+        //category image     
+        formData = {};
+        formData._id = $stateParams.catid;
+
+        NavigationService.apiCallWithData("Categories/findOneCategories", formData, function (data) {
+            console.log("catdata", data);
+            if (data.value === true) {
+                console.log(data)
+                $scope.categoryInsideImg = data.data;
+            }
+        });
+        //category image end
+
+        //all photographers
+        NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
+            if (data.value === true) {
+                console.log(data)
+                $scope.photographerData = data.data;
+                console.log("$scope.photographerData--", $scope.photographerData)
+            }
+        });
+        //all Photographers end
 
         $scope.checkboxData = [{
             label: 'mumbai',

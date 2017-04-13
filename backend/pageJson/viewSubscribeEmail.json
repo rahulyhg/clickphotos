@@ -1,0 +1,29 @@
+{
+    "title": "Subscribed Email",
+    "description": "List of Subscribed Email",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Email",
+        "isSort": "",
+        "tableRef": "email"
+    }],
+    "action": [{
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete SubscribeEmail",
+        "content": "Are you sure you want to delete SubscribeEmail?",
+        "api": "SubscribeEmail/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "apiCall": {
+        "url": "SubscribeEmail/search",
+        "params": "_id"
+    }
+}

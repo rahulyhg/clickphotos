@@ -45,13 +45,13 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'UsersCtrl'
         })
         .state('user-profile', {
-            url: "/user-profile",
+            url: "/user-profile/:userid",
             templateUrl: "frontend/views/template.html",
             controller: 'UserProfileCtrl'
         })
         
         .state('wild-photographer', {
-            url: "/wild-photographer",
+            url: "/wild-photographer/:catid",
             templateUrl: "frontend/views/template.html",
             controller: 'WildPhotoCtrl'
         });

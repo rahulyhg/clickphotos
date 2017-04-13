@@ -34,6 +34,16 @@
         "validation": ["", "trim", ""],
         "url": ""
     },{
+        "name": "Inside Image",
+        "type": "image",
+        "tableRef": "insideImage",
+        "option": "single",
+        "size": "1920 × 670px",
+        "placeholder": "Enter Categories Image",
+        "id": "input1",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    },{
         "name": "Order",
         "type": "text",
         "tableRef": "order",

@@ -1,5 +1,5 @@
 <div class="container-fluid pad0 mg_t75">
-    <img src="frontend/img/dd.jpg" alt="" class="img-full img-responsive">
+    <img ng-src="{{categoryInsideImg.insideImage | serverimage}}" alt="" class="img-full img-responsive">
 </div>
 <div class="black-back">
     <div class="container">
@@ -65,19 +65,19 @@
             </div>
         </div>
         <div class="col-md-10 users">
-            <div class="col-sm-6 col-md-4" ng-repeat="list in data  |  startFrom:currentPage*pageSize | limitTo:pageSize">
+            <div class="col-sm-6 col-md-4" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize">
                 <div class="thumbnail">
-                    <img ng-src="{{list.background}}" alt="..." class="img-full img-min-h">
+                    <img src="frontend/img/atm0.jpg" alt="..." class="img-full img-min-h">
                     <div class="user-icon">
                         <div class="border-half">
-                            <img ng-src="{{list.profile}}" alt="" class="img-responsive profile-f-img">
+                            <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img">
                         </div>
                     </div>
                     <hr class="border-line2 text-center">
                     <div class="caption googleb">
-                        <p class="title text-capitalize">{{list.name}} {{list.surName}} | {{list.place}}</p>
-                        <p class="title-intro">{{list.content}}</p>
-                        <p class="text-center"><a ui-sref="user-profile" class="btn whit-btn" type="button"> Read More</a></p>
+                        <p class="title text-capitalize">{{list.name}} | {{list.place}}</p>
+                        <p class="title-intro">{{list.bio}}</p>
+                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button"> Read More</a></p>
                     </div>
                 </div>
             </div>

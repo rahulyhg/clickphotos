@@ -180,7 +180,7 @@
             <div class="all_cate">
                 <div ng-repeat="catEl in bigImageCategory | limitTo:2 track by $index">
                     <div class=" col-md-12" ng-if="catEl">
-                        <a ui-sref="wild-photographer"><img ng-src="{{catEl.bigimage | serverimage}}" class="img-responsive" alt=""></a>
+                        <a ui-sref="wild-photographer({catid:catEl._id})"><img ng-src="{{catEl.bigimage | serverimage}}" class="img-responsive" alt=""></a>
                         <!--<div class="img-section__text">
                         <h3>{{catEl[0].name}}</h3>
                     </div>-->

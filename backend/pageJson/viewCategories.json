@@ -19,6 +19,11 @@
         "isSort": "",
         "tableRef": "smallimage"
     },{
+        "name": "Inside Image",
+        "type": "image",
+        "isSort": "",
+        "tableRef": "insideImage"
+    },{
         "name": "Order",
         "isSort": "",
         "tableRef": "order"

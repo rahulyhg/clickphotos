@@ -1,16 +1,19 @@
 <div class="container-fluid pad0 ">
     <div class="head-section relative mg_t75">
-        <img src="frontend/img/clickm/5.jpg" alt="" class="img-full img-responsive">
-        <img src="frontend/img/fh.png" alt="" class="img-responsive img-left">
+        <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="img-full img-responsive" ng-if="userData.coverPic" height="440">
+        <img src="frontend/img/photographer/back.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
+        <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
         <div class="ab">
             <div class="border-profile">
                 <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive profile-user">
-                <img src="{{userHead.profile}}" alt="" class="img-responsive profile-f-img">
+                <img ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="userData.profilePic">
+                <img src="frontend/img/photographer/profile.jpg" class="img-responsive prof-img" ng-if="!userData.profilePic">
+
             </div>
             <div class="user-name inline">
-                <h1>{{userHead.name}} {{userHead.surName}}</h1>
+                <h1>{{userData.name}}</h1>
                 <p>Location: <span ng-repeat="loc in userHead.location">{{loc}}</p>
-                <p>Speciality: wildlife , wedding , travel</p>
+                <p>Speciality:{{specialityString }}</p>
             </div>
         </div>
         <div class="row googleb">
@@ -33,7 +36,8 @@
         <div class="row">
             <div class="" ng-if="activeTab == 1">
                 <div class="main-cont whit-back">
-                    <div class="about-head text-capitalize">about asmara khan <span class="pull-right"><a href="#" class="whit-color"><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline"> Edit</a></span></div>
+                    <!--<div class="about-head text-capitalize"><span>about asmara khan</span>
+                       <span class="pull-right"><a href="#" class="whit-color"><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline"> Edit</a></span></div>
                     <div class="abt-form">
                         <form action="" class="form-horizontal">
                             <div class="form-group">
@@ -94,8 +98,70 @@
                                 </div>
                             </div>
                         </form>
+                    </div>-->
+                    <div class="about-head text-capitalize">about {{userData.name}}
+                        <!-- <div class="edit-pencil display-inline pull-right" ng-click="showabout()">
+                            <span>Edit</span><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline pull-right img-edit">
+                        </div>-->
+                    </div>
+                    <div class="abt-form">
+                        <form action="" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="name" class=""><img src="frontend/img/photographer/form/user.png" alt="" class="img-responsive display-inline">name:</label>
+                                <div class="display-inline">
+                                    {{userData.name}}
+                                    <!--<input type="text" class="form-control" id="name" placeholder="Please enter your full name" value="Rahul Mallesh" readonly>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline">Location:</label>
+                                <!--<div class="selected-option display-inline">
+                                                <span>Mumbai</span>
+                                            </div>-->
+                                <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                                <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
+                                <!--<div class="city">
+                                                <div class="display-inline city__name">
+                                                    <input type="text" class="form-control" id="locationCity">
+                                                </div>
+                                                <div class="display-inline city__add-icon" ng-click="test();">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </div>
+                                            </div>-->
+                            </div>
+                            <div class="form-group">
+                                <label for="speciality" class=""><img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
+                                <div class="selected-option display-inline" ng-repeat="speciality in userData.speciality">
+                                    <span>{{speciality.name}}</span>
+                                </div>
+                                <!--<div class="selected-option display-inline">
+                                                <span>Wedding</span>
+                                            </div>
+                                            <div class="selected-option display-inline">
+                                                <span>Food</span>
+                                            </div>-->
+                                <!-- <div class="display-inline"><input type="text" class="form-control" id="speciality"></div> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="bio" class="vat"><img src="frontend/img/photographer/form/edit.png" alt="" class="img-responsive display-inline">Bio:</label>
+                                <div class="inline">
+                                    <textarea class="form-control text-set" id="bio" rows="5" placeholder="" value="" readonly style="border: none!important">{{userData.bio}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" style="border-bottom: none;">
+                                <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
+                                <div class="display-inline">
+                                    {{userData.pricing}}
+                                    <!--<input type="text" class="form-control" id="pricing" placeholder="" value="&#8377; 5000" readonly>-->
+                                </div>
+                            </div>
+                            <div class="sub-sec text-center">
+                                <!-- <button type="submit" class="btn btn-default">Done</button> -->
+                            </div>
+                        </form>
                     </div>
                 </div>
+
                 <div class="main-cont so-nam">
                     <span>Share this Profile on </span><span><img src="frontend/img/social/4.png" alt=""></span><span><img src="frontend/img/social/3.png" alt=""></span><span><img src="frontend/img/social/2.png" alt=""></span><span><img src="frontend/img/social/1.png" alt=""></span>
                 </div>
@@ -121,20 +187,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="other-section">
 
+                <div class="other-section">
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
-                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in fpUser">
+                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in photographerData">
                             <div class="thumbnail shadow">
-                                <img ng-src="{{user.background}}" alt="...">
+                                <img src="frontend/img/fp_bg1.png" alt="...">
                                 <div class="user-ab">
                                     <div class="border-half">
-                                        <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                        <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
                                     </div>
                                     <div class="intro-profile">
-                                        <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
-                                        <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.place}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{specialityString}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -157,10 +223,14 @@
                     <div class="col-md-12" ng-show="showMe" style="position: relative;" ng-init="content=wildlife">
                         <div class="radioBtn_cat">
                             <!--used for categories radio buttons-->
-                            <div class="inline-block">
-                                <h2>Zohn Photos</h2>
+                            <div class="inline-block" >
+                                <h2>{{photographerData.name}} Photos</h2>
                             </div>
-                            <div class="radioBtn_wdt inline-block">
+                            <p ng-repeat="list in uniqueCategory track by $index">
+                                <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                <label for="{{list.category}}">{{list.category}}</label>
+                            </p>
+                            <!--<div class="radioBtn_wdt inline-block">
                                 <form>
                                     <input type="radio" name="wildlife" id="radio_01" ng-model="content" value="wildlife" ng-click="showData();">
                                     <label class="radio-inline" for="radio_01"><span></span> Wildlife
@@ -173,21 +243,21 @@
                                 Travel
                             </label>
                                 </form>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
                 <div class="inline-block  pad25 all_cat">
                     <!--used for categories-->
-                    <div ng-show="content == 'wildlife'">
-                        <div class="col-md-4 padd15" ng-repeat="imgs in wildlife track by $index">
+                    <div>
+                        <div class="col-md-4 padd15" ng-repeat="imgs in uploadImgData track by $index">
                             <div class="fp_innerPadd ">
-                                <img ng-src="{{imgs}}" class="img-responsive">
+                                <img ng-src="{{imgs.image | serverimage}}" class="img-responsive">
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-md-4 padd15" ng-show="content == 'wedding'" ng-repeat="imgs in wedding track by $index">
+                    <!--<div class="col-md-4 padd15" ng-show="content == 'wedding'" ng-repeat="imgs in wedding track by $index">
                         <div class="fp_innerPadd ">
                             <img ng-src="{{imgs}}" class="img-responsive">
                         </div>
@@ -196,7 +266,7 @@
                         <div class="fp_innerPadd ">
                             <img ng-src="{{imgs}}" class="img-responsive">
                         </div>
-                    </div>
+                    </div>-->
                     <div ng-show="showSocial" class="row">
                         <div class="col-md-12">
                             <div class="row share_profile">
@@ -234,16 +304,16 @@
                     <!--ng-hide="showMe"-->
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
-                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in fpUser">
+                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in photographerData">
                             <div class="thumbnail shadow">
-                                <img ng-src="{{user.background}}" alt="...">
+                                <img src="frontend/img/fp_bg1.png" alt="...">
                                 <div class="user-ab">
                                     <div class="border-half">
-                                        <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                        <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
                                     </div>
                                     <div class="intro-profile">
-                                        <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
-                                        <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.place}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{specialityString}}</p>
                                     </div>
                                 </div>
                             </div>
