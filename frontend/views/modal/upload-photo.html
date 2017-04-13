@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="img-holder">
-                    <img src="frontend/img/photographer/img.jpg" alt="" class="img-responsive">
+                    <img src="frontend/img/popup.jpg" alt="" class="img-responsive" ng-if="!imagesData.image">
+                    <img ng-src="{{imagesData.image | serverimage}}" alt="" class="img-responsive" ng-if="imagesData.image">
                 </div>
             </div>
             <div class="col-md-7">

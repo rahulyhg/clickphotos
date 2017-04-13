@@ -8,118 +8,131 @@
         <p class="hctl">{{data.intro}}</p>
     </div>
     <!-- start section tab -->
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <!--<ul class="full-tabs pad60 list-inline">
+    <div ng-if="!fetrPhoto">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <!--<ul class="full-tabs pad60 list-inline">
                 <li ng-class="{'active': activeTab == 1}" ng-click="toggleTab(1)" ng-if="!isLoggedIn">STEP 1</li>
                 <li ng-class="{'active': activeTab == 2}" ng-click="toggleTab(2)" ng-if="isLoggedIn">STEP 2</li>
             </ul>-->
-            <ul class="full-tabs pad60 list-inline">
-                <li ng-class="{'active': showStep == 1}" disabled="!steps">STEP 1</li>
-                <li ng-class="{'active': showStep == 2}" disabled="steps">STEP 2</li>
-            </ul>
+                <ul class="full-tabs pad60 list-inline">
+                    <li ng-class="{'active': showStep == 1}" disabled="!steps">STEP 1</li>
+                    <li ng-class="{'active': showStep == 2}" disabled="steps">STEP 2</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <!-- end section tab -->
-    <!-- start first tab -->
+        <!-- end section tab -->
+        <!-- start first tab -->
 
-    <!--<div class="row" ng-if="activeTab == 1">-->
-    <div class="row">
-      <div ng-if="showStep == 1" >
-        <form ng-submit="signUp(formData)" name="loginForm">
-            <div class="col-md-6 pad-right5">
-                <div class="row mr15 light-grey min-h">
-                    <div class="col-md-12 text-center">
-                        <h1 class="damionr orange-color forml">Sign up</h1>
-                    </div>
-                    <div class="col-md-6">
-                       <input type="text" class="form-control" id="name" placeholder="First Name" ng-model="formData.name" name="name" required><br>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required><br>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword" required>
-                    </div>
-                    <div class="col-md-6">
-                         <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword" required>
-                    </div>
-                    <div>
-                        <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="checkbox text-left condition-box">
-                            <p>
-                                <input type="checkbox" id="test1" required>
-                                <label for="test1" class="tnc">I agree with the <span>Terms &amp; Conditions</span> and <span>Privacy Policy</span> </label>
-                            </p>
+        <!--<div class="row" ng-if="activeTab == 1">-->
+        <div class="row">
+            <div ng-if="showStep == 1">
+                <form ng-submit="signUp(formData,terms)" name="loginForm">
+                    <div class="col-md-6 pad-right5">
+                        <div class="row mr15 light-grey min-h">
+                            <div class="col-md-12 text-center">
+                                <h1 class="damionr orange-color forml">Sign up</h1>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="name" placeholder="First Name" ng-model="formData.name" name="name" required><br>
+                                <span ng-show="loginForm.name.$touched && loginForm.name.$invalid">Please enter the name</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required><br>
+                                <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
+                                    required>
+                                <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
+
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword"
+                                    required>
+                            </div>
+                            <div>
+                                <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="checkbox text-left condition-box"  ng-init="terms">
+                                    <p>
+                                        <input type="checkbox" id="test1" ng-model="terms">
+                                        <label for="test1" class="tnc">I agree with the <span>Terms &amp; Conditions</span> and <span>Privacy Policy</span> </label>
+                                    </p>
+                                     <p class="alert-text"></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 mr40 text-center">
+                                <button class="btn orange-btn" type="submit">Sign up</button>
+                                <br>
+                                <hr class="border-hr text-center">
+                                <br>
+                                <a ui-sref="users" class="btn btn-social facek">
+                                    <span class="fa fa-facebook fspan"></span> Sign up with Facebook
+                                </a>
+                                <a ui-sref="users" class="btn btn-social google-back">
+                                    <span class="fa fa-google-plus googlespan"></span> Sign up with Google+
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 mr40 text-center">
-                        <button class="btn orange-btn" type="submit">Sign up</button>
-                        <br>
-                        <hr class="border-hr text-center">
-                        <br>
-                        <a ui-sref="users" class="btn btn-social facek">
-                            <span class="fa fa-facebook fspan"></span> Sign up with Facebook
-                        </a>
-                        <a ui-sref="users" class="btn btn-social google-back">
-                            <span class="fa fa-google-plus googlespan"></span> Sign up with Google+
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </form>
+                </form>
 
-        <form ng-submit="login(formdata)">
-            <div class="col-md-6 pad-right5">
-                <div class="row mr15 light-grey min-h">
-                    <div class="col-md-12 text-center">
-                        <h1 class="damionr orange-color forml">Login</h1>
+                <form ng-submit="login(formdata)">
+                    <div class="col-md-6 pad-right5">
+                        <div class="row mr15 light-grey min-h">
+                            <div class="col-md-12 text-center">
+                                <h1 class="damionr orange-color forml">Login</h1>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="emailId" placeholder="Email id" ng-model="formdata.email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" id="passwrd" placeholder="Password" ng-model="formdata.password" required><br>
+                                <a class="flink"> Forgot Password?</a>
+                            </div>
+                            <div class="col-xs-12 mr40 text-center">
+                                <button class="btn orange-btn" type="submit"> Login</button>
+                                <br>
+                                <hr class="border-hr text-center">
+                                <br>
+                                <a ui-sref="users" class="btn btn-social facek">
+                                    <span class="fa fa-facebook fspan"></span> Login with Facebook
+                                </a>
+                                <a ui-sref="users" class="btn btn-social google-back">
+                                    <span class="fa fa-google-plus googlespan"></span> Login with Google+
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <input type="email" class="form-control" id="emailId" placeholder="Email id" ng-model="formdata.email" required>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="password" class="form-control" id="passwrd" placeholder="Password" ng-model="formdata.password" required><br>
-                        <a class="flink"> Forgot Password?</a>
-                    </div>
-                    <div class="col-xs-12 mr40 text-center">
-                        <button class="btn orange-btn" type="submit"> Login</button>
-                        <br>
-                        <hr class="border-hr text-center">
-                        <br>
-                        <a ui-sref="users" class="btn btn-social facek">
-                            <span class="fa fa-facebook fspan"></span> Login with Facebook
-                        </a>
-                        <a ui-sref="users" class="btn btn-social google-back">
-                            <span class="fa fa-google-plus googlespan"></span> Login with Google+
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </form>
-          </div>
-    </div>
-
-    <!-- end first tab -->
-    <!-- start second tab -->
-    <!--<div class="row" ng-if="activeTab == 2">-->
-    <div class="row" ng-if="showStep == 2">
-        <div class="col-md-12">
-            <div class="intro hctl">
-                <strong class="intro-con">Hi {{photographerData.name}},</strong>
-                <p class="intro-con">You can become a featured photographer for the month of <strong>{{finalMonth}}</strong> by only paying <i class="fa fa-inr"></i><strong>1150.</strong></p>
-                <p class="intro-con">Inorder to become a featured photographer you need to subscribe.</p>
-            </div>
-            <ul class="list pad60">
-                <h2>Benefits</h2>
-                <li class="intro-con" ng-repeat="data in benefits">{{data.list}}</li>
-            </ul>
-            <div class="pay_btn text-center">
-                <p><a href="#" class="btn orange-btn" role="button" ng-click="updateToFeature()">Proceed to Pay</a></p>
+                </form>
             </div>
         </div>
+
+        <!-- end first tab -->
+        <!-- start second tab -->
+        <!--<div class="row" ng-if="activeTab == 2">-->
+        <div class="row" ng-if="showStep == 2">
+            <div class="col-md-12">
+                <div class="intro hctl">
+                    <strong class="intro-con">Hi {{photographerData.name}},</strong>
+                    <p class="intro-con">You can become a featured photographer for the month of <strong>{{finalMonth}}</strong> by only paying
+                        <i class="fa fa-inr"></i><strong>1150.</strong></p>
+                    <p class="intro-con">Inorder to become a featured photographer you need to subscribe.</p>
+                </div>
+                <ul class="list pad60">
+                    <h2>Benefits</h2>
+                    <li class="intro-con" ng-repeat="data in benefits">{{data.list}}</li>
+                </ul>
+                <div class="pay_btn text-center">
+                    <p><a href="#" class="btn orange-btn" role="button" ng-click="updateToFeature()">Proceed to Pay</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="fetrPhoto">
+        <h1>You Are already feature Photographer</h1>
     </div>
     <!--<div class="row">
 

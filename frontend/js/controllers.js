@@ -460,8 +460,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.package = 'Silver';
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
-                console.log("dataaaaaaaaaa", data);
+                console.log("silver memeber", data);
                 $scope.packageShow = data.data.package;
+                $.jStorage.set("photographer",data.data);
                 console.log("package", data.data.package);
                 $state.reload();
             });
@@ -482,6 +483,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 console.log("dataaaaaaaaaa", data);
                 $scope.packageShow = data.data.package;
+                $.jStorage.set("photographer",data.data);
                 $state.reload();
             });
         }
@@ -623,27 +625,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
         };
-        $scope.steps=false;
-        if($.jStorage.get("photographer")){
-            $scope.steps=true;
-            $scope.showStep=2;
-        }else
-        {
-            $scope.steps=false;
-            $scope.showStep=1;
+        $scope.steps = false;
+        if ($.jStorage.get("photographer")) {
+            if ($.jStorage.get("photographer").status == true) {
+                $scope.fetrPhoto = true;
+            } else {
+                $scope.fetrPhoto = false;
+                $scope.steps = true;
+                $scope.showStep = 2;
+            }
+        } else {
+            $scope.steps = false;
+            $scope.showStep = 1;
         }
-        $scope.signUp = function (formdata) {
+        $scope.signUp = function (formdata, terms) {
+
                 // formdata.serviceRequest = $scope.serviceList;
-                console.log(formdata);
-                NavigationService.sendLogin(formdata, function (data) {
-                    if (data.data.value) {
-                        console.log(data.data.data);
-                        $rootScope.showStep = 2;
-                        $.jStorage.set("photographer", data.data.data);
-                        $scope.template.profile = data.data.data;
-                        $state.reload();
-                    }
-                });
+                if (!terms) {
+                    // alert('check box error');
+                    $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+                } else {
+                    console.log(formdata);
+                    NavigationService.sendLogin(formdata, function (data) {
+                        if (data.data.value) {
+                            console.log(data.data.data);
+                            $rootScope.showStep = 2;
+                            $.jStorage.set("photographer", data.data.data);
+                            $scope.template.profile = data.data.data;
+                            $state.reload();
+                        }
+                    });
+                }
             },
 
             // $scope.signUp = function (formdata) {
@@ -698,10 +710,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // }
 
         //feature 
-        $scope.getFeaturedOnes = function () {
-
-
-        }
 
         $scope.date = new Date();
         var valMon = $scope.date.getMonth();
@@ -1431,23 +1439,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.signUp = function (formdata) {
+        $scope.signUp = function (formdata, terms) {
                 // formdata.serviceRequest = $scope.serviceList;
-                console.log(formdata);
-                NavigationService.sendLogin(formdata, function (data) {
-                    if (data.data.value) {
-                        console.log(data.data.data);
-                        $.jStorage.set("photographer", data.data.data);
-                        $scope.template.profile = data.data.data;
-                        if ($scope.signupModal) {
-                            $scope.signupModal.close();
+                if (!terms) {
+                    // alert('check box error');
+                    $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+                } else {
+                    console.log(formdata);
+                    NavigationService.sendLogin(formdata, function (data) {
+                        if (data.data.value) {
+                            console.log(data.data.data);
+                            $.jStorage.set("photographer", data.data.data);
+                            $scope.template.profile = data.data.data;
+                            if ($scope.signupModal) {
+                                $scope.signupModal.close();
+                            }
+                            if ($scope.loginModal) {
+                                $scope.loginModal.close();
+                            }
+                            $state.go('photographer');
                         }
-                        if ($scope.loginModal) {
-                            $scope.loginModal.close();
-                        }
-                        $state.go('photographer');
-                    }
-                });
+                    });
+                }
             },
 
             $scope.subscribeData = function (formdata) {

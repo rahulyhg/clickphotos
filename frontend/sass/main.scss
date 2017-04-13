@@ -613,12 +613,12 @@
         padding-bottom: 15px;
         cursor: pointer;
         .photographer_img {
-            
-            @include size(38px, 38px);
+            @include size(38px,
+            38px);
             display: inline-block;
             padding-right: 6px;
-            img{
-                width:100%;
+            img {
+                width: 100%;
                 height: 38px;
                 border-radius: 50%;
             }
@@ -1346,6 +1346,8 @@
     }
     
     .name-sec {
+        @include size(700px,
+        auto);
         vertical-align: middle;
         color: #fff;
         padding: 0 20px;
@@ -1355,6 +1357,14 @@
         }
         .name-part {
             font-size: 36px; // line-height: 1;
+        }
+        .name-sec__speciality-title {
+            vertical-align: top;
+        }
+        .name-sec__speciality-text {
+            vertical-align: top;
+            @include size(83%,
+            auto);
         }
     }
     
@@ -1953,7 +1963,8 @@
     .img-holder {
         margin: 18px 5px;
         border: 10px solid #fff;
-        @include size(null, 215px);
+        @include size(null,
+        215px);
         background-color: #ededed;
         overflow-y: hidden;
         box-shadow: 4px 5px 3px #c0c0c0;
