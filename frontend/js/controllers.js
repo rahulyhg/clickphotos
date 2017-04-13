@@ -794,6 +794,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         } else {
             $rootScope.showStep = 1;
         }
+        console.log($scope.template);
     })
 
     .controller('UsersCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
