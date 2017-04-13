@@ -146,7 +146,21 @@
                                         <div class="form-group">
                                             <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
                                             <div class="display-inline wd70">
-                                                <input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">
+                                                <!--<input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">-->
+                                                <div class="custom-check" uib-dropdown auto-close="outsideClick">
+                                                    <button class="btn" id="price-dropdown" uib-dropdown-toggle type="button">Give an estimate of the fee you charge
+                                                      <span class="caret"></span>
+                                                             </button>
+                                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="price-dropdown">
+
+                                                        <li role="menuitem" ng-repeat="priceRange in fees">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" id="fees" ng-model="priceRange.checked">
+                                                                <label for="fees"><i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceFrom}}</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceTo}}</span></label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="sub-sec text-center">
@@ -492,7 +506,7 @@
                                     <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
-                                            <a ng-href="{{item.image | serverimage}}" fancybox-box >
+                                            <a ng-href="{{item.image | serverimage}}" fancybox-box>
                                                 <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
                                             <button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
                                         </div>
@@ -631,14 +645,14 @@
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
-                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember()" >UPGRADE NOW</button>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="current-package " >
+                    <div class="current-package ">
                         <div class="subs-info pdb-25 " ng-if="packageShow=='Silver' || packageShow=='Gold'">
                             <p class="text-uppercase text-center ">you are currently subscribed to </p>
                         </div>
@@ -675,8 +689,7 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
-                                                <span class="display-block package-price "><span class="rupee ">`</span> 3450
-                                                inclusive of all taxes</span>
+                                                <span class="display-block package-price "><span class="rupee ">`</span>                                                3450 inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light "> 1 Jan 2016 to 31 Dec 2016</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> Credit Card</span></p>

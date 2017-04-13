@@ -74,8 +74,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
-      
-        NavigationService.callApi("Photographer/getFeaturePhotographer",function (data) {
+
+        NavigationService.callApi("Photographer/getFeaturePhotographer", function (data) {
             console.log("getFeaturePhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
@@ -623,16 +623,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
         };
-
+        $scope.steps=false;
+        if($.jStorage.get("photographer")){
+            $scope.steps=true;
+            $scope.showStep=2;
+        }else
+        {
+            $scope.steps=false;
+            $scope.showStep=1;
+        }
         $scope.signUp = function (formdata) {
                 // formdata.serviceRequest = $scope.serviceList;
                 console.log(formdata);
                 NavigationService.sendLogin(formdata, function (data) {
                     if (data.data.value) {
-                        console.log(data.data.value);
+                        console.log(data.data.data);
+                        $rootScope.showStep = 2;
+                        $.jStorage.set("photographer", data.data.data);
+                        $scope.template.profile = data.data.data;
+                        $state.reload();
                     }
                 });
             },
+
+            // $scope.signUp = function (formdata) {
+            //         // formdata.serviceRequest = $scope.serviceList;
+            //         console.log(formdata);
+            //         NavigationService.sendLogin(formdata, function (data) {
+            //             if (data.data.value) {
+            //                 console.log(data.data.value);
+            //             }
+            //         });
+            //     },
 
             $scope.login = function (formdata) {
                 // formdata.serviceRequest = $scope.serviceList;
@@ -645,7 +667,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.template.profile = data.data.data;
                         // $state.go("photographer");
                         $state.reload();
-
                         console.log("im in");
                     }
                 });
@@ -709,7 +730,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         console.log("$scope.finalMonth", $scope.finalMonth);
                     }
                 } else {
-                    $scope.finalMonth = $scope.monthNames[ $scope.nextMonth+ 1];
+                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
                     console.log("$scope.finalMonth", $scope.finalMonth);
                 }
             }
@@ -772,17 +793,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         };
 
-        if ($.jStorage.get("photographer")) {
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/findPhotographer", formdata, function (data) {
-                if (data.value === true) {
-                    console.log(data)
-                    $scope.photographerData = data.data;
-                    console.log("$scope.photographerData--", $scope.photographerData)
-                }
-            });
-        }
+        NavigationService.callApi("Photographer/getFeaturePhotographer", function (data) {
+            console.log("getFeaturePhotographer", data);
+            if (data.value === true) {
+                $scope.featrData = data.data;
+                console.log("featuePhoto", $scope.featrData);
+                _.forEach($scope.featrData, function (spec) {
+
+                    _.forEach(spec.speciality, function (spec1) {
+
+                        console.log("spec---", spec1.name);
+                        if (_.isEmpty(spec.specialityString)) {
+                            console.log("$scope.specialityString---", spec.specialityString)
+                            spec.specialityString = spec1.name;
+                        } else {
+                            spec.specialityString = spec.specialityString + ' | ' + spec1.name;
+                            console.log("$scope.specialityString---", spec.specialityString)
+                        }
+                    })
+                })
+            }
+        });
 
         $scope.usersList = [{
             "profile": "frontend/img/pic/pic1.jpg",
