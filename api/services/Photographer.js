@@ -302,9 +302,9 @@ var model = {
                 var checkmonth = moment(found.dateOfRagister).format();
                 var currentYear = moment(checkmonth).year();
                 var nextYear = Number(currentYear) + 1;
-                console.log("checkmonth",checkmonth);
-                console.log("currentYear",currentYear);
-                console.log("nextYear",nextYear);
+                console.log("checkmonth", checkmonth);
+                console.log("currentYear", currentYear);
+                console.log("nextYear", nextYear);
                 Photographer.find({
                     month: data.month,
                     dateOfRagister: {
@@ -316,11 +316,15 @@ var model = {
                         console.log(err);
                         callback(err, null);
                     } else {
-                        console.log("Number of docs: ", count);
                         //newreturns.totalpages = Math.ceil(count / data.pagesize);
-                        newreturns.lastDateOfRegister=found;
+                        if(found){
+                        console.log("found ", found);
+                        }
+                        newreturns.lastDateOfRegister = found[0].dateOfRagister;
                         newreturns.totalItems = count;
+                        console.log("newreturns", newreturns);
                         callback(null, newreturns);
+
                     }
                 })
             } else {
@@ -333,7 +337,7 @@ var model = {
 
     getFeaturePhotographer: function (data, callback) {
         this.find({
-            status: true   
+            status: true
         }).sort({
             month: -1
         }).deepPopulate("speciality").exec(function (err, found) {

@@ -462,7 +462,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 console.log("silver memeber", data);
                 $scope.packageShow = data.data.package;
-                $.jStorage.set("photographer",data.data);
+                $.jStorage.set("photographer", data.data);
                 console.log("package", data.data.package);
                 $state.reload();
             });
@@ -483,7 +483,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 console.log("dataaaaaaaaaa", data);
                 $scope.packageShow = data.data.package;
-                $.jStorage.set("photographer",data.data);
+                $.jStorage.set("photographer", data.data);
                 $state.reload();
             });
         }
@@ -722,26 +722,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formdata.month = $scope.mon;
         //console.log("frrrrr", formdata);
         NavigationService.apiCallWithData("Photographer/getLastFeaturedPhotographer", formdata, function (data) {
-            // console.log("getLastFeaturedPhotographer", data);
+            console.log("getLastFeaturedPhotographer", data);
             if (data.value == true) {
-                $scope.lastDateOfRegister = data.data.lastDateOfRegister[0].dateOfRagister;
-                $scope.totalCountOfLastDate = data.data.totalItems;
-                $scope.date = new Date();
-                //console.log("$scope.lastDateOfRegister", $scope.lastDateOfRegister);
-                //console.log("$scope.totalCountOfLastDate", $scope.totalCountOfLastDate);
-                if ($scope.lastDateOfRegister > $scope.date) {
-                    if (totalCountOfLastDate >= 12) {
-                        $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
-                        console.log("$scope.finalMonth", $scope.finalMonth);
+                if (data.data.totalItems>0) {
+                    $scope.lastDateOfRegister = data.data.lastDateOfRegister;
+                    $scope.totalCountOfLastDate = data.data.totalItems;
+                    $scope.date = new Date();
+                    //console.log("$scope.lastDateOfRegister", $scope.lastDateOfRegister);
+                    //console.log("$scope.totalCountOfLastDate", $scope.totalCountOfLastDate);
+                    if ($scope.lastDateOfRegister > $scope.date) {
+                        if (totalCountOfLastDate >= 12) {
+                            $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
+                            console.log("$scope.finalMonth", $scope.finalMonth);
+                        } else {
+                            $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
+                            console.log("$scope.finalMonth", $scope.finalMonth);
+                        }
                     } else {
                         $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
                         console.log("$scope.finalMonth", $scope.finalMonth);
                     }
                 } else {
-                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
+                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
                     console.log("$scope.finalMonth", $scope.finalMonth);
                 }
             }
+
         });
 
         $scope.updateToFeature = function () {
