@@ -63,6 +63,9 @@ mongoose.connect('mongodb://localhost:27017/' + database, function (err) {
             };
         }
     }
+    //api key for cities
+    sails.api="AIzaSyBeYWrUdZ2n9xHeSTjoCELO_IcvjzXgyS8";
+    //api key for cities end
 
     // Start server
     sails.lift(rc('sails'));

@@ -1,3 +1,4 @@
+var request = require("request");
 var schema = new Schema({
     name: String,
     profilePic: String,
@@ -16,6 +17,7 @@ var schema = new Schema({
         type: Date
     },
     month: String,
+    year: String,
     bio: String,
     pricing: String,
     email: {
@@ -207,7 +209,8 @@ var model = {
         }, {
             status: true,
             dateOfRagister: new Date(),
-            month: data.mon
+            month: data.mon,
+            year: data.yea
         }, function (err, updated) {
             console.log(updated);
             if (err) {
@@ -297,7 +300,7 @@ var model = {
             if (err) {
                 callback(err, null);
             } else if (found) {
-                console.log("found", found);
+                console.log("found---", found);
                 var newreturns = {};
                 var checkmonth = moment(found.dateOfRagister).format();
                 var currentYear = moment(checkmonth).year();
@@ -305,26 +308,36 @@ var model = {
                 console.log("checkmonth", checkmonth);
                 console.log("currentYear", currentYear);
                 console.log("nextYear", nextYear);
-                Photographer.find({
-                    month: data.month,
-                    dateOfRagister: {
-                        $gte: new Date(currentYear, 01, 01),
-                        $lt: new Date(nextYear, 12, 31)
+                var match = {};
+                if (!_.isEmpty(found)) {
+                    var match = {
+                        month: found[0].month,
+                        dateOfRagister: {
+                            $gte: new Date(currentYear, 01, 01),
+                            $lt: new Date(nextYear, 12, 31)
+                        }
                     }
-                }).count(function (err, count) {
+                }
+
+                Photographer.find(match).count(function (err, count) {
                     if (err) {
                         console.log(err);
                         callback(err, null);
                     } else {
                         //newreturns.totalpages = Math.ceil(count / data.pagesize);
-                        if(found){
-                        console.log("found ", found);
+                        if (_.isEmpty(found)) {
+                            console.log("found---- ", found);
+                            newreturns.totalItems = 0;
+                            console.log("newreturns", newreturns);
+                            callback(null, newreturns);
+                        } else {
+                            newreturns.lastDateOfRegister = found[0].dateOfRagister;
+                            newreturns.lastMonth = found[0].month;
+                            newreturns.lastYear = found[0].year;
+                            newreturns.totalItems = count;
+                            console.log("newreturns", newreturns);
+                            callback(null, newreturns);
                         }
-                        newreturns.lastDateOfRegister = found.dateOfRagister;
-                        newreturns.totalItems = count;
-                        console.log("newreturns", newreturns);
-                        callback(null, newreturns);
-
                     }
                 })
             } else {
@@ -374,6 +387,27 @@ var model = {
                 }
             }
         })
+    },
+
+    getCities: function (data, callback) {
+        var api = sails.api;
+        request({
+            // url: "https://www.vamaship.com/api/surface/book",
+            url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Vict&types=(cities)&language=pt_BR&key=" + api,
+            method: "GET"
+            //  headers: {
+            //    "Content-Type": "application/json",
+            //    "Authorization": "Bearer " + api
+            //  },
+            //   body: JSON.stringify(userData)
+        }, function (err, httpResponse, body) {
+            // console.log("err : ",err,"httpResponse",httpResponse);
+            console.log("err ::::::::::: ", err);
+            console.log("httpResponse::::::::::: ", httpResponse);
+            console.log("body::::::::::::: ", body);
+            // var bodyData = JSON.parse(body);
+            // console.log("bodyData", bodyData);
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

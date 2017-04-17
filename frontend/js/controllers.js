@@ -579,6 +579,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+        $scope.fees = [{
+           priceFrom: '1000',
+           priceTo: '15000',
+           value:'₹1000-₹15000'
+       }, {
+           priceFrom: '15000',
+           priceTo: '25000',
+           value:'₹15000-₹25000'
+       }, {
+           priceFrom: '25000',
+           priceTo: '50000',
+           value:'₹25000-₹50000'
+       }, {
+           priceFrom: '50000',
+           priceTo: '100000',
+           value:'₹50000-₹100000'
+       }, {
+           priceFrom: '100000',
+           priceTo: 'above',
+           value:'₹100000 and above'
+       }];
+
         $scope.uploadList = [
             'frontend/img/photographer/img.jpg',
             'frontend/img/photographer/img.jpg',
@@ -713,29 +735,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.date = new Date();
         var valMon = $scope.date.getMonth();
+        var valyear = $scope.date.getFullYear();
         $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
         $scope.nextMonth = valMon + 1;
         $scope.mon = $scope.monthNames[$scope.nextMonth];
         console.log("$scope.mon", $scope.mon);
 
         formdata = {};
-        formdata.month = $scope.mon;
+        // formdata.month = $scope.mon;
         //console.log("frrrrr", formdata);
         NavigationService.apiCallWithData("Photographer/getLastFeaturedPhotographer", formdata, function (data) {
             console.log("getLastFeaturedPhotographer", data);
             if (data.value == true) {
-                if (data.data.totalItems>0) {
+
+                var monthIndex =
+                    _.findIndex($scope.monthNames, function (o) {
+                        return o == data.data.lastMonth;
+                    });
+                if (data.data.totalItems > 0) {
+                    $scope.lastYearOfRegistartion = data.data.lastYear;
                     $scope.lastDateOfRegister = data.data.lastDateOfRegister;
                     $scope.totalCountOfLastDate = data.data.totalItems;
                     $scope.date = new Date();
                     //console.log("$scope.lastDateOfRegister", $scope.lastDateOfRegister);
                     //console.log("$scope.totalCountOfLastDate", $scope.totalCountOfLastDate);
-                    if ($scope.lastDateOfRegister > $scope.date) {
-                        if (totalCountOfLastDate >= 12) {
-                            $scope.finalMonth = $scope.monthNames[$scope.nextMonth + 1];
+                    if ($scope.lastYearOfRegistartion >= valyear && monthIndex >= $scope.nextMonth) {
+                        if ($scope.totalCountOfLastDate >= 12) {
+                            $scope.finalMonth = $scope.monthNames[monthIndex + 1];
                             console.log("$scope.finalMonth", $scope.finalMonth);
                         } else {
-                            $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
+                            $scope.finalMonth = $scope.monthNames[monthIndex];
                             console.log("$scope.finalMonth", $scope.finalMonth);
                         }
                     } else {
@@ -754,10 +783,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.mon = $scope.finalMonth;
+            formdata.yea = new Date().getFullYear();
             console.log("frrrrr", formdata);
             NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
                 console.log("updateToFeaturePhotographer", data);
                 if (data.value === true) {
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        console.log("catdata", data);
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
                     //console.log(data.data.data);
                     $state.go("users");
                 }

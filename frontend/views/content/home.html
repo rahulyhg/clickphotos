@@ -121,7 +121,7 @@
                         </div>
                         <div class="col-md-8 col-md-push-2">
                             <div class="view_prof_btn">
-                                <button class="btn btn-danger btn-block">View Profile</button>
+                                <button class="btn btn-danger btn-block" ui-sref="user-profile({userid:user._id})">View Profile</button>
                             </div>
                         </div>
                     </li>
@@ -186,13 +186,13 @@
                     </div>-->
                     </div>
                     <div class=" col-md-6  col-xs-12 padd_rt" ng-if="smallCat[$index][0]">
-                        <a href="#"> <img ng-src="{{smallCat[$index][0].smallimage | serverimage}}" class="img-responsive" alt=""></a>
+                        <a ui-sref="wild-photographer({catid:catEl._id})"> <img ng-src="{{smallCat[$index][0].smallimage | serverimage}}" class="img-responsive" alt=""></a>
                         <!--<div class="img-section__text">
                         <h3>{{catEl[1].name}}</h3>
                     </div>-->
                     </div>
                     <div class=" col-md-6 padd_lt" ng-if="smallCat[$index][1]">
-                        <a href="#"> <img ng-src="{{smallCat[$index][1].smallimage | serverimage}}" class="img-responsive" alt=""></a>
+                        <a ui-sref="wild-photographer({catid:catEl._id})"> <img ng-src="{{smallCat[$index][1].smallimage | serverimage}}" class="img-responsive" alt=""></a>
                         <!--<div class="img-section__text">
                         <h3>{{catEl[2].name}}</h3>
                     </div>-->

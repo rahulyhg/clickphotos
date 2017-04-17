@@ -36,24 +36,24 @@
                             <div class="quarter-circle"></div>
                         </div>
                         <div class="name-sec display-inline">
-                           <span class="name-part">{{photographerData.name}}</span>
-                           <div>
-                               <div class="inline-block">
-                                   <span class="loc-span">Location:</span>
-                               </div>
-                               <div class="inline-block">
-                                   <span class="loc-span">Mumbai | Delhi</span>
-                               </div>
-                           </div>
-                           <div>
-                               <div class="inline-block name-sec__speciality-title">
-                                   <span class="loc-span">Speciality:
+                            <span class="name-part">{{photographerData.name}}</span>
+                            <div>
+                                <div class="inline-block">
+                                    <span class="loc-span">Location:</span>
+                                </div>
+                                <div class="inline-block">
+                                    <span class="loc-span">Mumbai | Delhi</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="inline-block name-sec__speciality-title">
+                                    <span class="loc-span">Speciality:
                                </div>
                                <div class="inline-block name-sec__speciality-text">
                                  <span class="loc-span">{{specialityString }}</span>
-                               </div>
-                           </div>
-                       </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row text-center">
                         <!-- <div class=""> -->
@@ -168,11 +168,12 @@
                                                       <span class="caret"></span>
                                                              </button>
                                                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="price-dropdown">
-
                                                         <li role="menuitem" ng-repeat="priceRange in fees">
+
                                                             <div class="checkbox">
-                                                                <input type="checkbox" id="fees" ng-model="priceRange.checked">
-                                                                <label for="fees"><i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceFrom}}</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceTo}}</span></label>
+                                                                <input type="radio" ng-model="photographerData.pricing" value="{{priceRange.value}}" name="{{photographerData.pricing}}"
+                                                                    id="{{priceRange.value}}">
+                                                                <label for="{{priceRange.value}}"><i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceFrom}}</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceTo}}</span></label>
                                                             </div>
                                                         </li>
                                                     </ul>
