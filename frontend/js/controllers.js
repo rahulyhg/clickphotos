@@ -846,8 +846,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         };
 
-        NavigationService.callApi("Photographer/getFeaturePhotographer", function (data) {
-            console.log("getFeaturePhotographer", data);
+        $scope.date = new Date();
+        var valMon = $scope.date.getMonth();
+        var valyear = $scope.date.getFullYear();
+        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $scope.nextMonth = valMon + 1;
+        $scope.mon = $scope.monthNames[$scope.nextMonth];
+        formdata={};
+        formdata.month=$scope.mon;
+        NavigationService.apiCallWithData("Photographer/getFeatPhotographer",formdata, function (data) {
+            console.log("getFeatPhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
                 console.log("featuePhoto", $scope.featrData);

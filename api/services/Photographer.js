@@ -318,7 +318,6 @@ var model = {
                         }
                     }
                 }
-
                 Photographer.find(match).count(function (err, count) {
                     if (err) {
                         console.log(err);
@@ -408,6 +407,30 @@ var model = {
             // var bodyData = JSON.parse(body);
             // console.log("bodyData", bodyData);
         });
-    }
+    },
+
+    getFeatPhotographer: function (data, callback) {
+        this.find({
+            status: true,
+            month:data.month
+        }).sort({
+            month: -1
+        }).limit(12).deepPopulate("speciality").exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else if (found) {
+                if (_.isEmpty(found)) {
+                    callback(null, {});
+                } else {
+                    console.log("Found", found);
+                    callback(null, found);
+                }
+            } else {
+                callback(null, {
+                    message: "No Data Found"
+                });
+            }
+        })
+    },
 };
 module.exports = _.assign(module.exports, exports, model);
