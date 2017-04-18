@@ -118,18 +118,18 @@ var controller = {
         }
     },
 
-    getFeaturePhotographer: function (req, res) {
-        if (req.body) {
-            Photographer.getFeaturePhotographer(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
-        }
-    },
+    // getFeaturePhotographer: function (req, res) {
+    //     if (req.body) {
+    //         Photographer.getFeaturePhotographer(req.body, res.callback);
+    //     } else {
+    //         res.json({
+    //             value: false,
+    //             data: {
+    //                 message: "Invalid Request"
+    //             }
+    //         })
+    //     }
+    // },
 
     getAllPhotographers: function (req, res) {
         if (req.body) {
@@ -170,9 +170,22 @@ var controller = {
         }
     },
 
-     getFeatPhotographer: function (req, res) {
+    getFeatPhotographer: function (req, res) {
         if (req.body) {
             Photographer.getFeatPhotographer(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    getPhotographersByCategories: function (req, res) {
+        if (req.body) {
+            Photographer.getPhotographersByCategories(req.body, res.callback);
         } else {
             res.json({
                 value: false,

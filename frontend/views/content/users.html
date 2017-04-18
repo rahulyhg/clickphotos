@@ -17,9 +17,9 @@
                 </div>
                 <hr class="border-line2 text-center">
                 <div class="caption googleb">
-                    <p class="title text-capitalize">{{list.name}} | {{list.place}}</p>
+                    <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
                     <p class="title-intro">{{list.bio}}</p>
-                    <p class="text-center"><a ui-sref="user-profile" class="btn whit-btn" type="button"> Read More</a></p>
+                    <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button"> Read More</a></p>
                 </div>
             </div>
         </div>

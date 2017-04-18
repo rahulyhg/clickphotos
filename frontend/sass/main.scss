@@ -1713,7 +1713,7 @@
     
     .city {
         .city__name {
-            @include size(14%,
+            @include size(18%,
             auto);
         }
         .city__add-icon {
@@ -2558,6 +2558,12 @@
     .other-section {
         //  margin: 60px 150px 0;
         position: relative;
+        .thumbnail{
+            .profile-f-img{
+                height:125px;
+                    transform: rotate(-47deg);
+            }
+        }
     }
     
     .pad-border {
@@ -2605,6 +2611,11 @@
     .f-photo-div {
         position: relative;
         margin: 50px 0 0;
+        .profile-f-img{
+            height:125px;
+            transform: rotate(-44deg);
+
+        }
     }
     
     .img-min-h {

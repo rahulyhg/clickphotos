@@ -12,7 +12,7 @@
             </div>
             <div class="user-name inline">
                 <h1>{{userData.name}}</h1>
-                <p>Location: <span ng-repeat="loc in userHead.location">{{loc}}</p>
+                <p>Location:{{locString}}</p>
                 <p>Speciality:{{specialityString }}</p>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     <span class="border-line"></span>
                     <li ng-class="{'active': activeTab == 2}" ng-click="toggleTab(2)">WORK
                         <img src="frontend/img/photographer/under.png" alt="" class="img-responsive"></li>
-                    </ul>
+                </ul>
             </div>
         </div>
     </div>
@@ -115,9 +115,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline">Location:</label>
-                                <!--<div class="selected-option display-inline">
-                                                <span>Mumbai</span>
-                                            </div>-->
+                                <div class="selected-option display-inline" ng-repeat="Location in userData.location">
+                                    <span>{{Location}}</span>
+                                </div>
                                 <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
                                 <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
                                 <!--<div class="city">
@@ -199,18 +199,21 @@
                                         <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
                                     </div>
                                     <div class="intro-profile">
-                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.place}} </p>
-                                        <p class="spec text-capitalize">Speciality: {{specialityString}}</p>
+                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{user.specialityS}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                                <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!--page work-->
+
             <div class="" ng-if="activeTab == 2">
                 <div class="main-cont damionr sec-tab" ng-hide="showMe">
                     <h1 class="orange-color sech  ft100 text-capitalize ng-binding">asmara</h1>
@@ -223,7 +226,7 @@
                     <div class="col-md-12" ng-show="showMe" style="position: relative;" ng-init="content=wildlife">
                         <div class="radioBtn_cat">
                             <!--used for categories radio buttons-->
-                            <div class="inline-block" >
+                            <div class="inline-block">
                                 <h2>{{photographerData.name}} Photos</h2>
                             </div>
                             <p ng-repeat="list in uniqueCategory track by $index">
@@ -301,7 +304,7 @@
                 <!-- for shar profile link-->
 
                 <div class="other-section">
-                    <!--ng-hide="showMe"-->
+                 
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
                         <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in photographerData">
@@ -312,13 +315,13 @@
                                         <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
                                     </div>
                                     <div class="intro-profile">
-                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.place}} </p>
-                                        <p class="spec text-capitalize">Speciality: {{specialityString}}</p>
+                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{user.specialityS}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                                <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
                             </div>
                         </div>
                     </div>

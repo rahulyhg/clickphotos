@@ -6,26 +6,26 @@
         <div class="f-photo-div">
             <h2 class="head-f white-color">Featured <br> &nbsp;&nbsp;Photographers</h2>
             <div class="row pad-up100">
-                <div class="col-sm-4 col-md-3 pad5" ng-repeat="user in fpUser">
+                <div class="col-sm-4 col-md-3 pad5" ng-repeat="user in featrData">
                     <div class="thumbnail shadow">
-                        <img ng-src="{{user.background}}" alt="...">
+                        <img src="frontend/img/fp_bg1.png" alt="...">
                         <div class="user-ab">
                             <div class="border-half">
-                                <img ng-src="{{user.profile}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
                             </div>
                             <div class="intro-profile">
-                                <p class="name-loc text-capitalize">{{user.name}} {{user.surName}} | {{user.place}} </p>
-                                <p class="spec text-capitalize">Speciality: {{user.speciality}}</p>
+                                <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                <p class="spec text-capitalize">Speciality: {{user.specialityString}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <a href="#" class="btn whit-btn" role="button">View Profile</a>
+                        <a ui-sref="user-profile({userid:user._id})" class="btn whit-btn" role="button">View Profile</a>
                     </div>
                 </div>
             </div>
             <div class="text-center ">
-                <a href="#" class="btn whit-btn view-a  white-color" role="button">View All</a>
+                <a ui-sref="users" class="btn whit-btn view-a  white-color" role="button">View All</a>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                     </div>
                     <hr class="border-line2 text-center">
                     <div class="caption googleb">
-                        <p class="title text-capitalize">{{list.name}} | {{list.place}}</p>
+                        <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
                         <p class="title-intro">{{list.bio}}</p>
                         <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button"> Read More</a></p>
                     </div>

@@ -347,31 +347,31 @@ var model = {
         })
     },
 
-    getFeaturePhotographer: function (data, callback) {
-        this.find({
-            status: true
-        }).sort({
-            month: -1
-        }).deepPopulate("speciality").exec(function (err, found) {
-            if (err) {
-                callback(err, null);
-            } else if (found) {
-                if (_.isEmpty(found)) {
-                    callback(null, {});
-                } else {
-                    console.log("Found", found);
-                    callback(null, found);
-                }
-            } else {
-                callback(null, {
-                    message: "No Data Found"
-                });
-            }
-        })
-    },
+    // getFeaturePhotographer: function (data, callback) {
+    //     this.find({
+    //         status: true
+    //     }).sort({
+    //         month: -1
+    //     }).deepPopulate("speciality").exec(function (err, found) {
+    //         if (err) {
+    //             callback(err, null);
+    //         } else if (found) {
+    //             if (_.isEmpty(found)) {
+    //                 callback(null, {});
+    //             } else {
+    //                 console.log("Found", found);
+    //                 callback(null, found);
+    //             }
+    //         } else {
+    //             callback(null, {
+    //                 message: "No Data Found"
+    //             });
+    //         }
+    //     })
+    // },
 
     getAllPhotographers: function (data, callback) {
-        Photographer.find({}).exec(function (err, found) {
+        Photographer.find({}).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -392,8 +392,8 @@ var model = {
         var api = sails.api;
         request({
             // url: "https://www.vamaship.com/api/surface/book",
-            url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Vict&types=(cities)&language=pt_BR&key=" + api,
-            method: "GET"
+            url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?placeid=ChIJkbeSa_BfYzARphNChaFPjNcIndia&input=M&types=(cities)&language=en&key=" + api,
+            method: "POST"
             //  headers: {
             //    "Content-Type": "application/json",
             //    "Authorization": "Bearer " + api
@@ -402,17 +402,18 @@ var model = {
         }, function (err, httpResponse, body) {
             // console.log("err : ",err,"httpResponse",httpResponse);
             console.log("err ::::::::::: ", err);
-            console.log("httpResponse::::::::::: ", httpResponse);
+            // console.log("httpResponse::::::::::: ", httpResponse);
             console.log("body::::::::::::: ", body);
-            // var bodyData = JSON.parse(body);
-            // console.log("bodyData", bodyData);
+            var bodyData = JSON.parse(body);
+            console.log("bodyData", bodyData);
+            callback(err, bodyData);
         });
     },
 
     getFeatPhotographer: function (data, callback) {
         this.find({
             status: true,
-            month:data.month
+            month: data.month
         }).sort({
             month: -1
         }).limit(12).deepPopulate("speciality").exec(function (err, found) {
@@ -432,5 +433,37 @@ var model = {
             }
         })
     },
+
+    getPhotographersByCategories: function (data, callback) {
+        Photographer.aggregate([
+                // Stage 1
+                {
+                    $lookup: {
+                        "from": "categories",
+                        "localField": "speciality",
+                        "foreignField": "_id",
+                        "as": "specialities"
+                    }
+                },
+                // Stage 2
+                {
+                    $match: {
+                        "specialities.name": data.speciality
+                    }
+                },
+
+            ],
+            function (err, data) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                } else if (data) {
+                    console.log("Photographer data : ", data)
+                    callback(null, data);
+                } else {
+                    callback(null, "Invalid data");
+                }
+            });
+    }
 };
 module.exports = _.assign(module.exports, exports, model);
