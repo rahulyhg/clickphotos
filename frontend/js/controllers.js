@@ -1041,6 +1041,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.locString = [];
         $scope.specialityString = [];
         $scope.specialityS = [];
+        $scope.dataArr=[];
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
             $scope.showSocial = false; // here showSocial will be display: none;

@@ -12,11 +12,7 @@
         "name": "Package",
         "isSort": "",
         "tableRef": "package"
-    }, {
-        "name": "Location",
-        "type":"fkListView",
-        "tableRef": "location"
-    }, {
+    },{
         "name": "Speciality",
         "type":"enumdisplay",
         "isSort": "",
