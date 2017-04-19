@@ -13,6 +13,21 @@ var schema = new Schema({
             default: ""
         }
     }],
+    reviewList: [{
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "Photographer",
+        },
+        date: {
+            type: String,
+            default: Date.now()
+        },
+        review: {
+            type: String,
+            default: ""
+        },
+        reviewComment:[String]
+    }],
     dateOfRagister: {
         type: Date
     },
@@ -54,6 +69,9 @@ schema.plugin(deepPopulate, {
     populate: {
         speciality: {
             select: ""
+        },
+        "reviewList.user": {
+            select: ''
         }
     }
 });
@@ -61,7 +79,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Photographer', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "speciality", " speciality"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "speciality reviewList.user", " speciality reviewList.user"));
 var model = {
 
     getPhotographers: function (data, callback) {
@@ -464,6 +482,40 @@ var model = {
                     callback(null, "Invalid data");
                 }
             });
+    },
+
+    saveBottlesPhotos: function (data, callback) {
+
+        console.log(data);
+        Photographer.findOneAndUpdate({
+            _id: data._id
+        }, {
+            $push: {
+
+                reviewList: {
+                    $each: [{
+                        user: data.user,
+                        review: data.review
+                    }]
+                }
+            }
+        }).exec(function (err, found) {
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+
+                if (found) {
+
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);

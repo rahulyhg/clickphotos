@@ -35,7 +35,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.callApi("Categories/getAll", function (data) {
             console.log("catdata", data);
             if (data.value === true) {
-                console.log("Categories",data)
+                console.log("Categories", data)
                 $scope.category = data.data;
                 $scope.bigImageCategory = [];
                 $scope.smallImageCategory = [];
@@ -1103,8 +1103,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (document.getElementById(data).checked) {
                 $scope.dataArr.push(data);
                 _.forEach($scope.dataArr, function (value) {
-                    console.log("_.filter($scope.photographerData.uploadedImages, ['category', value])", _.filter($scope.photographerData.uploadedImages, ['category', value]).length)
-                    var filteredData = _.filter($scope.photographerData.uploadedImages, ['category', value])
+                    console.log("_.filter($scope.userData.uploadedImages, ['category', value])", _.filter($scope.userData.uploadedImages, ['category', value]).length)
+                    var filteredData = _.filter($scope.userData.uploadedImages, ['category', value])
                     _.forEach(filteredData, function (value1) {
                         $scope.uploadImgData.push(value1);
                         console.log("$scope.uploadImgDataasdsdasds", $scope.uploadImgData);
@@ -1115,7 +1115,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     return n != data;
                 });
                 _.forEach($scope.dataArr, function (value) {
-                    var filteredData = _.filter($scope.photographerData.uploadedImages, ['category', value])
+                    var filteredData = _.filter($scope.userData.uploadedImages, ['category', value])
                     _.forEach(filteredData, function (value1) {
                         $scope.uploadImgData.push(value1);
                         console.log("$scope.uploadImgDataasdsdasds", $scope.uploadImgData);
@@ -1123,12 +1123,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             }
             if (_.isEmpty($scope.dataArr)) {
-                $scope.uploadImgData = $scope.photographerData.uploadedImages;
+                $scope.uploadImgData = $scope.userData.uploadedImages;
                 $scope.showSixPhotos = _.slice($scope.uploadImgData, 0, 6);
             }
         }
-
         //filter end
+
+        //reviews
+        $scope.addReviews = function (data) {
+            formData = {};
+            if (!_.isEmpty($.jStorage.get("photographer"))) {
+                formData.user = $.jStorage.get("photographer")._id;
+                formData.review = data.review;
+                formData.reviewComment = data.reviewComment;
+                $scope.userData.reviewList.push(formData);
+                NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
+                    if (data.value) {
+                        console.log(data);
+                    }
+                });
+            } else {
+
+                $scope.uploadSignup();
+            }
+        }
+        //reviews end
+
+        //signup modal 
+        $scope.uploadSignup = function () {
+            console.log("signup");
+            $scope.loginModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/signup-profile.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+        };
+        $scope.logIn = function () {
+            if ($scope.loginModal) {
+                $scope.loginModal.close();
+            }
+            console.log("login");
+            $scope.signupModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/login.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+        };
+        //signup modal close
         $scope.userHead = {
             profile: "frontend/img/pic/pic1.jpg",
             background: "frontend/img/clickm/5.jpg",
@@ -1283,11 +1328,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //category image end
 
         //all photographers
-        formdata={};
-        formdata.speciality=$stateParams.catName;
-        NavigationService.apiCallWithData("Photographer/getPhotographersByCategories",formdata, function (data) {
+        formdata = {};
+        formdata.speciality = $stateParams.catName;
+        NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
             if (data.value === true) {
-                console.log("getPhotographersByCategories",data);
+                console.log("getPhotographersByCategories", data);
                 $scope.photographerData = data.data;
                 console.log("$scope.photographerData--", $scope.photographerData)
             }
@@ -1325,6 +1370,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
         //feature photographer end
+
+        //all categories
+        NavigationService.callApi("Categories/getAll", function (data) {
+            console.log("catdata", data);
+            if (data.value === true) {       
+                $scope.category = data.data;
+                console.log("Categories", $scope.category)
+            }
+        });
+        //all categories end
 
         $scope.checkboxData = [{
             label: 'mumbai',

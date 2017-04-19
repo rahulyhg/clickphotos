@@ -165,29 +165,30 @@
                 <div class="main-cont so-nam">
                     <span>Share this Profile on </span><span><img src="frontend/img/social/4.png" alt=""></span><span><img src="frontend/img/social/3.png" alt=""></span><span><img src="frontend/img/social/2.png" alt=""></span><span><img src="frontend/img/social/1.png" alt=""></span>
                 </div>
+                <!--review section-->
                 <div class="main-cont whit-back">
                     <div class="about-head text-capitalize">REVIEWS</div>
                     <div class="abt-form">
                         <div class="input-group pad25">
-                            <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">
-                            <span class="input-group-addon pub-btn" id="basic-addon2">Publish review</span>
+                            <input type="text" class="pub-r form-control" placeholder="Write a review for {{userData.name}}" aria-describedby="basic-addon2" ng-model="formreview.review">
+                            <span class="input-group-addon pub-btn" id="basic-addon2" ng-click="addReviews(formreview.review)">Publish review</span>
                         </div>
-                        <div class="user-section" ng-repeat="data in reviewList">
-                            <div class="profile-img"><img ng-src="{{data.profile}}" alt=""></div>
+                        <div class="user-section" ng-repeat="data in userData.reviewList">
+                            <div class="profile-img"><img ng-src="{{data.user.profilePic | serverimage}}" alt=""></div>
                             <div class="profile-intro">
-                                <p class="intro">{{data.name}} {{data.surName}}</p>
-                                <p>{{data.days}} Day ago</p>
+                                <p class="intro">{{data.user.name}}</p>
+                                <p>{{data.date | date}}</p>
                             </div>
-                            <p class="inline-block">{{data.content}}</p>
-                            <textarea name="name" class="input-border" placeholder="Write a comment..."></textarea>
+                            <p class="inline-block">{{data.review}}</p>
+                            <!--<textarea name="name" class="input-border" placeholder="Write a comment..." ng-model="formreview.reviewComment"></textarea>-->
                         </div>
-                        <div class="input-group pad25">
+                        <!--<div class="input-group pad25">
                             <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">
                             <span class="input-group-addon pub-btn" id="basic-addon2">Publish review</span>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
-
+                <!--review section end-->
                 <div class="other-section">
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
@@ -211,29 +212,38 @@
                     </div>
                 </div>
             </div>
-            
+
             <!--page work-->
 
             <div class="" ng-if="activeTab == 2">
-                <div class="main-cont damionr sec-tab" ng-hide="showMe">
-                    <h1 class="orange-color sech  ft100 text-capitalize ng-binding">asmara</h1>
+                <div class="main-cont damionr sec-tab" ng-if="!userData.uploadedImages[0]">
+                    <h1 class="orange-color sech  ft100 text-capitalize ng-binding">{{userData.name}}</h1>
                     <p>has not uploaded any photos</p>
                     <div class="text-center">
-                        <a href="#" class="btn orange-btn" role="button" ng-click="showMe=true">Ask her</a>
+                        <a href="#" class="btn orange-btn" role="button">Ask her</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12" ng-show="showMe" style="position: relative;" ng-init="content=wildlife">
-                        <div class="radioBtn_cat">
-                            <!--used for categories radio buttons-->
-                            <div class="inline-block">
-                                <h2>{{photographerData.name}} Photos</h2>
-                            </div>
-                            <p ng-repeat="list in uniqueCategory track by $index">
-                                <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
-                                <label for="{{list.category}}">{{list.category}}</label>
-                            </p>
-                            <!--<div class="radioBtn_wdt inline-block">
+                <div ng-if="userData.uploadedImages[0]">
+                    <div class="row">
+                        <div class="col-md-12" style="position: relative;" ng-init="content=wildlife">
+                            <div class="radioBtn_cat">
+                                <!--used for categories radio buttons-->
+                                <div class="inline-block">
+                                    <h2>{{userData.name}} Photos</h2>
+                                </div>
+                                <!--<p ng-repeat="list in uniqueCategory track by $index">
+                                    <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                    <label for="{{list.category}}">{{list.category}}</label>
+                                </p>-->
+                                <div class="radioBtn_wdt inline-block">
+                                    <form>
+                                        <div ng-repeat="list in uniqueCategory track by $index">
+                                            <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                            <label for="{{list.category}}" class="radio-inline">{{list.category}}</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--<div class="radioBtn_wdt inline-block">
                                 <form>
                                     <input type="radio" name="wildlife" id="radio_01" ng-model="content" value="wildlife" ng-click="showData();">
                                     <label class="radio-inline" for="radio_01"><span></span> Wildlife
@@ -247,20 +257,23 @@
                             </label>
                                 </form>
                             </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inline-block  pad25 all_cat">
+                        <!--used for categories-->
+                        <div>
+                            <div class="col-md-4 padd15" ng-repeat="imgs in uploadImgData track by $index">
+                                <div class="fp_innerPadd ">
+                                    <img ng-src="{{imgs.image | serverimage}}" class="img-responsive">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="inline-block  pad25 all_cat">
-                    <!--used for categories-->
-                    <div>
-                        <div class="col-md-4 padd15" ng-repeat="imgs in uploadImgData track by $index">
-                            <div class="fp_innerPadd ">
-                                <img ng-src="{{imgs.image | serverimage}}" class="img-responsive">
-                            </div>
-                        </div>
 
-                    </div>
-                    <!--<div class="col-md-4 padd15" ng-show="content == 'wedding'" ng-repeat="imgs in wedding track by $index">
+                <!--<div class="col-md-4 padd15" ng-show="content == 'wedding'" ng-repeat="imgs in wedding track by $index">
                         <div class="fp_innerPadd ">
                             <img ng-src="{{imgs}}" class="img-responsive">
                         </div>
@@ -270,33 +283,32 @@
                             <img ng-src="{{imgs}}" class="img-responsive">
                         </div>
                     </div>-->
-                    <div ng-show="showSocial" class="row">
-                        <div class="col-md-12">
-                            <div class="row share_profile">
-                                <div class="col-md-8">
-                                    <ul class=" list-unstyled list-inline">
-                                        <li>Share this profile on</li>
-                                        <li>
-                                            <a href=""><img src="frontend/img/social/4.png" alt="" class="img-responsive"></a>
-                                        </li>
-                                        <li>
-                                            <a href=""><img src="frontend/img/social/3.png" alt="" class="img-responsive"></a>
-                                        </li>
-                                        <li>
-                                            <a href=""><img src="frontend/img/social/2.png" alt="" class="img-responsive"></a>
-                                        </li>
-                                        <li>
-                                            <a href=""><img src="frontend/img/social/1.png" alt="" class="img-responsive"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 pull-right">
-                                    <div class="load_more_btn">
-                                        <p class="text-right"><a class="btn orange-btn" type="button">Load More</a></p>
-                                    </div>
-                                </div>
-
+                <div ng-show="showSocial" class="row">
+                    <div class="col-md-12">
+                        <div class="row share_profile">
+                            <div class="col-md-8">
+                                <ul class=" list-unstyled list-inline">
+                                    <li>Share this profile on</li>
+                                    <li>
+                                        <a href=""><img src="frontend/img/social/4.png" alt="" class="img-responsive"></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><img src="frontend/img/social/3.png" alt="" class="img-responsive"></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><img src="frontend/img/social/2.png" alt="" class="img-responsive"></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><img src="frontend/img/social/1.png" alt="" class="img-responsive"></a>
+                                    </li>
+                                </ul>
                             </div>
+                            <div class="col-md-3 pull-right">
+                                <div class="load_more_btn">
+                                    <p class="text-right"><a class="btn orange-btn" type="button">Load More</a></p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -304,7 +316,7 @@
                 <!-- for shar profile link-->
 
                 <div class="other-section">
-                 
+
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
                         <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in photographerData">
