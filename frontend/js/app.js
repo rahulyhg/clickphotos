@@ -49,11 +49,51 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "frontend/views/template.html",
             controller: 'UserProfileCtrl'
         })
-        
+
         .state('wild-photographer', {
             url: "/wild-photographer/:catid/:catName",
             templateUrl: "frontend/views/template.html",
             controller: 'WildPhotoCtrl'
+        })
+        .state('freemember', {
+            url: "/freemember",
+            templateUrl: "frontend/views/template.html",
+            controller: 'FreeMemberCtrl'
+        })
+        .state('silversubscribe', {
+            url: "/silversubscribe",
+            templateUrl: "frontend/views/template.html",
+            controller: 'SilverSubscribeCtrl'
+        })
+        .state('aboutus', {
+            url: "/aboutus",
+            templateUrl: "frontend/views/template.html",
+            controller: 'aboutusCtrl'
+        })
+        .state('privacy-policy', {
+            url: "/privacy-policy",
+            templateUrl: "frontend/views/template.html",
+            controller: 'privacyPolicyCtrl'
+        })
+        .state('terms', {
+            url: "/terms",
+            templateUrl: "frontend/views/template.html",
+            controller: 'termsCtrl'
+        })
+        .state('contact-us', {
+            url: "/contact-us",
+            templateUrl: "frontend/views/template.html",
+            controller: 'contactUsCtrl'
+        })
+        .state('competition', {
+            url: "/competition",
+            templateUrl: "frontend/views/template.html",
+            controller: 'competitionCtrl'
+        })
+        .state('photo-contest', {
+            url: "/photo-contest",
+            templateUrl: "frontend/views/template.html",
+            controller: 'photoContestCtrl'
         });
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);
@@ -88,25 +128,25 @@ firstapp.directive('img', function ($compile, $parse) {
 
 //image upload
 
-firstapp.directive('imageonload', function() {
+firstapp.directive('imageonload', function () {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('load', function() {
+        link: function (scope, element, attrs) {
+            element.bind('load', function () {
                 scope.$apply(attrs.imageonload);
             });
         }
     };
 });
 
-firstapp.directive('uploadImage', function($http, $filter) {
+firstapp.directive('uploadImage', function ($http, $filter) {
     return {
         templateUrl: 'frontend/views/directive/uploadFile.html',
         scope: {
             model: '=ngModel',
             callback: "=ngCallback"
         },
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             $scope.isMultiple = false;
             $scope.inObject = false;
             if (attrs.multiple || attrs.multiple === "") {
@@ -119,7 +159,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
             if ($scope.model) {
                 if (_.isArray($scope.model)) {
                     $scope.image = [];
-                    _.each($scope.model, function(n) {
+                    _.each($scope.model, function (n) {
                         $scope.image.push({
                             url: $filter("uploadpath")(n)
                         });
@@ -130,10 +170,10 @@ firstapp.directive('uploadImage', function($http, $filter) {
             if (attrs.inobj || attrs.inobj === "") {
                 $scope.inObject = true;
             }
-            $scope.clearOld = function() {
+            $scope.clearOld = function () {
                 $scope.model = [];
             };
-            $scope.uploadNow = function(image) {
+            $scope.uploadNow = function (image) {
                 var Template = this;
                 image.hide = true;
                 var formData = new FormData();
@@ -143,10 +183,10 @@ firstapp.directive('uploadImage', function($http, $filter) {
                         'Content-Type': undefined
                     },
                     transformRequest: angular.identity
-                }).then(function(data) {
+                }).then(function (data) {
                     data = data.data;
                     console.log("success");
-                    console.log("data",data);
+                    console.log("data", data);
                     if ($scope.callback) {
                         $scope.callback(data);
                     } else {

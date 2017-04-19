@@ -851,10 +851,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.template.profile = $.jStorage.get("photographer");
         }
 
-        $scope.data = {
-            "intro": "You could be a featured photographer on Clickmania and come under the lens of those who would love to harness your services. For as low as Rs. 1000 you could shoecase your work for a month.",
-            "name": "Manan",
-        };
         $scope.benefits = [{
             "list": "100 photos",
         }, {
@@ -1038,10 +1034,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
         $scope.activeTab = 1;
-        $scope.locString = [];
-        $scope.specialityString = [];
-        $scope.specialityS = [];
-        $scope.dataArr=[];
+        // $scope.locString = [];
+        // $scope.specialityString = [];
+        // $scope.specialityS = [];
+        $scope.dataArr = [];
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
             $scope.showSocial = false; // here showSocial will be display: none;
@@ -1734,4 +1730,64 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             //  $rootScope.$apply();
         };
+    })
+
+    .controller('aboutusCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("aboutus"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("About-Us"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('privacyPolicyCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("privacy-policy"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("privacy-policy"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('termsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("terms"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Terms"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('contactUsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("contact-us"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Contact"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('competitionCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("competition"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+
+    })
+
+    .controller('photoContestCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+        $scope.template = TemplateService.changecontent("photo-contest"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+        $scope.uploadImg = function () {
+            $scope.imgModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/upload-photo.html",
+                scope: $scope,
+                windowClass: 'upload-pic',
+                backdropClass: 'black-drop',
+                size: 'lg'
+            });
+        };
+
     })

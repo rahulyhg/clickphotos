@@ -4,12 +4,16 @@
             <div class="row">
                 <div class="footer_padd">
                     <div class="col-md-4">
-                        <h3>About Clickmania</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                            type and scrambled.
-                        </p>
-                        <p><a href="#" target="_blank" style="text-decoration: underline;">Know more</a></p>
+                        <div class="about-clickm">
+                            <h3>About Clickmania</h3>
+                            <p>
+                                Clickmania is an exclusive site for photographers, wherein we believe that photographers are not merely service providers
+                                but artists in the first place. Our mission is to create a universal platform for beginners,
+                                semi-professional & professional photographers, where they showcase their art & find potential
+                                absorbers of their work.
+                            </p>
+                            <p><a href="#" class="blank" style="text-decoration: underline;">Know more</a></p>
+                        </div>
                     </div>
                     <form ng-submit="subscribeData(formData)" name="loginForm">
                         <div class="col-md-4">
@@ -30,19 +34,19 @@
                     </form>
                     <div class="col-md-2">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="#" target="_blank">Home</a></li>
-                            <li class="list-group-item"><a ui-sref="categories" target="_blank">Categories</a></li>
-                            <li class="list-group-item"><a href="#" target="_blank"> photographers</a></li>
-                            <li class="list-group-item"><a href="#" target="_blank">Artist of the month</a></li>
-                            <li class="list-group-item"><a href="#" target="_blank">Careers</a></li>
+                            <li class="list-group-item"><a href="#" class="blank">Home</a></li>
+                            <li class="list-group-item"><a ui-sref="categories" class="blank">Categories</a></li>
+                            <li class="list-group-item"><a href="#" class="blank"> photographers</a></li>
+                            <li class="list-group-item"><a href="#" class="blank">Artist of the month</a></li>
+                            <li class="list-group-item"><a href="#" class="blank">Careers</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="#" target="_blank">Media</a></li>
-                            <li class="list-group-item"><a href="#" target="_blank">Contact us</a></li>
-                            <li class="list-group-item"><a href="#" target="_blank">Privacy Policy</a></li>
-                            <li class="list-group-item"><a href="#" target="_blank">Terms&conditions</a></li>
+                            <li class="list-group-item"><a href="#" class="blank">Media</a></li>
+                            <li class="list-group-item"><a ui-sref="contact-us" class="blank">Contact us</a></li>
+                            <li class="list-group-item"><a ui-sref="privacy-policy" class="blank">Privacy Policy</a></li>
+                            <li class="list-group-item"><a ui-sref="terms" class="blank">Terms&conditions</a></li>
                         </ul>
                     </div>
                 </div>

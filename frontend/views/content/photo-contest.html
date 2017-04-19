@@ -1,0 +1,199 @@
+<section>
+    <div class="contest mgtp80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="contest__title">
+                        <div class="ht30">
+                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
+                            <h1 class="fith damionr ft100 text-capitalize">Compete<br><span>with the best</span></h1>
+                        </div>
+                        <p>If winning for you is a breeze the best picture you have got to freeze </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="contest__stp-btn text-center list-unstyled list-inline">
+                <li class="active" ng-init="step = 1" ng-click="step = 1" ng-class="{'active': step == 1}">STEP 1</li>
+                <li ng-click="step = 2" ng-class="{'active': step == 2}">STEP 2</li>
+                <li ng-click="step = 3" ng-class="{'active': step == 3}">STEP 3</li>
+            </ul>
+            <div class="contest__stp1" ng-if="step == 1">
+                <form ng-submit="signUp(formData)" name="loginForm" class="ng-pristine ng-invalid ng-invalid-required ng-valid-email">
+                    <div class="row">
+                        <div class="col-md-6 pad-right5">
+                            <div class="signup-form">
+                                <div class="row mr15 light-grey min-h">
+                                    <div class="col-md-12 text-center">
+                                        <h1 class="damionr orange-color forml">Login as clickmania user</h1>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="name" placeholder="First Name"
+                                            ng-model="formData.name" name="name" required=""><br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control ng-pristine ng-untouched ng-empty ng-valid-email ng-invalid ng-invalid-required"
+                                            id="email" placeholder="Email id" ng-model="formData.email" name="email" required=""><br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="password" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="pwd" placeholder="Password"
+                                            ng-model="formData.password" name="passsword" required="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="password" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="pwd1" placeholder="Confirm Password"
+                                            ng-model="ConfirmPassword" name="ConfirmPassword" required="">
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkbox text-left condition-box">
+                                            <p>
+                                                <input type="checkbox" id="test1" required="">
+                                                <label for="test1" class="tnc">I agree with the <span>Terms &amp; Conditions</span> and <span>Privacy Policy</span> </label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 mr40 text-center">
+                                        <button class="btn orange-btn" type="submit">Sign up</button>
+                                        <br>
+                                        <hr class="border-hr text-center">
+                                        <br>
+                                        <a ui-sref="users" class="btn btn-social facek" href="/users">
+                                            <span class="fa fa-facebook fspan"></span> Sign up with Facebook
+                                        </a>
+                                        <a ui-sref="users" class="btn btn-social google-back" href="/users">
+                                            <span class="fa fa-google-plus googlespan"></span> Sign up with Google+
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                </form>
+
+                <form ng-submit="login(formdata)" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+                    <div class="col-md-6 pad-right5">
+                        <div class="login-form">
+                            <div class="row mr15 light-grey min-h">
+                                <div class="col-md-12 text-center">
+                                    <h1 class="damionr orange-color forml">Login as guest</h1>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-valid-email ng-invalid ng-invalid-required" id="emailId"
+                                        placeholder="First Name" ng-model="formdata.email" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="" placeholder="Last Name"><br>
+                                    <!--<a class="flink"> Forgot Password?</a>-->
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control ng-pristine ng-untouched ng-empty ng-valid-email ng-invalid ng-invalid-required"
+                                        id="emailId" placeholder="Email address" ng-model="formdata.email" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="" placeholder="Mobile No"><br>
+                                </div>
+                                <div class="col-xs-12 mr40 text-center">
+                                    <button class="btn orange-btn" type="submit"> Login</button>
+                                    <!--<br>
+                                    <hr class="border-hr text-center">
+                                    <br>
+                                    <a ui-sref="users" class="btn btn-social facek" href="/users">
+                                        <span class="fa fa-facebook fspan"></span> Login with Facebook
+                                    </a>
+                                    <a ui-sref="users" class="btn btn-social google-back" href="/users">
+                                        <span class="fa fa-google-plus googlespan"></span> Login with Google+
+                                    </a>-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+            <div class="contest__stp2" ng-if="step == 2">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="contest__stp2--box-shd">
+                            <div class="contest__stp2__txt">
+                                <h4>3 photos </h4>
+                                <h4>@</h4>
+                                <h4><i class="fa fa-inr"></i> 500</h4>
+                            </div>
+                        </div>
+                        <p><button class="btn orange-btn">Buy</button></p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="contest__stp2--box-shd">
+                            <div class="contest__stp2__txt">
+                                <h4>6 photos </h4>
+                                <h4>@</h4>
+                                <h4><i class="fa fa-inr"></i> 1000</h4>
+
+                            </div>
+                        </div>
+                        <p><button class="btn orange-btn">Buy</button></p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="contest__stp2--box-shd">
+                            <div class="contest__stp2__txt">
+                                <h4>9 photos </h4>
+                                <h4>@</h4>
+                                <h4><i class="fa fa-inr"></i> 1500</h4>
+                            </div>
+                        </div>
+                        <p><button class="btn orange-btn">Buy</button></p>
+                    </div>
+                </div>
+                <div class="contest__stp2__terms">
+                    <h1>Terms and conditions</h1>
+                    <ul>
+                        <li>Only 3 photos will be considered</li>
+                        <li>Size of each photo shouldn’t exceed 500KB</li>
+                        <li>Any user can join the contest, you needn’t be a registered member</li>
+                        <li>Entry will be considered only after full payment is received</li>
+                    </ul>
+                    <div class="custom-check">
+                        <input type="checkbox" name="terms" id="terms">
+                        <label for="terms">I agree to the terms and conditions</label>
+                    </div>
+                    <p><button class="btn orange-btn">Proceed to Pay</button></p>
+                </div>
+
+            </div>
+            <div class="contest__stp3" ng-if="step == 3">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="contest__stp3--box-shd">
+                            <div class="contest__stp3__txt">
+                                <img src="frontend/img/competition/5.png" alt="Add" class="img-responsive center-block" ng-click="uploadImg();">                                <br>
+                                <h3>Upload Photos</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="contest__stp3--box-shd">
+                            <div class="contest__stp3__txt">
+                                <img src="frontend/img/competition/5.png" alt="Add" class="img-responsive center-block " ng-click="uploadImg();"><br>
+                                <h3>Upload Photos</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="contest__stp3--box-shd">
+                            <div class="contest__stp3__txt">
+                                <img src="frontend/img/competition/5.png" alt="Add" class="img-responsive center-block" ng-click="uploadImg();"><br>
+                                <h3>Upload Photos</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-btn">
+                    <p class="text-center"><button class="btn orange-btn">Submit</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

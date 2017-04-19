@@ -1,6 +1,6 @@
 <div class="container-fluid pad0 ">
     <div class="head-section relative mg_t75">
-        <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="img-full img-responsive" ng-if="userData.coverPic" height="440">
+        <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="cover-img img-responsive" ng-if="userData.coverPic" height="440">
         <img src="frontend/img/photographer/back.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
         <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
         <div class="ab">
@@ -201,7 +201,7 @@
                                     </div>
                                     <div class="intro-profile">
                                         <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
-                                        <p class="spec text-capitalize">Speciality: {{user.specialityS}}</p>
+                                        <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +328,7 @@
                                     </div>
                                     <div class="intro-profile">
                                         <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
-                                        <p class="spec text-capitalize">Speciality: {{user.specialityS}}</p>
+                                        <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
                                     </div>
                                 </div>
                             </div>
