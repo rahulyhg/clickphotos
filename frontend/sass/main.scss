@@ -1268,6 +1268,7 @@
         cursor: pointer;
         position: absolute;
         bottom: -32px;
+        z-index: 8;
         left: 50%;
         width: 90%;
         transform: translate(-50%, -50%);
@@ -1275,6 +1276,7 @@
         background-color: rgba(0, 0, 0, 0.54);
         color: #fff;
         span {
+            display: none;
             font-size: 16px;
             font-family: 'Dosis-Regular';
             @include position(absolute,
@@ -2897,10 +2899,10 @@
             vertical-align: middle;
             width: 60%;
             position: relative;
-            input[type="radio"] {
+            input[type="checkbox"] {
                 display: none;
             }
-            input[type="radio"]+label span {
+            input[type="checkbox"]+label span {
                 display: inline-block;
                 width: 19px;
                 height: 19px;
@@ -2908,14 +2910,14 @@
                 cursor: pointer;
                 border-radius: 50%;
             }
-            input[type="radio"]+label span {
+            input[type="checkbox"]+label span {
                 background-color: $lightBlackColor;
             }
-            input[type="radio"]:checked+label span {
+            input[type="checkbox"]:checked+label span {
                 background-color: $whiteColor;
             }
-            input[type="radio"]+label span,
-            input[type="radio"]:checked+label span {
+            input[type="checkbox"]+label span,
+            input[type="checkbox"]:checked+label span {
                 @include transition(background-color 0.4s linear);
             }
             .radio-inline {
@@ -2923,6 +2925,30 @@
             }
         }
     }
+
+//     // Radiobtn
+// input[type="radio"] {
+//                 display: none;
+//             }
+//             input[type="radio"]+label span {
+//                 display: inline-block;
+//                 width: 19px;
+//                 height: 19px;
+//                 margin: -1px 4px 0 0;
+//                 cursor: pointer;
+//                 border-radius: 50%;
+//             }
+//             input[type="radio"]+label span {
+//                 background-color: $lightBlackColor;
+//             }
+//             input[type="radio"]:checked+label span {
+//                 background-color: $whiteColor;
+//             }
+//             input[type="radio"]+label span,
+//             input[type="radio"]:checked+label span {
+//                 @include transition(background-color 0.4s linear);
+//             }
+//     //End ofradio btn
     
     .all_cat {
         // to display images categorie wise

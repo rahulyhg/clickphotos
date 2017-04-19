@@ -650,7 +650,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             "titleOne": "Upgrade to",
             "titleTwo": "Gold"
         };
+        $scope.displayOpacity = function () {
+            $('.upload-trans span').css('display', 'block');
 
+        };
+        $scope.removeOpacity = function () {
+
+            $('.upload-trans span').css('display', 'none');
+
+        };
 
     })
 
@@ -1374,7 +1382,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //all categories
         NavigationService.callApi("Categories/getAll", function (data) {
             console.log("catdata", data);
-            if (data.value === true) {       
+            if (data.value === true) {
                 $scope.category = data.data;
                 console.log("Categories", $scope.category)
             }

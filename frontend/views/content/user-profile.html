@@ -237,9 +237,9 @@
                                 </p>-->
                                 <div class="radioBtn_wdt inline-block">
                                     <form>
-                                        <div ng-repeat="list in uniqueCategory track by $index">
+                                        <div ng-repeat="list in uniqueCategory track by $index" style="display: inline-block;">
                                             <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
-                                            <label for="{{list.category}}" class="radio-inline">{{list.category}}</label>
+                                            <label for="{{list.category}}" class="radio-inline"><span></span>{{list.category}}</label>
                                         </div>
                                     </form>
                                 </div>

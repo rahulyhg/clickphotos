@@ -20,7 +20,7 @@
                     <div class="profile-block">
                         <div class="holder1 display-inline">
                             <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive sm-logo">
-                            <div class="profile-holder">{{profilePhoto.profilePic }}
+                            <div class="profile-holder" ng-mouseover="displayOpacity();" ng-mouseleave="removeOpacity();">{{profilePhoto.profilePic }}
                                 <img ng-src="{{photographerData.profilePic | serverimage}}" alt="" class="img-responsive prof-img" ng-if="photographerData.profilePic">
                                 <img src="frontend/img/photographer/profile.jpg" class="img-responsive prof-img" ng-if="!photographerData.profilePic">
                                 <div class="upload-trans" type="button" ng-hide="profileSelect">
