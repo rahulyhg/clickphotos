@@ -1289,11 +1289,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.slide = !$scope.slide;
         };
 
-        // this function is used for data submmiting
+        // this function is used for data submmiting enquiry
         $scope.enquiryData = {};
         $scope.dataSubmit = function (data) {
-            console.log(data);
+            console.log("dataSubmit",data);
         };
+        //data submit enquiry
 
         // tis function is used to open an UIB modal
         $scope.openModal = function (size) {
