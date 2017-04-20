@@ -91,17 +91,18 @@
         <div class="marg-rel">
             <h2 class="head-f">View other <br> &nbsp;&nbsp;Catergories</h2>
             <div class="row pad-up100">
-                <div class="col-sm-6 col-md-3 pad5" ng-repeat="user in categories">
+                <div class="col-sm-6 col-md-3 pad5" ng-repeat="user in showlessCatImages">
                     <div class="thumbnail shadow">
-                        <img ng-src="{{user.background}}" alt="...">
+                        <img ng-src="{{user.viewOtherCatImage | serverimage}}" alt="...">
                     </div>
                     <div class="text-center">
-                        <a href="#" class="btn orange-btn" role="button">View Profile</a>
+                        <a ui-sref="wild-photographer({catid:user._id,catName:user.name})" class="btn orange-btn" role="button">View Profile</a>
                     </div>
                 </div>
             </div>
             <div class="text-center ">
-                <a ui-sref="categories" class="btn whit-btn view-orang" role="button">View All</a>
+                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMore()">View All</button>
+                <!--<a ui-sref="categories" class="btn whit-btn view-orang" role="button">View All</a>-->
             </div>
         </div>
     </div>

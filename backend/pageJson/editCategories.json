@@ -44,6 +44,16 @@
         "validation": ["required", "trim", ""],
         "url": ""
     },{
+        "name": "View Category Image",
+        "type": "image",
+        "tableRef": "viewOtherCatImage",
+        "option": "single",
+        "size": "812 × 517px",
+        "placeholder": "Enter Categories Image",
+        "id": "input1",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    },{
         "name": "Order",
         "type": "text",
         "tableRef": "order",

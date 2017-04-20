@@ -1074,32 +1074,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
                     console.log("$scope.locString", $scope.locString);
                 })
+                //get all related photographers
+                formdata1 = {}
+                formdata1.speciality = $scope.userData.speciality;
+                NavigationService.apiCallWithData("Photographer/getRelatedPhotographers", formdata1, function (data) {
+                    if (data.value === true) {
+                        console.log("getRelatedPhotographers", data);
+                        $scope.relatedPhotographerData = data.data;
+                        console.log("$scope.relatedPhotographerData--", $scope.relatedPhotographerData);
+                    }
+                });
+                //get all related photographers end
             }
         });
         //get single user end
-
-        //all Photographers
-        NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
-            if (data.value === true) {
-                console.log(data)
-                $scope.photographerData = data.data;
-                console.log("$scope.photographerData--", $scope.photographerData);
-                _.forEach($scope.photographerData, function (spec) {
-                    _.forEach(spec.speciality, function (spec1) {
-                        console.log("spec---", spec1);
-                        if (_.isEmpty(spec.specialityS)) {
-                            console.log("$scope.specialityS---", spec.specialityS)
-                            spec.specialityS = spec1.name;
-                        } else {
-                            spec.specialityS = spec.specialityS + ' | ' + spec1.name;
-                            console.log("$scope.specialityS---", spec.specialityS)
-                        }
-                    })
-                })
-
-            }
-        });
-        //all Photographers end
 
         //filter
         $scope.fliterCheck = function (data) {
@@ -1292,7 +1280,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // this function is used for data submmiting enquiry
         $scope.enquiryData = {};
         $scope.dataSubmit = function (data) {
-            console.log("dataSubmit",data);
+            console.log("dataSubmit", data);
         };
         //data submit enquiry
 
@@ -1319,6 +1307,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Wild Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        $scope.showlessCatImages=[];
 
         //category image     
         formData = {};
@@ -1382,10 +1371,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log("catdata", data);
             if (data.value === true) {
                 $scope.category = data.data;
+                $scope.showlessCatImages = _.slice($scope.category, 0, 4);
                 console.log("Categories", $scope.category)
             }
         });
         //all categories end
+
+        //loadmore for categories
+         $scope.LoadMore = function () {
+            $scope.showlessCatImages = $scope.category;
+        };
+        //loadmore for categories end
 
         $scope.checkboxData = [{
             label: 'mumbai',

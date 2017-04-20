@@ -15,6 +15,10 @@ var schema = new Schema({
         type: String,
         default: ""
     },
+    viewOtherCatImage: {
+        type: String,
+        default: ""
+    },
     order: {
         type: Number
     }

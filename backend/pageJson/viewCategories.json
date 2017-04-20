@@ -24,6 +24,11 @@
         "isSort": "",
         "tableRef": "insideImage"
     },{
+        "name": "View Category Image",
+        "type": "image",
+        "isSort": "",
+        "tableRef": "viewOtherCatImage"
+    },{
         "name": "Order",
         "isSort": "",
         "tableRef": "order"

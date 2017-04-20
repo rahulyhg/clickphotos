@@ -26,7 +26,7 @@ var schema = new Schema({
             type: String,
             default: ""
         },
-        reviewComment:[String]
+        reviewComment: [String]
     }],
     dateOfRagister: {
         type: Date
@@ -388,8 +388,12 @@ var model = {
     //     })
     // },
 
-    getAllPhotographers: function (data, callback) {
-        Photographer.find({}).deepPopulate("speciality").exec(function (err, found) {
+    getRelatedPhotographers: function (data, callback) {
+        Photographer.find({
+            speciality: {
+                $in: data.speciality
+            }
+        }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {

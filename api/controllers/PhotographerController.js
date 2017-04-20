@@ -131,9 +131,9 @@ var controller = {
     //     }
     // },
 
-    getAllPhotographers: function (req, res) {
+    getRelatedPhotographers: function (req, res) {
         if (req.body) {
-            Photographer.getAllPhotographers(req.body, res.callback);
+            Photographer.getRelatedPhotographers(req.body, res.callback);
         } else {
             res.json({
                 value: false,
