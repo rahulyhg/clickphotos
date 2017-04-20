@@ -13,7 +13,7 @@
             <div class="user-name inline">
                 <h1>{{userData.name}}</h1>
                 <p>Location:{{locString}}</p>
-                <p>Speciality:{{specialityString }}</p>
+                <!--<p>Speciality:{{specialityString }}</p>-->
             </div>
         </div>
         <div class="row googleb">
@@ -170,8 +170,9 @@
                     <div class="about-head text-capitalize">REVIEWS</div>
                     <div class="abt-form">
                         <div class="input-group pad25">
-                            <input type="text" class="pub-r form-control" placeholder="Write a review for {{userData.name}}" aria-describedby="basic-addon2" ng-model="formreview.review">
-                            <span class="input-group-addon pub-btn" id="basic-addon2" ng-click="addReviews(formreview.review)">Publish review</span>
+                            <input type="text" class="pub-r form-control" placeholder="Write a review for {{userData.name}}" aria-describedby="basic-addon2"
+                                ng-model="formreview.review">
+                            <span class="input-group-addon pub-btn" id="basic-addon2" ng-click="addReviews(formreview)">Publish review</span>
                         </div>
                         <div class="user-section" ng-repeat="data in userData.reviewList">
                             <div class="profile-img"><img ng-src="{{data.user.profilePic | serverimage}}" alt=""></div>
@@ -192,12 +193,36 @@
                 <div class="other-section">
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
-                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in relatedPhotographerData">
+                        <div class="black-custom-slider">
+                            <flex-slider slide="user in relatedPhotographerData track by $index" animation="slide" prev-text="" next-text="" item-margin="10"
+                                max-items="4" item-width="200">
+                                <li>
+                                    <div class="thumbnail shadow">
+                                        <img src="frontend/img/fp_bg1.png" alt="...">
+                                        <div class="user-ab">
+                                            <div class="border-half">
+                                                <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
+                                                <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                            </div>
+                                            <div class="intro-profile">
+                                                <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                                <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
+                                    </div>
+                                </li>
+                            </flex-slider>
+                        </div>
+                        <!--<div class="col-sm-6 col-md-4 pad5" ng-repeat="user in relatedPhotographerData">
                             <div class="thumbnail shadow">
                                 <img src="frontend/img/fp_bg1.png" alt="...">
                                 <div class="user-ab">
                                     <div class="border-half">
-                                        <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
+                                        <img src="frontend/img/profile.png" class="img-responsive" alt="" ng-if="!user.profilePic">
+                                        <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading" ng-if="user.profilePic"> 
                                     </div>
                                     <div class="intro-profile">
                                         <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
@@ -208,7 +233,7 @@
                             <div class="text-center">
                                 <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -319,7 +344,30 @@
 
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
-                        <div class="col-sm-6 col-md-4 pad5" ng-repeat="user in relatedPhotographerData">
+                        <div class="black-custom-slider">
+                            <flex-slider slide="user in relatedPhotographerData track by $index" animation="slide" prev-text="" next-text="" item-margin="10"
+                                max-items="4" item-width="200">
+                                <li>
+                                    <div class="thumbnail shadow">
+                                        <img src="frontend/img/fp_bg1.png" alt="...">
+                                        <div class="user-ab">
+                                            <div class="border-half">
+                                                <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
+                                                <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                            </div>
+                                            <div class="intro-profile">
+                                                <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                                <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
+                                    </div>
+                                </li>
+                            </flex-slider>
+                        </div>
+                        <!--<div class="col-sm-6 col-md-4 pad5" ng-repeat="user in relatedPhotographerData">
                             <div class="thumbnail shadow">
                                 <img src="frontend/img/fp_bg1.png" alt="...">
                                 <div class="user-ab">
@@ -335,7 +383,7 @@
                             <div class="text-center">
                                 <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <!--<div class="other-section" ng-show="showMe">

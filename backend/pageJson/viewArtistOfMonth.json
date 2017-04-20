@@ -14,10 +14,6 @@
         "isSort": "",
         "tableRef": "image"
     }, {
-        "name": "Location",
-        "type": "fkListView",
-        "tableRef": "location"
-    }, {
         "name": "Speciality",
         "type": "enumdisplay",
         "isSort": "",

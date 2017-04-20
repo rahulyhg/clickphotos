@@ -6,7 +6,30 @@
         <div class="f-photo-div">
             <h2 class="head-f white-color">Featured <br> &nbsp;&nbsp;Photographers</h2>
             <div class="row pad-up100">
-                <div class="col-sm-4 col-md-3 pad5" ng-repeat="user in featrData">
+                <div class="black-custom-slider">
+                    <flex-slider slide="user in featrData track by $index" animation="slide" prev-text="" next-text="" item-margin="10" max-items="4"
+                        item-width="200">
+                        <li>
+                            <div class="thumbnail shadow">
+                                <img src="frontend/img/fp_bg1.png" alt="...">
+                                <div class="user-ab">
+                                    <div class="border-half">
+                                        <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
+                                        <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                    </div>
+                                    <div class="intro-profile">
+                                        <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                        <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
+                            </div>
+                        </li>
+                    </flex-slider>
+                </div>
+                <!--<div class="col-sm-4 col-md-3 pad5" ng-repeat="user in featrData">
                     <div class="thumbnail shadow">
                         <img src="frontend/img/fp_bg1.png" alt="...">
                         <div class="user-ab">
@@ -22,7 +45,7 @@
                     <div class="text-center">
                         <a ui-sref="user-profile({userid:user._id})" class="btn whit-btn" role="button">View Profile</a>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="text-center ">
                 <a ui-sref="users" class="btn whit-btn view-a  white-color" role="button">View All</a>
@@ -70,14 +93,15 @@
                     <img src="frontend/img/atm0.jpg" alt="..." class="img-full img-min-h">
                     <div class="user-icon">
                         <div class="border-half">
-                            <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img">
+                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
+                            <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">
                         </div>
                     </div>
                     <hr class="border-line2 text-center">
                     <div class="caption googleb">
                         <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
                         <p class="title-intro">{{list.bio}}</p>
-                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button"> Read More</a></p>
+                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button">View Profile</a></p>
                     </div>
                 </div>
             </div>
@@ -96,7 +120,7 @@
                         <img ng-src="{{user.viewOtherCatImage | serverimage}}" alt="...">
                     </div>
                     <div class="text-center">
-                        <a ui-sref="wild-photographer({catid:user._id,catName:user.name})" class="btn orange-btn" role="button">View Profile</a>
+                        <a ui-sref="wild-photographer({catid:user._id,catName:user.name})" class="btn orange-btn" role="button">View Catergory</a>
                     </div>
                 </div>
             </div>

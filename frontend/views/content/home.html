@@ -113,7 +113,8 @@
                             <img src="frontend/img/fp_bg1.png" class="img-responsive" alt="">
                             <div class="fp_user_icn text-center">
                                 <div class="border-half">
-                                    <img ng-src="{{user.profilePic | serverimage}}" class="img-responsive" alt="">
+                                    <img src="frontend/img/profile.png" class="img-responsive" alt="" ng-if="!user.profilePic">
+                                    <img ng-src="{{user.profilePic | serverimage}}" class="img-responsive" alt="" ng-if="user.profilePic">
                                 </div>
                                 <h3>{{user.name}} | {{user.location[0]}}</h3>
                                 <p>Speciality: {{user.speciality[0].name}}</p>
@@ -153,7 +154,7 @@
                     <p>Get clicking in style and if your picture have got the oomph factor you could win a lakh of rupees </p>
                     <div class="col-md-5 col-md-push-3">
                         <div class="pht_contest_btn">
-                            <button class="btn btn-block">Click Here</button>
+                            <button class="btn btn-block" ui-sref="photo-contest">Click Here</button>
                         </div>
                     </div>
                 </div>
@@ -162,7 +163,7 @@
     </div>
     <div class="compete_btn">
         <p>
-            <a class="btn whit-btn " type="button" href="#"> COMPETE NOW</a>
+            <a class="btn whit-btn " type="button" ui-sref="photo-contest"> COMPETE NOW</a>
         </p>
     </div>
 </section>
@@ -209,7 +210,7 @@
 </section>
 <!--end of categories section-->
 <!-- start of signup section-->
-<section class="signup">
+<section class="signup" ng-if="!template.profile">
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -225,7 +226,7 @@
                 </div>
                 <p>You could reveal the stories you captured, on Clickmania and we will have you under the lens of people who
                     would want their own stories to be captured by you</p>
-                <p class="text-right"><a class="btn orange-btn" type="button">Sign up</a></p>
+                <p class="text-right"><a class="btn orange-btn" type="button" ng-click="uploadSignup()">Sign up</a></p>
                 <div class="img_absolute">
                     <img src="frontend/img/cam2.png" class="img-responsive" alt="">
                 </div>
@@ -245,7 +246,8 @@
                     <!--<img src="{{ArtistOfMonth.image | serverimage}}" class="img-responsive" alt="">-->
                     <div class="user-ab">
                         <div class="border-half">
-                            <img ng-src="{{artistOfMonth.image | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading">
+                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!artistOfMonth.image">
+                            <img ng-src="{{artistOfMonth.image | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading" ng-if="artistOfMonth.image">
                         </div>
                         <!--<div class="intro-profile">
                             <p class="name-loc ng-binding">Zaroon Jaffrani | Pune</p>

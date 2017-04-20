@@ -7,7 +7,7 @@
     @import "../../bower_components/fancyBox/source/jquery.fancybox";
     @import "../../bower_components/smart-app-banner/smart-app-banner";
     /* Bootstrap Variables Goes Here */
-    
+
     $brand-primary: #0d9dff !default;
     $brand-success: #84ce3c !default;
     $brand-warning: #ffec39 !default;
@@ -23,157 +23,157 @@
         src: url("../fonts/glyphicons-halflings-regular.eot");
         src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
     }
-    
+
     @font-face {
         font-family: 'hs-semiBold';
         src: url("../fonts/HoneyScript-SemiBold.ttf");
     }
-    
+
     @font-face {
         font-family: 'alegreya-light';
         src: url("../fonts/AlegreyaSans-Light.otf");
     }
-    
+
     @font-face {
         font-family: 'hs-light';
         src: url("../fonts/HoneyScript-Light.ttf");
     }
-    
+
     @font-face {
         font-family: 'damion-regular';
         src: url("../fonts/Damion-Regular.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-bold';
         src: url("../fonts/Dosis-Bold_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-extraBold';
         src: url("../fonts/Dosis-ExtraBold_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-extraLight';
         src: url("../fonts/Dosis-ExtraLight_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-light';
         src: url("../fonts/Dosis-Light_1.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-medium';
         src: url("../fonts/Dosis-Medium_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'dosis-regular';
         src: url("../fonts/Dosis-Regular_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'helveticalt';
         src: url("../fonts/HELVETICALT.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-black';
         src: url("../fonts/HELVETICALT-BLACK.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-bold';
         src: url("../fonts/HELVETICALT-BOLD.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-boldoblique';
         src: url("../fonts/HELVETICALT-BOLDOBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-compressed';
         src: url("../fonts/HELVETICALT-COMPRESSED.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed';
         src: url("../fonts/HELVETICALT-CONDENSED.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-black';
         src: url("../fonts/HELVETICALT-CONDENSED-BLACK.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-bold';
         src: url("../fonts/HELVETICALT-CONDENSED-BOLD.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-light';
         src: url("../fonts/HELVETICALT-CONDENSED-LIGHT.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-condensed-oblique';
         src: url("../fonts/HELVETICALT-CONDENSED-OBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-light';
         src: url("../fonts/HELVETICALT-LIGHT.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-lightOblique';
         src: url("../fonts/HELVETICALT-LIGHTOBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-narrow';
         src: url("../fonts/HELVETICALT-NARROW.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-narrow-boldOblique';
         src: url("../fonts/HELVETICALT-NARROW-BOLDOBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-narrow-oblique';
         src: url("../fonts/HELVETICALT-NARROW-OBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-oblique';
         src: url("../fonts/HELVETICALT-OBLIQUE.OTF");
     }
-    
+
     @font-face {
         font-family: 'helveticalt-ultraCompressed';
         src: url("../fonts/HELVETICALT-ULTRACOMPRESSED.OTF");
     }
-    
+
     @font-face {
         font-family: 'hctl';
         src: url("../fonts/HELVETICALT-LIGHT.OTF");
     }
-    
+
     @font-face {
         font-family: 'Dosis-Regular';
         src: url("../fonts/Dosis-Regular_0.ttf");
     }
-    
+
     @font-face {
         font-family: 'Foradian';
         src: url("../fonts/Rupee.ttf");
     }
-    
+
     body {
         //padding-top: 70px;
         font-family: 'dosis-regular';
@@ -186,7 +186,7 @@
         background-color: rgba(0, 0, 0, 0.80);
     }
     /* Track */
-    
+
      ::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -194,13 +194,13 @@
         border-radius: 10px;
     }
     /* Handle */
-    
+
      ::-webkit-scrollbar-thumb {
         background: $orangeColor;
         -webkit-box-shadow: inset 0 0 6px rgba(244, 81, 30, 0.5);
         box-shadow: inset 0 0 6px rgba(244, 81, 30, 0.5);
     }
-    
+
      ::-webkit-scrollbar-thumb:window-inactive {
         background: $orangeColor;
     } //used for @extend
@@ -210,73 +210,73 @@
         border-radius: $borderRadius;
         border-color: $orangeColor;
     }
-    
+
     .myBtnDarkGray {
         background-color: $lightBlackColor;
         color: $whiteColor;
         border-radius: $borderRadius;
         border-color: $lightBlackColor;
     }
-    
+
     .myBtnWhite {
         background-color: $whiteColor;
         color: $orangeColor;
         border-radius: $borderRadius;
         border-color: $whiteColor;
     }
-    
+
     .myJumbotron {
         color: $whiteColor;
         background-color: transparent;
     }
-    
+
     .mg {
         // margin top and bottom
         margin-top: 53px;
         margin-bottom: 53px;
     }
-    
+
     .mg_t75 {
         // this class is given kz the navbar is at fixed position.
         margin-top: 76px;
     }
-    
+
     .dosis-medium {
         font-family: 'dosis-medium';
     }
-    
+
     .rupee {
         font-family: 'Foradian';
     }
-    
+
     .dosis-light {
         font-family: 'dosis-light';
     }
-    
+
     .damoin {
         font-family: 'damion-regular';
     }
-    
+
     .orange-color {
         color: #f1592a;
     }
-    
+
     .damionr {
         font-family: 'Damion-Regular';
     }
-    
+
     .dosisl {
         font-family: dosis-Light;
     }
-    
+
     .hctl {
         font-family: hctl;
     }
-    
+
     .light-grey {
         background-color: #f6f6f6;
     }
-    
+
     .img-section__text {
         // used for abslt position
         position: absolute;
@@ -287,44 +287,44 @@
     } // end of @extend classes
     // CSS transition effects
     /*Pulse Grow*/
-    
+
     @include keyframes(pulse-grow) {
         to {
             @include transform(scale(1.1));
         }
     }
-    
+
     img.loading {
         text-align: center;
         opacity: 1;
         width: 32px !important;
         height: auto;
     }
-    
+
     img {
         opacity: 0;
         @include transition(all 300ms ease);
     }
-    
+
     img.doneLoading {
         opacity: 1;
     }
-    
+
     nav li:hover .dropdown-menu {
         display: block;
     }
-    
+
     #map img {
         opacity: 1;
     }
-    
+
     a,
     .btn,
     [ui-sref] {
         cursor: pointer;
         @include transition(all ease 300ms);
     }
-    
+
     .flexslider {
         .flex-direction-nav {
             a {
@@ -357,11 +357,11 @@
             }
         }
     }
-    
+
     .flex-control-paging li a {
         background-color: rgba(255, 255, 255, 0.5);
     }
-    
+
     .flex-control-paging li a.flex-active {
         background-color: #fff;
     } // footer section
@@ -452,17 +452,17 @@
         border-radius: 0;
         @include box-shadow(none);
     }
-    
+
     .form-control:focus {
         border-color: $brand-primary;
         outline: 0;
         @include box-shadow(none);
     }
-    
+
     .form-group {
         position: relative;
     }
-    
+
     .form-invalid {
         color: $brand-danger;
         .form-control {
@@ -473,7 +473,7 @@
             }
         }
     }
-    
+
     .form-submission {
         min-height: 300px;
     } //FLEX SLIDER FIXES
@@ -491,11 +491,11 @@
         }
     }
     /* Start writing sass here */
-    
+
     .content {
         min-height: 450px;
     }
-    
+
     .img-full {
         width: 100%;
         display: block;
@@ -503,16 +503,16 @@
     header>nav.navbar {
         margin-bottom: 0!important;
     }
-    
+
     header>nav>div.navbar-header>button.navbar-toggle {
         display: none;
     }
-    
+
     .navbar-default {
         background-color: $whiteColor;
         border: none; // position: relative;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle {
         width: 44px;
         position: relative;
@@ -522,15 +522,15 @@
         float: left;
         border: none;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle:hover {
         background-color: $whiteColor;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float {
         float: right;
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar0 {
         float: right;
         width: 26px;
@@ -538,7 +538,7 @@
         background-color: $orangeColor;
         @include transition(all 300ms linear);
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar1 {
         float: right;
         width: 23px;
@@ -546,7 +546,7 @@
         background-color: $orangeColor;
         @include transition(all 300ms linear);
     }
-    
+
     header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar2 {
         float: right;
         width: 20px;
@@ -554,7 +554,7 @@
         background-color: $orangeColor;
         @include transition(all 300ms linear);
     }
-    
+
     .hamburger-cross {
         // this class is used for X button animation to close side nav
         span {
@@ -797,7 +797,7 @@
         -webkit-box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
     }
-    
+
     .featu_photo_caraso {
         @extend .mg;
         position: relative;
@@ -1099,7 +1099,7 @@
                     .profile-f-img {
                         width: 250px;
                         height: 220px;
-                        transform: rotate(-48deg);
+                        transform: rotate(-44deg);
                     }
                 }
             }
@@ -1190,12 +1190,12 @@
         }
     } // end of testimonial 
     /*Rishabh CSS started. CSS for photographer module*/
-    
+
     $brand-holder: #ccc !default;
     .photographer-page {
         background-color: #f1f1f1;
     }
-    
+
     .profile-banner {
         .profile-banner__bg {
             @include size(null,
@@ -1228,7 +1228,7 @@
             }
         }
     }
-    
+
     .sm-logo {
         width: 40px;
         position: absolute;
@@ -1236,7 +1236,7 @@
         z-index: 9;
         top: 40px;
     }
-    
+
     .profile-holder {
         display: inline-block;
         @include size(220px,
@@ -1260,13 +1260,13 @@
             }
         }
     }
-    
+
     .profile-block {
         bottom: -6px;
         left: 7%;
         position: absolute;
     }
-    
+
     .quarter-circle {
         height: 130px;
         top: 5px;
@@ -1278,7 +1278,7 @@
         position: absolute;
         top: -26px;
     }
-    
+
     .upload-trans {
         cursor: pointer;
         position: absolute;
@@ -1311,12 +1311,12 @@
             2px null null null);
         }
     }
-    
+
     .select-box {
         background-color: #f1592a;
         position: relative;
     }
-    
+
     .btn-1 {
         position: relative;
         display: inline-block;
@@ -1344,7 +1344,7 @@
             }
         }
     }
-    
+
     .btn-1.active {
         button {
             border-bottom: 4px solid #191919;
@@ -1357,16 +1357,16 @@
             display: block;
         }
     }
-    
+
     .display-inline {
         display: inline-block;
     }
-    
+
     .holder1 {
         position: relative;
         vertical-align: middle;
     }
-    
+
     .name-sec {
         @include size(700px,
         auto);
@@ -1389,7 +1389,7 @@
             auto);
         }
     }
-    
+
     .loc-span {
         display: block;
         font-size: 22px;
@@ -1404,7 +1404,7 @@
         padding: 10px 30px;
         font-size: 22px;
     }
-    
+
     .about-desc {
         background-color: #fff;
         margin: 35px 150px;
@@ -1413,13 +1413,13 @@
             text-align: left;
         }
     }
-    
+
     .form-control[readonly],
     fieldset[disabled] .form-control {
         background-color: #fff;
         opacity: 1;
     }
-    
+
     .abt-form {
         .form-group {
             margin-bottom: 10px;
@@ -1526,29 +1526,29 @@
             }
         }
     }
-    
+
     .inline {
         display: inline;
     }
-    
+
     .display-block {
         display: block;
     }
-    
+
     .text-set {
         max-width: 75%;
         display: inline-block;
     }
-    
+
     .vat {
         vertical-align: top;
     }
-    
+
     .abt-sec2 {
         background-color: #fff;
         padding: 10px 40px 1px;
     }
-    
+
     .red-sec {
         background-color: #f1592a;
         padding: 10px 30px 1px;
@@ -1557,7 +1557,7 @@
             font-size: 18px;
         }
     }
-    
+
     .upgrade-sec {
         padding: 10px 30px 1px;
         text-align: center;
@@ -1567,24 +1567,24 @@
             letter-spacing: 0.5px;
         }
     }
-    
+
     .package-name {
         font-family: 'Dosis-Medium';
         font-size: 26px;
     }
-    
+
     .package-price {
         font-family: 'Dosis-Light';
         font-size: 26px;
     }
-    
+
     .pkg-info {
         vertical-align: -webkit-baseline-middle;
         text-align: left;
         margin-left: 30px;
         width: 45%;
     }
-    
+
     .upgrade-pkg {
         margin-left: -12px; // padding: 20px;
         background: #ccc;
@@ -1593,7 +1593,7 @@
             margin-top: 10px;
         }
     }
-    
+
     .upgrade-pkg:before {
         content: "";
         border-style: solid;
@@ -1603,7 +1603,7 @@
         left: -12px;
         top: -14px;
     }
-    
+
     .upgrade-pkg2 {
         margin-left: -12px; // padding: 20px;
         background: #f6ea74;
@@ -1612,7 +1612,7 @@
             margin-top: 10px;
         }
     }
-    
+
     .upgrade-pkg2:before {
         content: "";
         border-style: solid;
@@ -1622,7 +1622,7 @@
         left: -12px;
         top: -14px;
     }
-    
+
     .border-divider {
         border-left: 1px solid #000;
         ul>li {
@@ -1631,7 +1631,7 @@
             line-height: 1.3;
         }
     }
-    
+
     .upgrade-pkg,
     .upgrade-pkg2 {
         button {
@@ -1652,14 +1652,14 @@
             }
         }
     }
-    
+
     .btn-full {
         width: 100%;
         background-color: #f1592a;
         color: #fff;
         border: 0;
     }
-    
+
     .sub-sec {
         padding-bottom: 15px;
         .btn-default {
@@ -1727,7 +1727,7 @@
         color: #fff;
         margin-right: 8px;
     }
-    
+
     .city {
         .city__name {
             @include size(18%,
@@ -1738,7 +1738,7 @@
             @include margin(null 15px null null);
         }
     }
-    
+
     .close-btn {
         display: inline-block;
         color: #fff;
@@ -1747,28 +1747,28 @@
         vertical-align: text-bottom;
         cursor: pointer;
     }
-    
+
     .border-line {
         border: 1px solid;
         padding: 10px 0;
         color: #fff;
     }
-    
+
     .package-card {
         margin-top: 15px;
     }
-    
+
     .img-edit {
         margin-top: 5px;
     }
-    
+
     .edit-pencil {
         cursor: pointer;
         span {
             padding-right: 10px;
         }
     }
-    
+
     .wd70 {
         width: 70%;
     } //work
@@ -1798,7 +1798,7 @@
             margin-bottom: -5px;
         }
     }
-    
+
     .package-block {
         padding-bottom: 60px;
         p {
@@ -1807,7 +1807,7 @@
             letter-spacing: 0.5px;
         }
     }
-    
+
     .silver-pack {
         padding: 0 30px;
         .package-head {
@@ -1829,7 +1829,7 @@
             margin-left: 15px;
         }
     }
-    
+
     .silver-content {
         // box-shadow: 1px 1px 6px #9E9E9E;
         box-shadow: 4px 4px 6px #ccc;
@@ -1843,7 +1843,7 @@
             font-size: 18px;
         }
     }
-    
+
     .package-specs {
         list-style: none;
         font-family: helvetica;
@@ -1858,7 +1858,7 @@
             }
         }
     }
-    
+
     .or-cont:before {
         content: "OR";
         top: 50%;
@@ -1868,7 +1868,7 @@
         left: -12px;
         font-family: Dosis-regular;
     }
-    
+
     .silver-subscribed {
         .big-font {
             font-size: 90px;
@@ -1880,7 +1880,7 @@
             font-size: 40px;
         }
     }
-    
+
     .upload-pic {
         button {
             font-size: 17px;
@@ -1894,7 +1894,7 @@
             }
         }
     }
-    
+
     .terms {
         box-shadow: 1px 1px 6px #9E9E9E;
         background-color: #fff;
@@ -1915,21 +1915,21 @@
             line-height: 1.8;
         }
     }
-    
+
     .upload-pic .modal-dialog {
         top: 25%;
     }
-    
+
     .upload-pic .modal-content {
         width: 91%;
         margin: 0 auto;
     }
-    
+
     .black-drop {
         background-color: #000;
         opacity: 0.8!important;
     }
-    
+
     .select_join {
         margin: 2px 0 6px;
         width: 220px;
@@ -1942,7 +1942,7 @@
         -webkit-box-shadow: inset 0 0 10px 1px #FEFEFE;
         box-shadow: inset 0 0 10px 1px #FEFEFE;
     }
-    
+
     .select_join select {
         background: transparent;
         width: 220px;
@@ -1954,11 +1954,11 @@
         height: 34px;
         -webkit-appearance: none;
     }
-    
+
     .select_join select:focus {
         outline: none;
     }
-    
+
     .upl-sec {
         margin-top: 22px;
         .upload-pic {
@@ -1981,7 +1981,7 @@
             }
         }
     }
-    
+
     .img-holder {
         margin: 18px 5px;
         border: 10px solid #fff;
@@ -1991,12 +1991,12 @@
         overflow-y: hidden;
         box-shadow: 4px 5px 3px #c0c0c0;
     }
-    
+
     .upload-imageblock {
         position: relative; // width: 50%;
         padding: 25px;
     }
-    
+
     .close-modal {
         position: absolute;
         top: -9px;
@@ -2038,13 +2038,13 @@
             }
         }
     }
-    
+
     .count-images {
         font-family: 'dosis-medium';
         font-size: 18px;
         vertical-align: -webkit-baseline-middle;
     }
-    
+
     .checkbox-form {
         margin-top: 15px;
         .upload-pic {
@@ -2056,7 +2056,7 @@
             padding: 5px 35px;
         }
     }
-    
+
     .circular-checkbox {
         background-color: #5d5d5d; // width: 75%;
         padding: 0 160px 0 10px;
@@ -2123,7 +2123,7 @@
             transform: scale(1);
         }
     }
-    
+
     .ld-more {
         margin: 20px 0 35px;
         button {
@@ -2131,12 +2131,12 @@
             padding: 8px 65px;
         }
     }
-    
+
     .btn-fix {
         width: auto!important;
         float: none!important;
     }
-    
+
     .upgrade-gd {
         .upgrd-gold {
             margin: 0 auto;
@@ -2175,7 +2175,7 @@
             font-size: 40px;
         }
     }
-    
+
     .img-holder {
         position: relative;
         &:hover {
@@ -2191,7 +2191,7 @@
             display: none;
         }
     }
-    
+
     .edit-uploaded {
         position: absolute;
         top: 50%;
@@ -2209,7 +2209,7 @@
             }
         }
     }
-    
+
     .head-gold {
         background: linear-gradient(to right, #c9b459, #f9ef76)!important;
     } //history
@@ -2218,13 +2218,13 @@
         padding: 35px 30px 1px;
         text-align: left;
     }
-    
+
     .history-sec2 {
         font-size: 19px;
         padding: 5px 30px 1px;
         text-align: left;
     }
-    
+
     .his-under {
         border-bottom: 2px solid #e5e5e5;
         border-radius: 5px;
@@ -2232,17 +2232,17 @@
     .current-package {
         padding-top: 60px;
     }
-    
+
     .subs-info {
         p {
             font-size: 24px;
         }
     }
-    
+
     .valdidity {
         margin-left: 12px;
     }
-    
+
     .historypackage-card1,
     .historypackage-card2 {
         background: linear-gradient(to right, rgb(173, 173, 173), rgb(228, 228, 228));
@@ -2270,29 +2270,29 @@
             line-height: 1;
         }
     }
-    
+
     .vam {
         vertical-align: middle;
     }
-    
+
     .validity {
         vertical-align: top;
     }
-    
+
     .set-1 {
         line-height: 1;
         font-size: 20px;
         letter-spacing: 1px;
     }
-    
+
     .pdt10 {
         padding-top: 10px;
     }
-    
+
     .pdb-25 {
         padding-bottom: 25px;
     }
-    
+
     .upgrade-inner {
         display: inline-block;
         position: absolute;
@@ -2303,11 +2303,11 @@
         font-size: 25px;
         border-left: 1px solid;
     }
-    
+
     .historypackage-card2 {
         background: linear-gradient(to right, #c9b459, #f9ef76);
     }
-    
+
     .sign-up {
         .fcbk {
             background-color: #3b5998;
@@ -2363,21 +2363,21 @@
             margin: 10px 0 20px;
         }
     }
-    
+
     .mgt15 {
         margin-top: 15px;
     }
-    
+
     .mg10 {
         margin: 10px;
     }
-    
+
     .border-div {
         width: 20%;
         border: 1px solid #ccc;
         display: inline-block;
     }
-    
+
     .divide-or {
         .detail-text {
             font-size: 24px;
@@ -2385,13 +2385,13 @@
             vertical-align: -webkit-baseline-middle;
         }
     }
-    
+
     .exist-user {
         color: #000;
         margin-bottom: 5px;
         font-size: 17px;
     }
-    
+
     .condition-box {
         /* Base for label styling */
         [type="checkbox"]:checked,
@@ -2459,88 +2459,88 @@
             }
         }
     }
-    
+
     .mgb0 {
         margin-bottom: 0;
         line-height: 1;
     }
-    
+
     .mgt-8 {
         margin-top: -8px;
         line-height: 1;
     }
     /* end of Photographer module*/
     /*Start of Future Photographer module (Antu Ram)*/
-    
+
     header {
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.51);
     }
-    
+
     .grey-back {
         background-color: #f1f1f1;
         position: relative;
     }
-    
+
     .orange-color {
         color: $orangeColor;
     }
-    
+
     .white-color {
         color: $whiteColor !important;
     }
-    
+
     .facek {
         background-color: #3b5997;
     }
-    
+
     .fspan {
         background-color: #354f88;
     }
-    
+
     .googleb {
         background-color: #f15a29;
     }
-    
+
     .google-back {
         background-color: #de4c33;
     }
-    
+
     .googlespan {
         background-color: #ce3e26;
     }
-    
+
     .black-back {
         background-color: #252525;
     }
-    
+
     .whit-back {
         background-color: #fff;
     }
-    
+
     .relative {
         position: relative;
     }
-    
+
     .text-lowercase {
         text-transform: lowercase !important;
     }
-    
+
     .inline-block {
         display: inline-block;
     }
-    
+
     .pad25 {
         padding: 25px 0;
     }
-    
+
     .padd15 {
         padding: 15px 0;
     }
-    
+
     .pad-up100 {
         padding-top: 83px;
     }
-    
+
     .border-up {
         border-top: 2px solid gray;
         margin-top: 50px;
@@ -2551,7 +2551,7 @@
             color: black;
         }
     }
-    
+
     .shadow {
         position: relative;
         border: none;
@@ -2559,48 +2559,48 @@
         box-shadow: 0 0 6px black;
         border-radius: 0;
     }
-    
+
     .pad5 {
         //  padding: 0 5px 60px;
         padding: 0 13px 60px;
     }
-    
+
     .img-left {
         position: absolute;
         top: -45px;
         left: -75px;
         width: 430px;
     }
-    
+
     .other-section {
         //  margin: 60px 150px 0;
         position: relative;
         .thumbnail {
             .profile-f-img {
                 height: 125px;
-                transform: rotate(-47deg);
+                transform: rotate(-44deg);
             }
         }
     }
-    
+
     .pad-border {
         padding: 0 0 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #cecece;
     }
-    
+
     .user-section {
         padding: 0 0 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #cecece;
     }
-    
+
     .input-border {
         width: 100%;
         border: 1px solid #cecece !important;
         height: auto;
     }
-    
+
     .pub-r {
         background-image: url("../img/pencil.png");
         background-color: #f4f4f4;
@@ -2611,7 +2611,7 @@
         font-size: 22px !important;
         height: auto;
     }
-    
+
     .pub-btn {
         font-size: 20px;
         color: #fff;
@@ -2619,82 +2619,95 @@
         padding: 9px 24px;
         border: 1px solid #f1592a;
     }
-    
+
     .profile-intro {
         margin-top: 17px;
         padding-left: 85px;
     }
-    
+
     .f-photo-div {
         position: relative;
         margin: 50px 0 0;
         .profile-f-img {
-            height: 125px;
+            height: 125px!important;
             transform: rotate(-44deg);
         }
     }
-    
+
+    .black-custom-slider {
+        .flexslider {
+            background: transparent;
+            border: 0 solid transparent; // li {
+            //     width: 320.333px!important;
+            // }
+            .flex-control-nav {
+                display: none;
+            }
+        }
+    }
+
     .img-min-h {
         min-height: 160px;
     }
-    
+
     .forml {
         padding: 36px 0;
         margin: 0;
     }
-    
+
     .mr15 {
         margin: 0 3px;
     }
-    
+
     .pad-right5 {
         padding: 0 5px;
     }
-    
+
     .font70 {
         font-size: 70px;
     }
-    
+
     .ft100 {
         font-size: 100px;
     }
-    
+
     .pad60 {
         padding: 70px 0;
     }
-    
+
     .mr40 {
         margin: 40px 0;
     }
-    
+
     .min-h {
         //  min-height: 416px;
         min-height: 466px;
     }
-    
+
     .pad100 {
         padding: 0 100px;
     }
-    
+
     .marg-rel {
         position: relative;
         margin: 0 26px;
     }
-    
+
     .view-orang {
         margin-top: 0 !important;
         margin-bottom: 44px !important;
         background-color: transparent !important;
         border: 1px solid #f15a29 !important;
     }
-    
+
     .pad0 {
         padding: 0 !important;
     }
-    .cover-img{
-        height:440px!important;
+
+    .cover-img {
+        height: 440px!important;
     }
-    
+
     .ab {
         position: absolute;
         bottom: 0;
@@ -2728,7 +2741,7 @@
             }
         }
     }
-    
+
     .user-name {
         margin-left: 15px;
         position: absolute;
@@ -2748,7 +2761,7 @@
             text-transform: capitalize;
         }
     }
-    
+
     .profile-img {
         display: inline;
         float: left;
@@ -2757,7 +2770,7 @@
             width: 75px;
         }
     }
-    
+
     .head-f {
         font-family: 'damion-regular';
         color: #f4511e;
@@ -2769,7 +2782,7 @@
         left: 0;
         margin: 0;
     }
-    
+
     .user-ab {
         position: absolute;
         top: 50%;
@@ -2778,7 +2791,7 @@
         width: 100%;
         transform: translate(-50%, -50%);
     }
-    
+
     .intro-profile {
         margin-top: -11px;
         padding: 2px 15px;
@@ -2796,7 +2809,7 @@
             font-size: 16px;
         }
     }
-    
+
     .main-cont {
         border-radius: 5px;
         margin: 60px 150px;
@@ -2870,7 +2883,7 @@
             }
         }
     }
-    
+
     .showEnquery {
         // this class is used to show an enquiry box from -29% to 0px
         right: 0;
@@ -2897,7 +2910,7 @@
             }
         }
     }
-    
+
     .radioBtn_cat {
         position: relative;
         margin-top: 53px;
@@ -2941,9 +2954,7 @@
                 font-size: 30px;
             }
         }
-    }
-    
-    //     // Radiobtn
+    } //     // Radiobtn
     // input[type="radio"] {
     //                 display: none;
     //             }
@@ -2995,7 +3006,7 @@
             }
         }
     }
-    
+
     .so-nam {
         font-size: 36px;
         font-family: dosis-Light;
@@ -3006,14 +3017,14 @@
             margin: 0 15px;
         }
     }
-    
+
     .view-a {
         margin-top: -32px;
         margin-bottom: 29px;
         background-color: transparent !important;
         border: 1px solid white !important;
     }
-    
+
     .full-tabs {
         margin: 0;
         li {
@@ -3033,7 +3044,7 @@
             }
         }
     }
-    
+
     .full-tabs2 {
         margin: 0;
         .border-line {
@@ -3070,13 +3081,13 @@
             }
         }
     }
-    
+
     .border-hr {
         border-top: 1px solid #bfbfbf;
         margin-left: 32%;
         margin-right: 32%;
     }
-    
+
     hr.border-hr:after {
         content: 'or';
         display: inline-block;
@@ -3088,7 +3099,7 @@
         font-size: 18px;
         font-family: helveticalt-narrow;
     }
-    
+
     .feature-photo {
         .signup-form,
         .login-form {
@@ -3100,7 +3111,7 @@
             }
         }
     }
-    
+
     .head-name {
         text-align: center;
         @extend .mg_t75;
@@ -3133,7 +3144,7 @@
             color: $orangeColor;
         }
     }
-    
+
     .reg-btn {
         font-family: dosis-Light;
         border-bottom: 2px solid rgba(241, 90, 41, 0.19);
@@ -3152,12 +3163,12 @@
             border-color: #f15a29 !important;
         }
     }
-    
+
     .reg-btn:focus {
         box-shadow: none;
         border-color: #f15a29 !important;
     }
-    
+
     .orange-btn {
         font-family: hctl;
         color: #fff;
@@ -3166,7 +3177,7 @@
         border-radius: 4px;
         padding: 6px 30px;
     }
-    
+
     .orange-btn:focus,
     .orange-btn:hover {
         color: #fff;
@@ -3174,7 +3185,7 @@
         outline: none !important;
         box-shadow: none;
     }
-    
+
     .whit-btn {
         font-family: hctl;
         color: #f15a29;
@@ -3183,7 +3194,7 @@
         border-radius: 4px;
         padding: 6px 36px;
     }
-    
+
     .whit-btn:focus,
     .whit-btn:hover {
         color: #f15a29;
@@ -3191,17 +3202,17 @@
         outline: none !important;
         box-shadow: none;
     }
-    
+
     .whit-color {
         text-decoration: none;
         color: #fff;
     }
-    
+
     .whit-color:focus,
     .whit-color:hover {
         color: #fff;
     }
-    
+
     .btn-social {
         margin: 0 13px;
         position: relative;
@@ -3223,13 +3234,13 @@
             text-align: center;
         }
     }
-    
+
     .btn-social:focus,
     .btn-social:hover {
         color: #fff;
         outline: none;
     }
-    
+
     .flink {
         font-family: dosis-Light;
         float: right;
@@ -3238,7 +3249,7 @@
         margin-top: -13px;
         font-weight: 600;
     }
-    
+
     .list {
         list-style: none;
         li::before {
@@ -3248,21 +3259,21 @@
             padding-right: 3px;
         }
     }
-    
+
     .intro-con {
         margin: 0;
         font-size: 26px;
         text-align: justify;
         font-weight: 100;
     }
-    
+
     .pay_btn {
         padding-top: 60px;
         .orange-btn {
             padding: 10px 45px;
         }
     }
-    
+
     .intro {
         margin-top: -35px;
         strong {
@@ -3271,7 +3282,7 @@
             letter-spacing: 1px;
         }
     }
-    
+
     .black-btn {
         margin: 0 15px;
         width: 100px;
@@ -3283,13 +3294,13 @@
         font-family: dosis-Light;
         outline: none;
     }
-    
+
     .black-btn:focus,
     .black-btn:hover {
         color: #fff;
         outline: none;
     }
-    
+
     .tans-btn {
         padding: 8px 16px;
         font-family: dosis-Light;
@@ -3301,13 +3312,13 @@
         cursor: text;
         outline: none;
     }
-    
+
     .btn:focus,
     .btn:hover {
         outline: none !important;
         box-shadow: none !important;
     }
-    
+
     .sec-span {
         padding: 0 5px;
         outline: none;
@@ -3315,16 +3326,16 @@
         color: black;
         font-weight: 600;
     }
-    
+
     .btn-marg {
         margin: 60px 18px 21px;
     }
-    
+
     .location {
         height: 258px;
         overflow: auto;
     }
-    
+
     .list {
         min-height: 373px;
         background-image: url("/../frontend/img/clickm/11.png");
@@ -3342,7 +3353,7 @@
             margin: 0;
         }
     }
-    
+
     .users {
         .thumbnail {
             margin: 50px 0;
@@ -3408,13 +3419,12 @@
                 border-radius: 50%;
                 width: 150px;
                 height: 125px;
-                border: 3px solid #f15a29;
-                //transform: rotate(-44deg);
+                border: 3px solid #f15a29; //transform: rotate(-44deg);
                 transform: rotate(-44deg);
             }
         }
     }
-    
+
     .border-half {
         border: 9px solid #f15a29;
         border-radius: 50%;
@@ -3426,15 +3436,14 @@
         border-bottom: 9px solid transparent;
         transform: rotate(44deg);
     }
-    
+
     .profile-f-img {
         border-radius: 50%;
         width: 150px;
-        border: 3px solid #f15a29;
-        //transform: rotate(-44deg);
+        border: 3px solid #f15a29; //transform: rotate(-44deg);
         transform: rotate(-56deg);
     }
-    
+
     .sec-tab {
         padding-left: 20%;
         margin-top: 100px;
@@ -3451,7 +3460,7 @@
             margin-top: 20px;
         }
     }
-    
+
     .sub-main {
         position: relative;
         margin: 10px 0 60px;
@@ -3543,23 +3552,23 @@
     // }
     /*End of Future Photographer (Antu Ram)*/
     /* fancybox-override */
-    
+
     #fancybox-loading,
     .fancybox-close,
     .fancybox-next span,
     .fancybox-prev span {
         background-image: url("../img/fancybox_sprite.png");
     }
-    
+
     .fancybox-overlay {
         background-color: rgba(0, 0, 0, 0.55);
     }
-    
+
     #fancybox-loading div {
         background: url('../img/fancybox_loading.gif') center center no-repeat;
     }
     /*Retina graphics!*/
-    
+
     @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
     only screen and (min--moz-device-pixel-ratio: 1.5),
     only screen and (min-device-pixel-ratio: 1.5) {
@@ -3573,31 +3582,31 @@
             background-image: url('../img/fancybox_loading@2x.gif');
         }
     }
-    
+
     .fancybox-nav {
         height: 100%;
         /* helps IE */
     }
-    
+
     .fancybox-image {
         opacity: 1 !important;
     }
-    
+
     .fancybox-nav span {
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
     }
-    
+
     .fancybox-nav.fancybox-next span {
         background-image: url(../img/next.png);
     }
-    
+
     .fancybox-nav.fancybox-prev span {
         background-image: url(../img/prev.png);
     }
     /* end of fancybox-override */
-    
+
     // Start of about us page, privacy-policy, terms-condition page
     .aboutus,
     .privacy-policy,
@@ -3614,7 +3623,7 @@
             background-color: #3c5146;
         }
     }
-    
+
     .aboutus__desc,
     .privacy-policy__desc,
     .terms-condition__desc {
@@ -3644,7 +3653,7 @@
             display: list-item!important;
         }
     }
-    
+
     .contactus {
         background-image: url('../img/contact_us.jpg');
         background-repeat: no-repeat;
@@ -3677,7 +3686,7 @@
     .mgtp80 {
         margin-top: 80px;
     }
-    
+
     .compet__title,
     .contest__title {
         .ht30 {
@@ -3708,7 +3717,7 @@
             text-indent: 45px;
         }
     }
-    
+
     .compet__contest {
         h1 {
             font-family: Helvetica, sans-serif;
@@ -3730,7 +3739,7 @@
             font-size: 19px;
         }
     }
-    
+
     .compet__prev-contest {
         @include size(70%,
         auto);
@@ -3766,7 +3775,7 @@
             }
         }
     }
-    
+
     .brd-none {
         border-bottom: 1px solid transparent!important;
     } //End of  competition page

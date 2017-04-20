@@ -40,17 +40,6 @@
         "validation": ["", "trim", ""],
         "url": ""
     }, {
-        "name": "Location",
-        "type": "tags",
-        "tableRef": "location",
-        "placeholder": "Enter Location",
-        "id": "location",
-        "validation": ["", "trim", ""],
-        "url": "Location/search",
-        "dropDownField": "city",
-        "dropDownType": "multiple",
-        "onView": true
-    }, {
         "name": "Speciality",
         "type": "tags",
         "tableRef": "speciality",

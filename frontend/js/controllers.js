@@ -1,6 +1,6 @@
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload'])
 
-    .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll) {
+    .controller('HomeCtrl', function ($state, $scope, $rootScope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll, $uibModal) {
         $scope.template = TemplateService.changecontent("home"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("ClickMania"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -106,48 +106,72 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
-        $scope.mySlides = [
-            // 'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-            // 'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-            // 'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-            // 'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-            "frontend/img/bg1.jpg",
-            "frontend/img/bg1.jpg",
-            "frontend/img/bg1.jpg"
+        //signup modal 
+        $scope.uploadSignup = function () {
+            console.log("signup");
+            $scope.loginModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/signup-profile.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+        };
+        $scope.logIn = function () {
+            if ($scope.loginModal) {
+                $scope.loginModal.close();
+            }
+            console.log("login");
+            $scope.signupModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/login.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+        };
 
-        ];
+        $scope.signUp = function (formdata, terms) {
+                // formdata.serviceRequest = $scope.serviceList;
+                if (!terms) {
+                    // alert('check box error');
+                    $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+                } else {
+                    console.log(formdata);
+                    NavigationService.sendLogin(formdata, function (data) {
+                        if (data.data.value) {
+                            console.log(data.data.data);
+                            $.jStorage.set("photographer", data.data.data);
+                            $scope.template.profile = data.data.data;
+                            if ($scope.signupModal) {
+                                $scope.signupModal.close();
+                            }
+                            if ($scope.loginModal) {
+                                $scope.loginModal.close();
+                            }
+                            $state.go('photographer');
+                        }
+                    });
+                }
+            },
 
-        $scope.fpUser = [{ // Featured Photographer
-            profile: "frontend/img/pic1.png",
-            background: "frontend/img/fp_bg1.png",
-            title: "Zaroon Jaffrani | Pune",
-            speciality: "wild life"
-        }, {
-            profile: "frontend/img/pic2.png",
-            background: "frontend/img/fp_bg1.png",
-            title: "Asmara Khan | Banglore",
-            speciality: "wedding"
-        }, {
-            profile: "frontend/img/pic3.png",
-            background: "frontend/img/fp_bg1.png",
-            title: "Fatema | Delhi",
-            speciality: "wild life"
-        }, {
-            profile: "frontend/img/clickm/pic1.png",
-            background: "frontend/img/fp_bg1.png",
-            title: "Zaroon Jaffrani | Pune",
-            speciality: "wild life"
-        }, {
-            profile: "frontend/img/clickm/pic2.png",
-            background: "frontend/img/fp_bg1.png",
-            title: "Asmara Khan | Banglore",
-            speciality: "Wedding"
-        }, {
-            profile: "frontend/img/pic3.png",
-            background: "frontend/img/fp_bg1.png",
-            title: "Fatema | Delhi",
-            speciality: "wild life"
-        }];
+            $scope.login = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.checkLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.data);
+                        $.jStorage.set("photographer", data.data.data);
+                        $rootScope.showStep = 2;
+                        $scope.template.profile = data.data.data;
+                        $scope.signupModal.close();
+                        $state.go("photographer");
+                    }
+                });
+            }
+
+        //signup modal close
+
 
         $scope.testimonial = [{ // used for testimonials
             text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 0the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambledLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been",
@@ -235,7 +259,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     } else {
                         $scope.packageShow = '';
                     }
+
                     $scope.uploadImgData = $scope.photographerData.uploadedImages;
+                    if (!_.isEmpty($scope.uploadImgData)) {
+                        $scope.termS = false;
+                        $scope.termG = false;
+                    }
                     $scope.showSixPhotos = _.slice($scope.uploadImgData, 0, 6);
                     console.log("$scope.showSixPhotos", $scope.showSixPhotos);
                     console.log("$scope.uploadImgData", $scope.uploadImgData);
@@ -1028,7 +1057,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('UserProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
+    .controller('UserProfileCtrl', function ($scope, $rootScope, $state, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
         $scope.template = TemplateService.changecontent("user-profile"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("User Profile"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1133,6 +1162,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
                     if (data.value) {
                         console.log(data);
+                        $state.reload();
                     }
                 });
             } else {
@@ -1166,7 +1196,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 backdropClass: 'black-drop'
             });
         };
+
+        $scope.signUp = function (formdata, terms) {
+                // formdata.serviceRequest = $scope.serviceList;
+                if (!terms) {
+                    // alert('check box error');
+                    $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+                } else {
+                    console.log(formdata);
+                    NavigationService.sendLogin(formdata, function (data) {
+                        if (data.data.value) {
+                            console.log(data.data.data);
+                            $.jStorage.set("photographer", data.data.data);
+                            $scope.template.profile = data.data.data;
+                            if ($scope.signupModal) {
+                                $scope.signupModal.close();
+                            }
+                            if ($scope.loginModal) {
+                                $scope.loginModal.close();
+                            }
+                            $state.go('photographer');
+                        }
+                    });
+                }
+            },
+
+            $scope.login = function (formdata) {
+                // formdata.serviceRequest = $scope.serviceList;
+                console.log(formdata);
+                NavigationService.checkLogin(formdata, function (data) {
+                    if (data.data.value) {
+                        console.log(data.data.data);
+                        $.jStorage.set("photographer", data.data.data);
+                        $rootScope.showStep = 2;
+                        $scope.template.profile = data.data.data;
+                        $scope.signupModal.close();
+                        $state.go("photographer");
+                    }
+                });
+            }
+
         //signup modal close
+
         $scope.userHead = {
             profile: "frontend/img/pic/pic1.jpg",
             background: "frontend/img/clickm/5.jpg",
@@ -1307,7 +1378,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Wild Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        $scope.showlessCatImages=[];
+        $scope.showlessCatImages = [];
 
         //category image     
         formData = {};
@@ -1378,7 +1449,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //all categories end
 
         //loadmore for categories
-         $scope.LoadMore = function () {
+        $scope.LoadMore = function () {
             $scope.showlessCatImages = $scope.category;
         };
         //loadmore for categories end
@@ -1695,6 +1766,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $.jStorage.flush();
             $scope.template.profile = null;
             $state.go("home");
+
         }
         //     $scope.signUp = function() {
         //       console.log(modal);

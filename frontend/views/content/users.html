@@ -12,7 +12,8 @@
                 <img src="frontend/img/atm0.jpg" alt="..." class="img-full img-min-h">
                 <div class="user-icon">
                     <div class="border-half">
-                        <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img">
+                        <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
+                        <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">
                     </div>
                 </div>
                 <hr class="border-line2 text-center">
