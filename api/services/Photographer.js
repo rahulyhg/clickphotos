@@ -524,7 +524,9 @@ var model = {
 
     priceFilter: function (data, callback) {
         Photographer.find({
-           pricing:data.pricing
+           pricing: {
+                $in: data.pricing
+            }
         }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);

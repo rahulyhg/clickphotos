@@ -115,7 +115,7 @@
                                             <div class="display-inline city__add-icon" ng-click="addLocation();">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </div>
-                                            <div class="selected-option display-inline" ng-repeat="a in arrLocation">
+                                            <div class="selected-option display-inline" ng-repeat="a in arrLocation track by $index">
                                                 <span>{{a}}</span>
                                                 <div class="close-btn" ng-click="removeLocation($index)">x</div>
                                             </div>

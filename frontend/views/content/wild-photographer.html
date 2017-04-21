@@ -76,14 +76,16 @@
             <h2 class="border-up text-capitalize">Price <small>(per day)</small></h2>
             <div class="price">
                 <div class="checkbox checkboxing">
-                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="price"><span></span><i class="fa fa-inr"></i> 1000 - <i class="fa fa-inr"></i> 15000</label><br>
-                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price1" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="price1"><span></span><i class="fa fa-inr"></i> 15000 - <i class="fa fa-inr"></i> 250000</label><br>
-                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price2" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="price2"><span></span><i class="fa fa-inr"></i> 250000 - <i class="fa fa-inr"></i> 50000</label><br>
-                    <input value="" type="checkbox" ng-click="checkAllLocation()" id="price3" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="price3" class="text-lowercase"><span></span><i class="fa fa-inr"></i> 50000 and above</label><br>
+                    <input value="" type="checkbox" ng-click="priceFil(0)" id="₹1000-₹15000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="₹1000-₹15000"><span></span><i class="fa fa-inr"></i> 1000 - <i class="fa fa-inr"></i> 15000</label><br>
+                    <input value="" type="checkbox" ng-click="priceFil(1)" id="₹15000-₹25000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="₹15000-₹25000"><span></span><i class="fa fa-inr"></i> 15000 - <i class="fa fa-inr"></i> 25000</label><br>
+                    <input value="" type="checkbox" ng-click="priceFil(2)" id="₹25000-₹50000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="₹25000-₹50000"><span></span><i class="fa fa-inr"></i> 25000 - <i class="fa fa-inr"></i> 50000</label><br>
+                    <input value="" type="checkbox" ng-click="priceFil(3)" id="₹50000-₹100000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="₹50000-₹100000"><span></span><i class="fa fa-inr"></i> 50000 - <i class="fa fa-inr"></i> 100000</label><br>
+                    <input value="" type="checkbox" ng-click="priceFil(4)" id="₹100000 and above" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <label for="₹100000 and above" class="text-lowercase"><span></span><i class="fa fa-inr"></i>₹100000 and above</label><br>
                 </div>
             </div>
         </div>
