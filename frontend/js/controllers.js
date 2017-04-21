@@ -1517,6 +1517,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }, {
             "background": "frontend/img/cat4.jpg"
         }];
+
+        //price filter
         var formdata = {}
         $scope.priceRange = [];
         $scope.priceList = ["₹1000-₹15000", "₹15000-₹25000", "₹25000-₹50000", "₹50000-₹100000", "₹100000 and above"];
@@ -1562,6 +1564,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             }
         }
+        //price filter end
 
     })
 
