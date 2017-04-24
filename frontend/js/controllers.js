@@ -352,9 +352,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //sid code 
 
         $scope.addLocation = function () {
-            //console.log(document.getElementById("locationCity").value);
             var valText = document.getElementById("locationCity").value;
-            if (!_.isEmpty(valText) && !valText.match("^[a-zA-Z0-9]*$")) {
+            console.log(!/\d/.test(valText)); //returns true if contains numbers
+            if (!/\d/.test(valText)) {
                 valText = valText.split(",");
                 $scope.arrLocation.push(valText[0]);
                 document.getElementById("locationCity").value = null
@@ -638,22 +638,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.fees = [{
             priceFrom: '1000',
             priceTo: '15000',
-            value: '₹1000-₹15000'
+            name: 'Upto 10,000',
+            value: 'Upto 10,000'
         }, {
             priceFrom: '15000',
             priceTo: '25000',
-            value: '₹15000-₹25000'
+            name: 'Upto 20,000',
+            value: 'Upto 20,000'
         }, {
             priceFrom: '25000',
             priceTo: '50000',
-            value: '₹25000-₹50000'
+            name: 'Upto 50,000',
+            value: 'Upto 50,000'
         }, {
             priceFrom: '50000',
             priceTo: '100000',
-            value: '₹50000-₹100000'
+            name: 'Upto 1,00,000',
+            value: 'Upto 1,00,000'
         }, {
             priceFrom: '100000',
             priceTo: 'above',
+            name: '₹100000 and above',
             value: '₹100000 and above'
         }];
 
@@ -1380,7 +1385,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //category image     
         formData = {};
         formData._id = $stateParams.catid;
-
         NavigationService.apiCallWithData("Categories/findOneCategories", formData, function (data) {
             //console.log("catdata", data);
             if (data.value === true) {
@@ -1391,13 +1395,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //category image end
 
         //all photographers
+        $scope.loc = [];
+        $scope.cityFilter = [];
         formdata = {};
         formdata.speciality = $stateParams.catName;
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
             if (data.value === true) {
                 //console.log("getPhotographersByCategories", data);
                 $scope.photographerData = data.data;
-                //console.log("$scope.photographerData--", $scope.photographerData)
+                //console.log("$scope.photographerData ", $scope.photographerData);
+                _.forEach($scope.photographerData, function (spec) {
+                    _.forEach(spec.location, function (spec1) {
+                        //console.log("spec---", spec1);
+                        if (!~$scope.cityFilter.indexOf(spec1)) {
+                            $scope.cityFilter.push(spec1);
+                        }
+                        // console.log("$scope.cityFilter", $scope.cityFilter);
+                    })
+                })
             }
         });
         //all Photographers end
@@ -1435,8 +1450,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //feature photographer end
 
         //all categories
-        NavigationService.callApi("Categories/getAll", function (data) {
-            //console.log("catdata", data);
+        formData = {};
+        formData._id = $stateParams.catid;
+        NavigationService.apiCallWithData("Categories/getAll", formData, function (data) {
+            console.log("catdata", data);
             if (data.value === true) {
                 $scope.category = data.data;
                 $scope.showlessCatImages = _.slice($scope.category, 0, 4);
@@ -1451,25 +1468,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
         //loadmore for categories end
 
-        $scope.checkboxData = [{
-            label: 'mumbai',
-            value: true
-        }, {
-            label: 'banglor',
-            value: false
-        }, {
-            label: 'pune',
-            value: false
-        }, {
-            label: 'chennai',
-            value: false
-        }, {
-            label: 'karnataka',
-            value: false
-        }, {
-            label: 'barcelona',
-            value: false
-        }];
         $scope.checkall = false;
         $scope.toggleAll = function () {
             $scope.checkall = !$scope.checkall;
@@ -1518,33 +1516,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             "background": "frontend/img/cat4.jpg"
         }];
 
-        //price filter
+        // filter
         var formdata = {}
         $scope.priceRange = [];
+        $scope.cityFill = [];
         $scope.priceList = ["₹1000-₹15000", "₹15000-₹25000", "₹25000-₹50000", "₹50000-₹100000", "₹100000 and above"];
         $scope.priceFil = function (data) {
-            $scope.priceRange.push($scope.priceList[data]);
-            $scope.uploadImgData = [];
-            console.log("Doc", document.getElementById($scope.priceList[data]).checked);
-            if (document.getElementById($scope.priceList[data]).checked) {
+            var check;
+            if (/\d/.test(data)) {
+                $scope.priceRange.push($scope.priceList[data]);
+                check = $scope.priceList[data];
+
+            } else {
+                $scope.cityFill.push(data);
+                check = data;
+            }
+            console.log("Doc", document.getElementById(check).checked);
+            if (document.getElementById(check).checked) {
                 // $scope.price.push(priceRange);
                 formdata.pricing = $scope.priceRange;
-                NavigationService.apiCallWithData("Photographer/priceFilter", formdata, function (data) {
-                    console.log("priceFilter", data);
+                formdata.location = $scope.cityFill;
+                NavigationService.apiCallWithData("Photographer/clickFilter", formdata, function (data) {
+                    console.log("clickFilter", data);
                     if (data.value === true) {
                         $scope.photographerData = data.data;
                     }
                 });
             } else {
-                $scope.priceRange = _.remove($scope.priceRange, function (n) {
-                    return n != $scope.priceList[data];
-                });
+                if (/\d/.test(data)) {
+                    $scope.priceRange = _.remove($scope.priceRange, function (n) {
+                        return n != $scope.priceList[data];
+                    });
+                } else {
+                    $scope.cityFill = _.remove($scope.cityFill, function (n) {
+                        return n != data;
+                    });
+                }
                 console.log("$scope.priceRange", $scope.priceRange);
                 // $scope.price.push(priceRange);
-                if (!_.isEmpty($scope.priceRange)) {
+                if (!_.isEmpty($scope.priceRange) || !_.isEmpty($scope.cityFill)) {
                     formdata.pricing = $scope.priceRange;
-                    NavigationService.apiCallWithData("Photographer/priceFilter", formdata, function (data) {
-                        console.log("priceFilter", data);
+                    formdata.location = $scope.cityFill;
+                    NavigationService.apiCallWithData("Photographer/clickFilter", formdata, function (data) {
+                        console.log("clickFilter", data);
                         if (data.value === true) {
                             $scope.photographerData = data.data;
                         }
@@ -1564,7 +1578,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             }
         }
-        //price filter end
+        // filter end
 
     })
 

@@ -410,6 +410,7 @@ var model = {
         })
     },
 
+    //google api for get city unused
     getCities: function (data, callback) {
         var api = sails.api;
         request({
@@ -431,6 +432,7 @@ var model = {
             callback(err, bodyData);
         });
     },
+    //google api for get city unused end
 
     getFeatPhotographer: function (data, callback) {
         this.find({
@@ -522,18 +524,55 @@ var model = {
         })
     },
 
-    priceFilter: function (data, callback) {
-        Photographer.find({
-           pricing: {
-                $in: data.pricing
+    clickFilter: function (data, callback) {
+        console.log("Datataaaa",data)
+        if (!_.isEmpty(data.pricing)) {
+            console.log("inside pricing")
+            var matchArr = {
+                pricing: {
+                    $in: data.pricing
+                }
             }
-        }).deepPopulate("speciality").exec(function (err, found) {
+            if (!_.isEmpty(data.location)) {
+                console.log("inside Lcoaction1")
+                var matchArr = {
+                    pricing: {
+                        $in: data.pricing
+                    },
+                    location: {
+                        $in: data.location
+                    }
+                }
+            }
+        }
+        if (!_.isEmpty(data.location)) {
+            console.log("inside location2")
+
+            var matchArr = {
+                location: {
+                    $in: data.location
+                }
+            }
+            if (!_.isEmpty(data.pricing)) {
+                console.log("inside locationlocation ")
+
+                var matchArr = {
+                    pricing: {
+                        $in: data.pricing
+                    },
+                    location: {
+                        $in: data.location
+                    }
+                }
+            }
+        }
+        Photographer.find(matchArr).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
 
                 if (found) {
-                    console.log("Found", found);
+                    // console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {
@@ -542,6 +581,6 @@ var model = {
                 }
             }
         })
-    }
+    }    
 };
 module.exports = _.assign(module.exports, exports, model);

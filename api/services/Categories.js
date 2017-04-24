@@ -126,7 +126,7 @@ var model = {
     },
 
     getAll: function (data, callback) {
-        Categories.find({}).exec(function (err, found) {
+        Categories.find({_id: { $ne: data._id }}).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {

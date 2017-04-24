@@ -65,11 +65,11 @@
             <h2 class="border-up">City</h2>
             <div class="location">
                 <div class="checkbox checkboxing">
-                    <input value="" type="checkbox" id="d" ng-model="checkall" ng-click="toggleAll()">
-                    <label for="d"><span></span> all</label>
-                    <div ng-repeat="dataPoint in checkboxData">
-                        <input value="" type="checkbox" id="{{dataPoint.label}}" ng-model="dataPoint.label">
-                        <label for="{{dataPoint.label}}"><span></span> {{dataPoint.label}}</label>
+                    <!--<input type="checkbox" id="All" ng-click="cityFil('All')">
+                    <label for="All"><span></span> all</label>-->
+                    <div ng-repeat="dataPoint in cityFilter track by $index">
+                        <input type="checkbox" id="{{dataPoint}}" ng-click="priceFil(dataPoint)" >
+                        <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
                     </div>
                 </div>
             </div>

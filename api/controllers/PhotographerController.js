@@ -196,9 +196,9 @@ var controller = {
         }
     },
 
-    priceFilter: function (req, res) {
+    clickFilter: function (req, res) {
         if (req.body) {
-            Photographer.priceFilter(req.body, res.callback);
+            Photographer.clickFilter(req.body, res.callback);
         } else {
             res.json({
                 value: false,
@@ -208,7 +208,6 @@ var controller = {
             })
         }
     }
-
 
 };
 module.exports = _.assign(module.exports, controller);

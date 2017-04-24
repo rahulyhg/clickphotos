@@ -163,7 +163,12 @@
                                             <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
                                             <div class="display-inline wd70">
                                                 <!--<input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">-->
-                                                <div class="custom-check" uib-dropdown auto-close="outsideClick">
+                                                <select name="txtCountry" ng-model="photographerData.pricing" required>
+                                                 <option ng-selected="true" value="">Give an estimate of the fee you charge</option>
+                                                 <option value="{{cat.value}}" ng-repeat="cat in fees">{{cat.name}}</option>
+                                                 <!--<option value="2">Scenery</option>-->
+                                                 </select>
+                                                <!--<div class="custom-check" uib-dropdown auto-close="outsideClick">
                                                     <button class="btn" id="price-dropdown" uib-dropdown-toggle type="button">Give an estimate of the fee you charge
                                                       <span class="caret"></span>
                                                              </button>
@@ -177,7 +182,7 @@
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                         <div class="sub-sec text-center">
@@ -272,7 +277,8 @@
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">SILVER PACKAGE</span>
                                                         <span class="display-block package-price">
-                                                      <span class="rupee">`</span>2300 plus taxes</span>
+                                                      <span class="rupee">`</span>2300
+                                                        plus taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -295,7 +301,8 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price"><span class="rupee">`</span>3400 plus taxes</span>
+                                                        <span class="display-block package-price"><span class="rupee">`</span>3400
+                                                        plus taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
