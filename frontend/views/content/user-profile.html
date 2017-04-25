@@ -169,19 +169,40 @@
                 <div class="main-cont whit-back">
                     <div class="about-head text-capitalize">REVIEWS</div>
                     <div class="abt-form">
-                        <div class="input-group pad25">
+                        <div class="input-group pad25" ng-if="template.profile._id!=currentProfile">
                             <input type="text" class="pub-r form-control" placeholder="Write a review for {{userData.name}}" aria-describedby="basic-addon2"
-                                ng-model="formreview.review">
+                                ng-model="formreview.comment">
                             <span class="input-group-addon pub-btn" id="basic-addon2" ng-click="addReviews(formreview)">Publish review</span>
                         </div>
                         <div class="user-section" ng-repeat="data in userData.reviewList">
                             <div class="profile-img"><img ng-src="{{data.user.profilePic | serverimage}}" alt=""></div>
                             <div class="profile-intro">
                                 <p class="intro">{{data.user.name}}</p>
-                                <p>{{data.date | date}}</p>
+                                <p>{{data.review[0].date | date}}</p>
                             </div>
-                            <p class="inline-block">{{data.review}}</p>
-                            <!--<textarea name="name" class="input-border" placeholder="Write a comment..." ng-model="formreview.reviewComment"></textarea>-->
+                            <p class="inline-block">{{data.review[0].comment}}</p>
+                            <div class="photographer-cmnt" ng-repeat="data1 in data.review" ng-if="$index>0">
+                                <div class="inline-block photographer-img">
+                                    <img ng-if="data1.selfUser" ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img">
+                                    <img ng-if="!data1.selfUser" ng-src="{{data.user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img">
+
+                                </div>
+                                <div class="inline-block photographer-dsc">
+                                    <h4 ng-if="data1.selfUser">{{userData.name}}</h4>
+                                    <h4 ng-if="!data1.selfUser">{{data.user.name}}</h4>
+                                    <p ng-if="data1.selfUser">{{data1.comment}}</p>
+                                    <p ng-if="!data1.selfUser">{{data1.comment}}</p>
+                                    <span>15 hr ago</span>
+                                </div>
+                            </div>
+                            <div class="guest-comment" ng-if="template.profile._id==data.user._id || template.profile._id== currentProfile">
+                                <div class="inline-block" style="vertical-align: middle;">
+                                    <textarea name="name" cols="99" class="" placeholder="Write a comment..." ng-model="formcomment.comment"></textarea>
+                                </div>
+                                <div class="inline-block" style="vertical-align: middle;">
+                                    <button class="btn orange-btn" ng-click="giveComment(formcomment,$index)">Submit</button>
+                                </div>
+                            </div>
                         </div>
                         <!--<div class="input-group pad25">
                             <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">

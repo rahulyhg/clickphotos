@@ -2593,6 +2593,52 @@
         padding: 0 0 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #cecece;
+        .photographer-cmnt {
+            @include padding(5px 15px 5px 20px);
+            @include margin(null null 15px 85px);
+            border-left: 1px solid #ccc;
+            .photographer-img {
+                max-height: 65px;
+                img {
+                    opacity: 1;
+                }
+                .profile-f-img {
+                    @include size(65px,
+                    auto);
+                    @include transform(rotate(0deg));
+                    border: 1px solid transparent;
+                }
+            }
+            .photographer-dsc {
+                line-height: 1;
+                vertical-align: top;
+                @include size(75%,
+                auto);
+                @include padding(null null null 10px);
+                h4 {
+                    color: #f15a29;
+                    @include margin(null null 0 null);
+                    font-size: 17px;
+                }
+                p {
+                    font-size: 12px;
+                    @include margin(null null 5px null);
+                }
+                span {
+                    color: #ccc;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .guest-comment{
+            button{
+                @include size(70px, auto);
+                    border-radius: 0;
+                font-size: 12px;
+                @include padding(6px 17px);
+            }
+        }
     }
 
     .input-border {

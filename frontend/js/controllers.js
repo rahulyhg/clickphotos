@@ -1072,7 +1072,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.activeTab = val;
             $scope.showSocial = false; // here showSocial will be display: none;
         };
-
+        $scope.currentProfile = $stateParams.userid;
         //get single user
         formData = {};
         formData._id = $stateParams.userid;
@@ -1155,10 +1155,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //reviews
         $scope.addReviews = function (data) {
             formData = {};
+            formData.review = [];
             if (!_.isEmpty($.jStorage.get("photographer"))) {
                 formData.user = $.jStorage.get("photographer")._id;
-                formData.review = data.review;
-                formData.reviewComment = data.reviewComment;
+                data.selfUser = false;
+                formData.review.push(data);
                 $scope.userData.reviewList.push(formData);
                 NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
                     if (data.value) {
@@ -1172,6 +1173,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
         //reviews end
+        if ($.jStorage.get('photographer') != null) {
+            $scope.template.profile = $.jStorage.get("photographer");
+        }
+
+        //  comment part on review 
+        $scope.giveComment = function (data,indx) {
+            formData = {};
+            formData.review = $scope.userData.reviewList[indx].review;
+            if (!_.isEqual($.jStorage.get("photographer")._id, $scope.userData.reviewList[0].user._id)) {
+                data.selfUser = true;
+            } else {
+                data.selfUser = false;
+            }
+            formData.review.push(data);
+            $scope.userData.reviewList[indx].review=formData.review;
+            NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
+                if (data.value) {
+                    console.log(data);
+                    $state.reload();
+                }
+            });
+        }
+        // comment part on review end
 
         //signup modal 
         $scope.uploadSignup = function () {

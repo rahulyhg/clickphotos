@@ -18,15 +18,14 @@ var schema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Photographer",
         },
-        date: {
-            type: String,
-            default: Date.now()
-        },
-        review: {
-            type: String,
-            default: ""
-        },
-        reviewComment: [String]
+        review: [{
+            comment: String,
+            date: {
+                type: String,
+                default: Date.now()
+            },
+            selfUser: Boolean
+        }]
     }],
     dateOfRagister: {
         type: Date
@@ -525,7 +524,7 @@ var model = {
     },
 
     clickFilter: function (data, callback) {
-        console.log("Datataaaa",data)
+        console.log("Datataaaa", data)
         if (!_.isEmpty(data.pricing)) {
             console.log("inside pricing")
             var matchArr = {
@@ -581,6 +580,6 @@ var model = {
                 }
             }
         })
-    }    
+    }
 };
 module.exports = _.assign(module.exports, exports, model);
