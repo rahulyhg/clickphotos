@@ -3698,6 +3698,17 @@
             //list-style-type: disc;
             display: list-item!important;
         }
+        .custom-check [type="checkbox"]:checked + label:before, .custom-check [type="checkbox"]:not(:checked) + label:before{
+            top: 2px;
+        }
+        .custom-check{
+            margin-left: -25px;
+            label{
+             color: $orangeColor;
+             font-weight: normal;
+            }
+            
+        }
     }
 
     .contactus {
