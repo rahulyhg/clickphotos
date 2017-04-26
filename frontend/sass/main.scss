@@ -3728,9 +3728,9 @@
         }
         .contactus__address {
             @include position(absolute,
-            45% 0% 16% 67%);
+            40% 0% 16% 67%);
             background-color: #ff6c00;
-            @include padding(15px 45px);
+            @include padding(15px 35px);
             address {
                 font-size: 22px;
                 font-family: Helvetica, sans-serif;

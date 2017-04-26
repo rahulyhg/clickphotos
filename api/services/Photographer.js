@@ -16,7 +16,7 @@ var schema = new Schema({
     reviewList: [{
         user: {
             type: Schema.Types.ObjectId,
-            ref: "Photographer",
+            ref: "Photographer"
         },
         review: [{
             comment: String,
@@ -61,7 +61,17 @@ var schema = new Schema({
     },
     isactive: {
         type: Boolean
-    }
+    },
+    enquiry:[{
+        enquiryUser: {
+            type: Schema.Types.ObjectId,
+            ref: "Photographer"
+        },
+        enquirerName:String,
+        enquirerEmail:String,
+        enquirerMobileNo:String,
+        enquirerMsg:String
+    }]
 });
 
 schema.plugin(deepPopulate, {

@@ -295,7 +295,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.formData = {}
                     NavigationService.callApi("Categories/getAll", function (data) {
                         if (data.value === true) {
-                            console.log(data)
+                            // console.log(data)
                             $scope.specialityData = data.data;
                             _.forEach($scope.specialityData, function (value1) {
                                 _.forEach($scope.photographerData.speciality, function (value2) {
@@ -1031,10 +1031,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // console.log("cat", value);
                         if (value.bigimage) {
                             $scope.bigImageCategory.push(value);
-                            // console.log("$scope.bigImageCategory.", $scope.bigImageCategory);
+                            //console.log("$scope.bigImageCategory.", $scope.bigImageCategory);
                         } else {
                             $scope.smallImageCategory.push(value);
-                            //  console.log(" $scope.smallImageCategory", $scope.smallImageCategory);
+                            //console.log(" $scope.smallImageCategory", $scope.smallImageCategory);
                         }
                     }
                     //     //$scope.minCategoryL3Price = _.minBy(data.data, 'price')
@@ -1073,6 +1073,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.showSocial = false; // here showSocial will be display: none;
         };
         $scope.currentProfile = $stateParams.userid;
+
         //get single user
         formData = {};
         formData._id = $stateParams.userid;
@@ -1081,7 +1082,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 // console.log(data)
                 $scope.userData = data.data;
-                //console.log(" $scope.userData", $scope.userData);
+                //console.log(" $scope.userData",$scope.userData.reviewList);
+                $scope.showLessReviews = _.slice($scope.userData.reviewList, 0, 3);
+                //console.log(" $scope.showLessReviews", $scope.showLessReviews);
                 $scope.uploadImgData = $scope.userData.uploadedImages;
                 // console.log(" $scope.uploadImgData", $scope.uploadImgData);
                 $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
@@ -1118,6 +1121,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
         //get single user end
+
+        //load more reviews
+        $scope.LoadMoreReview = function () {
+            $scope.showLessReviews = $scope.userData.reviewList;
+            console.log("LoadMoreReview", $scope.showLessReviews);
+        };
+        //load more reviews end
 
         //filter
         $scope.fliterCheck = function (data) {
@@ -1178,7 +1188,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         //  comment part on review 
-        $scope.giveComment = function (data,indx) {
+        $scope.giveComment = function (data, indx) {
             formData = {};
             formData.review = $scope.userData.reviewList[indx].review;
             if (!_.isEqual($.jStorage.get("photographer")._id, $scope.userData.reviewList[0].user._id)) {
@@ -1187,7 +1197,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 data.selfUser = false;
             }
             formData.review.push(data);
-            $scope.userData.reviewList[indx].review=formData.review;
+            $scope.userData.reviewList[indx].review = formData.review;
             NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
                 if (data.value) {
                     console.log(data);
@@ -1263,120 +1273,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //signup modal close
 
-        $scope.userHead = {
-            profile: "frontend/img/pic/pic1.jpg",
-            background: "frontend/img/clickm/5.jpg",
-            name: "zohn",
-            surName: "carter",
-            location: ['mumbai | ', 'pune | ', 'delhi'],
-            speciality: ['wedding', 'wildlife', 'travel']
-        };
-        $scope.reviewList = [{
-            "profile": "frontend/img/pic/pic1.jpg",
-            "name": "sagar",
-            "surName": "roy",
-            "days": "1",
-            "content": "Clickmania is an online mobile photo-sharing site that allows its users to share pictures and videos either publicly or privately on the app, as well as through a variety of other social networking platforms, such as Facebook,Twitter, Tumblr, and Flickr. "
-        }, {
-            "profile": "frontend/img/pic/pic3.jpg",
-            "name": "zaroon",
-            "surName": "jaffrani",
-            "days": "3",
-            "content": "Clickmania is an online mobile photo-sharing site that allows its users to share pictures and videos either publicly or privately on the app, as well as through a variety of other social networking platforms, such as Facebook, Twitter, Tumblr, and Flickr."
-        }, {
-            "profile": "frontend/img/pic/pic2.jpg",
-            "name": "rayeesh",
-            "surName": "khan",
-            "days": "4",
-            "content": "Would you like to insert and display separate images for intro text and full article in your blog? "
-        }];
-
-        $scope.fpUser = [{
-            "profile": "frontend/img/pic/pic1.jpg",
-            "background": "frontend/img/fp_bg1.png",
-            "name": "prachi",
-            "surName": "ronsk",
-            "place": "new mumbai",
-            "speciality": "wild life"
-        }, {
-            "profile": "frontend/img/pic/pic2.jpg",
-            "background": "frontend/img/fp_bg1.png",
-            "name": "prachi",
-            "surName": "ronsk",
-            "place": "new mumbai",
-            "speciality": "wedding"
-        }, {
-            "profile": "frontend/img/pic/pic3.jpg",
-            "background": "frontend/img/fp_bg1.png",
-            "name": "prachi",
-            "surName": "ronsk",
-            "place": "new mumbai",
-            "speciality": "wild life"
-        }, {
-            "profile": "frontend/img/pic/pic4.jpg",
-            "background": "frontend/img/fp_bg1.png",
-            "name": "prachi",
-            "surName": "ronsk",
-            "place": "new mumbai",
-            "speciality": "wild life"
-        }, {
-            "profile": "frontend/img/pic/pic5.jpg",
-            "background": "frontend/img/fp_bg1.png",
-            "name": "prachi",
-            "surName": "ronsk",
-            "place": "new mumbai",
-            "speciality": "Wedding"
-        }, {
-            "profile": "frontend/img/pic/pic6.jpg",
-            "background": "frontend/img/fp_bg1.png",
-            "name": "prachi",
-            "surName": "ronsk",
-            "place": "new mumbai",
-            "speciality": "wild life"
-        }];
-
-        $scope.wildlife = ['frontend/img/photographer/wildlife1.jpg',
-            'frontend/img/photographer/wildlife2.jpg',
-            'frontend/img/photographer/wildlife3.jpg',
-            'frontend/img/photographer/wildlife1.jpg',
-            'frontend/img/photographer/wildlife2.jpg',
-            'frontend/img/photographer/wildlife3.jpg',
-            'frontend/img/photographer/wildlife1.jpg',
-            'frontend/img/photographer/wildlife2.jpg',
-            'frontend/img/photographer/wildlife3.jpg',
-            'frontend/img/photographer/wildlife1.jpg',
-            'frontend/img/photographer/wildlife2.jpg',
-            'frontend/img/photographer/wildlife3.jpg'
-        ];
-
-        $scope.wedding = ['frontend/img/photographer/wedding1.jpg',
-            'frontend/img/photographer/wedding2.jpg',
-            'frontend/img/photographer/wedding3.jpg',
-            'frontend/img/photographer/wedding1.jpg',
-            'frontend/img/photographer/wedding2.jpg',
-            'frontend/img/photographer/wedding3.jpg',
-            'frontend/img/photographer/wedding1.jpg',
-            'frontend/img/photographer/wedding2.jpg',
-            'frontend/img/photographer/wedding3.jpg'
-        ];
-
-        $scope.travel = ['frontend/img/photographer/travel.jpg',
-            'frontend/img/photographer/travel.jpg',
-            'frontend/img/photographer/travel.jpg',
-            'frontend/img/photographer/travel.jpg',
-            'frontend/img/photographer/travel.jpg',
-            'frontend/img/photographer/travel.jpg'
-        ];
-
         // this function is used to show Send Enquiry navigation
         $scope.sendEnquiry = function ($event) {
             $scope.slide = !$scope.slide;
         };
 
         // this function is used for data submmiting enquiry
-        $scope.enquiryData = {};
+        $scope.formEnquiry = {};
         $scope.dataSubmit = function (data) {
-            //console.log("dataSubmit", data);
+            console.log("enquiryInfo",$scope.enquiryInfo);
+            if (!_.isEmpty(data)) {
+                console.log("dataaaa", data);
+                console.log("enquiryInfo",$scope.enquiryInfo);
+                $scope.enquiryData = {};
+                $scope.enquiryData.enquiryUser = $stateParams.userid;
+                $scope.enquiryData.enquirerName = data.enquirerName;
+                $scope.enquiryData.enquirerEmail = data.enquirerEmail;
+                $scope.enquiryData.enquirerMobileNo = data.enquirerMobileNo;
+                $scope.enquiryData.enquirerMsg = data.enquirerMsg;
+                $scope.userData.enquiry.push($scope.enquiryData);
+                console.log("enquiryData", $scope.enquiryData);
+                NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
+                    if (data.value == true) {
+                        //console.log(data);
+                        $scope.openModal();
+                        $scope.enquiryInfo=null;
+                    }
+                });
+            }
         };
         //data submit enquiry
 
@@ -1477,7 +1401,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formData = {};
         formData._id = $stateParams.catid;
         NavigationService.apiCallWithData("Categories/getAll", formData, function (data) {
-            console.log("catdata", data);
+            // console.log("catdata", data);
             if (data.value === true) {
                 $scope.category = data.data;
                 $scope.showlessCatImages = _.slice($scope.category, 0, 4);

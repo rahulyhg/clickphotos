@@ -174,7 +174,7 @@
                                 ng-model="formreview.comment">
                             <span class="input-group-addon pub-btn" id="basic-addon2" ng-click="addReviews(formreview)">Publish review</span>
                         </div>
-                        <div class="user-section" ng-repeat="data in userData.reviewList">
+                        <div class="user-section" ng-repeat="data in showLessReviews">
                             <div class="profile-img"><img ng-src="{{data.user.profilePic | serverimage}}" alt=""></div>
                             <div class="profile-intro">
                                 <p class="intro">{{data.user.name}}</p>
@@ -203,6 +203,9 @@
                                     <button class="btn orange-btn" ng-click="giveComment(formcomment,$index)">Submit</button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="text-center ">
+                            <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreReview()">View All</button>
                         </div>
                         <!--<div class="input-group pad25">
                             <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">
@@ -442,18 +445,18 @@
                 </div>
 
                 <div class="col-md-12 padd35">
-                    <form name="formEnquiry" ng-submit="dataSubmit(enquiryInfo)">
+                    <form name="formEnquiry" >
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="userName" placeholder="Full Name" name="userName" ng-model="enquiryInfo.name"
+                                    <input type="text" class="form-control" id="userName" placeholder="Full Name" name="userName" ng-model="enquiryInfo.enquirerName"
                                         required>
                                     <div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required ng-model="enquiryInfo.email">
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required ng-model="enquiryInfo.enquirerEmail">
                                 </div>
                                 <!--<p>Please Enter Your Email</p>-->
                             </div>
@@ -461,11 +464,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="mobNo" placeholder="Mobile No" name="mobileNumber" required ng-model="enquiryInfo.mobileNumber">
+                                    <input type="number" class="form-control" id="mobNo" placeholder="Mobile No" name="mobileNumber" required ng-model="enquiryInfo.enquirerMobileNo">
                                 </div>
                                 <!--<p>Please Enter Your Mobile No</p>-->
                             </div>
-                            <div class="col-md-6">
+                            <!--<div class="col-md-6">
                                 <div class="form-group">
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown">Needed on <i class="fa fa-caret-down" aria-hidden="true"></i></button>
@@ -476,19 +479,18 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" cols="30" rows="5" name="enquiryData" id="comment" ng-model="enquiryInfo.enquiryData" required></textarea>
+                                    <textarea class="form-control" cols="30" rows="5" name="enquiryData" id="comment" ng-model="enquiryInfo.enquirerMsg" required></textarea>
                                 </div>
                                 <!--<p>Please Enter Some Comments</p>-->
                             </div>
                         </div>
-
                         <div class="row">
-                            <p class="text-center"><a class="btn orange-btn" type="submit" ng-click="openModal('sm');">Send</a></p>
+                            <p class="text-center"><a class="btn orange-btn" type="submit" ng-click="dataSubmit(enquiryInfo)">Send</a></p>
                         </div>
                     </form>
                 </div>
