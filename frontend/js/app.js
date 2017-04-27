@@ -94,6 +94,31 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             url: "/photo-contest",
             templateUrl: "frontend/views/template.html",
             controller: 'photoContestCtrl'
+        })
+        .state('thanks', {
+            url: "/thanks",
+            templateUrl: "frontend/views/template.html",
+            controller: 'thanksCtrl'
+        })
+        .state('thanks-silver', {
+            url: "/thanks-silver",
+            templateUrl: "frontend/views/template.html",
+            controller: 'thanksSilverCtrl'
+        })
+        .state('error', {
+            url: "/error",
+            templateUrl: "frontend/views/template.html",
+            controller: 'errorCtrl'
+        })
+        .state('becomefp', {
+            url: "/becomefp",
+            templateUrl: "frontend/views/template.html",
+            controller: 'becomeFpCtrl'
+        })
+        .state('thanks-gold', {
+            url: "/thanks-gold",
+            templateUrl: "frontend/views/template.html",
+            controller: 'thanksGoldCtrl'
         });
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);

@@ -2059,7 +2059,10 @@
 
     .circular-checkbox {
         background-color: #5d5d5d; // width: 75%;
-        padding: 0 160px 0 10px;
+        position: relative;
+        padding: 0 0 0 10px;
+        @include size(70%,
+        auto);
         vertical-align: text-top;
         p {
             letter-spacing: 1px;
@@ -2121,6 +2124,24 @@
         [type="checkbox"]:checked+label:after {
             opacity: 1;
             transform: scale(1);
+        }
+        .radio-cat {
+            vertical-align: top;
+            @include size(80%,
+            auto);
+        }
+        .collapse {
+            display: inline-block;
+            min-height: 45px!important;
+            overflow: hidden;
+        }
+        .absolute-plus {
+            display: inline-block;
+            cursor: pointer;
+            @include size(21px,
+            21px);
+            @include position(absolute,
+            25% 2% null null);
         }
     }
 
@@ -2630,11 +2651,11 @@
                 }
             }
         }
-
-        .guest-comment{
-            button{
-                @include size(70px, auto);
-                    border-radius: 0;
+        .guest-comment {
+            button {
+                @include size(70px,
+                auto);
+                border-radius: 0;
                 font-size: 12px;
                 @include padding(6px 17px);
             }
@@ -2999,6 +3020,19 @@
             .radio-inline {
                 font-size: 30px;
             }
+        }
+        .collapse {
+            display: block;
+            min-height: 45px!important;
+            overflow: hidden;
+        }
+        .absolute-plus {
+            display: inline-block;
+            cursor: pointer;
+            @include size(21px,
+            21px);
+            @include position(absolute,
+            37% 2% null null);
         }
     } //     // Radiobtn
     // input[type="radio"] {
@@ -3698,16 +3732,16 @@
             //list-style-type: disc;
             display: list-item!important;
         }
-        .custom-check [type="checkbox"]:checked + label:before, .custom-check [type="checkbox"]:not(:checked) + label:before{
+        .custom-check [type="checkbox"]:checked+label:before,
+        .custom-check [type="checkbox"]:not(:checked)+label:before {
             top: 2px;
         }
-        .custom-check{
+        .custom-check {
             margin-left: -25px;
-            label{
-             color: $orangeColor;
-             font-weight: normal;
+            label {
+                color: $orangeColor;
+                font-weight: normal;
             }
-            
         }
     }
 
@@ -3947,6 +3981,92 @@
             @include padding(35px 0 45px);
         }
     } //End of Contest @page
+    
+    //Start of Thank You for gold, silver & sorry pages
+    .thanks,
+    .thanks-silver,
+    .thanks-gold,
+    .error,
+    .becomefp {
+        @include padding(50px null);
+    }
+
+    .thanks-title,
+    .thanks-title,
+    .thanks-title {
+        //line-height: 5;
+        .ht30 {
+            display: inline-block;
+            height: 130px;
+            @include margin(null null 65px null);
+        }
+        .imgwt {
+            @include position(absolute,
+            null null null 9%);
+            @include transform(rotate(55deg));
+            @include size(110px,
+            auto);
+            z-index: -2;
+        }
+        h1 {
+            line-height: 117px;
+            font-size: 120px;
+            text-indent: 35px;
+            @include margin(45px null null null);
+        }
+        p {
+            font-size: 18px;
+            font-family: Helvetica, sans-serif;
+        }
+    }
+
+    .error-title {
+        @extend .thanks-title;
+        h1 {
+            text-indent: 55px;
+        }
+    }
+
+    .becomefp-title {
+        @extend .thanks-title;
+        h1 {
+            line-height: 0.8;
+            font-size: 60px;
+            text-indent: 80px;
+            span {
+                color: $orangeColor;
+            }
+            @include margin(54px null null null);
+        }
+        span.name,
+        b {
+            color: $orangeColor;
+        }
+    }
+
+    .becomefp button {
+        margin-left: 155px;
+    }
+
+    .thanks .cam-img,
+    .thanks-gold .cam-img,
+    .thanks-silver .cam-img,
+    .error .cam-img,
+    .becomefp .cam-img {
+        @include padding(70px);
+    }
+
+    .thanks,
+    .thanks-gold,
+    .thanks-silver,
+    .error,
+    .becomefp {
+        button {
+            @include padding(10px 30px);
+            border-radius: 0px;
+        }
+    } //End of Thank You for gold, silver & sorry pages
+    //Start of competition page
     //@import "fancybox-override";
     // @import "rishabh";
     // @import "feature-photo";

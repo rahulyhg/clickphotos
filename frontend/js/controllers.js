@@ -331,32 +331,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
 
-        $scope.formData1 = {}
-        NavigationService.callApi("Locations/getAll", function (data) {
-            if (data.value === true) {
-                //console.log("location data", data);
-                $scope.LocationData = data.data;
-                _.forEach($scope.LocationData, function (value1) {
-                    _.forEach($scope.photographerData.location, function (value2) {
-                        if (_.isEqual(value1.name, value2.name)) {
-                            $scope.arrLocation.push(value1._id)
-                            value1.value = true;
-                            $scope.formData1[value1.name] = true;
-                        }
-                    });
-                });
-                //console.log("$scope.arrLocation--", $scope.arrLocation)
-            }
-        });
+        // $scope.formData1 = {}
+        // NavigationService.callApi("Locations/getAll", function (data) {
+        //     if (data.value === true) {
+        //         //console.log("location data", data);
+        //         $scope.LocationData = data.data;
+        //         _.forEach($scope.LocationData, function (value1) {
+        //             _.forEach($scope.photographerData.location, function (value2) {
+        //                 if (_.isEqual(value1.name, value2.name)) {
+        //                     $scope.arrLocation.push(value1._id)
+        //                     value1.value = true;
+        //                     $scope.formData1[value1.name] = true;
+        //                 }
+        //             });
+        //         });
+        //         //console.log("$scope.arrLocation--", $scope.arrLocation)
+        //     }
+        // });
 
         //sid code 
 
         $scope.addLocation = function () {
             var valText = document.getElementById("locationCity").value;
+            var valArr = [];
             console.log(!/\d/.test(valText)); //returns true if contains numbers
             if (!/\d/.test(valText)) {
-                valText = valText.split(",");
-                $scope.arrLocation.push(valText[0]);
+                valArr = valText.split(",");
+                if (!/\d/.test(valArr[0])) {
+                    $scope.arrLocation.push(valArr[0]);
+                }
                 document.getElementById("locationCity").value = null
             }
         }
@@ -469,11 +472,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.goldSub = false;
         }
         $scope.silverShow = function () {
-            console.log($scope.termS);
+            //console.log($scope.termS);
             $scope.silverSub = true;
             $scope.termS = false;
             $scope.silverPackage = false;
-            console.log($scope.termS);
+            //console.log($scope.termS);
 
         }
         $scope.goldShow = function () {
@@ -504,12 +507,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.package = 'Silver';
+            formdata.packageBroughtDate = new Date();
+            // console.log("formdata", formdata);
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 //console.log("silver memeber", data);
                 $scope.packageShow = data.data.package;
                 $.jStorage.set("photographer", data.data);
                 // console.log("package", data.data.package);
-                $state.reload();
+                $state.go("thanks-silver");
             });
         }
         $scope.goldMember = function () {
@@ -525,11 +530,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.package = 'Gold';
+            formdata.packageBroughtDate = new Date();
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 //console.log("dataaaaaaaaaa", data);
                 $scope.packageShow = data.data.package;
                 $.jStorage.set("photographer", data.data);
-                $state.reload();
+                $state.go("thanks-gold");
             });
         }
         $scope.dataArr = [];
@@ -587,7 +593,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (data.value) {
                     //console.log("dataaaaaaaaaa", data);
                     $scope.imgModal.close();
-                    console.log("modal close");
+                    //console.log("modal close");
                     NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                         if (data.value === true) {
                             $scope.photographerData = data.data;
@@ -720,6 +726,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($.jStorage.get("photographer")) {
             if ($.jStorage.get("photographer").status == true) {
                 $scope.fetrPhoto = true;
+                $state.go("becomefp");
             } else {
                 $scope.fetrPhoto = false;
                 $scope.steps = true;
@@ -1073,6 +1080,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.showSocial = false; // here showSocial will be display: none;
         };
         $scope.currentProfile = $stateParams.userid;
+        $scope.iconChange = function(){
+         $('.collapse').on('show.bs.collapse', function(){
+           $('div.absolute-plus > img').attr('src', 'frontend/img/minus.png'); 
+         });
+
+         $('.collapse').on('hide.bs.collapse', function(){
+           $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png'); 
+         });
+        };
 
         //get single user
         formData = {};
@@ -1190,11 +1206,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //  comment part on review 
         $scope.giveComment = function (data, indx) {
             formData = {};
+            data.selfUser = false;
             formData.review = $scope.userData.reviewList[indx].review;
-            if (!_.isEqual($.jStorage.get("photographer")._id, $scope.userData.reviewList[0].user._id)) {
-                data.selfUser = true;
-            } else {
+            // console.log("$.jStorage.get(photographer)._id",$.jStorage.get("photographer")._id);
+            // console.log("$scope.userData.reviewList[0].user._id",$scope.userData.reviewList[indx]);
+            if (_.isEqual($.jStorage.get("photographer")._id, $scope.userData.reviewList[indx].user._id)) {
                 data.selfUser = false;
+            } else {
+                data.selfUser = true;
             }
             formData.review.push(data);
             $scope.userData.reviewList[indx].review = formData.review;
@@ -1281,10 +1300,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // this function is used for data submmiting enquiry
         $scope.formEnquiry = {};
         $scope.dataSubmit = function (data) {
-            console.log("enquiryInfo",$scope.enquiryInfo);
-            if (!_.isEmpty(data)) {
-                console.log("dataaaa", data);
-                console.log("enquiryInfo",$scope.enquiryInfo);
+            //console.log("dataaaa", data);
+            if (!_.isEmpty(data) || data != undefined) {
                 $scope.enquiryData = {};
                 $scope.enquiryData.enquiryUser = $stateParams.userid;
                 $scope.enquiryData.enquirerName = data.enquirerName;
@@ -1292,14 +1309,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.enquiryData.enquirerMobileNo = data.enquirerMobileNo;
                 $scope.enquiryData.enquirerMsg = data.enquirerMsg;
                 $scope.userData.enquiry.push($scope.enquiryData);
-                console.log("enquiryData", $scope.enquiryData);
-                NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
-                    if (data.value == true) {
-                        //console.log(data);
-                        $scope.openModal();
-                        $scope.enquiryInfo=null;
-                    }
-                });
+                //console.log("enquiryData", $scope.enquiryData);
+                if (!_.isEmpty($scope.enquiryData)) {
+                    NavigationService.apiCallWithData("Photographer/saveData", $scope.userData, function (data) {
+                        if (data.value == true) {
+                            //console.log(data);
+                            $scope.openModal();
+                            $scope.enquiryInfo = null;
+                        }
+                    });
+                }
             }
         };
         //data submit enquiry
@@ -1468,7 +1487,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         var formdata = {}
         $scope.priceRange = [];
         $scope.cityFill = [];
-        $scope.priceList = ["₹1000-₹15000", "₹15000-₹25000", "₹25000-₹50000", "₹50000-₹100000", "₹100000 and above"];
+        $scope.priceList = ["Upto 10,000", "Upto 20,000", "Upto 50,000", "Upto 1,00,000", "₹100000 and above"];
         $scope.priceFil = function (data) {
             var check;
             if (/\d/.test(data)) {
@@ -1479,7 +1498,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.cityFill.push(data);
                 check = data;
             }
-            console.log("Doc", document.getElementById(check).checked);
+            //console.log("Doc", document.getElementById(check).checked);
             if (document.getElementById(check).checked) {
                 // $scope.price.push(priceRange);
                 formdata.pricing = $scope.priceRange;
@@ -1538,7 +1557,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
         $.fancybox.close(true);
         $scope.uploadSignup = function () {
-            console.log("signup");
+            //console.log("signup");
             $scope.loginModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/signup-profile.html",
@@ -1720,4 +1739,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+    })
+
+    .controller('thanksCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("thanks"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('thanksGoldCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("thanks-gold"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('thanksSilverCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("thanks-silver"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('errorCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("error"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Error"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('becomeFpCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("becomefp"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Featured Photographer"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+        $scope.name=$.jStorage.get("photographer").name;
+        $scope.month=$.jStorage.get("photographer").month;
     })

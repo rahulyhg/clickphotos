@@ -1,4 +1,5 @@
 var request = require("request");
+var cron = require("node-cron");
 var schema = new Schema({
     name: String,
     profilePic: String,
@@ -30,6 +31,9 @@ var schema = new Schema({
     dateOfRagister: {
         type: Date
     },
+    packageBroughtDate: {
+        type: Date
+    },
     month: String,
     year: String,
     bio: String,
@@ -45,7 +49,7 @@ var schema = new Schema({
     },
     package: {
         type: String,
-        enum: ["Gold", "Silver"]
+        enum: ["Gold", "Silver", ""]
     },
     location: [String],
     speciality: {
@@ -62,15 +66,15 @@ var schema = new Schema({
     isactive: {
         type: Boolean
     },
-    enquiry:[{
+    enquiry: [{
         enquiryUser: {
             type: Schema.Types.ObjectId,
             ref: "Photographer"
         },
-        enquirerName:String,
-        enquirerEmail:String,
-        enquirerMobileNo:String,
-        enquirerMsg:String
+        enquirerName: String,
+        enquirerEmail: String,
+        enquirerMobileNo: String,
+        enquirerMsg: String
     }]
 });
 
@@ -592,4 +596,34 @@ var model = {
         })
     }
 };
+
+cron.schedule('15 10 * * *', function () {
+    Photographer.find({}, function (err, found) {
+        if (err) {
+            console.log("error occured");
+           // callback(err, null);
+        } else {
+            async.eachSeries(found, function (value,callback1) {
+                // write their api to update status if changed
+                var packgeDate = moment(value.packageBroughtDate.setFullYear(value.packageBroughtDate.getFullYear() + 1)).format();
+                console.log("packgeDate",packgeDate);
+                if (packgeDate == new Date() && value.package!="") {
+                    value.package = "";
+                    value.save(function () {})
+                    console.log("updated");
+                }
+                callback1(null,"go ahead");
+            }, function (error, data) {
+                if (err) {
+                    console.log("error found in doLogin.callback1")
+                    //callback(null, err);
+                } else {
+                    //callback(null, "updated");
+                }
+            });
+            console.log("m in found");
+        }
+    });
+});
+
 module.exports = _.assign(module.exports, exports, model);

@@ -285,12 +285,15 @@
                                     <label for="{{list.category}}">{{list.category}}</label>
                                 </p>-->
                                 <div class="radioBtn_wdt inline-block">
-                                    <form>
+                                    <form id="radioCollapse" class="collapse">
                                         <div ng-repeat="list in uniqueCategory track by $index" style="display: inline-block;">
                                             <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
                                             <label for="{{list.category}}" class="radio-inline"><span></span>{{list.category}}</label>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();">
+                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive">
                                 </div>
                                 <!--<div class="radioBtn_wdt inline-block">
                                 <form>
@@ -445,18 +448,18 @@
                 </div>
 
                 <div class="col-md-12 padd35">
-                    <form name="formEnquiry" >
+                    <form name="formEnquiry">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="userName" placeholder="Full Name" name="userName" ng-model="enquiryInfo.enquirerName"
-                                        required>
-                                    <div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>
+                                    <input type="text" class="form-control" id="enquirerName" placeholder="Name" ng-model="enquiryInfo.enquirerName" required>
+                                    <!--<div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>-->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required ng-model="enquiryInfo.enquirerEmail">
+                                    <input type="email" class="form-control" id="enquirerEmail" placeholder="Email Address" ng-model="enquiryInfo.enquirerEmail"
+                                        required>
                                 </div>
                                 <!--<p>Please Enter Your Email</p>-->
                             </div>
@@ -464,7 +467,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="mobNo" placeholder="Mobile No" name="mobileNumber" required ng-model="enquiryInfo.enquirerMobileNo">
+                                    <input type="text" class="form-control" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
+                                        required>
                                 </div>
                                 <!--<p>Please Enter Your Mobile No</p>-->
                             </div>
@@ -484,13 +488,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" cols="30" rows="5" name="enquiryData" id="comment" ng-model="enquiryInfo.enquirerMsg" required></textarea>
+                                    <textarea class="form-control" cols="30" rows="5" id="enquirerMsg" ng-model="enquiryInfo.enquirerMsg" required></textarea>
                                 </div>
                                 <!--<p>Please Enter Some Comments</p>-->
                             </div>
                         </div>
                         <div class="row">
-                            <p class="text-center"><a class="btn orange-btn" type="submit" ng-click="dataSubmit(enquiryInfo)">Send</a></p>
+                            <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo)">Send</a></p>
                         </div>
                     </form>
                 </div>

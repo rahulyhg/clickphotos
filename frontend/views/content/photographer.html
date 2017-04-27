@@ -68,7 +68,7 @@
                         </div>
                         <span class="border-line"></span>
                         <div class="btn-1" ng-click="tab = 3" ng-class="{'active':tab == 3}">
-                            <button type="button" class="btn btn-default btn-select">HISTORY</button>
+                            <button type="button" class="btn btn-default btn-select">PACKAGES</button>
                             <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
                         </div>
                     </div>
@@ -505,12 +505,15 @@
                             </div>
                         </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 30 PHOTOS</span></span>
                         <div class="checkbox-form">
-                            <form action="#" class="circular-checkbox display-inline">
-                                <p>My Photos</p>
-                                <p ng-repeat="list in uniqueCategory track by $index">
+                            <form action="#" class=" circular-checkbox display-inline" >
+                                <p class="inline-block" style="vertical-align: top;">My Photos</p>
+                                <div class="inline-block radio-cat collapse" id="radioCollapse">   
+                                  <p ng-repeat="list in uniqueCategory track by $index">
                                     <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
                                     <label for="{{list.category}}">{{list.category}}</label>
                                 </p>
+                                </div>
+                                
                                 <!--<p>
                                     <input type="checkbox" id="chennai" />
                                     <label for="chennai">Chennai</label>
@@ -519,6 +522,9 @@
                                     <input type="checkbox" id="mumbai" />
                                     <label for="mumbai">Mumbai</label>
                                 </p>-->
+                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="test();">
+                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive">
+                                </div>
                             </form>
                             <div class="upload-pic display-inline">
                                 <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<30">Upload picture</button>
@@ -738,7 +744,7 @@
                                         <div class="upgrd-gold text-center ">
                                             <h1 class="damionr font70 white-color ">{{subclick.titleOne}}</h1>
                                             <h1 class="damionr font70 white-color ">{{subclick.titleTwo}}</h1>
-                                            <p class="text-center btn-fix "><a class="btn orange-btn btn-fix " type="button ">Click here</a></p>
+                                            <p class="text-center btn-fix "><a class="btn orange-btn btn-fix " type="button" ng-click="goldMember()">Click here</a></p>
                                         </div>
                                     </div>
                                     <ul class="upgrade-inner ">
