@@ -798,6 +798,21 @@
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
     }
 
+    .fp_innerPadd {
+        &:hover {
+            .edit-image {
+                display: block;
+            }
+        }
+        .edit-image {
+            @include size(95%, auto);
+            @include position(absolute,
+            4% 2.9% 4% 2.9%);
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    }
+
     .featu_photo_caraso {
         @extend .mg;
         position: relative;
@@ -2974,6 +2989,27 @@
                     left: 120px; // transform: rotate(125deg);
                     @include transform(rotate(125deg));
                 }
+                .delete-pht {
+                    @include padding(15px 0);
+                    h4 {
+                        color: $orangeColor;
+                        margin-bottom: 20px;
+                    }
+                    button {
+                        @include margin(null 10px null null);
+                        @include size(90px,
+                        auto);
+                        border-radius: 0px;
+                    }
+                    .absolute-cross {
+                        @include position(absolute,
+                        -15px -15px null null);
+                        display: inline-block;
+                        @include size(30px,
+                        30px);
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
@@ -3516,6 +3552,13 @@
         border-bottom: 9px solid transparent;
         transform: rotate(44deg);
     }
+    .circle-img{
+       background-size: cover!important;
+        height:125px;
+        border-radius: 50%;
+        @include transform(rotate(-50deg));
+        overflow: hidden;
+    }
 
     .profile-f-img {
         border-radius: 50%;
@@ -3981,7 +4024,6 @@
             @include padding(35px 0 45px);
         }
     } //End of Contest @page
-    
     //Start of Thank You for gold, silver & sorry pages
     .thanks,
     .thanks-silver,

@@ -320,6 +320,28 @@ firstapp.filter('serverimage', function () {
     }
 });
 
+firstapp.filter('serverimage1', function () {
+   return function (input, width, height, style) {
+       var other = "";
+       if (width && width !== "") {
+           other += "&width=" + width;
+       }
+       if (height && height !== "") {
+           other += "&height=" + height;
+       }
+       if (style && style !== "") {
+           other += "&style=" + style;
+       }
+       if (input) {
+           if (input.indexOf('https://') == -1) {
+               return adminurl + "upload/readFile?file=" + input + other;
+           } else {
+               return input;
+           }
+       }
+   };
+});
+
 firstapp.service('anchorSmoothScroll', function () {
 
     this.scrollTo = function (eID) {

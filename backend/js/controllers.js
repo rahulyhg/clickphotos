@@ -9,7 +9,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.navigation = NavigationService.getnav();
     })
 
-
     .controller('AccessController', function ($scope, TemplateService, NavigationService, $timeout, $state) {
         // if ($.jStorage.get("accessToken")) {
 

@@ -608,6 +608,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+        //delete modal
+        $scope.deletePhoto = function (size, item) {
+             $scope.deleteMe = item;
+            //console.log( $scope.deleteMe )
+            $scope.loginModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/delete-photo.html",
+                scope: $scope,
+                size: size,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+           
+        };
+        $scope.closeModal = function () {
+            $scope.loginModal.close();
+        };
+        //delete modal end
+
+        //delete upload image
         $scope.deleteUploadImage = function (index) {
             var formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
@@ -628,7 +648,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     })
                 }
             });
+             $scope.loginModal.close();
         };
+        //delete upload image
 
         //google api autocomplete
         $scope.autoLocation = function () {
@@ -1080,14 +1102,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.showSocial = false; // here showSocial will be display: none;
         };
         $scope.currentProfile = $stateParams.userid;
-        $scope.iconChange = function(){
-         $('.collapse').on('show.bs.collapse', function(){
-           $('div.absolute-plus > img').attr('src', 'frontend/img/minus.png'); 
-         });
+        $scope.iconChange = function () {
+            $('.collapse').on('show.bs.collapse', function () {
+                $('div.absolute-plus > img').attr('src', 'frontend/img/minus.png');
+            });
 
-         $('.collapse').on('hide.bs.collapse', function(){
-           $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png'); 
-         });
+            $('.collapse').on('hide.bs.collapse', function () {
+                $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png');
+            });
         };
 
         //get single user
@@ -1131,17 +1153,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // console.log("getRelatedPhotographers", data);
                         $scope.relatedPhotographerData = data.data;
                         //console.log("$scope.relatedPhotographerData--", $scope.relatedPhotographerData);
+                        var idToBeRemoved = $stateParams.userid;
+                        $scope.relatedPhotographerData = _.remove($scope.relatedPhotographerData, function (n) {
+                            return n._id != idToBeRemoved;
+                        });
+                        //console.log("$scope.relatedPhotographerData",$scope.relatedPhotographerData);
                     }
                 });
                 //get all related photographers end
             }
+
+            $scope.lengthOfReview = $scope.userData.reviewList.length;
+            console.log("$scope.lengthOfReview", $scope.lengthOfReview);
         });
         //get single user end
 
         //load more reviews
         $scope.LoadMoreReview = function () {
             $scope.showLessReviews = $scope.userData.reviewList;
-            console.log("LoadMoreReview", $scope.showLessReviews);
+            //console.log("LoadMoreReview", $scope.showLessReviews);
         };
         //load more reviews end
 
@@ -1778,6 +1808,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Featured Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        $scope.name=$.jStorage.get("photographer").name;
-        $scope.month=$.jStorage.get("photographer").month;
+        $scope.name = $.jStorage.get("photographer").name;
+        $scope.month = $.jStorage.get("photographer").month;
     })
