@@ -61,7 +61,7 @@
         <swiper autoplay="5000" effect="slide" loop="true">
             <slides>
                 <slide ng-repeat="image in bannerImageData track by $index">
-                    <img ng-src="{{image.bannerImage | serverimage}}"  class="img-full" noloading="true">
+                    <img ng-src="{{image.bannerImage | serverimage}}" class="img-full" noloading="true">
                 </slide>
             </slides>
             <prev></prev>
@@ -187,13 +187,13 @@
                     </div>-->
                     </div>
                     <div class=" col-md-6  col-xs-12 padd_rt" ng-if="smallCat[$index][0]">
-                        <a ui-sref="wild-photographer({catid:catEl._id,catName:smallCat[$index][0].name})"> <img ng-src="{{smallCat[$index][0].smallimage | serverimage}}" class="img-responsive" alt=""></a>
+                        <a ui-sref="wild-photographer({catid:smallCat[$index][0]._id,catName:smallCat[$index][0].name})"> <img ng-src="{{smallCat[$index][0].smallimage | serverimage}}" class="img-responsive" alt=""></a>
                         <!--<div class="img-section__text">
                         <h3>{{catEl[1].name}}</h3>
                     </div>-->
                     </div>
                     <div class=" col-md-6 padd_lt" ng-if="smallCat[$index][1]">
-                        <a ui-sref="wild-photographer({catid:catEl._id,catName:smallCat[$index][1].name})"> <img ng-src="{{smallCat[$index][1].smallimage | serverimage}}" class="img-responsive" alt=""></a>
+                        <a ui-sref="wild-photographer({catid:smallCat[$index][1]._id,catName:smallCat[$index][1].name})"> <img ng-src="{{smallCat[$index][1].smallimage | serverimage}}" class="img-responsive" alt=""></a>
                         <!--<div class="img-section__text">
                         <h3>{{catEl[2].name}}</h3>
                     </div>-->
@@ -210,7 +210,8 @@
 </section>
 <!--end of categories section-->
 <!-- start of signup section-->
-<section class="signup" ng-if="!template.profile">
+<!--<section class="signup" ng-if="!template.profile">-->
+<section class="signup">
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -220,13 +221,13 @@
             </div>
             <div class="col-md-6 mg">
                 <div class="cam_heading">
-                    <h2>Great with
-                        <h2>Camera</h2>
+                    <h2>Get
+                        <h2>featured!</h2>
                     </h2>
                 </div>
-                <p>You could reveal the stories you captured, on Clickmania and we will have you under the lens of people who
-                    would want to harness your services or buy your photographs</p>
-                <p class="text-right"><a class="btn orange-btn" type="button" ng-click="uploadSignup()">Sign up</a></p>
+                <p>Become a Featured photographer on Clickmania and get your profile viewed by user across all categories. We feature only 12 Photographers every month.</p>
+                <!--<p class="text-right"><a class="btn orange-btn" type="button" ng-click="uploadSignup()">Sign up</a></p>-->
+                <p class="text-right"><a class="btn orange-btn" type="button" ui-sref="feature-photographer">Know More</a></p>
                 <div class="img_absolute">
                     <img src="frontend/img/cam2.png" class="img-responsive" alt="">
                 </div>

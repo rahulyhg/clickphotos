@@ -126,8 +126,10 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
 
 firstapp.filter('startFrom', function () {
     return function (input, start) {
-        start = +start; //parse to int
-        return input.slice(start);
+        if (input != undefined) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
     }
 });
 
@@ -297,12 +299,12 @@ firstapp.directive('autoHeight', function ($compile, $parse) {
     };
 });
 
-firstapp.filter('startFrom', function () {
-    return function (input, start) {
-        start = +start; //parse to int
-        return input.slice(start);
-    }
-});
+// firstapp.filter('startFrom', function () {
+//     return function (input, start) {
+//         start = +start; //parse to int
+//         return input.slice(start);
+//     }
+// });
 
 firstapp.config(function ($translateProvider) {
     $translateProvider.translations('en', LanguageEnglish);
@@ -321,25 +323,25 @@ firstapp.filter('serverimage', function () {
 });
 
 firstapp.filter('serverimage1', function () {
-   return function (input, width, height, style) {
-       var other = "";
-       if (width && width !== "") {
-           other += "&width=" + width;
-       }
-       if (height && height !== "") {
-           other += "&height=" + height;
-       }
-       if (style && style !== "") {
-           other += "&style=" + style;
-       }
-       if (input) {
-           if (input.indexOf('https://') == -1) {
-               return adminurl + "upload/readFile?file=" + input + other;
-           } else {
-               return input;
-           }
-       }
-   };
+    return function (input, width, height, style) {
+        var other = "";
+        if (width && width !== "") {
+            other += "&width=" + width;
+        }
+        if (height && height !== "") {
+            other += "&height=" + height;
+        }
+        if (style && style !== "") {
+            other += "&style=" + style;
+        }
+        if (input) {
+            if (input.indexOf('https://') == -1) {
+                return adminurl + "upload/readFile?file=" + input + other;
+            } else {
+                return input;
+            }
+        }
+    };
 });
 
 firstapp.service('anchorSmoothScroll', function () {
