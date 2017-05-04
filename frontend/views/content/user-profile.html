@@ -286,7 +286,7 @@
                                 </p>-->
                                 <div class="radioBtn_wdt inline-block">
                                     <form id="radioCollapse" class="collapse">
-                                        <div ng-repeat="list in uniqueCategory track by $index" style="display: inline-block;">
+                                        <div class="radio-cat"ng-repeat="list in uniqueCategory track by $index" style="display: inline-block;">
                                             <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
                                             <label for="{{list.category}}" class="radio-inline"><span></span>{{list.category}}</label>
                                         </div>

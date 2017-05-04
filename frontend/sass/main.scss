@@ -640,6 +640,13 @@
             letter-spacing: 1px;
             text-align: justify;
         }
+        button {
+            @include size(75px,
+            auto);
+            @include padding(5px 15px);
+            @include margin(null null null 5px);
+            font-size: 13px;
+        }
     } //end display photographer's image(user image)
     // This section contains main background image with side nav menu
     .sliding_bg {
@@ -805,7 +812,8 @@
             }
         }
         .edit-image {
-            @include size(95%, auto);
+            @include size(95%,
+            auto);
             @include position(absolute,
             4% 2.9% 4% 2.9%);
             background-color: rgba(0, 0, 0, 0.5);
@@ -2081,7 +2089,10 @@
         vertical-align: text-top;
         p {
             letter-spacing: 1px;
-            padding: 5px 26px 3px;
+            //padding: 5px 26px 3px;
+            padding: 5px 0 3px;
+            min-width:19%;
+            margin-right: 4px;
             font-size: 20px;
             color: #fff;
             display: inline-block;
@@ -2156,7 +2167,7 @@
             @include size(21px,
             21px);
             @include position(absolute,
-            25% 2% null null);
+            13px 2% null null);
         }
     }
 
@@ -3056,6 +3067,10 @@
             .radio-inline {
                 font-size: 30px;
             }
+            .radio-cat{
+                min-width: 22%;
+                margin-right: -2px;
+            }
         }
         .collapse {
             display: block;
@@ -3068,7 +3083,7 @@
             @include size(21px,
             21px);
             @include position(absolute,
-            37% 2% null null);
+            25px 2% null null);
         }
     } //     // Radiobtn
     // input[type="radio"] {
@@ -3523,6 +3538,13 @@
                     font-family: hctl;
                     padding: 0 20px;
                     color: black;
+                    display: -webkit-box;
+                    max-height: 150px;
+                    -webkit-line-clamp:7;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
                 }
             }
             .user-icon {
@@ -3552,9 +3574,10 @@
         border-bottom: 9px solid transparent;
         transform: rotate(44deg);
     }
-    .circle-img{
-       background-size: cover!important;
-        height:125px;
+
+    .circle-img {
+        background-size: cover!important;
+        height: 125px;
         border-radius: 50%;
         @include transform(rotate(-50deg));
         overflow: hidden;

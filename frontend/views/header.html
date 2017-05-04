@@ -50,10 +50,10 @@
                             <img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="template.profile.profilePic">
 
                         </div>
-                        <span ng-if="!template.profile" ng-click="uploadSignup()">Sign up as photographer</span>
+                        <span ng-if="!template.profile" ng-click="uploadSignup()">Sign up as a photographer</span>
                         <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
                         
-                        <button ng-if="template.profile" ng-click="logout()" >Logout</span>
+                        <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()" >Log out</span>
                         
                     </div>
                     <!--photographer-->

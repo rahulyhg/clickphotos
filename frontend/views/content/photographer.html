@@ -522,7 +522,7 @@
                                     <input type="checkbox" id="mumbai" />
                                     <label for="mumbai">Mumbai</label>
                                 </p>-->
-                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="test();">
+                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();">
                                     <img src="frontend/img/plus.png" alt="Expand" class="img-responsive">
                                 </div>
                             </form>
@@ -547,7 +547,7 @@
                             </div>
                         </div>
                         <div class="upload-pic text-center ld-more">
-                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()">Load more</button>
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()" ng-if="uploadImgLength>=6">Load more</button>
                         </div>
                         <div class="upgrade-gd">
                             <div class="free-member">

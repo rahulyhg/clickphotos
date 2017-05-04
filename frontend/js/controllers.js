@@ -350,6 +350,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // });
 
         //sid code 
+        // for Plus to minus button
+        $scope.iconChange = function () {
+            $('.collapse').on('show.bs.collapse', function () {
+                $('div.absolute-plus > img').attr('src', 'frontend/img/minus.png');
+            });
+
+            $('.collapse').on('hide.bs.collapse', function () {
+                $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png');
+            });
+        };
 
         $scope.addLocation = function () {
             var valText = document.getElementById("locationCity").value;
@@ -895,7 +905,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
                     //console.log(data.data.data);
-                    $state.go("users");
+                    $state.go("thanks");
                 }
             });
         }
@@ -936,7 +946,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.navigation = NavigationService.getnav();
         $scope.tileList = {
             "titleOne": "Featured",
-            "titleTwo": "Time freezers",
+            "titleTwo": "Photographers",
 
         };
 
