@@ -7,7 +7,8 @@ var firstapp = angular.module('firstapp', [
     'pascalprecht.translate',
     'angulartics',
     'angulartics.google.analytics',
-    'imageupload'
+    'imageupload',
+    'toastr'
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
@@ -131,6 +132,13 @@ firstapp.filter('startFrom', function () {
             return input.slice(start);
         }
     }
+});
+
+firstapp.config(function (toastrConfig) {
+    angular.extend(toastrConfig, {
+        preventOpenDuplicates: true,
+        positionClass: "toast-top-center",
+    });
 });
 
 firstapp.directive('img', function ($compile, $parse) {

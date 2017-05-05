@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meata charset="UTF-8">
+        <title>Emailer</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Dosis:500');
+
+            table {
+                width: 600px;
+                margin: 0 auto;
+            }
+
+            caption>div.logo {
+                display: inline-block;
+                width: 230px;
+                height: auto;
+                padding: 15px;
+            }
+
+            tbody>tr:nth-child(2)>td {
+                font-size: 13pt;
+                padding: 25px 50px;
+                font-family: Helvetica, sans-serif;
+            }
+
+            tfoot {
+                background-color: #f1592a;
+                font-family: 'Dosis', sans-serif;
+                color: white;
+                font-size: 15px;
+            }
+
+            tfoot>ul.list-inline {
+                padding-left: 0;
+                list-style: none;
+                margin-left: -5px;
+            }
+
+            tfoot>ul {
+                -webkit-margin-before: 0!important;
+                -webkit-margin-after: 0!important;
+            }
+
+            .list-inline>li {
+                display: inline-block;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .img-responsive {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .cpyright {
+                line-height: 1.6;
+                padding: 10px 30px;
+            }
+
+            .social-icns {
+                padding: 10px 30px;
+            }
+
+            .social-icns>ul.list-inline>li {
+                vertical-align: -webkit-baseline-middle;
+            }
+        </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <caption>
+                <div class="logo">
+                    <img src="frontend/img/cmlogo.png" alt="Logo" class="img-responsive">
+                </div>
+            </caption>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="frontend/img/silvermember.jpg" class="img-responsive" alt="SilverMember">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dear <span style="color: #f1592a">Manan Vora</span>,<br><br>Thank you for registering for the Silver
+                    Package.<br><br>You are now entitled to upload 30 photos. Do keep in mind that each photo shouldn’t be
+                    larger than 2 MB per photo. The photo bank can be edited by you any time.
+                    <br>
+                    <br> So, get clicking and start uploading.
+                    <br><br> Cheers!
+                    <br> Team Clickmania<br><br>Search in Google: how to limit image size in lightroom, photoshop or other
+                    app
+                </td>
+            </tr>
+        </tbody>
+        <tfoot style="font-family: 'Dosis', sans-serif;">
+            <tr>
+                <td>
+                    <div class="cpyright" style="float: left">
+                        &copy; Clickmania (OPC) Pvt. Ltd
+                    </div>
+                    <div class="social-icns" style="float: right">
+                        <ul class="list-inline" style="-webkit-margin-before: 0!important;-webkit-margin-after: 0!important;-moz-margin-inline-start: 0; -moz-margin-inline-end: 0;">
+                            <li>
+                                <a href=""><img src="frontend/img/fb.png" alt="FacebookLink"></a>
+
+                            </li>
+                            <li>
+                                <a href=""><img src="frontend/img/twitter.png" alt="TwitterLink"></a>
+
+                            </li>
+                            <li>
+                                <a href=""><img src="frontend/img/linkedin.png" alt="LinkedinLink"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>

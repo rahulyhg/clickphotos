@@ -1,18 +1,18 @@
-<div class="photographer-page">
+<div class="photographer-page mg_t75">
     <form>
         <div class="profile-banner">
-            <div class="profile-banner__bg">
-                <img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive" height="440" ng-if="photographerData.coverPic">
-                <img src="frontend/img/photographer/back.jpg" class="img-responsive prof-img" ng-if="!photographerData.coverPic" height="440">
+            <div class="profile-banner__bg" style="background: url('{{photographerData.coverPic | serverimage}}') no-repeat center top">
+                <!--<img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive" height="440" ng-if="photographerData.coverPic">-->
+                <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!photographerData.coverPic" height="440">
             </div>
             <div class="change-cover">
                 <div class="inline-block change-cover__img">
                     <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive">
                 </div>
-                <div class="inline-block change-cover__text">
+                <!--<div class="inline-block change-cover__text">
                     <span>Upload Cover Photo</span>
                     <upload-image ng-model="photographerData.coverPic" no-view></upload-image>
-                </div>
+                </div>-->
                 <!--<button type="button" ng-click="coverPicture(myPic)" >  Upload Cover Photo</button>-->
             </div>
             <div class="select-box">
@@ -20,17 +20,17 @@
                     <div class="profile-block">
                         <div class="holder1 display-inline">
                             <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive sm-logo">
-                            <div class="profile-holder" ng-mouseover="displayOpacity();" ng-mouseleave="removeOpacity();">{{profilePhoto.profilePic }}
-                                <img ng-src="{{photographerData.profilePic | serverimage}}" alt="" class="img-responsive prof-img" ng-if="photographerData.profilePic">
+                            <div class="profile-holder" style="background: url('{{photographerData.profilePic | serverimage}}') no-repeat center center">{{profilePhoto.profilePic }}
+                                <!--<img ng-src="{{photographerData.profilePic | serverimage}}" alt="" class="img-responsive prof-img" ng-if="photographerData.profilePic">-->
                                 <img src="frontend/img/photographer/profile.jpg" class="img-responsive prof-img" ng-if="!photographerData.profilePic">
                                 <div class="upload-trans" type="button" ng-hide="profileSelect">
-                                    <span>
+                                    <span class="directive-opacity" ng-click="userUploadImg()">
                                         <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
                                         Upload Profile Pic
                                     </span>
-                                    <div class="directive-opacity">
+                                    <!--<div ng-disabled="true">
                                         <upload-image ng-model="photographerData.profilePic" no-view></upload-image>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                             <div class="quarter-circle"></div>
@@ -505,15 +505,15 @@
                             </div>
                         </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 30 PHOTOS</span></span>
                         <div class="checkbox-form">
-                            <form action="#" class=" circular-checkbox display-inline" >
+                            <form action="#" class=" circular-checkbox display-inline">
                                 <p class="inline-block" style="vertical-align: top;">My Photos</p>
-                                <div class="inline-block radio-cat collapse" id="radioCollapse">   
-                                  <p ng-repeat="list in uniqueCategory track by $index">
-                                    <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
-                                    <label for="{{list.category}}">{{list.category}}</label>
-                                </p>
+                                <div class="inline-block radio-cat collapse" id="radioCollapse">
+                                    <p ng-repeat="list in uniqueCategory track by $index">
+                                        <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                        <label for="{{list.category}}">{{list.category}}</label>
+                                    </p>
                                 </div>
-                                
+
                                 <!--<p>
                                     <input type="checkbox" id="chennai" />
                                     <label for="chennai">Chennai</label>
@@ -532,14 +532,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
-                                <div class="img-holder">
-                                    <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
+                                <div class="img-holder" style="background: url('{{item.image | serverimage}}') no-repeat 50% 50%">
+                                    <!--<img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">-->
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
                                             <a ng-href="{{item.image | serverimage}}" fancybox-box>
                                                 <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
                                             <!--<button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>-->
-                                             <button type="button" class="btn btn-default" ng-click="deletePhoto('sm',item);">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+                                            <button type="button" class="btn btn-default" ng-click="deletePhoto('sm',item);">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
 
                                         </div>
                                     </div>
@@ -602,8 +602,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
-                                <div class="img-holder">
-                                    <img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">
+                                <div class="img-holder" style="background: url('{{item.image | serverimage}}') no-repeat 50% 50%">
+                                    <!--<img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">-->
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
                                             <a ng-href="{{item.image | serverimage}}" fancybox-box>
@@ -615,7 +615,7 @@
                             </div>
                         </div>
                         <div class="upload-pic text-center ld-more">
-                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()">Load more</button>
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()" ng-if="uploadImgLength>=6">Load more</button>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <div class="container-fluid pad0 ">
     <div class="head-section relative mg_t75">
         <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="cover-img img-responsive" ng-if="userData.coverPic" height="440">
-        <img src="frontend/img/photographer/back.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
+        <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
         <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
         <div class="ab">
             <div class="border-profile">
@@ -225,8 +225,11 @@
                                         <img src="frontend/img/userback1.jpg" alt="...">
                                         <div class="user-ab">
                                             <div class="border-half">
+                                                <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat center center" ng-if="user.profilePic">
+
+                                                </div>
                                                 <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
-                                                <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                                <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
                                             </div>
                                             <div class="intro-profile">
                                                 <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
@@ -286,7 +289,7 @@
                                 </p>-->
                                 <div class="radioBtn_wdt inline-block">
                                     <form id="radioCollapse" class="collapse">
-                                        <div class="radio-cat"ng-repeat="list in uniqueCategory track by $index" style="display: inline-block;">
+                                        <div class="radio-cat" ng-repeat="list in uniqueCategory track by $index" style="display: inline-block;">
                                             <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
                                             <label for="{{list.category}}" class="radio-inline"><span></span>{{list.category}}</label>
                                         </div>
@@ -316,7 +319,7 @@
                         <!--used for categories-->
                         <div>
                             <div class="col-md-4 padd15" ng-repeat="imgs in uploadImgData track by $index">
-                                <div class="fp_innerPadd ">
+                                <div class="fp_innerPadd">
                                     <img ng-src="{{imgs.image | serverimage}}" class="img-responsive">
                                     <div class="edit-image">
                                         <div class="edit-uploaded">
@@ -385,8 +388,11 @@
                                         <img src="frontend/img/userback1.jpg" alt="...">
                                         <div class="user-ab">
                                             <div class="border-half">
+                                                <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat center center"ng-if="user.profilePic">
+
+                                                </div>
                                                 <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
-                                                <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                                <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
                                             </div>
                                             <div class="intro-profile">
                                                 <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>

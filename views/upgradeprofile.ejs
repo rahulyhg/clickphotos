@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meata charset="UTF-8">
+        <title>Emailer</title>
+        <script src="https://use.fontawesome.com/09aa75a0c4.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Dosis:500');
+            .inline-block {
+                display: inline-block;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+
+            table {
+                width: 600px;
+                margin: 0 auto;
+            }
+
+            caption>div.logo {
+                display: inline-block;
+                width: 230px;
+                height: auto;
+                padding: 15px;
+            }
+
+            tbody>tr:nth-child(2)>td {
+                font-size: 13pt;
+                padding: 25px 50px;
+                font-family: Helvetica, sans-serif;
+            }
+
+
+            tfoot {
+                background-color: #f1592a;
+                font-family: 'Dosis', sans-serif;
+                color: white;
+                font-size: 15px;
+            }
+
+            tfoot>ul.list-inline {
+                padding-left: 0;
+                list-style: none;
+                margin-left: -5px;
+            }
+
+            tfoot>ul {
+                -webkit-margin-before: 0!important;
+                -webkit-margin-after: 0!important;
+            }
+
+            .list-inline>li {
+                display: inline-block;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .img-responsive {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .cpyright {
+                line-height: 1.6;
+                padding: 10px 30px;
+            }
+
+            .social-icns {
+                padding: 10px 30px;
+            }
+
+            .social-icns>ul.list-inline>li {
+                vertical-align: -webkit-baseline-middle;
+            }
+        </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <caption>
+                <div class="logo">
+                    <img src="frontend/img/cmlogo.png" alt="Logo" class="img-responsive">
+                </div>
+            </caption>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="frontend/img/upgrade-profile.jpg" class="img-responsive" alt="Enquiry">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dear <span style="color: #f1592a"><%= name %></span>,<br><br> You are at present, a free member of Clickmania.
+                    Upgrade to the Silver or Gold Package and upload your photos in Clickmania for the user to see.
+                    <br><br> So, get clicking and uploading now.
+                    <p class="text-center">*Details of Silver and Gold Package*</p>
+                    <div class="package text-center">
+                        <div class="inline-block silver-pack" style="width:230px;margin-right: 25px; box-shadow:4px 4px 10px #ccc;">
+                            <div class="silver-title text-center" style="background:linear-gradient(to right, #adadad, #e4e4e4);border-top-right-radius: 3px;border-top-left-radius: 3px;padding: 8px 0;">
+                                <img src="img/award-symbolcopy2.png" class="inline-block" alt="AwardLogo" width="30" style="vertical-align: middle">
+                                <span class="inline-block" style="vertical-align: middle; font-family: 'Dosis', sans-serif;">SILVER PACKAGE</span>
+                            </div>
+                            <p class="text-center" style=" padding: 0px 25px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box; 
+    box-sizing: border-box; font-size:15px;"><i class="fa fa-inr"></i> 2000 per annum plus taxes 30 photos 2 MB per photo photos can be replaced
+                                by you any number of times
+                            </p>
+                        </div>
+                        <div class="inline-block gold-pack" style="width:230px; box-shadow:4px 4px 10px #ccc;">
+                            <div class="silver-title text-center" style="background: linear-gradient(to right, #c9b459, #f9ef76);border-top-right-radius: 3px;border-top-left-radius: 3px;padding: 8px 0;">
+                                <img src="img/award-symbolcopy2.png" class="inline-block" alt="AwardLogo" width="30" style="vertical-align: middle">
+                                <span class="inline-block" style="vertical-align: middle; font-family: 'Dosis', sans-serif;">GOLD PACKAGE</span>
+                            </div>
+                            <p class="text-center" style=" padding: 0px 25px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box; 
+    box-sizing: border-box; font-size:15px;"> <i class="fa fa-inr"></i> 3000 per annum plus taxes 100 photos 3 MB per photo photos can be replaced
+                                by you any number of times</p>
+                        </div>
+                    </div>
+                    <br> Cheers!
+                    <br> Team Clickmania
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+            </tr>
+        </tbody>
+        <tfoot style="font-family: 'Dosis', sans-serif;">
+            <tr>
+                <td>
+                    <div class="cpyright" style="float: left">
+                        &copy; Clickmania (OPC) Pvt. Ltd
+                    </div>
+                    <div class="social-icns" style="float: right">
+                        <ul class="list-inline" style="-webkit-margin-before: 0!important;-webkit-margin-after: 0!important;-moz-margin-inline-start: 0; -moz-margin-inline-end: 0;">
+                            <li>
+                                <a href=""><img src="frontend/img/fb.png" alt="FacebookLink"></a>
+
+                            </li>
+                            <li>
+                                <a href=""><img src="frontend/img/twitter.png" alt="TwitterLink"></a>
+
+                            </li>
+                            <li>
+                                <a href=""><img src="frontend/img/linkedin.png" alt="LinkedinLink"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+
+</html>

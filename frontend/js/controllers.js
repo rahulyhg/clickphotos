@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload', 'toastr'])
 
     .controller('HomeCtrl', function ($state, $scope, $rootScope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll, $uibModal) {
         $scope.template = TemplateService.changecontent("home"); //Use same name of .html file
@@ -422,41 +422,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.profilePic._id = $.jStorage.get("photographer")._id;
         }
 
-        $scope.photographerData = {
-            coverPic: ""
-        };
+        // $scope.photographerData = {
+        //     coverPic: ""
+        // };
 
-        $scope.photographerData = {
-            profilePic: ""
-        };
+        // $scope.photographerData = {
+        //     profilePic: ""
+        // };
 
         $scope.photographerData.coverPic = {};
         $scope.photographerData.profilePic = {};
 
-        $scope.$watch("photographerData.coverPic", function (newImage, oldImage) {
-            //console.log("Change in image", newImage, oldImage);
-            $scope.photographerData._id = $.jStorage.get("photographer")._id;
-            $scope.photographerData.coverPic = newImage
-            NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
-                //console.log("coverPhotoUpdate", data);
+        // $scope.$watch("photographerData.coverPic", function (newImage, oldImage) {
+        //     //console.log("Change in image", newImage, oldImage);
+        //     $scope.photographerData._id = $.jStorage.get("photographer")._id;
+        //     $scope.photographerData.coverPic = newImage
+        //     NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
+        //         //console.log("coverPhotoUpdate", data);
 
-            });
+        //     });
 
-        });
+        // });
 
-        $scope.$watch("photographerData.profilePic", function (newImage, oldImage) {
-            //console.log("Change in image profile", newImage, oldImage);
-            $scope.photographerData._id = $.jStorage.get("photographer")._id;
-            $scope.photographerData.profilePic = newImage;
-            NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
-                //console.log("profilePhotoUpdate", data);
-                if (data.value == true) {
-                    $.jStorage.flush();
-                    $.jStorage.set("photographer", $scope.photographerData);
-                    $scope.template.profile = $scope.photographerData;
-                }
-            });
-        });
+        // $scope.$watch("photographerData.profilePic", function (newImage, oldImage) {
+        //     //console.log("Change in image profile", newImage, oldImage);
+        //     $scope.photographerData._id = $.jStorage.get("photographer")._id;
+        //     $scope.photographerData.profilePic = newImage;
+        //     NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
+        //         //console.log("profilePhotoUpdate", data);
+        //         if (data.value == true) {
+        //             $.jStorage.flush();
+        //             $.jStorage.set("photographer", $scope.photographerData);
+        //             $scope.template.profile = $scope.photographerData;
+        //         }
+        //     });
+        // });
 
         //End cover and profile pic update and set//
 
@@ -583,6 +583,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
+        //upload image
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
@@ -593,7 +594,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 size: 'lg'
             });
         };
-
 
         $scope.uploadImage = function (formdata) {
             //console.log("im in upload image", formdata);
@@ -617,10 +617,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             });
         };
+        //upload image end
+
+
+        //upload profile pic
+
+        $scope.userUploadImg = function () {
+            $scope.profilePicModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/userupload-photo.html",
+                scope: $scope,
+                windowClass: 'upload-pic',
+                backdropClass: 'black-drop',
+                size: 'lg'
+            });
+        };
+
+        $scope.photographerData = {};
+
+        $scope.uploadProfilePic = function (formdata) {
+            $scope.photographerData._id = $.jStorage.get("photographer")._id;
+            $scope.photographerData.profilePic = formdata.profilePic;
+            NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
+                //console.log("profilePhotoUpdate", data);
+                if (data.value == true) {
+                    $scope.profilePicModal.close();
+                    $.jStorage.flush();
+                    $.jStorage.set("photographer", $scope.photographerData);
+                    $scope.template.profile = $scope.photographerData;
+                }
+            });
+        };
+       
+        //upload profile pic end
 
         //delete modal
         $scope.deletePhoto = function (size, item) {
-             $scope.deleteMe = item;
+            $scope.deleteMe = item;
             //console.log( $scope.deleteMe )
             $scope.loginModal = $uibModal.open({
                 animation: true,
@@ -630,7 +663,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 windowClass: '',
                 backdropClass: 'black-drop'
             });
-           
+
         };
         $scope.closeModal = function () {
             $scope.loginModal.close();
@@ -658,7 +691,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     })
                 }
             });
-             $scope.loginModal.close();
+            $scope.loginModal.close();
         };
         //delete upload image
 
@@ -717,15 +750,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             "background": "frontend/img/user-back.png",
             "titleOne": "Upgrade to",
             "titleTwo": "Gold"
-        };
-        $scope.displayOpacity = function () {
-            $('.upload-trans span').css('display', 'block');
-
-        };
-        $scope.removeOpacity = function () {
-
-            $('.upload-trans span').css('display', 'none');
-
         };
 
     })
@@ -1310,6 +1334,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                 $scope.loginModal.close();
                             }
                             $state.go('photographer');
+                        } else {
+                            toastr.error('User already exist');
                         }
                     });
                 }
@@ -1326,6 +1352,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.template.profile = data.data.data;
                         $scope.signupModal.close();
                         $state.go("photographer");
+                    } else {
+                        toastr.error('Wrong Input');
                     }
                 });
             }
@@ -1589,7 +1617,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $rootScope) {
+    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $rootScope, toastr) {
         $scope.template = TemplateService;
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -1639,6 +1667,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                 $scope.loginModal.close();
                             }
                             $state.go('photographer');
+                        } else {
+                            toastr.error('User already exist');
                         }
                     });
                 }
@@ -1674,6 +1704,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.template.profile = data.data.data;
                         $scope.signupModal.close();
                         $state.go("photographer");
+                    } else {
+                        toastr.error('Wrong Input');
                     }
                 });
             }
@@ -1786,7 +1818,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-
+        $scope.month = $.jStorage.get("photographer").month;
     })
 
     .controller('thanksGoldCtrl', function ($scope, TemplateService, NavigationService, $timeout) {

@@ -4,35 +4,35 @@
         <div class="row">
             <div class="col-md-5">
                 <div>
-                    <img src="frontend/img/popup.jpg" alt="" class="img-responsive" ng-if="!imagesData.image">
-                    <div class="img-holder" style="background: url('{{imagesData.image | serverimage}}') no-repeat 50% 50%" ng-if="imagesData.image">
+                    <img src="frontend/img/popup.jpg" alt="" class="img-responsive" ng-if="!imagesData.profilePic">
+                    <div class="img-holder" style="background: url('{{imagesData.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="imagesData.profilePic">
+
                     </div>
                     <!--<img ng-src="{{imagesData.image | serverimage}}" alt="" class="img-responsive" ng-if="imagesData.image">-->
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="upl-sec">
-                    <span class="upload-head">Upload Picture</span>
-                    <div class="select_join">
+                    <span class="upload-head">Upload Profile Picture</span>
+                    <!--<div class="select_join">
                         <select name="txtCountry" ng-model="imagesData.category" required>
                               <option ng-selected="true" value="">Select Category</option>
                               <option value="{{cat.name}}" ng-repeat="cat in photographerData.speciality">{{cat.name}}</option>
-                              <!--<option value="2">Scenery</option>-->
+                              <option value="2">Scenery</option>
                             </select>
-                    </div>
+                    </div>-->
                     <p>We accept the following type <br> <span>.JPG,.PNG</span></p>
-                    <p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
+                    <!--<p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>-->
 
                     <div class="upload-pic">
                         <!--<input type="file" value="" />-->
-                        <upload-image ng-model="imagesData.image" no-view></upload-image>
+                        <upload-image ng-model="imagesData.profilePic" no-view></upload-image>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImage(imagesData)">Upload Image</button>
+                        <button type="button" class="btn btn-default text-uppercase" ng-click="uploadProfilePic(imagesData)">Upload Image</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>

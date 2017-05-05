@@ -10,7 +10,6 @@
         "type": "image",
         "tableRef": "bannerImage",
         "option": "single",
-        "size": "1940 x 954px",
         "placeholder": "Enter Logo",
         "id": "input1",
         "validation": ["", "trim", ""],

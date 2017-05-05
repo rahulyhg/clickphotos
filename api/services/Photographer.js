@@ -157,7 +157,7 @@ var model = {
     },
 
     doLogin: function (data, callback) {
-        console.log("data", data)
+        // console.log("data", data)
         Photographer.findOne({
             email: data.email,
             password: md5(data.password)
@@ -180,6 +180,20 @@ var model = {
         });
     },
 
+    // registerUser: function (data, callback) {
+    //     var photographer = this(data);
+    //     photographer.password = md5(photographer.password);
+    //     photographer.save(function (err, created) {
+    //         if (err) {
+    //             callback(err, null);
+    //         } else if (created) {
+    //             callback(null, created);
+    //         } else {
+    //             callback(null, {});
+    //         }
+    //     });
+    // },
+
     registerUser: function (data, callback) {
         var photographer = this(data);
         photographer.password = md5(photographer.password);
@@ -187,7 +201,109 @@ var model = {
             if (err) {
                 callback(err, null);
             } else if (created) {
-                callback(null, created);
+                console.log("data", created);
+                var emailData = {};
+                emailData.email = created.email;
+                emailData.filename = "welcome.ejs";
+                emailData.name = created.name;
+                //emailData.serviceRequest = data1.serviceRequest;
+                // emailData.email = data1.email;
+                //emailData.mobile = data1.mobile;
+                //emailData.query = data1.query;
+                emailData.from = "aditya.ghag@wohlig.com";
+                emailData.subject = "Welcome To Clickmania";
+                console.log("email data : ", emailData);
+                Config.email(emailData, function (err, emailRespo) {
+                    console.log("emailRespo", emailRespo);
+                    if (err) {
+                        console.log(err);
+                        callback(null, created);
+                    } else if (emailRespo) {
+                        // callback(null, "Contact us form saved successfully!!!");
+                        var emailData = {};
+                        emailData.email = created.email;
+                        emailData.filename = "upgradeprofile.ejs";
+                        emailData.name = created.name;
+                        //emailData.serviceRequest = data1.serviceRequest;
+                        // emailData.email = data1.email;
+                        //emailData.mobile = data1.mobile;
+                        //emailData.query = data1.query;
+                        emailData.from = "aditya.ghag@wohlig.com";
+                        emailData.subject = "Clickmania Update Profile";
+                        console.log("email data : ", emailData);
+                        Config.email(emailData, function (err, emailRespo) {
+                            console.log("emailRespo", emailRespo);
+                            if (err) {
+                                console.log(err);
+                                callback(null, created);
+                            } else if (emailRespo) {
+                                callback(null, created);
+                            } else {
+                                callback(null, created);
+                            }
+                        });
+                    } else {
+                        callback(null, created);
+                    }
+                });
+                // async.parallel({
+                //     sendFirstMail: function (callback1) {
+                //         console.log("data", created);
+                //         var emailData = {};
+                //         emailData.email = created.email;
+                //         emailData.filename = "welcome.ejs";
+                //         emailData.name = created.name;
+                //         //emailData.serviceRequest = data1.serviceRequest;
+                //         // emailData.email = data1.email;
+                //         //emailData.mobile = data1.mobile;
+                //         //emailData.query = data1.query;
+                //         emailData.from = "aditya.ghag@wohlig.com";
+                //         emailData.subject = "Welcome To Clickmania";
+                //         console.log("email data : ", emailData);
+                //         Config.email(emailData, function (err, emailRespo) {
+                //             console.log("emailRespo", emailRespo);
+                //             if (err) {
+                //                 console.log(err);
+                //                 callback1(err, null);
+                //             } else if (emailRespo) {
+                //                 callback1(null, "Contact us form saved successfully!!!");
+                //             } else {
+                //                 callback1("Invalid data", null);
+                //             }
+                //         });
+                //     },
+                //     sendSecondMail: function (callback2) {
+                //         console.log("data", created);
+                //         var emailData = {};
+                //         emailData.email = created.email;
+                //         emailData.filename = "upgradeprofile.ejs";
+                //         emailData.name = created.name;
+                //         //emailData.serviceRequest = data1.serviceRequest;
+                //         // emailData.email = data1.email;
+                //         //emailData.mobile = data1.mobile;
+                //         //emailData.query = data1.query;
+                //         emailData.from = "aditya.ghag@wohlig.com";
+                //         emailData.subject = "Clickmania Update Profile";
+                //         console.log("email data : ", emailData);
+                //         Config.email(emailData, function (err, emailRespo) {
+                //             console.log("emailRespo", emailRespo);
+                //             if (err) {
+                //                 console.log(err);
+                //                 callback2(err, null);
+                //             } else if (emailRespo) {
+                //                 callback2(null, "Contact us form saved successfully!!!");
+                //             } else {
+                //                 callback2("Invalid data", null);
+                //             }
+                //         });
+                //     }
+                // }, function (error) {
+                //     if (error) {
+                //         callback(null, "Error");
+                //     } else {
+                //         callback(null, created);
+                //     }
+                // })
             } else {
                 callback(null, {});
             }
@@ -228,6 +344,31 @@ var model = {
         })
     },
 
+    // updateToFeaturePhotographer: function (data, callback) {
+    //     console.log("DATA", data);
+    //     // var date = new Date();
+    //     // var monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    //     // var mon = monthNames[date.getMonth() + 1];
+    //     // var m = date.getMonth() + 1;
+    //     // console.log("month", mon);
+    //     Photographer.update({
+    //         _id: data._id
+    //     }, {
+    //         status: true,
+    //         dateOfRagister: new Date(),
+    //         month: data.mon,
+    //         year: data.yea
+    //     }, function (err, updated) {
+    //         console.log(updated);
+    //         if (err) {
+    //             console.log(err);
+    //             callback(err, null);
+    //         } else {
+    //             callback(null, updated);
+    //         }
+    //     });
+    // },
+
     updateToFeaturePhotographer: function (data, callback) {
         console.log("DATA", data);
         // var date = new Date();
@@ -235,19 +376,44 @@ var model = {
         // var mon = monthNames[date.getMonth() + 1];
         // var m = date.getMonth() + 1;
         // console.log("month", mon);
-        Photographer.update({
+        Photographer.findOneAndUpdate({
             _id: data._id
         }, {
             status: true,
             dateOfRagister: new Date(),
             month: data.mon,
             year: data.yea
-        }, function (err, updated) {
+        }, {
+            new: true
+        },function (err, updated) {
             console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
             } else {
+                console.log("data", updated);
+                var emailData = {};
+                emailData.email = updated.email;
+                emailData.filename = "featuredpht.ejs";
+                emailData.name = updated.name;
+                //emailData.serviceRequest = data1.serviceRequest;
+                // emailData.email = data1.email;
+                //emailData.mobile = data1.mobile;
+                //emailData.query = data1.query;
+                emailData.from = "aditya.ghag@wohlig.com";
+                emailData.subject = "Feature Photographer";
+                console.log("email data : ", emailData);
+                Config.email(emailData, function (err, emailRespo) {
+                    console.log("emailRespo", emailRespo);
+                    if (err) {
+                        console.log(err);
+                        callback(err, null);
+                    } else if (emailRespo) {
+                        callback(null, "Contact us form saved successfully!!!");
+                    } else {
+                        callback("Invalid data", null);
+                    }
+                });
                 callback(null, updated);
             }
         });
@@ -601,18 +767,18 @@ cron.schedule('15 10 * * *', function () {
     Photographer.find({}, function (err, found) {
         if (err) {
             console.log("error occured");
-           // callback(err, null);
+            // callback(err, null);
         } else {
-            async.eachSeries(found, function (value,callback1) {
+            async.eachSeries(found, function (value, callback1) {
                 // write their api to update status if changed
                 var packgeDate = moment(value.packageBroughtDate.setFullYear(value.packageBroughtDate.getFullYear() + 1)).format();
-                console.log("packgeDate",packgeDate);
-                if (packgeDate == new Date() && value.package!="") {
+                console.log("packgeDate", packgeDate);
+                if (packgeDate == new Date() && value.package != "") {
                     value.package = "";
                     value.save(function () {})
                     console.log("updated");
                 }
-                callback1(null,"go ahead");
+                callback1(null, "go ahead");
             }, function (error, data) {
                 if (err) {
                     console.log("error found in doLogin.callback1")

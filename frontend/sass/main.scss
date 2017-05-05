@@ -6,6 +6,7 @@
     @import "../../bower_components/angular-ui-swiper/dist/angular-ui-swiper";
     @import "../../bower_components/fancyBox/source/jquery.fancybox";
     @import "../../bower_components/smart-app-banner/smart-app-banner";
+    @import "../../bower_components/angular-toastr/dist/angular-toastr";
     /* Bootstrap Variables Goes Here */
 
     $brand-primary: #0d9dff !default;
@@ -15,6 +16,8 @@
     $brand-info: #000072 !default;
     $orangeColor: #f1592a !default;
     $whiteColor: #ffffff !default;
+    $blue:#7D76FF!default;
+    $orange:#FA6945!default;
     $lightBlackColor:#1e1e1e; // rgba(55, 55, 55, 0.92);
     $borderRadius: 4px; // used to overwrite the inheritance for btn class mentioned in Node-framework
     @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -708,8 +711,8 @@
                 background-image: url(/../frontend/img/lt_arrow.png);
                 top: 59%;
             }
-            img {
-                height: 100%;
+            .swiper-slide img.swiperbg {
+                margin-top: 50px;
             }
             .bg_main {
                 position: absolute;
@@ -862,25 +865,6 @@
                         top: 50px;
                         left: 0;
                         right: 0;
-                        .border-half {
-                            border: 7px solid $orangeColor;
-                            border-radius: 50%;
-                            width: 150px;
-                            padding: 5px;
-                            margin: auto;
-                            border-top: 7px solid transparent;
-                            border-right: 7px solid transparent;
-                            border-bottom: 7px solid transparent;
-                            @include transform(rotate(57deg));
-                            img {
-                                display: inline-block;
-                                border-radius: 50%;
-                                width: 125px;
-                                height: 125px;
-                                border: 3px solid $orangeColor;
-                                @include transform(rotate(-57deg));
-                            }
-                        }
                         h3 {
                             font-size: 27.34px;
                             font-weight: 400;
@@ -914,6 +898,35 @@
         }
         .flex-control-nav {
             display: none!important; // for dots navigation 
+        }
+    }
+
+    .fp_user_icn .border-half {
+        border: 7px solid $orangeColor;
+        border-radius: 50%;
+        @include size(150px,
+        150px);
+        padding: 5px;
+        margin: auto;
+        border-top: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        @include transform(rotate(57deg));
+        img {
+            display: inline-block;
+            border-radius: 50%;
+            width: 125px;
+            height: 125px;
+            border: 3px solid $orangeColor;
+            @include transform(rotate(-57deg));
+        }
+        .user-img {
+            background-size: cover!important;
+            overflow: hidden;
+            border-radius: 50%;
+            height: 100%;
+            border: 3px solid $orangeColor;
+            @include transform(rotate(-57deg));
         }
     } //end feature photographer flex-slider
     // start of photo contest section
@@ -1118,10 +1131,17 @@
             .user-ab {
                 top: 24%;
                 .border-half {
-                    width: 250px;
+                    @include size(250px,
+                    250px);
                     .profile-f-img {
                         width: 250px;
                         height: 220px;
+                        transform: rotate(-44deg);
+                    }
+                    .user-img {
+                        background-size: cover!important;
+                        height: 100%;
+                        border-radius: 50%;
                         transform: rotate(-44deg);
                     }
                 }
@@ -1224,10 +1244,7 @@
             @include size(null,
             440px);
             overflow-y: hidden;
-            img {
-                width: 100%;
-                height: 440px;
-            }
+            max-height: 440px; // background-size: cover!important;
         }
         .change-cover {
             position: absolute;
@@ -1269,9 +1286,9 @@
         border-radius: 50%;
         position: relative;
         overflow: hidden;
+        background-size: cover!important;
         img {
             border-radius: 50%;
-            height: 100%;
         }
         .prof-img {
             // width: 220px;
@@ -1319,8 +1336,7 @@
             font-family: 'Dosis-Regular';
             @include position(absolute,
             24% null null null);
-            z-index: 10;
-            pointer-events: none;
+            z-index: 10; //  pointer-events: none;
             img {
                 border-radius: 0;
                 width: 16px;
@@ -2011,6 +2027,7 @@
         @include size(null,
         215px);
         background-color: #ededed;
+        background-size: cover!important;
         overflow-y: hidden;
         box-shadow: 4px 5px 3px #c0c0c0;
     }
@@ -2088,10 +2105,9 @@
         auto);
         vertical-align: text-top;
         p {
-            letter-spacing: 1px;
-            //padding: 5px 26px 3px;
+            letter-spacing: 1px; //padding: 5px 26px 3px;
             padding: 5px 0 3px;
-            min-width:19%;
+            min-width: 19%;
             margin-right: 4px;
             font-size: 20px;
             color: #fff;
@@ -2623,6 +2639,14 @@
         //  margin: 60px 150px 0;
         position: relative;
         .thumbnail {
+            .user-img {
+                background-size: cover!important;
+                overflow: hidden;
+                border-radius: 50%;
+                height: 100%;
+                border: 3px solid $orangeColor;
+                @include transform(rotate(-44deg));
+            }
             .profile-f-img {
                 height: 125px;
                 transform: rotate(-44deg);
@@ -2736,6 +2760,14 @@
             .flex-control-nav {
                 display: none;
             }
+        }
+        .user-img {
+            background-size: cover!important;
+            overflow: hidden;
+            border-radius: 50%;
+            height: 100%;
+            border: 3px solid $orangeColor;
+            @include transform(rotate(-44deg));
         }
     }
 
@@ -3067,7 +3099,7 @@
             .radio-inline {
                 font-size: 30px;
             }
-            .radio-cat{
+            .radio-cat {
                 min-width: 22%;
                 margin-right: -2px;
             }
@@ -3112,10 +3144,12 @@
         // to display images categorie wise
         position: relative;
         .fp_innerPadd {
-            img {
-                width: 100%;
-                height: 226px;
-            }
+            height: 226px;
+            overflow: hidden;
+            background-size: cover!important; // img {
+            //     width: 100%;
+            //     height: 226px;
+            // }
         }
     } // used for share your profile on social sites
     .share_profile {
@@ -3540,11 +3574,10 @@
                     color: black;
                     display: -webkit-box;
                     max-height: 150px;
-                    -webkit-line-clamp:7;
+                    -webkit-line-clamp: 7;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    
                 }
             }
             .user-icon {
@@ -3560,6 +3593,14 @@
                 border: 3px solid #f15a29; //transform: rotate(-44deg);
                 transform: rotate(-44deg);
             }
+            .user-img {
+                background-size: cover!important;
+                overflow: hidden;
+                border-radius: 50%;
+                height: 100%;
+                border: 3px solid $orangeColor;
+                @include transform(rotate(-44deg));
+            }
         }
     }
 
@@ -3567,6 +3608,7 @@
         border: 9px solid #f15a29;
         border-radius: 50%;
         width: 150px;
+        height: 150px;
         padding: 5px;
         margin: auto;
         border-top: 9px solid transparent;
@@ -4131,6 +4173,65 @@
             border-radius: 0px;
         }
     } //End of Thank You for gold, silver & sorry pages
+    //toast
+    #toast-container.toast-top-center .toast,
+    #toast-container.toast-bottom-center .toast {
+        width: auto;
+        min-width: 300px;
+        max-width: 500px;
+    }
+
+    .toast-success {
+        background-color: $brand-success;
+    }
+
+    .toast-error {
+        background-color: $brand-danger;
+    }
+
+    .toast-info {
+        background-color: $blue;
+    }
+
+    .toast-warning {
+        background-color: $orange;
+    }
+
+    #toast-container {
+        top: 12px;
+        right: auto;
+        width: auto;
+    }
+
+    .toast-top-center {
+        left: 50%;
+        @include transform(translateX(-50%));
+    }
+
+    .toast-top-left {
+        top: 12px;
+        left: 12px;
+    }
+
+    .toast-top-right {
+        top: 12px;
+        right: 12px;
+    }
+
+    .profile-holder {
+        &:hover {
+            .upload-trans {
+                bottom: -30px;
+                padding: 10px 30px 28px;
+                .directive-opacity {
+                    opacity: 1;
+                }
+                span {
+                    display: block;
+                }
+            }
+        }
+    } //toast end
     //Start of competition page
     //@import "fancybox-override";
     // @import "rishabh";

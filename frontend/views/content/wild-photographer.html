@@ -1,4 +1,5 @@
 <div class="container-fluid pad0 mg_t75">
+    
     <img ng-src="{{categoryInsideImg.insideImage | serverimage}}" alt="" class="img-full img-responsive">
 </div>
 <div class="black-back">
@@ -14,8 +15,10 @@
                                 <img src="frontend/img/userback1.jpg" alt="...">
                                 <div class="user-ab">
                                     <div class="border-half">
+                                        <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="user.profilePic">
+                                        </div>
                                         <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
-                                        <img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                        <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
                                     </div>
                                     <div class="intro-profile">
                                         <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
@@ -95,8 +98,10 @@
                     <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
                     <div class="user-icon">
                         <div class="border-half">
+                            <div class="user-img" style="background: url('{{list.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="list.profilePic">
+                            </div>
                             <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
-                            <img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">
+                            <!--<img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">-->
                         </div>
                     </div>
                     <hr class="border-line2 text-center">

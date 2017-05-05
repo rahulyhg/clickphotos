@@ -61,7 +61,7 @@
         <swiper autoplay="5000" effect="slide" loop="true">
             <slides>
                 <slide ng-repeat="image in bannerImageData track by $index">
-                    <img ng-src="{{image.bannerImage | serverimage}}" class="img-full" noloading="true">
+                    <img ng-src="{{image.bannerImage | serverimage}}" class="img-responsive swiperbg" noloading="true">
                 </slide>
             </slides>
             <prev></prev>
@@ -113,8 +113,10 @@
                             <img src="frontend/img/userback1.jpg" class="img-responsive" alt="">
                             <div class="fp_user_icn text-center">
                                 <div class="border-half">
+                                    <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="user.profilePic">
+                                    </div>
                                     <img src="frontend/img/profile.png" class="img-responsive" alt="" ng-if="!user.profilePic">
-                                    <img ng-src="{{user.profilePic | serverimage}}" class="img-responsive" alt="" ng-if="user.profilePic">
+                                    <!--<img ng-src="{{user.profilePic | serverimage}}" class="img-responsive" alt="" ng-if="user.profilePic">-->
                                 </div>
                                 <h3>{{user.name}} | {{user.location[0]}}</h3>
                                 <p>Speciality: {{user.speciality[0].name}}</p>
@@ -247,8 +249,11 @@
                     <!--<img src="{{ArtistOfMonth.image | serverimage}}" class="img-responsive" alt="">-->
                     <div class="user-ab">
                         <div class="border-half">
+                            <div class="user-img" style="background: url('{{artistOfMonth.image | serverimage}}') no-repeat center center" ng-if="artistOfMonth.image">
+
+                            </div>
                             <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!artistOfMonth.image">
-                            <img ng-src="{{artistOfMonth.image | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading" ng-if="artistOfMonth.image">
+                            <!--<img ng-src="{{artistOfMonth.image | serverimage}}" alt="" class="img-responsive profile-f-img doneLoading" ng-if="artistOfMonth.image">-->
                         </div>
                         <!--<div class="intro-profile">
                             <p class="name-loc ng-binding">Zaroon Jaffrani | Pune</p>
