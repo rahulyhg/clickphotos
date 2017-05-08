@@ -1850,7 +1850,78 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        $scope.month = $.jStorage.get("photographer").month;
+         //feature 
+
+        $scope.date = new Date();
+        var valMon = $scope.date.getMonth();
+        var valyear = $scope.date.getFullYear();
+        $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $scope.nextMonth = valMon + 1;
+        $scope.mon = $scope.monthNames[$scope.nextMonth];
+        //console.log("$scope.mon", $scope.mon);
+
+        formdata = {};
+        // formdata.month = $scope.mon;
+        //console.log("frrrrr", formdata);
+        NavigationService.apiCallWithData("Photographer/getLastFeaturedPhotographer", formdata, function (data) {
+            //console.log("getLastFeaturedPhotographer", data);
+            if (data.value == true) {
+
+                var monthIndex =
+                    _.findIndex($scope.monthNames, function (o) {
+                        return o == data.data.lastMonth;
+                    });
+                if (data.data.totalItems > 0) {
+                    $scope.lastYearOfRegistartion = data.data.lastYear;
+                    $scope.lastDateOfRegister = data.data.lastDateOfRegister;
+                    $scope.totalCountOfLastDate = data.data.totalItems;
+                    $scope.date = new Date();
+                    //console.log("$scope.lastDateOfRegister", $scope.lastDateOfRegister);
+                    //console.log("$scope.totalCountOfLastDate", $scope.totalCountOfLastDate);
+                    if ($scope.lastYearOfRegistartion >= valyear && monthIndex >= $scope.nextMonth) {
+                        if ($scope.totalCountOfLastDate >= 12) {
+                            $scope.finalMonth = $scope.monthNames[monthIndex + 1];
+                            //console.log("$scope.finalMonth", $scope.finalMonth);
+                        } else {
+                            $scope.finalMonth = $scope.monthNames[monthIndex];
+                            // console.log("$scope.finalMonth", $scope.finalMonth);
+                        }
+                    } else {
+                        $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
+                        //console.log("$scope.finalMonth", $scope.finalMonth);
+                    }
+                } else {
+                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
+                    //console.log("$scope.finalMonth", $scope.finalMonth);
+                }
+            }
+
+        });
+
+        $scope.updateToFeature = function () {
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            formdata.mon = $scope.finalMonth;
+            formdata.yea = new Date().getFullYear();
+            // console.log("frrrrr", formdata);
+            NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
+                // console.log("updateToFeaturePhotographer", data);
+                if (data.value === true) {
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        //console.log("catdata", data);
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
+                    //console.log(data.data.data);
+                    $state.go("thanks");
+                }
+            });
+        }
+
+        //feature end
     })
 
     .controller('thanksGoldCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
