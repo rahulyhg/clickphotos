@@ -1,7 +1,8 @@
 var schema = new Schema({
     name: {
         type: String,
-        default: ""
+        default: "",
+        required: true
     },
     bigimage: {
         type: String,
@@ -13,11 +14,13 @@ var schema = new Schema({
     },
     insideImage: {
         type: String,
-        default: ""
+        default: "",
+        required: true
     },
     viewOtherCatImage: {
         type: String,
-        default: ""
+        default: "",
+        required: true
     },
     order: {
         type: Number

@@ -1567,11 +1567,11 @@
         select {
             background-color: white;
             border: none;
-            &:focus{
-                 outline: none;
+            &:focus {
+                outline: none;
             }
         }
-           outline: -webkit-focus-ring-color auto 5px;
+        outline: -webkit-focus-ring-color auto 5px;
     }
 
     .inline {
@@ -2850,8 +2850,9 @@
         .border-profile {
             margin-left: 13%;
             margin-bottom: -36px;
-            border-radius: 50%;
-            width: 26%;
+            border-radius: 50%; // width: 26%;
+            @include size(330px,
+            330px);
             padding: 12px;
             border: 18px solid #f15a29;
             border-top: 18px solid transparent;
@@ -2872,6 +2873,13 @@
                 width: 100%;
                 height: 270px;
             }
+        }
+        .border-profileImg {
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background-size: cover!important;
+            @include transform(rotate(-58deg));
         }
     }
 

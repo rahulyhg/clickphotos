@@ -262,7 +262,7 @@
                                 <div class="abt-2">
                                     <div class="red-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
                                         <p>
-                                            You are currently registered as a free user package {{photographerData}}
+                                            You are currently registered as a free user package
                                         </p>
                                     </div>
                                     <div class="upgrade-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
@@ -522,8 +522,8 @@
                                     <input type="checkbox" id="mumbai" />
                                     <label for="mumbai">Mumbai</label>
                                 </p>-->
-                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();">
-                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive">
+                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();" ng-if="uniqueCategory.length>=3">
+                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive" >
                                 </div>
                             </form>
                             <div class="upload-pic display-inline">
@@ -630,6 +630,9 @@
                                     <div class="history-sec his-under">
                                         <p class="">You joined Clickmania on {{photographerData.createdAt | date}}</p>
                                     </div>
+                                    <div class="history-sec his-under" ng-if="packageShow=='Silver' && packageShow!='Gold'">
+                                        <p class="">You Subscribed to Silver Package on {{photographerData.packageBroughtDate | date}}</p>
+                                    </div>
                                     <div class="history-sec2">
                                         <p class=""></p>
                                     </div>
@@ -700,7 +703,7 @@
                                                 <span class="display-block package-name ">SILVER PACKAGE</span>
                                                 <span class="display-block package-price ">    <span class="rupee ">`</span>2300 inclusive of all taxes</span>
                                             </div>
-                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{photographerData.packageBroughtDate | date}}</span></p>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDate| date}}</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> NA</span></p>
                                         </div>
                                         <div class="upload-pic display-inline ">
@@ -724,7 +727,7 @@
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
                                                 <span class="display-block package-price "><span class="rupee ">`</span>3450 inclusive of all taxes</span>
                                             </div>
-                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{photographerData.packageBroughtDate | date}}</span></p>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDate | date}}</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light ">NA</span></p>
                                         </div>
                                         <div class="upload-pic display-inline ">

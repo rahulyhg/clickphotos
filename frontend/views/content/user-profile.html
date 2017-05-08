@@ -6,7 +6,10 @@
         <div class="ab">
             <div class="border-profile">
                 <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive profile-user ">
-                <img ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="userData.profilePic">
+                <div class="border-profileImg" style="background: url('{{userData.profilePic | serverimage}}') no-repeat 50% 50%">
+
+                </div>
+                <!--<img ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="userData.profilePic">-->
                 <img src="frontend/img/photographer/profile.jpg" class="img-responsive profile-f-img" ng-if="!userData.profilePic">
 
             </div>
@@ -165,8 +168,9 @@
                 <div class="main-cont so-nam">
                     <span>Share this Profile on </span><span><img src="frontend/img/social/4.png" alt=""></span><span><img src="frontend/img/social/3.png" alt=""></span><span><img src="frontend/img/social/2.png" alt=""></span><span><img src="frontend/img/social/1.png" alt=""></span>
                 </div>
+
                 <!--review section-->
-                <div class="main-cont whit-back">
+                <!--<div class="main-cont whit-back">
                     <div class="about-head text-capitalize">REVIEWS</div>
                     <div class="abt-form">
                         <div class="input-group pad25" ng-if="template.profile._id!=currentProfile">
@@ -207,13 +211,14 @@
                         <div class="text-center ">
                             <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreReview()" ng-if="lengthOfReview>=3">View All</button>
                         </div>
-                        <!--<div class="input-group pad25">
+                        <div class="input-group pad25">
                             <input type="text" class="pub-r form-control" placeholder="Write a review for asmara khan" aria-describedby="basic-addon2">
                             <span class="input-group-addon pub-btn" id="basic-addon2">Publish review</span>
-                        </div>-->
+                        </div>
                     </div>
-                </div>
+                </div>-->
                 <!--review section end-->
+
                 <div class="other-section" ng-if="relatedPhotographerData[0]">
                     <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                     <div class="row pad-up100">
@@ -281,7 +286,7 @@
                             <div class="radioBtn_cat">
                                 <!--used for categories radio buttons-->
                                 <div class="inline-block">
-                                    <h2>{{userData.name}} Photos</h2>
+                                    <h2>{{userData.name}}'s Photos</h2>
                                 </div>
                                 <!--<p ng-repeat="list in uniqueCategory track by $index">
                                     <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
@@ -388,7 +393,7 @@
                                         <img src="frontend/img/userback1.jpg" alt="...">
                                         <div class="user-ab">
                                             <div class="border-half">
-                                                <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat center center"ng-if="user.profilePic">
+                                                <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat center center" ng-if="user.profilePic">
 
                                                 </div>
                                                 <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">

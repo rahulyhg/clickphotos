@@ -30,7 +30,7 @@
 
                 <div class="col-md-4">
                     <!--search bar-->
-                    <div class="Search_bar">
+                    <!--<div class="Search_bar">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for photographer">
                             <div class="input-group-btn">
@@ -39,16 +39,15 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!--search_bar-->
                 </div>
                 <div class="col-md-4">
                     <!--user name with img-->
                     <div class="photographer text-right">
                         <div class="photographer_img">
-                            <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="!template.profile.profilePic">
+                            <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ng-if="!template.profile.profilePic">
                             <img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="template.profile.profilePic">
-
                         </div>
                         <span ng-if="!template.profile" ng-click="uploadSignup()">Sign up as a photographer</span>
                         <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
