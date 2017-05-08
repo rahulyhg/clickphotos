@@ -262,7 +262,7 @@
                                 <div class="abt-2">
                                     <div class="red-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
                                         <p>
-                                            You are currently registered as a free user package
+                                            You are currently registered as a free user package {{photographerData}}
                                         </p>
                                     </div>
                                     <div class="upgrade-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
@@ -291,7 +291,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>
+                                        <button type="button" class="btn btn-default btn-full" ng-click="silverMember();silverPack(photographerData._id);updateGold(photographerData._id);">UPGRADE NOW</button>
                                     </div>
                                     <br>
                                     <div class="upgrade-pkg2 gold" ng-if=" packageShow!='Gold'">
@@ -315,7 +315,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
+                                        <button type="button" class="btn btn-default btn-full" ng-click="goldMember();goldPack(photographerData._id);">UPGRADE NOW</button>
                                     </div>
                                     <br>
                                 </div>
@@ -426,7 +426,7 @@
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
-                                            <button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="silverMember();silverPack(photographerData._id);updateGold(photographerData._id);">UPGRADE NOW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -448,7 +448,7 @@
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
-                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember();goldPack(photographerData._id);">UPGRADE NOW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -563,7 +563,7 @@
                                             <div class="upgrd-gold text-center">
                                                 <h1 class="damionr font70 white-color mgb0">{{subclick.titleOne}}</h1>
                                                 <h1 class="damionr font70  white-color mgt-8">{{subclick.titleTwo}}</h1>
-                                                <p class="text-center btn-fix"><a class="btn orange-btn btn-fix" type="button" ng-click="goldMember()">Click here</a></p>
+                                                <p class="text-center btn-fix"><a class="btn orange-btn btn-fix" type="button" ng-click="goldMember();goldPack(photographerData._id);">Click here</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -608,7 +608,8 @@
                                         <div class="edit-uploaded">
                                             <a ng-href="{{item.image | serverimage}}" fancybox-box>
                                                 <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
-                                            <button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+                                            <!--<button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>-->
+                                            <button type="button" class="btn btn-default" ng-click="deletePhoto('sm',item);">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -655,7 +656,7 @@
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
-                                            <button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="silverMember();silverPack(photographerData._id);updateGold(photographerData._id);">UPGRADE NOW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -677,7 +678,7 @@
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
-                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember();goldPack(photographerData._id);">UPGRADE NOW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -697,10 +698,10 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">SILVER PACKAGE</span>
-                                                <span class="display-block package-price ">    <span class="rupee ">`</span>                                                2300 inclusive of all taxes</span>
+                                                <span class="display-block package-price ">    <span class="rupee ">`</span>2300 inclusive of all taxes</span>
                                             </div>
-                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light "> 1 Jan 2016 to 31 Dec 2016</span></p>
-                                            <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> Credit Card</span></p>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{photographerData.packageBroughtDate | date}}</span></p>
+                                            <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> NA</span></p>
                                         </div>
                                         <div class="upload-pic display-inline ">
                                             <button type="button " class="btn btn-default text-uppercase display-block
@@ -721,10 +722,10 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
-                                                <span class="display-block package-price "><span class="rupee ">`</span>                                                3450 inclusive of all taxes</span>
+                                                <span class="display-block package-price "><span class="rupee ">`</span>3450 inclusive of all taxes</span>
                                             </div>
-                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light "> 1 Jan 2016 to 31 Dec 2016</span></p>
-                                            <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> Credit Card</span></p>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{photographerData.packageBroughtDate | date}}</span></p>
+                                            <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light ">NA</span></p>
                                         </div>
                                         <div class="upload-pic display-inline ">
                                             <button type="button " class="btn btn-default text-uppercase display-block
@@ -746,7 +747,7 @@
                                         <div class="upgrd-gold text-center ">
                                             <h1 class="damionr font70 white-color ">{{subclick.titleOne}}</h1>
                                             <h1 class="damionr font70 white-color ">{{subclick.titleTwo}}</h1>
-                                            <p class="text-center btn-fix "><a class="btn orange-btn btn-fix " type="button" ng-click="goldMember()">Click here</a></p>
+                                            <p class="text-center btn-fix "><a class="btn orange-btn btn-fix " type="button" ng-click="goldMember();goldPack(photographerData._id);">Click here</a></p>
                                         </div>
                                     </div>
                                     <ul class="upgrade-inner ">

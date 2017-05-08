@@ -207,6 +207,47 @@ var controller = {
                 }
             })
         }
+    },
+
+    //mailers
+
+    silverPackgeMail: function (req, res) {
+        if (req.body) {
+            Photographer.silverPackgeMail(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    upgradToGoldMail: function (req, res) {
+        if (req.body) {
+            Photographer.upgradToGoldMail(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    goldPackageMail: function (req, res) {
+        if (req.body) {
+            Photographer.goldPackageMail(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 };

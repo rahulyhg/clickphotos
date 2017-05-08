@@ -19,12 +19,6 @@
                 padding: 15px;
             }
 
-            tbody>tr:nth-child(2)>td {
-                font-size: 13pt;
-                padding: 25px 50px;
-                font-family: Helvetica, sans-serif;
-            }
-
 
             tfoot {
                 background-color: #f1592a;
@@ -37,11 +31,6 @@
                 padding-left: 0;
                 list-style: none;
                 margin-left: -5px;
-            }
-
-            tfoot>ul {
-                -webkit-margin-before: 0!important;
-                -webkit-margin-after: 0!important;
             }
 
             .list-inline>li {
@@ -87,8 +76,8 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    Dear <span style="color: #f1592a"><%= name %></span>,<br><br>Thank you for registering as a featured photographer
+                <td style=" font-size: 13pt;padding: 25px 50px;font-family: Helvetica, sans-serif;">
+                    Dear <span style="color: #f1592a;  text-transform: capitalize;"><%= name %></span>,<br><br>Thank you for registering as a featured photographer
                     with Clickmania. You are now part of the 12 photographers to be showcased this month in the home page
                     of Clickmania
                     <br><br>Enjoy the limelight and do remember to upload your best work.<br>
@@ -105,7 +94,7 @@
                         &copy; Clickmania (OPC) Pvt. Ltd
                     </div>
                     <div class="social-icns" style="float: right">
-                        <ul class="list-inline" style="-webkit-margin-before: 0!important;-webkit-margin-after: 0!important;-moz-margin-inline-start: 0; -moz-margin-inline-end: 0;">
+                        <ul class="list-inline" style="margin-top: 0!important; margin-bottom: 0;">
                             <li>
                                 <a href=""><img src="http://clickmania.tingdom.in/frontend/img/fb.png" alt="FacebookLink"></a>
 

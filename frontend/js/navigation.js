@@ -70,7 +70,48 @@ var navigationservice = angular.module('navigationservice', [])
                 }).then(function (data) {
                     callback(data);
                 });
-            }
+            },
+
+            //mailers
+
+            silverPackMail: function (id, callback) {
+                console.log(id);
+                var data = {
+                    _id: id
+                };
+                $http({
+                    url: adminurl + 'Photographer/silverPackgeMail',
+                    method: 'POST',
+                    withCredentials: true,
+                    data: data
+                }).then(callback);
+            },
+
+            upgradToGold: function (id, callback) {
+                console.log(id);
+                var data = {
+                    _id: id
+                };
+                $http({
+                    url: adminurl + 'Photographer/upgradToGoldMail',
+                    method: 'POST',
+                    withCredentials: true,
+                    data: data
+                }).then(callback);
+            },
+
+            goldPackMail: function (id, callback) {
+                console.log(id);
+                var data = {
+                    _id: id
+                };
+                $http({
+                    url: adminurl + 'Photographer/goldPackageMail',
+                    method: 'POST',
+                    withCredentials: true,
+                    data: data
+                }).then(callback);
+            },
 
         };
     });

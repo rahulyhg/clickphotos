@@ -526,7 +526,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // console.log("package", data.data.package);
                 $state.go("thanks-silver");
             });
+
+            $scope.silverPack = function (id) {
+                NavigationService.silverPackMail(id, function (data) {
+                    console.log("acceptdataa", data);
+                    if (data.data.value) {
+                        console.log(data.data.value);                  
+                    }
+                })
+            };
+
+            $scope.updateGold = function (id) {
+                NavigationService.upgradToGold(id, function (data) {
+                    console.log("acceptdataa", data);
+                    if (data.data.value) {
+                        console.log(data.data.value);               
+                    }
+                })
+            };
         }
+
+
         $scope.goldMember = function () {
             $scope.noEdit = false;
             $scope.freeMember = true;
@@ -547,9 +567,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $.jStorage.set("photographer", data.data);
                 $state.go("thanks-gold");
             });
-        }
-        $scope.dataArr = [];
 
+            $scope.goldPack = function (id) {
+                NavigationService.goldPackMail(id, function (data) {
+                    console.log("acceptdataa", data);
+                    if (data.data.value) {
+                        console.log(data.data.value);
+                    }
+                })
+            };
+
+        }
+
+        $scope.dataArr = [];
         $scope.fliterCheck = function (data) {
             $scope.uploadImgData = [];
             //console.log("Doc", document.getElementById(data).checked);
@@ -648,7 +678,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             });
         };
-       
+
         //upload profile pic end
 
         //delete modal
@@ -944,15 +974,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.template.profile = $.jStorage.get("photographer");
         }
 
-        $scope.benefits = [{
-            "list": "100 photos",
-        }, {
-            "list": "3mb per photo",
-        }, {
-            "list": "Photos can be edited by you.",
-        }, {
-            "list": "Valid till 1 year.",
-        }];
+        // $scope.benefits = [{
+        //     "list": "100 photos",
+        // }, {
+        //     "list": "3mb per photo",
+        // }, {
+        //     "list": "Photos can be edited by you.",
+        // }, {
+        //     "list": "Valid till 1 year.",
+        // }];
 
         if ($.jStorage.get("photographer")) {
             $scope.template.profile = $.jStorage.get("photographer");

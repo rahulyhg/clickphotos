@@ -1564,6 +1564,14 @@
                 }
             }
         }
+        select {
+            background-color: white;
+            border: none;
+            &:focus{
+                 outline: none;
+            }
+        }
+           outline: -webkit-focus-ring-color auto 5px;
     }
 
     .inline {
