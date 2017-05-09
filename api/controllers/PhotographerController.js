@@ -248,6 +248,19 @@ var controller = {
                 }
             })
         }
+    },
+
+    smsForOtp: function (req, res) {
+        if (req.body) {
+            Photographer.smsForOtp(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 };

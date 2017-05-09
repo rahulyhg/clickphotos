@@ -348,6 +348,28 @@ var models = {
             return undefined;
         }
     },
+
+    //sms
+    sendSms: function (data, callback) {
+        if (data.mobile) {
+            request.get({
+                url: "http://api-alerts.solutionsinfini.com/v3/?method=sms&api_key=A2673b52d60295c217f83efd42a6ab576&to=" + data.mobile + "&sender=TAGBOS&message=" + data.content + "&format=json"
+            }, function (err, http, body) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                } else {
+                    console.log("body", body);
+                    callback(null, body);
+                }
+            });
+        } else {
+            callback({
+                message: "Mobile number not found"
+            }, null);
+        }
+    },
+    //sms end
     downloadFromUrl: function (url, callback) {
         var dest = "./.tmp/" + moment().valueOf() + "-" + _.last(url.split("/"));
         var file = fs.createWriteStream(dest);

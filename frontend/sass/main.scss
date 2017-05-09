@@ -579,6 +579,7 @@
     } // for clickmania logo adjustment which includes boot strap's class navbar-brand
     a.navbar-brand {
         height: auto;
+        padding:13px 15px 5px;
         .navbar-toggle {
             margin-bottom: 0;
             padding-right: 0px;
@@ -586,7 +587,7 @@
         }
         .cmlogo {
             // width: 230px;
-            width: 70%;
+           width: 65%;
         }
     } // end of clickmania logo adjustment
     // search bar
@@ -618,19 +619,34 @@
     } // end of search bar
     // To display photographer's image(user image)
     .photographer {
-        padding-top: 20px;
-        padding-bottom: 15px;
-        cursor: pointer;
+      padding: 15px 0;
+        cursor: pointer; // .photographer_img {
+        //     // @include size(38px,
+        //     // 38px);
+        //     display: inline-block;
+        //     vertical-align: middle;
+        //     padding-right: 6px;
+        //     img {
+        //         width: 35px;
+        //         height: 33px;
+        //         border-radius: 50%;
+        //     }
+        // }
         .photographer_img {
-            // @include size(38px,
-            // 38px);
             display: inline-block;
+            @include size(40px,
+            33px);
             vertical-align: middle;
             padding-right: 6px;
-            img {
-                width: 35px;
-                height: 33px;
+            .server-img {
+                 @include size(auto,
+            100%);
+                background-size: cover!important;
+                overflow: hidden;
                 border-radius: 50%;
+            }
+            img {
+                height: 90%;
             }
         }
         span {
@@ -654,7 +670,7 @@
     // This section contains main background image with side nav menu
     .sliding_bg {
         position: relative;
-        @extend .mg_t75;
+        margin-top: 63px;
         height: 100%;
         .sidebar {
             position: absolute;
@@ -2851,8 +2867,8 @@
             margin-left: 13%;
             margin-bottom: -36px;
             border-radius: 50%; // width: 26%;
-            @include size(330px,
-            330px);
+            @include size(280px,
+            280px);
             padding: 12px;
             border: 18px solid #f15a29;
             border-top: 18px solid transparent;
@@ -3076,6 +3092,7 @@
     .radioBtn_cat {
         position: relative;
         margin-top: 53px;
+        margin-bottom: 30px;
         background-color: #5d5d5d;
         color: $whiteColor;
         .inline-block {
@@ -3159,13 +3176,12 @@
     .all_cat {
         // to display images categorie wise
         position: relative;
-        .fp_innerPadd {
+        margin-bottom: 30px;
+        .server-img {
             height: 226px;
             overflow: hidden;
             background-size: cover!important; // img {
-            //     width: 100%;
-            //     height: 226px;
-            // }
+          
         }
     } // used for share your profile on social sites
     .share_profile {
@@ -3229,8 +3245,8 @@
     .full-tabs2 {
         margin: 0;
         .border-line {
-            border: 2px solid;
-            padding: 21px 0 0;
+            border: 1px solid;
+            padding: 13px 0px 4px;
             color: #fff;
             border-radius: 6px;
         }
@@ -3241,7 +3257,7 @@
             border-color: transparent;
             margin-left: 10px;
             margin-right: 10px;
-            font-size: 48px;
+            font-size: 32px;
             cursor: pointer;
             color: #ffffff;
             border-bottom: 5px solid transparent;

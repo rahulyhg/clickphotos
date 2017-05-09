@@ -446,20 +446,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         // });
 
-        // $scope.$watch("photographerData.profilePic", function (newImage, oldImage) {
-        //     //console.log("Change in image profile", newImage, oldImage);
-        //     $scope.photographerData._id = $.jStorage.get("photographer")._id;
-        //     $scope.photographerData.profilePic = newImage;
-        //     NavigationService.apiCallWithData("Photographer/saveData", $scope.photographerData, function (data) {
-        //         //console.log("profilePhotoUpdate", data);
-        //         if (data.value == true) {
-        //             $.jStorage.flush();
-        //             $.jStorage.set("photographer", $scope.photographerData);
-        //             $scope.template.profile = $scope.photographerData;
-        //         }
-        //     });
-        // });
-
         //End cover and profile pic update and set//
 
         $scope.chooseSilverhis = function () {
@@ -1153,7 +1139,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('UserProfileCtrl', function ($scope, $rootScope, $state, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
+    .controller('UserProfileCtrl', function ($scope, $rootScope, $state, TemplateService, NavigationService, $timeout, $uibModal, $stateParams,$location) {
         $scope.template = TemplateService.changecontent("user-profile"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("User Profile"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1177,6 +1163,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png');
             });
         };
+
+        $scope.myUrl = $location.absUrl();
+        console.log("myUrl",$scope.myUrl);
 
         //get single user
         formData = {};
@@ -1230,7 +1219,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
 
             $scope.lengthOfReview = $scope.userData.reviewList.length;
-            console.log("$scope.lengthOfReview", $scope.lengthOfReview);
+            //console.log("$scope.lengthOfReview", $scope.lengthOfReview);
         });
         //get single user end
 
@@ -1846,11 +1835,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
     .controller('thanksCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+
         $scope.template = TemplateService.changecontent("thanks"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-         //feature 
+        //feature 
 
         $scope.date = new Date();
         var valMon = $scope.date.getMonth();

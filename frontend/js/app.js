@@ -134,6 +134,12 @@ firstapp.filter('startFrom', function () {
     }
 });
 
+//url share profile
+firstapp.filter('urlEncode', [function () {
+    return window.encodeURIComponent;
+}]);
+//url share profile end
+
 firstapp.config(function (toastrConfig) {
     angular.extend(toastrConfig, {
         preventOpenDuplicates: true,
