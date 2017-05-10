@@ -885,26 +885,26 @@ var model = {
             }
         });
     },
-
+   
     //smsotp
-    smsForOtp: function (data, callback) {
-        var smsData = {};
-        console.log("mobileOtp", mobileOtp);
-        smsData.mobile = data.mobile;
-        smsData.content = "We regret to inform you that your application has been rejected for SFA Mumbai 2017. For further queries please email us at info@sfanow.in";
-        console.log("smsdata", smsData);
-        Config.sendSms(smsData, function (err, smsRespo) {
-            if (err) {
-                console.log(err);
-                callback(err, null);
-            } else if (smsRespo) {
-                console.log(smsRespo, "sms sent");
-                callback(null, smsRespo);
-            } else {
-                callback(null, "Invalid data");
-            }
-        });
-    }
+    // smsForOtp: function (data, callback) {
+    //     var smsData = {};
+    //     console.log("mobileOtp", mobileOtp);
+    //     smsData.mobile = data.mobile;
+    //     smsData.content = "We regret to inform you that your application has been rejected for SFA Mumbai 2017. For further queries please email us at info@sfanow.in";
+    //     console.log("smsdata", smsData);
+    //     Config.sendSms(smsData, function (err, smsRespo) {
+    //         if (err) {
+    //             console.log(err);
+    //             callback(err, null);
+    //         } else if (smsRespo) {
+    //             console.log(smsRespo, "sms sent");
+    //             callback(null, smsRespo);
+    //         } else {
+    //             callback(null, "Invalid data");
+    //         }
+    //     });
+    // }
     //smsotp
 };
 
