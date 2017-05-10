@@ -446,15 +446,7 @@ firstapp.directive('sidebarDirective', function () {
                     });
                     $('section .mg_lft').css('margin-left', '29%');
                     $('#sidenav-overlay').show();
-                    // $('body').on({
-                    //     'mousewheel': function (e) {
-                    //         e.preventDefault();
-                    //         e.stopPropagation();
-                    //     }
-                    // });
-
                     $('body').css('overflow-y', 'hidden');
-
                     element.addClass('show');
                     return;
                 } else {

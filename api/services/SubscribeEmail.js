@@ -3,7 +3,7 @@ var schema = new Schema({
         type: String,
         validate: validators.isEmail(),
         unique: true
-    },
+    }
 });
 
 schema.plugin(deepPopulate, {});

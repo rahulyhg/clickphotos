@@ -113,5 +113,17 @@ var navigationservice = angular.module('navigationservice', [])
                 }).then(callback);
             },
 
+            sendEnquiry: function (id, callback) {
+                console.log(id);
+                var data = {
+                    _id: id
+                };
+                $http({
+                    url: adminurl + 'Photographer/sendEnq',
+                    method: 'POST',
+                    withCredentials: true,
+                    data: data
+                }).then(callback);
+            }
         };
     });

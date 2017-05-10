@@ -250,9 +250,9 @@ var controller = {
         }
     },
 
-    smsForOtp: function (req, res) {
+    sendEnq: function (req, res) {
         if (req.body) {
-            Photographer.smsForOtp(req.body, res.callback);
+            Photographer.sendEnq(req.body, res.callback);
         } else {
             res.json({
                 value: false,
@@ -261,7 +261,33 @@ var controller = {
                 }
             })
         }
-    }
+    },
+
+    search: function (req, res) {
+        if (req.body) {
+            Photographer.search(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    // smsForOtp: function (req, res) {
+    //     if (req.body) {
+    //         Photographer.smsForOtp(req.body, res.callback);
+    //     } else {
+    //         res.json({
+    //             value: false,
+    //             data: {
+    //                 message: "Invalid Request"
+    //             }
+    //         })
+    //     }
+    // }
 
 };
 module.exports = _.assign(module.exports, controller);

@@ -201,6 +201,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     'position': 'absolute',
                     'bottom': '60px'
                 });
+                $('.navbar-brand .navbar-toggle').css({
+                    'visibility': 'hidden',
+                    'cursor': 'default',
+                    WebkitTransition: 'visibility 1s ease',
+                    MozTransition: 'visibility 1s ease',
+                    MsTransition: 'visibility 1s ease',
+                    'transition': 'visibility 1s ease'
+                });
             } else {
                 $('.sliding_bg .scroll_down').css({
 
@@ -210,6 +218,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     'transition': 'all 300ms linear',
                     'position': 'absolute',
                     'bottom': '135px'
+                });
+                $('.navbar-brand .navbar-toggle').css({
+                    WebkitTransition: 'visibility 1s ease',
+                    MozTransition: 'visibility 1s ease',
+                    MsTransition: 'visibility 1s ease',
+                    'transition': 'visibility 1s ease',
+                    'visibility': 'visible',
+                    'cursor': 'initial'
                 });
             }
         });
@@ -1139,7 +1155,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('UserProfileCtrl', function ($scope, $rootScope, $state, TemplateService, NavigationService, $timeout, $uibModal, $stateParams,$location) {
+    .controller('UserProfileCtrl', function ($scope, $rootScope, $state, TemplateService, NavigationService, $timeout, $uibModal, $stateParams, $location) {
         $scope.template = TemplateService.changecontent("user-profile"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("User Profile"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1165,7 +1181,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.myUrl = $location.absUrl();
-        console.log("myUrl",$scope.myUrl);
+        // console.log("myUrl", $scope.myUrl);
 
         //get single user
         formData = {};
@@ -1411,6 +1427,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         };
         //data submit enquiry
+
+        //enquiry email
+        $scope.sendEnqu = function (id) {
+            NavigationService.sendEnquiry(id, function (data) {
+                console.log("acceptdataa", data);
+                if (data.data.value) {
+                    console.log(data.data.value);
+                }
+            })
+        };
+        //enquiry email end
 
         // tis function is used to open an UIB modal
         $scope.openModal = function (size) {
@@ -1695,25 +1722,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             },
 
-            $scope.subscribeData = function (formdata) {
-                //  console.log("formdatafsgdvtrhejy", formdata);
-                NavigationService.apiCallWithData("SubscribeEmail/save", formdata, function (data) {
-                    if (data.value === true) {
-                        // console.log(data);
-                        $scope.subscribeModal = $uibModal.open({
-                            animation: true,
-                            templateUrl: "frontend/views/modal/subscribe.html",
-                            scope: $scope,
-                            windowClass: '',
-                            size: 'sm',
-                            backdropClass: 'black-drop'
-                        });
-                    }
-                });
-            },
-
-
-
             $scope.login = function (formdata) {
                 // formdata.serviceRequest = $scope.serviceList;
                 //  console.log(formdata);
@@ -1739,7 +1747,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $.jStorage.flush();
             $scope.template.profile = null;
             $state.go("home");
-
         }
         //     $scope.signUp = function() {
         //       console.log(modal);

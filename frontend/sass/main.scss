@@ -406,6 +406,7 @@ footer {
                 .form-control {
                     height: 43px;
                     background-color: transparent;
+                    color: white;
                 }
                 .input-group-btn {
                     .btn {
@@ -983,20 +984,15 @@ a.navbar-brand {
             h2 {
                 font-family: 'damion-regular';
                 font-size: 65px;
+                 color: $orangeColor;
                 font-weight: 500;
+                line-height: 0.7;
+                span{
+                    margin-left: 100px;
+                }
             }
-            h2:nth-child(odd) {
-                color: $whiteColor;
-                margin: 0 0;
-            }
-            h2:nth-child(even) {
-                color: $orangeColor;
-                white-space: nowrap;
-                position: absolute;
-                text-indent: 97px;
-                top: 44px;
-                margin: 0 0;
-            }
+          
+
         }
         .pht_contest_btn {
             button {
@@ -2239,6 +2235,9 @@ fieldset[disabled] .form-control {
         margin: 0 auto;
         width: 50%;
         float: right;
+        h2{
+            font-family: Helvetica, sans-serif;
+        }
     }
     .fith {
         padding-right: 0;
