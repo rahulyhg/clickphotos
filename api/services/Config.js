@@ -392,7 +392,7 @@ var models = {
                 callback(err, null);
             } else if (userdata && userdata.length > 0) {
                 if (data.filename && data.filename != "") {
-                    //console.log("filename ", data.filename);
+                    console.log("filename data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", data);
                     request.post({
                         url: requrl + "config/emailReader/",
                         json: data

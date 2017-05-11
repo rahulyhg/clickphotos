@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload', 'toastr'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload', 'toastr', 'ui.select'])
 
     .controller('HomeCtrl', function ($state, $scope, $rootScope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll, $uibModal) {
         $scope.template = TemplateService.changecontent("home"); //Use same name of .html file
@@ -1401,11 +1401,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.sendEnquiry = function ($event) {
             $scope.slide = !$scope.slide;
         };
+        $scope.popup1 = {
+            opened: false
+        }
+        $scope.openDatePicker = function () { // to open datePicker for sendEnquiry popup
+            $scope.popup1.opened = true;
+        };
 
         // this function is used for data submmiting enquiry
         $scope.formEnquiry = {};
         $scope.dataSubmit = function (data) {
             //console.log("dataaaa", data);
+            $scope.slide = !$scope.slide;
             if (!_.isEmpty(data) || data != undefined) {
                 $scope.enquiryData = {};
                 $scope.enquiryData.enquiryUser = $stateParams.userid;
@@ -1413,6 +1420,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.enquiryData.enquirerEmail = data.enquirerEmail;
                 $scope.enquiryData.enquirerMobileNo = data.enquirerMobileNo;
                 $scope.enquiryData.enquirerMsg = data.enquirerMsg;
+                $scope.enquiryData.enquirerDate = data.enquirerdate;
                 $scope.userData.enquiry.push($scope.enquiryData);
                 //console.log("enquiryData", $scope.enquiryData);
                 if (!_.isEmpty($scope.enquiryData)) {
@@ -1424,6 +1432,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
                 }
+
+                data.enquirerName = "";
+                data.enquirerEmail = "";
+                data.enquirerMobileNo = "";
+                data.enquirerName = "";
+                data.enquirerMsg = "";
+                data.enquirerdate="";
             }
         };
         //data submit enquiry
@@ -1666,12 +1681,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
     .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $rootScope, toastr) {
+
         $scope.template = TemplateService;
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
         });
         $.fancybox.close(true);
+
         $scope.uploadSignup = function () {
             //console.log("signup");
             $scope.loginModal = $uibModal.open({
@@ -1686,6 +1703,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if ($scope.loginModal) {
                 $scope.loginModal.close();
             }
+
             console.log("login");
             $scope.signupModal = $uibModal.open({
                 animation: true,
@@ -1722,6 +1740,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             },
 
+            $scope.subscribe = function (formdata) {
+                //  console.log("formdatafsgdvtrhejy", formdata);
+                NavigationService.apiCallWithData("SubscribeEmail/save", formdata, function (data) {
+                    if (data.value === true) {
+                        // console.log(data);
+                        $scope.subscribeModal = $uibModal.open({
+                            animation: true,
+                            templateUrl: "frontend/views/modal/subscribe.html",
+                            scope: $scope,
+                            windowClass: '',
+                            size: 'sm',
+                            backdropClass: 'black-drop'
+                        });
+                        setTimeout(function (data) {
+                            $scope.subscribeModal.close();
+                            formdata.email = "";
+                        }, 2000);
+                    }
+                });
+            },
+
             $scope.login = function (formdata) {
                 // formdata.serviceRequest = $scope.serviceList;
                 //  console.log(formdata);
@@ -1748,6 +1787,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.template.profile = null;
             $state.go("home");
         }
+
+        $scope.catData = [];
+        NavigationService.callApi("Categories/getAll", function (data) {
+            if (data.value === true) {
+                //console.log(data)
+                $scope.category = data.data;
+                _.forEach($scope.category, function (value) {
+                    $scope.catData.push(value);
+                    //console.log("Cat-data", $scope.catData);
+                });
+            }
+        });
+        $scope.selected = {
+            value: $scope.catData[0]
+        };
         //     $scope.signUp = function() {
         //       console.log(modal);
         //         $uibModal.open({

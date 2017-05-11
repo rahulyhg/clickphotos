@@ -27,30 +27,26 @@
                 <div ng-include="template.menu" class="template menu"></div>         
             </div>-->
                 <div class="col-md-4">
-                    <!--search bar-->
-                    <!--<div class="Search_bar">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for photographer">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>-->
-                    <!--search_bar-->
+                    <ui-select ng-model="selected.value">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.name"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (catData | filter: $select.search) track by item._id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
                 <div class="col-md-4">
                     <!--user name with img-->
                     <div class="photographer text-right">
                         <div class="photographer_img">
-                            <div class="server-img"style="background: url('{{template.profile.profilePic | serverimage}}') no-repeat 50% 50%"
-                            ng-if="template.profile.profilePic" ui-sref="photographer">   
+                            <div class="server-img" style="background: url('{{template.profile.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="template.profile.profilePic"
+                                ui-sref="photographer">
                             </div>
-                             <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ng-if="!template.profile.profilePic">
+                            <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ng-if="!template.profile.profilePic">
                             <!--<img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="template.profile.profilePic">-->
                         </div>
-                       
+
                         <span ng-if="!template.profile" ng-click="uploadSignup()">Sign Up as a Photographer</span>
                         <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
                         <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()">Log out</span>                     

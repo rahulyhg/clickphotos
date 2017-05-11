@@ -74,6 +74,7 @@ var schema = new Schema({
         enquirerName: String,
         enquirerEmail: String,
         enquirerMobileNo: String,
+        enquirerDate: Date,
         enquirerMsg: String
     }]
 });
@@ -898,16 +899,24 @@ var model = {
             } else if (data1) {
                 console.log("data", data1);
                 var emailData = {};
+                //console.log("data1-----", data1.enquiry.length);
+                //console.log("data1-----", data1.enquiry[data1.enquiry.length - 1]);
+
+                //var ind = data1.enquiry.length - 1;
                 emailData.email = data1.email;
-                emailData.filename = "enquiry.ejs";
+                emailData.filename = "goldpackage.ejs";
                 emailData.name = data1.name;
+                //emailData.enqName = data1.enquiry[ind].enquirerName;
+               // emailData.emailOfEnquirer = data1.enquiry[ind].enquirerEmail;
                 //emailData.serviceRequest = data1.serviceRequest;
                 // emailData.email = data1.email;
-                //emailData.mobile = data1.mobile;
-                //emailData.query = data1.query;
+
+                // emailData.mobile = data1.enquiry[ind].enquirerMobileNo;
+                // emailData.query = data1.enquiry[ind].enquirerMsg;
+                // emailData.date = data1.enquiry[ind].enquirerDate;
                 emailData.from = "admin@clickmania.in";
-                emailData.subject = "congrats you Have upgraded to Gold Package";
-                console.log("email data : ", emailData);
+                emailData.subject = "Enquiry";
+                // console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
                     console.log("emailRespo", emailRespo);
                     if (err) {

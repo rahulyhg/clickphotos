@@ -6,7 +6,7 @@
         <div class="ab">
             <div class="border-profile">
                 <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive profile-user ">
-                <div class="border-profileImg" style="background: url('{{userData.profilePic | serverimage }}') no-repeat 50% 50%" ng-if="userData.profilePic"> 
+                <div class="border-profileImg" style="background: url('{{userData.profilePic | serverimage }}') no-repeat 50% 50%" ng-if="userData.profilePic">
                 </div>
                 <!--<img ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="userData.profilePic">-->
                 <img src="frontend/img/photographer/profile.jpg" class="img-responsive profile-f-img" ng-if="!userData.profilePic">
@@ -490,6 +490,18 @@
                             </div>
                             <!--<p>Please Enter Your Mobile No</p>-->
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions"
+                                        ng-required="true" close-text="Close" ng-model="enquiryInfo.enquirerdate">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openDatePicker();"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
                         <!--<div class="col-md-6">
                                 <div class="form-group">
                                     <div class="dropdown">
@@ -514,7 +526,7 @@
                     <div class="row">
                         <!--emailerFunction
                         sendEnqu(currentProfile)-->
-                        <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);">Send</a></p>
+                        <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile)">Send</a></p>
                     </div>
                 </form>
             </div>

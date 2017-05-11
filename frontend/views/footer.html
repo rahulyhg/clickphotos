@@ -15,14 +15,14 @@
                             <p><a href="#" class="blank" ui-sref="aboutus" style="text-decoration: underline;">Know more</a></p>
                         </div>
                     </div>
-                    <form ng-submit="subscribeData(formData)" name="loginForm">
+                    <form name="loginForm">
                         <div class="col-md-4">
                             <h3>Subscribe Newsletter</h3>
                             <div class="input-group">
                                 <input type="email" class="form-control" placeholder="Email Address" ng-model="formData.email" required>
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit">
-                                 <span ng-click="subscribe('sm')">Subscribe</span>
+                                 <span ng-click="subscribe(formData)">Subscribe</span>
                         </button>
                                 </div>
                             </div>
