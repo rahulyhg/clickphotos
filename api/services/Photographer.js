@@ -902,18 +902,18 @@ var model = {
                 //console.log("data1-----", data1.enquiry.length);
                 //console.log("data1-----", data1.enquiry[data1.enquiry.length - 1]);
 
-                //var ind = data1.enquiry.length - 1;
+                var ind = data1.enquiry.length - 1;
                 emailData.email = data1.email;
-                emailData.filename = "goldpackage.ejs";
+                emailData.filename = "enquiry.ejs";
                 emailData.name = data1.name;
-                //emailData.enqName = data1.enquiry[ind].enquirerName;
-               // emailData.emailOfEnquirer = data1.enquiry[ind].enquirerEmail;
+                emailData.enqName = data1.enquiry[ind].enquirerName;
+               emailData.emailOfEnquirer = data1.enquiry[ind].enquirerEmail;
                 //emailData.serviceRequest = data1.serviceRequest;
                 // emailData.email = data1.email;
 
-                // emailData.mobile = data1.enquiry[ind].enquirerMobileNo;
-                // emailData.query = data1.enquiry[ind].enquirerMsg;
-                // emailData.date = data1.enquiry[ind].enquirerDate;
+                emailData.mobile = data1.enquiry[ind].enquirerMobileNo;
+                emailData.query = data1.enquiry[ind].enquirerMsg;
+                emailData.date = data1.enquiry[ind].enquirerDate;
                 emailData.from = "admin@clickmania.in";
                 emailData.subject = "Enquiry";
                 // console.log("email data : ", emailData);
