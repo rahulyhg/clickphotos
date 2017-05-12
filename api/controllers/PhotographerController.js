@@ -263,9 +263,9 @@ var controller = {
         }
     },
 
-    search: function (req, res) {
+    sendOtp: function (req, res) {
         if (req.body) {
-            Photographer.search(req.body, res.callback);
+            Photographer.sendOtp(req.body, res.callback);
         } else {
             res.json({
                 value: false,
@@ -275,7 +275,6 @@ var controller = {
             })
         }
     },
-
     // smsForOtp: function (req, res) {
     //     if (req.body) {
     //         Photographer.smsForOtp(req.body, res.callback);

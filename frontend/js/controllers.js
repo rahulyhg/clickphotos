@@ -1822,11 +1822,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.verifyAndSendEmail = function (formdata) {
             // formdata.serviceRequest = $scope.serviceList;
             // console.log(formdata);
-            var formData = {};
-            formData.email = formdata;
-            NavigationService.apiCallWithData("Photographer/sendOtp", formData, function (data) {
+            NavigationService.apiCallWithData("Photographer/sendOtp", formdata, function (data) {
                 console.log("dataForOtp", data);
-                if (data.data.value) {
+                if (data.value) {
                     //  console.log(data.data.data);
                     $scope.emailOtp = data;
                 }
@@ -1848,7 +1846,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // console.log("doneFormData", formdata);
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 if (data.value) {
-                    
+
                 }
             });
         }
