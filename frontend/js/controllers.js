@@ -1819,6 +1819,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
         //End of forgot password modal
         //verify and send mail for forgot password
+        $scope.displayCnfirmBox = false;
+        $scope.displayotpBox = false;
         $scope.verifyAndSendEmail = function (formdata) {
             // formdata.serviceRequest = $scope.serviceList;
             // console.log(formdata);
@@ -1826,27 +1828,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log("dataForOtp", data);
                 if (data.value) {
                     //  console.log(data.data.data);
-                    $scope.emailOtp = data;
+                    $scope.emailOtp = data.data.otp;
+                    $scope.id = data.data.id;
+                    console.log("$scope.emailOtp", $scope.emailOtp);
+                    $scope.displayotpBox = true;
                 }
             });
         };
 
         $scope.checkOTP = function (otp) {
-            console.log("opt", $scope.emailOtp, otp);
-            if (_.isEqual($scope.emailOtp, otp)) {
+            console.log("opt", $scope.emailOtp);
+            console.log("opt", otp);
+            if (_.isEqual($scope.emailOtp, otp.otp)) {
                 console.log("email OTP verified");
                 $scope.displayCnfirmBox = true;
+                $scope.displayotpBox = false;
             } else {
                 alert("Incorrect OTP!");
             }
         }
 
         $scope.savePassword = function (formdata) {
-            formdata.password = formdata;
+            formdata._id = $scope.id;
             // console.log("doneFormData", formdata);
-            NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
                 if (data.value) {
-
+                    alert("Password change");
                 }
             });
         }

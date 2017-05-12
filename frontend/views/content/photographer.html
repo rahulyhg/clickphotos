@@ -1,0 +1,774 @@
+<div class="photographer-page mg_t75">
+    <form>
+        <div class="profile-banner">
+            <div class="profile-banner__bg" style="background: url('{{photographerData.coverPic | serverimage}}') no-repeat center top">
+                <!--<img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive" height="440" ng-if="photographerData.coverPic">-->
+                <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!photographerData.coverPic" height="440">
+            </div>
+            <div class="change-cover">
+                <div class="inline-block change-cover__img">
+                    <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive">
+                </div>
+                <!--<div class="inline-block change-cover__text">
+                    <span>Upload Cover Photo</span>
+                    <upload-image ng-model="photographerData.coverPic" no-view></upload-image>
+                </div>-->
+                <!--<button type="button" ng-click="coverPicture(myPic)" >  Upload Cover Photo</button>-->
+            </div>
+            <div class="select-box">
+                <div class="container">
+                    <div class="profile-block">
+                        <div class="holder1 display-inline">
+                            <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive sm-logo">
+                            <div class="profile-holder" style="background: url('{{photographerData.profilePic | serverimage}}') no-repeat center center">{{profilePhoto.profilePic }}
+                                <!--<img ng-src="{{photographerData.profilePic | serverimage}}" alt="" class="img-responsive prof-img" ng-if="photographerData.profilePic">-->
+                                <img src="frontend/img/photographer/profile.jpg" class="img-responsive prof-img" ng-if="!photographerData.profilePic">
+                                <div class="upload-trans" type="button" ng-hide="profileSelect">
+                                    <span class="directive-opacity" ng-click="userUploadImg()">
+                                        <img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline">
+                                        Upload Profile Pic
+                                    </span>
+                                    <!--<div ng-disabled="true">
+                                        <upload-image ng-model="photographerData.profilePic" no-view></upload-image>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="quarter-circle"></div>
+                        </div>
+                        <div class="name-sec display-inline">
+                            <span class="name-part">{{photographerData.name}}</span>
+                            <div>
+                                <div class="inline-block">
+                                    <span class="loc-span">Location:</span>
+                                </div>
+                                <div class="inline-block">
+                                    <span class="loc-span">{{locString}}</span>
+                                </div>
+                            </div>
+                            <!--<div>
+                                <div class="inline-block name-sec__speciality-title">
+                                    <span class="loc-span">Speciality:
+                               </div>
+                               <div class="inline-block name-sec__speciality-text">
+                                 <span class="loc-span">{{specialityString }}</span>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <!-- <div class=""> -->
+                        <div class="btn-1" ng-click="tab = 1" ng-class="{'active':tab == 1}">
+                            <button type="button" class="btn btn-default btn-select">ABOUT</button>
+                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                        </div>
+                        <span class="border-line"></span>
+                        <div class="btn-1" ng-click="tab = 2" ng-class="{'active':tab == 2}">
+                            <button type="button" class="btn btn-default btn-select">WORK</button>
+                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                        </div>
+                        <span class="border-line"></span>
+                        <div class="btn-1" ng-click="tab = 3" ng-class="{'active':tab == 3}">
+                            <button type="button" class="btn btn-default btn-select">PACKAGES</button>
+                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <!-- //form-input -->
+                    <div class="part-1" ng-if="tab == 1">
+                        <div class="about-part">
+                            <div class="about-desc" ng-if="!about">
+                                <!--edit-->
+                                <div class="about-head text-capitalize">about {{photographerData.name}}
+                                    <!--<img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline pull-right img-edit">-->
+                                </div>
+                                <div class="abt-form">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="name" class=""> <img src="frontend/img/photographer/form/user.png" alt="" class="img-responsive display-inline">Name:</label>
+                                            <div class="display-inline wd70">
+                                                <input type="text" class="form-control" id="name" placeholder="Please enter your full name" ng-model="photographerData.name">
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group location">
+                                            <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline"> Location:</label>-->
+                                        <!--<div class="selected-option display-inline">
+                                                <span>Mumbai</span>
+                                                <div class="close-btn">x</div>
+                                            </div>-->
+                                        <!--<input type="text" placeholder="Enter location">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>-->
+                                        <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
+                                        <!--</div>-->
+                                        <div class="form-group city">
+                                            <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline"> Location:</label>
+                                            <!--<div class="selected-option display-inline">
+                                               <span>Mumbai</span>
+                                               <div class="close-btn">x</div>
+                                           </div>-->
+
+                                            <div class="display-inline city__name">
+                                                <input type="text" ng-change="autoLocation()" class="form-control" id="locationCity" ng-model="dummy.abc">
+                                            </div>
+                                            <div class="display-inline city__add-icon" ng-click="addLocation();">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="selected-option display-inline" ng-repeat="a in arrLocation track by $index">
+                                                <span>{{a}}</span>
+                                                <div class="close-btn" ng-click="removeLocation($index)">x</div>
+                                            </div>
+                                            <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
+                                        </div>
+                                        <div class="form-group custom-check edit-tab">
+                                            <div class="inline-block speciality">
+                                                <label for="speciality" class=""> 
+                                                <!--<img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">-->
+                                            Speciality:</label>
+                                            </div>
+                                            <div class="inline-block speciality-list">
+                                                <p class="check-box" ng-repeat="speciality in specialityData">
+                                                    <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)"
+                                                    />
+                                                    <label for="{{speciality.name}}" class="check-label">{{speciality.name}}</label>
+                                                </p>
+                                            </div>
+                                            <!--<p class="check-box">
+                                                <input type="checkbox" id="test2" />
+                                                <label for="test2" class="check-label">Wedding</label>
+                                            </p>
+                                            <p class="check-box">
+                                                <input type="checkbox" id="test3" />
+                                                <label for="test3" class="check-label">Food</label>
+                                            </p>
+                                            <p class="check-box">
+                                                <input type="checkbox" id="test4" />
+                                                <label for="test4" class="check-label">Wildlife</label>
+                                            </p>
+                                            <p class="check-box">
+                                                <input type="checkbox" id="test5" />
+                                                <label for="test5" class="check-label">Others</label>
+                                            </p>-->
+                                            <!-- <div class="display-inline"><input type="text" class="form-control" id="speciality"></div> -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bio" class="vat"><img src="frontend/img/photographer/form/edit.png" alt="" class="img-responsive display-inline">Bio:</label>
+                                            <div class="inline">
+                                                <textarea class="form-control text-set" id="bio" rows="5" placeholder="Describe yourself as a photographer in less than 250 characters"
+                                                    ng-model="photographerData.bio"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
+                                            <div class="display-inline wd70">
+                                                <!--<input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">-->
+                                                <select name="txtCountry" ng-model="photographerData.pricing" required>
+                                                 <option ng-selected="true" value="">Give an estimate of the fee you charge</option>
+                                                 <option value="{{cat.value}}" ng-repeat="cat in fees">{{cat.name}}</option>
+                                                 <!--<option value="2">Scenery</option>-->
+                                                 </select>
+                                                <!--<div class="custom-check" uib-dropdown auto-close="outsideClick">
+                                                    <button class="btn" id="price-dropdown" uib-dropdown-toggle type="button">Give an estimate of the fee you charge
+                                                      <span class="caret"></span>
+                                                             </button>
+                                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="price-dropdown">
+                                                        <li role="menuitem" ng-repeat="priceRange in fees">
+
+                                                            <div class="checkbox">
+                                                                <input type="radio" ng-model="photographerData.pricing" value="{{priceRange.value}}" name="{{photographerData.pricing}}"
+                                                                    id="{{priceRange.value}}">
+                                                                <label for="{{priceRange.value}}"><i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceFrom}}</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceTo}}</span></label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                        <div class="sub-sec text-center">
+                                            <button type="button" class="btn btn-default" ng-click="done(photographerData)">Done</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /form-submit -->
+                            <div class="about-desc" ng-if="about">
+
+                                <!--display-->
+                                <!--without edit-->
+                                <div class="about-head text-capitalize">about {{photographerData.name}}
+                                    <div class="edit-pencil display-inline pull-right" ng-click="showabout()">
+                                        <span>Edit</span><img src="frontend/img/photographer/form/edit-white.png" alt=""
+                                            class="img-responsive display-inline pull-right img-edit">
+                                    </div>
+                                </div>
+                                <div class="abt-form">
+                                    <form action="" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="name" class=""><img src="frontend/img/photographer/form/user.png" alt="" class="img-responsive display-inline">name:</label>
+                                            <div class="display-inline">
+                                                {{photographerData.name}}
+                                                <!--<input type="text" class="form-control" id="name" placeholder="Please enter your full name" value="Rahul Mallesh" readonly>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline">Location:</label>
+                                            <div class="selected-option display-inline" ng-repeat="speciality in photographerData.location">
+                                                <span>{{speciality}}</span>
+                                            </div>
+                                            <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                                            <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
+                                            <div class="city">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="speciality" class=""><img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
+                                            <div class="selected-option display-inline" ng-repeat="speciality in photographerData.speciality">
+                                                <span>{{speciality.name}}</span>
+                                            </div>
+                                            <!--<div class="selected-option display-inline">
+                                                <span>Wedding</span>
+                                            </div>
+                                            <div class="selected-option display-inline">
+                                                <span>Food</span>
+                                            </div>-->
+                                            <!-- <div class="display-inline"><input type="text" class="form-control" id="speciality"></div> -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bio" class="vat"><img src="frontend/img/photographer/form/edit.png" alt="" class="img-responsive display-inline">Bio:</label>
+                                            <div class="inline">
+                                                <textarea class="form-control text-set" id="bio" rows="5" placeholder="" value="" readonly style="border: none!important">{{photographerData.bio}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="border-bottom: none;">
+                                            <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
+                                            <div class="display-inline">
+                                                {{photographerData.pricing}}
+                                                <!--<input type="text" class="form-control" id="pricing" placeholder="" value="&#8377; 5000" readonly>-->
+                                            </div>
+                                        </div>
+                                        <div class="sub-sec text-center">
+                                            <!-- <button type="submit" class="btn btn-default">Done</button> -->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- secondpart -->
+                        <div class="row">
+                            <div class="about-desc" ng-hide="packageShow=='Gold'">
+                                <div class="about-head text-capitalize">Membership</div>
+                                <div class="abt-2">
+                                    <div class="red-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
+                                        <p>
+                                            You are currently registered as a free user package
+                                        </p>
+                                    </div>
+                                    <div class="upgrade-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
+                                        <p class="text-uppercase">Upgrade to the following premium packages</p>
+                                    </div>
+
+                                    <div class="upgrade-pkg" ng-if="packageShow!='Silver' && packageShow!='Gold' ">
+                                        <div class="row">
+                                            <div class="col-md-6 text-center">
+                                                <div class="package-card">
+                                                    <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                    <div class="display-inline pkg-info">
+                                                        <span class="display-block package-name">SILVER PACKAGE</span>
+                                                        <span class="display-block package-price">
+                                                      <span class="rupee">`</span>2300
+                                                        inclusive of taxes</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 border-divider">
+                                                <ul>
+                                                    <li>30 photos</li>
+                                                    <li>2mb per photo</li>
+                                                    <li>Photos can be edited by you</li>
+                                                    <li>Valid for 1 year</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-default btn-full" ng-click="silverMember();silverPack(photographerData._id);updateGold(photographerData._id);">UPGRADE NOW</button>
+                                    </div>
+                                    <br>
+                                    <div class="upgrade-pkg2 gold" ng-if=" packageShow!='Gold'">
+                                        <div class="row">
+                                            <div class="col-md-6 text-center">
+                                                <div class="package-card">
+                                                    <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                    <div class="display-inline pkg-info">
+                                                        <span class="display-block package-name">GOLD PACKAGE</span>
+                                                        <span class="display-block package-price"><span class="rupee">`</span>3400
+                                                        inclusive of taxes</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 border-divider">
+                                                <ul>
+                                                    <li>100 photos</li>
+                                                    <li>3mb per photo</li>
+                                                    <li>Photos can be edited by you</li>
+                                                    <li>Valid for 1 year</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-default btn-full" ng-click="goldMember();goldPack(photographerData._id);">UPGRADE NOW</button>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- goldmember -->
+
+                        <!-- silverMember -->
+                        <div class="about-desc" ng-if="packageShow=='Silver' ">
+                            <div class="about-head text-capitalize">Membership</div>
+                            <div class="abt-2">
+                                <div class="red-sec">
+                                    <p>
+                                        You are currently registered as a Silver Package
+                                    </p>
+                                </div>
+                                <!--<div class="upgrade-sec">
+                                    <p class="text-uppercase">Upgrade to the following premium packages</p>
+                                </div>
+                                <div class="upgrade-pkg2 gold">
+                                    <div class="row">
+                                        <div class="col-md-6 text-center">
+                                            <div class="package-card">
+                                                <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                <div class="display-inline pkg-info">
+                                                    <span class="display-block package-name">GOLD PACKAGE</span>
+                                                    <span class="display-block package-price">  <span class="rupee">`</span>                                                    3400 plus taxes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 border-divider">
+                                            <ul>
+                                                <li>100 photos</li>
+                                                <li>3mb per photo</li>
+                                                <li>Photos can be edited by you</li>
+                                                <li>Valid for 1 year</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="about-desc" ng-if="packageShow=='Gold'">
+                            <div class="about-head text-capitalize">Membership</div>
+                            <div class="abt-2">
+                                <div class="red-sec">
+                                    <p>
+                                        You are currently registered as a Gold Package
+                                    </p>
+                                </div>
+                                <!--<div class="upgrade-sec">
+                                    <p class="text-uppercase">Upgrade to the following premium packages</p>
+                                </div>
+                                <div class="upgrade-pkg2 gold">
+                                    <div class="row">
+                                        <div class="col-md-6 text-center">
+                                            <div class="package-card">
+                                                <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                <div class="display-inline pkg-info">
+                                                    <span class="display-block package-name">GOLD PACKAGE</span>
+                                                    <span class="display-block package-price">  <span class="rupee">`</span>                                                    3400 plus taxes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 border-divider">
+                                            <ul>
+                                                <li>100 photos</li>
+                                                <li>3mb per photo</li>
+                                                <li>Photos can be edited by you</li>
+                                                <li>Valid for 1 year</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- work-sec -->
+                <div class="work-part" ng-if="tab == 2">
+                    <div class="" ng-if="packageShow==''">
+                        <div class="free-member">
+                            <span class="small-font left-font">As a</span>
+                            <span class="orange-color big-font">Free Member</span>
+                            <span class="small-font">you are unable to upload photos</span>
+                        </div>
+                        <div class="package-block">
+                            <p class="text-uppercase text-center">Upgrade to the following premium packages to upload</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="silver-pack" ng-if="packageShow!='Silver' && packageShow!='Gold' ">
+                                        <div class="silver-content text-center">
+                                            <div class="package-head">
+                                                <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                <div class="display-inline pkg-info">
+                                                    <span class="package-name">SILVER PACKAGE</span>
+                                                </div>
+                                            </div>
+                                            <span class="display-block package-price">    <span class="rupee">`</span> 2300
+                                            plus taxes
+                                            </span>
+                                            <ul class="package-specs text-left">
+                                                <li>30 photos</li>
+                                                <li>2mb per photo</li>
+                                                <li>Photos can be edited by you</li>
+                                                <li>Valid for 1 year</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="silverMember();silverPack(photographerData._id);updateGold(photographerData._id);">UPGRADE NOW</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="silver-pack or-cont" ng-if=" packageShow!='Gold'">
+                                        <div class="silver-content text-center">
+                                            <div class="package-head1">
+                                                <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                <div class="display-inline pkg-info">
+                                                    <span class="package-name">GOLD PACKAGE</span>
+                                                </div>
+                                            </div>
+                                            <span class="display-block package-price"><span class="rupee">`</span> 3450 plus
+                                            taxes
+                                            </span>
+                                            <ul class="package-specs text-left">
+                                                <li>100 photos</li>
+                                                <li>3mb per photo</li>
+                                                <li>Photos can be edited by you</li>
+                                                <li>Valid for 1 year</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember();goldPack(photographerData._id);">UPGRADE NOW</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--sliver subscribed-->
+                    <div class="silver-subscribed" ng-if="packageShow=='Silver' && termS">
+                        <div class="free-member">
+                            <span class="small-font left-font">You are now</span>
+                            <span class="orange-color big-font">Subscribed</span>
+                            <span class="small-font">to a silver package</span>
+                        </div>
+                        <div class="upload-pic text-center">
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="silverShow()">Start uploading</button>
+                        </div>
+                        <div class="terms">
+                            <span class="text-center">Terms and conditions</span>
+                            <ul class="package-specs text-left">
+                                <li>30 photos</li>
+                                <li>2mb per photo</li>
+                                <li>Photos can be edited by you</li>
+                                <li>Valid for 1 year</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- //gold subscribed-->
+                    <div class="silver-subscribed" ng-if="packageShow=='Gold'&& termG">
+                        <div class="free-member">
+                            <span class="small-font left-font">You are now</span>
+                            <span class="orange-color big-font">Subscribed</span>
+                            <span class="small-font">to a gold package</span>
+                        </div>
+                        <div class="upload-pic text-center">
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="goldShow()">Start uploading</button>
+                        </div>
+                        <div class="terms">
+                            <span class="text-center">Terms and conditions</span>
+                            <ul class="package-specs text-left">
+                                <li>100 photos</li>
+                                <li>3mb per photo</li>
+                                <li>Photos can be edited by you</li>
+                                <li>Valid for 1 year</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- uploaded-images -->
+                    <!--silver package-->
+                    <div class="uploaded-images" ng-if="packageShow=='Silver' && !termS">
+                        <div class="package-head">
+                            <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                            <div class="display-inline pkg-info">
+                                <span class="package-name">SILVER PACKAGE</span>
+                            </div>
+                        </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 30 PHOTOS</span></span>
+                        <div class="checkbox-form">
+                            <form action="#" class=" circular-checkbox display-inline">
+                                <p class="inline-block" style="vertical-align: top;">My Photos</p>
+                                <div class="inline-block radio-cat collapse" id="radioCollapse">
+                                    <p ng-repeat="list in uniqueCategory track by $index">
+                                        <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                        <label for="{{list.category}}">{{list.category}}</label>
+                                    </p>
+                                </div>
+
+                                <!--<p>
+                                    <input type="checkbox" id="chennai" />
+                                    <label for="chennai">Chennai</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="mumbai" />
+                                    <label for="mumbai">Mumbai</label>
+                                </p>-->
+                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();" ng-if="uniqueCategory.length>=3">
+                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive" >
+                                </div>
+                            </form>
+                            <div class="upload-pic display-inline">
+                                <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<30">Upload picture</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
+                                <div class="img-holder" style="background: url('{{item.image | serverimage}}') no-repeat 50% 50%">
+                                    <!--<img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">-->
+                                    <div class="edit-image">
+                                        <div class="edit-uploaded">
+                                            <a ng-href="{{item.image | serverimage}}" fancybox-box>
+                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
+                                            <!--<button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>-->
+                                            <button type="button" class="btn btn-default" ng-click="deletePhoto('sm',item);">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-pic text-center ld-more">
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()" ng-if="uploadImgLength>=6">Load more</button>
+                        </div>
+                        <div class="upgrade-gd">
+                            <div class="free-member">
+                                <span class="small-font left-font">Want to</span>
+                                <span class="orange-color big-font">Upload</span>
+                                <span class="small-font">more photos</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="sub-main">
+                                        <img src="frontend/img/updatetogold.png" alt="..." class="img-full img-min-h">
+                                        <div class="sub-title text-right">
+                                            <div class="upgrd-gold text-center">
+                                                <h1 class="damionr font70 white-color mgb0">Upgrade to</h1>
+                                                <h1 class="damionr font70  white-color mgt-8">Gold</h1>
+                                                <h2 class="white-color mgt-8">for &#8377;1000 only</h2>
+                                                <p class="text-center btn-fix"><a class="btn orange-btn btn-fix" type="button" ng-click="goldMember();goldPack(photographerData._id);">Click here</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- gold-package -->
+                    <div class="uploaded-images" ng-if="packageShow=='Gold' && !termG">
+                        <div class="package-head head-gold">
+                            <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                            <div class="display-inline pkg-info">
+                                <span class="package-name">GOLD PACKAGE</span>
+                            </div>
+                        </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 100 PHOTOS</span></span>
+                        <div class="checkbox-form">
+                            <form action="#" class="circular-checkbox display-inline">
+                                <p>My Photos</p>
+                                <p ng-repeat="list in uniqueCategory track by $index">
+                                    <input type="checkbox" id="{{list.category}}" ng-click="fliterCheck(list.category)" />
+                                    <label for="{{list.category}}">{{list.category}}</label>
+                                </p>
+                                <!--<p>
+                                    <input type="checkbox" id="chennai1" />
+                                    <label for="chennai1">Chennai</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" id="mumbai2" />
+                                    <label for="mumbai2">Mumbai</label>
+                                </p>-->
+                            </form>
+                            <div class="upload-pic display-inline">
+                                <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<100">Upload picture</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
+                                <div class="img-holder" style="background: url('{{item.image | serverimage}}') no-repeat 50% 50%">
+                                    <!--<img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">-->
+                                    <div class="edit-image">
+                                        <div class="edit-uploaded">
+                                            <a ng-href="{{item.image | serverimage}}" fancybox-box>
+                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
+                                            <!--<button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>-->
+                                            <button type="button" class="btn btn-default" ng-click="deletePhoto('sm',item);">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-pic text-center ld-more">
+                            <button type="button" class="btn btn-default text-uppercase" ng-click="LoadMore()" ng-if="uploadImgLength>=6">Load more</button>
+                        </div>
+                    </div>
+                </div>
+                <!--history-->
+                <div class="history-part" ng-if="tab == 3">
+                    <div ng-hide="hideHistory">
+                        <div class="row">
+                            <div class="about-desc">
+                                <div class="about-head text-capitalize">Order History</div>
+                                <div class="abt-2">
+                                    <div class="history-sec his-under">
+                                        <p class="">You joined Clickmania on {{photographerData.createdAt | date}}</p>
+                                    </div>
+                                    <div class="history-sec his-under" ng-if="packageShow=='Silver' && packageShow!='Gold'">
+                                        <p class="">You Subscribed to Silver Package on {{photographerData.packageBroughtDate | date}}</p>
+                                    </div>
+                                    <div class="history-sec2">
+                                        <p class=""></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="package-block" ng-if="packageShow==''">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="silver-pack" ng-if="packageShow!='Silver' && packageShow!='Gold'">
+                                        <div class="silver-content text-center">
+                                            <div class="package-head">
+                                                <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                <div class="display-inline pkg-info">
+                                                    <span class="package-name">SILVER PACKAGE</span>
+                                                </div>
+                                            </div>
+                                            <span class="display-block package-price">    <span class="rupee">`</span> 2300
+                                            plus taxes
+                                            </span>
+                                            <ul class="package-specs text-left">
+                                                <li>30 photos</li>
+                                                <li>2mb per photo</li>
+                                                <li>Photos can be edited by you</li>
+                                                <li>Valid for 1 year</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="silverMember();silverPack(photographerData._id);updateGold(photographerData._id);">UPGRADE NOW</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="silver-pack or-cont" ng-if=" packageShow!='Gold'">
+                                        <div class="silver-content text-center">
+                                            <div class="package-head1">
+                                                <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
+                                                <div class="display-inline pkg-info">
+                                                    <span class="package-name">GOLD PACKAGE</span>
+                                                </div>
+                                            </div>
+                                            <span class="display-block package-price"><span class="rupee">`</span> 3450 plus
+                                            taxes
+                                            </span>
+                                            <ul class="package-specs text-left">
+                                                <li>100 photos</li>
+                                                <li>3mb per photo</li>
+                                                <li>Photos can be edited by you</li>
+                                                <li>Valid for 1 year</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-default btn-full" ng-click="goldMember();goldPack(photographerData._id);">UPGRADE NOW</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="current-package ">
+                        <div class="subs-info pdb-25 " ng-if="packageShow=='Silver' || packageShow=='Gold'">
+                            <p class="text-uppercase text-center ">you are currently subscribed to </p>
+                        </div>
+                        <div class="row " ng-if="packageShow=='Silver'">
+                            <div class="col-md-10 col-md-offset-1 ">
+                                <div class="historypackage-card1 " ng-hide="silverStatus ">
+                                    <div class="display-inline pkg-info ">
+                                        <img src="frontend/img/photographer/award-symbolcopy2.png " alt=" " class="img-responsive
+                                                display-inline ">
+                                        <div class="valdidity inline-block ">
+                                            <div class="inline-block vam ">
+                                                <span class="display-block package-name ">SILVER PACKAGE</span>
+                                                <span class="display-block package-price ">    <span class="rupee ">`</span>2300 inclusive of all taxes</span>
+                                            </div>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDate| date}}</span></p>
+                                            <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> NA</span></p>
+                                        </div>
+                                        <div class="upload-pic display-inline ">
+                                            <button type="button " class="btn btn-default text-uppercase display-block
+                                                " ng-click=" ">Download invoice</button>
+                                            <button type="button " class="btn btn-default text-uppercase display-block
+                                                " ng-click=" ">Renew Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row " ng-if="packageShow=='Gold'">
+                            <div class="col-md-10 col-md-offset-1 ">
+                                <div class="historypackage-card2 " ng-hide="goldStatus ">
+                                    <div class="display-inline pkg-info ">
+                                        <img src="frontend/img/photographer/award-symbolcopy2.png " alt=" " class="img-responsive
+                                                display-inline ">
+                                        <div class="valdidity inline-block ">
+                                            <div class="inline-block vam ">
+                                                <span class="display-block package-name ">GOLD PACKAGE</span>
+                                                <span class="display-block package-price "><span class="rupee ">`</span>3450 inclusive of all taxes</span>
+                                            </div>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDate | date}}</span></p>
+                                            <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light ">NA</span></p>
+                                        </div>
+                                        <div class="upload-pic display-inline ">
+                                            <button type="button " class="btn btn-default text-uppercase display-block
+                                                " ng-click=" ">Download-invoice</button>
+                                            <button type="button " class="btn btn-default text-uppercase display-block
+                                                " ng-click=" ">Renew Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row " ng-if="packageShow=='Silver'">
+                            <div class="col-md-12 ">
+                                <!-- <div class="sub-main ">
+                                <img src="{{subclick.background}} " alt="... " class="img-full img-min-h "> </div> -->
+                                <div class="sub-main ">
+                                    <img src="frontend/img/updatetogold.png" alt="... " class="img-full img-min-h ">
+                                    <div class="sub-title ">
+                                        <div class="upgrd-gold text-center ">
+                                            <h1 class="damionr font70 white-color ">{{subclick.titleOne}}</h1>
+                                            <h1 class="damionr font70 white-color ">{{subclick.titleTwo}}</h1>
+                                            <p class="text-center btn-fix "><a class="btn orange-btn btn-fix " type="button" ng-click="goldMember();goldPack(photographerData._id);">Click here</a></p>
+                                        </div>
+                                    </div>
+                                    <ul class="upgrade-inner ">
+                                        <li>100 photos</li>
+                                        <li>3mb per photo</li>
+                                        <li>Photos can be edited by you</li>
+                                        <li>Valid for 1 year</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="subs-info pdb-25 ">
+                            <p class="text-uppercase text-center ">Gold package starting from 10/11/2017 to 09/01/2018 for &#8377; 200/- </p>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

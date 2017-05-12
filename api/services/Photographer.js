@@ -939,6 +939,7 @@ var model = {
 
     sendOtp: function (data, callback) {
         // console.log("data", data)
+        var foundData={};
         Photographer.findOne({
             email: data.email
         }).exec(function (err, found) {
@@ -960,7 +961,9 @@ var model = {
                             console.log(err);
                             callback(null, err);
                         } else if (emailRespo) {
-                            callback(null, emailOtp);
+                            foundData.otp = emailOtp;
+                            foundData.id = found._id;
+                            callback(null, foundData);
                         } else {
                             callback(null, "Invalid data");
                         }
@@ -973,6 +976,24 @@ var model = {
                 }
             }
 
+        });
+    },
+
+    updatePass: function (data, callback) {
+        console.log("DATA-----", data);
+        Photographer.findOneAndUpdate({
+            _id: data._id
+        }, {
+          password:md5(data.password)
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log("error in updatepass-----",err);
+                callback(err, null);
+            } else {
+                   console.log(" successfully-----",updated);
+                   callback(null, updated);
+            }
         });
     },
 
