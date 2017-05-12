@@ -4,6 +4,7 @@
             <div class="profile-banner__bg" style="background: url('{{photographerData.coverPic | serverimage}}') no-repeat center top">
                 <!--<img ng-src="{{photographerData.coverPic | serverimage}}" alt="" class="img-responsive" height="440" ng-if="photographerData.coverPic">-->
                 <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!photographerData.coverPic" height="440">
+                <div class="profile-overlay"></div>
             </div>
             <div class="change-cover">
                 <div class="inline-block change-cover__img">
@@ -174,7 +175,6 @@
                                                              </button>
                                                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="price-dropdown">
                                                         <li role="menuitem" ng-repeat="priceRange in fees">
-
                                                             <div class="checkbox">
                                                                 <input type="radio" ng-model="photographerData.pricing" value="{{priceRange.value}}" name="{{photographerData.pricing}}"
                                                                     id="{{priceRange.value}}">

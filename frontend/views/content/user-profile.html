@@ -1,7 +1,10 @@
 <div class="container-fluid pad0 ">
     <div class="head-section relative mg_t75">
         <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="cover-img img-responsive" ng-if="userData.coverPic" height="440">
-        <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
+        <div class="head-bg relative">
+            <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
+            <div class="pht-overlay"></div>
+        </div>
         <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
         <div class="ab">
             <div class="border-profile">
@@ -494,8 +497,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions"
-                                        ng-required="true" close-text="Close" ng-model="enquiryInfo.enquirerdate">
+                                    <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+                                        close-text="Close" ng-model="enquiryInfo.enquirerdate">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="openDatePicker();"><i class="glyphicon glyphicon-calendar"></i></button>
                                         </span>

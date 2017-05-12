@@ -217,7 +217,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     MsTransition: 'opacity 1s ease-in-out',
                     'transition': 'all 300ms linear',
                     'position': 'absolute',
-                    'bottom': '135px'
+                    'bottom': '60px'
                 });
                 $('.navbar-brand .navbar-toggle').css({
                     WebkitTransition: 'visibility 1s ease',
