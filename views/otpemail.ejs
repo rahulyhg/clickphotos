@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meata charset="UTF-8">
+        <title>Emailer</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Dosis:500');
+
+            table {
+                width: 600px;
+                margin: 0 auto;
+            }
+
+            caption>div.logo {
+                display: inline-block;
+                width: 230px;
+                height: auto;
+                padding: 15px;
+            }
+
+
+            tfoot {
+                background-color: #f1592a;
+                font-family: 'Dosis', sans-serif;
+                color: white;
+                font-size: 15px;
+            }
+
+            tfoot>ul.list-inline {
+                padding-left: 0;
+                list-style: none;
+                margin-left: -5px;
+            }
+
+            .list-inline>li {
+                display: inline-block;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-left:0;
+            }
+
+            .img-responsive {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .social-icns>ul.list-inline>li {
+                vertical-align: -webkit-baseline-middle;
+            }
+        </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <caption>
+                <div class="logo">
+                    <img src="http://clickmania.tingdom.in/frontend/img/emailers/cmlogo.png" alt="Logo" class="img-responsive">
+                </div>
+            </caption>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="http://clickmania.tingdom.in/frontend/img/emailers/welcome.jpg" class="img-responsive" alt="WelcomeToClickMania">
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 13pt; padding: 25px 50px;font-family: Helvetica, sans-serif;">
+                    Dear <span style="color: #f1592a; text-transform: capitalize;" ><%= name %></span>,<br><br> We got a request to reset the clickmania password.Use below OTP to reset password.
+                  
+                    <br>
+                    <br><br> Cheers!
+                    <br> Team Clickmania
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <div class="cpyright" style="float: left;  line-height: 1.6; padding: 10px 30px;">
+                        &copy; Clickmania (OPC) Pvt. Ltd
+                    </div>
+                    <div class="social-icns" style="float: right; padding: 10px 30px;">
+                        <ul class="list-inline" style="margin-top: 0!important; margin-bottom: 0;">
+                            <li>
+                                <a href=""><img src="http://clickmania.tingdom.in/frontend/img/emailers/fb.png" alt="FacebookLink"></a>
+
+                            </li>
+                            <li>
+                                <a href=""><img src="http://clickmania.tingdom.in/frontend/img/emailers/twitter.png" alt="TwitterLink"></a>
+
+                            </li>
+                            <li>
+                                <a href=""><img src="http://clickmania.tingdom.in/frontend/img/emailers/linkedin.png" alt="LinkedinLink"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>

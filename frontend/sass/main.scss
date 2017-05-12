@@ -681,7 +681,6 @@ a.navbar-brand {
 // This section contains main background image with side nav menu
 .sliding_bg {
     position: relative;
-  
     height: 100%;
     .sidebar {
         position: absolute;
@@ -985,15 +984,13 @@ a.navbar-brand {
             h2 {
                 font-family: 'damion-regular';
                 font-size: 65px;
-                 color: $orangeColor;
+                color: $orangeColor;
                 font-weight: 500;
                 line-height: 0.7;
-                span{
+                span {
                     margin-left: 100px;
                 }
             }
-          
-
         }
         .pht_contest_btn {
             button {
@@ -2236,7 +2233,7 @@ fieldset[disabled] .form-control {
         margin: 0 auto;
         width: 50%;
         float: right;
-        h2{
+        h2 {
             font-family: Helvetica, sans-serif;
         }
     }
@@ -3089,6 +3086,70 @@ header {
                     @include size(90px,
                     auto);
                     border-radius: 0px;
+                }
+                .absolute-cross {
+                    @include position(absolute,
+                    -15px -15px null null);
+                    display: inline-block;
+                    @include size(30px,
+                    30px);
+                    cursor: pointer;
+                }
+            }
+            .pass-contet {
+                // For change password modal
+                @include padding(0 100px);
+                h2 {
+                    font-family: Helvetica, sans-serif;
+                    color: $orangeColor;
+                    font-size: 34px;
+                    letter-spacing: 2px;
+                    margin-bottom: 20px;
+                }
+                h4 {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 22px;
+                    color: $orangeColor;
+                    margin-bottom: 20px;
+                }
+                form {
+                    @include size(70%,
+                    auto);
+                    @include margin(0 auto);
+                }
+                .form-group {
+                    margin-bottom: 20px;
+                    input {
+                        border: 0;
+                        border-bottom: 1px solid #f1592a;
+                    }
+                }
+                button.cnf-btn {
+                    font-family: Helvetica, sans-serif;
+                    @include margin(20px 0 10px);
+                    @include size(150px,
+                    auto);
+                    letter-spacing: 2px;
+                    font-size: 16px;
+                    border-radius: 0px;
+                    padding: 6px 25px;
+                }
+                button.go-btn,
+                .ok-btn {
+                    border-radius: 0;
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+                .dgt-code {
+                    span {
+                        @include size(40px,
+                        35px);
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 2.3;
+                        margin-right: 5px;
+                        border-bottom: 1px solid $orangeColor;
+                    }
                 }
                 .absolute-cross {
                     @include position(absolute,
