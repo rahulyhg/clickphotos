@@ -1849,13 +1849,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-        $scope.savePassword = function (formdata) {
+        $scope.resetPass = function (formdata) {
             formdata._id = $scope.id;
             // console.log("doneFormData", formdata);
             NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                if (data.value) {
-                    alert("Password change");
-                }
+                console.log("doneFormDatadata", data);
+                $.jStorage.set("photographer", data.data);
+                $scope.template.profile = data.data;
+                $state.go('photographer');
+                // if (data.value) {
+                //     // alert("Password change");
+
+                // }
             });
         }
 

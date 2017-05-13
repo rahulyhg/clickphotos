@@ -14,6 +14,8 @@ var firstapp = angular.module('firstapp', [
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
+
+    $urlRouterProvider.otherwise("/");
     $stateProvider
         .state('home', {
             url: "/",
@@ -121,8 +123,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "frontend/views/template.html",
             controller: 'thanksGoldCtrl'
         });
-    $urlRouterProvider.otherwise("/");
-    $locationProvider.html5Mode(isproduction);
+    // $locationProvider.html5Mode(isproduction);
 });
 
 firstapp.filter('startFrom', function () {

@@ -939,7 +939,7 @@ var model = {
 
     sendOtp: function (data, callback) {
         // console.log("data", data)
-        var foundData={};
+        var foundData = {};
         Photographer.findOne({
             email: data.email
         }).exec(function (err, found) {
@@ -984,15 +984,17 @@ var model = {
         Photographer.findOneAndUpdate({
             _id: data._id
         }, {
-          password:md5(data.password)
+            password: md5(data.password)
+        }, {
+            new: true
         }, function (err, updated) {
             console.log(updated);
             if (err) {
-                console.log("error in updatepass-----",err);
+                console.log("error in updatepass-----", err);
                 callback(err, null);
             } else {
-                   console.log(" successfully-----",updated);
-                   callback(null, updated);
+                console.log(" successfully-----", updated);
+                callback(null, updated);
             }
         });
     },
