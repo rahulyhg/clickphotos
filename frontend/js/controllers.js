@@ -568,15 +568,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 //console.log("dataaaaaaaaaa", data);
                 $scope.packageShow = data.data.package;
+                //console.log("$scope.packageShow", $scope.packageShow);
                 $.jStorage.set("photographer", data.data);
                 $state.go("thanks-gold");
             });
 
             $scope.goldPack = function (id) {
                 NavigationService.goldPackMail(id, function (data) {
-                    console.log("acceptdataa", data);
+                    //console.log("acceptdataa", data);
                     if (data.data.value) {
-                        console.log(data.data.value);
+                        //console.log(data.data.value);
                     }
                 })
             };

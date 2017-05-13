@@ -634,6 +634,9 @@
                                     <div class="history-sec his-under" ng-if="packageShow=='Silver' && packageShow!='Gold'">
                                         <p class="">You Subscribed to Silver Package on {{photographerData.packageBroughtDate | date}}</p>
                                     </div>
+                                    <div class="history-sec his-under" ng-if="packageShow!='Silver' && packageShow=='Gold'">
+                                        <p class="">You Subscribed to Gold Package on {{photographerData.packageBroughtDate | date}}</p>
+                                    </div>
                                     <div class="history-sec2">
                                         <p class=""></p>
                                     </div>
