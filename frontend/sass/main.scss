@@ -247,7 +247,7 @@ body {
 
 .mg_t75 {
     // this class is given kz the navbar is at fixed position.
-    margin-top: 76px;
+    margin-top: 65px;
 }
 
 .dosis-medium {
@@ -738,7 +738,7 @@ a.navbar-brand {
             top: 59%;
         }
         .swiper-slide img.swiperbg {
-            margin-top: 50px;
+            margin-top: 180px;
         }
         .bg_main {
             position: absolute;
@@ -793,7 +793,7 @@ a.navbar-brand {
         // z-index: 99;
         // cursor: pointer;
         position: absolute;
-        bottom: 135px;
+        bottom: 60px;
         left: 0;
         right: 0;
         z-index: 99;
@@ -1259,8 +1259,25 @@ $brand-holder: #ccc !default;
     background-color: #f1f1f1;
 }
 
+.pht-overlay {
+    @include position(absolute,
+    0 0 0 0);
+    background: linear-gradient(180deg, transparent, black);
+    //  background:  @include linear-gradient(180deg, transparent,rgba(51, 51, 51, 0.74));
+}
+
+.profile-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, transparent, black);
+}
+
 .profile-banner {
     .profile-banner__bg {
+        position: relative;
         @include size(null,
         440px);
         overflow-y: hidden;
