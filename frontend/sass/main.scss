@@ -681,6 +681,7 @@ a.navbar-brand {
 // This section contains main background image with side nav menu
 .sliding_bg {
     position: relative;
+    margin-top: 62px;
     height: 100%;
     .sidebar {
         position: absolute;
@@ -738,7 +739,7 @@ a.navbar-brand {
             top: 59%;
         }
         .swiper-slide img.swiperbg {
-            margin-top: 180px;
+           // margin-top: 180px;
         }
         .bg_main {
             position: absolute;
@@ -793,7 +794,7 @@ a.navbar-brand {
         // z-index: 99;
         // cursor: pointer;
         position: absolute;
-        bottom: 60px;
+        bottom: 125px;
         left: 0;
         right: 0;
         z-index: 99;
@@ -1262,8 +1263,7 @@ $brand-holder: #ccc !default;
 .pht-overlay {
     @include position(absolute,
     0 0 0 0);
-    background: linear-gradient(180deg, transparent, black);
-    //  background:  @include linear-gradient(180deg, transparent,rgba(51, 51, 51, 0.74));
+    background: linear-gradient(180deg, transparent, black); //  background:  @include linear-gradient(180deg, transparent,rgba(51, 51, 51, 0.74));
 }
 
 .profile-overlay {
@@ -2044,9 +2044,12 @@ fieldset[disabled] .form-control {
 }
 
 .upl-sec {
-    margin-top: 22px;
+    line-height: 1.1;
+    min-height: 212px;
     .upload-pic {
-        margin: 15px 0;
+        margin: 15px 0 0;
+        @include position(absolute,
+        null null 0 null);
     }
     .note-msg {
         font-family: 'dosis-regular';
@@ -2063,6 +2066,12 @@ fieldset[disabled] .form-control {
         span {
             font-weight: 400;
         }
+    }
+    .upload-imgbtn {
+        @include position(absolute,
+        -5% 0 null -0.8%);
+        background-color: white;
+        pointer-events: none;
     }
 }
 
@@ -2461,6 +2470,10 @@ fieldset[disabled] .form-control {
             border: 0;
             border-bottom: 1px solid $orangeColor;
             font-size: 16px;
+        }
+        a.forgot-pwd {
+            text-decoration: underline;
+            color: $orangeColor;
         }
     }
     .s-gn {

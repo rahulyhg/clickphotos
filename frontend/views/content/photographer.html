@@ -278,7 +278,7 @@
                                                         <span class="display-block package-name">SILVER PACKAGE</span>
                                                         <span class="display-block package-price">
                                                       <span class="rupee">`</span>2300
-                                                        inclusive of taxes</span>
+                                                        inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -302,7 +302,7 @@
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
                                                         <span class="display-block package-price"><span class="rupee">`</span>3400
-                                                        inclusive of taxes</span>
+                                                        inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -418,7 +418,7 @@
                                                 </div>
                                             </div>
                                             <span class="display-block package-price">    <span class="rupee">`</span> 2300
-                                            plus taxes
+                                            inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
@@ -439,8 +439,8 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span> 3450 plus
-                                            taxes
+                                            <span class="display-block package-price"><span class="rupee">`</span> 3450 inclusive
+                                            of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>100 photos</li>
@@ -523,7 +523,7 @@
                                     <label for="mumbai">Mumbai</label>
                                 </p>-->
                                 <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();" ng-if="uniqueCategory.length>=3">
-                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive" >
+                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive">
                                 </div>
                             </form>
                             <div class="upload-pic display-inline">
@@ -631,12 +631,24 @@
                                     <div class="history-sec his-under">
                                         <p class="">You joined Clickmania on {{photographerData.createdAt | date}}</p>
                                     </div>
-                                    <div class="history-sec his-under" ng-if="packageShow=='Silver' && packageShow!='Gold'">
-                                        <p class="">You Subscribed to Silver Package on {{photographerData.packageBroughtDate | date}}</p>
+                                    <div ng-if="showAllTabs=='show'">
+                                        <div class="history-sec his-under">
+                                            <p class="">You Subscribed to Silver Package on {{photographerData.silverPackageBroughtDate
+                                                | date}}</p>
+                                        </div>
+                                        <div class="history-sec his-under">
+                                            <p class="">You Subscribed to Gold Package on {{photographerData.goldPackageBroughtDate |
+                                                date}}</p>
+                                        </div>
                                     </div>
-                                    <div class="history-sec his-under" ng-if="packageShow!='Silver' && packageShow=='Gold'">
-                                        <p class="">You Subscribed to Gold Package on {{photographerData.packageBroughtDate | date}}</p>
+                                    <div ng-if="showAllTabs=='hide'">
+                                        <div class="history-sec his-under">
+                                            <p class="">You Subscribed to Gold Package on {{photographerData.goldPackageBroughtDate |
+                                                date}}</p>
+                                        </div>
                                     </div>
+                                    <!--{{history}}
+                                    <div ng-repeat="hs in history $track by index"> cdjfb</div>-->
                                     <div class="history-sec2">
                                         <p class=""></p>
                                     </div>
@@ -705,9 +717,10 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">SILVER PACKAGE</span>
-                                                <span class="display-block package-price ">    <span class="rupee ">`</span>2300 inclusive of all taxes</span>
+                                                <span class="display-block package-price ">    <span class="rupee ">`</span>2300
+                                                inclusive of all taxes</span>
                                             </div>
-                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDate| date}}</span></p>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForSilver | date}}</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light "> NA</span></p>
                                         </div>
                                         <div class="upload-pic display-inline ">
@@ -729,9 +742,10 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
-                                                <span class="display-block package-price "><span class="rupee ">`</span>3450 inclusive of all taxes</span>
+                                                <span class="display-block package-price "><span class="rupee ">`</span>3450
+                                                inclusive of all taxes</span>
                                             </div>
-                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDate | date}}</span></p>
+                                            <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForGold | date}}</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light ">NA</span></p>
                                         </div>
                                         <div class="upload-pic display-inline ">

@@ -269,9 +269,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                 if (data.value === true) {
                     //console.log(data)
+                    $scope.showAllTabs = {};
                     $scope.photographerData = data.data;
-                    $scope.validDate = new Date($scope.photographerData.packageBroughtDate);
-                    $scope.validDate.setYear($scope.validDate.getFullYear() + 1);
+                    if (!_.isEmpty($scope.photographerData.package)) {
+                        if (!_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
+                            $scope.showAllTabs = 'show';
+                        } else if (_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
+                            $scope.showAllTabs = 'hide';
+                        }
+                    }
+                    $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
+                    $scope.validDateForSilver.setYear($scope.validDateForSilver.getFullYear() + 1);
+                    $scope.validDateForGold = new Date($scope.photographerData.GoldPackageBroughtDate);
+                    $scope.validDateForGold.setYear($scope.validDateForGold.getFullYear() + 1);
                     if ($scope.photographerData.package) {
                         $scope.packageShow = $scope.photographerData.package;
                     } else {
@@ -523,7 +533,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.package = 'Silver';
             formdata.packageBroughtDate = new Date();
             // console.log("formdata", formdata);
-            NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/updateToSilver", formdata, function (data) {
                 //console.log("silver memeber", data);
                 $scope.packageShow = data.data.package;
                 $.jStorage.set("photographer", data.data);
@@ -565,7 +575,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata._id = $.jStorage.get("photographer")._id;
             formdata.package = 'Gold';
             formdata.packageBroughtDate = new Date();
-            NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
+            NavigationService.apiCallWithData("Photographer/updateToGold", formdata, function (data) {
                 //console.log("dataaaaaaaaaa", data);
                 $scope.packageShow = data.data.package;
                 //console.log("$scope.packageShow", $scope.packageShow);
@@ -1462,7 +1472,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.openEnquiryModal = $uibModal.open({
                 animation: true,
                 templateUrl: 'frontend/views/modal/sendEnquiry.html',
-                size: size,
+                size: 'sm',
                 scope: $scope,
                 //windowClass: "loginbox"
             });
@@ -1683,7 +1693,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $rootScope, toastr) {
+    .controller('headerctrl', function ($scope, TemplateService, $uibModal, $location, $window, NavigationService, $state, $rootScope, toastr) {
 
         $scope.template = TemplateService;
 
@@ -1825,14 +1835,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.verifyAndSendEmail = function (formdata) {
             // formdata.serviceRequest = $scope.serviceList;
             // console.log(formdata);
+            $scope.displayotpBox = true;
             NavigationService.apiCallWithData("Photographer/sendOtp", formdata, function (data) {
                 console.log("dataForOtp", data);
                 if (data.value) {
                     //  console.log(data.data.data);
+
                     $scope.emailOtp = data.data.otp;
                     $scope.id = data.data.id;
                     console.log("$scope.emailOtp", $scope.emailOtp);
-                    $scope.displayotpBox = true;
+
                 }
             });
         };
@@ -1854,13 +1866,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // console.log("doneFormData", formdata);
             NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
                 console.log("doneFormDatadata", data);
-                $.jStorage.set("photographer", data.data);
-                $scope.template.profile = data.data;
-                $state.go('photographer');
-                // if (data.value) {
-                //     // alert("Password change");
-
-                // }
+                if (data.value) {
+                    $.jStorage.set("photographer", data.data);
+                    $scope.template.profile = data.data;
+                    // var url = "http://" + $window.location.host + "/photographer";
+                    // console.log(url);
+                    // $window.location.href = url;
+                    // $location.path('/photographer'); 
+                    $state.go('photographer');
+                }
             });
         }
 

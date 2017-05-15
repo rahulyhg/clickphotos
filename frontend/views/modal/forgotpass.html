@@ -4,7 +4,7 @@
         <div class="pass-contet text-center">
             <div ng-if="displayCnfirmBox">
                 <h2>Change Password</h2>
-                <form action="">
+       
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="New Password" id="password">
                     </div>
@@ -12,16 +12,16 @@
                         <input type="password" class="form-control" placeholder="Confirm Password" id="password" ng-model="formdata.password">
                     </div>
                     <p><button class="btn orange-btn cnf-btn" ng-click="resetPass(formdata)">CONFIRM</button></p>
-                </form>
+
             </div>
             <div ng-if="displayotpBox==false && displayCnfirmBox==false">
                 <h2>OTP</h2>
                 <h4>Enter your email id below and<br>you'll receive a 4 Digit Verification Code.</h4>
-                <form action="">
+                
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="Enter your email id." id="email" ng-model="formdata.email">
                     </div>
-                </form>
+
                 <p class="text-center">
                     <button class="btn orange-btn go-btn" ng-click="verifyAndSendEmail(formdata)">GO</button>
                 </p>
@@ -30,7 +30,7 @@
                 <div>
                     <h2>OTP</h2>
                     <h4>Enter the 4 Digit Verification Code sent to your Email id.</h4>
-                    <form action="">
+
                         <div class="form-group">
                             <div class="dgt-code">
                                 <input type="text" ng-model="formdata.otp">
@@ -40,10 +40,9 @@
                             <span class="inline-block" contenteditable="true"></span>-->
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div>
-                    <h4>Your password has been changed successfully.</h4>
+                    <!--<h4>Your password has been changed successfully.</h4>-->
                     <p class="text-center">
                         <button class="btn orange-btn ok-btn" ng-click="checkOTP(formdata)">OK</button>
                     </p>

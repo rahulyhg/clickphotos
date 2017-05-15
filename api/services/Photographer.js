@@ -31,7 +31,10 @@ var schema = new Schema({
     dateOfRagister: {
         type: Date
     },
-    packageBroughtDate: {
+    silverPackageBroughtDate: {
+        type: Date
+    },
+    goldPackageBroughtDate: {
         type: Date
     },
     month: String,
@@ -1021,35 +1024,128 @@ var model = {
     //     });
     // }
     //smsotp
+
+    //update to gold
+    // updateToGold: function (data, callback) {
+    //     console.log(data);
+    //     var resObj = {};
+    //     Photographer.findOne({
+    //         _id: data._id
+    //     }).exec(function (err, foundOne) {
+    //         if (err) {
+    //             // console.log(err);
+    //             callback(err, null);
+    //         } else if (_.isEmpty(foundOne)) {
+    //             callback(null, "noDataFound");
+    //         } else {
+    //             Photographer.findOneAndUpdate({
+    //                 _id: data._id
+    //             }, {
+    //                 package: data.package,
+    //                 packageBroughtDate: data.packageBroughtDate
+    //             }, {
+    //                 new: true
+    //             }).exec(function (err, foundUpdate) {
+    //                 if (err) {
+    //                     // console.log(err);
+    //                     callback(err, null);
+    //                 } else if (_.isEmpty(foundUpdate)) {
+    //                     callback(null, "noDataFound-update");
+    //                 } else {
+    //                     resObj.oldData = foundOne;
+    //                     resObj.newData = foundUpdate;
+    //                     callback(null, resObj);
+    //                 }
+
+    //             })
+    //             // callback();
+    //         }
+
+    //     })
+    // },
+    updateToGold: function (data, callback) {
+        console.log(data);
+        Photographer.findOneAndUpdate({
+            _id: data._id
+        }, {
+            package: data.package,
+            goldPackageBroughtDate: data.packageBroughtDate
+        }, {
+            new: true
+        }).exec(function (err, found) {
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+
+        })
+    },
+    //update to Gold end
+
+    //update to silverpackage
+    updateToSilver: function (data, callback) {
+        console.log(data);
+        Photographer.findOneAndUpdate({
+            _id: data._id
+        }, {
+            package: data.package,
+            silverPackageBroughtDate: data.packageBroughtDate
+        }, {
+            new: true
+        }).exec(function (err, found) {
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+
+        })
+    },
+    //update to silverpackage end
 };
 
-cron.schedule('15 10 * * *', function () {
-    Photographer.find({}, function (err, found) {
-        if (err) {
-            console.log("error occured");
-            // callback(err, null);
-        } else {
-            async.eachSeries(found, function (value, callback1) {
-                // write their api to update status if changed
-                var packgeDate = moment(value.packageBroughtDate.setFullYear(value.packageBroughtDate.getFullYear() + 1)).format();
-                console.log("packgeDate", packgeDate);
-                if (packgeDate == new Date() && value.package != "") {
-                    value.package = "";
-                    value.save(function () {})
-                    console.log("updated");
-                }
-                callback1(null, "go ahead");
-            }, function (error, data) {
-                if (err) {
-                    console.log("error found in doLogin.callback1")
-                    //callback(null, err);
-                } else {
-                    //callback(null, "updated");
-                }
-            });
-            console.log("m in found");
-        }
-    });
-});
+// cron.schedule('15 10 * * *', function () {
+//     Photographer.find({}, function (err, found) {
+//         if (err) {
+//             console.log("error occured");
+//             // callback(err, null);
+//         } else {
+//             async.eachSeries(found, function (value, callback1) {
+//                 // write their api to update status if changed
+//                 var packgeDate = moment(value.packageBroughtDate.setFullYear(value.packageBroughtDate.getFullYear() + 1)).format();
+//                 console.log("packgeDate", packgeDate);
+//                 if (packgeDate == new Date() && value.package != "") {
+//                     value.package = "";
+//                     value.save(function () {})
+//                     console.log("updated");
+//                 }
+//                 callback1(null, "go ahead");
+//             }, function (error, data) {
+//                 if (err) {
+//                     console.log("error found in doLogin.callback1")
+//                     //callback(null, err);
+//                 } else {
+//                     //callback(null, "updated");
+//                 }
+//             });
+//             console.log("m in found");
+//         }
+//     });
+// });
 
 module.exports = _.assign(module.exports, exports, model);

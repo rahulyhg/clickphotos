@@ -30,7 +30,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
         .state('photographer', {
             url: "/photographer",
             templateUrl: "frontend/views/template.html",
-            controller: 'PhotographerCtrl'
+            controller: 'PhotographerCtrl',
+            resolve:{
+                test:function(){
+                    console.log("_______________________ inside photographer____________________________");
+                }
+            }
         })
         .state('form', {
             url: "/form",
@@ -123,7 +128,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "frontend/views/template.html",
             controller: 'thanksGoldCtrl'
         });
-    // $locationProvider.html5Mode(isproduction);
+    $locationProvider.html5Mode(isproduction);
 });
 
 firstapp.filter('startFrom', function () {
