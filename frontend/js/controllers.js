@@ -197,7 +197,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     WebkitTransition: 'opacity 1s ease-in-out',
                     MozTransition: 'opacity 1s ease-in-out',
                     MsTransition: 'opacity 1s ease-in-out',
-                    'transition': 'all 300ms linear',
+                    'transition': 'all 300ms ease-in-out',
                     'position': 'absolute',
                     'bottom': '60px'
                 });
@@ -215,9 +215,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     WebkitTransition: 'opacity 1s ease-in-out',
                     MozTransition: 'opacity 1s ease-in-out',
                     MsTransition: 'opacity 1s ease-in-out',
-                    'transition': 'all 300ms linear',
+                    'transition': 'all 300ms ease-in-out',
                     'position': 'absolute',
-                    'bottom': '60px'
+                    'bottom': '125px'
                 });
                 $('.navbar-brand .navbar-toggle').css({
                     WebkitTransition: 'visibility 1s ease',

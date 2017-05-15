@@ -9,6 +9,7 @@
         "name": "Image",
         "type": "image",
         "tableRef": "bannerImage",
+        "size": "1600 × 783px",
         "option": "single",
         "placeholder": "Enter Logo",
         "id": "input1",

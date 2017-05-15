@@ -10,7 +10,7 @@
         "type": "image",
         "tableRef": "bannerImage",
         "option": "single",
-        "size": "1940 x 954px",
+        "size": "1600 × 783px",
         "placeholder": "Enter HomePage Image",
         "id": "input1",
         "validation": ["", "trim", ""],
