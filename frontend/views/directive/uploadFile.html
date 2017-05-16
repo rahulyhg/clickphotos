@@ -11,8 +11,8 @@
   </div>
 
   <div class="">
-    <input id="inputImage" ng-show="!isMultiple" type="file" accept="image/*" image="image" title="Choose Files" class="btn-primary">
-    <input id="inputImage" ng-show="isMultiple" type="file" accept="image/*" image="image" title="Choose Multiple Files" class="btn-primary" onchange="angular.element(this).scope().clearOld()" multiple>
+    <input id="inputImage" ng-show="!isMultiple" type="file" accept="image/*" image="image" title="Choose Files">
+    <input id="inputImage" ng-show="isMultiple" type="file" accept="image/*" image="image" title="Choose Multiple Files"  onchange="angular.element(this).scope().clearOld()" multiple>
     <!--<span>CHOOSE FILE</span>-->
     <!-- <a class="btn btn-primary btn-outline btn-small create-btn" ng-if="!isMultiple">Choose File</a> -->
     <!-- <a class="btn btn-primary btn-outline btn-small create-btn" ng-if="isMultiple">Choose Files</a> -->

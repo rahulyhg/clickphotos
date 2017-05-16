@@ -263,6 +263,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.specialityList = [];
         $scope.arrLocation = [];
         $scope.showSixPhotos = [];
+        validDateForSilver = {};
+        validDateForGold = {};
         if ($.jStorage.get("photographer")) {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
@@ -274,13 +276,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     if (!_.isEmpty($scope.photographerData.package)) {
                         if (!_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
                             $scope.showAllTabs = 'show';
-                        } else if (_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
-                            $scope.showAllTabs = 'hide';
                         }
+                        // else if (_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
+                        //     $scope.showAllTabs = 'hide';
+                        // }
                     }
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
                     $scope.validDateForSilver.setYear($scope.validDateForSilver.getFullYear() + 1);
-                    $scope.validDateForGold = new Date($scope.photographerData.GoldPackageBroughtDate);
+                    $scope.validDateForGold = new Date($scope.photographerData.goldPackageBroughtDate);
                     $scope.validDateForGold.setYear($scope.validDateForGold.getFullYear() + 1);
                     if ($scope.photographerData.package) {
                         $scope.packageShow = $scope.photographerData.package;
@@ -1403,7 +1406,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.signupModal.close();
                         $state.go("photographer");
                     } else {
-                        toastr.error('Wrong Input');
+                        toastr.error('Incorrect credential');
                     }
                 });
             }
@@ -1786,7 +1789,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.signupModal.close();
                         $state.go("photographer");
                     } else {
-                        toastr.error('Wrong Input');
+                        toastr.error('Incorrect credential');
                     }
                 });
             }
@@ -1832,6 +1835,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //verify and send mail for forgot password
         $scope.displayCnfirmBox = false;
         $scope.displayotpBox = false;
+        $scope.displayThanksBox = false;
         $scope.verifyAndSendEmail = function (formdata) {
             // formdata.serviceRequest = $scope.serviceList;
             // console.log(formdata);
@@ -1867,13 +1871,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
                 console.log("doneFormDatadata", data);
                 if (data.value) {
-                    $.jStorage.set("photographer", data.data);
-                    $scope.template.profile = data.data;
+                    $scope.displayCnfirmBox = false;
+                    $scope.displayotpBox = false;
+                    $scope.displayThanksBox = true;
+
+                    // $.jStorage.set("photographer", data.data);
+                    // $scope.template.profile = data.data;
                     // var url = "http://" + $window.location.host + "/photographer";
                     // console.log(url);
                     // $window.location.href = url;
                     // $location.path('/photographer'); 
-                    $state.go('photographer');
+                    // $state.go('photographer');
                 }
             });
         }
@@ -1923,7 +1931,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     .controller('privacyPolicyCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("privacy-policy"); //Use same name of .html file
-        $scope.menutitle = NavigationService.makeactive("privacy-policy"); //This is the Title of the Website
+        $scope.menutitle = NavigationService.makeactive("Privacy Policy"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
@@ -1931,7 +1939,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     .controller('termsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("terms"); //Use same name of .html file
-        $scope.menutitle = NavigationService.makeactive("Terms"); //This is the Title of the Website
+        $scope.menutitle = NavigationService.makeactive("Terms & Conditions"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
@@ -1939,7 +1947,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     .controller('contactUsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("contact-us"); //Use same name of .html file
-        $scope.menutitle = NavigationService.makeactive("Contact"); //This is the Title of the Website
+        $scope.menutitle = NavigationService.makeactive("Contact Us"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 

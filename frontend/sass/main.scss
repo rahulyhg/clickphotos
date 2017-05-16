@@ -739,7 +739,7 @@ a.navbar-brand {
             top: 59%;
         }
         .swiper-slide img.swiperbg {
-           margin-top: -37px;
+            margin-top: -37px;
         }
         .bg_main {
             position: absolute;
@@ -1805,18 +1805,38 @@ fieldset[disabled] .form-control {
         padding: 0 15px;
     }
 } //end
+.added-city {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+    .selected-option {
+        background-color: #f1592a;
+        padding: 3px 10px;
+        border-radius: 5px;
+        color: #fff;
+        margin-right: 8px;
+        margin-bottom: 5px;
+    }
+}
+
 .selected-option {
     background-color: #f1592a;
     padding: 3px 10px;
     border-radius: 5px;
     color: #fff;
     margin-right: 8px;
+    margin-bottom: 5px;
 }
 
 .city {
     .city__name {
-        @include size(18%,
+        @include size(25%,
         auto);
+        vertical-align: top;
+        input {
+            width: 80%;
+            display: inline-block;
+        }
     }
     .city__add-icon {
         cursor: pointer;
@@ -2047,10 +2067,11 @@ fieldset[disabled] .form-control {
 .upl-sec {
     line-height: 1.1;
     min-height: 212px;
+    position: relative;
     .upload-pic {
         margin: 15px 0 0;
         @include position(absolute,
-        null null 0 null);
+        null 14% -2% 0);
     }
     .note-msg {
         font-family: 'dosis-regular';
@@ -2068,11 +2089,15 @@ fieldset[disabled] .form-control {
             font-weight: 400;
         }
     }
+    .upload-dire {
+        display: inline-block;
+        position: relative;
+        top: 10px;
+        width: 50%;
+    }
     .upload-imgbtn {
-        @include position(absolute,
-        -5% 0 null -0.8%);
-        background-color: white;
-        pointer-events: none;
+        display: inline-block;
+        vertical-align: bottom;
     }
 }
 
@@ -3181,6 +3206,9 @@ header {
                         margin-right: 5px;
                         border-bottom: 1px solid $orangeColor;
                     }
+                    input {
+                        letter-spacing: 5px;
+                    }
                 }
                 .absolute-cross {
                     @include position(absolute,
@@ -3638,9 +3666,17 @@ hr.border-hr:after {
     overflow: auto;
 }
 
+.form-horizontal {
+    .selected-data {
+        display: inline-block;
+        vertical-align: top;
+        width: 83%;
+    }
+}
+
 .list {
     min-height: 373px;
-    background-image: url("/../frontend/img/clickm/11.png");
+    background-image: url("/../frontend/img/cam1.png");
     background-repeat: no-repeat;
     background-position: 100% 46%;
     background-size: 34% 100%;
@@ -3944,7 +3980,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .privacy-policy,
 .terms-condition,
 .contactus {
-    @include margin(75px null null null);
+    @include margin(64px null null null);
     .aboutus__bg-img {
         background-color: #2a666d;
     }
@@ -4011,6 +4047,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
     .contactus__map {
         position: relative;
         @include margin(65px 0);
+        .gm-style .place-card-large {
+            // for iframe div
+            display: none!important;
+        }
     }
     .contactus__address {
         @include position(absolute,

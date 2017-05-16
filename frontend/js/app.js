@@ -30,12 +30,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
         .state('photographer', {
             url: "/photographer",
             templateUrl: "frontend/views/template.html",
-            controller: 'PhotographerCtrl',
-            resolve:{
-                test:function(){
-                    console.log("_______________________ inside photographer____________________________");
-                }
-            }
+            controller: 'PhotographerCtrl'
         })
         .state('form', {
             url: "/form",
@@ -437,6 +432,7 @@ firstapp.directive('sidebarDirective', function () {
         link: function (scope, element, attr) {
 
             scope.$watch(attr.sidebarDirective, function (newVal) {
+                var sidebarOpen = false;
 
                 if (newVal) {
 
@@ -454,6 +450,13 @@ firstapp.directive('sidebarDirective', function () {
                     $('#sidenav-overlay').show();
                     $('body').css('overflow-y', 'hidden');
                     element.addClass('show');
+                    $('.sidebar').on('click', function () {
+                       sidebarOpen = true;
+                        if (sidebarOpen) {
+                            $('body').css('overflow-y', 'scroll');
+                        }
+
+                    });
                     return;
                 } else {
                     if ($('div.icon_float').hasClass('hamburger-cross')) {

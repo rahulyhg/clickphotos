@@ -27,9 +27,11 @@
 
                     <div class="upload-pic">
                         <!--<input type="file" value="" />-->
-                        <upload-image ng-model="imagesData.profilePic" no-view></upload-image>
                         <div class="upload-imgbtn">
                             <button type="button" class="btn btn-default" ng-click="uploadProfilePic(imagesData)">Choose your file</button>
+                        </div>
+                        <div class="upload-dire">
+                             <upload-image ng-model="imagesData.profilePic" no-view></upload-image>
                         </div>
                     </div>
                 </div>
