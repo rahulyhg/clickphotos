@@ -2,7 +2,7 @@
 <div class="modal-demo pass-modal">
     <div class="modal-body" id="modal-body" style="border: 2px solid #f15a29">
         <div class="signupOTP-contet text-center">
-            <div>
+            <div ng-if="!showSucessBox">
                 <h2>OTP</h2>
                 <h4>Enter the 4 Digit Verification Code sent to your Email id.</h4>
                 <form>
@@ -20,7 +20,7 @@
                     </p>
                 </form>
             </div>
-            <div>
+            <div ng-if="showSucessBox">
                 <h4>Your account has been successfully verified.</h4>
                 <p class="text-center">
                     <button class="btn orange-btn ok-btn" ng-click="signUp()">CONTINUE</button>

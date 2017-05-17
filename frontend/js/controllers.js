@@ -1754,30 +1754,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             //verify and send mail for signup password
 
-            $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
-                if (!terms) {
-                    // alert('check box error');
-                    $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
-                } else {
-                    // formdata.serviceRequest = $scope.serviceList;
-                    $scope.registerData = formdata;
-                    console.log("$scope.registerData", $scope.registerData);
-                    NavigationService.apiCallWithData("Photographer/sendOtpForSignUp", formdata, function (data) {
-                        console.log("dataForOtp", data);
-                        if (data.value) {
-                            //  console.log(data.data.data);
-                            $scope.emailOtp = data.data.otp;
-                            console.log("$scope.emailOtp", $scope.emailOtp);
-                        }
-                    });
-                }
-            };
+            $scope.showOtpBox = false;
+        $scope.showSucessBox = false;
+        $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
+            if (!terms) {
+                // alert('check box error');
+                $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+            } else {
+                // formdata.serviceRequest = $scope.serviceList;
+                $scope.registerData = formdata;
+                console.log("$scope.registerData", $scope.registerData);
+                NavigationService.apiCallWithData("Photographer/sendOtpForSignUp", formdata, function (data) {
+                    console.log("dataForOtp", data);
+                    if (data.value) {
+                        //  console.log(data.data.data);
+                        $scope.emailOtp = data.data.otp;
+                        console.log("$scope.emailOtp", $scope.emailOtp);
+                    }
+                });
+            }
+        };
 
         $scope.checkOTPForSignUp = function (formdata) {
             console.log("opt", $scope.emailOtp);
-            console.log("opt", otp);
+            console.log("opt", formdata.otp);
             if (_.isEqual($scope.emailOtp, formdata.otp)) {
                 console.log("email OTP verified");
+                $scope.showSucessBox = true;
             } else {
                 alert("Incorrect OTP!");
             }
@@ -1948,12 +1951,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
-        $scope.searchBarGo = function (cat, city, abc) {
-            $state.go("wild-photographer", {
-                catid: cat,
-                catName: city
-            })
 
+        $scope.filterToBeApplied = {};
+        $scope.addFilterValue = function (val, type) {
+            if (_.isEqual(type, "category")) {
+                $scope.filterToBeApplied.category = val._id;
+                $scope.filterToBeApplied.catName = val.name;
+            } else {
+                $scope.filterToBeApplied.city = val;
+
+            }
+            console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
+        }
+
+
+        $scope.searchData={};
+         $scope.searchData.location=[];
+        $scope.searchBarGo = function () {
+            console.log("formadata", $scope.filterToBeApplied);
+            $scope.searchData.location.push($scope.filterToBeApplied.city);
+            NavigationService.apiCallWithData("Photographer/clickFilter", $scope.searchData, function (data) {
+                //console.log("clickFilter", data);
+                if (data.value === true) {
+                    $scope.photographerData = data.data;
+                    $state.go("wild-photographer", {
+                        catid: $scope.filterToBeApplied.category,
+                        catName: $scope.filterToBeApplied.catName
+                    })
+                }
+            });
         }
         //searchFilter end
 
