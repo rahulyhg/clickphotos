@@ -314,6 +314,32 @@ var controller = {
             })
         }
     },
+    
+    findPhotographerCities: function (req, res) {
+        if (req.body) {
+            Photographer.findPhotographerCities(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    sendOtpForSignUp: function (req, res) {
+        if (req.body) {
+            Photographer.sendOtpForSignUp(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    }
     // smsForOtp: function (req, res) {
     //     if (req.body) {
     //         Photographer.smsForOtp(req.body, res.callback);

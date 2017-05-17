@@ -1002,6 +1002,30 @@ var model = {
         });
     },
 
+    sendOtpForSignUp: function (data, callback) {
+        var emailOtp = (Math.random() + "").substring(2, 6);
+        var foundData = {};
+        var emailData = {};
+        emailData.from = "admin@clickmania.in";
+        emailData.name = data.name;
+        emailData.email = data.email;
+        emailData.otp = emailOtp;
+        emailData.filename = "otpForSignUp.ejs";
+        emailData.subject = "Clickmania OTP";
+        console.log("emaildata", emailData);
+        Config.email(emailData, function (err, emailRespo) {
+            if (err) {
+                console.log(err);
+                callback(null, err);
+            } else if (emailRespo) {
+                foundData.otp = emailOtp;
+                callback(null, foundData);
+            } else {
+                callback(null, "Invalid data");
+            }
+        });
+    },
+
     //verify email and send otp on email end
 
     //smsotp
@@ -1117,6 +1141,27 @@ var model = {
         })
     },
     //update to silverpackage end
+
+    //searchBar get all photographers city
+    findPhotographerCities: function (data, callback) {
+        console.log("data", data)
+        Photographer.find({}).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback({
+                        message: "Incorrect Credentials!"
+                    }, null);
+                }
+            }
+
+        });
+    }
+    //searchBar get all photographers city end
+
 };
 
 // cron.schedule('15 10 * * *', function () {

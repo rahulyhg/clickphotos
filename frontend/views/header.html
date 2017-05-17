@@ -27,14 +27,23 @@
                 <div ng-include="template.menu" class="template menu"></div>         
             </div>-->
                 <div class="col-md-4">
-                    <!--<ui-select ng-model="selected.value">
+                    <ui-select ng-model="selected.value">
                         <ui-select-match>
                             <span ng-bind="$select.selected.name"></span>
                         </ui-select-match>
-                        <ui-select-choices repeat="item in (catData | filter: $select.search) track by item._id">
+                        <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id">
                             <span ng-bind="item.name"></span>
                         </ui-select-choices>
-                    </ui-select>-->
+                    </ui-select>
+                    <ui-select ng-model="selected.value">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (cityFilterForSearch | filter: $select.search) track by item">
+                            <span ng-bind="item"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <button type="button" ng-click="searchBarGo()">GO</button>
                 </div>
                 <div class="col-md-4">
                     <!--user name with img-->

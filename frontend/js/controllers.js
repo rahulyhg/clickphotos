@@ -1699,6 +1699,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     .controller('headerctrl', function ($scope, TemplateService, $uibModal, $location, $window, NavigationService, $state, $rootScope, toastr) {
 
         $scope.template = TemplateService;
+        $scope.registerData = {};
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
@@ -1730,33 +1731,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.signUp = function (formdata, terms) {
-                // formdata.serviceRequest = $scope.serviceList;
+        $scope.signUp = function () {
+                // formdata.serviceRequest = $scope.serviceList;       
+                // console.log(formdata);
+                NavigationService.sendLogin($scope.registerData, function (data) {
+                    if (data.data.value) {
+                        //console.log(data.data.data);
+                        $.jStorage.set("photographer", data.data.data);
+                        $scope.template.profile = data.data.data;
+                        if ($scope.signupModal) {
+                            $scope.signupModal.close();
+                        }
+                        if ($scope.loginModal) {
+                            $scope.loginModal.close();
+                        }
+                        $state.go('photographer');
+                    } else {
+                        toastr.error('User already exist');
+                    }
+                });
+            },
+
+            //verify and send mail for signup password
+
+            $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
                 if (!terms) {
                     // alert('check box error');
                     $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
                 } else {
-                    // console.log(formdata);
-                    NavigationService.sendLogin(formdata, function (data) {
-                        if (data.data.value) {
-                            //console.log(data.data.data);
-                            $.jStorage.set("photographer", data.data.data);
-                            $scope.template.profile = data.data.data;
-                            if ($scope.signupModal) {
-                                $scope.signupModal.close();
-                            }
-                            if ($scope.loginModal) {
-                                $scope.loginModal.close();
-                            }
-                            $state.go('photographer');
-                        } else {
-                            toastr.error('User already exist');
+                    // formdata.serviceRequest = $scope.serviceList;
+                    $scope.registerData = formdata;
+                    console.log("$scope.registerData", $scope.registerData);
+                    NavigationService.apiCallWithData("Photographer/sendOtpForSignUp", formdata, function (data) {
+                        console.log("dataForOtp", data);
+                        if (data.value) {
+                            //  console.log(data.data.data);
+                            $scope.emailOtp = data.data.otp;
+                            console.log("$scope.emailOtp", $scope.emailOtp);
                         }
                     });
                 }
-            },
+            };
 
-            $scope.subscribe = function (formdata) {
+        $scope.checkOTPForSignUp = function (formdata) {
+            console.log("opt", $scope.emailOtp);
+            console.log("opt", otp);
+            if (_.isEqual($scope.emailOtp, formdata.otp)) {
+                console.log("email OTP verified");
+            } else {
+                alert("Incorrect OTP!");
+            }
+        }
+        //verify and send mail for signup password
+
+
+        //sign up otp verification modal
+        $scope.signUpOTP = function () {
+            $scope.signUpOTP = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/signup-otp.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+            $scope.closeModal = function () { // to close modals for ALL OTP
+                $scope.signUpOTP.close();
+            };
+        };
+        //sign up otp verification modal end
+
+        $scope.subscribe = function (formdata) {
                 //  console.log("formdatafsgdvtrhejy", formdata);
                 NavigationService.apiCallWithData("SubscribeEmail/save", formdata, function (data) {
                     if (data.value === true) {
@@ -1804,20 +1848,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $state.go("home");
         }
 
-        $scope.catData = [];
-        NavigationService.callApi("Categories/getAll", function (data) {
-            if (data.value === true) {
-                //console.log(data)
-                $scope.category = data.data;
-                _.forEach($scope.category, function (value) {
-                    $scope.catData.push(value);
-                    //console.log("Cat-data", $scope.catData);
-                });
-            }
-        });
-        $scope.selected = {
-            value: $scope.catData[0]
-        };
         // Forgot password modal
         $scope.changePwd = function () {
             $scope.pwdModal = $uibModal.open({
@@ -1827,11 +1857,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // windowClass: 'modalWidth',
                 backdropClass: 'black-drop'
             });
-            $scope.closeModal = function () {
+            $scope.closeModal = function () { // to close modals for ALL OTP
                 $scope.pwdModal.close();
             };
         };
         //End of forgot password modal
+
         //verify and send mail for forgot password
         $scope.displayCnfirmBox = false;
         $scope.displayotpBox = false;
@@ -1884,7 +1915,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     // $state.go('photographer');
                 }
             });
+        };
+
+        //searchFilter 
+        $scope.cityFilterForSearch = [];
+        NavigationService.callApi("Photographer/findPhotographerCities", function (data) {
+            if (data.value === true) {
+                //console.log("getPhotographersByCategories", data);
+                $scope.photographerData = data.data;
+                //console.log("$scope.photographerData ", $scope.photographerData);
+                _.forEach($scope.photographerData, function (spec) {
+                    _.forEach(spec.location, function (spec1) {
+                        //console.log("spec---", spec1);
+                        if (!~$scope.cityFilterForSearch.indexOf(spec1)) {
+                            $scope.cityFilterForSearch.push(spec1);
+                        }
+                        //console.log("$scope.cityFilterForSearch", $scope.cityFilterForSearch);
+                    })
+                })
+            }
+        });
+
+        $scope.catSearchBar = [];
+        NavigationService.callApi("Categories/getAll", function (data) {
+            if (data.value === true) {
+                //console.log(data)
+                $scope.category = data.data;
+                _.forEach($scope.category, function (value) {
+                    $scope.catSearchBar.push(value);
+                    //console.log("Cat-data", $scope.catSearchBar);
+                });
+            }
+        });
+
+        $scope.searchBarGo = function (cat, city, abc) {
+            $state.go("wild-photographer", {
+                catid: cat,
+                catName: city
+            })
+
         }
+        //searchFilter end
 
         //verify and send mail for forgot password
 

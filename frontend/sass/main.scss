@@ -3152,7 +3152,7 @@ header {
                     cursor: pointer;
                 }
             }
-            .pass-contet {
+            .pass-contet, .signupOTP-contet {
                 // For change password modal
                 @include padding(0 100px);
                 h2 {
@@ -3178,6 +3178,9 @@ header {
                     input {
                         border: 0;
                         border-bottom: 1px solid #f1592a;
+                        &:focus{
+                            outline: none;
+                        }
                     }
                 }
                 button.cnf-btn {
