@@ -11,32 +11,44 @@
                   <span class="icon-bar"></span>
                 </button>
                         <!--<a class="navbar-brand" ui-sref="home"><img src="frontend/img/logo.png" alt="logo" width="20"> </a>-->
-                        <a class="navbar-brand" ui-sref="home">
-                            <div class="navbar-toggle" ng-click='toggleState()'>
+                        <a class="navbar-brand" href="#">
+                            <div class="navbar-toggle" ng-click='openSideNav()'>
                                 <div class="icon_float">
                                     <span class="icon-bar icon_bar0"></span>
                                     <span class="icon-bar icon_bar1"></span>
                                     <span class="icon-bar icon_bar2"></span>
                                 </div>
                             </div>
-                            <img src="frontend/img/cmlogo.png" class="cmlogo img-responsive" alt="ClickMania_Logo">
+                            <img src="frontend/img/cmlogo.png" class="cmlogo img-responsive" alt="ClickMania_Logo" ui-sref="home">
                         </a>
                     </div>
                 </div>
                 <!--<div class="collapse navbar-collapse" id="nav-collapse">
                 <div ng-include="template.menu" class="template menu"></div>         
             </div>-->
+                <div class="side-menu menu-out">
+                    <ul class="list-group text-center">
+                        <li class="list-group-item navigation-items"><a href="#">Home</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="aboutus">About Us</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="categories">Categories</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="users">Featured Photographers</a></li>
+                        <li class="list-group-item navigation-items"><a href="#">Media</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="contact-us">Contact us</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="privacy-policy">Privacy Policy</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="terms">Terms & conditions</a></li>
+                    </ul>
+                </div>
                 <div class="col-md-4">
 
                     <ui-select ng-model="item.selected" on-select="addFilterValue(item.selected,'category')">
-                     <ui-select-match >
+                        <ui-select-match>
                             <span ng-bind="$select.selected.name"></span>
                         </ui-select-match>
                         <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id">
                             <span ng-bind="item.name"></span>
                         </ui-select-choices>
                     </ui-select>
-          <ui-select ng-model="city.selected"  on-select="addFilterValue(city.selected,'city')">
+                    <ui-select ng-model="city.selected" on-select="addFilterValue(city.selected,'city')">
                         <ui-select-match>
                             <span ng-bind="$select.selected"></span>
                         </ui-select-match>

@@ -201,14 +201,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     'position': 'absolute',
                     'bottom': '60px'
                 });
-                $('.navbar-brand .navbar-toggle').css({
-                    'visibility': 'hidden',
-                    'cursor': 'default',
-                    WebkitTransition: 'visibility 1s ease',
-                    MozTransition: 'visibility 1s ease',
-                    MsTransition: 'visibility 1s ease',
-                    'transition': 'visibility 1s ease'
-                });
+
             } else {
                 $('.sliding_bg .scroll_down').css({
 
@@ -219,23 +212,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     'position': 'absolute',
                     'bottom': '125px'
                 });
-                $('.navbar-brand .navbar-toggle').css({
-                    WebkitTransition: 'visibility 1s ease',
-                    MozTransition: 'visibility 1s ease',
-                    MsTransition: 'visibility 1s ease',
-                    'transition': 'visibility 1s ease',
-                    'visibility': 'visible',
-                    'cursor': 'initial'
-                });
             }
         });
 
         // used for left-sidebar navigation
-        $scope.state = false;
-        $scope.toggleState = function ($event) {
-            $scope.state = !$scope.state;
+        // $scope.state = false;
+        // $scope.toggleState = function ($event) {
+        //     $scope.state = !$scope.state;
 
-        };
+        // };
 
     })
 
@@ -1513,6 +1498,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.cityFilter = [];
         formdata = {};
         formdata.speciality = $stateParams.catName;
+        formdata.location = $stateParams.photoLoc;
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
             if (data.value === true) {
                 //console.log("getPhotographersByCategories", data);
@@ -1681,6 +1667,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //all photographers
                     formdata = {};
                     formdata.speciality = $stateParams.catName;
+                    formdata.location = $stateParams.photoLoc;
                     NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
                         if (data.value === true) {
                             //console.log("getPhotographersByCategories", data);
@@ -1705,6 +1692,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $(window).scrollTop(0);
         });
         $.fancybox.close(true);
+
+
+        $scope.sideNav = false; // For toggle sidenavigation
+        $scope.openSideNav = function () { // For opening the leftside navigation
+
+            if (!$scope.sideNav) {
+                $('div.icon_float').children().removeClass(function (index, className) {
+                    return (className.match(/\bicon_\S+/g) || []).join(' ');
+                });
+
+                $('div.icon_float').addClass('hamburger-cross');
+                $('div.icon_float > span.icon-bar').css({
+                    'height': '3px',
+                    'background-color': '#f4511e',
+                    'width': '36px'
+                });
+
+                $('.side-menu').addClass('menu-in');
+                $('.side-menu').removeClass('menu-out');
+                $('.main-overlay').css('opacity', '1');
+                //  $('.navbar-toggle').attr('ng-click', 'test1()');
+                $scope.sideNav = true;
+            } else {
+                if ($('div.icon_float').hasClass('hamburger-cross')) {
+                    $('div.icon_float').children().addClass(function (n) {
+                        $('div.icon_float').removeClass('hamburger-cross');
+                        $('div.icon_float > span.icon-bar').removeAttr('style');
+                        $('section .mg_lft').css('margin-left', '0');
+                        $('#sidenav-overlay').css('display', 'none');
+                        $('body').css('overflow-y', 'scroll');
+                        return 'icon_bar' + n;
+
+                    });
+                }
+                $('.side-menu').addClass('menu-out');
+                $('.side-menu').removeClass('menu-in');
+                $('.main-overlay').css('opacity', '0');
+                $scope.sideNav = false;
+            }
+        };
+        $scope.closeSideNav = function () {
+            $('.side-menu').removeClass('menu-in');
+            $('.side-menu').addClass('menu-out');
+        };
 
         $scope.uploadSignup = function () {
             //console.log("signup");
@@ -1924,7 +1955,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.cityFilterForSearch = [];
         NavigationService.callApi("Photographer/findPhotographerCities", function (data) {
             if (data.value === true) {
-                //console.log("getPhotographersByCategories", data);
+                //console.log("findPhotographerCities", data);
                 $scope.photographerData = data.data;
                 //console.log("$scope.photographerData ", $scope.photographerData);
                 _.forEach($scope.photographerData, function (spec) {
@@ -1965,18 +1996,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
 
-        $scope.searchData={};
-         $scope.searchData.location=[];
         $scope.searchBarGo = function () {
             console.log("formadata", $scope.filterToBeApplied);
-            $scope.searchData.location.push($scope.filterToBeApplied.city);
-            NavigationService.apiCallWithData("Photographer/clickFilter", $scope.searchData, function (data) {
-                //console.log("clickFilter", data);
+            formdata = {};
+            formdata.location = $scope.filterToBeApplied.city;
+            NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
+                //console.log("getPhotographersByCategories", data);
                 if (data.value === true) {
                     $scope.photographerData = data.data;
                     $state.go("wild-photographer", {
                         catid: $scope.filterToBeApplied.category,
-                        catName: $scope.filterToBeApplied.catName
+                        catName: $scope.filterToBeApplied.catName,
+                        photoLoc: $scope.filterToBeApplied.city,
                     })
                 }
             });

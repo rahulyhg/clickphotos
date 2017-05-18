@@ -601,6 +601,54 @@ a.navbar-brand {
         width: 65%;
     }
 } // end of clickmania logo adjustment
+
+//Start of left side navigation
+.side-menu {
+    width: 29%;
+    height: 100vh;
+    padding: 15px;
+    position: fixed;
+    border-top: 1px solid #ccc;
+    top: 63px;
+    left: 0;
+    z-index: 100;
+    overflow-y: auto;
+    background-color: white;
+    .list-group-item {
+        border: none;
+        font-size: 22px;
+        a {
+            color: $orangeColor;
+            text-decoration: none;
+        }
+    }
+}
+
+.menu-in {
+    transform: translateX(0px);
+    transition: transform 0.3s ease;
+}
+
+.menu-out {
+    transform: translateX(-2000px);
+    transition: transform 0.3s ease;
+}
+
+.main-overlay {
+    opacity: 0;
+    @include position(absolute,
+    0 0 0 0);
+    @include background (linear-gradient(rgba(0,
+    0,
+    0,
+    0.38),
+    rgba(0,
+    0,
+    0,
+    0.38)));
+    @include transition(opacity 0.3s ease);
+}
+//End of left side navigation
 // search bar
 .Search_bar {
     padding-top: 18px;

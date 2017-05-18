@@ -54,7 +54,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
         })
 
         .state('wild-photographer', {
-            url: "/wild-photographer/:catid/:catName",
+            url: "/wild-photographer/:catid/:catName/:photoLoc",
             templateUrl: "frontend/views/template.html",
             controller: 'WildPhotoCtrl'
         })

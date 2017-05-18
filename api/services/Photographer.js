@@ -641,7 +641,9 @@ var model = {
     },
 
     getPhotographersByCategories: function (data, callback) {
-        Photographer.aggregate([
+        //console.log("data--------------------------------------",data);
+        if (!_.isEmpty(data.speciality) && !_.isEmpty(data.location)) {
+            var pipeline = [
                 // Stage 1
                 {
                     $lookup: {
@@ -658,18 +660,55 @@ var model = {
                     }
                 },
 
-            ],
-            function (err, data) {
-                if (err) {
-                    console.log(err);
-                    callback(err, null);
-                } else if (data) {
-                    console.log("Photographer data : ", data)
-                    callback(null, data);
-                } else {
-                    callback(null, "Invalid data");
+                //stage 3
+                {
+                    $match: {
+                        "location": data.location
+                    }
+                },
+            ]
+        } else if (_.isEmpty(data.speciality) && !_.isEmpty(data.location)) {
+            var pipeline = [
+                // Stage 1
+                {
+                    $match: {
+                        "location": data.location
+                    }
                 }
-            });
+            ]
+        } else if (!_.isEmpty(data.speciality) && _.isEmpty(data.location)) {
+            var pipeline = [
+                // Stage 1
+                {
+                    $lookup: {
+                        "from": "categories",
+                        "localField": "speciality",
+                        "foreignField": "_id",
+                        "as": "specialities"
+                    }
+                },
+                // Stage 2
+                {
+                    $match: {
+                        "specialities.name": data.speciality
+                    }
+                }
+            ]
+
+        }
+
+        Photographer.aggregate(pipeline, function (err, found) {
+            // console.log("found",found);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else if (found) {
+                console.log("Photographer data : ", found)
+                callback(null, found);
+            } else {
+                callback(null, "Invalid found");
+            }
+        });
     },
 
     saveBottlesPhotos: function (data, callback) {
