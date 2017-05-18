@@ -30,7 +30,7 @@
             <!--<div class="row" ng-if="activeTab == 1">-->
             <div class="row">
                 <div ng-if="showStep == 1">
-                    <form ng-submit="signUp(formData,terms)" name="loginForm">
+                    <form name="loginForm">
                         <div class="signup-form">
                             <div class="col-md-6 pad-right5">
                                 <div class="row mr15 light-grey min-h">
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 mr40 text-center">
-                                        <button class="btn orange-btn" type="submit">Sign up</button>
+                                        <button class="btn orange-btn" type="submit" ng-click="signUpOTP();verifyAndSendSignUpEmail(formData,terms)">Sign up</button>
                                         <br>
                                         <hr class="border-hr text-center">
                                         <br>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <input type="password" class="form-control" id="passwrd" placeholder="Password" ng-model="formdata.password" required><br>
-                                        <a class="flink"> Forgot Password?</a>
+                                        <a class="flink" ng-click="changePwd();"> Forgot Password?</a>
                                     </div>
                                     <div class="col-xs-12 mr40 text-center">
                                         <button class="btn orange-btn" type="submit"> Login</button>
