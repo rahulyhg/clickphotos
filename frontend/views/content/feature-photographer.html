@@ -84,7 +84,7 @@
                         </div>
                     </form>
 
-                    <form ng-submit="login(formdata)">
+                    <form >
                         <div class="login-form">
                             <div class="col-md-6 pad-right5">
                                 <div class="row mr15 light-grey min-h">
@@ -99,7 +99,7 @@
                                         <a class="flink" ng-click="changePwd();"> Forgot Password?</a>
                                     </div>
                                     <div class="col-xs-12 mr40 text-center">
-                                        <button class="btn orange-btn" type="submit"> Login</button>
+                                        <button class="btn orange-btn" type="button" ng-click="login(formdata)"> Login</button>
                                         <br>
                                         <hr class="border-hr text-center">
                                         <br>

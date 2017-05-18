@@ -809,7 +809,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
     })
 
-    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope,$uibModal) {
+    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope, $uibModal,toastr) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -937,6 +937,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     // $state.go("photographer");
                     $state.reload();
                     // console.log("im in");
+                } else {
+                    toastr.error('Incorrect credential');
                 }
             });
         }
