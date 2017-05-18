@@ -339,6 +339,19 @@ var controller = {
                 }
             })
         }
+    },
+
+    getAllPhotographers: function (req, res) {
+        if (req.body) {
+            Photographer.getAllPhotographers(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
     // smsForOtp: function (req, res) {
     //     if (req.body) {

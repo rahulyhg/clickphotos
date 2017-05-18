@@ -71,7 +71,7 @@
                     <!--<input type="checkbox" id="All" ng-click="cityFil('All')">
                     <label for="All"><span></span> all</label>-->
                     <div ng-repeat="dataPoint in cityFilter track by $index">
-                        <input type="checkbox" id="{{dataPoint}}" ng-click="priceFil(dataPoint)">
+                        <input type="checkbox" id="{{dataPoint}}" ng-click="filterPriceAndCity(dataPoint)">
                         <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
                     </div>
                 </div>
@@ -79,15 +79,15 @@
             <h2 class="border-up text-capitalize">Price <small>(per day)</small></h2>
             <div class="price">
                 <div class="checkbox checkboxing">
-                    <input value="" type="checkbox" ng-click="priceFil(0)" id="Upto 10,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <input value="" type="checkbox" ng-click="filterPriceAndCity(0)" id="Upto 10,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                     <label for="Upto 10,000"><span></span><i class="fa fa-inr"></i>Upto 10,000</label><br>
-                    <input value="" type="checkbox" ng-click="priceFil(1)" id="Upto 20,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <input value="" type="checkbox" ng-click="filterPriceAndCity(1)" id="Upto 20,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                     <label for="Upto 20,000"><span></span><i class="fa fa-inr"></i>Upto 20,000</label><br>
-                    <input value="" type="checkbox" ng-click="priceFil(2)" id="Upto 50,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <input value="" type="checkbox" ng-click="filterPriceAndCity(2)" id="Upto 50,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                     <label for="Upto 50,000"><span></span><i class="fa fa-inr"></i>Upto 50,000</label><br>
-                    <input value="" type="checkbox" ng-click="priceFil(3)" id="Upto 1,00,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <input value="" type="checkbox" ng-click="filterPriceAndCity(3)" id="Upto 1,00,000" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                     <label for="Upto 1,00,000"><span></span><i class="fa fa-inr"></i>Upto 1,00,000</label><br>
-                    <input value="" type="checkbox" ng-click="priceFil(4)" id="₹100000 and above" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                    <input value="" type="checkbox" ng-click="filterPriceAndCity(4)" id="₹100000 and above" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                     <label for="₹100000 and above" class="text-lowercase"><span></span><i class="fa fa-inr"></i>₹100000 and above</label><br>
                 </div>
             </div>
