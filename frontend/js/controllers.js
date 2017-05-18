@@ -1573,10 +1573,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // console.log("getFeatPhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
+                if(!_.isEmpty($.jStorage.get("photographer"))){
                 var idToBeRemoved = $.jStorage.get("photographer")._id;
                 $scope.featrData = _.remove($scope.featrData, function (n) {
                     return n._id != idToBeRemoved;
                 });
+                }
                 // console.log("featuePhoto", $scope.featrData);
                 _.forEach($scope.featrData, function (spec) {
 
