@@ -1573,11 +1573,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // console.log("getFeatPhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
-                if(!_.isEmpty($.jStorage.get("photographer"))){
-                var idToBeRemoved = $.jStorage.get("photographer")._id;
-                $scope.featrData = _.remove($scope.featrData, function (n) {
-                    return n._id != idToBeRemoved;
-                });
+                if (!_.isEmpty($.jStorage.get("photographer"))) {
+                    var idToBeRemoved = $.jStorage.get("photographer")._id;
+                    $scope.featrData = _.remove($scope.featrData, function (n) {
+                        return n._id != idToBeRemoved;
+                    });
                 }
                 // console.log("featuePhoto", $scope.featrData);
                 _.forEach($scope.featrData, function (spec) {
@@ -1926,7 +1926,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.logout = function () {
             $.jStorage.flush();
             $scope.template.profile = null;
-            $state.go("home");
+            if ($state.current.name == 'home') {
+                $state.reload();
+            } else {
+                $state.go("home");
+            }
         }
 
         // Forgot password modal
