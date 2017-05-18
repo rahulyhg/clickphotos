@@ -15,12 +15,15 @@
             <div class="col-md-7">
                 <div class="upl-sec">
                     <h2 class="upload-head">Upload Picture</h2>
-                    <div class="select_join">
+                    <div class="select_join relative">
                         <select name="txtCountry" ng-model="imagesData.category" required>
                               <option ng-selected="true" value="">Select Category</option>
                               <option value="{{cat.name}}" ng-repeat="cat in photographerData.speciality">{{cat.name}}</option>
                               <!--<option value="2">Scenery</option>-->
                             </select>
+                        <div class="select-arrow">
+                            <img src="frontend//img/photographer/arrow.jpg" alt="Click Here">
+                        </div>
                     </div>
                     <p>We accept the following type <br> <span>.JPG,.PNG</span></p>
                     <p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
