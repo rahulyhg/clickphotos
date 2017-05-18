@@ -587,7 +587,7 @@
                                 <span class="package-name">GOLD PACKAGE</span>
                             </div>
                         </div> <span class="count-images">YOU HAVE UPLOADED <span class="orange-color">{{uploadImgLength}} OUT OF 100 PHOTOS</span></span>
-                        <div class="checkbox-form">
+                        <div class="checkbox-form relative">
                             <form action="#" class="circular-checkbox display-inline">
                                 <p>My Photos</p>
                                 <div class="inline-block radio-cat collapse" id="radioCollapse">
@@ -604,10 +604,14 @@
                                     <input type="checkbox" id="mumbai2" />
                                     <label for="mumbai2">Mumbai</label>
                                 </p>-->
+                                <div class="absolute-plus" data-toggle="collapse" data-target="#radioCollapse" ng-click="iconChange();" ng-if="uniqueCategory.length>=3">
+                                    <img src="frontend/img/plus.png" alt="Expand" class="img-responsive">
+                                </div>
                             </form>
                             <div class="upload-pic display-inline">
                                 <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<100">Upload picture</button>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">

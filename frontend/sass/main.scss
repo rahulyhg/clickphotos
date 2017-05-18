@@ -601,7 +601,6 @@ a.navbar-brand {
         width: 65%;
     }
 } // end of clickmania logo adjustment
-
 //Start of left side navigation
 .side-menu {
     width: 29%;
@@ -648,6 +647,7 @@ a.navbar-brand {
     0.38)));
     @include transition(opacity 0.3s ease);
 }
+
 //End of left side navigation
 // search bar
 .Search_bar {
@@ -1132,6 +1132,9 @@ a.navbar-brand {
         color: $lightBlackColor;
         font-weight: 500;
     }
+    p {
+        font-size: 18px;
+    }
     .cam_heading {
         position: relative;
         height: 101px;
@@ -1239,6 +1242,7 @@ a.navbar-brand {
         p {
             color: $lightBlackColor;
             text-align: justify;
+            font-size: 18px;
         }
         .whit-btn {
             font-family: inherit;
@@ -2094,6 +2098,14 @@ fieldset[disabled] .form-control {
     border-radius: 3px;
     -webkit-box-shadow: inset 0 0 10px 1px #FEFEFE;
     box-shadow: inset 0 0 10px 1px #FEFEFE;
+}
+
+.select_join .select-arrow {
+    @include position(absolute,
+    0 0 null null);
+    -webkit-box-shadow: inset 0 0 10px 1px #FEFEFE;
+    box-shadow: inset 0 0 10px 1px #FEFEFE;
+    pointer-events: none;
 }
 
 .select_join select {
@@ -3200,7 +3212,8 @@ header {
                     cursor: pointer;
                 }
             }
-            .pass-contet, .signupOTP-contet {
+            .pass-contet,
+            .signupOTP-contet {
                 // For change password modal
                 @include padding(0 100px);
                 h2 {
@@ -3226,7 +3239,7 @@ header {
                     input {
                         border: 0;
                         border-bottom: 1px solid #f1592a;
-                        &:focus{
+                        &:focus {
                             outline: none;
                         }
                     }
