@@ -590,17 +590,84 @@ header>nav a.navbar-brand>div.navbar-toggle>div.icon_float>span.icon_bar2 {
 } // for clickmania logo adjustment which includes boot strap's class navbar-brand
 a.navbar-brand {
     height: auto;
-    padding: 13px 15px 5px;
+    line-height: 2.3;
+    padding: 11px 15px 5px;
     .navbar-toggle {
         margin-bottom: 0;
         padding-right: 0px;
         margin-bottom: 0px;
     }
     .cmlogo {
-        // width: 230px;
-        width: 65%;
+        width: 215px;
+        display: inline-block;
     }
 } // end of clickmania logo adjustment
+// UI select design used for search a pht or location
+.search-directive {
+    padding: 12px 0;
+    position: relative;
+    .ui-select-container {
+        width: 193px;
+        margin-right: 10px;
+        display: inline-block;
+        input[type="search"] {
+            width: 100%!important;
+        }
+        .ui-select-choices-group {
+            height: 200px;
+            overflow-y: scroll;
+        }
+         ::-webkit-scrollbar {
+            width: 4px;
+            background-color: rgba(0, 0, 0, 0.80);
+        }
+        .dropdown-menu {
+            width: 193px;
+        }
+        .ui-select-choices-row {
+            padding: 3px 15px;
+            a {
+                text-decoration: none;
+                font-size: 15px;
+                color: black;
+                font-weight: 600;
+            }
+        }
+        i.caret {
+            display: none;
+        }
+        .form-control {
+            height: 34px;
+            &:focus {
+                border-color: $orangeColor;
+            }
+        }
+        .btn-default:hover {
+            background-color: white;
+        }
+    }
+    .go-btn {
+        background-color: $orangeColor;
+        color: white;
+        font-weight: 600;
+        padding: 7px 12px; //padding: 7px 6px 10px;
+        width: 45px;
+        &:hover {
+            background-color: $orangeColor;
+            color: white;
+        }
+    }
+    .ui-select-focusser {
+        display: none;
+    }
+    .select-arrow {
+        @include position(absolute,
+        12px null null 152px);
+        pointer-events: none;
+    }
+}
+
+//End o fUI select design
 //Start of left side navigation
 .side-menu {
     width: 29%;
@@ -2089,10 +2156,9 @@ fieldset[disabled] .form-control {
 
 .select_join {
     margin: 2px 0 6px;
-    width: 220px;
+    width: 240px;
     height: 36px;
-    overflow: hidden;
-    background: url('../img/photographer/arrow.jpg') no-repeat right #FEFEFE;
+    overflow: hidden; //   background: url('../img/photographer/arrow.jpg') no-repeat right #FEFEFE;
     border: #FEFEFE 1px solid;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -2110,7 +2176,7 @@ fieldset[disabled] .form-control {
 
 .select_join select {
     background: transparent;
-    width: 220px;
+    width: 100%;
     padding: 0 10px;
     font-size: 12pt;
     color: #c0c0c0;
@@ -2291,10 +2357,9 @@ fieldset[disabled] .form-control {
     [type="checkbox"]:not(:checked)+label:after {
         content: '•';
         position: absolute;
-        top: -17px;
-        left: -0.8px;
+        top: -41px;
+        left: 0;
         font-size: 72px;
-        line-height: 0.76;
         color: #fff;
         transition: all 0.2s;
     }
