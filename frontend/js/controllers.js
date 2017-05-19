@@ -88,6 +88,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //console.log("getFeatPhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
+                if (!_.isEmpty($.jStorage.get("photographer"))) {
+                    var idToBeRemoved = $.jStorage.get("photographer")._id;
+                    $scope.featrData = _.remove($scope.featrData, function (n) {
+                        return n._id != idToBeRemoved;
+                    });
+                }
                 //console.log("featuePhoto", $scope.featrData);
                 _.forEach($scope.featrData, function (spec) {
 
@@ -803,7 +809,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
     })
 
-    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope) {
+    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope, $uibModal,toastr) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -827,51 +833,189 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.steps = false;
             $scope.showStep = 1;
         }
-        $scope.signUp = function (formdata, terms) {
+        // $scope.signUp = function (formdata, terms) {
 
-                // formdata.serviceRequest = $scope.serviceList;
-                if (!terms) {
-                    // alert('check box error');
-                    $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
-                } else {
-                    //console.log(formdata);
-                    NavigationService.sendLogin(formdata, function (data) {
-                        if (data.data.value) {
-                            //console.log(data.data.data);
-                            $rootScope.showStep = 2;
-                            $.jStorage.set("photographer", data.data.data);
-                            $scope.template.profile = data.data.data;
-                            $state.reload();
-                        }
-                    });
-                }
-            },
+        //         // formdata.serviceRequest = $scope.serviceList;
+        //         if (!terms) {
+        //             // alert('check box error');
+        //             $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+        //         } else {
+        //             //console.log(formdata);
+        //             NavigationService.sendLogin(formdata, function (data) {
+        //                 if (data.data.value) {
+        //                     //console.log(data.data.data);
+        //                     $rootScope.showStep = 2;
+        //                     $.jStorage.set("photographer", data.data.data);
+        //                     $scope.template.profile = data.data.data;
+        //                     $state.reload();
+        //                 }
+        //             });
+        //         }
+        //     },
 
-            // $scope.signUp = function (formdata) {
-            //         // formdata.serviceRequest = $scope.serviceList;
-            //         console.log(formdata);
-            //         NavigationService.sendLogin(formdata, function (data) {
-            //             if (data.data.value) {
-            //                 console.log(data.data.value);
-            //             }
-            //         });
-            //     },
+        //sign up functtionallity
 
-            $scope.login = function (formdata) {
-                // formdata.serviceRequest = $scope.serviceList;
-                //console.log(formdata);
-                NavigationService.checkLogin(formdata, function (data) {
+        $scope.signUp = function () {
+                // formdata.serviceRequest = $scope.serviceList;       
+                // console.log(formdata);
+                NavigationService.sendLogin($scope.registerData, function (data) {
                     if (data.data.value) {
                         //console.log(data.data.data);
                         $rootScope.showStep = 2;
                         $.jStorage.set("photographer", data.data.data);
                         $scope.template.profile = data.data.data;
-                        // $state.go("photographer");
                         $state.reload();
-                        // console.log("im in");
+                    } else {
+                        toastr.error('User already exist');
+                    }
+                });
+            },
+
+            //verify and send mail for signup password
+
+            $scope.showOtpBox = false;
+        $scope.showSucessBox = false;
+        $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
+            if (!terms) {
+                // alert('check box error');
+                $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+            } else {
+                // formdata.serviceRequest = $scope.serviceList;
+                $scope.registerData = formdata;
+                console.log("$scope.registerData", $scope.registerData);
+                NavigationService.apiCallWithData("Photographer/sendOtpForSignUp", formdata, function (data) {
+                    console.log("dataForOtp", data);
+                    if (data.value) {
+                        //  console.log(data.data.data);
+                        $scope.emailOtp = data.data.otp;
+                        console.log("$scope.emailOtp", $scope.emailOtp);
                     }
                 });
             }
+        };
+
+        $scope.checkOTPForSignUp = function (formdata) {
+            console.log("opt", $scope.emailOtp);
+            console.log("opt", formdata.otp);
+            if (_.isEqual($scope.emailOtp, formdata.otp)) {
+                console.log("email OTP verified");
+                $scope.showSucessBox = true;
+            } else {
+                alert("Incorrect OTP!");
+            }
+        }
+        //verify and send mail for signup password
+
+
+        //sign up otp verification modal
+        $scope.signUpOTP = function () {
+            $scope.signUpOTP = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/signup-otp.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+            $scope.closeModal = function () { // to close modals for ALL OTP
+                $scope.signUpOTP.close();
+            };
+        };
+        //sign up otp verification modal end
+
+        //sign up functtionallity end
+
+
+        $scope.login = function (formdata) {
+            // formdata.serviceRequest = $scope.serviceList;
+            //console.log(formdata);
+            NavigationService.checkLogin(formdata, function (data) {
+                if (data.data.value) {
+                    //console.log(data.data.data);
+                    $rootScope.showStep = 2;
+                    $.jStorage.set("photographer", data.data.data);
+                    $scope.template.profile = data.data.data;
+                    // $state.go("photographer");
+                    $state.reload();
+                    // console.log("im in");
+                } else {
+                    toastr.error('Incorrect credential');
+                }
+            });
+        }
+
+
+        //reset password Funct
+
+        // Forgot password modal
+        $scope.changePwd = function () {
+            $scope.pwdModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/forgotpass.html",
+                scope: $scope,
+                // windowClass: 'modalWidth',
+                backdropClass: 'black-drop'
+            });
+            $scope.closeModal = function () { // to close modals for ALL OTP
+                $scope.pwdModal.close();
+            };
+        };
+        //End of forgot password modal
+
+        //verify and send mail for forgot password
+        $scope.displayCnfirmBox = false;
+        $scope.displayotpBox = false;
+        $scope.displayThanksBox = false;
+        $scope.verifyAndSendEmail = function (formdata) {
+            // formdata.serviceRequest = $scope.serviceList;
+            // console.log(formdata);
+            $scope.displayotpBox = true;
+            NavigationService.apiCallWithData("Photographer/sendOtp", formdata, function (data) {
+                console.log("dataForOtp", data);
+                if (data.value) {
+                    //  console.log(data.data.data);
+
+                    $scope.emailOtp = data.data.otp;
+                    $scope.id = data.data.id;
+                    console.log("$scope.emailOtp", $scope.emailOtp);
+
+                }
+            });
+        };
+
+        $scope.checkOTP = function (otp) {
+            console.log("opt", $scope.emailOtp);
+            console.log("opt", otp);
+            if (_.isEqual($scope.emailOtp, otp.otp)) {
+                console.log("email OTP verified");
+                $scope.displayCnfirmBox = true;
+                $scope.displayotpBox = false;
+            } else {
+                alert("Incorrect OTP!");
+            }
+        }
+
+        $scope.resetPass = function (formdata) {
+            formdata._id = $scope.id;
+            // console.log("doneFormData", formdata);
+            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                console.log("doneFormDatadata", data);
+                if (data.value) {
+                    $scope.displayCnfirmBox = false;
+                    $scope.displayotpBox = false;
+                    $scope.displayThanksBox = true;
+
+                    // $.jStorage.set("photographer", data.data);
+                    // $scope.template.profile = data.data;
+                    // var url = "http://" + $window.location.host + "/photographer";
+                    // console.log(url);
+                    // $window.location.href = url;
+                    // $location.path('/photographer'); 
+                    // $state.go('photographer');
+                }
+            });
+        };
+        //verify and send mail for forgot password end
+        //reset password funct end
 
         if ($.jStorage.get("photographer")) {
             formdata = {};
@@ -1480,6 +1624,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.navigation = NavigationService.getnav();
         $scope.showlessCatImages = [];
         $scope.price = [];
+        $scope.cityFill = [];
 
         //category image     
         formData = {};
@@ -1493,28 +1638,64 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
         //category image end
 
+        //on document load
+        // angular.element(document).ready(function () {
+        //     console.log("document.getElementById", $stateParams.photoLoc.toString().trim());
+        //     console.log("---------------", document.getElementById($stateParams.photoLoc.toString().trim()));
+        // });
+        //on document load End
+
         //all photographers
         $scope.loc = [];
         $scope.cityFilter = [];
         formdata = {};
         formdata.speciality = $stateParams.catName;
         formdata.location = $stateParams.photoLoc;
+        // console.log("$stateParams.photoLoc", $stateParams.photoLoc);
+        // $scope.cityFill.push(formdata.location);
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
             if (data.value === true) {
                 //console.log("getPhotographersByCategories", data);
                 $scope.photographerData = data.data;
+                if (!_.isEmpty($.jStorage.get("photographer"))) {
+                    var idToBeRemoved = $.jStorage.get("photographer")._id;
+                    $scope.photographerData = _.remove($scope.photographerData, function (n) {
+                        return n._id != idToBeRemoved;
+                    });
+                }
                 //console.log("$scope.photographerData ", $scope.photographerData);
-                _.forEach($scope.photographerData, function (spec) {
+                // _.forEach($scope.photographerData, function (spec) {
+                //     _.forEach(spec.location, function (spec1) {
+                //         //console.log("spec---", spec1);
+                //         if (!~$scope.cityFilter.indexOf(spec1)) {
+                //             $scope.cityFilter.push(spec1);
+                //         }
+                //         // document.getElementById($stateParams.photoLoc).checked = true;
+                //         // console.log("$scope.cityFilter", $scope.cityFilter);
+                //     })
+                // })
+            }
+        });
+
+        NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
+            if (data.value === true) {
+                //console.log("getAllPhotographers", data);
+                $scope.allCities = data.data;
+                //console.log("$scope.allCities ", $scope.allCities);
+                _.forEach($scope.allCities, function (spec) {
                     _.forEach(spec.location, function (spec1) {
                         //console.log("spec---", spec1);
                         if (!~$scope.cityFilter.indexOf(spec1)) {
                             $scope.cityFilter.push(spec1);
+                            //console.log("$scope.cityFilter---", $scope.cityFilter);
+
                         }
-                        // console.log("$scope.cityFilter", $scope.cityFilter);
                     })
                 })
             }
         });
+
+
         //all Photographers end
 
         //feature photographer
@@ -1530,6 +1711,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // console.log("getFeatPhotographer", data);
             if (data.value === true) {
                 $scope.featrData = data.data;
+                if (!_.isEmpty($.jStorage.get("photographer"))) {
+                    var idToBeRemoved = $.jStorage.get("photographer")._id;
+                    $scope.featrData = _.remove($scope.featrData, function (n) {
+                        return n._id != idToBeRemoved;
+                    });
+                }
                 // console.log("featuePhoto", $scope.featrData);
                 _.forEach($scope.featrData, function (spec) {
 
@@ -1619,9 +1806,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // filter
         var formdata = {}
         $scope.priceRange = [];
-        $scope.cityFill = [];
         $scope.priceList = ["Upto 10,000", "Upto 20,000", "Upto 50,000", "Upto 1,00,000", "₹100000 and above"];
-        $scope.priceFil = function (data) {
+        $scope.filterPriceAndCity = function (data) {
             var check;
             if (/\d/.test(data)) {
                 $scope.priceRange.push($scope.priceList[data]);
@@ -1667,7 +1853,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //all photographers
                     formdata = {};
                     formdata.speciality = $stateParams.catName;
-                    formdata.location = $stateParams.photoLoc;
                     NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
                         if (data.value === true) {
                             //console.log("getPhotographersByCategories", data);
@@ -1879,7 +2064,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.logout = function () {
             $.jStorage.flush();
             $scope.template.profile = null;
-            $state.go("home");
+            if ($state.current.name == 'home') {
+                $state.reload();
+            } else {
+                $state.go("home");
+            }
         }
 
         // Forgot password modal
@@ -1950,6 +2139,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             });
         };
+        //verify and send mail for forgot password end
 
         //searchFilter 
         $scope.cityFilterForSearch = [];

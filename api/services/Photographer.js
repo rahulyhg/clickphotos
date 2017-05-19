@@ -1198,38 +1198,61 @@ var model = {
             }
 
         });
-    }
+    },
     //searchBar get all photographers city end
+
+    getAllPhotographers: function (data, callback) {
+        Photographer.find({}).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    console.log("Found", found);
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+        })
+    }
 
 };
 
-// cron.schedule('15 10 * * *', function () {
-//     Photographer.find({}, function (err, found) {
-//         if (err) {
-//             console.log("error occured");
-//             // callback(err, null);
-//         } else {
-//             async.eachSeries(found, function (value, callback1) {
-//                 // write their api to update status if changed
-//                 var packgeDate = moment(value.packageBroughtDate.setFullYear(value.packageBroughtDate.getFullYear() + 1)).format();
-//                 console.log("packgeDate", packgeDate);
-//                 if (packgeDate == new Date() && value.package != "") {
-//                     value.package = "";
-//                     value.save(function () {})
-//                     console.log("updated");
-//                 }
-//                 callback1(null, "go ahead");
-//             }, function (error, data) {
-//                 if (err) {
-//                     console.log("error found in doLogin.callback1")
-//                     //callback(null, err);
-//                 } else {
-//                     //callback(null, "updated");
-//                 }
-//             });
-//             console.log("m in found");
-//         }
-//     });
-// });
+cron.schedule('15 10 * * *', function () {
+    Photographer.find({}, function (err, found) {
+        if (err) {
+            console.log("error occured");
+            // callback(err, null);
+        } else {
+            async.eachSeries(found, function (value, callback1) {
+                if (!_.isEmpty(value.silverPackageBroughtDate) && !_.isEmpty(value.goldPackageBroughtDate)) {
+                    var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
+                } else if (_.isEmpty(value.silverPackageBroughtDate) && !_.isEmpty(value.goldPackageBroughtDate)) {
+                    var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
+                } else if (!_.isEmpty(value.silverPackageBroughtDate) && _.isEmpty(value.goldPackageBroughtDate)) {
+                    var PackgeDate = moment(value.silverPackageBroughtDate.setFullYear(value.silverPackageBroughtDate.getFullYear() + 1)).format();
+                }
+                // write their api to update status if changed
+                console.log("packgeDate", packgeDate);
+                if (packgeDate == new Date() && value.package != "") {
+                    value.package = "";
+                    value.save(function () {})
+                    console.log("updated");
+                }
+                callback1(null, "go ahead");
+            }, function (error, data) {
+                if (err) {
+                    console.log("error found in doLogin.callback1")
+                    //callback(null, err);
+                } else {
+                    //callback(null, "updated");
+                }
+            });
+            console.log("m in found");
+        }
+    });
+});
 
 module.exports = _.assign(module.exports, exports, model);
