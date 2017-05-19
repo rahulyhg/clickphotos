@@ -71,7 +71,7 @@
                     <!--<input type="checkbox" id="All" ng-click="cityFil('All')">
                     <label for="All"><span></span> all</label>-->
                     <div ng-repeat="dataPoint in cityFilter track by $index">
-                        <input type="checkbox" id="{{dataPoint}}" ng-click="filterPriceAndCity(dataPoint)">
+                        <input type="checkbox" id="{{dataPoint}}" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
                         <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
                     </div>
                 </div>

@@ -809,7 +809,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
     })
 
-    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope, $uibModal,toastr) {
+    .controller('FeaturPCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $rootScope, $uibModal, toastr) {
         $scope.template = TemplateService.changecontent("feature-photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1651,6 +1651,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formdata = {};
         formdata.speciality = $stateParams.catName;
         formdata.location = $stateParams.photoLoc;
+        $scope.checkedLoc=$stateParams.photoLoc;          
         // console.log("$stateParams.photoLoc", $stateParams.photoLoc);
         // $scope.cityFill.push(formdata.location);
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
@@ -1663,37 +1664,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         return n._id != idToBeRemoved;
                     });
                 }
-                //console.log("$scope.photographerData ", $scope.photographerData);
-                // _.forEach($scope.photographerData, function (spec) {
-                //     _.forEach(spec.location, function (spec1) {
-                //         //console.log("spec---", spec1);
-                //         if (!~$scope.cityFilter.indexOf(spec1)) {
-                //             $scope.cityFilter.push(spec1);
-                //         }
-                //         // document.getElementById($stateParams.photoLoc).checked = true;
-                //         // console.log("$scope.cityFilter", $scope.cityFilter);
-                //     })
-                // })
-            }
-        });
-
-        NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
-            if (data.value === true) {
-                //console.log("getAllPhotographers", data);
-                $scope.allCities = data.data;
-                //console.log("$scope.allCities ", $scope.allCities);
-                _.forEach($scope.allCities, function (spec) {
+                console.log("$scope.photographerData ", $scope.photographerData);
+                _.forEach($scope.photographerData, function (spec) {
                     _.forEach(spec.location, function (spec1) {
                         //console.log("spec---", spec1);
                         if (!~$scope.cityFilter.indexOf(spec1)) {
                             $scope.cityFilter.push(spec1);
-                            //console.log("$scope.cityFilter---", $scope.cityFilter);
-
                         }
+                        // document.getElementById($stateParams.photoLoc).checked = true;
+                        // console.log("$scope.cityFilter", $scope.cityFilter);
                     })
                 })
             }
         });
+
+        // NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
+        //     if (data.value === true) {
+        //         //console.log("getAllPhotographers", data);
+        //         $scope.allCities = data.data;
+        //         //console.log("$scope.allCities ", $scope.allCities);
+        //         _.forEach($scope.allCities, function (spec) {
+        //             _.forEach(spec.location, function (spec1) {
+        //                 //console.log("spec---", spec1);
+        //                 if (!~$scope.cityFilter.indexOf(spec1)) {
+        //                     $scope.cityFilter.push(spec1);
+        //                     //console.log("$scope.cityFilter---", $scope.cityFilter);
+
+        //                 }
+        //             })
+        //         })
+        //     }
+        // });
 
 
         //all Photographers end
