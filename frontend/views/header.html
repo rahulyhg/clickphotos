@@ -2,30 +2,55 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed visible-xs" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                        <!--<a class="navbar-brand" ui-sref="home"><img src="frontend/img/logo.png" alt="logo" width="20"> </a>-->
-                        <a class="navbar-brand" href="#">
-                            <div class="navbar-toggle" ng-click='openSideNav()'>
-                                <div class="icon_float">
-                                    <span class="icon-bar icon_bar0"></span>
-                                    <span class="icon-bar icon_bar1"></span>
-                                    <span class="icon-bar icon_bar2"></span>
-                                </div>
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed visible-xs" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                         </button>
+                    <!--<a class="navbar-brand" ui-sref="home"><img src="frontend/img/logo.png" alt="logo" width="20"> </a>-->
+                    <a class="navbar-brand" href="#">
+                        <div class="navbar-toggle" ng-click='openSideNav()'>
+                            <div class="icon_float">
+                                <span class="icon-bar icon_bar0"></span>
+                                <span class="icon-bar icon_bar1"></span>
+                                <span class="icon-bar icon_bar2"></span>
                             </div>
-                            <img src="frontend/img/cmlogo.png" class="cmlogo img-responsive" alt="ClickMania_Logo" ui-sref="home">
-                        </a>
-                    </div>
+                        </div>
+                        <img src="frontend/img/cmlogo.png" class="cmlogo" alt="ClickMania_Logo" ui-sref="home">
+                    </a>
                 </div>
-                <!--<div class="collapse navbar-collapse" id="nav-collapse">
-                <div ng-include="template.menu" class="template menu"></div>         
-            </div>-->
+
+                <div class="collapse navbar-collapse" id="nav-collapse" style="display:none!important;">
+                    <!--<div ng-include="template.menu" class="template menu"></div>         -->
+                    <ul class="list-group text-center">
+                        <!--<li class="list-group-item navigation-items"><a href="#">Home</a></li>-->
+                        <li class="list-group-item navigation-items"><a ui-sref="aboutus">About Us</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="categories">Categories</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="users">Featured Photographers</a></li>
+                        <li class="list-group-item navigation-items"><a href="#">Media</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="contact-us">Contact us</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="privacy-policy">Privacy Policy</a></li>
+                        <li class="list-group-item navigation-items"><a ui-sref="terms">Terms & conditions</a></li>
+                        <li>
+                            <div class="photographer center">
+                                <div class="photographer_img">
+                                    <div class="server-img" style="background: url('{{template.profile.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="template.profile.profilePic"
+                                        ui-sref="photographer">
+                                    </div>
+                                    <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ng-if="!template.profile.profilePic">
+                                    <!--<img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="template.profile.profilePic">-->
+                                </div>
+
+                                <span ng-if="!template.profile" ng-click="uploadSignup()">Sign Up as a Photographer</span>
+                                <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
+                                <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()">Log out</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="side-menu menu-out">
                     <ul class="list-group text-center">
                         <!--<li class="list-group-item navigation-items"><a href="#">Home</a></li>-->
@@ -38,26 +63,32 @@
                         <li class="list-group-item navigation-items"><a ui-sref="terms">Terms & conditions</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <ui-select ng-model="item.selected" on-select="addFilterValue(item.selected,'category')">
-                        <ui-select-match>
-                            <span ng-bind="$select.selected.name"></span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id">
-                            <span ng-bind="item.name"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                    <ui-select ng-model="city.selected" on-select="addFilterValue(city.selected,'city')">
-                        <ui-select-match>
-                            <span ng-bind="$select.selected"></span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="city in (cityFilterForSearch | filter: $select.search) track by city">
-                            <span ng-bind="city"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                    <button type="button" ng-click="searchBarGo()">GO</button>
+
+                <div class="col-md-5">
+                    <div class="search-directive">
+                        <ui-select ng-model="item.selected" on-select="addFilterValue(item.selected,'category')">
+                            <ui-select-match>
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <ui-select ng-model="city.selected" on-select="addFilterValue(city.selected,'city')">
+                            <ui-select-match>
+                                <span ng-bind="$select.selected"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="city in (cityFilterForSearch | filter: $select.search) track by city">
+                                <span ng-bind="city"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <button type="button" ng-click="searchBarGo()" class="btn go-btn">GO</button>
+                        <div class="select-arrow">
+                            <img src="frontend//img/photographer/arrow.jpg" height="35" alt="Click Here">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 pull-right">
                     <!--user name with img-->
                     <div class="photographer text-right">
                         <div class="photographer_img">
@@ -70,7 +101,7 @@
 
                         <span ng-if="!template.profile" ng-click="uploadSignup()">Sign Up as a Photographer</span>
                         <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
-                        <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()">Log out</span>                     
+                        <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()">Log out</button>
                     </div>
                     <!--photographer-->
                 </div>
