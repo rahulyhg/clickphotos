@@ -1664,7 +1664,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         return n._id != idToBeRemoved;
                     });
                 }
-                console.log("$scope.photographerData ", $scope.photographerData);
+                //console.log("$scope.photographerData ", $scope.photographerData);
                 _.forEach($scope.photographerData, function (spec) {
                     _.forEach(spec.location, function (spec1) {
                         //console.log("spec---", spec1);
@@ -2183,7 +2183,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.filterToBeApplied.city = val;
 
             }
-            console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
+          //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
         }
 
 
