@@ -1,5 +1,5 @@
 <div class="container-fluid pad0 mg_t75">
-    
+
     <img ng-src="{{categoryInsideImg.insideImage | serverimage}}" alt="" class="img-full img-responsive">
 </div>
 <div class="black-back">
@@ -116,6 +116,19 @@
                 <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>                <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
                 <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
             </div>
+            <div class="row">
+                <div class="col-md-7 col-md-offset-4">
+                    <div class="nopht-title">
+                        <div class="ht30">
+                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
+                            <h1 class="fith damionr text-capitalize">Sorry</h1>
+                        </div>
+                        <p>There are no photographers for your search result!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="row">

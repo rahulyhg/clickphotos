@@ -4447,6 +4447,14 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
 }
 
+.nopht-title {
+    @extend .thanks-title;
+    @include margin(225px 0);
+    h1 {
+        text-indent: 55px;
+    }
+}
+
 .becomefp-title {
     @extend .thanks-title;
     h1 {
