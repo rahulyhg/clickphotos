@@ -805,130 +805,7 @@ var model = {
     },
 
     //emailers
-
-    silverPackgeMail: function (data, callback) {
-        console.log("data", data);
-        // var contact = this(data);
-        Photographer.findOne({
-            _id: data._id
-        }).exec(function (err, data1) {
-            console.log("data1", data1, err);
-            if (err) {
-                callback(err, null);
-            } else if (data1) {
-                console.log("data", data1);
-                var emailData = {};
-                emailData.email = data1.email;
-                emailData.filename = "silverpackage.ejs";
-                emailData.name = data1.name;
-                //emailData.serviceRequest = data1.serviceRequest;
-                // emailData.email = data1.email;
-                //emailData.mobile = data1.mobile;
-                //emailData.query = data1.query;
-                emailData.from = "admin@clickmania.in";
-                emailData.subject = "congrats you Have upgraded to Silver Package";
-                console.log("email data : ", emailData);
-
-                Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
-                    if (err) {
-                        console.log(err);
-                        callback(err, null);
-                    } else if (emailRespo) {
-                        callback(null, "Contact us form saved successfully!!!");
-                    } else {
-                        callback("Invalid data", null);
-                    }
-                });
-
-            } else {
-                callback("Invalid data", null);
-            }
-        });
-    },
-
-    upgradToGoldMail: function (data, callback) {
-        console.log("data", data);
-        // var contact = this(data);
-        Photographer.findOne({
-            _id: data._id
-        }).exec(function (err, data1) {
-            console.log("data1", data1, err);
-            if (err) {
-                callback(err, null);
-            } else if (data1) {
-                console.log("data", data1);
-                var emailData = {};
-                emailData.email = data1.email;
-                emailData.filename = "goldupgrade.ejs";
-                emailData.name = data1.name;
-                //emailData.serviceRequest = data1.serviceRequest;
-                // emailData.email = data1.email;
-                //emailData.mobile = data1.mobile;
-                //emailData.query = data1.query;
-                emailData.from = "admin@clickmania.in";
-                emailData.subject = "Please upgrade to Gold";
-                console.log("email data : ", emailData);
-
-                Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
-                    if (err) {
-                        console.log(err);
-                        callback(err, null);
-                    } else if (emailRespo) {
-                        callback(null, "Contact us form saved successfully!!!");
-                    } else {
-                        callback("Invalid data", null);
-                    }
-                });
-
-            } else {
-                callback("Invalid data", null);
-            }
-        });
-    },
-
-    goldPackageMail: function (data, callback) {
-        console.log("data", data);
-        // var contact = this(data);
-        Photographer.findOne({
-            _id: data._id
-        }).exec(function (err, data1) {
-            console.log("data1", data1, err);
-            if (err) {
-                callback(err, null);
-            } else if (data1) {
-                console.log("data", data1);
-                var emailData = {};
-                emailData.email = data1.email;
-                emailData.filename = "goldpackage.ejs";
-                emailData.name = data1.name;
-                //emailData.serviceRequest = data1.serviceRequest;
-                // emailData.email = data1.email;
-                //emailData.mobile = data1.mobile;
-                //emailData.query = data1.query;
-                emailData.from = "admin@clickmania.in";
-                emailData.subject = "congrats you Have upgraded to Gold Package";
-                console.log("email data : ", emailData);
-
-                Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
-                    if (err) {
-                        console.log(err);
-                        callback(err, null);
-                    } else if (emailRespo) {
-                        callback(null, "Contact us form saved successfully!!!");
-                    } else {
-                        callback("Invalid data", null);
-                    }
-                });
-
-            } else {
-                callback("Invalid data", null);
-            }
-        });
-    },
-
+    
     sendEnq: function (data, callback) {
         console.log("data", data);
         // var contact = this(data);
@@ -1141,7 +1018,30 @@ var model = {
                 callback(err, null);
             } else {
                 if (found) {
-                    callback(null, found);
+                    //callback(null, found);
+                    var emailData = {};
+                    emailData.email = found.email;
+                    emailData.filename = "goldpackage.ejs";
+                    emailData.name = found.name;
+                    //emailData.serviceRequest = data1.serviceRequest;
+                    // emailData.email = data1.email;
+                    //emailData.mobile = data1.mobile;
+                    //emailData.query = data1.query;
+                    emailData.from = "admin@clickmania.in";
+                    emailData.subject = "congrats you Have upgraded to Gold Package";
+                    console.log("email data : ", emailData);
+
+                    Config.email(emailData, function (err, emailRespo) {
+                        console.log("emailRespo", emailRespo);
+                        if (err) {
+                            console.log(err);
+                            callback(err, null);
+                        } else if (emailRespo) {
+                            callback(null, found);
+                        } else {
+                            callback("Invalid data", found);
+                        }
+                    });
                 } else {
                     callback(null, {
                         message: "No Data Found"
@@ -1167,14 +1067,59 @@ var model = {
             if (err) {
                 // console.log(err);
                 callback(err, null);
+            } else if (found) {
+                //callback(null, found);
+                var emailData = {};
+                emailData.email = found.email;
+                emailData.filename = "silverpackage.ejs";
+                emailData.name = found.name;
+                //emailData.serviceRequest = data1.serviceRequest;
+                // emailData.email = data1.email;
+                //emailData.mobile = data1.mobile;
+                //emailData.query = data1.query;
+                emailData.from = "admin@clickmania.in";
+                emailData.subject = "congrats you Have upgraded to Silver Package";
+                console.log("email data : ", emailData);
+
+                Config.email(emailData, function (err, emailRespo) {
+                    console.log("emailRespo", emailRespo);
+                    if (err) {
+                        console.log(err);
+                        callback(err, null);
+                    } else if (emailRespo) {
+                        //callback(null, "Contact us form saved successfully!!!");
+                        var emailData = {};
+                        emailData.email = found.email;
+                        emailData.filename = "goldupgrade.ejs";
+                        emailData.name = found.name;
+                        //emailData.serviceRequest = data1.serviceRequest;
+                        // emailData.email = data1.email;
+                        //emailData.mobile = data1.mobile;
+                        //emailData.query = data1.query;
+                        emailData.from = "admin@clickmania.in";
+                        emailData.subject = "Please upgrade to Gold";
+                        console.log("email data : ", emailData);
+
+                        Config.email(emailData, function (err, emailRespo) {
+                            console.log("emailRespo", emailRespo);
+                            if (err) {
+                                console.log(err);
+                                callback(err, null);
+                            } else if (emailRespo) {
+                                callback(null, found);
+                            } else {
+                                callback("Invalid data", found);
+                            }
+                        });
+                    } else {
+                        callback("Invalid data", found);
+                    }
+                });
+
             } else {
-                if (found) {
-                    callback(null, found);
-                } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
-                }
+                callback(null, {
+                    message: "No Data Found"
+                });
             }
 
         })

@@ -534,24 +534,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // console.log("package", data.data.package);
                 $state.go("thanks-silver");
             });
-
-            $scope.silverPack = function (id) {
-                NavigationService.silverPackMail(id, function (data) {
-                    console.log("acceptdataa", data);
-                    if (data.data.value) {
-                        console.log(data.data.value);
-                    }
-                })
-            };
-
-            $scope.updateGold = function (id) {
-                NavigationService.upgradToGold(id, function (data) {
-                    console.log("acceptdataa", data);
-                    if (data.data.value) {
-                        console.log(data.data.value);
-                    }
-                })
-            };
         }
 
 
@@ -576,16 +558,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $.jStorage.set("photographer", data.data);
                 $state.go("thanks-gold");
             });
-
-            $scope.goldPack = function (id) {
-                NavigationService.goldPackMail(id, function (data) {
-                    //console.log("acceptdataa", data);
-                    if (data.data.value) {
-                        //console.log(data.data.value);
-                    }
-                })
-            };
-
         }
 
         $scope.dataArr = [];
