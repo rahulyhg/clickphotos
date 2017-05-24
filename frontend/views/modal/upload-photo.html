@@ -26,8 +26,11 @@
                         </div>
                     </div>-->
                     <div class="select-catopt">
-                        <ui-select ng-model="imagesData.category" style="width: 200px;" title="Select Category">
-                            <ui-select-match placeholder="Select Category">{{cat.name}}</ui-select-match>
+                        <ui-select ng-model="cat.category1" on-select="addImages(cat.category1)" style="width: 200px;" title="Select Category">
+                             <ui-select-match placeholder="Select Category">
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <!--<ui-select-match placeholder="Select Category">{{cat.name}}</ui-select-match>-->
                             <ui-select-choices repeat="cat in photographerData.speciality">
                                 <span ng-bind-html="cat.name"></span>
                             </ui-select-choices>
@@ -38,8 +41,8 @@
 
                     <div class="upload-pic">
                         <!--<input type="file" value="" />-->
-                        <div class="upload-imgbtn">
-                            <button type="button" class="btn btn-default" ng-click="uploadImage(imagesData)" ng-disabled="!imagesData.image || !imagesData.category">Upload Image</button>
+                        <div class="upload-imgbtn">{{imagesData.category}}
+                            <button type="button" class="btn btn-default" ng-click="uploadImage(imagesData)" ng-disabled="!imagesData.image">Upload Image</button>
                         </div>
                         <div class="upload-dire">
                             <upload-image ng-model="imagesData.image" no-view></upload-image>

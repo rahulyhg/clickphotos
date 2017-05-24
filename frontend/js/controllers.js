@@ -623,6 +623,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         //upload image
+
+        $scope.imageData = {};
+        $scope.addImages = function (val) {
+            //console.log("val", val);
+            $scope.imageData.category = val.name;
+            //console.log("$scope.imageData", $scope.imageData.category);
+            //     if (_.isEqual(type, "category")) {
+            //         $scope.filterToBeApplied.category = val._id;
+            //         $scope.filterToBeApplied.catName = val.name;
+            //     } else {
+            //         $scope.filterToBeApplied.city = val;
+            //     }
+            //   //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
+        }
+
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
@@ -636,6 +651,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.uploadImage = function (formdata) {
             //console.log("im in upload image", formdata);
+            formdata.category = $scope.imageData.category;
             formdata._id = $.jStorage.get("photographer")._id;
             NavigationService.apiCallWithData("Photographer/uploadPhotos", formdata, function (data) {
                 //console.log("data", data);
@@ -1651,7 +1667,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formdata = {};
         formdata.speciality = $stateParams.catName;
         formdata.location = $stateParams.photoLoc;
-        $scope.checkedLoc=$stateParams.photoLoc;          
+        $scope.checkedLoc = $stateParams.photoLoc;
         // console.log("$stateParams.photoLoc", $stateParams.photoLoc);
         // $scope.cityFill.push(formdata.location);
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
@@ -2183,7 +2199,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.filterToBeApplied.city = val;
 
             }
-          //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
+            //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
         }
 
 
