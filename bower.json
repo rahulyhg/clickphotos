@@ -61,5 +61,8 @@
     "svg-morpheus": "https://github.com/alexk111/SVG-Morpheus.git#~0.1.8",
     "tinymce": "4.3.12",
     "ui-router": "*"
+  },
+  "resolutions": {
+    "angular": ">1.2.6"
   }
 }
