@@ -1,3 +1,4 @@
+var sha512 = require('sha512');
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
 
@@ -289,6 +290,94 @@ var controller = {
         }
     },
 
+    checkoutPayment: function (req, res) {
+        if (req.body) {
+            var formData = {
+                name: req.body.name,
+                photographer: req.body.photographer,
+                payAmount: req.body.payAmount,
+                amount: req.body.amount,
+                email: req.body.email,
+                return_url: req.body.return_url
+            };
+            // Order.saveData(formData, res.callback);
+            Order.saveData(formData, res.callback);
+
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
+    },
+    sendToPaymentGateway: function (req, res) {
+        if (req.query.id) {
+            Order.findOne({
+                _id: req.query.id
+            }).populate('photographer payAmount').lean().exec(function (err, data) {
+                if (err) {
+                    res.callback(err);
+                } else {
+                    console.log("on ressssssssss");
+                    console.log(data);
+                    var hash = sha512("1185b99221ffd026edca73922e1a12e6|24065|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|Test Order Description|GBP|1|" + data.email + "|TEST|" + data.name + "|04423452345|600001|" + req.query.id + "|" + data.return_url);
+                    var hashtext = hash.toString('hex');
+                    var hs = hashtext.toUpperCase('hex');
+                    var reference_no = req.query.id;
+
+                    var formData = {
+                        account_id: "24065",
+                        address: "Billing Address",
+                        amount: data.payAmount.amount,
+                        channel: "0",
+                        city: "Billing City",
+                        country: "IND",
+                        currency: "INR",
+                        description: "Test Order Description",
+                        display_currency: "GBP",
+                        display_currency_rates: "1",
+                        email: data.email,
+                        mode: "TEST",
+                        reference_no: req.query.id,
+                        name: data.name,
+                        phone: "04423452345",
+                        postal_code: "600001",
+                        return_url: data.return_url,
+                        secure_hash: hs
+                    };
+                    res.view("payu", formData);
+
+                }
+
+            });
+
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
+    },
+
+    paymentGatewayResponce: function (req, res) {
+        if (req.body) {
+            console.log("in responce of ..");
+            console.log(req.body);
+            res.redirect("http://wohlig.io/thanks-silver");
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
+    },
+
     updateToGold: function (req, res) {
         if (req.body) {
             Photographer.updateToGold(req.body, res.callback);
@@ -298,7 +387,7 @@ var controller = {
                 data: {
                     message: "Invalid Request"
                 }
-            })
+            });
         }
     },
 
@@ -314,7 +403,7 @@ var controller = {
             })
         }
     },
-    
+
     findPhotographerCities: function (req, res) {
         if (req.body) {
             Photographer.findPhotographerCities(req.body, res.callback);
@@ -342,29 +431,29 @@ var controller = {
     },
 
     getAllPhotographers: function (req, res) {
-        if (req.body) {
-            Photographer.getAllPhotographers(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
-                }
-            })
+            if (req.body) {
+                Photographer.getAllPhotographers(req.body, res.callback);
+            } else {
+                res.json({
+                    value: false,
+                    data: {
+                        message: "Invalid Request"
+                    }
+                })
+            }
         }
-    }
-    // smsForOtp: function (req, res) {
-    //     if (req.body) {
-    //         Photographer.smsForOtp(req.body, res.callback);
-    //     } else {
-    //         res.json({
-    //             value: false,
-    //             data: {
-    //                 message: "Invalid Request"
-    //             }
-    //         })
-    //     }
-    // }
+        // smsForOtp: function (req, res) {
+        //     if (req.body) {
+        //         Photographer.smsForOtp(req.body, res.callback);
+        //     } else {
+        //         res.json({
+        //             value: false,
+        //             data: {
+        //                 message: "Invalid Request"
+        //             }
+        //         })
+        //     }
+        // }
 
 };
 module.exports = _.assign(module.exports, controller);

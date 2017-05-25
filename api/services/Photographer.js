@@ -1,5 +1,7 @@
 var request = require("request");
 var cron = require("node-cron");
+var sha512 = require('sha512');
+var curl = require('curlrequest');
 var schema = new Schema({
     name: String,
     profilePic: String,
@@ -599,11 +601,11 @@ var model = {
             // url: "https://www.vamaship.com/api/surface/book",
             url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?placeid=ChIJkbeSa_BfYzARphNChaFPjNcIndia&input=M&types=(cities)&language=en&key=" + api,
             method: "POST"
-            //  headers: {
-            //    "Content-Type": "application/json",
-            //    "Authorization": "Bearer " + api
-            //  },
-            //   body: JSON.stringify(userData)
+                //  headers: {
+                //    "Content-Type": "application/json",
+                //    "Authorization": "Bearer " + api
+                //  },
+                //   body: JSON.stringify(userData)
         }, function (err, httpResponse, body) {
             // console.log("err : ",err,"httpResponse",httpResponse);
             console.log("err ::::::::::: ", err);
@@ -805,7 +807,7 @@ var model = {
     },
 
     //emailers
-    
+
     sendEnq: function (data, callback) {
         console.log("data", data);
         // var contact = this(data);
@@ -1003,6 +1005,39 @@ var model = {
 
     //     })
     // },
+
+
+    payUpdateToGold: function (data, callback) {
+
+
+
+
+        // request.post({
+        //     url: 'https://secure.ebs.in/pg/ma/payment/request',
+        // params: {
+        //     account_id: "24065",
+        //     address: "Billing Address",
+        //     amount: 1.00,
+        //     channel: 0,
+        //     city: "Billing City",
+        //     country: "IND",
+        //     currency: "INR",
+        //     description: "Test Order Description",
+        //     display_currency: "GBP",
+        //     display_currency_rates: 1,
+        //     email: "name@yourdomain.in",
+        //     mode: "TEST",
+        //     name: "Billing Name",
+        //     phone: "04423452345",
+        //     postal_code: "600001",
+        //     reference_no: 223,
+        //     return_url: "http://localhost/ebs/response.php",
+        //     secure_hash: hs,
+        // }
+        // }, callback);
+
+    },
+
     updateToGold: function (data, callback) {
         console.log(data);
         Photographer.findOneAndUpdate({
@@ -1190,7 +1225,7 @@ cron.schedule('15 10 * * *', function () {
             }, function (error, data) {
                 if (err) {
                     console.log("error found in doLogin.callback1")
-                    //callback(null, err);
+                        //callback(null, err);
                 } else {
                     //callback(null, "updated");
                 }

@@ -42,7 +42,7 @@
                                 <div class="inline-block">
                                     <span class="loc-span">Location:</span>
                                 </div>
-                                <div class="inline-block">
+                                <div class="inline-block added-city">
                                     <span class="loc-span">{{locString}}</span>
                                 </div>
                             </div>
@@ -109,18 +109,15 @@
                                                <span>Mumbai</span>
                                                <div class="close-btn">x</div>
                                            </div>-->
-
                                             <div class="display-inline city__name">
                                                 <input type="text" ng-change="autoLocation()" class="form-control" id="locationCity" ng-model="dummy.abc">
                                                 <i class="fa fa-plus  city__add-icon" ng-click="addLocation();"></i>
                                             </div>
-
                                             <div class="added-city">
                                                 <div class="selected-option display-inline" ng-repeat="a in arrLocation track by $index">
                                                     <span>{{a}}</span>
                                                     <div class="close-btn" ng-click="removeLocation($index)">x</div>
                                                 </div>
-
                                             </div>
                                             <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
                                         </div>
@@ -195,7 +192,6 @@
                             </div>
                             <!-- /form-submit -->
                             <div class="about-desc" ng-if="about">
-
                                 <!--display-->
                                 <!--without edit-->
                                 <div class="about-head text-capitalize">about {{photographerData.name}}
@@ -223,7 +219,6 @@
                                             <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
                                             <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
                                             <div class="city">
-
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -274,7 +269,6 @@
                                     <div class="upgrade-sec" ng-hide="packageShow=='Silver' || packageShow=='Gold'">
                                         <p class="text-uppercase">Upgrade to the following premium packages</p>
                                     </div>
-
                                     <div class="upgrade-pkg" ng-if="packageShow!='Silver' && packageShow!='Gold' ">
                                         <div class="row">
                                             <div class="col-md-6 text-center">
@@ -283,7 +277,7 @@
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">SILVER PACKAGE</span>
                                                         <span class="display-block package-price">
-                                                      <span class="rupee">`</span>2300
+                                                      <span class="rupee">`</span>{{amount[0].amount}}
                                                         inclusive of all taxes</span>
                                                     </div>
                                                 </div>
@@ -307,7 +301,7 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price"><span class="rupee">`</span>3400
+                                                        <span class="display-block package-price"><span class="rupee">`</span>{{amount[1].amount}}
                                                         inclusive of all taxes</span>
                                                     </div>
                                                 </div>
@@ -328,7 +322,6 @@
                             </div>
                         </div>
                         <!-- goldmember -->
-
                         <!-- silverMember -->
                         <div class="about-desc" ng-if="packageShow=='Silver' ">
                             <div class="about-head text-capitalize">Membership</div>
@@ -423,7 +416,7 @@
                                                     <span class="package-name">SILVER PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price">    <span class="rupee">`</span> 2300
+                                            <span class="display-block package-price">    <span class="rupee">`</span> {{amount[0].amount}}
                                             inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
@@ -445,8 +438,8 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span> 3450 inclusive
-                                            of all taxes
+                                            <span class="display-block package-price"><span class="rupee">`</span> {{amount[1].amount}}
+                                            inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>100 photos</li>
@@ -519,7 +512,6 @@
                                         <label for="{{list.category}}">{{list.category}}</label>
                                     </p>
                                 </div>
-
                                 <!--<p>
                                     <input type="checkbox" id="chennai" />
                                     <label for="chennai">Chennai</label>
@@ -537,7 +529,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
+                            <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="item in showSixPhotos track by $index">
                                 <div class="img-holder" style="background: url('{{item.image | serverimage}}') no-repeat 50% 50%">
                                     <!--<img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">-->
                                     <div class="edit-image">
@@ -546,7 +538,6 @@
                                                 <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
                                             <!--<button type="button" class="btn btn-default" ng-click="deleteUploadImage(item)">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>-->
                                             <button type="button" class="btn btn-default" ng-click="deletePhoto('sm',item);">  <i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -578,7 +569,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- gold-package -->
                     <div class="uploaded-images" ng-if="packageShow=='Gold' && !termG">
                         <div class="package-head head-gold">
@@ -611,10 +601,9 @@
                             <div class="upload-pic display-inline">
                                 <button type="button" class="btn btn-default text-uppercase" ng-click="uploadImg()" ng-if="uploadImgLength<100">Upload picture</button>
                             </div>
-
                         </div>
                         <div class="row">
-                            <div class="col-md-4" ng-repeat="item in showSixPhotos track by $index">
+                            <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="item in showSixPhotos track by $index">
                                 <div class="img-holder" style="background: url('{{item.image | serverimage}}') no-repeat 50% 50%">
                                     <!--<img ng-src="{{item.image | serverimage}}" alt="" class="img-responsive">-->
                                     <div class="edit-image">
@@ -680,8 +669,8 @@
                                                     <span class="package-name">SILVER PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price">    <span class="rupee">`</span> 2300inclusive
-                                            of all taxes
+                                            <span class="display-block package-price">    <span class="rupee">`</span> {{amount[0].amount}}
+                                            inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
@@ -702,8 +691,8 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span> 3450 inclusive
-                                            of all taxes
+                                            <span class="display-block package-price"><span class="rupee">`</span> {{amount[1].amount}}
+                                            inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>100 photos</li>
@@ -731,7 +720,7 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">SILVER PACKAGE</span>
-                                                <span class="display-block package-price ">    <span class="rupee ">`</span>2300
+                                                <span class="display-block package-price ">    <span class="rupee ">`</span>{{amount[0].amount}}
                                                 inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForSilver | date}}</span></p>
@@ -756,7 +745,7 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
-                                                <span class="display-block package-price "><span class="rupee ">`</span>3450
+                                                <span class="display-block package-price "><span class="rupee ">`</span>{{amount[1].amount}}
                                                 inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForGold | date}}</span></p>
