@@ -2,9 +2,9 @@
     <div class="upload-imageblock">
         <div class="close-modal pull-right" ng-click="$dismiss()"><i class="fa fa-times" aria-hidden="true"></i></div>
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5 col-sm-6 ">
                 <div class="img-holder">
-                    <img src="frontend/img/popup.jpg" alt="" class="img-responsive" ng-if="!imagesData.profilePic">
+                    <img src="frontend/img/popup.jpg" alt="" class="img-responsive full-hight" ng-if="!imagesData.profilePic">
                     <div style="background: url('{{imagesData.profilePic | serverimage}}') no-repeat 50% 50%; height: 100%; background-size: cover!important;"
                         ng-if="imagesData.profilePic">
 
@@ -12,7 +12,7 @@
                     <!--<img ng-src="{{imagesData.image | serverimage}}" alt="" class="img-responsive" ng-if="imagesData.image">-->
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-6">
                 <div class="upl-sec">
                     <h2 class="upload-head">Upload Profile Picture</h2>
                     <!--<div class="select_join">
@@ -31,7 +31,7 @@
                             <button type="button" class="btn btn-default" ng-click="uploadProfilePic(imagesData)">Upload Image</button>
                         </div>
                         <div class="upload-dire">
-                             <upload-image ng-model="imagesData.profilePic" no-view></upload-image>
+                            <upload-image ng-model="imagesData.profilePic" no-view></upload-image>
                         </div>
                     </div>
                 </div>

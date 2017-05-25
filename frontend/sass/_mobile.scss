@@ -1,5 +1,343 @@
-@media (max-width: $screen-xs-max) {}
+    @media (max-width: $screen-xs-max) {}
 
-@media (max-width: $screen-sm-max) {}
+    @media (max-width: $screen-sm-max) {
+        // Start of  home page
+        //CSS global classes
+        .font50 {
+            font-size: 50px;
+        }
+        .head-f {
+            @extend .font50;
+        }
+        .profile-holder {
+            @include size(195px, 195px);
+        }
+        .package-name {
+            font-size: 20px;
+        }
+        .set-1 {
+            font-size: 16px;
+        }
+        .full-hight {
+            height: 100%;
+        }
+        .package-price {
+            font-size: 20px;
+        }
+        .big-font {
+            font-size: 70px;
+        }
+        .font70 {
+            font-size: 40px;
+        } //End of CSS global classes
+        //Start of future photo
+        .featu_photo_caraso {
+            .fp_padd_rl {
+                h2 {
+                    @extend .font50;
+                }
+            }
+        } //End of future photo
+        // start of photo contest section
+        .pht_contest {
+            height: 345px;
+            .jumbotron {
+                padding: 0;
+                .ht100 {
+                    height: 85px;
+                    h2 {
+                        @extend .font50;
+                    }
+                }
+            }
+        } //End of the photo contest section
+        //Start of section categorie
+        .categories {
+            .ht30 {
+                .imgwt {
+                    width: 110px;
+                    left: -55px;
+                }
+                h2 {
+                    @extend .font50;
+                }
+            }
+            .all_cate {
+                .padd_rt {
+                    padding-right: 15px;
+                }
+                .padd_lt {
+                    padding-left: 15px;
+                }
+            }
+            button {
+                @include size(130px, 39px);
+                &:hover {
+                    color: white;
+                }
+            }
+        } //End of section categorie
+        //Start of signup section
+        .signup {
+            .mg {
+                @include margin(0 0);
+            }
+            .img_relative {
+                top: -60px;
+            }
+            .img_absolute {
+                display: none;
+            }
+            .cam_heading {
+                height: 85px;
+                h2 {
+                    @extend .font50;
+                }
+                h2:nth-child(even):after {
+                    top: -55px;
+                    font-size: 120px;
+                }
+                p {
+                    font-size: 16px;
+                }
+            }
+        } //End of sign up section 
+        //Start of the artist of the month
+        .atm {
+            height: 395px;
+            margin-bottom: -55px;
+            .head-f {
+                top: 31px;
+                font-size: 34px;
+                line-height: 26px;
+            }
+            .bg_img {
+                .user-ab {
+                    .border-half {
+                        @include size(180px, 180px);
+                        .profile-f-img {
+                            width: 180px;
+                            height: 150px;
+                            transform: rotate(-44deg);
+                        }
+                        .user-img {
+                            background-size: cover!important;
+                            height: 100%;
+                            border-radius: 50%;
+                            transform: rotate(-44deg);
+                        }
+                    }
+                }
+                .abslt {
+                    // used to adjust the logo
+                    width: 40px;
+                    position: absolute;
+                    bottom: -21px;
+                    @include transform(rotate(3deg));
+                    left: -21px;
+                }
+            }
+            .user_info {
+                h2 {
+                    font-size: 24px;
+                }
+                h3 {
+                    font-size: 19px;
+                }
+                p {
+                    font-size: 16px;
+                }
+            }
+        } //End of the artist of the month
+        // Start of Testimonials
+        .testimonial {
+            height: 345px;
+            h2 {
+                @extend .font50;
+            }
+            .abslt_lt {
+                width: 40px;
+            }
+            .abslt_rt {
+                // used for downside logo image
+                right: -5px;
+                width: 40px;
+                bottom: -14px;
+            }
+        } //End of Testimonials
+        // End of home page.html
+        // Start of photographer.html page
+        .profile-banner {
+            .profile-banner__bg {
+                height: auto;
+            }
+        }
+        .name-sec {
+            @include size(505px, auto);
+            margin-bottom: 30px;
+            .name-part {
+                font-size: 30px; // line-height: 1;
+                text-transform: capitalize;
+            }
+            .added-city {
+                vertical-align: top;
+                width: 75%;
+            }
+        }
+        .btn-1 {
+            .btn-select {
+                font-size: 20px;
+            }
+            .form-horizontal {
+                .selected-data {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 70%;
+                }
+            }
+        }
+        .city {
+            .city__name {
+                @include size(40%, auto);
+            }
+            .city__add-icon {
+                @include margin(null 0 null null);
+            }
+            .added-city {
+                width: 100%;
+            }
+        }
+        .abt-form {
+            .speciality-list {
+                @include size(100%, auto);
+            }
+            .check-box {
+                padding: 0 5px;
+            }
+        }
+        .form-horizontal .selected-data {
+            width: 70%;
+        }
+        .uploaded-images {
+            .package-head {
+                width: 35%;
+            }
+            .count-images {
+                font-size: 17px;
+            }
+        }
+        .historypackage-card1,
+        .historypackage-card2 {
+            .package-name,
+            .package-price {
+                font-size: 20px;
+            }
+        }
+        .checkbox-form {
+            button {
+                font-size: 15px;
+                padding: 10px 30px;
+            }
+        }
+        .circular-checkbox {
+            .radio-cat {
+                width: 79%;
+            }
+        }
+        .edit-uploaded {
+            button {
+                padding: 5px 5px;
+            }
+        }
+        .profile-holder {
+            &:hover {
+                .upload-trans {
+                    padding: 6px 20px 28px;
+                }
+            }
+        }
+        .upl-sec {
+            // Used in userupload-photo.html modal
+            .upload-head {
+                font-size: 30px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .upload-pic {
+                button {
+                    font-size: 14px;
+                }
+            }
+        }
+        .sub-main {
+            .sub-title {
+                h2 {
+                    font-size: 20px;
+                }
+                p {
+                    margin-top: 10px;
+                    .btn {
+                        font-size: 13px!important;
+                    }
+                }
+            }
+            .upgrade-inner {
+                font-size: 19px;
+                right: 6px;
+                bottom: 4%;
+            }
+        }
+        .upgrade-gd {
+            .upgrd-gold {
+                .big-font {
+                    font-size: 70px;
+                }
+            }
+        } // End of photographer.html page
+        // Start of about us page, privacy-policy, terms-condition page
+        .contactus {
+            .contactus__address {
+                address {
+                    font-size: 14px;
+                    line-height: 1.5;
+                }
+            }
+        } //End of about us page, privacy-policy, terms-condition page
+        //Start of Thank You for gold, silver & sorry pages
+        .thanks-title {
+            .ht30 {
+                @include margin(null null 60px null);
+            }
+            .imgwt {
+                @include size(100px, auto);
+            }
+            h1 {
+                font-size: 100px;
+                @include margin(30px null null null);
+            }
+            p {
+                font-size: 16px;
+            }
+        }
+        .thanks .cam-img,
+        .thanks-gold .cam-img,
+        .thanks-silver .cam-img,
+        .error .cam-img,
+        .becomefp .cam-img {
+            @include padding(35px);
+        }
+        .thanks,
+        .thanks-gold,
+        .thanks-silver,
+        .error,
+        .becomefp {
+            button {
+                font-size: 12px;
+                @include padding(10px 20px);
+                border-radius: 0px;
+            }
+        } //End of Thank You for gold, silver & sorry pages
+    }
 
-@media (max-width: $screen-md-max) {}
+    @media (max-width: $screen-md-max) {}

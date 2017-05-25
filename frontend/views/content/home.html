@@ -100,14 +100,14 @@
                                 <p>Speciality: {{user.speciality[0].name}}</p>
                             </div>
                         </div>
-                        <div class="col-md-8 col-md-push-2">
+                        <div class="col-md-8 col-md-push-2 col-sm-8 col-sm-push-2 ">
                             <div class="view_prof_btn">
                                 <button class="btn btn-danger btn-block" ui-sref="user-profile({userid:user._id})">View Profile</button>
                             </div>
                         </div>
                     </li>
                 </flex-slider>
-                <div class="col-md-2 col-md-push-5" id="middle">
+                <div class="col-md-2 col-md-push-5 col-sm-3 col-sm-push-5" id="middle">
                     <div class="fp_viewAll_btn">
                         <button class="btn btn-block" ui-sref="users">View All</button>
                     </div>
@@ -124,7 +124,7 @@
             <div class="camera_img">
                 <img src="frontend/img/cam.png" alt="Camera" class="img-responsive center-block" width="100" alt="">
             </div>
-            <div class="col-md-6 col-md-push-3">
+            <div class="col-md-6 col-md-push-3 col-sm-7 col-sm-push-3">
                 <div class="jumbotron">
                     <div class="ht100">
                         <h2> &nbsp Compete<br>
@@ -132,7 +132,7 @@
                         </h2>
                     </div>
                     <p>Get clicking in style and if your pictures have the oomph factor you could win exciting prizes </p>
-                    <div class="col-md-5 col-md-push-3">
+                    <div class="col-md-5 col-md-push-3 col-sm-4 col-sm-push-3">
                         <div class="pht_contest_btn">
                             <!--<button class="btn btn-block" ui-sref="photo-contest">Click Here</button>-->
                             <button class="btn btn-block" style="pointer-events: none;">Coming soon</button>
@@ -153,7 +153,7 @@
 <section class="categories">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 col-sm-12 text-center">
                 <div class="ht30">
                     <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
                     <h2>Categories</h2>
@@ -184,9 +184,9 @@
                 </div>-->
                 </div>
             </div>
-            <div class="col-md-2 col-md-push-5 ">
-                <button class="btn btn-block" ui-sref="categories">View All</button>
-            </div>
+            <p class="text-center">
+                <button class="btn" ui-sref="categories">View All</button>
+            </p>
         </div>
 </section>
 <!--end of categories section-->
@@ -195,12 +195,12 @@
 <section class="signup">
     <div class="container">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5 col-sm-5">
                 <div class="img_relative">
                     <img src="frontend/img/cam1.png" class="img-responsive" alt="">
                 </div>
             </div>
-            <div class="col-md-6 mg">
+            <div class="col-md-6 col-sm-6 mg">
                 <div class="cam_heading">
                     <h2>Get
                         <h2>featured!</h2>
@@ -222,7 +222,7 @@
 <section class="atm">
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-7">
                 <h2 class="head-f">Artist of <br> &nbsp the month</h2>
                 <div class="bg_img">
                     <img src="frontend/img/atm0.jpg" class="img-responsive" alt="">
@@ -243,7 +243,7 @@
                     <img src="frontend/img/atm2.png" alt="" class="img-responsive abslt">
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 col-sm-5">
                 <div class="user_info">
                     <h2>{{artistOfMonth.name}}</h2>
                     <h3>Speciality:{{specialityStr }}</h3>

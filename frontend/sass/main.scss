@@ -1,4 +1,4 @@
-$output-bourbon-deprecation-warnings: false;
+$output-bourbon-deprecation-warnings: false !default;
 @import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
@@ -385,12 +385,11 @@ footer {
     }
     .footer_bgup {
         // footer background up which includes black-gray background
-        background-color: #252525;
-        height: 250px;
+        background-color: #252525; //    min-height: 250px;
         .footer_padd {
             display: inline-block;
             padding: 15px 0;
-            height: 250px;
+            min-height: 250px;
             h3 {
                 font-family: 'dosis-light';
             }
@@ -1190,6 +1189,7 @@ a.navbar-brand {
         //  margin-top: 50px;
         @include margin(null null 60px null);
         height: 39px;
+        width: 180px;
         @extend .myBtnOrange;
     }
     .btn:hover {
@@ -1201,8 +1201,7 @@ a.navbar-brand {
     position: relative;
     .img_relative {
         position: relative;
-        top: -108px;
-        width: 400px;
+        top: -108px; //  width: 400px;
         z-index: -3;
         display: inline-block;
     }
@@ -1588,6 +1587,7 @@ $brand-holder: #ccc !default;
     }
     .name-part {
         font-size: 36px; // line-height: 1;
+        text-transform: capitalize;
     }
     .name-sec__speciality-title {
         vertical-align: top;
