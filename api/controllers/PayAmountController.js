@@ -9,7 +9,7 @@ var controller = {
                 data: {
                     message: "Invalid Request"
                 }
-            })
+            });
         }
     },
 };
