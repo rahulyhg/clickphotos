@@ -1039,12 +1039,14 @@ var model = {
     },
 
     updateToGold: function (data, callback) {
+        console.log("in update gold..");
         console.log(data);
+        var photographerId = data.Description.split("/");
         Photographer.findOneAndUpdate({
-            _id: data._id
+            _id: photographerId[1]
         }, {
-            package: data.package,
-            goldPackageBroughtDate: data.packageBroughtDate
+            package: photographerId[0],
+            goldPackageBroughtDate: Date.now()
         }, {
             new: true
         }).exec(function (err, found) {

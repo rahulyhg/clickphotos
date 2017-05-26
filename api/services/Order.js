@@ -23,6 +23,7 @@ var schema = new Schema({
         index: true
     },
     amount: Number,
+    type: String,
     address: {
         type: String,
         default: 'Billing Address'
@@ -68,6 +69,12 @@ var schema = new Schema({
     },
     return_url: {
         type: String
+    },
+    transactionId: {
+        type: String
+    },
+    paymentResponce: {
+        type: []
     }
 
 });
@@ -87,5 +94,24 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Order', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "photographer payAmount", "photographer payAmount"));
-var model = {};
+var model = {
+    editData: function (data, callback) {
+        //        delete data.password;
+        if (data._id) {
+            this.findOneAndUpdate({
+                _id: data._id
+            }, data).exec(function (err, updated) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                } else if (updated) {
+                    console.log("hey", updated);
+                    callback(null, updated);
+                } else {
+                    callback(null, {});
+                }
+            });
+        }
+    },
+};
 module.exports = _.assign(module.exports, exports, model);

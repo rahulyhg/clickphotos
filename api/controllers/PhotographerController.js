@@ -292,8 +292,10 @@ var controller = {
 
     checkoutPayment: function (req, res) {
         if (req.body) {
+            console.log(req.body);
             var formData = {
                 name: req.body.name,
+                description: req.body.type,
                 photographer: req.body.photographer,
                 payAmount: req.body.payAmount,
                 amount: req.body.amount,
@@ -322,7 +324,7 @@ var controller = {
                 } else {
                     console.log("on ressssssssss");
                     console.log(data);
-                    var hash = sha512("1185b99221ffd026edca73922e1a12e6|24065|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|Test Order Description|GBP|1|" + data.email + "|TEST|" + data.name + "|04423452345|600001|" + req.query.id + "|" + data.return_url);
+                    var hash = sha512("1185b99221ffd026edca73922e1a12e6|24065|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|TEST|" + data.name + "|04423452345|600001|" + req.query.id + "|" + data.return_url);
                     var hashtext = hash.toString('hex');
                     var hs = hashtext.toUpperCase('hex');
                     var reference_no = req.query.id;
@@ -335,7 +337,7 @@ var controller = {
                         city: "Billing City",
                         country: "IND",
                         currency: "INR",
-                        description: "Test Order Description",
+                        description: data.description,
                         display_currency: "GBP",
                         display_currency_rates: "1",
                         email: data.email,
@@ -367,7 +369,21 @@ var controller = {
         if (req.body) {
             console.log("in responce of ..");
             console.log(req.body);
-            res.redirect("http://wohlig.io/thanks-silver");
+            if (req.body.ResponseMessage == "Transaction Successful") {
+                var formData = {
+                    _id: req.body.MerchantRefNo,
+                    transactionId: req.body.TransactionId,
+                    paymentResponce: req.body
+                };
+                Order.editData(formData, function (err, data) {
+                    Photographer.updateToGold(req.body, function (err, data) {
+                        res.redirect("http://wohlig.io/thanks-silver");
+                    });
+                });
+
+            } else {
+                res.redirect("http://wohlig.io/error");
+            }
         } else {
             res.json({
                 value: false,

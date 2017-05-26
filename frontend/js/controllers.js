@@ -537,6 +537,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formdata.email = $.jStorage.get("photographer").email;
         formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
         formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "Silver/" + $.jStorage.get("photographer")._id;
         console.log(formdata);
         NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
             console.log(data);
