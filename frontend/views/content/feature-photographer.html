@@ -26,7 +26,6 @@
             </div>
             <!-- end section tab -->
             <!-- start first tab -->
-
             <!--<div class="row" ng-if="activeTab == 1">-->
             <div class="row">
                 <div ng-if="showStep == 1">
@@ -49,7 +48,6 @@
                                         <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
                                             required>
                                         <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
-
                                     </div>
                                     <div class="col-md-6">
                                         <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword"
@@ -83,8 +81,7 @@
                             </div>
                         </div>
                     </form>
-
-                    <form >
+                    <form>
                         <div class="login-form">
                             <div class="col-md-6 pad-right5">
                                 <div class="row mr15 light-grey min-h">
@@ -116,7 +113,6 @@
                     </form>
                 </div>
             </div>
-
             <!-- end first tab -->
             <!-- start second tab -->
             <!--<div class="row" ng-if="activeTab == 2">-->
@@ -125,7 +121,7 @@
                     <div class="intro hctl">
                         <strong class="intro-con">Hi {{photographerData.name}},</strong>
                         <p class="intro-con">You can become a featured photographer for the month of <strong>{{finalMonth}}</strong> by only paying
-                            <i class="fa fa-inr"></i><strong>1150.</strong></p>
+                            <i class="fa fa-inr"></i><strong>{{amount[2].amount}}.</strong></p>
                         <p class="intro-con">In order to become a featured photographer you need to subscribe.</p>
                     </div>
                     <ul class="list pad60">

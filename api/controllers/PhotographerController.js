@@ -372,13 +372,22 @@ var controller = {
             if (req.body.ResponseMessage == "Transaction Successful") {
                 var formData = {
                     _id: req.body.MerchantRefNo,
-                    transactionId: req.body.TransactionId,
+                    transactionId: req.body.TransactionID,
                     paymentResponce: req.body
                 };
                 Order.editData(formData, function (err, data) {
-                    Photographer.updateToGold(req.body, function (err, data) {
-                        res.redirect("http://wohlig.io/thanks-silver");
-                    });
+                    console.log("ffffffffff");
+                    console.log(req.body.Description.split("/"));
+                    console.log(req.body.Description.split("/")[0]);
+                    if (req.body.Description.split("/")[0] === "featured") {
+                        Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
+                            res.redirect("http://wohlig.io/thanks/" + req.body.MerchantRefNo);
+                        });
+                    } else {
+                        Photographer.updateToGold(req.body, function (err, data) {
+                            res.redirect("http://wohlig.io/thanks/" + req.body.MerchantRefNo);
+                        });
+                    }
                 });
 
             } else {
