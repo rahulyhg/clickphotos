@@ -26,7 +26,7 @@ module.exports = {
    ***************************************************************************/
 
   port: 80,
-  realHost: " http://clickmania.tingdom.in",
+  realHost: "http://clickmania.tingdom.in",
   emails: ["chintan@wohlig.com", "ashish.zanwar@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com","aditya.ghag@wohlig.com"]
 
   /***************************************************************************
