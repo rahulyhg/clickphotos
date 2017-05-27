@@ -379,20 +379,20 @@ var controller = {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "featured") {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
-                                res.redirect("http://wohlig.io/thanks/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost+"/thanks/" + req.body.MerchantRefNo);
                             });
                         } else {
                             Photographer.updateToGold(req.body, function (err, data) {
-                                res.redirect("http://wohlig.io/thanks/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost+"/thanks/" + req.body.MerchantRefNo);
                             });
                         }
                     } else {
-                        res.redirect("http://wohlig.io/error");
+                        res.redirect(env.realHost+"/error");
                     }
                 });
 
             } else {
-                res.redirect("http://wohlig.io/error");
+                res.redirect(env.realHost+"/error");
             }
         } else {
             res.json({
