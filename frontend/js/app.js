@@ -53,7 +53,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'UserProfileCtrl'
         })
 
-        .state('wild-photographer', {
+    .state('wild-photographer', {
             url: "/wild-photographer/:catid/:catName/:photoLoc",
             templateUrl: "frontend/views/template.html",
             controller: 'WildPhotoCtrl'
@@ -99,7 +99,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'photoContestCtrl'
         })
         .state('thanks', {
-            url: "/thanks",
+            url: "/thanks/:id",
             templateUrl: "frontend/views/template.html",
             controller: 'thanksCtrl'
         })
@@ -451,7 +451,7 @@ firstapp.directive('sidebarDirective', function () {
                     $('body').css('overflow-y', 'hidden');
                     element.addClass('show');
                     $('.sidebar').on('click', function () {
-                       sidebarOpen = true;
+                        sidebarOpen = true;
                         if (sidebarOpen) {
                             $('body').css('overflow-y', 'scroll');
                         }

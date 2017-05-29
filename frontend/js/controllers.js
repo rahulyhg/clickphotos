@@ -537,6 +537,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formdata.email = $.jStorage.get("photographer").email;
         formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
         formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "Silver/" + $.jStorage.get("photographer")._id;
         console.log(formdata);
         NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
             console.log(data);
@@ -566,17 +567,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showForm = false;
         $scope.hideAboutDesc = true;
         formdata = {};
-        formdata._id = $.jStorage.get("photographer")._id;
-        formdata.package = 'Gold';
-        formdata.packageBroughtDate = new Date();
-        NavigationService.apiCallWithData("Photographer/updateToGold", formdata, function (data) {
-            //console.log("dataaaaaaaaaa", data);
-            $scope.packageShow = data.data.package;
-            //console.log("$scope.packageShow", $scope.packageShow);
-            $.jStorage.set("photographer", data.data);
-            $state.go("thanks-gold");
+
+        formdata.photographer = $.jStorage.get("photographer")._id;
+        formdata.payAmount = $scope.amount[1]._id;
+        formdata.amount = $scope.amount[1].amount;
+        formdata.email = $.jStorage.get("photographer").email;
+        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+        formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "Gold/" + $.jStorage.get("photographer")._id;
+        console.log(formdata);
+        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+            console.log(data);
+            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
         });
-    }
+
+        // formdata._id = $.jStorage.get("photographer")._id;
+        // formdata.package = 'Gold';
+        // formdata.packageBroughtDate = new Date();
+        // NavigationService.apiCallWithData("Photographer/updateToGold", formdata, function (data) {
+        //     $scope.packageShow = data.data.package;
+        //     $.jStorage.set("photographer", data.data);
+        //     $state.go("thanks-gold");
+        // });
+    };
 
     $scope.dataArr = [];
     $scope.fliterCheck = function (data) {
@@ -820,6 +833,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Feature Photographer"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.amount = {};
+
+
+    NavigationService.callApi("PayAmount/getAll", function (data) {
+        $scope.amount = data.data;
+    });
+
     // $rootScope.showStep="";
     $scope.activeTab = 1;
     $scope.toggleTab = function (val) {
@@ -1097,27 +1117,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
 
     $scope.updateToFeature = function () {
+
         formdata = {};
-        formdata._id = $.jStorage.get("photographer")._id;
-        formdata.mon = $scope.finalMonth;
-        formdata.yea = new Date().getFullYear();
-        // console.log("frrrrr", formdata);
-        NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
-            // console.log("updateToFeaturePhotographer", data);
-            if (data.value === true) {
-                formData = {};
-                formData._id = $.jStorage.get("photographer")._id;
-                NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
-                    //console.log("catdata", data);
-                    if (data.value === true) {
-                        $.jStorage.set("photographer", data.data);
-                    }
-                });
-                //console.log(data.data.data);
-                $state.go("thanks");
-            }
+
+        formdata.photographer = $.jStorage.get("photographer")._id;
+        formdata.payAmount = $scope.amount[2]._id;
+        formdata.amount = $scope.amount[2].amount;
+        formdata.email = $.jStorage.get("photographer").email;
+        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+        formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "featured/" + $.jStorage.get("photographer")._id + "/" + $scope.finalMonth + "/" + new Date().getFullYear();
+        console.log(formdata);
+        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+            console.log(data);
+            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
         });
-    }
+
+        // formdata = {};
+        // formdata._id = $.jStorage.get("photographer")._id;
+        // formdata.mon = $scope.finalMonth;
+        // formdata.yea = new Date().getFullYear();
+        // NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
+        //     if (data.value === true) {
+        //         formData = {};
+        //         formData._id = $.jStorage.get("photographer")._id;
+        //         NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+        //             if (data.value === true) {
+        //                 $.jStorage.set("photographer", data.data);
+        //             }
+        //         });
+        //         $state.go("thanks");
+        //     }
+        // });
+    };
 
     //feature end
 
@@ -2306,84 +2338,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('thanksCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('thanksCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
 
     $scope.template = TemplateService.changecontent("thanks"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    //feature 
 
-    $scope.date = new Date();
-    var valMon = $scope.date.getMonth();
-    var valyear = $scope.date.getFullYear();
-    $scope.monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    $scope.nextMonth = valMon + 1;
-    $scope.mon = $scope.monthNames[$scope.nextMonth];
-    //console.log("$scope.mon", $scope.mon);
+    $scope.msg = "";
+    formData = {};
+    formData._id = $stateParams.id;
+    NavigationService.apiCallWithData("Order/getOne", formData, function (data) {
+        if (data.value === true) {
+            if (data.data.description.split('/')[0] != "featured") {
+                $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
 
-    formdata = {};
-    // formdata.month = $scope.mon;
-    //console.log("frrrrr", formdata);
-    NavigationService.apiCallWithData("Photographer/getLastFeaturedPhotographer", formdata, function (data) {
-        //console.log("getLastFeaturedPhotographer", data);
-        if (data.value == true) {
-
-            var monthIndex =
-                _.findIndex($scope.monthNames, function (o) {
-                    return o == data.data.lastMonth;
-                });
-            if (data.data.totalItems > 0) {
-                $scope.lastYearOfRegistartion = data.data.lastYear;
-                $scope.lastDateOfRegister = data.data.lastDateOfRegister;
-                $scope.totalCountOfLastDate = data.data.totalItems;
-                $scope.date = new Date();
-                //console.log("$scope.lastDateOfRegister", $scope.lastDateOfRegister);
-                //console.log("$scope.totalCountOfLastDate", $scope.totalCountOfLastDate);
-                if ($scope.lastYearOfRegistartion >= valyear && monthIndex >= $scope.nextMonth) {
-                    if ($scope.totalCountOfLastDate >= 12) {
-                        $scope.finalMonth = $scope.monthNames[monthIndex + 1];
-                        //console.log("$scope.finalMonth", $scope.finalMonth);
-                    } else {
-                        $scope.finalMonth = $scope.monthNames[monthIndex];
-                        // console.log("$scope.finalMonth", $scope.finalMonth);
-                    }
-                } else {
-                    $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
-                    //console.log("$scope.finalMonth", $scope.finalMonth);
-                }
             } else {
-                $scope.finalMonth = $scope.monthNames[$scope.nextMonth];
-                //console.log("$scope.finalMonth", $scope.finalMonth);
-            }
-        }
-
-    });
-
-    $scope.updateToFeature = function () {
-        formdata = {};
-        formdata._id = $.jStorage.get("photographer")._id;
-        formdata.mon = $scope.finalMonth;
-        formdata.yea = new Date().getFullYear();
-        // console.log("frrrrr", formdata);
-        NavigationService.apiCallWithData("Photographer/updateToFeaturePhotographer", formdata, function (data) {
-            // console.log("updateToFeaturePhotographer", data);
-            if (data.value === true) {
+                $scope.msg = "You are now registered as a Featured Photographer for the month of " + data
+                    .data.photographer.month;
                 formData = {};
                 formData._id = $.jStorage.get("photographer")._id;
                 NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
-                    //console.log("catdata", data);
                     if (data.value === true) {
                         $.jStorage.set("photographer", data.data);
                     }
                 });
-                //console.log(data.data.data);
-                $state.go("thanks");
             }
-        });
-    }
-
-    //feature end
+        }
+    });
 })
 
 .controller('thanksGoldCtrl', function ($scope, TemplateService, NavigationService, $timeout) {

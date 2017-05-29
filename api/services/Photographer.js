@@ -383,12 +383,12 @@ var model = {
         // var m = date.getMonth() + 1;
         // console.log("month", mon);
         Photographer.findOneAndUpdate({
-            _id: data._id
+            _id: data.Description.split("/")[1]
         }, {
             status: true,
             dateOfRagister: new Date(),
-            month: data.mon,
-            year: data.yea
+            month: data.Description.split("/")[2],
+            year: data.Description.split("/")[3]
         }, {
             new: true
         }, function (err, updated) {
@@ -1039,12 +1039,14 @@ var model = {
     },
 
     updateToGold: function (data, callback) {
+        console.log("in update gold..");
         console.log(data);
+        var photographerId = data.Description.split("/");
         Photographer.findOneAndUpdate({
-            _id: data._id
+            _id: photographerId[1]
         }, {
-            package: data.package,
-            goldPackageBroughtDate: data.packageBroughtDate
+            package: photographerId[0],
+            goldPackageBroughtDate: Date.now()
         }, {
             new: true
         }).exec(function (err, found) {
@@ -1063,7 +1065,7 @@ var model = {
                     //emailData.mobile = data1.mobile;
                     //emailData.query = data1.query;
                     emailData.from = "admin@clickmania.in";
-                    emailData.subject = "congrats you Have upgraded to Gold Package";
+                    emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
                     console.log("email data : ", emailData);
 
                     Config.email(emailData, function (err, emailRespo) {

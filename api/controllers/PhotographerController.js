@@ -294,13 +294,13 @@ var controller = {
         if (req.body) {
             var formData = {
                 name: req.body.name,
+                description: req.body.type,
                 photographer: req.body.photographer,
                 payAmount: req.body.payAmount,
                 amount: req.body.amount,
                 email: req.body.email,
                 return_url: req.body.return_url
             };
-            // Order.saveData(formData, res.callback);
             Order.saveData(formData, res.callback);
 
         } else {
@@ -320,34 +320,38 @@ var controller = {
                 if (err) {
                     res.callback(err);
                 } else {
-                    console.log("on ressssssssss");
-                    console.log(data);
-                    var hash = sha512("1185b99221ffd026edca73922e1a12e6|24065|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|Test Order Description|GBP|1|" + data.email + "|TEST|" + data.name + "|04423452345|600001|" + req.query.id + "|" + data.return_url);
-                    var hashtext = hash.toString('hex');
-                    var hs = hashtext.toUpperCase('hex');
-                    var reference_no = req.query.id;
+                    EBSConfig.getAll({}, function (err, dataConfig) {
+                        console.log("ggggggggg");
+                        console.log(dataConfig);
+                        var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|04423452345|600001|" + req.query.id + "|" + data.return_url);
+                        var hashtext = hash.toString('hex');
+                        var hs = hashtext.toUpperCase('hex');
+                        var reference_no = req.query.id;
 
-                    var formData = {
-                        account_id: "24065",
-                        address: "Billing Address",
-                        amount: data.payAmount.amount,
-                        channel: "0",
-                        city: "Billing City",
-                        country: "IND",
-                        currency: "INR",
-                        description: "Test Order Description",
-                        display_currency: "GBP",
-                        display_currency_rates: "1",
-                        email: data.email,
-                        mode: "TEST",
-                        reference_no: req.query.id,
-                        name: data.name,
-                        phone: "04423452345",
-                        postal_code: "600001",
-                        return_url: data.return_url,
-                        secure_hash: hs
-                    };
-                    res.view("payu", formData);
+                        var formData = {
+                            account_id: dataConfig[0].account,
+                            address: "Billing Address",
+                            amount: data.payAmount.amount,
+                            channel: "0",
+                            city: "Billing City",
+                            country: "IND",
+                            currency: "INR",
+                            description: data.description,
+                            display_currency: "GBP",
+                            display_currency_rates: "1",
+                            email: data.email,
+                            mode: dataConfig[0].name,
+                            reference_no: req.query.id,
+                            name: data.name,
+                            phone: "04423452345",
+                            postal_code: "600001",
+                            return_url: data.return_url,
+                            secure_hash: hs
+                        };
+                        res.view("payu", formData);
+
+                    });
+
 
                 }
 
@@ -365,9 +369,31 @@ var controller = {
 
     paymentGatewayResponce: function (req, res) {
         if (req.body) {
-            console.log("in responce of ..");
-            console.log(req.body);
-            res.redirect("http://wohlig.io/thanks-silver");
+            if (req.body.ResponseMessage == "Transaction Successful") {
+                var formData = {
+                    _id: req.body.MerchantRefNo,
+                    transactionId: req.body.TransactionID,
+                    paymentResponce: req.body
+                };
+                Order.editData(formData, function (err, data) {
+                    if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
+                        if (req.body.Description.split("/")[0] === "featured") {
+                            Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
+                                res.redirect(env.realHost+"/thanks/" + req.body.MerchantRefNo);
+                            });
+                        } else {
+                            Photographer.updateToGold(req.body, function (err, data) {
+                                res.redirect(env.realHost+"/thanks/" + req.body.MerchantRefNo);
+                            });
+                        }
+                    } else {
+                        res.redirect(env.realHost+"/error");
+                    }
+                });
+
+            } else {
+                res.redirect(env.realHost+"/error");
+            }
         } else {
             res.json({
                 value: false,
