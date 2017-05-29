@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-4">
             <h2 class="border-up">City</h2>
             <div class="location">
                 <div class="checkbox checkboxing">
@@ -92,8 +92,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-10 users">
-            <div class="col-sm-6 col-md-4" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize" ng-if="photographerData">
+        <div class="col-md-10 col-sm-8 users">
+            <div class="col-sm-6 col-md-4" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
+                ng-if="photographerData">
                 <div class="thumbnail">
                     <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
                     <div class="user-icon">
@@ -113,7 +114,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7 col-md-offset-4" ng-if="!photographerData[0]">
+                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3" ng-if="!photographerData[0]">
                     <div class="nopht-title">
                         <div class="ht30">
                             <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">

@@ -119,8 +119,10 @@
                         </div>
                         <div class="form-group">
                             <label for="name" class=""><img src="frontend/img/photographer/form/loc.png" alt="" class="img-responsive display-inline">Location:</label>
-                            <div class="selected-option display-inline" ng-repeat="Location in userData.location">
-                                <span>{{Location}}</span>
+                            <div class="selected-data">
+                                <div class="selected-option display-inline" ng-repeat="Location in userData.location">
+                                    <span>{{Location}}</span>
+                                </div>
                             </div>
                             <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
                             <!-- <div class="display-inline"><input type="text" class="form-control" id="location"></div> -->
@@ -135,8 +137,10 @@
                         </div>
                         <div class="form-group">
                             <label for="speciality" class=""><img src="frontend/img/photographer/form/cam.png" alt="" class="img-responsive display-inline">Speciality:</label>
-                            <div class="selected-option display-inline" ng-repeat="speciality in userData.speciality">
-                                <span>{{speciality.name}}</span>
+                            <div class="selected-data">
+                                <div class="selected-option display-inline" ng-repeat="speciality in userData.speciality">
+                                    <span>{{speciality.name}}</span>
+                                </div>
                             </div>
                             <!--<div class="selected-option display-inline">
                                                 <span>Wedding</span>
@@ -465,7 +469,7 @@
         <div class="send_enquirySlidebar" enquiry-directive="slide">
             <div class="send_enquiry">
                 <p>
-                    <a class="btn orange-btn " type="button" href="#" ng-click="sendEnquiry()"> Send an enquiry</a>
+                    <a class="btn orange-btn " type="button" href="#" ng-click="sendEnquiry()"> contact photographer</a>
                 </p>
             </div>
             <div class="col-md-12 padd35">
@@ -487,9 +491,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
+                            <div class="form-group relative ">
+                                <input type="tel" class="form-control" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
                                     required>
+                                <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
+                                <input type="tel" placeholder="+91" class="form-control">
                             </div>
                             <!--<p>Please Enter Your Mobile No</p>-->
                         </div>

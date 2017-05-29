@@ -30,35 +30,35 @@
             <!--<div class="row" ng-if="activeTab == 1">-->
             <div class="row">
                 <div ng-if="showStep == 1">
-                    <form name="loginForm">
-                        <div class="signup-form">
-                            <div class="col-md-6 pad-right5">
+                    <div class="col-md-6 col-sm-6 pad-right5">
+                        <form name="loginForm">
+                            <div class="signup-form">
                                 <div class="row mr15 light-grey min-h">
                                     <div class="col-md-12 text-center">
                                         <h1 class="damionr orange-color forml">Sign up</h1>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" id="name" placeholder="First Name" ng-model="formData.name" name="name" required><br>
                                         <span ng-show="loginForm.name.$touched && loginForm.name.$invalid">Please enter the name</span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required><br>
                                         <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
                                             required>
                                         <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
 
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword"
                                             required>
                                     </div>
                                     <div>
                                         <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 col-sm-12">
                                         <div class="checkbox text-left condition-box" ng-init="terms">
                                             <p>
                                                 <input type="checkbox" id="test1" ng-model="terms">
@@ -81,20 +81,22 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
 
-                    <form >
-                        <div class="login-form">
-                            <div class="col-md-6 pad-right5">
+
+
+                    <div class="col-md-6 col-sm-6 pad-right5">
+                        <form>
+                            <div class="login-form">
                                 <div class="row mr15 light-grey min-h">
-                                    <div class="col-md-12 text-center">
+                                    <div class="col-md-12 col-sm-12 text-center">
                                         <h1 class="damionr orange-color forml">Login</h1>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <input type="email" class="form-control" id="emailId" placeholder="Email id" ng-model="formdata.email" required>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <input type="password" class="form-control" id="passwrd" placeholder="Password" ng-model="formdata.password" required><br>
                                         <a class="flink" ng-click="changePwd();"> Forgot Password?</a>
                                     </div>
@@ -112,8 +114,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 
@@ -121,7 +124,7 @@
             <!-- start second tab -->
             <!--<div class="row" ng-if="activeTab == 2">-->
             <div class="row" ng-if="showStep == 2">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-10 col-sm-offset-1">
                     <div class="intro hctl">
                         <strong class="intro-con">Hi {{photographerData.name}},</strong>
                         <p class="intro-con">You can become a featured photographer for the month of <strong>{{finalMonth}}</strong> by only paying

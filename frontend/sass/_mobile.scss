@@ -25,11 +25,21 @@
             font-size: 20px;
         }
         .big-font {
-            font-size: 70px;
+            font-size: 70px!important;
         }
         .font70 {
             font-size: 40px;
+        }
+        .ft100 {
+            font-size: 70px;
         } //End of CSS global classes
+        //Start of header.html
+        header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
+        .icon_float>span.icon_bar1,
+        .icon_float>span.icon_bar2,
+        {
+            height: 3px;
+        } //End of header.html
         //Start of future photo
         .featu_photo_caraso {
             .fp_padd_rl {
@@ -226,6 +236,9 @@
                 font-size: 17px;
             }
         }
+        .package-specs li {
+            font-size: 18px;
+        }
         .historypackage-card1,
         .historypackage-card2 {
             .package-name,
@@ -294,7 +307,149 @@
                     font-size: 70px;
                 }
             }
+        }
+        .package-card {
+            img {
+                width: 65px;
+            }
+        }
+        .silver-pack {
+            .pkg-info {
+                width: 21%;
+            }
+        }
+        .or-cont:before {
+            content: '';
+        }
+        .free-member {
+            width: 84%;
+            .left-font {
+                margin-left: 32%;
+            }
+        }
+        .head-name {
+            .ht30 {
+                .imgwt {
+                    width: 110px;
+                    margin-top: 47px;
+                }
+            }
+            .sech {
+                line-height: 0.8;
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+        .sub-main {
+            .sub-title {
+                .fith {
+                    line-height: 0.8;
+                    margin-top: 30px;
+                }
+            }
         } // End of photographer.html page
+        //Start of user.html page
+        .head-name {
+            .ht30 {
+                .imgwt {
+                    width: 110px;
+                    margin-top: 47px;
+                }
+            }
+            .sech {
+                line-height: 0.8;
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+        .sub-main {
+            .sub-title {
+                .fith {
+                    line-height: 0.8;
+                    margin-top: 30px;
+                }
+            }
+        } //End of user.html page
+        //Start of user-profile.html
+        .main-cont {
+            margin: 60px 65px;
+        }
+        .so-nam {
+            font-size: 30px;
+            img {
+                width: 50px;
+                margin: 0 10px;
+            }
+        }
+        .ab {
+            @include position(absolute, null 66% 0 3%);
+            width: 0;
+            .border-profile {
+                @include size(250px, 250px);
+            }
+        }
+        .user-name {
+            bottom: 80px;
+            h1 {
+                font-size: 35px;
+            }
+            p {
+                font-size: 23px;
+            }
+        }
+        .full-tabs2 {
+            li {
+                font-size: 25px;
+            }
+            .border-line {
+                padding: 9px 0px 6px;
+            }
+        } //End of user-profile.html
+        //Start of feature-pht.html
+        .full-tabs {
+            li {
+                font-size: 25px;
+            }
+        }
+        .intro-con {
+            font-size: 18px;
+        }
+        .list {
+            min-height: 1px;
+            background-position: right center;
+            background-size: 28% 85%;
+        }
+        .min-h {
+            min-height: 565px;
+        }
+        .btn-social {
+            margin: 0 2px;
+            padding-left: 40px;
+            span {
+                width: 30px;
+                font-size: 1.2em;
+            }
+        } //End of feature-pht.html
+        //Start of Wild-photographer.html
+        .other-section .thumbnail .profile-f-img {
+            height: auto;
+        }
+        .black-custom-slider {
+            .border-half {
+                @include size(100px, 100px);
+            }
+            .profile-f-img {
+                height: auto;
+            }
+            .intro-profile .name-loc {
+                max-width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        } //End of Wild-photographer.html
         // Start of about us page, privacy-policy, terms-condition page
         .contactus {
             .contactus__address {
@@ -307,14 +462,16 @@
         //Start of Thank You for gold, silver & sorry pages
         .thanks-title {
             .ht30 {
-                @include margin(null null 60px null);
+                position: relative;
+                @include margin(null null 40px null);
             }
             .imgwt {
                 @include size(100px, auto);
             }
             h1 {
-                font-size: 100px;
-                @include margin(30px null null null);
+                font-size: 70px;
+                line-height: 0.8;
+                @include margin(50px null null null);
             }
             p {
                 font-size: 16px;
@@ -336,6 +493,23 @@
                 font-size: 12px;
                 @include padding(10px 20px);
                 border-radius: 0px;
+            }
+        }
+        .becomefp {
+            .becomefp-title {
+                .ht30 {
+                    margin-left: 8.33333%;
+                }
+                p {
+                    @include margin(10px 5% null);
+                }
+            }
+            .cam-img {
+                @include padding(35px 150px);
+            }
+            button {
+                display: block;
+                margin: 0 auto;
             }
         } //End of Thank You for gold, silver & sorry pages
     }

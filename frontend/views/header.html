@@ -66,7 +66,7 @@
                     </ul>
                 </div>
 
-                <div class="col-md-5 col-sm-5">
+                <div class="col-md-4 col-sm-5">
                     <div class="search-directive">
                         <ui-select ng-model="item.selected" on-select="addFilterValue(item.selected,'category')">
                             <ui-select-match placeholder="Photographer">
@@ -90,9 +90,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-4 col-sm-3">
                     <!--user name with img-->
-                    <div class="photographer text-right">
+                    <div class="photographer text-center">
                         <div class="photographer_img">
                             <div class="server-img" style="background: url('{{template.profile.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="template.profile.profilePic"
                                 ui-sref="photographer">

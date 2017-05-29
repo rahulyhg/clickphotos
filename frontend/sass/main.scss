@@ -611,7 +611,6 @@ a.navbar-brand {
 // UI select design used for search a pht or location
 .search-directive {
     padding: 12px 0;
-    margin-bottom: 10px;
     position: relative;
     .ui-select-container {
         width: 40%;
@@ -662,8 +661,7 @@ a.navbar-brand {
         vertical-align: middle;
         color: white;
         font-weight: 600;
-        padding: 7px 12px; //padding: 7px 6px 10px;
-        width: 45px;
+        padding: 2% 2.5%;
         &:hover {
             background-color: $orangeColor;
             color: white;
@@ -674,7 +672,7 @@ a.navbar-brand {
     }
     .select-arrow {
         @include position(absolute,
-        13px null null 31%);
+        13px null null 29%);
         pointer-events: none;
     }
 }
@@ -791,11 +789,8 @@ a.navbar-brand {
         display: inline-block;
         vertical-align: middle;
         color: #030303;
-        font-size: 22.25px;
-        /* Approximation due to font substitution */
+        font-size: 21.25px;
         font-weight: 400;
-        letter-spacing: 1px;
-        text-align: justify;
     }
     button {
         @include size(75px,
@@ -1409,11 +1404,10 @@ $brand-holder: #ccc !default;
 
 .profile-banner {
     .profile-banner__bg {
-        position: relative;
-        @include size(null,
-        440px);
-        overflow-y: hidden;
-        max-height: 440px; // background-size: cover!important;
+        position: relative; // @include size(null,
+        // 440px);
+        // overflow-y: hidden;
+        // max-height: 440px; // background-size: cover!important;
     }
     .change-cover {
         position: absolute;
@@ -2070,6 +2064,7 @@ fieldset[disabled] .form-control {
 .silver-content {
     // box-shadow: 1px 1px 6px #9E9E9E;
     box-shadow: 4px 4px 6px #ccc;
+    margin-bottom: 15px;
     .package-price {
         width: 90%;
         margin: 0 auto;
@@ -3270,6 +3265,15 @@ header {
         }
         .dropdown-menu {
             min-width: 100%;
+        }
+    }
+    .cntry-code {
+        @include position(absolute,
+        0 67% 0 0);
+        @include padding(0 7px);
+        line-height: 2.1;
+        .fa-plus {
+            font-size: 12px;
         }
     }
 }
