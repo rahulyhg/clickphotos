@@ -390,15 +390,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.addLocation = function () {
-            var valText = document.getElementById("locationCity").value;
-            var valArr = [];
-            console.log(!/\d/.test(valText)); //returns true if contains numbers
-            if (!/\d/.test(valText)) {
-                valArr = valText.split(",");
-                if (!/\d/.test(valArr[0])) {
-                    $scope.arrLocation.push(valArr[0]);
+            if (!_.isEmpty(document.getElementById("locationCity").value)) {
+                var valText = document.getElementById("locationCity").value;
+                var valArr = [];
+                //console.log(!/\d/.test(valText)); //returns true if contains numbers
+                if (!/\d/.test(valText)) {
+                    valArr = valText.split(",");
+                    if (!/\d/.test(valArr[0])) {
+                        $scope.arrLocation.push(valArr[0]);
+                    }
+                    document.getElementById("locationCity").value = null
                 }
-                document.getElementById("locationCity").value = null
+            } else {
+                alert('Please enter the location');
             }
         }
 
@@ -412,6 +416,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.done = function (formdata) {
             formdata.speciality = $scope.specialityList;
             formdata.location = $scope.arrLocation;
+            if(!_.isEmpty(formdata.location)){
             // console.log("doneFormData", formdata);
             NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
                 if (data.value) {
@@ -431,7 +436,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 //console.log("dataaaaaaaaaa", data);
                 $scope.about = true;
 
-            });
+            });}else{
+                alert('Please enter the location');
+            }
         };
 
         $scope.showabout = function () {
