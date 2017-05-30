@@ -1328,7 +1328,7 @@ a.navbar-brand {
     position: relative;
     background-image: url(../img/testi.jpg);
     width: 100%;
-    height: 400px;
+    min-height: 400px;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1933,7 +1933,7 @@ fieldset[disabled] .form-control {
 } //end
 .added-city {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
     width: 50%;
     .selected-option {
         background-color: #f1592a;
@@ -3267,14 +3267,15 @@ header {
             min-width: 100%;
         }
     }
+    .mobNo {
+        @include size(calc(100% - 48px),
+        auto);
+        margin-left: 35%;
+    }
     .cntry-code {
         @include position(absolute,
-        0 67% 0 0);
-        @include padding(0 7px);
-        line-height: 2.1;
-        .fa-plus {
-            font-size: 12px;
-        }
+        0 null 0 0);
+        width: 35%;
     }
 }
 
@@ -3983,7 +3984,7 @@ hr.border-hr:after {
     padding-left: 20%;
     margin-top: 100px;
     h1 {
-        line-height: 39px;
+        line-height: 0.8;
     }
     p {
         color: black;

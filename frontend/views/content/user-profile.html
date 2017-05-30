@@ -284,8 +284,8 @@
             <div class="main-cont damionr sec-tab" ng-if="!userData.uploadedImages[0]">
                 <h1 class="orange-color sech  ft100 text-capitalize ng-binding">{{userData.name}}</h1>
                 <p>has not uploaded any photos</p>
-                <div class="text-center">
-                    <a href="#" class="btn orange-btn" role="button">Ask her</a>
+                <div class="text-center" style="display: none">
+                    <a href="#" class="btn orange-btn" role="button">Ask the photographer</a>
                 </div>
             </div>
             <div ng-if="userData.uploadedImages[0]">
@@ -491,11 +491,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group relative ">
-                                <input type="tel" class="form-control" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
+                            <div class="form-group relative " ng-init="cntryCode = '+91'">
+                                <input type="tel" class="form-control mobNo" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
                                     required>
                                 <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
-                                <input type="tel" placeholder="+91" class="form-control">
+                                <input type="tel" class="form-control cntry-code" value="{{cntryCode}}" ng-model="cntryCode">
                             </div>
                             <!--<p>Please Enter Your Mobile No</p>-->
                         </div>

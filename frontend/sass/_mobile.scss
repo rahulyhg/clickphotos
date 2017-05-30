@@ -1,6 +1,50 @@
-    @media (max-width: $screen-xs-max) {}
-
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: $screen-xs-max) {
+        .brand-logo {
+            width: 92px!important;
+        }
+        a.navbar-brand {
+            padding: 16px 0 5px!important;
+        }
+        header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
+        header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
+        header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
+        {
+            height: 2px!important;
+        }
+        .search-directive {
+            display: none;
+        }
+        .photographer {
+            //  text-align: left;
+            span {
+                font-size: 11.25px!important;
+            }
+        } //Footer.html
+        footer {
+            .footer_bgdw {
+                display: block;
+                p {
+                    font-size: 12px;
+                    margin: 15px 0;
+                }
+            }
+        } //End of Footer.html
+        //Start of home.html
+        .testimonial {
+            .padd63 {
+                padding: 15px 15px;
+                text-align: initial;
+            }
+            .abslt_lt {
+                display: none;
+            }
+            .abslt_rt {
+                right: 1px!important;
+                width: 29px!important;
+            }
+        } //End of home.html
+    } // End of @media
+    @media (max-width: 1024px) {
         // Start of  home page
         //CSS global classes
         .font50 {
@@ -35,10 +79,49 @@
         } //End of CSS global classes
         //Start of header.html
         header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
-        .icon_float>span.icon_bar1,
-        .icon_float>span.icon_bar2,
+        header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
+        header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
         {
             height: 3px;
+        }
+        .brand-logo {
+            width: 171px;
+        }
+        a.navbar-brand {
+            padding: 16px 15px 5px;
+        }
+        .search-directive {
+            .ui-select-placeholder {
+                font-size: 12px;
+            }
+            .select-arrow {
+                @include position(absolute, 12px null null 29%);
+                img {
+                    @include size(32px, 34px);
+                }
+            }
+            .go-btn {
+                font-size: 12px;
+                padding: 2.4% 2.3%;
+            }
+        }
+        .photographer {
+            .photographer_img {
+                @include size(25px, 19px);
+                img {
+                    height: auto;
+                }
+            }
+            span {
+                font-size: 12.25px;
+            }
+            button {
+                font-size: 12px;
+                @include size(70px, auto);
+            }
+        }
+        .side-menu {
+            top: 58px;
         } //End of header.html
         //Start of future photo
         .featu_photo_caraso {
@@ -161,7 +244,7 @@
         } //End of the artist of the month
         // Start of Testimonials
         .testimonial {
-            height: 345px;
+            min-height: 345px!important;
             h2 {
                 @extend .font50;
             }
@@ -515,3 +598,14 @@
     }
 
     @media (max-width: $screen-md-max) {}
+
+    @media only screen and(orientation: landscape) {
+        .photographer {
+            .photographer_img {
+                @include size(35px, 28px);
+            }
+            span {
+                font-size: 17.25px;
+            }
+        }
+    }
