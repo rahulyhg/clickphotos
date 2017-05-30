@@ -80,7 +80,8 @@ var schema = new Schema({
         enquirerEmail: String,
         enquirerMobileNo: String,
         enquirerDate: Date,
-        enquirerMsg: String
+        enquirerMsg: String,
+        enquirercntryCode: Number
     }]
 });
 
@@ -601,11 +602,11 @@ var model = {
             // url: "https://www.vamaship.com/api/surface/book",
             url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?placeid=ChIJkbeSa_BfYzARphNChaFPjNcIndia&input=M&types=(cities)&language=en&key=" + api,
             method: "POST"
-                //  headers: {
-                //    "Content-Type": "application/json",
-                //    "Authorization": "Bearer " + api
-                //  },
-                //   body: JSON.stringify(userData)
+            //  headers: {
+            //    "Content-Type": "application/json",
+            //    "Authorization": "Bearer " + api
+            //  },
+            //   body: JSON.stringify(userData)
         }, function (err, httpResponse, body) {
             // console.log("err : ",err,"httpResponse",httpResponse);
             console.log("err ::::::::::: ", err);
@@ -831,7 +832,7 @@ var model = {
                 emailData.emailOfEnquirer = data1.enquiry[ind].enquirerEmail;
                 //emailData.serviceRequest = data1.serviceRequest;
                 // emailData.email = data1.email;
-
+                emailData.enquirercntryCode = data1.enquiry[ind].enquirercntryCode;
                 emailData.mobile = data1.enquiry[ind].enquirerMobileNo;
                 emailData.query = data1.enquiry[ind].enquirerMsg;
                 emailData.date = data1.enquiry[ind].enquirerDate;
@@ -1227,7 +1228,7 @@ cron.schedule('15 10 * * *', function () {
             }, function (error, data) {
                 if (err) {
                     console.log("error found in doLogin.callback1")
-                        //callback(null, err);
+                    //callback(null, err);
                 } else {
                     //callback(null, "updated");
                 }

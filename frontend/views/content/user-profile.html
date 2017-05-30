@@ -491,11 +491,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group relative " ng-init="cntryCode = '+91'">
+                            <div class="form-group relative " ng-init="enquiryInfo.enquirercntryCode = '+91'">
                                 <input type="tel" class="form-control mobNo" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
                                     required>
                                 <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
-                                <input type="tel" class="form-control cntry-code" value="{{cntryCode}}" ng-model="cntryCode">
+                                <input type="tel" class="form-control cntry-code" value="{{enquiryInfo.enquirercntryCode}}" id="enquirercntryCode" ng-model="enquiryInfo.enquirercntryCode">
                             </div>
                             <!--<p>Please Enter Your Mobile No</p>-->
                         </div>

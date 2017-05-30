@@ -1609,6 +1609,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.enquiryData.enquiryUser = $stateParams.userid;
                 $scope.enquiryData.enquirerName = data.enquirerName;
                 $scope.enquiryData.enquirerEmail = data.enquirerEmail;
+                $scope.enquiryData.enquirercntryCode = data.enquirercntryCode;
                 $scope.enquiryData.enquirerMobileNo = data.enquirerMobileNo;
                 $scope.enquiryData.enquirerMsg = data.enquirerMsg;
                 $scope.enquiryData.enquirerDate = data.enquirerdate;
@@ -1630,6 +1631,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 data.enquirerName = "";
                 data.enquirerMsg = "";
                 data.enquirerdate = "";
+                data.enquirercntryCode="";
             }
         };
         //data submit enquiry
