@@ -15,6 +15,14 @@
         "id": "input1",
         "validation": ["", "trim", ""],
         "url": ""
+    },{
+        "name": "URL",
+        "type": "text",
+        "tableRef": "url",
+        "placeholder": "Enter URL",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": ""
     }],
     "action": [{
         "name": "submit",

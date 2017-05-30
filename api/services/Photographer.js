@@ -836,7 +836,7 @@ var model = {
                 emailData.query = data1.enquiry[ind].enquirerMsg;
                 emailData.date = data1.enquiry[ind].enquirerDate;
                 emailData.from = "admin@clickmania.in";
-                emailData.subject = "Enquiry";
+                emailData.subject = "Contact your potential Client";
                 // console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
                     console.log("emailRespo", emailRespo);

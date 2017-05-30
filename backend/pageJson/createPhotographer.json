@@ -34,7 +34,7 @@
         "placeholder": "Enter speciality",
         "id": "speciality",
         "validation": ["", "trim", ""],
-        "url": "Categories/search",
+        "url": "Categories/findAllCategories",
         "dropDownField": "name",
         "dropDownType": "multiple",
         "onView": true
