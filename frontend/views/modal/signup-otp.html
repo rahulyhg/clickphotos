@@ -18,6 +18,7 @@
                     <p class="text-center">
                         <button class="btn orange-btn ok-btn" ng-click="checkOTPForSignUp(formdata)">OK</button>
                     </p>
+                    <p class="orange-color">This OTP is valid for 10 minutes</p>
                 </form>
             </div>
             <div ng-if="showSucessBox">
@@ -25,7 +26,7 @@
                 <p class="text-center">
                     <button class="btn orange-btn ok-btn" ng-click="signUp()">CONTINUE</button>
                 </p>
-                <p class="orange-color">This OTP is valid for 10 minutes</p>
+
             </div>
             <div class="absolute-cross" ng-click="closeModal();" title="Close">
                 <img src="frontend/img/cross.png" alt="Close-Box" class="img-responsive">

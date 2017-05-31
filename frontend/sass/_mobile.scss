@@ -1,9 +1,25 @@
     @media (max-width: $screen-xs-max) {
+        //Global classes
+        .head-f {
+            font-size: 30px!important;
+            line-height: 1!important;
+        }
+        .ft100 {
+            //font-size: 50px!important;
+            font-size: 45px!important;
+        }
+        .font70 {
+            font-size: 25px!important;
+        }
+        .pad60 {
+            padding: 30px 0;
+        } //End of global classes
+        //Start of header.html
         .brand-logo {
             width: 92px!important;
         }
         a.navbar-brand {
-            padding: 16px 0 5px!important;
+            padding: 21px 0 5px!important;
         }
         header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
         header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
@@ -19,7 +35,14 @@
             span {
                 font-size: 11.25px!important;
             }
-        } //Footer.html
+        }
+        .side-menu {
+            width: 50%;
+            .list-group-item {
+                font-size: 16px;
+            }
+        } //End of header.html
+        //Footer.html
         footer {
             .footer_bgdw {
                 display: block;
@@ -30,6 +53,91 @@
             }
         } //End of Footer.html
         //Start of home.html
+        .featu_photo_caraso {
+            .fp_padd_rl {
+                .fp_width {
+                    .fp_innerPadd {
+                        .fp_user_icn {
+                            top: 12%;
+                            .border-half {
+                                @include size(100px, 100px);
+                            }
+                            h3 {
+                                font-size: 21.34px!important;
+                            }
+                            p {
+                                font-size: 18.08px!important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .pht_contest {
+            height: 280px!important;
+            .jumbotron {
+                padding: 0;
+                .ht100 {
+                    height: auto!important;
+                    h2 {
+                        font-size: 30px!important;
+                    }
+                }
+            }
+        }
+        .categories {
+            .ht30 {
+                .imgwt {
+                    width: 80px!important;
+                    left: -37px!important;
+                }
+                h2 {
+                    font-size: 30px!important;
+                    margin-top: 10px;
+                }
+            }
+            button {
+                width: 115px!important;
+                height: 35px!important;
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+        .signup {
+            .img_relative {
+                display: none;
+            }
+            .cam_heading {
+                height: 50px!important;
+                h2 {
+                    font-size: 30px!important;
+                }
+                h2:nth-child(even):after {
+                    top: -40px!important;
+                    font-size: 80px!important;
+                }
+                p {
+                    font-size: 16px;
+                }
+            }
+        }
+        .atm {
+            .bg_img {
+                .abslt {
+                    // used to adjust the logo
+                    width: 29px!important;
+                    bottom: -15px!important;
+                    @include transform(rotate(3deg));
+                    left: -11px!important;
+                }
+            }
+            .user_info {
+                h2 {
+                    font-size: 22px!important;
+                }
+            }
+        }
         .testimonial {
             .padd63 {
                 padding: 15px 15px;
@@ -43,6 +151,84 @@
                 width: 29px!important;
             }
         } //End of home.html
+        //Start of users.html
+        .head-name {
+            padding: 30px 0!important;
+            .ht30 {
+                height: 70px!important;
+                .imgwt {
+                    width: 110px;
+                    margin-top: 15px!important;
+                }
+            }
+            .sech {
+                line-height: 0.8;
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+        .sub-main {
+            .sub-title {
+                .fith {
+                    padding-right: 80px;
+                }
+            }
+        }
+        .users {
+            padding: 0 35px;
+        } //End of users.html
+        //Start of future-photographer.html
+        .feature-photo {
+            .head-name {
+                p {
+                    padding: 35px 15px 0;
+                }
+            }
+            .full-tabs {
+                li {
+                    font-size: 18px!important;
+                }
+            }
+            .signup-form {
+                margin-bottom: 10px;
+            }
+        } //End of future-photographer.html
+        //Start of thank, error, thanks-gold, thanks-silver,becomefp .html
+        .thanks-title {
+            text-align: center;
+        } //End of thank, error, thanks-gold, thanks-silver,becomefp .html
+        // Start of about us page, privacy-policy, terms-condition page
+        .aboutus__desc,
+        .privacy-policy__desc,
+        .terms-condition__desc {
+            @include padding(45px 15px 60px);
+        }
+        .contactus {
+            .contactus__address {
+                left: auto;
+                address {
+                    line-height: 1.8!important;
+                }
+            }
+        } //End of about us page, privacy-policy, terms-condition page
+        //All modals html
+        //Statrt of signup.html
+        .upload-imageblock {
+            padding: 15px;
+        }
+        .sign-up {
+            .sign-btn {
+                font-size: 13px;
+                padding: 4px 15px 7px;
+            }
+            .soc-btn {
+                margin: 0 5px 5px;
+                font-size: 13px;
+                width: auto;
+            }
+        } //End of signup.html
+        //End of all modals html
     } // End of @media
     @media (max-width: 1024px) {
         // Start of  home page
@@ -197,7 +383,7 @@
         } //End of sign up section 
         //Start of the artist of the month
         .atm {
-            height: 395px;
+            min-height: 395px;
             margin-bottom: -55px;
             .head-f {
                 top: 31px;
