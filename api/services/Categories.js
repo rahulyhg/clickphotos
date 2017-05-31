@@ -151,7 +151,31 @@ var model = {
     },
 
     findAllCategories: function (data, callback) {
-        Categories.find({}).exec(function (err, found) {
+           var maxRow = Config.maxRow;
+        var type = data.clientType;
+        var page = 1;
+        if (data.page) {
+            page = data.page;
+            console.log("page is", data.page);
+        }
+        var field = data.field;
+        var options = {
+            field: data.field,
+            filters: {
+                keyword: {
+                    fields: ['name'],
+                    term: data.keyword
+                }
+            },
+            sort: {
+                desc: 'createdAt'
+            },
+            start: (page - 1) * maxRow,
+            count: maxRow
+        };
+        Categories.find({}) .order(options)
+            .keyword(options)
+            .page(options,function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
