@@ -151,7 +151,7 @@ var model = {
     },
 
     findAllCategories: function (data, callback) {
-           var maxRow = Config.maxRow;
+        var maxRow = 20;
         var type = data.clientType;
         var page = 1;
         if (data.page) {
