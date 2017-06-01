@@ -4229,7 +4229,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
     .contactus__address {
         @include position(absolute,
-        40% 0% 16% 67%);
+        28% 0% 16% 67%);
         background-color: #ff6c00;
         @include padding(15px 35px);
         address {
