@@ -218,6 +218,7 @@ var model = {
                 //emailData.mobile = data1.mobile;
                 //emailData.query = data1.query;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "Welcome To Clickmania";
                 console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
@@ -236,6 +237,7 @@ var model = {
                         //emailData.mobile = data1.mobile;
                         //emailData.query = data1.query;
                         emailData.from = "admin@clickmania.in";
+                        emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Clickmania Update Profile";
                         console.log("email data : ", emailData);
                         Config.email(emailData, function (err, emailRespo) {
@@ -408,6 +410,7 @@ var model = {
                 //emailData.mobile = data1.mobile;
                 //emailData.query = data1.query;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "Feature Photographer";
                 console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
@@ -837,6 +840,7 @@ var model = {
                 emailData.query = data1.enquiry[ind].enquirerMsg;
                 emailData.date = data1.enquiry[ind].enquirerDate;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "Contact your potential Client";
                 // console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
@@ -872,6 +876,7 @@ var model = {
                     var emailOtp = (Math.random() + "").substring(2, 6);
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
+                    emailData.fromname = "Clickmania Admin";
                     emailData.name = found.name;
                     emailData.email = found.email;
                     emailData.otp = emailOtp;
@@ -926,6 +931,7 @@ var model = {
         var foundData = {};
         var emailData = {};
         emailData.from = "admin@clickmania.in";
+        emailData.fromname = "Clickmania Admin";
         emailData.name = data.name;
         emailData.email = data.email;
         emailData.otp = emailOtp;
@@ -1066,6 +1072,7 @@ var model = {
                     //emailData.mobile = data1.mobile;
                     //emailData.query = data1.query;
                     emailData.from = "admin@clickmania.in";
+                    emailData.fromname = "Clickmania Admin";
                     emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
                     console.log("email data : ", emailData);
 
@@ -1116,6 +1123,7 @@ var model = {
                 //emailData.mobile = data1.mobile;
                 //emailData.query = data1.query;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "congrats you Have upgraded to Silver Package";
                 console.log("email data : ", emailData);
 
