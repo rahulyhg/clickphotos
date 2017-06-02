@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2 col-sm-4">
+        <div class="col-md-2 col-sm-4 col-xs-12">
             <h2 class="border-up">City</h2>
             <div class="location">
                 <div class="checkbox checkboxing">
@@ -92,8 +92,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-10 col-sm-8 users">
-            <div class="col-sm-6 col-md-4" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
+        <div class="col-md-10 col-sm-8 col-xs-12 users">
+            <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
                 ng-if="photographerData">
                 <div class="thumbnail">
                     <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
@@ -126,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 col-xs-12 text-center">
             <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>            <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
             <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
         </div>
@@ -135,7 +135,7 @@
         <div class="marg-rel">
             <h2 class="head-f">View other <br> &nbsp;&nbsp;Catergories</h2>
             <div class="row pad-up100">
-                <div class="col-sm-6 col-md-3 pad5" ng-repeat="user in showlessCatImages">
+                <div class="col-sm-6 col-md-3 col-xs-12 pad5" ng-repeat="user in showlessCatImages">
                     <div class="thumbnail shadow">
                         <img ng-src="{{user.viewOtherCatImage | serverimage}}" alt="...">
                     </div>

@@ -39,7 +39,7 @@
         <swiper autoplay="5000" effect="slide" loop="true">
             <slides>
                 <slide ng-repeat="image in bannerImageData track by $index">
-                    <a href="{{image.url}}" target="_blank"><img ng-src="{{image.bannerImage | serverimage}}" class="img-responsive swiperbg" noloading="true"></a>
+                    <a href="{{image.url}}"><img ng-src="{{image.bannerImage | serverimage}}" class="img-responsive swiperbg" noloading="true"></a>
                 </slide>
             </slides>
             <prev></prev>
@@ -124,7 +124,7 @@
             <div class="camera_img">
                 <img src="frontend/img/cam.png" alt="Camera" class="img-responsive center-block" width="100" alt="">
             </div>
-            <div class="col-md-6 col-md-push-3 col-sm-7 col-sm-push-3 col-xs-10 col-xs-push-1">
+            <div class="col-md-6 col-md-push-3 col-sm-7 col-sm-push-3 col-xs-12 ">
                 <div class="jumbotron">
                     <div class="ht100">
                         <h2><span> join the</span> <br>
@@ -132,7 +132,7 @@
                         </h2>
                     </div>
                     <p class="text-center">and win exciting prizes </p>
-                    <div class="col-md-5 col-md-push-3 col-sm-4 col-sm-push-3 col-xs-5 col-xs-push-3">
+                    <div class="col-md-5 col-md-push-3 col-sm-4 col-sm-push-3 col-xs-4 col-xs-push-4">
                         <div class="pht_contest_btn">
                             <!--<button class="btn btn-block" ui-sref="photo-contest">Click Here</button>-->
                             <button class="btn btn-block" style="pointer-events: none;">Go Live</button>

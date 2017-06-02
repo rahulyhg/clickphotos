@@ -1,12 +1,15 @@
     @media (max-width: $screen-xs-max) {
         //Global classes
+        .text-hide {
+            display: none;
+        }
         .head-f {
             font-size: 30px!important;
             line-height: 1!important;
         }
         .ft100 {
             //font-size: 50px!important;
-            font-size: 45px!important;
+            font-size: 42px!important;
         }
         .font70 {
             font-size: 25px!important;
@@ -51,7 +54,7 @@
                 display: block;
                 p {
                     font-size: 12px;
-                    margin: 15px 0;
+                    margin: 15px 0 0;
                 }
             }
         } //End of Footer.html
@@ -79,11 +82,18 @@
         .pht_contest {
             height: 280px!important;
             .jumbotron {
-                padding: 0;
+                padding: 0!important;
+                text-align: center;
                 .ht100 {
                     height: auto!important;
                     h2 {
                         font-size: 30px!important;
+                        span:first-child {
+                            margin-left: -35px;
+                        }
+                        span:last-child {
+                            margin-left: 0!important;
+                        }
                     }
                 }
             }
@@ -177,10 +187,55 @@
                     padding-right: 80px;
                 }
             }
+            .upgrd-gold {
+                .gold-mgtop {
+                    margin-top: 0;
+                }
+            }
         }
         .users {
             padding: 0 35px;
         } //End of users.html
+        //Start of user-profile
+        .full-tabs2 li {
+            padding: 0 25px;
+        }
+        .main-cont {
+            margin: 60px 0px!important;
+        }
+        .so-nam {
+            img {
+                width: 45px!important;
+            }
+        }
+        .send_enquirySlidebar {
+            right: -68%;
+            width: 69%;
+            .padd35 {
+                padding: 0 25px;
+            }
+            .enquiry {
+                height: 315px;
+                padding-right: 16px;
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+            .cntry-code {
+                width: 64px;
+            }
+            .mobNo {
+                width: calc(100% - 64px);
+                height: auto;
+                margin-left: 64px;
+            }
+        }
+        .showEnquery {
+            right: 0!important;
+        }
+        .sec-tab p {
+            font-size: 40px;
+            line-height: 30px;
+        } //End of user-profile
         //Start of future-photographer.html
         .feature-photo {
             .head-name {
@@ -188,13 +243,23 @@
                     padding: 35px 15px 0;
                 }
             }
+            .ht30 {
+                position: relative;
+            }
             .full-tabs {
                 li {
                     font-size: 18px!important;
+                    padding: 2px 35px;
                 }
             }
             .signup-form {
                 margin-bottom: 10px;
+            }
+            .intro {
+                margin-top: 0;
+            }
+            .list {
+                background-image: none;
             }
         } //End of future-photographer.html
         //Start of photographer.html
@@ -245,7 +310,7 @@
         }
         .historypackage-card1,
         .historypackage-card2 {
-            padding: 25px 40px;
+            padding: 25px 20px;
             .pkg-info {
                 .upload-pic {
                     vertical-align: top;
@@ -255,7 +320,6 @@
         }
         .sub-main {
             .sub-title {
-                width: 55%;
                 height: 0;
             }
             .upgrade-inner {
@@ -269,6 +333,7 @@
             }
         }
         .uploaded-images {
+            padding: 20px 0px 0;
             .package-head {
                 width: 100%!important;
             }
@@ -293,6 +358,20 @@
         .upgrd-gold h2 {
             margin-top: 1px;
         } //End of photographer.html
+        //Start of wildlife-photographer.html
+        .black-btn {
+            font-size: 13px;
+            width: 71px;
+        }
+        .nopht-title {
+            margin: 50px 0;
+            .ht30 {
+                margin-bottom: 25px!important;
+            }
+        }
+        .marg-rel {
+            margin: 10px 26px 0;
+        } //End of wildlife-photographer.html
         //Start of thank, error, thanks-gold, thanks-silver,becomefp .html
         .thanks-title {
             text-align: center;
@@ -312,8 +391,12 @@
                 text-align: inherit;
                 margin-left: -19%!important;
             }
+            .deny-msg {
+                display: inline;
+            }
         }
         .silver-pack {
+            padding: 0;
             .pkg-info {
                 width: 31%!important;
             }
