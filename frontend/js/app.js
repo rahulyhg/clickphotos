@@ -228,13 +228,14 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                 }).then(function (data) {
                     data = data.data;
                     //console.log("success");
-                    //console.log("data", data);
+                    console.log("data", data.value);
                     if (data.value == false) {
-                        //console.log('enter');
+                        console.log('enter');
                         $scope.callback("More than 3Mb", null);
-                    } else if ($scope.callback) {
-                        $scope.callback(data);
-                    } else {
+                    } else if (data.value == true) {
+                        // if ($scope.callback) {
+                        //     $scope.callback(data);
+                        // } else {
                         if ($scope.isMultiple) {
                             if ($scope.inObject) {
                                 $scope.model.push({
@@ -247,6 +248,7 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                             $scope.model = data.data[0];
                         }
                     }
+                    // }
                 });
             };
         }
