@@ -53,7 +53,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'UserProfileCtrl'
         })
 
-    .state('wild-photographer', {
+        .state('wild-photographer', {
             url: "/wild-photographer/:catid/:catName/:photoLoc",
             templateUrl: "frontend/views/template.html",
             controller: 'WildPhotoCtrl'
@@ -227,9 +227,12 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                     transformRequest: angular.identity
                 }).then(function (data) {
                     data = data.data;
-                    console.log("success");
-                    console.log("data", data);
-                    if ($scope.callback) {
+                    //console.log("success");
+                    //console.log("data", data);
+                    if (data.value == false) {
+                        //console.log('enter');
+                        $scope.callback("More than 3Mb", null);
+                    } else if ($scope.callback) {
                         $scope.callback(data);
                     } else {
                         if ($scope.isMultiple) {

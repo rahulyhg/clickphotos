@@ -230,7 +230,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('PhotographerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $http, $state) {
+    .controller('PhotographerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $http, $state, toastr) {
         $scope.template = TemplateService.changecontent("photographer"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -261,6 +261,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
         });
+
+        $scope.imageSize = function (data) {
+            //console.log("data------", data);
+            if (data == 'More than 3Mb') {
+                toastr.error('Image Size Is More Than 3 Mb');
+            }
+        }
 
         if ($.jStorage.get("photographer")) {
             formdata = {};
