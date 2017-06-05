@@ -428,11 +428,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.location = $scope.arrLocation;
             if (!_.isEmpty(formdata.location)) {
                 // console.log("doneFormData", formdata);
-<<<<<<< HEAD
                 NavigationService.apiCallWithData("Photographer/allUpdate", formdata, function (data) {
-=======
-                NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
->>>>>>> ffc0cd98a2262c3a17e333a9c1ed3ca3b6be1d5d
                     if (data.value) {
                         NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                             if (data.value === true) {
@@ -452,19 +448,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
                 });
             } else {
-<<<<<<< HEAD
                 // alert('Please enter the location');
                 toastr.error('Please enter the location');
-=======
-                alert('Please enter the location');
->>>>>>> ffc0cd98a2262c3a17e333a9c1ed3ca3b6be1d5d
             }
         };
 
         $scope.showabout = function () {
             $scope.about = false;
         }
-
         //cover and profile pic update and set
 
         $scope.photographerData = {};
@@ -953,7 +944,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log("dataForOtp", data);
                     if (data.value) {
                         console.log(data.data);
-                        $.jStorage.set("photographer", data.data);
                         $scope.signUpOTP();
                         setTimeout(function (data) {
                             $scope.signUpOTP.close();
@@ -967,9 +957,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.checkOTPForSignUp = function (formdata) {
             NavigationService.apiCallWithData("Photographer/verifyOTP", formdata, function (data) {
-                console.log("dataForOtp", data);
+                //console.log("dataForOtp", data);
                 if (data.value == true) {
-                    console.log("email OTP verified");
+                   // console.log("email OTP verified");
+                    $.jStorage.set("photographer", data.data);
                     $scope.showSucessBox = true;
                 } else {
                     alert("Incorrect OTP!");
@@ -2079,8 +2070,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
                     console.log("dataForOtp", data);
                     if (data.value) {
-                        console.log(data.data);
-                        $.jStorage.set("photographer", data.data);
+                        //console.log(data.data);
                         $scope.signUpOTP();
                         //$scope.emailOtp = data.data.otp;
                         //console.log("$scope.emailOtp", $scope.emailOtp);
@@ -2109,9 +2099,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.checkOTPForSignUp = function (formdata) {
             NavigationService.apiCallWithData("Photographer/verifyOTP", formdata, function (data) {
-                console.log("dataForOtp", data);
+                console.log("dataForOtp", data.data);
                 if (data.value == true) {
-                    console.log("email OTP verified");
+                    //console.log("email OTP verified");
+                    $.jStorage.set("photographer", data.data);
                     $scope.showSucessBox = true;
                 } else {
                     alert("Incorrect OTP!");

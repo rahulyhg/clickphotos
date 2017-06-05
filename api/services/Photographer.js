@@ -723,11 +723,7 @@ var model = {
                 emailData.date = data1.enquiry[ind].enquirerDate;
                 emailData.from = "admin@clickmania.in";
                 emailData.fromname = "Clickmania Admin";
-<<<<<<< HEAD
                 emailData.subject = "A potential Client has shown interest in you";
-=======
-                emailData.subject = "Contact your potential Client";
->>>>>>> ffc0cd98a2262c3a17e333a9c1ed3ca3b6be1d5d
                 // console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
                     console.log("emailRespo", emailRespo);
@@ -842,24 +838,10 @@ var model = {
         otpData.otpTime = new Date();
         otpData.password = md5(otpData.password);
         var emailOtp = (Math.random() + "").substring(2, 6);
-<<<<<<< HEAD
         otpData.otp = emailOtp;
         Photographer.findOne({
             email: data.email
         }).exec(function (err, found) {
-=======
-        var foundData = {};
-        var emailData = {};
-        emailData.from = "admin@clickmania.in";
-        emailData.fromname = "Clickmania Admin";
-        emailData.name = data.name;
-        emailData.email = data.email;
-        emailData.otp = emailOtp;
-        emailData.filename = "otpForSignUp.ejs";
-        emailData.subject = "Clickmania OTP";
-        console.log("emaildata", emailData);
-        Config.email(emailData, function (err, emailRespo) {
->>>>>>> ffc0cd98a2262c3a17e333a9c1ed3ca3b6be1d5d
             if (err) {
                 callback(err, null);
             } else {
