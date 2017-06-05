@@ -106,9 +106,9 @@ var controller = {
         }
     },
 
-    saveData: function (req, res) {
+    allUpdate: function (req, res) {
         if (req.body) {
-            Photographer.saveData(req.body, res.callback);
+            Photographer.allUpdate(req.body, res.callback);
         } else {
             res.json({
                 value: false,
@@ -119,6 +119,33 @@ var controller = {
         }
     },
 
+    //otp signup
+    checkPhotographersForOtp: function (req, res) {
+        if (req.body) {
+            Photographer.checkPhotographersForOtp(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    verifyOTP: function (req, res) {
+        if (req.body) {
+            Photographer.verifyOTP(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+    //otp signup end
     // getFeaturePhotographer: function (req, res) {
     //     if (req.body) {
     //         Photographer.getFeaturePhotographer(req.body, res.callback);
@@ -312,6 +339,7 @@ var controller = {
             });
         }
     },
+
     sendToPaymentGateway: function (req, res) {
         if (req.query.id) {
             Order.findOne({
@@ -379,20 +407,20 @@ var controller = {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "featured") {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
-                                res.redirect(env.realHost+"/thanks/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                         } else {
                             Photographer.updateToGold(req.body, function (err, data) {
-                                res.redirect(env.realHost+"/thanks/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                         }
                     } else {
-                        res.redirect(env.realHost+"/error");
+                        res.redirect(env.realHost + "/error");
                     }
                 });
 
             } else {
-                res.redirect(env.realHost+"/error");
+                res.redirect(env.realHost + "/error");
             }
         } else {
             res.json({
@@ -457,29 +485,29 @@ var controller = {
     },
 
     getAllPhotographers: function (req, res) {
-            if (req.body) {
-                Photographer.getAllPhotographers(req.body, res.callback);
-            } else {
-                res.json({
-                    value: false,
-                    data: {
-                        message: "Invalid Request"
-                    }
-                })
-            }
+        if (req.body) {
+            Photographer.getAllPhotographers(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
         }
-        // smsForOtp: function (req, res) {
-        //     if (req.body) {
-        //         Photographer.smsForOtp(req.body, res.callback);
-        //     } else {
-        //         res.json({
-        //             value: false,
-        //             data: {
-        //                 message: "Invalid Request"
-        //             }
-        //         })
-        //     }
-        // }
+    }
+    // smsForOtp: function (req, res) {
+    //     if (req.body) {
+    //         Photographer.smsForOtp(req.body, res.callback);
+    //     } else {
+    //         res.json({
+    //             value: false,
+    //             data: {
+    //                 message: "Invalid Request"
+    //             }
+    //         })
+    //     }
+    // }
 
 };
 module.exports = _.assign(module.exports, controller);

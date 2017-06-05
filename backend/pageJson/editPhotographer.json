@@ -14,6 +14,22 @@
         "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
+        "name": "Email",
+        "type": "text",
+        "tableRef": "email",
+        "placeholder": "Enter Email",
+        "id": "email",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    },{
+        "name": "Content",
+        "type": "wysiwyg",
+        "tableRef": "content",
+        "placeholder": "Enter name",
+        "id": "input1",
+        "validation": ["", "trim", ""],
+        "url": ""
+    },{
         "name": "Package",
         "type": "tags",
         "tableRef": "package",

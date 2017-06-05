@@ -21,6 +21,16 @@
         "name": "Status",
         "isSort": "",
         "tableRef": "status"
+    },
+    {
+        "name": "Email",
+        "isSort": "",
+        "tableRef": "email"
+    }, {
+        "name": "Joining Date",
+        "isSort": "",
+        "tableRef": "createdAt",
+        "type": "date"
     }],
     "action": [{
         "name": "edit",

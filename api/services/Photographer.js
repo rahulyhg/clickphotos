@@ -82,7 +82,9 @@ var schema = new Schema({
         enquirerDate: Date,
         enquirerMsg: String,
         enquirercntryCode: Number
-    }]
+    }],
+    otp: String,
+    otpTime: Date
 });
 
 schema.plugin(deepPopulate, {
@@ -187,20 +189,6 @@ var model = {
         });
     },
 
-    // registerUser: function (data, callback) {
-    //     var photographer = this(data);
-    //     photographer.password = md5(photographer.password);
-    //     photographer.save(function (err, created) {
-    //         if (err) {
-    //             callback(err, null);
-    //         } else if (created) {
-    //             callback(null, created);
-    //         } else {
-    //             callback(null, {});
-    //         }
-    //     });
-    // },
-
     registerUser: function (data, callback) {
         var photographer = this(data);
         photographer.password = md5(photographer.password);
@@ -218,6 +206,7 @@ var model = {
                 //emailData.mobile = data1.mobile;
                 //emailData.query = data1.query;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "Welcome To Clickmania";
                 console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
@@ -236,6 +225,7 @@ var model = {
                         //emailData.mobile = data1.mobile;
                         //emailData.query = data1.query;
                         emailData.from = "admin@clickmania.in";
+                        emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Clickmania Update Profile";
                         console.log("email data : ", emailData);
                         Config.email(emailData, function (err, emailRespo) {
@@ -253,64 +243,6 @@ var model = {
                         callback(null, created);
                     }
                 });
-                // async.parallel({
-                //     sendFirstMail: function (callback1) {
-                //         console.log("data", created);
-                //         var emailData = {};
-                //         emailData.email = created.email;
-                //         emailData.filename = "welcome.ejs";
-                //         emailData.name = created.name;
-                //         //emailData.serviceRequest = data1.serviceRequest;
-                //         // emailData.email = data1.email;
-                //         //emailData.mobile = data1.mobile;
-                //         //emailData.query = data1.query;
-                //         emailData.from = "aditya.ghag@wohlig.com";
-                //         emailData.subject = "Welcome To Clickmania";
-                //         console.log("email data : ", emailData);
-                //         Config.email(emailData, function (err, emailRespo) {
-                //             console.log("emailRespo", emailRespo);
-                //             if (err) {
-                //                 console.log(err);
-                //                 callback1(err, null);
-                //             } else if (emailRespo) {
-                //                 callback1(null, "Contact us form saved successfully!!!");
-                //             } else {
-                //                 callback1("Invalid data", null);
-                //             }
-                //         });
-                //     },
-                //     sendSecondMail: function (callback2) {
-                //         console.log("data", created);
-                //         var emailData = {};
-                //         emailData.email = created.email;
-                //         emailData.filename = "upgradeprofile.ejs";
-                //         emailData.name = created.name;
-                //         //emailData.serviceRequest = data1.serviceRequest;
-                //         // emailData.email = data1.email;
-                //         //emailData.mobile = data1.mobile;
-                //         //emailData.query = data1.query;
-                //         emailData.from = "aditya.ghag@wohlig.com";
-                //         emailData.subject = "Clickmania Update Profile";
-                //         console.log("email data : ", emailData);
-                //         Config.email(emailData, function (err, emailRespo) {
-                //             console.log("emailRespo", emailRespo);
-                //             if (err) {
-                //                 console.log(err);
-                //                 callback2(err, null);
-                //             } else if (emailRespo) {
-                //                 callback2(null, "Contact us form saved successfully!!!");
-                //             } else {
-                //                 callback2("Invalid data", null);
-                //             }
-                //         });
-                //     }
-                // }, function (error) {
-                //     if (error) {
-                //         callback(null, "Error");
-                //     } else {
-                //         callback(null, created);
-                //     }
-                // })
             } else {
                 callback(null, {});
             }
@@ -350,31 +282,6 @@ var model = {
 
         })
     },
-
-    // updateToFeaturePhotographer: function (data, callback) {
-    //     console.log("DATA", data);
-    //     // var date = new Date();
-    //     // var monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    //     // var mon = monthNames[date.getMonth() + 1];
-    //     // var m = date.getMonth() + 1;
-    //     // console.log("month", mon);
-    //     Photographer.update({
-    //         _id: data._id
-    //     }, {
-    //         status: true,
-    //         dateOfRagister: new Date(),
-    //         month: data.mon,
-    //         year: data.yea
-    //     }, function (err, updated) {
-    //         console.log(updated);
-    //         if (err) {
-    //             console.log(err);
-    //             callback(err, null);
-    //         } else {
-    //             callback(null, updated);
-    //         }
-    //     });
-    // },
 
     updateToFeaturePhotographer: function (data, callback) {
         console.log("DATA", data);
@@ -445,8 +352,8 @@ var model = {
         });
     },
 
-    saveData: function (data, callback) {
-        //        delete data.password;
+    allUpdate: function (data, callback) {
+        // delete data.password;
         var photographer = this(data);
         if (data._id) {
             this.findOneAndUpdate({
@@ -549,29 +456,6 @@ var model = {
             }
         })
     },
-
-    // getFeaturePhotographer: function (data, callback) {
-    //     this.find({
-    //         status: true
-    //     }).sort({
-    //         month: -1
-    //     }).deepPopulate("speciality").exec(function (err, found) {
-    //         if (err) {
-    //             callback(err, null);
-    //         } else if (found) {
-    //             if (_.isEmpty(found)) {
-    //                 callback(null, {});
-    //             } else {
-    //                 console.log("Found", found);
-    //                 callback(null, found);
-    //             }
-    //         } else {
-    //             callback(null, {
-    //                 message: "No Data Found"
-    //             });
-    //         }
-    //     })
-    // },
 
     getRelatedPhotographers: function (data, callback) {
         Photographer.find({
@@ -714,39 +598,39 @@ var model = {
         });
     },
 
-    saveBottlesPhotos: function (data, callback) {
+    // saveBottlesPhotos: function (data, callback) {
 
-        console.log(data);
-        Photographer.findOneAndUpdate({
-            _id: data._id
-        }, {
-            $push: {
+    //     console.log(data);
+    //     Photographer.findOneAndUpdate({
+    //         _id: data._id
+    //     }, {
+    //         $push: {
 
-                reviewList: {
-                    $each: [{
-                        user: data.user,
-                        review: data.review
-                    }]
-                }
-            }
-        }).exec(function (err, found) {
-            if (err) {
-                // console.log(err);
-                callback(err, null);
-            } else {
+    //             reviewList: {
+    //                 $each: [{
+    //                     user: data.user,
+    //                     review: data.review
+    //                 }]
+    //             }
+    //         }
+    //     }).exec(function (err, found) {
+    //         if (err) {
+    //             // console.log(err);
+    //             callback(err, null);
+    //         } else {
 
-                if (found) {
+    //             if (found) {
 
-                    callback(null, found);
-                } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
-                }
-            }
+    //                 callback(null, found);
+    //             } else {
+    //                 callback(null, {
+    //                     message: "No Data Found"
+    //                 });
+    //             }
+    //         }
 
-        })
-    },
+    //     })
+    // },
 
     clickFilter: function (data, callback) {
         console.log("Datataaaa", data)
@@ -837,6 +721,7 @@ var model = {
                 emailData.query = data1.enquiry[ind].enquirerMsg;
                 emailData.date = data1.enquiry[ind].enquirerDate;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "A potential Client has shown interest in you";
                 // console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
@@ -872,6 +757,7 @@ var model = {
                     var emailOtp = (Math.random() + "").substring(2, 6);
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
+                    emailData.fromname = "Clickmania Admin";
                     emailData.name = found.name;
                     emailData.email = found.email;
                     emailData.otp = emailOtp;
@@ -921,28 +807,171 @@ var model = {
         });
     },
 
-    sendOtpForSignUp: function (data, callback) {
+    // sendOtpForSignUp: function (data, callback) {
+    //     var emailOtp = (Math.random() + "").substring(2, 6);
+    //     var foundData = {};
+    //     var emailData = {};
+    //     emailData.from = "admin@clickmania.in";
+    //     emailData.name = data.name;
+    //     emailData.email = data.email;
+    //     emailData.otp = emailOtp;
+    //     emailData.filename = "otpForSignUp.ejs";
+    //     emailData.subject = "Clickmania OTP";
+    //     console.log("emaildata", emailData);
+    //     Config.email(emailData, function (err, emailRespo) {
+    //         if (err) {
+    //             console.log(err);
+    //             callback(null, err);
+    //         } else if (emailRespo) {
+    //             foundData.otp = emailOtp;
+    //             callback(null, foundData);
+    //         } else {
+    //             callback(null, "Invalid data");
+    //         }
+    //     });
+    // },
+
+    //send otp
+    checkPhotographersForOtp: function (data, callback) {
+        var otpData = this(data);
+        otpData.otpTime = new Date();
+        otpData.password = md5(otpData.password);
         var emailOtp = (Math.random() + "").substring(2, 6);
-        var foundData = {};
-        var emailData = {};
-        emailData.from = "admin@clickmania.in";
-        emailData.name = data.name;
-        emailData.email = data.email;
-        emailData.otp = emailOtp;
-        emailData.filename = "otpForSignUp.ejs";
-        emailData.subject = "Clickmania OTP";
-        console.log("emaildata", emailData);
-        Config.email(emailData, function (err, emailRespo) {
+        otpData.otp = emailOtp;
+        Photographer.findOne({
+            email: data.email
+        }).exec(function (err, found) {
             if (err) {
-                console.log(err);
-                callback(null, err);
-            } else if (emailRespo) {
-                foundData.otp = emailOtp;
-                callback(null, foundData);
+                callback(err, null);
             } else {
-                callback(null, "Invalid data");
+                // if (!found) {
+                // dataObj._id = new mongoose.mongo.ObjectID();
+                otpData.save(function (err, updated) {
+                    if (err) {
+                        console.log("errrrrrrr", err);
+                        callback(err, null);
+                    } else if (updated) {
+                        var foundData = {};
+                        var emailData = {};
+                        emailData.from = "admin@clickmania.in";
+                        emailData.name = otpData.name;
+                        emailData.email = otpData.email;
+                        emailData.otp = emailOtp;
+                        emailData.filename = "otpForSignUp.ejs";
+                        emailData.subject = "Clickmania OTP";
+                        console.log("emaildata", emailData);
+                        Config.email(emailData, function (err, emailRespo) {
+                            if (err) {
+                                console.log(err);
+                                callback(null, err);
+                            } else if (emailRespo) {
+                                //foundData.emailRespo = emailRespo;
+                                //foundData.updated = updated;
+                                callback(null, updated);
+                            } else {
+                                callback(null, "Invalid data");
+                            }
+                        });
+                        // callback(null, updated);
+                    } else {
+                        callback(null, {
+                            message: "No Data Found"
+                        });
+                    }
+                });
+                // } else {
+                //     Photographer.findOneAndUpdate({
+                //         email: otpData.email
+                //     }, {
+                //         otp: emailOtp
+                //     }, {
+                //         new: true
+                //     }, function (err, updated) {
+                //         if (err) {
+                //             callback(err, null);
+                //         } else if (updated) {
+                //             if (_.isEmpty(updated)) {
+                //                 callback(null, {});
+                //             } else {
+                //                 var foundData = {};
+                //                 var emailData = {};
+                //                 emailData.from = "admin@clickmania.in";
+                //                 emailData.fromname = "Clickmania Admin";
+                //                 emailData.name = updated.name;
+                //                 emailData.email = updated.email;
+                //                 emailData.otp = emailOtp;
+                //                 emailData.filename = "otpForSignUp.ejs";
+                //                 emailData.subject = "Clickmania OTP";
+                //                 console.log("emaildata", emailData);
+                //                 Config.email(emailData, function (err, emailRespo) {
+                //                     if (err) {
+                //                         console.log(err);
+                //                         callback(null, err);
+                //                     } else if (emailRespo) {
+                //                         //foundData.emailRespo = emailRespo;
+                //                         //foundData.updated = updated;
+                //                         callback(null, updated);
+                //                     } else {
+                //                         callback(null, "Invalid data");
+                //                     }
+                //                 });
+                //                 //callback(null, updated);
+                //             }
+                //         } else {
+                //             callback(null, {
+                //                 message: "No Data Found"
+                //             });
+                //         }
+                //     });
+                // }
             }
         });
+    },
+
+    //verify otp
+    verifyOTP: function (data, callback) {
+        var currentTime = new Date();
+        Photographer.findOne({
+            otp: data.otp,
+        }).exec(function (error, found) {
+            if (error || found == undefined) {
+                console.log("User >>> verifyOTP >>> User.findOne >>> error >>>", error);
+                callback(error, null);
+            } else {
+                if (_.isEmpty(found)) {
+                    callback(null, {
+                        message: "No data found"
+                    });
+                } else {
+                    var ottym = found.otpTime;
+                    // console.log("pre", moment(ottym).format('LTS'));
+                    // console.log("curr", moment(currentTime).format('LTS'));
+                    // console.log("diff", moment(currentTime).diff(ottym, 'minutes'));
+                    var diff = moment(currentTime).diff(ottym, 'minutes');
+                    if (diff <= 10) {
+                        console.log("aaa");
+                        callback(null, found);
+                    } else {
+                        console.log("bbb");
+                        Photographer.remove({
+                            _id:found._id
+                        }).exec(function (error, found1) {
+                            if (error) {
+                                callback(error, null);
+                            } else if (found1) {
+                                //console.log("successfully deleted", found1);
+                                callback(null, found1);
+                            } else {
+                                callback(null, {
+                                    message: "No Data Found"
+                                });
+                            }
+                        })
+                    }
+                    // callback(null, found);
+                }
+            }
+        })
     },
 
     //verify email and send otp on email end
@@ -1009,10 +1038,6 @@ var model = {
 
 
     payUpdateToGold: function (data, callback) {
-
-
-
-
         // request.post({
         //     url: 'https://secure.ebs.in/pg/ma/payment/request',
         // params: {
@@ -1036,7 +1061,6 @@ var model = {
         //     secure_hash: hs,
         // }
         // }, callback);
-
     },
 
     updateToGold: function (data, callback) {
@@ -1066,6 +1090,7 @@ var model = {
                     //emailData.mobile = data1.mobile;
                     //emailData.query = data1.query;
                     emailData.from = "admin@clickmania.in";
+                    emailData.fromname = "Clickmania Admin";
                     emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
                     console.log("email data : ", emailData);
 
@@ -1116,6 +1141,7 @@ var model = {
                 //emailData.mobile = data1.mobile;
                 //emailData.query = data1.query;
                 emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
                 emailData.subject = "congrats you Have upgraded to Silver Package";
                 console.log("email data : ", emailData);
 
@@ -1135,6 +1161,7 @@ var model = {
                         //emailData.mobile = data1.mobile;
                         //emailData.query = data1.query;
                         emailData.from = "admin@clickmania.in";
+                        emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Please upgrade to Gold";
                         console.log("email data : ", emailData);
 
