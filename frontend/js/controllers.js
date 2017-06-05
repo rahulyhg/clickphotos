@@ -264,6 +264,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.amount = data.data;
         });
 
+        $scope.imageSize = function (data) {
+            //console.log("data------", data);
+            if (data == 'More than 3Mb') {
+                toastr.error('Image Size Is More Than 3 Mb');
+            }
+        }
+
         if ($.jStorage.get("photographer")) {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
@@ -421,7 +428,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.location = $scope.arrLocation;
             if (!_.isEmpty(formdata.location)) {
                 // console.log("doneFormData", formdata);
+<<<<<<< HEAD
                 NavigationService.apiCallWithData("Photographer/allUpdate", formdata, function (data) {
+=======
+                NavigationService.apiCallWithData("Photographer/saveData", formdata, function (data) {
+>>>>>>> ffc0cd98a2262c3a17e333a9c1ed3ca3b6be1d5d
                     if (data.value) {
                         NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                             if (data.value === true) {
@@ -441,8 +452,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
                 });
             } else {
+<<<<<<< HEAD
                 // alert('Please enter the location');
                 toastr.error('Please enter the location');
+=======
+                alert('Please enter the location');
+>>>>>>> ffc0cd98a2262c3a17e333a9c1ed3ca3b6be1d5d
             }
         };
 
@@ -2298,19 +2313,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.searchBarGo = function () {
             console.log("formadata", $scope.filterToBeApplied);
-            formdata = {};
-            formdata.location = $scope.filterToBeApplied.city;
-            NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
-                //console.log("getPhotographersByCategories", data);
-                if (data.value === true) {
-                    $scope.photographerData = data.data;
-                    $state.go("wild-photographer", {
-                        catid: $scope.filterToBeApplied.category,
-                        catName: $scope.filterToBeApplied.catName,
-                        photoLoc: $scope.filterToBeApplied.city,
-                    })
-                }
-            });
+            if (!_.isEmpty($scope.filterToBeApplied.category) && !_.isEmpty($scope.filterToBeApplied.catName) && !_.isEmpty($scope.filterToBeApplied.city)) {
+                formdata = {};
+                formdata.location = $scope.filterToBeApplied.city;
+                NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
+                    //console.log("getPhotographersByCategories", data);
+                    if (data.value === true) {
+                        $scope.photographerData = data.data;
+                        $state.go("wild-photographer", {
+                            catid: $scope.filterToBeApplied.category,
+                            catName: $scope.filterToBeApplied.catName,
+                            photoLoc: $scope.filterToBeApplied.city,
+                        })
+                    }
+                });
+            }
         }
         //searchFilter end
 

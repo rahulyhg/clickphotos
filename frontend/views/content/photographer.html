@@ -111,7 +111,7 @@
                                            </div>-->
                                             <div class="display-inline city__name">
                                                 <input type="text" ng-change="autoLocation()" class="form-control" id="locationCity" ng-model="dummy.abc">
-                                                <i class="fa fa-plus  city__add-icon"  ng-click="addLocation();"></i>
+                                                <i class="fa fa-plus  city__add-icon" ng-click="addLocation();"></i>
                                             </div>
                                             <div class="added-city">
                                                 <div class="selected-option display-inline" ng-repeat="a in arrLocation track by $index">
@@ -161,7 +161,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
-                                            <div class="display-inline wd70">
+                                            <div class="display-inline wd70  pht-cost">
                                                 <!--<input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">-->
                                                 <select name="txtCountry" ng-model="photographerData.pricing" required>
                                                  <option ng-selected="true" value="">Give an estimate of the fee you charge</option>
@@ -285,12 +285,13 @@
                                             <div class="col-md-6 border-divider">
                                                 <ul>
                                                     <li>30 photos</li>
-                                                    <li>2mb per photo</li>
+                                                    <li>3mb per photo</li>
                                                     <li>Photos can be edited by you</li>
                                                     <li>Valid for 1 year</li>
                                                 </ul>
                                             </div>
                                         </div>
+                                        <!--<button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>-->
                                         <button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>
                                     </div>
                                     <br>
@@ -402,7 +403,7 @@
                         <div class="free-member">
                             <span class="small-font left-font">As a</span>
                             <span class="orange-color big-font">Free Member</span>
-                            <span class="small-font">you are unable to upload photos</span>
+                            <span class="small-font deny-msg">you are unable to upload photos</span>
                         </div>
                         <div class="package-block">
                             <p class="text-uppercase text-center">Upgrade to the following premium packages to upload</p>
@@ -421,7 +422,7 @@
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
-                                                <li>2mb per photo</li>
+                                                <li>3mb per photo</li>
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
@@ -468,7 +469,7 @@
                             <span class="text-center">Terms and conditions</span>
                             <ul class="package-specs text-left">
                                 <li>30 photos</li>
-                                <li>2mb per photo</li>
+                                <li>3mb per photo</li>
                                 <li>Photos can be edited by you</li>
                                 <li>Valid for 1 year</li>
                             </ul>
@@ -674,7 +675,7 @@
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
-                                                <li>2mb per photo</li>
+                                                <li>3mb per photo</li>
                                                 <li>Photos can be edited by you</li>
                                                 <li>Valid for 1 year</li>
                                             </ul>
@@ -770,7 +771,7 @@
                                     <div class="sub-title ">
                                         <div class="upgrd-gold text-center ">
                                             <h1 class="damionr font70 white-color ">{{subclick.titleOne}}</h1>
-                                            <h1 class="damionr font70 white-color ">{{subclick.titleTwo}}</h1>
+                                            <h1 class="damionr font70 white-color gold-mgtop">{{subclick.titleTwo}}</h1>
                                             <p class="text-center btn-fix "><a class="btn orange-btn btn-fix " type="button" ng-click="goldMember()">Click here</a></p>
                                         </div>
                                     </div>

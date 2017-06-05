@@ -1,39 +1,41 @@
-<div class="container-fluid pad0 ">
-    <div class="head-section relative mg_t75">
-        <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="cover-img img-responsive" ng-if="userData.coverPic" height="440">
-        <div class="head-bg relative">
-            <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
-            <div class="pht-overlay"></div>
-        </div>
-        <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
-        <div class="ab">
-            <div class="border-profile">
-                <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive profile-user ">
-                <div class="border-profileImg" style="background: url('{{userData.profilePic | serverimage }}') no-repeat 50% 50%" ng-if="userData.profilePic">
+<section class="userprof-bg">
+    <div class="container-fluid pad0">
+        <div class="head-section relative mg_t75">
+            <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="cover-img img-responsive" ng-if="userData.coverPic" height="440">
+            <div class="head-bg relative">
+                <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
+                <div class="pht-overlay"></div>
+            </div>
+            <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
+            <div class="ab">
+                <div class="border-profile">
+                    <img src="frontend/img/photographer/small-logo.png" alt="" class="img-responsive profile-user ">
+                    <div class="border-profileImg" style="background: url('{{userData.profilePic | serverimage }}') no-repeat 50% 50%" ng-if="userData.profilePic">
+                    </div>
+                    <!--<img ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="userData.profilePic">-->
+                    <img src="frontend/img/photographer/profile.jpg" class="img-responsive profile-f-img" ng-if="!userData.profilePic">
                 </div>
-                <!--<img ng-src="{{userData.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="userData.profilePic">-->
-                <img src="frontend/img/photographer/profile.jpg" class="img-responsive profile-f-img" ng-if="!userData.profilePic">
+                <div class="user-name inline">
+                    <h1>{{userData.name}}</h1>
+                    <p>Location:{{locString}}</p>
+                    <!--<p>Speciality:{{specialityString }}</p>-->
+                </div>
             </div>
-            <div class="user-name inline">
-                <h1>{{userData.name}}</h1>
-                <p>Location:{{locString}}</p>
-                <!--<p>Speciality:{{specialityString }}</p>-->
-            </div>
-        </div>
-        <div class="row googleb">
-            <div class="col-md-12 text-center">
-                <ul class="full-tabs2 list-inline">
-                    <li ng-class="{'active': activeTab == 1}" ng-click="toggleTab(1)">ABOUT
-                        <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
-                    </li>
-                    <span class="border-line"></span>
-                    <li ng-class="{'active': activeTab == 2}" ng-click="toggleTab(2)">WORK
-                        <img src="frontend/img/photographer/under.png" alt="" class="img-responsive"></li>
-                </ul>
+            <div class="row googleb">
+                <div class="col-md-12 col-xs-12 text-center">
+                    <ul class="full-tabs2 list-inline">
+                        <li ng-class="{'active': activeTab == 1}" ng-click="toggleTab(1)">ABOUT
+                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                        </li>
+                        <span class="border-line"></span>
+                        <li ng-class="{'active': activeTab == 2}" ng-click="toggleTab(2)">WORK
+                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive"></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- dosis-medium for categories -->
 <div class="grey-back">
     <div class="container ">
@@ -473,45 +475,46 @@
                 </p>
             </div>
             <div class="col-md-12 padd35">
-                <form name="formEnquiry">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="enquirerName" placeholder="Name" ng-model="enquiryInfo.enquirerName" required>
-                                <!--<div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>-->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="enquirerEmail" placeholder="Email Address" ng-model="enquiryInfo.enquirerEmail"
-                                    required>
-                            </div>
-                            <!--<p>Please Enter Your Email</p>-->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group relative " ng-init="enquiryInfo.enquirercntryCode = '+91'">
-                                <input type="tel" class="form-control mobNo" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
-                                    required>
-                                <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
-                                <input type="tel" class="form-control cntry-code" value="{{enquiryInfo.enquirercntryCode}}" id="enquirercntryCode" ng-model="enquiryInfo.enquirercntryCode">
-                            </div>
-                            <!--<p>Please Enter Your Mobile No</p>-->
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-                                        close-text="Close" ng-model="enquiryInfo.enquirerdate">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openDatePicker();"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
+                <div class="enquiry">
+                    <form name="formEnquiry">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="enquirerName" placeholder="Name" ng-model="enquiryInfo.enquirerName" required>
+                                    <!--<div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>-->
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="enquirerEmail" placeholder="Email Address" ng-model="enquiryInfo.enquirerEmail"
+                                        required>
+                                </div>
+                                <!--<p>Please Enter Your Email</p>-->
+                            </div>
                         </div>
-                        <!--<div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group relative " ng-init="enquiryInfo.enquirercntryCode = '+91'">
+                                    <input type="tel" class="form-control mobNo" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
+                                        required>
+                                    <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
+                                    <input type="tel" class="form-control cntry-code" value="{{enquiryInfo.enquirercntryCode}}" id="enquirercntryCode" ng-model="enquiryInfo.enquirercntryCode">
+                                </div>
+                                <!--<p>Please Enter Your Mobile No</p>-->
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+                                            close-text="Close" ng-model="enquiryInfo.enquirerdate">
+                                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openDatePicker();"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-6">
                                 <div class="form-group">
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown">Needed on <i class="fa fa-caret-down" aria-hidden="true"></i></button>
@@ -523,21 +526,22 @@
                                     </div>
                                 </div>
                             </div>-->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <textarea class="form-control" cols="30" rows="5" id="enquirerMsg" ng-model="enquiryInfo.enquirerMsg" required></textarea>
-                            </div>
-                            <!--<p>Please Enter Some Comments</p>-->
                         </div>
-                    </div>
-                    <div class="row">
-                        <!--emailerFunction
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" cols="30" rows="5" id="enquirerMsg" ng-model="enquiryInfo.enquirerMsg" required></textarea>
+                                </div>
+                                <!--<p>Please Enter Some Comments</p>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--emailerFunction
                         sendEnqu(currentProfile)-->
-                        <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile)">Send</a></p>
-                    </div>
-                </form>
+                            <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile)">Send</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
 
         </div>

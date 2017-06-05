@@ -1,15 +1,21 @@
     @media (max-width: $screen-xs-max) {
         //Global classes
+        .text-hide {
+            display: none;
+        }
         .head-f {
             font-size: 30px!important;
             line-height: 1!important;
         }
         .ft100 {
             //font-size: 50px!important;
-            font-size: 45px!important;
+            font-size: 42px!important;
         }
         .font70 {
             font-size: 25px!important;
+        }
+        .big-font {
+            font-size: 55px!important;
         }
         .pad60 {
             padding: 30px 0;
@@ -48,7 +54,7 @@
                 display: block;
                 p {
                     font-size: 12px;
-                    margin: 15px 0;
+                    margin: 15px 0 0;
                 }
             }
         } //End of Footer.html
@@ -76,11 +82,18 @@
         .pht_contest {
             height: 280px!important;
             .jumbotron {
-                padding: 0;
+                padding: 0!important;
+                text-align: center;
                 .ht100 {
                     height: auto!important;
                     h2 {
                         font-size: 30px!important;
+                        span:first-child {
+                            margin-left: -35px;
+                        }
+                        span:last-child {
+                            margin-left: 0!important;
+                        }
                     }
                 }
             }
@@ -174,10 +187,55 @@
                     padding-right: 80px;
                 }
             }
+            .upgrd-gold {
+                .gold-mgtop {
+                    margin-top: 0;
+                }
+            }
         }
         .users {
             padding: 0 35px;
         } //End of users.html
+        //Start of user-profile
+        .full-tabs2 li {
+            padding: 0 25px;
+        }
+        .main-cont {
+            margin: 60px 0px!important;
+        }
+        .so-nam {
+            img {
+                width: 45px!important;
+            }
+        }
+        .send_enquirySlidebar {
+            right: -68%;
+            width: 69%;
+            .padd35 {
+                padding: 0 25px;
+            }
+            .enquiry {
+                height: 315px;
+                padding-right: 16px;
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+            .cntry-code {
+                width: 64px;
+            }
+            .mobNo {
+                width: calc(100% - 64px);
+                height: auto;
+                margin-left: 64px;
+            }
+        }
+        .showEnquery {
+            right: 0!important;
+        }
+        .sec-tab p {
+            font-size: 40px;
+            line-height: 30px;
+        } //End of user-profile
         //Start of future-photographer.html
         .feature-photo {
             .head-name {
@@ -185,18 +243,197 @@
                     padding: 35px 15px 0;
                 }
             }
+            .ht30 {
+                position: relative;
+            }
             .full-tabs {
                 li {
                     font-size: 18px!important;
+                    padding: 2px 35px;
                 }
             }
             .signup-form {
                 margin-bottom: 10px;
             }
+            .intro {
+                margin-top: 0;
+            }
+            .list {
+                background-image: none;
+            }
         } //End of future-photographer.html
+        //Start of photographer.html
+        .profile-block {
+            bottom: 33px;
+            .profile-holder {
+                width: 130px!important;
+                height: 130px!important;
+            }
+            .name-sec {
+                width: 60%!important;
+                .name-part {
+                    font-size: 25px;
+                }
+                .loc-span {
+                    font-size: 21px;
+                }
+                .added-city {
+                    width: 100% !important;
+                }
+            }
+            .holder1 {
+                vertical-align: bottom;
+            }
+        }
+        .btn-1 {
+            padding: 0;
+            .btn-select {
+                font-size: 16px;
+            }
+        }
+        .border-line {
+            padding: 8px 0px;
+        }
+        .quarter-circle {
+            display: none;
+        }
+        .about-desc {
+            margin: 35px 15px;
+        }
+        .form-horizontal {
+            .selected-data {
+                width: 100%!important;
+            }
+        }
+        .terms {
+            width: 90%;
+        }
+        .historypackage-card1,
+        .historypackage-card2 {
+            padding: 25px 20px;
+            .pkg-info {
+                .upload-pic {
+                    vertical-align: top;
+                    float: none;
+                }
+            }
+        }
+        .sub-main {
+            .sub-title {
+                height: 0;
+            }
+            .upgrade-inner {
+                padding-top: 20px;
+                position: relative;
+                width: 100%;
+                margin-left: 6px;
+                border-radius: 10px;
+                background: linear-gradient(to right, #adadad, #e4e4e4);
+                color: #333;
+            }
+        }
+        .uploaded-images {
+            padding: 20px 0px 0;
+            .package-head {
+                width: 100%!important;
+            }
+            .circular-checkbox {
+                width: 100%;
+            }
+            .upload-pic {
+                width: 100%;
+                margin: 15px 0;
+            }
+            .checkbox-form button {
+                width: 100%;
+            }
+        }
+        .circular-checkbox .radio-cat {
+            width: 100%;
+            margin-left: -2px;
+        }
+        .edit-uploaded button {
+            font-size: 13px;
+        }
+        .upgrd-gold h2 {
+            margin-top: 1px;
+        } //End of photographer.html
+        //Start of wildlife-photographer.html
+        .black-btn {
+            font-size: 13px;
+            width: 71px;
+        }
+        .nopht-title {
+            margin: 50px 0;
+            .ht30 {
+                margin-bottom: 25px!important;
+            }
+        }
+        .marg-rel {
+            margin: 10px 26px 0;
+        } //End of wildlife-photographer.html
         //Start of thank, error, thanks-gold, thanks-silver,becomefp .html
         .thanks-title {
             text-align: center;
+        }
+        .free-member {
+            width: 100%!important;
+            padding: 65px 10px 65px;
+            line-height: 1.2;
+            .small-font {
+                font-size: 25px!important;
+                line-height: 0;
+            }
+            .big-font {
+                font-size: 55px!important;
+            }
+            .left-font {
+                text-align: inherit;
+                margin-left: -19%!important;
+            }
+            .deny-msg {
+                display: inline;
+            }
+        }
+        .silver-pack {
+            padding: 0;
+            .pkg-info {
+                width: 31%!important;
+            }
+        }
+        .circular-checkbox {
+            width: 100%;
+            .radio-cat {
+                width: 100%!important;
+            }
+            .upload-pic {
+                margin: 15px 0;
+                width: 100%;
+            }
+            button {
+                width: 100%;
+            }
+        }
+        .text-set {
+            max-width: 100%;
+        }
+        .pht-cost {
+            width: 100%!important;
+        }
+        .abt-form select {
+            width: 100%;
+        }
+        .upgrade-gd {
+            .free-member {
+                padding: 9px 10px 35px!important;
+                .small-font {
+                    line-height: 1!important;
+                }
+            }
+        }
+        .upgrade-pkg,
+        .upgrade-pkg2 {
+            margin: 0 14px;
         } //End of thank, error, thanks-gold, thanks-silver,becomefp .html
         // Start of about us page, privacy-policy, terms-condition page
         .aboutus__desc,
@@ -216,6 +453,27 @@
         //Statrt of signup.html
         .upload-imageblock {
             padding: 15px;
+            .img-holder {
+                background-color: rgba(204, 204, 204, 0.45);
+                height: 185px;
+                img {
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+            .upl-sec {
+                text-align: center;
+                .ui-select-container {
+                    width: 100%!important;
+                }
+                .ui-select-search {
+                    width: 100%!important;
+                }
+                .upload-dire {
+                    width: 22%;
+                    margin-left: 5px;
+                }
+            }
         }
         .sign-up {
             .sign-btn {
