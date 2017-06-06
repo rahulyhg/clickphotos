@@ -634,16 +634,16 @@ var model = {
     // },
 
     clickFilter: function (data, callback) {
-        console.log("Datataaaa", data)
+        //console.log("Datataaaa", data)
         if (!_.isEmpty(data.pricing)) {
-            console.log("inside pricing")
+            //console.log("inside pricing")
             var matchArr = {
                 pricing: {
                     $in: data.pricing
                 }
             }
             if (!_.isEmpty(data.location)) {
-                console.log("inside Lcoaction1")
+                //console.log("inside Lcoaction1")
                 var matchArr = {
                     pricing: {
                         $in: data.pricing
@@ -655,7 +655,7 @@ var model = {
             }
         }
         if (!_.isEmpty(data.location)) {
-            console.log("inside location2")
+           // console.log("inside location2")
 
             var matchArr = {
                 location: {
@@ -663,7 +663,7 @@ var model = {
                 }
             }
             if (!_.isEmpty(data.pricing)) {
-                console.log("inside locationlocation ")
+                //console.log("inside locationlocation ")
 
                 var matchArr = {
                     pricing: {

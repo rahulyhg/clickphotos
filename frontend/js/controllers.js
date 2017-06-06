@@ -1886,7 +1886,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.cityFill.push(data);
                 check = data;
             }
-            //console.log("Doc", document.getElementById(check).checked);
+            console.log("Doc", check);
             if (document.getElementById(check).checked) {
                 // $scope.price.push(priceRange);
                 formdata.pricing = $scope.priceRange;
@@ -1895,10 +1895,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //console.log("clickFilter", data);
                     if (data.value === true) {
                         $scope.photographerData = data.data;
-                        var idToBeRemove = $.jStorage.get("photographer")._id;
-                        $scope.photographerData = _.remove($scope.photographerData, function (n) {
-                            return n._id != idToBeRemove;
-                        });
+                        if (!_.isEmpty($.jStorage.get("photographer"))) {
+                            var idToBeRemove = $.jStorage.get("photographer")._id;
+                            $scope.photographerData = _.remove($scope.photographerData, function (n) {
+                                return n._id != idToBeRemove;
+                            });
+                        }
                     }
                 });
             } else {
@@ -1920,10 +1922,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         //console.log("clickFilter", data);
                         if (data.value === true) {
                             $scope.photographerData = data.data;
-                            var idToBeRemove = $.jStorage.get("photographer")._id;
-                            $scope.photographerData = _.remove($scope.photographerData, function (n) {
-                                return n._id != idToBeRemove;
-                            });
+                            if (!_.isEmpty($.jStorage.get("photographer"))) {
+                                var idToBeRemove = $.jStorage.get("photographer")._id;
+                                $scope.photographerData = _.remove($scope.photographerData, function (n) {
+                                    return n._id != idToBeRemove;
+                                });
+                            }
                         }
                     });
                 } else {
@@ -1934,10 +1938,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         if (data.value === true) {
                             //console.log("getPhotographersByCategories", data);
                             $scope.photographerData = data.data;
-                            var idToBeRemove = $.jStorage.get("photographer")._id;
-                            $scope.photographerData = _.remove($scope.photographerData, function (n) {
-                                return n._id != idToBeRemove;
-                            });
+                            if (!_.isEmpty($.jStorage.get("photographer"))) {
+                                var idToBeRemove = $.jStorage.get("photographer")._id;
+                                $scope.photographerData = _.remove($scope.photographerData, function (n) {
+                                    return n._id != idToBeRemove;
+                                });
+                            }
                             //console.log("$scope.photographerData--", $scope.photographerData)
                         }
                     });
