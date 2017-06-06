@@ -42,7 +42,7 @@ var schema = new Schema({
     month: String,
     year: String,
     bio: String,
-    pricing: String,
+    pricing: [String],
     email: {
         type: String,
         validate: validators.isEmail(),
@@ -747,15 +747,19 @@ var model = {
 
     sendOtp: function (data, callback) {
         // console.log("data", data)
+        var emailOtp = (Math.random() + "").substring(2, 6);
         var foundData = {};
-        Photographer.findOne({
+        Photographer.findOneAndUpdate({
             email: data.email
+        }, {
+            otp: emailOtp
+        }, {
+            new: true
         }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
                 if (found) {
-                    var emailOtp = (Math.random() + "").substring(2, 6);
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
                     emailData.fromname = "Clickmania Admin";
@@ -770,9 +774,9 @@ var model = {
                             console.log(err);
                             callback(null, err);
                         } else if (emailRespo) {
-                            foundData.otp = emailOtp;
-                            foundData.id = found._id;
-                            callback(null, foundData);
+                            // foundData.otp = emailOtp;
+                            // foundData.id = found._id;
+                            callback(null, found);
                         } else {
                             callback(null, "Invalid data");
                         }
@@ -806,6 +810,24 @@ var model = {
                 callback(null, updated);
             }
         });
+    },
+
+    verifyOTPForResetPass: function (data, callback) {
+        Photographer.findOne({
+            otp: data.otp,
+        }).exec(function (error, found) {
+            if (error || found == undefined) {
+                callback(error, null);
+            } else {
+                if (_.isEmpty(found)) {
+                    callback(null, {
+                        message: "No data found"
+                    });
+                } else {
+                    callback(null, found);
+                }
+            }
+        })
     },
 
     // sendOtpForSignUp: function (data, callback) {
@@ -955,7 +977,7 @@ var model = {
                     } else {
                         console.log("bbb");
                         Photographer.remove({
-                            _id:found._id
+                            _id: found._id
                         }).exec(function (error, found1) {
                             if (error) {
                                 callback(error, null);

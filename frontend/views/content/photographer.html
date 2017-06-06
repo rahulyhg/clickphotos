@@ -163,25 +163,32 @@
                                             <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
                                             <div class="display-inline wd70  pht-cost">
                                                 <!--<input type="text" class="form-control" id="pricing" placeholder="Give an estimate of the fee you charge" ng-model="photographerData.pricing">-->
-                                                <select name="txtCountry" ng-model="photographerData.pricing" required>
+                                                <!--<select name="txtCountry" ng-model="photographerData.pricing" required>
                                                  <option ng-selected="true" value="">Give an estimate of the fee you charge</option>
                                                  <option value="{{cat.value}}" ng-repeat="cat in fees">{{cat.name}}</option>
-                                                 <!--<option value="2">Scenery</option>-->
-                                                 </select>
-                                                <!--<div class="custom-check" uib-dropdown auto-close="outsideClick">
+                                                 <option value="2">Scenery</option>
+                                                 </select>-->
+                                                <div class="custom-check" uib-dropdown auto-close="outsideClick">
                                                     <button class="btn" id="price-dropdown" uib-dropdown-toggle type="button">Give an estimate of the fee you charge
                                                       <span class="caret"></span>
                                                              </button>
                                                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="price-dropdown">
                                                         <li role="menuitem" ng-repeat="priceRange in fees">
                                                             <div class="checkbox">
-                                                                <input type="radio" ng-model="photographerData.pricing" value="{{priceRange.value}}" name="{{photographerData.pricing}}"
-                                                                    id="{{priceRange.value}}">
-                                                                <label for="{{priceRange.value}}"><i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceFrom}}</span> - <i class="fa fa-inr" aria-hidden="true"></i><span>{{priceRange.priceTo}}</span></label>
+                                                                <input type="checkbox" value="{{priceRange.value}}" id="{{priceRange.name}}" ng-checked="priceRange.status" ng-model="formData[priceRange.name]" checked="{{priceRange.value}}"
+                                                                    ng-change="addPricing(priceRange)">
+                                                                <label for="{{priceRange.name}}">{{priceRange.name}}
+                                                                    </label>
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                </div>-->
+                                                </div>
+                                            </div>
+                                            <div class="added-city">
+                                                <div class="selected-option display-inline" ng-repeat="a in adPricing track by $index">
+                                                    <span>{{a}}</span>
+                                                    <div class="close-btn" ng-click="removePricing($index,a)">x</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="sub-sec text-center">
@@ -245,7 +252,7 @@
                                         <div class="form-group" style="border-bottom: none;">
                                             <label for="Pricing" class=""><img src="frontend/img/photographer/form/tag.png" alt="" class="img-responsive display-inline">Pricing:</label>
                                             <div class="display-inline">
-                                                {{photographerData.pricing}}
+                                                {{priceDataa}}
                                                 <!--<input type="text" class="form-control" id="pricing" placeholder="" value="&#8377; 5000" readonly>-->
                                             </div>
                                         </div>
@@ -276,8 +283,11 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">SILVER PACKAGE</span>
-                                                        <span class="display-block package-price">
+                                                        <span class="display-block package-price" ng-if="amount[0]">
                                                       <span class="rupee">`</span>{{amount[0].amount}}
+                                                        inclusive of all taxes</span>
+                                                        <span class="display-block package-price" ng-if="!amount[0]">
+                                                      <span class="rupee">`</span>{{2300}}
                                                         inclusive of all taxes</span>
                                                     </div>
                                                 </div>
@@ -302,7 +312,9 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price"><span class="rupee">`</span>{{amount[1].amount}}
+                                                        <span class="display-block package-price" ng-if="amount[1]"><span class="rupee">`</span>{{amount[1].amount}}
+                                                        inclusive of all taxes</span>
+                                                        <span class="display-block package-price" ng-if="!amount[1]"><span class="rupee">`</span>{{3450}}
                                                         inclusive of all taxes</span>
                                                     </div>
                                                 </div>
@@ -417,8 +429,9 @@
                                                     <span class="package-name">SILVER PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price">    <span class="rupee">`</span> {{amount[0].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price" ng-if="amount[0]"> <span class="rupee">`</span>                                            {{amount[0].amount}} inclusive of all taxes
+                                            </span>
+                                            <span class="display-block package-price" ng-if="!amount[0]"> <span class="rupee">`</span>                                            {{2300}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
@@ -439,8 +452,9 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span> {{amount[1].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price" ng-if="amount[1]"><span class="rupee">`</span>                                            {{amount[1].amount}} inclusive of all taxes
+                                            </span>
+                                            <span class="display-block package-price" ng-if="!amount[1]"><span class="rupee">`</span>                                            {{3450}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>100 photos</li>
@@ -670,8 +684,9 @@
                                                     <span class="package-name">SILVER PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price">    <span class="rupee">`</span> {{amount[0].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price" ng-if="amount[0]">    <span class="rupee">`</span>                                            {{amount[0].amount}} inclusive of all taxes
+                                            </span>
+                                            <span class="display-block package-price" ng-if="!amount[0]">    <span class="rupee">`</span>                                            {{2300}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
@@ -692,8 +707,9 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span> {{amount[1].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price" ng-if="amount[1]"><span class="rupee">`</span>                                            {{amount[1].amount}} inclusive of all taxes
+                                            </span>
+                                            <span class="display-block package-price" ng-if="!amount[1]"><span class="rupee">`</span>                                            {{3450}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>100 photos</li>
@@ -721,7 +737,9 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">SILVER PACKAGE</span>
-                                                <span class="display-block package-price ">    <span class="rupee ">`</span>{{amount[0].amount}}
+                                                <span class="display-block package-price " ng-if="amount[0]">    <span class="rupee ">`</span>{{amount[0].amount}}
+                                                inclusive of all taxes</span>
+                                                <span class="display-block package-price " ng-if="!amount[0]">    <span class="rupee ">`</span>{{amount[0].amount}}
                                                 inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForSilver | date}}</span></p>
@@ -746,7 +764,9 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
-                                                <span class="display-block package-price "><span class="rupee ">`</span>{{amount[1].amount}}
+                                                <span class="display-block package-price " ng-if="amount[1]"><span class="rupee ">`</span>{{amount[1].amount}}
+                                                inclusive of all taxes</span>
+                                                <span class="display-block package-price " ng-if="!amount[1]"><span class="rupee ">`</span>{{3450}}
                                                 inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForGold | date}}</span></p>
