@@ -2043,7 +2043,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 $scope.registerData = formdata;
                 NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    console.log("dataForOtp", data);
+                    //console.log("dataForOtp", data);
                     if (data.value) {
                         $scope.signUpOTP();
                         setTimeout(function (data) {
@@ -2058,7 +2058,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.checkOTPForSignUp = function (formdata) {
             NavigationService.apiCallWithData("Photographer/verifyOTP", formdata, function (data) {
-                console.log("dataForOtp", data.data);
+                //console.log("dataForOtp", data.data);
                 if (data.value == true) {
                     $.jStorage.set("photographer", data.data);
                     $scope.showSucessBox = true;
