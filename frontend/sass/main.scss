@@ -3289,6 +3289,14 @@ header {
     .modal-demo {
         position: relative;
         .modal-body {
+            .absolute-cross {
+                @include position(absolute,
+                -15px -15px null null);
+                display: inline-block;
+                @include size(30px,
+                30px);
+                cursor: pointer;
+            }
             .well {
                 background-color: $whiteColor;
                 border: none;
@@ -3314,14 +3322,6 @@ header {
                     @include size(90px,
                     auto);
                     border-radius: 0px;
-                }
-                .absolute-cross {
-                    @include position(absolute,
-                    -15px -15px null null);
-                    display: inline-block;
-                    @include size(30px,
-                    30px);
-                    cursor: pointer;
                 }
             }
             .pass-contet,
@@ -3385,14 +3385,6 @@ header {
                     input {
                         letter-spacing: 5px;
                     }
-                }
-                .absolute-cross {
-                    @include position(absolute,
-                    -15px -15px null null);
-                    display: inline-block;
-                    @include size(30px,
-                    30px);
-                    cursor: pointer;
                 }
             }
         }

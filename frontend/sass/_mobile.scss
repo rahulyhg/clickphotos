@@ -1,5 +1,8 @@
     @media (max-width: $screen-xs-max) {
         //Global classes
+        .mg_t75 {
+            margin-top: 57px;
+        }
         .text-hide {
             display: none;
         }
@@ -24,14 +27,19 @@
         .brand-logo {
             width: 92px!important;
         }
+        .navbar-toggle .icon-bar+.icon-bar {
+            margin-top: 3px;
+        }
         a.navbar-brand {
             padding: 21px 0 5px!important;
-        }
-        header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
-        header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
-        header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
-        {
-            height: 2px!important;
+        } // header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
+        // header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
+        // header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
+        // {
+        //     height: 2px!important;
+        // }
+        header>nav div.navbar-toggle {
+            margin-right: 3px;
         }
         .search-directive {
             display: none;
@@ -41,9 +49,15 @@
             span {
                 font-size: 11.25px!important;
             }
+            button {
+                font-size: 9px!important;
+                width: 52px!important;
+                padding: 5px 8px;
+            }
         }
         .side-menu {
-            width: 50%;
+            width: 65%;
+            top: 55px!important;
             .list-group-item {
                 font-size: 16px;
             }
@@ -59,6 +73,9 @@
             }
         } //End of Footer.html
         //Start of home.html
+        .sliding_bg {
+            margin-top: 55px;
+        }
         .featu_photo_caraso {
             .fp_padd_rl {
                 .fp_width {
@@ -67,6 +84,7 @@
                             top: 12%;
                             .border-half {
                                 @include size(100px, 100px);
+                                margin-top: -8px;
                             }
                             h3 {
                                 font-size: 21.34px!important;
@@ -136,6 +154,7 @@
             }
         }
         .atm {
+            min-height: 320px!important;
             .bg_img {
                 .abslt {
                     // used to adjust the logo
@@ -197,6 +216,31 @@
             padding: 0 35px;
         } //End of users.html
         //Start of user-profile
+        .ab {
+            position: absolute;
+            bottom: 0!important;
+            margin: auto 0;
+            right: 0 !important;
+            width: 100% !important;
+            .border-profile {
+                width: 150px!important;
+                height: 150px!important;
+                margin-bottom: 25px;
+                margin-left: 0;
+                border: none;
+                float: none;
+                vertical-align: middle;
+            }
+        }
+        .user-name {
+            bottom: auto!important;
+            h1 {
+                font-size: 30px!important;
+            }
+            p {
+                font-size: 20px!important;
+            }
+        }
         .full-tabs2 li {
             padding: 0 25px;
         }
@@ -237,6 +281,10 @@
             line-height: 30px;
         } //End of user-profile
         //Start of future-photographer.html
+        .btn-social {
+            width: 180px;
+            margin: 3px 2px!important;
+        }
         .feature-photo {
             .head-name {
                 p {
@@ -263,6 +311,15 @@
             }
         } //End of future-photographer.html
         //Start of photographer.html
+        .change-cover {
+            display: none;
+        }
+        .profile-banner .profile-banner__bg {
+            img {
+                width: 100%;
+                height: 156px;
+            }
+        }
         .profile-block {
             bottom: 33px;
             .profile-holder {
@@ -270,7 +327,7 @@
                 height: 130px!important;
             }
             .name-sec {
-                width: 60%!important;
+                width: 55%!important;
                 .name-part {
                     font-size: 25px;
                 }
@@ -300,6 +357,12 @@
         .about-desc {
             margin: 35px 15px;
         }
+        .abt-form {
+            padding: 10px 25px 1px;
+        }
+        .city .city__name {
+            width: 57%!important;
+        }
         .form-horizontal {
             .selected-data {
                 width: 100%!important;
@@ -307,6 +370,22 @@
         }
         .terms {
             width: 90%;
+        }
+        .package-card {
+            img {
+                display: block;
+                margin: 0 auto 5px;
+            }
+        }
+        .pkg-info {
+            width: 100%;
+            text-align: center;
+            margin-left: 0;
+        }
+        .border-divider {
+            ul>li {
+                font-size: 15px;
+            }
         }
         .historypackage-card1,
         .historypackage-card2 {
@@ -359,6 +438,11 @@
             margin-top: 1px;
         } //End of photographer.html
         //Start of wildlife-photographer.html
+        // .black-custom-slider {
+        //     .border-half {
+        //         img {}
+        //     }
+        // }
         .black-btn {
             font-size: 13px;
             width: 71px;
@@ -416,12 +500,23 @@
         }
         .text-set {
             max-width: 100%;
-        }
-        .pht-cost {
-            width: 100%!important;
-        }
-        .abt-form select {
-            width: 100%;
+        } // .abt-form select {
+        //     width: 100%;
+        // }
+        .abt-form {
+            .dropdown {
+                .dropdown-menu {
+                    left: 0;
+                }
+                button {
+                    font-size: 13px;
+                    .caret {
+                        border-top: 6px dashed;
+                        border-right: 6px solid transparent;
+                        border-left: 6px solid transparent;
+                    }
+                }
+            }
         }
         .upgrade-gd {
             .free-member {
@@ -436,6 +531,12 @@
             margin: 0 14px;
         } //End of thank, error, thanks-gold, thanks-silver,becomefp .html
         // Start of about us page, privacy-policy, terms-condition page
+        .aboutus,
+        .privacy-policy,
+        .terms-condition,
+        .contactus {
+            @include margin(55px null null null);
+        }
         .aboutus__desc,
         .privacy-policy__desc,
         .terms-condition__desc {
@@ -485,8 +586,46 @@
                 font-size: 13px;
                 width: auto;
             }
+            .soc-btn i {
+                width: 25%;
+            }
+            .alert-text {
+                text-indent: 0!important;
+                text-align: center;
+            }
         } //End of signup.html
-        //End of all modals html
+        .modal-dialog .modal-demo .modal-body {
+            .absolute-cross {
+                @include position(absolute, -15px -15px null null);
+                display: inline-block;
+                @include size(25px, 25px);
+                cursor: pointer;
+            }
+            .delete-pht {
+                @include padding(5px 0);
+                h4 {
+                    font-size: 14px;
+                }
+                button {
+                    width: 75px;
+                    font-size: 12px;
+                }
+            }
+            .pass-contet,
+            .signupOTP-contet {
+                @include padding(0);
+                h2 {
+                    font-size: 25px;
+                }
+                h4 {
+                    font-size: 14px;
+                }
+                button.go-btn,
+                .ok-btn {
+                    font-size: 12px;
+                }
+            }
+        } //End of all modals html
     } // End of @media
     @media (max-width: 1024px) {
         // Start of  home page
@@ -641,8 +780,7 @@
         } //End of sign up section 
         //Start of the artist of the month
         .atm {
-            min-height: 395px;
-            margin-bottom: -55px;
+            min-height: 360px;
             .head-f {
                 top: 31px;
                 font-size: 34px;
@@ -1050,6 +1188,17 @@
             }
             span {
                 font-size: 17.25px;
+            }
+        }
+    }
+
+    @media (min-width: 320px)and(max-width: 375px) {
+        .brand-logo {
+            width: 83px !important;
+        }
+        .photographer {
+            span {
+                font-size: 10px !important;
             }
         }
     }

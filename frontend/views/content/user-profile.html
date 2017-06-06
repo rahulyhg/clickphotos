@@ -1,10 +1,10 @@
-<section class="userprof-bg">
-    <div class="container-fluid pad0">
-        <div class="head-section relative mg_t75">
+<section class="userprof-bg relative">
+    <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic">
+    <div class="pht-overlay"></div>
+    <div class="container-fluid ">
+        <div class="head-section relative">
             <img ng-src="{{userData.coverPic | serverimage}}" alt="" class="cover-img img-responsive" ng-if="userData.coverPic" height="440">
             <div class="head-bg relative">
-                <img src="frontend/img/photographer/back1.jpg" class="img-responsive prof-img" ng-if="!userData.coverPic" height="440">
-                <div class="pht-overlay"></div>
             </div>
             <!--<img src="frontend/img/fh.png" alt="" class="img-responsive img-left">-->
             <div class="ab">
@@ -399,7 +399,7 @@
                 <div class="row pad-up100">
                     <div class="black-custom-slider">
                         <flex-slider slide="user in relatedPhotographerData track by $index" animation="slide" prev-text="" next-text="" item-margin="10"
-                            max-items="4" item-width="200">
+                            item-width="200">
                             <li>
                                 <div class="thumbnail shadow">
                                     <img src="frontend/img/userback1.jpg" alt="...">
