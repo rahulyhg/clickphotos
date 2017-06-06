@@ -145,6 +145,20 @@ var controller = {
             })
         }
     },
+
+    verifyOTPForResetPass: function (req, res) {
+        if (req.body) {
+            Photographer.verifyOTPForResetPass(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
     //otp signup end
     // getFeaturePhotographer: function (req, res) {
     //     if (req.body) {
