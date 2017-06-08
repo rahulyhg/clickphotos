@@ -1964,16 +1964,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.openSideNav = function () { // For opening the leftside navigation
 
             if (!$scope.sideNav) {
-                $('div.icon_float').children().removeClass(function (index, className) {
-                    return (className.match(/\bicon_\S+/g) || []).join(' ');
-                });
+                // $('div.icon_float').children().removeClass(function (index, className) {
+                //     return (className.match(/\bicon_\S+/g) || []).join(' ');
+                // });
 
-                $('div.icon_float').addClass('hamburger-cross');
-                $('div.icon_float > span.icon-bar').css({
-                    'height': '3px',
-                    'background-color': '#f4511e',
-                    'width': '36px'
-                });
+                // $('div.icon_float').addClass('hamburger-cross');
+                // // $('div.icon_float > span.icon-bar').css({
+                // //     'height': '3px',
+                // //     'background-color': '#f4511e',
+                // //     'width': '36px'
+                // // });
+                $('#nav-icon').toggleClass('open');
 
                 $('.side-menu').addClass('menu-in');
                 $('.side-menu').removeClass('menu-out');
@@ -1981,17 +1982,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 //  $('.navbar-toggle').attr('ng-click', 'test1()');
                 $scope.sideNav = true;
             } else {
-                if ($('div.icon_float').hasClass('hamburger-cross')) {
-                    $('div.icon_float').children().addClass(function (n) {
-                        $('div.icon_float').removeClass('hamburger-cross');
-                        $('div.icon_float > span.icon-bar').removeAttr('style');
-                        $('section .mg_lft').css('margin-left', '0');
-                        $('#sidenav-overlay').css('display', 'none');
-                        $('body').css('overflow-y', 'scroll');
-                        return 'icon_bar' + n;
+                // if ($('div.icon_float').hasClass('hamburger-cross')) {
+                //     $('div.icon_float').children().addClass(function (n) {
+                //         $('div.icon_float').removeClass('hamburger-cross');
+                //         $('div.icon_float > span.icon-bar').removeAttr('style');
+                //         $('section .mg_lft').css('margin-left', '0');
+                //         $('#sidenav-overlay').css('display', 'none');
+                //         $('body').css('overflow-y', 'scroll');
+                //         return 'icon_bar' + n;
 
-                    });
-                }
+                //     });
+                // }
+                $('#nav-icon').toggleClass('open');
                 $('.side-menu').addClass('menu-out');
                 $('.side-menu').removeClass('menu-in');
                 $('.main-overlay').css('opacity', '0');

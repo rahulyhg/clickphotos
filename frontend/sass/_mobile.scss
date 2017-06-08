@@ -25,13 +25,50 @@
         } //End of global classes
         //Start of header.html
         .brand-logo {
-            width: 92px!important;
+            width: 90px!important;
         }
-        .navbar-toggle .icon-bar+.icon-bar {
-            margin-top: 3px;
+        .website-brand {
+            padding: 15px 0;
         }
-        a.navbar-brand {
-            padding: 21px 0 5px!important;
+        #nav-icon span {
+            height: 2px;
+        }
+        #nav-icon span:nth-child(1) {
+            top: 0;
+            width: 50%;
+            margin-left: 16px;
+        }
+        #nav-icon span:nth-child(2),
+        #nav-icon span:nth-child(3) {
+            top: 5px;
+            width: 38%;
+            margin-left: 20px
+        }
+        #nav-icon span:nth-child(4) {
+            top: 10px;
+            width: 34%;
+            margin-left: 23px;
+        }
+        #nav-icon.open span:nth-child(1) {
+            top: 18px;
+            width: 0%;
+            left: 50%;
+        }
+        #nav-icon.open span:nth-child(2) {
+            @include transform(rotate(45deg));
+            width: 60%!important;
+            margin-left: 0; //    width: 50%;
+            margin-left: 10px;
+        }
+        #nav-icon.open span:nth-child(3) {
+            @include transform(rotate(-45deg));
+            width: 60%!important;
+            margin-left: 10px; // width: 50%;
+        }
+        #nav-icon.open span:nth-child(4) {
+            top: 18px;
+            width: 0%;
+            left: 50%;
         } // header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
@@ -75,6 +112,12 @@
         //Start of home.html
         .sliding_bg {
             margin-top: 55px;
+            .swiper-container {
+                height: auto;
+            }
+            .scroll_down {
+                display: none;
+            }
         }
         .featu_photo_caraso {
             .fp_padd_rl {
@@ -216,6 +259,9 @@
             padding: 0 35px;
         } //End of users.html
         //Start of user-profile
+        .userprof-bg {
+            margin-top: 57px;
+        }
         .ab {
             position: absolute;
             bottom: 0!important;
@@ -230,6 +276,9 @@
                 border: none;
                 float: none;
                 vertical-align: middle;
+                .profile-user {
+                    width: 35px;
+                }
             }
         }
         .user-name {
@@ -248,8 +297,10 @@
             margin: 60px 0px!important;
         }
         .so-nam {
+            font-size: 22px!important;
             img {
-                width: 45px!important;
+                width: 35px!important;
+                margin: 0 2px!important;
             }
         }
         .send_enquirySlidebar {
@@ -314,6 +365,9 @@
         .change-cover {
             display: none;
         }
+        .border-divider {
+            border: 0 solid transparent;
+        }
         .profile-banner .profile-banner__bg {
             img {
                 width: 100%;
@@ -327,7 +381,7 @@
                 height: 130px!important;
             }
             .name-sec {
-                width: 55%!important;
+                width: 48%!important;
                 .name-part {
                     font-size: 25px;
                 }
@@ -340,6 +394,24 @@
             }
             .holder1 {
                 vertical-align: bottom;
+            }
+        }
+        .profile-holder {
+            &:hover {
+                .upload-trans {
+                    padding: 6px 0px 20px!important;
+                    span {
+                        display: block;
+                        text-align: center;
+                        font-size: 13px;
+                        img {
+                            display: none;
+                        }
+                    }
+                    .directive-opacity {
+                        top: -3px;
+                    }
+                }
             }
         }
         .btn-1 {
@@ -395,6 +467,18 @@
                     vertical-align: top;
                     float: none;
                 }
+                .upload-pic {
+                    display: block;
+                }
+                button {
+                    width: auto;
+                    margin: 15px auto;
+                }
+            }
+            img {
+                width: 55px;
+                display: block;
+                margin: 0 auto 10px;
             }
         }
         .sub-main {
@@ -456,6 +540,29 @@
         .marg-rel {
             margin: 10px 26px 0;
         } //End of wildlife-photographer.html
+        //Start of become fp photographer
+        .becomefp {
+            margin-top: 57px!important;
+            .becomefp-title {
+                .ht30 {
+                    margin-left: 0!important;
+                }
+                .imgwt {
+                    width: 80px!important;
+                }
+                h1 {
+                    margin-top: 41px!important;
+                    font-size: 35px !important;
+                    text-indent: 55px;
+                }
+            }
+            .cam-img {
+                padding: 25px 60px!important;
+            }
+            button {
+                font-size: 11px;
+            }
+        } //End of becomefp photographer
         //Start of thank, error, thanks-gold, thanks-silver,becomefp .html
         .thanks-title {
             text-align: center;
@@ -575,6 +682,9 @@
                     margin-left: 5px;
                 }
             }
+            .mob-ht {
+                min-height: 125px;
+            }
         }
         .sign-up {
             .sign-btn {
@@ -584,7 +694,7 @@
             .soc-btn {
                 margin: 0 5px 5px;
                 font-size: 13px;
-                width: auto;
+                width: 165px;
             }
             .soc-btn i {
                 width: 25%;
@@ -596,7 +706,7 @@
         } //End of signup.html
         .modal-dialog .modal-demo .modal-body {
             .absolute-cross {
-                @include position(absolute, -15px -15px null null);
+                @include position(absolute, -10px -11px null null);
                 display: inline-block;
                 @include size(25px, 25px);
                 cursor: pointer;
@@ -672,6 +782,10 @@
         }
         a.navbar-brand {
             padding: 16px 15px 5px;
+        }
+        #nav-icon.open span:nth-child(2),
+        #nav-icon.open span:nth-child(3) {
+            width: 85%;
         }
         .search-directive {
             .ui-select-placeholder {
@@ -846,6 +960,9 @@
             .profile-banner__bg {
                 height: auto;
             }
+        }
+        .change-cover {
+            display: none;
         }
         .name-sec {
             @include size(505px, auto);
@@ -1193,8 +1310,11 @@
     }
 
     @media (min-width: 320px)and(max-width: 375px) {
-        .brand-logo {
-            width: 83px !important;
+        #nav-icon {
+            padding: 2px;
+            .brand-logo {
+                width: 80px!important;
+            }
         }
         .photographer {
             span {
