@@ -51,21 +51,13 @@ var model = {
     },
 
     removeContestUsers: function (data, callback) {
-
         console.log("DATA", data);
         PhotoContest.update({
             "_id": data._id,
-
-            "contestParticipant": {
-                $elemMatch: {
-                    _id: data.testid
-                }
-            }
+            "contestParticipant": mongoose.Types.ObjectId(data.testid)
         }, {
             $pull: {
-                contestParticipant: {
-                    _id: data.testid
-                }
+                contestParticipant: mongoose.Types.ObjectId(data.testid)
             }
         }, function (err, updated) {
             console.log(updated);
