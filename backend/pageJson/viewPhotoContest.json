@@ -1,0 +1,57 @@
+{
+    "title": "PhotoContests",
+    "description": "List of PhotoContests",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "contestName"
+    }, {
+        "name": "Status",
+        "isSort": "",
+        "tableRef": "status"
+    },{
+        "name": "Date",
+        "isSort": "",
+        "tableRef": "contestExpDate"
+    },{
+        "name": "Wining Price",
+        "isSort": "",
+        "tableRef": "winingPrice"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editPhotoContest",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete PhotoContest",
+        "content": "Are you sure you want to delete PhotoContest?",
+        "api": "PhotoContest/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createPhotoContest"
+    }],
+    "apiCall": {
+        "url": "PhotoContest/search",
+        "params": "_id"
+    }
+}

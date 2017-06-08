@@ -40,6 +40,11 @@ var navigationservice = angular.module('navigationservice', [])
                 name: "Subscribed Emails",
                 classis: "active",
                 sref: "#!/page/viewSubscribeEmail//",
+            },
+            {
+                name: "Photo Contest",
+                classis: "active",
+                sref: "#!/page/viewPhotoContest//",
             }
         ];
 

@@ -1,0 +1,73 @@
+{
+    "title": "Edit PhotoContests",
+    "name": "PhotoContest",
+    "jsonPage": "viewPhotoContest",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "contestName",
+        "placeholder": "Enter Name",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Wining Price",
+        "type": "text",
+        "tableRef": "winingPrice",
+        "placeholder": "Enter winingPrice",
+        "id": "winingPrice",
+        "validation": ["", "trim", ""],
+        "url": ""
+    },{
+        "name": "Date",
+        "type": "date",
+        "tableRef": "contestExpDate",
+        "placeholder": "Enter Date",
+        "id": "date",
+        "validation": ["", "trim", ""],
+        "url": ""
+    },{
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Enter status",
+        "id": "status",
+        "validation": ["", "trim", ""],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": [true, false]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitPhotoContest",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewPhotoContest"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewPhotoContest"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "PhotoContest/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "PhotoContest/getOne",
+        "params": "_id"
+    }
+
+}

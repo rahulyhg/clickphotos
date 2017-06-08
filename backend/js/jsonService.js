@@ -40,6 +40,12 @@ jsonservicemod.service('JsonService', function ($http, TemplateService, $state, 
             TemplateService.changecontent("categoryImages");
           }
           break;
+        case "PhotoContestedit":
+          {
+            console.log("IN components EDIT");
+            TemplateService.changecontent("photoContest");
+          }
+          break;
       }
       callback();
     });
@@ -92,7 +98,10 @@ jsonservicemod.service('JsonService', function ($http, TemplateService, $state, 
         window.location.href = adminurl + action.action;
       } else if (action.linkType == "internal") {
         window.location.href = "#/" + action.action;
-      } else {
+      } else if (action && action.type == "photoContestpage") {
+        console.log("IN photoContestpage TYPE");
+        $state.go("photoContestpage", sendTo);
+      }else {
         window.location.href = action.action;
       }
     } else {

@@ -84,7 +84,23 @@ var schema = new Schema({
         enquirercntryCode: Number
     }],
     otp: String,
-    otpTime: Date
+    otpTime: Date,
+
+    //photo contest
+
+    contestPhotos: {
+        contestId: {
+            type: Schema.Types.ObjectId,
+            ref: "PhotoContest"
+        },
+        Photos: [String]
+    },
+
+    contest: [{
+        type: Schema.Types.ObjectId,
+        ref: "PhotoContest"
+    }]
+
 });
 
 schema.plugin(deepPopulate, {
@@ -655,7 +671,7 @@ var model = {
             }
         }
         if (!_.isEmpty(data.location)) {
-           // console.log("inside location2")
+            // console.log("inside location2")
 
             var matchArr = {
                 location: {
@@ -966,6 +982,53 @@ var model = {
                         message: "No data found"
                     });
                 } else {
+                    var emailData = {};
+                    emailData.email = found.email;
+                    emailData.filename = "welcome.ejs";
+                    emailData.name = found.name;
+                    //emailData.serviceRequest = data1.serviceRequest;
+                    // emailData.email = data1.email;
+                    //emailData.mobile = data1.mobile;
+                    //emailData.query = data1.query;
+                    emailData.from = "admin@clickmania.in";
+                    emailData.fromname = "Clickmania Admin";
+                    emailData.subject = "Welcome To Clickmania";
+                    console.log("email data : ", emailData);
+                    Config.email(emailData, function (err, emailRespo) {
+                        console.log("emailRespo", emailRespo);
+                        if (err) {
+                            console.log(err);
+                            callback(null, found);
+                        } else if (emailRespo) {
+                            // callback(null, "Contact us form saved successfully!!!");
+                            var emailData = {};
+                            emailData.email = found.email;
+                            emailData.filename = "upgradeprofile.ejs";
+                            emailData.name = found.name;
+                            //emailData.serviceRequest = data1.serviceRequest;
+                            // emailData.email = data1.email;
+                            //emailData.mobile = data1.mobile;
+                            //emailData.query = data1.query;
+                            emailData.from = "admin@clickmania.in";
+                            emailData.fromname = "Clickmania Admin";
+                            emailData.subject = "Clickmania Update Profile";
+                            console.log("email data : ", emailData);
+                            Config.email(emailData, function (err, emailRespo) {
+                                console.log("emailRespo", emailRespo);
+                                if (err) {
+                                    console.log(err);
+                                    callback(null, found);
+                                } else if (emailRespo) {
+                                    callback(null, found);
+                                } else {
+                                    callback(null, found);
+                                }
+                            });
+                        } else {
+                            callback(null, found);
+                        }
+                    });
+                    //tym check
                     var ottym = found.otpTime;
                     // console.log("pre", moment(ottym).format('LTS'));
                     // console.log("curr", moment(currentTime).format('LTS'));

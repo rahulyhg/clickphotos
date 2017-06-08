@@ -1886,7 +1886,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.cityFill.push(data);
                 check = data;
             }
-            console.log("Doc", check);
+            //console.log("Doc", check);
             if (document.getElementById(check).checked) {
                 // $scope.price.push(priceRange);
                 formdata.pricing = $scope.priceRange;
