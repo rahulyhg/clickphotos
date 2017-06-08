@@ -3,7 +3,7 @@
     "name": "PhotoContest",
     "jsonPage": "viewPhotoContest",
     "desciption": "",
-    "pageType": "edit",
+    "pageType": "PhotoContestedit",
     "urlFields": ["_id"],
     "fields": [{
         "name": "Name",

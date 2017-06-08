@@ -1284,6 +1284,270 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     //photo Contest
 
+    // .controller('PhotoContestCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, $uibModal, toastr) {
+    //     $scope.json = JsonService;
+    //     JsonService.setKeyword($stateParams.keyword);
+    //     $scope.template = TemplateService;
+    //     $scope.data = {};
+    //     $scope.formdata = {};
+    //     console.log("IN PROJECT controller");
+    //     console.log("SCOPE JSON", $scope.json);
+    //     $scope.tableData = {};
+    //     $scope.stateData = {};
+    //     $scope.projectDATA = {};
+    //     $scope.stateName = [];
+    //     $scope.stateIds = [];
+    //     $scope.STATE;
+
+    //     $scope.projectID = {};
+
+    //     //testimonial
+
+    //     $scope.findPhotoContest = function () {
+    //         console.log('datttttttta1111');
+    //         NavigationService.apiCall("PhotoContest/findOnePhotoContest", {
+    //             [$scope.json.json.preApi.params]: $scope.json.keyword._id
+    //         }, function (data) {
+    //             // var mydata = _.cloneDeep(data.data);
+    //             // console.log('mydatatttttttttttt',mydata);
+    //             $scope.projectDATA = data.data;
+    //             $scope.tableData = data.data;
+    //             $scope.generateField = true;
+    //             console.log("TABLEDATA IS FOUND HERE-->", $scope.tableData);
+    //         });
+    //     }
+
+
+
+    //     // $scope.findPhotoContest();
+    //     // $scope.findState();
+    //     // //  START FOR EDIT
+    //     // if ($scope.json.json.preApi) {
+
+    //     //     NavigationService.apiCall($scope.json.json.preApi.url, {
+    //     //         [$scope.json.json.preApi.params]: $scope.json.keyword._id
+    //     //     }, function (data) {
+    //     //         $scope.data = data.data;
+    //     //         $scope.generateField = true;
+    //     //         console.log("DATA IS FOUND HERE-->", $scope.data);
+
+    //     //     });
+    //     // } else {
+    //     //     $scope.generateField = true;
+    //     // }
+
+
+    //     $scope.editBoxCustomPhotoContest = function (data) {
+
+    //         console.log("DATADATA", data);
+
+    //         $scope.status = ["true", "false"];
+    //         $scope.datainfo = data;
+    //         $scope.newinfo = {
+    //             _id: $scope.json.keyword._id,
+    //             testi_id: data
+    //         };
+
+
+    //         $scope.modalInstance = $uibModal.open({
+    //             animation: $scope.animationsEnabled,
+    //             templateUrl: '/backend/views/modal/image-edit-photoContest.html',
+    //             size: 'lg',
+    //             scope: $scope,
+
+    //         });
+    //     };
+
+    //     //testimonial saveedit
+
+    //     $scope.saveEditShrinkTestimonial = function (id, name, cname, city, content, order, status) {
+    //         //console.log("DATA", result);
+    //         newinfo = {};
+    //         newinfo._id = $scope.json.keyword._id,
+    //             newinfo.testi_id = id;
+    //         newinfo.name = name;
+    //         newinfo.cname = cname;
+    //         newinfo.city = city;
+    //         newinfo.content = content;
+    //         newinfo.order = order;
+    //         newinfo.status = status;
+
+    //         // console.log("image", image);
+    //         // console.log("id", id);
+    //         // console.log("old", old);
+
+    //         // var data1 = {};
+    //         // data1.name = result.name;
+    //         // data1.content = result.content;
+    //         // data1.order = result.order;
+    //         // data1.status = result.status;
+    //         // $scope.newinfo = {};
+
+    //         NavigationService.boxCall("ShrinkFilm/updateShrinkTestimonial", newinfo, function (data) {
+    //             $scope.projectData = data.data;
+    //             $scope.generateField = true;
+    //             $scope.modalInstance.close();
+    //             $scope.findPhotoContest();
+    //             toastr.success(" Testimonial" + " " + "updated" + " successfully.");
+    //         })
+
+    //     };
+
+    //     //testimonial all
+
+    //     // $scope.editBoxInstitute = function () {
+
+
+    //     //     var modalInstance = $uibModal.open({
+    //     //         animation: $scope.animationsEnabled,
+    //     //         templateUrl: '/backend/views/modal/institute-edit-detail.html',
+    //     //         size: 'lg',
+    //     //         scope: $scope,
+    //     //         tableData: $scope.tableData
+    //     //     });
+    //     // };
+
+    //     $scope.addBoxShrinkTestimonial = function (data) {
+    //         console.log("DATADATA", data);
+    //         $scope.status = ["true", "false"];
+    //         $scope.newtestimonialinfo = {
+    //             _id: data
+
+    //         };
+
+    //         $scope.modalInstance = $uibModal.open({
+    //             animation: $scope.animationsEnabled,
+    //             templateUrl: '/backend/views/modal/image-add-shrinktestimonial.html',
+    //             size: 'lg',
+    //             scope: $scope,
+    //             tableData: $scope.tableData
+    //         });
+    //     };
+
+
+    //     $scope.onCancel = function (sendTo) {
+    //         $scope.json.json.action[1].stateName.json.keyword = "";
+    //         $scope.json.json.action[1].stateName.json.page = "";
+    //         $state.go($scope.json.json.action[1].stateName.page, $scope.json.json.action[1].stateName.json);
+    //     };
+
+
+    //     $scope.saveShrinkTestimonial = function (id, name, cname, city, content, order, status) {
+    //         // console.log("DATA", value);
+
+    //         console.log("DATA", name);
+    //         console.log("DATA", content);
+    //         console.log("DATA", order);
+    //         console.log("DATA", status);
+    //         testiData = {};
+    //         testiData.name = name;
+    //         testiData.cname = cname;
+    //         testiData.city = city;
+    //         testiData._id = id;
+    //         testiData.content = content;
+    //         testiData.order = order;
+    //         testiData.status = status;
+
+    //         console.log("INSIDE SPP");
+    //         NavigationService.boxCall("ShrinkFilm/saveShrinkTestimonial", testiData, function (data) {
+    //             $scope.projectData = data.data;
+    //             $scope.generateField = true;
+    //             $scope.modalInstance.close();
+    //             $scope.findPhotoContest();
+    //             toastr.success(value.name + " testimonial" + " " + "added" + " successfully.");
+    //         })
+
+    //     };
+
+    //     // $scope.saveEditProductsPhotos = function (value) {
+    //     //     console.log("DATA", value);
+    //     //     NavigationService.boxCall("Products/save", value, function (data) {
+    //     //         $scope.projectData = data.data;
+    //     //         $scope.generateField = true;
+    //     //         $scope.modalInstance.close();
+    //     //         $scope.findProject();
+    //     //         toastr.success(" Gallery" + " " + "updated" + " successfully.");
+    //     //     })
+
+    //     // };
+
+    //     $scope.removePhotoContest = function (value, project) {
+
+    //         var abc = {};
+    //         console.log("value = ", value)
+    //         abc._id = project;
+    //         abc.testid = value
+    //         // abc = value;
+    //         // abc.project=project;
+    //         // console.log("PROJECT ",project);
+    //         console.log("PROJECT IMAGE afdadfdaTA", abc);
+
+    //         NavigationService.boxCall("PhotoContest/removeContestUsers", abc, function (data) {
+    //             $scope.newProjectData = data.data;
+    //             $scope.generateField = true;
+    //             // $state.reload();
+    //             $scope.findPhotoContest();
+    //         })
+
+    //     };
+
+    //     $scope.closeBox = function () {
+    //         $scope.modalInstance.close();
+    //         $scope.findProject();
+    //     };
+
+
+    //     // $scope.saveData = function (formData) {
+    //     //         console.log("in save");
+    //     //         console.log("ABC", formData);
+    //     //         // console.log("PIC",formData.photos[0].photo);
+    //     //         NavigationService.apiCall($scope.json.json.apiCall.url, formData, function (data) {
+    //     //                 if (data.value === true) {
+    //     //                     $scope.json.json.action[0].stateName.json.keyword = "";
+    //     //                     $scope.json.json.action[0].stateName.json.page = "";
+    //     //                     $state.go($scope.json.json.action[0].stateName.page, $scope.json.json.action[0].stateName.json);
+    //     //                     var messText = "created";
+    //     //                     if ($scope.json.keyword._id) {
+    //     //                         messText = "edited";
+    //     //                     }
+    //     //                     toastr.success($scope.json.json.name + " " + formData.name + " " + messText + " successfully.");
+    //     //                 } else {
+    //     //                     var messText = "creating";
+    //     //                     if ($scope.json.keyword._id) {
+    //     //                         messText = "editing";
+    //     //                     }
+    //     //                     toastr.error("Failed " + messText + " " + $scope.json.json.name);
+    //     //                 }
+
+    //     $scope.saveData = function (formData) {
+    //         console.log("in save");
+    //         // delete formData.testimonial;
+    //         // delete formData.gallery;
+    //         console.log("ABC", formData);
+    //         // console.log("PIC",formData.photos[0].photo);
+    //         NavigationService.apiCall($scope.json.json.apiCall.url, formData, function (data) {
+    //             if (data.value === true) {
+    //                 $scope.json.json.action[0].stateName.json.keyword = "";
+    //                 $scope.json.json.action[0].stateName.json.page = "";
+    //                 $state.go($scope.json.json.action[0].stateName.page, $scope.json.json.action[0].stateName.json);
+    //                 var messText = "created";
+    //                 if ($scope.json.keyword._id) {
+    //                     messText = "edited";
+    //                 }
+    //                 toastr.success($scope.json.json.name + " " + formData.name + " " + messText + " successfully.");
+    //             } else {
+    //                 var messText = "creating";
+    //                 if ($scope.json.keyword._id) {
+    //                     messText = "editing";
+    //                 }
+    //                 toastr.error("Failed " + messText + " " + $scope.json.json.name);
+    //             }
+    //         });
+    //     };
+
+    // })
+
+
     .controller('PhotoContestCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, $uibModal, toastr) {
         $scope.json = JsonService;
         JsonService.setKeyword($stateParams.keyword);
@@ -1301,54 +1565,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.projectID = {};
 
-        //testimonial
 
         $scope.findPhotoContest = function () {
             console.log('datttttttta1111');
             NavigationService.apiCall("PhotoContest/findOnePhotoContest", {
                 [$scope.json.json.preApi.params]: $scope.json.keyword._id
             }, function (data) {
-                // var mydata = _.cloneDeep(data.data);
-                // console.log('mydatatttttttttttt',mydata);
-                $scope.projectDATA = data.data;
-                $scope.tableData = data.data;
-                $scope.generateField = true;
-                console.log("TABLEDATA IS FOUND HERE-->", $scope.tableData);
+                if (data.value) {
+                    // var mydata = _.cloneDeep(data.data);
+                    // console.log('mydatatttttttttttt',mydata);
+                    $scope.projectDATA = data.data;
+                    $scope.tableData = data.data;
+                    $scope.generateField = true;
+                    console.log("TABLEDATA IS FOUND HERE-->", $scope.tableData);
+                } else {
+                    $scope.projectDATA = {};
+                    $scope.tableData = {};
+                    $scope.generateField = true;
+                    console.log("TABLEDATA IS FOUND HERE-->", $scope.tableData);
+                }
             });
         }
 
 
 
-        // $scope.findProducts();
+        $scope.findPhotoContest();
         // $scope.findState();
-        // //  START FOR EDIT
-        // if ($scope.json.json.preApi) {
+        //  START FOR EDIT
+        if ($scope.json.json.preApi) {
 
-        //     NavigationService.apiCall($scope.json.json.preApi.url, {
-        //         [$scope.json.json.preApi.params]: $scope.json.keyword._id
-        //     }, function (data) {
-        //         $scope.data = data.data;
-        //         $scope.generateField = true;
-        //         console.log("DATA IS FOUND HERE-->", $scope.data);
+            NavigationService.apiCall($scope.json.json.preApi.url, {
+                [$scope.json.json.preApi.params]: $scope.json.keyword._id
+            }, function (data) {
+                $scope.data = data.data;
+                $scope.generateField = true;
+                console.log("DATA IS FOUND HERE-->", $scope.data);
 
-        //     });
-        // } else {
-        //     $scope.generateField = true;
-        // }
+            });
+        } else {
+            $scope.generateField = true;
+        }
 
 
+        //  END FOR EDIT
         $scope.editBoxCustomPhotoContest = function (data) {
 
             console.log("DATADATA", data);
-
-            $scope.status = ["true", "false"];
             $scope.datainfo = data;
-            $scope.newinfo = {
-                _id: $scope.json.keyword._id,
-                testi_id: data
-            };
-
-
+            $scope.newinfo = {};
             $scope.modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: '/backend/views/modal/image-edit-photoContest.html',
@@ -1358,66 +1622,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        //testimonial saveedit
-
-        $scope.saveEditShrinkTestimonial = function (id, name, cname, city, content, order, status) {
-            //console.log("DATA", result);
-            newinfo = {};
-            newinfo._id = $scope.json.keyword._id,
-                newinfo.testi_id = id;
-            newinfo.name = name;
-            newinfo.cname = cname;
-            newinfo.city = city;
-            newinfo.content = content;
-            newinfo.order = order;
-            newinfo.status = status;
-
+        $scope.saveEditShrinkGalleryPhotos = function (image1, image2, id, old1, old2) {
             // console.log("image", image);
             // console.log("id", id);
             // console.log("old", old);
 
-            // var data1 = {};
-            // data1.name = result.name;
-            // data1.content = result.content;
-            // data1.order = result.order;
-            // data1.status = result.status;
-            // $scope.newinfo = {};
+            var data1 = {};
+            data1._id = id;
+            data1.photo1 = image1;
+            data1.photo2 = image2;
+            data1.old = old1;
+            data1.old1 = old2;
+            $scope.newinfo = {};
 
-            NavigationService.boxCall("ShrinkFilm/updateShrinkTestimonial", newinfo, function (data) {
+            NavigationService.boxCall("ShrinkFilm/updateShrinkGalleryPhotos", data1, function (data) {
                 $scope.projectData = data.data;
                 $scope.generateField = true;
                 $scope.modalInstance.close();
                 $scope.findPhotoContest();
-                toastr.success(" Testimonial" + " " + "updated" + " successfully.");
+                toastr.success("Gallery" + " " + "updated" + " successfully.");
             })
 
         };
 
-        //testimonial all
-
-        // $scope.editBoxInstitute = function () {
-
-
-        //     var modalInstance = $uibModal.open({
-        //         animation: $scope.animationsEnabled,
-        //         templateUrl: '/backend/views/modal/institute-edit-detail.html',
-        //         size: 'lg',
-        //         scope: $scope,
-        //         tableData: $scope.tableData
-        //     });
-        // };
-
-        $scope.addBoxShrinkTestimonial = function (data) {
+        $scope.addBoxShrinkImage = function (data) {
             console.log("DATADATA", data);
-            $scope.status = ["true", "false"];
-            $scope.newtestimonialinfo = {
+
+            $scope.projectinfo = {
                 _id: data
 
             };
 
             $scope.modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: '/backend/views/modal/image-add-shrinktestimonial.html',
+                templateUrl: '/backend/views/modal/image-add-shrink.html',
                 size: 'lg',
                 scope: $scope,
                 tableData: $scope.tableData
@@ -1431,50 +1669,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $state.go($scope.json.json.action[1].stateName.page, $scope.json.json.action[1].stateName.json);
         };
 
-
-        $scope.saveShrinkTestimonial = function (id, name, cname, city, content, order, status) {
-            // console.log("DATA", value);
-
-            console.log("DATA", name);
-            console.log("DATA", content);
-            console.log("DATA", order);
-            console.log("DATA", status);
-            testiData = {};
-            testiData.name = name;
-            testiData.cname = cname;
-            testiData.city = city;
-            testiData._id = id;
-            testiData.content = content;
-            testiData.order = order;
-            testiData.status = status;
-
-            console.log("INSIDE SPP");
-            NavigationService.boxCall("ShrinkFilm/saveShrinkTestimonial", testiData, function (data) {
+        $scope.saveShrinkPhotos = function (value) {
+            console.log("DATA", value);
+            // console.log("INSIDE SPP");
+            NavigationService.boxCall("ShrinkFilm/saveShrinkPhotos", value, function (data) {
                 $scope.projectData = data.data;
                 $scope.generateField = true;
                 $scope.modalInstance.close();
                 $scope.findPhotoContest();
-                toastr.success(value.name + " testimonial" + " " + "added" + " successfully.");
+                toastr.success(value.name + " Gallery" + " " + "added" + " successfully.");
             })
 
         };
 
-        // $scope.saveEditProductsPhotos = function (value) {
-        //     console.log("DATA", value);
-        //     NavigationService.boxCall("Products/save", value, function (data) {
-        //         $scope.projectData = data.data;
-        //         $scope.generateField = true;
-        //         $scope.modalInstance.close();
-        //         $scope.findProject();
-        //         toastr.success(" Gallery" + " " + "updated" + " successfully.");
-        //     })
 
-        // };
 
         $scope.removePhotoContest = function (value, project) {
 
             var abc = {};
-            console.log("value = ", value)
+
             abc._id = project;
             abc.testid = value
             // abc = value;
@@ -1497,32 +1710,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
 
-        // $scope.saveData = function (formData) {
-        //         console.log("in save");
-        //         console.log("ABC", formData);
-        //         // console.log("PIC",formData.photos[0].photo);
-        //         NavigationService.apiCall($scope.json.json.apiCall.url, formData, function (data) {
-        //                 if (data.value === true) {
-        //                     $scope.json.json.action[0].stateName.json.keyword = "";
-        //                     $scope.json.json.action[0].stateName.json.page = "";
-        //                     $state.go($scope.json.json.action[0].stateName.page, $scope.json.json.action[0].stateName.json);
-        //                     var messText = "created";
-        //                     if ($scope.json.keyword._id) {
-        //                         messText = "edited";
-        //                     }
-        //                     toastr.success($scope.json.json.name + " " + formData.name + " " + messText + " successfully.");
-        //                 } else {
-        //                     var messText = "creating";
-        //                     if ($scope.json.keyword._id) {
-        //                         messText = "editing";
-        //                     }
-        //                     toastr.error("Failed " + messText + " " + $scope.json.json.name);
-        //                 }
-
         $scope.saveData = function (formData) {
             console.log("in save");
-            // delete formData.testimonial;
-            // delete formData.gallery;
+            delete formData.testimonial;
+            delete formData.gallery;
             console.log("ABC", formData);
             // console.log("PIC",formData.photos[0].photo);
             NavigationService.apiCall($scope.json.json.apiCall.url, formData, function (data) {

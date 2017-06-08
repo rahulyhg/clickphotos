@@ -101,7 +101,7 @@ jsonservicemod.service('JsonService', function ($http, TemplateService, $state, 
       } else if (action && action.type == "photoContestpage") {
         console.log("IN photoContestpage TYPE");
         $state.go("photoContestpage", sendTo);
-      }else {
+      } else {
         window.location.href = action.action;
       }
     } else {

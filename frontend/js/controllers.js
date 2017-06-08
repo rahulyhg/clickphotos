@@ -2066,7 +2066,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.checkOTPForSignUp = function (formdata) {
             NavigationService.apiCallWithData("Photographer/verifyOTP", formdata, function (data) {
-                //console.log("dataForOtp", data.data);
+                console.log("dataForOtp", data);
                 if (data.value == true) {
                     $.jStorage.set("photographer", data.data);
                     $scope.showSucessBox = true;
