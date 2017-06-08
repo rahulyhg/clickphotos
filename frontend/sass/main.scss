@@ -423,10 +423,11 @@ footer {
                 border: none;
             }
             .soc_icns {
-                display: inline-block;
-                width: 40%;
                 p {
                     margin-top: 14px;
+                }
+                img {
+                    width: 35px;
                 }
             }
         }
@@ -545,34 +546,102 @@ header>nav div.navbar-toggle>div.icon_float {
     float: right;
 }
 
-header>nav div.navbar-toggle>div.icon_float>span.icon_bar0 {
-    float: right;
-    width: 26px;
-    height: 4px;
-    background-color: $orangeColor;
-    @include transition(all 300ms linear);
+#nav-icon {
+    width: 44px;
+    position: relative;
+    display: inline-block;
+    vertical-align: super;
+    cursor: pointer;
+    @include transform(rotate(0deg));
+    @include transition(all .5s ease-in-out);
 }
 
-header>nav div.navbar-toggle>div.icon_float>span.icon_bar1 {
-    float: right;
-    width: 23px;
-    height: 4px;
-    background-color: $orangeColor;
-    @include transition(all 300ms linear);
+#nav-icon span {
+    display: block;
+    height: 3px;
+    background: $orangeColor;
+    border-radius: 9px;
+    position: absolute;
+    left: 0;
+    @include transform(rotate(0deg));
+    @include transition(all .25s ease-in-out);
 }
 
-header>nav div.navbar-toggle>div.icon_float>span.icon_bar2 {
-    float: right;
-    width: 20px;
-    height: 4px;
-    background-color: $orangeColor;
-    @include transition(all 300ms linear);
+#nav-icon span:nth-child(1) {
+    top: 0;
+    width: 75%;
+    margin-left: 5px;
 }
 
+#nav-icon span:nth-child(2),
+#nav-icon span:nth-child(3) {
+    top: 7px;
+    width: 52%;
+    margin-left: 15px;
+}
+
+#nav-icon span:nth-child(4) {
+    top: 14px;
+    width: 48%;
+    margin-left: 18px;
+}
+
+#nav-icon.open span:nth-child(1) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+
+#nav-icon.open span:nth-child(2) {
+    @include transform(rotate(45deg));
+    width: 95%;
+    margin-left: 0; //    width: 50%;
+    //     margin-left: 10px;
+}
+
+#nav-icon.open span:nth-child(3) {
+    @include transform(rotate(-45deg));
+    width: 95%;
+    margin-left: 0; // width: 50%;
+    // margin-left: 10px;
+}
+
+#nav-icon.open span:nth-child(4) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+
+// header>nav div.navbar-toggle>div.icon_float>span.icon_bar0 {
+//     float: right;
+//     width: 26px;
+//     height: 4px;
+//     background-color: $orangeColor;
+//     @include transition(all 300ms linear);
+// }
+// header>nav div.navbar-toggle>div.icon_float>span.icon_bar1 {
+//     float: right;
+//     width: 23px;
+//     height: 4px;
+//     background-color: $orangeColor;
+//     @include transition(all 300ms linear);
+// }
+// header>nav div.navbar-toggle>div.icon_float>span.icon_bar2 {
+//     float: right;
+//     width: 20px;
+//     height: 4px;
+//     background-color: $orangeColor;
+//     @include transition(all 300ms linear);
+// }
 .brand-logo {
     display: inline-block;
+    vertical-align: middle;
     @include size(230px,
-    auto);
+    auto); //padding: 10px 0;
+}
+
+.website-brand {
+    padding: 13px 0 6px;
 }
 
 .hamburger-cross {
@@ -594,20 +663,20 @@ header>nav div.navbar-toggle>div.icon_float>span.icon_bar2 {
         @include transform(rotate(-45deg));
     }
 } // for clickmania logo adjustment which includes boot strap's class navbar-brand
-a.navbar-brand {
-    height: auto;
-    line-height: 2.3;
-    padding: 11px 15px 5px;
-    .navbar-toggle {
-        margin-bottom: 0;
-        padding-right: 0px;
-        margin-bottom: 0px;
-    }
-    .cmlogo {
-        width: 215px;
-        display: inline-block;
-    }
-} // end of clickmania logo adjustment
+// a.navbar-brand {
+//     height: auto;
+//     line-height: 2.3;
+//     padding: 11px 15px 5px;
+//     .navbar-toggle {
+//         margin-bottom: 0;
+//         padding-right: 0px;
+//         margin-bottom: 0px;
+//     }
+//     .cmlogo {
+//         width: 215px;
+//         display: inline-block;
+//     }
+// } // end of clickmania logo adjustment
 // UI select design used for search a pht or location
 .search-directive {
     padding: 12px 0;
@@ -623,6 +692,9 @@ a.navbar-brand {
          ::-webkit-scrollbar {
             width: 4px;
             background-color: rgba(0, 0, 0, 0.80);
+        }
+        .ui-select-choices {
+            width: auto;
         }
         .ui-select-choices-row {
             a {
@@ -654,6 +726,12 @@ a.navbar-brand {
             overflow: hidden;
             white-space: nowrap;
         }
+        .ui-select-match-text {
+            width: 84%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
     }
     .go-btn {
         background-color: $orangeColor;
@@ -674,6 +752,7 @@ a.navbar-brand {
         @include position(absolute,
         13px null null 29%);
         pointer-events: none;
+        cursor: pointer;
     }
 }
 
@@ -755,7 +834,7 @@ a.navbar-brand {
 } // end of search bar
 // To display photographer's image(user image)
 .photographer {
-    padding: 15px 0;
+    padding: 15px 0; //   @include navbar-vertical-align(28px);
     cursor: pointer; // .photographer_img {
     //     // @include size(38px,
     //     // 38px);
@@ -1935,7 +2014,7 @@ fieldset[disabled] .form-control {
 .added-city {
     display: inline-block;
     vertical-align: top;
-    width: 50%;
+    width: 80%;
     .selected-option {
         background-color: #f1592a;
         padding: 3px 10px;
@@ -2221,6 +2300,12 @@ fieldset[disabled] .form-control {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+    }
+    .ui-select-match-text {
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .ui-select-choices-row.active>a {
         background-color: $orange;

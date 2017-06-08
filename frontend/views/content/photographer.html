@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row">
+                <div class="">
                     <!-- //form-input -->
                     <div class="part-1" ng-if="tab == 1">
                         <div class="about-part">
@@ -287,21 +287,23 @@
                                                         <span class="display-block package-price" ng-if="amount[0]">
                                                       <span class="rupee">`</span>{{amount[0].amount}}
                                                         inclusive of all taxes</span>
+
                                                         <span class="display-block package-price" ng-if="!amount[0]">
-                                                      <span class="rupee">`</span>{{2300}}
+                                                     <span class="rupee">`</span>{{2300}}
                                                         inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 border-divider">
+                                                <ul>
+                                                    <li>30 photos</li>
+                                                    <li>3mb per photo</li>
+                                                    <li>Photos can be edited by you</li>
+                                                    <li>Valid for 1 year</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6  col-xs-12 border-divider">
-                                            <ul>
-                                                <li>30 photos</li>
-                                                <li>3mb per photo</li>
-                                                <li>Photos can be edited by you</li>
-                                                <li>Valid for 1 year</li>
-                                            </ul>
-                                        </div>
+                                        <button type="button" class="btn btn-default btn-full" ng-click="silverMember()">UPGRADE NOW</button>
                                     </div>
                                     <br>
                                     <div class="upgrade-pkg2 gold" ng-if=" packageShow!='Gold'">
@@ -311,28 +313,27 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price" ng-if="amount[1]"><span class="rupee">`</span>{{amount[1].amount}}
-                                                        inclusive of all taxes</span>
-                                                        <span class="display-block package-price" ng-if="!amount[1]"><span class="rupee">`</span>{{3450}}
+                                                        <span class="display-block package-price"><span class="rupee">`</span>{{amount[1].amount}}
                                                         inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 border-divider">
+                                                <ul>
+                                                    <li>100 photos</li>
+                                                    <li>3mb per photo</li>
+                                                    <li>Photos can be edited by you</li>
+                                                    <li>Valid for 1 year</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6  col-xs-12  border-divider">
-                                            <ul>
-                                                <li>100 photos</li>
-                                                <li>3mb per photo</li>
-                                                <li>Photos can be edited by you</li>
-                                                <li>Valid for 1 year</li>
-                                            </ul>
-                                        </div>
+                                        <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
                                     </div>
-                                    <button type="button" class="btn btn-default btn-full" ng-click="goldMember()">UPGRADE NOW</button>
+                                    <br>
                                 </div>
-                                <br>
                             </div>
                         </div>
+
 
                         <!-- goldmember -->
                         <!-- silverMember -->
