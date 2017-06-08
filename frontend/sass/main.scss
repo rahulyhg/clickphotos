@@ -423,10 +423,11 @@ footer {
                 border: none;
             }
             .soc_icns {
-                display: inline-block;
-                width: 40%;
                 p {
                     margin-top: 14px;
+                }
+                img {
+                    width: 35px;
                 }
             }
         }
