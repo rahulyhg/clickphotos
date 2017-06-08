@@ -1740,6 +1740,7 @@ fieldset[disabled] .form-control {
             color: #f1592a;
             font-family: 'Dosis-Medium';
             margin-right: 15px;
+            vertical-align: top;
         }
         span {
             font-family: 'Dosis-Regular';
@@ -1785,6 +1786,12 @@ fieldset[disabled] .form-control {
     .speciality-list {
         @include size(77%,
         auto);
+    }
+    .pht-costrange {
+        vertical-align: top;
+        .added-city {
+            width: 100%;
+        }
     }
     .dropdown {
         button {
@@ -2014,7 +2021,7 @@ fieldset[disabled] .form-control {
 .added-city {
     display: inline-block;
     vertical-align: top;
-    width: 80%;
+    width: 56%;
     .selected-option {
         background-color: #f1592a;
         padding: 3px 10px;
