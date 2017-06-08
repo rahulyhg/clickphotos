@@ -1619,6 +1619,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.popup1.opened = true;
         };
 
+        $scope.dateOptions = {
+            minDate: new Date()
+        }
+
+        $scope.toggleMin = function () {
+            // To disable previous dates from current date
+            $scope.dateOptions.minDate = $scope.dateOptions.minDate ? new Date() : null;
+
+        };
+        $scope.toggleMin(); //To disable previous dates from current date
+
+
         // this function is used for data submmiting enquiry
         $scope.formEnquiry = {};
         $scope.dataSubmit = function (data) {
