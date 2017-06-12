@@ -232,33 +232,34 @@
             <div class="other-section" ng-if="relatedPhotographerData[0]">
                 <h2 class="head-f">View other <br> &nbsp;&nbsp;Photographers</h2>
                 <div class="row pad-up100">
-                    <div class="black-custom-slider">
-                        <flex-slider slide="user in relatedPhotographerData track by $index" animation="slide" prev-text="" next-text="" item-margin="10"
-                            max-items="4" item-width="200">
-                            <li>
-                                <div class="thumbnail shadow">
-                                    <img src="frontend/img/userback1.jpg" alt="...">
-                                    <div class="user-ab">
-                                        <div class="border-half">
-                                            <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat center center" ng-if="user.profilePic">
+                    <div class="col-xs-12">
+                        <div class="black-custom-slider">
+                            <flex-slider slide="user in relatedPhotographerData track by $index" animation="slide" prev-text="" next-text="" item-margin="10"
+                                max-items="4" item-width="200">
+                                <li>
+                                    <div class="thumbnail shadow">
+                                        <img src="frontend/img/userback1.jpg" alt="...">
+                                        <div class="user-ab">
+                                            <div class="border-half">
+                                                <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat center center" ng-if="user.profilePic">
 
+                                                </div>
+                                                <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
+                                                <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
                                             </div>
-                                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
-                                            <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
-                                        </div>
-                                        <div class="intro-profile">
-                                            <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
-                                            <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                            <div class="intro-profile">
+                                                <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                                <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
-                                </div>
-                            </li>
-                        </flex-slider>
-                    </div>
-                    <!--<div class="col-sm-6 col-md-4 pad5" ng-repeat="user in relatedPhotographerData">
+                                    <div class="text-center">
+                                        <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
+                                    </div>
+                                </li>
+                            </flex-slider>
+                        </div>
+                        <!--<div class="col-sm-6 col-md-4 pad5" ng-repeat="user in relatedPhotographerData">
                             <div class="thumbnail shadow">
                                 <img src="frontend/img/fp_bg1.png" alt="...">
                                 <div class="user-ab">
@@ -276,6 +277,7 @@
                                 <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
                             </div>
                         </div>-->
+                    </div>
                 </div>
             </div>
         </div>

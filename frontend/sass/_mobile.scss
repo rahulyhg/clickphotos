@@ -1,7 +1,7 @@
     @media (max-width: $screen-xs-max) {
         //Global classes
         .mg_t75 {
-            margin-top: 57px;
+            margin-top: 55px;
         }
         .text-hide {
             display: none;
@@ -94,7 +94,7 @@
         }
         .side-menu {
             width: 65%;
-            top: 55px!important;
+            top: 54px!important;
             .list-group-item {
                 font-size: 16px;
             }
@@ -117,6 +117,9 @@
             }
             .scroll_down {
                 display: none;
+            }
+            .swiper-container .swiper-slide img.swiperbg {
+                margin-top: 0;
             }
         }
         .featu_photo_caraso {
@@ -260,7 +263,10 @@
         } //End of users.html
         //Start of user-profile
         .userprof-bg {
-            margin-top: 57px;
+            margin-top: 55px;
+            .userbg-img {
+                min-height: 135px;
+            }
         }
         .ab {
             position: absolute;
@@ -284,10 +290,18 @@
         .user-name {
             bottom: auto!important;
             h1 {
-                font-size: 30px!important;
+                font-size: 25px!important;
+                margin-bottom: 0;
             }
             p {
-                font-size: 20px!important;
+                font-size: 17px!important;
+                max-height: 70px;
+                line-height: 1;
+                -webkit-line-clamp: 4;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
         .full-tabs2 li {
@@ -330,6 +344,28 @@
         .sec-tab p {
             font-size: 40px;
             line-height: 30px;
+        }
+        .black-custom-slider {
+            overflow-x: hidden; //  padding: 0 60px;
+        }
+        .radioBtn_cat {
+            .inline-block {
+                width: 100%;
+                padding: 10px;
+                h2 {
+                    font-size: 25px;
+                }
+            }
+            .radioBtn_wdt {
+                width: 100%;
+                padding: 5px;
+                .radio-inline {
+                    font-size: 20px;
+                }
+            }
+            .collapse {
+                min-height: 30px !important;
+            }
         } //End of user-profile
         //Start of future-photographer.html
         .btn-social {
@@ -376,17 +412,26 @@
         }
         .profile-block {
             bottom: 33px;
+            left: 1%;
             .profile-holder {
                 width: 130px!important;
                 height: 130px!important;
             }
             .name-sec {
-                width: 48%!important;
+                width: 56%!important;
+                padding: 0 12px;
+                margin-bottom: 25px!important;
                 .name-part {
-                    font-size: 25px;
+                    font-size: 20px;
                 }
                 .loc-span {
-                    font-size: 21px;
+                    font-size: 16px;
+                    display: -webkit-box;
+                    max-height: 48px;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .added-city {
                     width: 100% !important;
@@ -417,11 +462,20 @@
         .btn-1 {
             padding: 0;
             .btn-select {
-                font-size: 16px;
+                font-size: 13px!important;
             }
         }
         .border-line {
-            padding: 8px 0px;
+            padding: 0;
+        }
+        .circular-checkbox {
+            p {
+                font-size: 18px;
+            }
+            .absolute-plus {
+                width: 16px;
+                height: 16px
+            }
         }
         .quarter-circle {
             display: none;
@@ -520,6 +574,29 @@
         }
         .upgrd-gold h2 {
             margin-top: 1px;
+        }
+        .compete {
+            margin: 35px 0;
+            .contest-heading {
+                font-size: 15px;
+            }
+            .pls-mns-sign {
+                width: 16px;
+                height: 16px;
+                margin: 0;
+            }
+            .upload-photobox {
+                min-height: 160px;
+            }
+            .photobox-txt {
+                padding: 40px 25px;
+                img {
+                    height: 30px;
+                }
+                h3 {
+                    font-size: 15px;
+                }
+            }
         } //End of photographer.html
         //Start of wildlife-photographer.html
         // .black-custom-slider {
