@@ -1697,6 +1697,55 @@ $brand-holder: #ccc !default;
     }
 }
 
+.compete // for photo contest-tab
+{
+    margin: 35px 150px;
+    .panel-default {
+        margin-bottom: 15px;
+    }
+    .panel-default>.panel-heading {
+        background-color: $orangeColor;
+        a:hover,
+        a:focus {
+            text-decoration: none;
+        }
+    }
+    .pls-mns-sign {
+        @include size(25px,
+        25px);
+        @include margin(5px 0);
+    }
+    .contest-heading {
+        font-size: 30px;
+        color: white;
+        text-transform: capitalize;
+    }
+    .upload-photobox {
+        border: 1px solid #ededed;
+        @include padding(5px);
+        box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+        min-height: 220px;
+        background-size: cover!important;
+        background-clip: content-box!important;
+        overflow: hidden;
+    }
+    .photobox-txt {
+        border: 1px solid #ededed;
+        background-color: #ededed;
+        @include padding(60px 25px 55px);
+        line-height: 0;
+        h3 {
+            font-family: Helvetica, sans-serif;
+            @include margin(10px null null null);
+        }
+        img {
+            @include size(auto,
+            45px);
+            cursor: pointer;
+        }
+    }
+}
+
 .form-control[readonly],
 fieldset[disabled] .form-control {
     background-color: #fff;
@@ -4334,6 +4383,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .contest__title {
     .ht30 {
         display: inline-block;
+        position: relative;
         @include size(null,
         130px);
         .imgwt {
@@ -4431,7 +4481,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
             font-family: hctl;
             @include padding(2px 40px);
             border-color: transparent;
-            @include margin(null 10px null null);
+            @include margin(null 10px 10px null);
             font-size: 30px;
             cursor: pointer;
             color: #ffffff;
@@ -4505,6 +4555,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
         border: 1px solid #ededed;
         @include padding(5px);
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+    }
+    .contest__stp3--box-shd {
+        min-height: 220px;
+        background-size: cover!important;
+        background-clip: content-box!important;
+        overflow: hidden;
     }
     .contest__stp2__txt {
         h4 {

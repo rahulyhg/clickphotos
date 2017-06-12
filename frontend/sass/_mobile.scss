@@ -297,10 +297,10 @@
             margin: 60px 0px!important;
         }
         .so-nam {
-            font-size: 22px!important;
+            font-size: 19px!important;
             img {
-                width: 35px!important;
-                margin: 0 2px!important;
+                width: 25px!important;
+                margin: 0 3px!important;
             }
         }
         .send_enquirySlidebar {
@@ -563,6 +563,39 @@
                 font-size: 11px;
             }
         } //End of becomefp photographer
+        //Start of photo-contest
+        .compet__title,
+        .contest__title {}
+        .contest {
+            .contest__stp-btn {
+                li {
+                    font-size: 25px;
+                }
+            }
+            .contest__stp3,
+            .contest__stp2 {
+                @include margin(0 35px);
+                button {
+                    font-size: 15px;
+                }
+            }
+            .contest__stp3__txt {
+                @include padding(60px 25px);
+                img {
+                    height: 40px;
+                }
+                h3 {
+                    font-size: 20px;
+                }
+                h4 {
+                    font-size: 27px;
+                }
+            }
+            .contest__stp2__terms {
+                padding-top: 30px;
+                padding-bottom: 40px;
+            }
+        } //End of photo-contest
         //Start of thank, error, thanks-gold, thanks-silver,becomefp .html
         .thanks-title {
             text-align: center;
@@ -1295,6 +1328,37 @@
                 margin: 0 auto;
             }
         } //End of Thank You for gold, silver & sorry pages
+        //Start of competation(Photo Contest UI)
+        .contest {
+            .contest__stp-btn {
+                li {
+                    font-size: 25px;
+                }
+            }
+            .contest__stp3,
+            .contest__stp2 {
+                @include margin(0 35px);
+                button {
+                    font-size: 15px;
+                }
+            }
+            .contest__stp3__txt {
+                @include padding(60px 25px);
+                img {
+                    height: 40px;
+                }
+                h3 {
+                    font-size: 20px;
+                }
+                h4 {
+                    font-size: 27px;
+                }
+            }
+            .contest__stp2__terms {
+                padding-top: 30px;
+                padding-bottom: 40px;
+            }
+        }
     }
 
     @media (max-width: $screen-md-max) {}
@@ -1313,9 +1377,9 @@
     @media (min-width: 320px)and(max-width: 375px) {
         #nav-icon {
             padding: 2px;
-            .brand-logo {
-                width: 80px!important;
-            }
+        }
+        .brand-logo {
+            width: 82px!important;
         }
         .photographer {
             span {

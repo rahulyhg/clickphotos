@@ -260,6 +260,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         validDateForSilver = {};
         validDateForGold = {};
         $scope.amount = {};
+        $scope.oneAtATime = true;
+
+        //Function to change ths plus & minus sign in photo contest tab
+        $scope.imgUrl = 'frontend/img/plus.png';
+        $scope.changeSign = function () {
+            if ($scope.imgUrl === 'frontend/img/plus.png') {
+                $scope.imgUrl = 'frontend/img/minus.png';
+            } else {
+                $scope.imgUrl = 'frontend/img/plus.png';
+            }
+        }
+
 
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
@@ -2411,6 +2423,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     .controller('thanksSilverCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("thanks-silver"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+
+    .controller('ThanksContestCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("thanks-contest"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
