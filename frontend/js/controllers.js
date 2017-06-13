@@ -954,9 +954,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 $scope.registerData = formdata;
                 NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    console.log("dataForOtp", data);
-                    if (data.value) {
-                        console.log(data.data);
+                    //console.log("dataForOtp", data);
+                    if (data.data.verifyAcc == false) {
+                        //console.log(data.data);
                         $scope.signUpOTP();
                         setTimeout(function (data) {
                             $scope.signUpOTP.close();
@@ -969,7 +969,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.checkOTPForSignUp = function (formdata) {
-            NavigationService.apiCallWithData("Photographer/verifyOTP", formdata, function (data) {
+            $scope.registerData.otp = formdata.otp;
+            NavigationService.apiCallWithData("Photographer/verifyOTP", $scope.registerData, function (data) {
                 //console.log("dataForOtp", data);
                 if (data.value == true) {
                     // console.log("email OTP verified");
@@ -2075,8 +2076,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 $scope.registerData = formdata;
                 NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    //console.log("dataForOtp", data);
-                    if (data.value) {
+                    // console.log("dataForOtp", data);
+                    if (data.data.verifyAcc == false) {
                         $scope.signUpOTP();
                         setTimeout(function (data) {
                             $scope.signUpOTP.close();
@@ -2089,8 +2090,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.checkOTPForSignUp = function (formdata) {
-            NavigationService.apiCallWithData("Photographer/verifyOTP", formdata, function (data) {
-                console.log("dataForOtp", data);
+            $scope.registerData.otp = formdata.otp;
+            //console.log("$scope.registerData", $scope.registerData);
+            NavigationService.apiCallWithData("Photographer/verifyOTP", $scope.registerData, function (data) {
+                //console.log("dataForOtp", data);
                 if (data.value == true) {
                     $.jStorage.set("photographer", data.data);
                     $scope.showSucessBox = true;

@@ -470,7 +470,60 @@ var controller = {
                 }
             })
         }
-    }
+    },
+
+    getAllPhotographersForBack: function (req, res) {
+        if (req.body) {
+            Photographer.getAllPhotographersForBack(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    findContest: function (req, res) {
+        if (req.body) {
+            Photographer.findContest(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    removeContestUser: function (req, res) {
+        if (req.body) {
+            Photographer.removeContestUser(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    findContestPhotos: function (req, res) {
+        if (req.body) {
+            Photographer.findContestPhotos(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+    
     
     // smsForOtp: function (req, res) {
     //     if (req.body) {

@@ -85,21 +85,22 @@ var schema = new Schema({
     }],
     otp: String,
     otpTime: Date,
+    verifyAcc: Boolean,
 
     //photo contest
 
-    contestPhotos: {
+    contestPhotos: [{
         contestId: {
             type: Schema.Types.ObjectId,
             ref: "PhotoContest"
         },
         Photos: [String]
-    },
-
-    contest: [{
-        type: Schema.Types.ObjectId,
-        ref: "PhotoContest"
     }]
+
+    // contest: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: "PhotoContest"
+    // }]
 
 });
 
@@ -110,6 +111,9 @@ schema.plugin(deepPopulate, {
         },
         "reviewList.user": {
             select: ''
+        },
+        "contestPhotos.contestId": {
+            select: ''
         }
     }
 });
@@ -117,7 +121,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Photographer', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "speciality reviewList.user", " speciality reviewList.user"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "speciality reviewList.user contestPhotos.contestId", " speciality reviewList.user contestPhotos.contestId"));
 var model = {
 
     getPhotographers: function (data, callback) {
@@ -162,6 +166,49 @@ var model = {
                 });
     },
 
+    //backend get all photographers
+    getAllPhotographersForBack: function (data, callback) {
+        var maxRow = Config.maxRow;
+        var page = 1;
+        if (data.page) {
+            page = data.page;
+        }
+        var field = data.field;
+        var options = {
+            field: data.field,
+            filters: {
+                keyword: {
+                    fields: ['name'],
+                    term: data.keyword
+                }
+            },
+            sort: {
+                desc: 'createdAt'
+            },
+            start: (page - 1) * maxRow,
+            count: maxRow
+        };
+        Photographer.find({
+                verifyAcc: true
+            }).sort({
+                createdAt: -1
+            })
+            .deepPopulate("location speciality")
+            .order(options)
+            .keyword(options)
+            .page(options,
+                function (err, found) {
+                    if (err) {
+                        console.log(err);
+                        callback(err, null);
+                    } else if (found) {
+                        callback(null, found);
+                    } else {
+                        callback("Invalid data", null);
+                    }
+                });
+    },
+
     deleteFeaturedPhotographer: function (data, callback) {
 
         console.log("DATA", data);
@@ -185,7 +232,8 @@ var model = {
         // console.log("data", data)
         Photographer.findOne({
             email: data.email,
-            password: md5(data.password)
+            password: md5(data.password),
+            verifyAcc: true
         }).exec(function (err, found) {
             if (err) {
 
@@ -874,6 +922,7 @@ var model = {
     checkPhotographersForOtp: function (data, callback) {
         var otpData = this(data);
         otpData.otpTime = new Date();
+        otpData.verifyAcc = false;
         otpData.password = md5(otpData.password);
         var emailOtp = (Math.random() + "").substring(2, 6);
         otpData.otp = emailOtp;
@@ -883,86 +932,87 @@ var model = {
             if (err) {
                 callback(err, null);
             } else {
-                // if (!found) {
-                // dataObj._id = new mongoose.mongo.ObjectID();
-                otpData.save(function (err, updated) {
-                    if (err) {
-                        console.log("errrrrrrr", err);
-                        callback(err, null);
-                    } else if (updated) {
-                        var foundData = {};
-                        var emailData = {};
-                        emailData.from = "admin@clickmania.in";
-                        emailData.name = otpData.name;
-                        emailData.email = otpData.email;
-                        emailData.otp = emailOtp;
-                        emailData.filename = "otpForSignUp.ejs";
-                        emailData.subject = "Clickmania OTP";
-                        console.log("emaildata", emailData);
-                        Config.email(emailData, function (err, emailRespo) {
-                            if (err) {
-                                console.log(err);
-                                callback(null, err);
-                            } else if (emailRespo) {
-                                //foundData.emailRespo = emailRespo;
-                                //foundData.updated = updated;
-                                callback(null, updated);
+                if (!found) {
+                    // dataObj._id = new mongoose.mongo.ObjectID();
+                    otpData.save(function (err, updated) {
+                        if (err) {
+                            console.log("errrrrrrr", err);
+                            callback(err, null);
+                        } else if (updated) {
+                            var foundData = {};
+                            var emailData = {};
+                            emailData.from = "admin@clickmania.in";
+                            emailData.name = otpData.name;
+                            emailData.email = otpData.email;
+                            emailData.otp = emailOtp;
+                            emailData.filename = "otpForSignUp.ejs";
+                            emailData.subject = "Clickmania OTP";
+                            console.log("emaildata", emailData);
+                            Config.email(emailData, function (err, emailRespo) {
+                                if (err) {
+                                    console.log(err);
+                                    callback(null, err);
+                                } else if (emailRespo) {
+                                    //foundData.emailRespo = emailRespo;
+                                    //foundData.updated = updated;
+                                    callback(null, updated);
+                                } else {
+                                    callback(null, "Invalid data");
+                                }
+                            });
+                            // callback(null, updated);
+                        } else {
+                            callback(null, {
+                                message: "No Data Found"
+                            });
+                        }
+                    });
+                } else {
+                    Photographer.findOneAndUpdate({
+                        email: otpData.email,
+                        verifyAcc: false
+                    }, {
+                        otp: emailOtp
+                    }, {
+                        new: true
+                    }, function (err, updated) {
+                        if (err) {
+                            callback(err, null);
+                        } else if (updated) {
+                            if (_.isEmpty(updated)) {
+                                callback(null, {});
                             } else {
-                                callback(null, "Invalid data");
+                                var foundData = {};
+                                var emailData = {};
+                                emailData.from = "admin@clickmania.in";
+                                emailData.fromname = "Clickmania Admin";
+                                emailData.name = updated.name;
+                                emailData.email = updated.email;
+                                emailData.otp = emailOtp;
+                                emailData.filename = "otpForSignUp.ejs";
+                                emailData.subject = "Clickmania OTP";
+                                console.log("emaildata", emailData);
+                                Config.email(emailData, function (err, emailRespo) {
+                                    if (err) {
+                                        console.log(err);
+                                        callback(null, err);
+                                    } else if (emailRespo) {
+                                        //foundData.emailRespo = emailRespo;
+                                        //foundData.updated = updated;
+                                        callback(null, updated);
+                                    } else {
+                                        callback(null, "Invalid data");
+                                    }
+                                });
+                                //callback(null, updated);
                             }
-                        });
-                        // callback(null, updated);
-                    } else {
-                        callback(null, {
-                            message: "No Data Found"
-                        });
-                    }
-                });
-                // } else {
-                //     Photographer.findOneAndUpdate({
-                //         email: otpData.email
-                //     }, {
-                //         otp: emailOtp
-                //     }, {
-                //         new: true
-                //     }, function (err, updated) {
-                //         if (err) {
-                //             callback(err, null);
-                //         } else if (updated) {
-                //             if (_.isEmpty(updated)) {
-                //                 callback(null, {});
-                //             } else {
-                //                 var foundData = {};
-                //                 var emailData = {};
-                //                 emailData.from = "admin@clickmania.in";
-                //                 emailData.fromname = "Clickmania Admin";
-                //                 emailData.name = updated.name;
-                //                 emailData.email = updated.email;
-                //                 emailData.otp = emailOtp;
-                //                 emailData.filename = "otpForSignUp.ejs";
-                //                 emailData.subject = "Clickmania OTP";
-                //                 console.log("emaildata", emailData);
-                //                 Config.email(emailData, function (err, emailRespo) {
-                //                     if (err) {
-                //                         console.log(err);
-                //                         callback(null, err);
-                //                     } else if (emailRespo) {
-                //                         //foundData.emailRespo = emailRespo;
-                //                         //foundData.updated = updated;
-                //                         callback(null, updated);
-                //                     } else {
-                //                         callback(null, "Invalid data");
-                //                     }
-                //                 });
-                //                 //callback(null, updated);
-                //             }
-                //         } else {
-                //             callback(null, {
-                //                 message: "No Data Found"
-                //             });
-                //         }
-                //     });
-                // }
+                        } else {
+                            callback(null, {
+                                message: "No Data Found"
+                            });
+                        }
+                    });
+                }
             }
         });
     },
@@ -970,8 +1020,13 @@ var model = {
     //verify otp
     verifyOTP: function (data, callback) {
         var currentTime = new Date();
-        Photographer.findOne({
+        Photographer.findOneAndUpdate({
             otp: data.otp,
+            email: data.email
+        }, {
+            verifyAcc: true
+        }, {
+            new: true
         }).exec(function (error, found) {
             if (error || found == undefined) {
                 console.log("User >>> verifyOTP >>> User.findOne >>> error >>>", error);
@@ -1019,13 +1074,13 @@ var model = {
                                     console.log(err);
                                     //callback(null, found);
                                 } else if (emailRespo) {
-                                   // callback(null, found);
+                                    // callback(null, found);
                                 } else {
                                     //callback(null, found);
                                 }
                             });
                         } else {
-                           // callback(null, found);
+                            // callback(null, found);
                         }
                     });
                     //tym check
@@ -1311,6 +1366,85 @@ var model = {
                     });
                 }
             }
+        })
+    },
+
+    //PhotoContest
+
+    findContest: function (data, callback) {
+        Photographer.find({
+            contestPhotos: {
+                $elemMatch: {
+                    contestId: data._id
+                }
+            }
+        }).deepPopulate("contestPhotos.contestId").exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+
+        })
+    },
+
+    removeContestUser: function (data, callback) {
+        console.log("DATA", data);
+        Photographer.update({
+            "_id": data.testid,
+            contestPhotos: {
+                $elemMatch: {
+                    contestId: mongoose.Types.ObjectId(data._id)
+                }
+            }
+            // "contestPhotos": mongoose.Types.ObjectId(data._id)
+        }, {
+            $pull: {
+                contestPhotos: {
+                    $elemMatch: {
+                        contestId: mongoose.Types.ObjectId(data._id)
+                    }
+                }
+                // contestParticipant: mongoose.Types.ObjectId(data.testid)
+            }
+        }, function (err, updated) {
+            console.log(updated);
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, updated);
+            }
+        });
+    },
+
+    findContestPhotos: function (data, callback) {
+        Photographer.find({
+            _id: data.testid,
+            contestPhotos: {
+                $elemMatch: {
+                    contestId: data._id
+                }
+            }
+        }).deepPopulate("contestPhotos.contestId").exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+
         })
     }
 

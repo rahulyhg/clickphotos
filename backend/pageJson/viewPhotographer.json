@@ -62,7 +62,7 @@
         "action": "createPhotographer"
     }],
     "apiCall": {
-        "url": "Photographer/search",
+        "url": "Photographer/getAllPhotographersForBack",
         "params": "_id"
     }
 }

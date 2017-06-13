@@ -38,8 +38,44 @@ var model = {
                 callback(err, null);
             } else {
                 if (found) {
-                    // console.log("Found", found);
-                    callback(null, found);
+                    PhotoContest.aggregate([{
+                            $unwind: {
+                                path: "$contestParticipant",
+                                "preserveNullAndEmptyArrays": true
+                            }
+                        },
+                        {
+                            $lookup: {
+                                "from": "photographers",
+                                "localField": "contestParticipant",
+                                "foreignField": "_id",
+                                "as": "contest_Data"
+                            }
+                        },
+                        {
+                            $unwind: {
+                                path: "$contest_Data",
+                                "preserveNullAndEmptyArrays": true
+                            }
+                        },
+                        {
+                            $match: {
+                                "contest_Data.contestPhotos.contestId": ObjectId(data._id)
+                            }
+                        }
+                    ], function (err, found1) {
+                        if (err) {
+                            // console.log(err);
+                            callback(err, null);
+                        } else {
+                            if (_.isEmpty(found1)) {
+                                callback(null, "noDataFound1");
+                            } else {
+                                callback(null, found1);
+                            }
+                        }
+                    });
+                    // callback(null, found);
                 } else {
                     callback(null, {
                         message: "No Data Found"

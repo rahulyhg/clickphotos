@@ -1304,7 +1304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.findPhotoContest = function () {
             console.log('datttttttta1111');
-            NavigationService.apiCall("PhotoContest/findOnePhotoContest", {
+            NavigationService.apiCall("Photographer/findContest", {
                 [$scope.json.json.preApi.params]: $scope.json.keyword._id
             }, function (data) {
                 if (data.value) {
@@ -1342,13 +1342,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.generateField = true;
         }
 
-
+        $scope.contestData = {};
+        $scope.conPhotoData = [];
         //  END FOR EDIT
-        $scope.editBoxCustomPhotoContest = function (data) {
+        $scope.editBoxCustomPhotoContest = function (value, project) {
+            var abc = {};
+            abc._id = project;
+            abc.testid = value;
+            console.log("PROJECT IMAGE _____-------", abc);
+            NavigationService.apiCall("Photographer/findContestPhotos", abc, function (data) {
+                $scope.contestData = data.data;
+                console.log("$scope.contestData ", $scope.contestData);
 
-            console.log("DATADATA", data);
-            $scope.datainfo = data;
-            $scope.newinfo = {};
+                $scope.conPhotoData = data.data[0].contestPhotos;
+                console.log("$scope.data.data ", data.data[0]);
+                console.log("$scope.contestData ", $scope.conPhotoData);
+                // $scope.generateField = true;
+                // $state.reload();
+                // $scope.findPhotoContest();
+            });
+            // $scope.datainfo = data;
+            // $scope.newinfo = {};
             $scope.modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: '/backend/views/modal/image-edit-photoContest.html',
@@ -1358,28 +1372,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.saveEditShrinkGalleryPhotos = function (image1, image2, id, old1, old2) {
-            // console.log("image", image);
-            // console.log("id", id);
-            // console.log("old", old);
+        // $scope.saveEditShrinkGalleryPhotos = function (image1, image2, id, old1, old2) {
+        //     // console.log("image", image);
+        //     // console.log("id", id);
+        //     // console.log("old", old);
 
-            var data1 = {};
-            data1._id = id;
-            data1.photo1 = image1;
-            data1.photo2 = image2;
-            data1.old = old1;
-            data1.old1 = old2;
-            $scope.newinfo = {};
+        //     var data1 = {};
+        //     data1._id = id;
+        //     data1.photo1 = image1;
+        //     data1.photo2 = image2;
+        //     data1.old = old1;
+        //     data1.old1 = old2;
+        //     $scope.newinfo = {};
 
-            NavigationService.boxCall("ShrinkFilm/updateShrinkGalleryPhotos", data1, function (data) {
-                $scope.projectData = data.data;
-                $scope.generateField = true;
-                $scope.modalInstance.close();
-                $scope.findPhotoContest();
-                toastr.success("Gallery" + " " + "updated" + " successfully.");
-            })
+        //     NavigationService.boxCall("ShrinkFilm/updateShrinkGalleryPhotos", data1, function (data) {
+        //         $scope.projectData = data.data;
+        //         $scope.generateField = true;
+        //         $scope.modalInstance.close();
+        //         $scope.findPhotoContest();
+        //         toastr.success("Gallery" + " " + "updated" + " successfully.");
+        //     })
 
-        };
+        // };
 
         $scope.addBoxShrinkImage = function (data) {
             console.log("DATADATA", data);
@@ -1405,18 +1419,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $state.go($scope.json.json.action[1].stateName.page, $scope.json.json.action[1].stateName.json);
         };
 
-        $scope.saveShrinkPhotos = function (value) {
-            console.log("DATA", value);
-            // console.log("INSIDE SPP");
-            NavigationService.boxCall("ShrinkFilm/saveShrinkPhotos", value, function (data) {
-                $scope.projectData = data.data;
-                $scope.generateField = true;
-                $scope.modalInstance.close();
-                $scope.findPhotoContest();
-                toastr.success(value.name + " Gallery" + " " + "added" + " successfully.");
-            })
+        // $scope.saveShrinkPhotos = function (value) {
+        //     console.log("DATA", value);
+        //     // console.log("INSIDE SPP");
+        //     NavigationService.boxCall("ShrinkFilm/saveShrinkPhotos", value, function (data) {
+        //         $scope.projectData = data.data;
+        //         $scope.generateField = true;
+        //         $scope.modalInstance.close();
+        //         $scope.findPhotoContest();
+        //         toastr.success(value.name + " Gallery" + " " + "added" + " successfully.");
+        //     })
 
-        };
+        // };
 
 
 
@@ -1425,12 +1439,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             abc._id = project;
             abc.testid = value;
             console.log("PROJECT IMAGE afdadfdaTA", abc);
-            NavigationService.apiCall("PhotoContest/removeContestUsers", abc, function (data) {
+            NavigationService.apiCall("Photographer/removeContestUser", abc, function (data) {
                 $scope.newProjectData = data.data;
                 $scope.generateField = true;
                 // $state.reload();
                 $scope.findPhotoContest();
             })
+
+        };
+
+        $scope.removePhotos = function (perent, child) {
+            console.log("removePhotos--------------", $scope.conPhotoData[perent].Photos[child]);
+            _.remove($scope.conPhotoData[perent].Photos, function (n) {
+                return n == $scope.conPhotoData[perent].Photos[child];
+            });
+            console.log("child", $scope.conPhotoData);
+
+            //  $scope.contestData.splice(index, 1);
+            // NavigationService.apiCall("Photographer/removeContestUser", abc, function (data) {
+            //     $scope.newProjectData = data.data;
+            //     $scope.generateField = true;
+            //     // $state.reload();
+            //     $scope.findPhotoContest();
+            // })
 
         };
 
