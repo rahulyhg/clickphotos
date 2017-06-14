@@ -1239,13 +1239,59 @@ var model = {
                         console.log("emailRespo", emailRespo);
                         if (err) {
                             console.log(err);
-                            callback(err, null);
+                           // callback(err, null);
                         } else if (emailRespo) {
-                            callback(null, found);
+                            //callback(null, found);
                         } else {
-                            callback("Invalid data", found);
+                           // callback("Invalid data", found);
                         }
                     });
+
+                    if (found.package == 'Silver') {
+                        Photographer.findOneAndUpdate({
+                            _id: found._id
+                        }, {
+                            silverPackageBroughtDate: Date.now()
+                        }, {
+                            new: true
+                        }, function (err, updated) {
+                            if (err) {
+                                callback(err, null);
+                            } else if (updated) {
+                                if (_.isEmpty(updated)) {
+                                    callback(null, {});
+                                } else {
+                                    callback(null, updated);
+                                }
+                            } else {
+                                callback(null, {
+                                    message: "No Data Found"
+                                });
+                            }
+                        });
+                    } else if (found.package == 'Gold') {
+                        Photographer.findOneAndUpdate({
+                            _id: found._id
+                        }, {
+                            goldPackageBroughtDate: Date.now()
+                        }, {
+                            new: true
+                        }, function (err, updated) {
+                            if (err) {
+                                callback(err, null);
+                            } else if (updated) {
+                                if (_.isEmpty(updated)) {
+                                    callback(null, {});
+                                } else {
+                                    callback(null, updated);
+                                }
+                            } else {
+                                callback(null, {
+                                    message: "No Data Found"
+                                });
+                            }
+                        });
+                    }
                 } else {
                     callback(null, {
                         message: "No Data Found"

@@ -1448,7 +1448,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         };
 
+        $scope.idOfPhoto = {};
         $scope.removePhotos = function (perent, child) {
+            $scope.idOfPhoto = $scope.contestData[perent]._id;
+            console.log("perent", $scope.idOfPhoto);
             console.log("removePhotos--------------", $scope.conPhotoData[perent].Photos[child]);
             _.remove($scope.conPhotoData[perent].Photos, function (n) {
                 return n == $scope.conPhotoData[perent].Photos[child];
@@ -1462,6 +1465,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //     // $state.reload();
             //     $scope.findPhotoContest();
             // })
+
+        };
+
+        $scope.savePhotos = function (value) {
+            var abc = {};
+            //abc.id = project;
+            abc._id = $scope.idOfPhoto;
+            abc.contestPhotos = $scope.conPhotoData;
+            //console.log("savePhotos-------------", abc);
+
+            NavigationService.apiCall("Photographer/allUpdate", abc, function (data) {
+                //console.log("profilePhotoUpdate", data);
+                if (data.value == true) {
+                console.log("updateddd----------");
+                $state.reload();
+                }
+            });
 
         };
 
