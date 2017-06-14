@@ -200,6 +200,15 @@
             }
         }
         .atm {
+            .head-f {
+                position: relative;
+                top: 0!important;
+                br {
+                    display: none;
+                }
+                text-align: center;
+                margin-top: 10px;
+            }
             min-height: 320px!important;
             .bg_img {
                 .abslt {
