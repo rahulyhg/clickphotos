@@ -208,6 +208,9 @@
                 }
                 text-align: center;
                 margin-top: 10px;
+                span {
+                    margin-left: 5px;
+                }
             }
             min-height: 320px!important;
             .bg_img {
@@ -226,6 +229,9 @@
             }
         }
         .testimonial {
+            h2 {
+                font-size: 30px!important;
+            }
             .padd63 {
                 padding: 15px 15px;
                 text-align: initial;
