@@ -47,16 +47,16 @@
                                                             <tr ng-repeat="info in tableData track by $index">
                                                                 <td>{{$index+1}}</td>
                                                                 <td>
-                                                                    {{info.name}}
+                                                                    {{info.photographerId.name}}
                                                                 </td>
                                                                 <td>
-                                                                    {{info.email}}
+                                                                    {{info.photographerId.email}}
                                                                 </td>
                                                                 <td>
-                                                                    <a class="btn btn-primary" ng-click="editBoxCustomPhotoContest(info._id,json.keyword._id)">
+                                                                    <a class="btn btn-primary" ng-click="editBoxCustomPhotoContest($index)">
                                                                         <i class="fa fa-pencil"></i>
                                                                     </a>
-                                                                    <a class="btn btn-danger" ng-click="removePhotoContest(info._id,json.keyword._id)">
+                                                                    <a class="btn btn-danger" ng-click="removePhotoContest($index)">
                                                                         <i class="fa fa-trash"></i>
                                                                     </a>
                                                                 </td>

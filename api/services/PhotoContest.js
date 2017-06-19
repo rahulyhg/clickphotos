@@ -1,6 +1,7 @@
 var schema = new Schema({
     contestName: String,
     contestExpDate: Date,
+    image: String,
     status: {
         type: String,
         enum: ["true", "false"]
@@ -11,14 +12,24 @@ var schema = new Schema({
         enum: ["three", "six", "nine"]
     },
     contestParticipant: [{
+        photographerId: {
+            type: Schema.Types.ObjectId,
+            ref: "Photographer"
+        },
+        Photos: [String]
+    }],
+    winner: {
         type: Schema.Types.ObjectId,
         ref: "Photographer"
-    }]
+    }
 });
 
 schema.plugin(deepPopulate, {
     populate: {
-        contestParticipant: {
+        "contestParticipant.photographerId": {
+            select: ""
+        },
+        winner: {
             select: ""
         }
     }
@@ -27,7 +38,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('PhotoContest', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "contestParticipant", "contestParticipant"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "contestParticipant.photographerId winner", "contestParticipant.photographerId winner"));
 var model = {
 
     findOnePhotoContest: function (data, callback) {
@@ -104,6 +115,66 @@ var model = {
                 callback(null, updated);
             }
         });
+    },
+
+    findPhotographer: function (data, callback) {
+        //console.log("DATA", data);
+        PhotoContest.findOne({
+            _id: data._id
+        }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
+            // console.log(found);
+            if (err) {
+                //console.log(err);
+                callback(err, null);
+            } else if (_.isEmpty(found)) {
+                callback(null, "noDataFound");
+            } else {
+                callback(null, found.contestParticipant);
+            }
+        });
+    },
+
+    findPhotographerForWinner: function (data, callback) {
+        //console.log("DATA", data);
+        PhotoContest.findOne({
+            _id: data._id
+        }).deepPopulate('contestParticipant.photographerId').select('contestParticipant.photographerId').exec(function (err, found) {
+            // console.log(found);
+            if (err) {
+                //console.log(err);
+                callback(err, null);
+            } else if (_.isEmpty(found)) {
+                callback(null, "noDataFound");
+            } else {
+                var test =  [];
+                _.each(found.contestParticipant,function(n){
+                    test.push(n.photographerId);
+                });
+                //console.log("found.contestParticipant.photographerId",found.contestParticipant)
+                //console.log("test",test);
+                callback(null, test);
+            }
+        });
+    },
+
+    allUpdate: function (data, callback) {
+        // delete data.password;
+        var photographer = this(data);
+        if (data._id) {
+            this.findOneAndUpdate({
+                _id: data._id
+            }, data).exec(function (err, updated) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                } else if (updated) {
+                    console.log("hey", updated);
+                    callback(null, updated);
+                } else {
+                    callback(null, {});
+                }
+            });
+        }
     }
 };
 module.exports = _.assign(module.exports, exports, model);

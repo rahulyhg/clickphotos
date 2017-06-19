@@ -88,19 +88,10 @@ var schema = new Schema({
     verifyAcc: Boolean,
 
     //photo contest
-
-    contestPhotos: [{
-        contestId: {
-            type: Schema.Types.ObjectId,
-            ref: "PhotoContest"
-        },
-        Photos: [String]
+    contest: [{
+        type: Schema.Types.ObjectId,
+        ref: "PhotoContest"
     }]
-
-    // contest: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: "PhotoContest"
-    // }]
 
 });
 
@@ -1221,32 +1212,6 @@ var model = {
                 callback(err, null);
             } else {
                 if (found) {
-                    //callback(null, found);
-                    var emailData = {};
-                    emailData.email = found.email;
-                    emailData.filename = "goldpackage.ejs";
-                    emailData.name = found.name;
-                    //emailData.serviceRequest = data1.serviceRequest;
-                    // emailData.email = data1.email;
-                    //emailData.mobile = data1.mobile;
-                    //emailData.query = data1.query;
-                    emailData.from = "admin@clickmania.in";
-                    emailData.fromname = "Clickmania Admin";
-                    emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
-                    console.log("email data : ", emailData);
-
-                    Config.email(emailData, function (err, emailRespo) {
-                        console.log("emailRespo", emailRespo);
-                        if (err) {
-                            console.log(err);
-                           // callback(err, null);
-                        } else if (emailRespo) {
-                            //callback(null, found);
-                        } else {
-                           // callback("Invalid data", found);
-                        }
-                    });
-
                     if (found.package == 'Silver') {
                         Photographer.findOneAndUpdate({
                             _id: found._id
@@ -1261,7 +1226,56 @@ var model = {
                                 if (_.isEmpty(updated)) {
                                     callback(null, {});
                                 } else {
-                                    callback(null, updated);
+                                    // callback(null, updated);
+                                    //callback(null, found);
+                                    var emailData = {};
+                                    emailData.email = found.email;
+                                    emailData.filename = "silverpackage.ejs";
+                                    emailData.name = found.name;
+                                    //emailData.serviceRequest = data1.serviceRequest;
+                                    // emailData.email = data1.email;
+                                    //emailData.mobile = data1.mobile;
+                                    //emailData.query = data1.query;
+                                    emailData.from = "admin@clickmania.in";
+                                    emailData.fromname = "Clickmania Admin";
+                                    emailData.subject = "congrats you Have upgraded to Silver Package";
+                                    console.log("email data : ", emailData);
+
+                                    Config.email(emailData, function (err, emailRespo) {
+                                        console.log("emailRespo", emailRespo);
+                                        if (err) {
+                                            console.log(err);
+                                            callback(err, null);
+                                        } else if (emailRespo) {
+                                            //callback(null, "Contact us form saved successfully!!!");
+                                            var emailData = {};
+                                            emailData.email = found.email;
+                                            emailData.filename = "goldupgrade.ejs";
+                                            emailData.name = found.name;
+                                            //emailData.serviceRequest = data1.serviceRequest;
+                                            // emailData.email = data1.email;
+                                            //emailData.mobile = data1.mobile;
+                                            //emailData.query = data1.query;
+                                            emailData.from = "admin@clickmania.in";
+                                            emailData.fromname = "Clickmania Admin";
+                                            emailData.subject = "Please upgrade to Gold";
+                                            console.log("email data : ", emailData);
+
+                                            Config.email(emailData, function (err, emailRespo) {
+                                                console.log("emailRespo", emailRespo);
+                                                if (err) {
+                                                    console.log(err);
+                                                    callback(err, null);
+                                                } else if (emailRespo) {
+                                                    callback(null, updated);
+                                                } else {
+                                                    callback("Invalid data", updated);
+                                                }
+                                            });
+                                        } else {
+                                            callback("Invalid data", updated);
+                                        }
+                                    });
                                 }
                             } else {
                                 callback(null, {
@@ -1283,7 +1297,31 @@ var model = {
                                 if (_.isEmpty(updated)) {
                                     callback(null, {});
                                 } else {
-                                    callback(null, updated);
+                                    // callback(null, updated);
+                                    var emailData = {};
+                                    emailData.email = found.email;
+                                    emailData.filename = "goldpackage.ejs";
+                                    emailData.name = found.name;
+                                    //emailData.serviceRequest = data1.serviceRequest;
+                                    // emailData.email = data1.email;
+                                    //emailData.mobile = data1.mobile;
+                                    //emailData.query = data1.query;
+                                    emailData.from = "admin@clickmania.in";
+                                    emailData.fromname = "Clickmania Admin";
+                                    emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
+                                    console.log("email data : ", emailData);
+
+                                    Config.email(emailData, function (err, emailRespo) {
+                                        console.log("emailRespo", emailRespo);
+                                        if (err) {
+                                            console.log(err);
+                                            // callback(err, null);
+                                        } else if (emailRespo) {
+                                            callback(null, updated);
+                                        } else {
+                                            // callback("Invalid data", found);
+                                        }
+                                    });
                                 }
                             } else {
                                 callback(null, {
@@ -1299,7 +1337,7 @@ var model = {
                 }
             }
 
-        })
+        });
     },
     //update to Gold end
 

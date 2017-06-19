@@ -23,23 +23,22 @@
                             <!--<th width="150px ">Actions</th>-->
                         </tr>
                         <thead>
-                            <tr ng-repeat="info in contestData track by $index">
                                 <td>{{$index+1}}</td>
                                 <td>
-                                    {{info.name}}
+                                    {{contestData.photographerId.name}}
                                 </td>
                                 <td colspan="1">
-                                    <div ng-repeat="x in info.contestPhotos track by $index"  ng-init="perentIndex=$index">
+                                    <!--<div ng-repeat="x in info.contestPhotos track by $index"  ng-init="perentIndex=$index">-->
                                         <!--<div><span>{{x.contestId}}</span> </div>-->
-                                        <div ng-repeat="y in x.Photos track by $index" style=" margin-bottom: 5px" ng-init="childIndex=$index">
+                                        <div ng-repeat="y in contestData.Photos track by $index" style=" margin-bottom: 5px" >
                                             <img ng-src="{{y | serverimage}}" class="img-responsive" width="174" style="display: inline-block">
-                                            <a class="btn btn-danger" ng-click="removePhotos(perentIndex,childIndex)" style="vertical-align: top">
+                                            <a class="btn btn-danger" ng-click="removePhotos($index)" style="vertical-align: top">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                                 <a ng-href="{{y|downloadImage}}" download class="btn btn-warning" style="vertical-align: top;">Download File</a>
 
                                         </div>
-                                    </div>
+                                    <!--</div>-->
 
                                 </td>
                                 <!--<td>-->
@@ -70,7 +69,7 @@
                 </div>
             </div>-->
             <div class="text-center">
-                <button class="btn btn-primary btn-save " type="submit" ng-disabled="modalForm.$invalid" ng-click="savePhotos(info._id)">Save</button>
+                <button class="btn btn-primary btn-save " type="submit" ng-disabled="modalForm.$invalid" ng-click="savePhotos(contestData)">Save</button>
                 <button class="btn btn-primary btn-danger" type="submit" ng-click="closeBox()">Cancel</button>
             </div>
         </div>

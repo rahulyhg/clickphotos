@@ -30,6 +30,16 @@
         "validation": ["", "trim", ""],
         "url": ""
     },{
+        "name": "Image",
+        "type": "image",
+        "tableRef": "image",
+        "option": "single",
+        "size": "500 x 500px",
+        "placeholder": "Enter Logo",
+        "id": "input1",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    },{
         "name": "Status",
         "type": "tags",
         "tableRef": "status",
