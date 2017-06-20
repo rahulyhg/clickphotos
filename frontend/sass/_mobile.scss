@@ -433,11 +433,12 @@
             width: 100%;
             left: 1%;
             .profile-holder {
-                width: 130px!important;
-                height: 130px!important;
+                width: 100px!important;
+                height: 100px!important;
+                vertical-align: middle;
             }
             .name-sec {
-                width: 56%!important;
+                width: 65%!important;
                 padding: 0 12px;
                 margin-bottom: 25px!important;
                 .name-part {
@@ -459,6 +460,13 @@
             .holder1 {
                 vertical-align: bottom;
             }
+        }
+        .sm-logo {
+            width: 30px;
+        }
+        .btn-1 img {
+            @include size(20px, 20px);
+            bottom: -8px;
         }
         .profile-holder {
             &:hover {
