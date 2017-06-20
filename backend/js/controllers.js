@@ -1380,7 +1380,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.contestData = {};
         $scope.editBoxCustomPhotoContest = function (index) {
-            $scope.indexToBeSaved=index;
+            $scope.indexToBeSaved = index;
             $scope.contestData = $scope.tableData[index];
             console.log("$scope.contestData ", $scope.contestData);
             $scope.modalInstance = $uibModal.open({
@@ -1468,10 +1468,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // };
 
         $scope.removePhotoContest = function (index) {
-            $scope.tableData.splice(index, 1);            
-            var abc={};
-            abc._id=$scope.json.keyword._id;
-            abc.contestParticipant=$scope.tableData;
+            $scope.tableData.splice(index, 1);
+            var abc = {};
+            abc._id = $scope.json.keyword._id;
+            abc.contestParticipant = $scope.tableData;
             NavigationService.apiCall("photoContest/allUpdate", abc, function (data) {
                 //console.log("profilePhotoUpdate", data);
                 if (data.value == true) {
@@ -1518,9 +1518,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.savePhotos = function (value) {
-            $scope.tableData.contestParticipant[$scope.indexToBeSaved]=value;  
-            console.log("savePhotos-------------", $scope.tableData.contestParticipant);
-            NavigationService.apiCall("photoContest/allUpdate", $scope.tableData, function (data) {
+            $scope.tableData[$scope.indexToBeSaved] = value;
+            var abc = {};
+            abc._id = $scope.json.keyword._id;
+            abc.contestParticipant = $scope.tableData;
+            console.log("savePhotos-------------", $scope.tableData);
+            NavigationService.apiCall("photoContest/save", abc, function (data) {
                 //console.log("profilePhotoUpdate", data);
                 if (data.value == true) {
                     console.log("updateddd----------");
