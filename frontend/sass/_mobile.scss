@@ -636,9 +636,26 @@
         //         img {}
         //     }
         // }
+        .back-back-desk {
+            display: none;
+        }
+        .black-back-mob {
+            display: block;
+        }
         .black-btn {
             font-size: 13px;
             width: 71px;
+        }
+        .tans-btn {
+            padding: 6px 16px;
+        }
+        .btn-marg {
+            margin: 15px 18px 5px;
+            text-align: center;
+            float: none!important;
+        }
+        .border-up {
+            margin-top: 10px;
         }
         .nopht-title {
             margin: 50px 0;

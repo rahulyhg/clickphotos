@@ -2973,6 +2973,10 @@ header {
     background-color: #252525;
 }
 
+.black-back-mob {
+    display: none;
+}
+
 .whit-back {
     background-color: #fff;
 }
@@ -3926,7 +3930,7 @@ hr.border-hr:after {
 }
 
 .black-btn {
-    margin: 0 15px;
+    margin: 0 15px 15px;
     width: 100px;
     border-radius: 4px;
     background-color: #252525;
@@ -3945,6 +3949,7 @@ hr.border-hr:after {
 
 .tans-btn {
     padding: 8px 16px;
+    margin-bottom: 15px;
     font-family: dosis-Light;
     color: black;
     font-weight: 600;
