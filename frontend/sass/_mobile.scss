@@ -322,8 +322,17 @@
                 text-overflow: ellipsis;
             }
         }
-        .full-tabs2 li {
-            padding: 0 25px;
+        .full-tabs2 {
+            li {
+                font-size: 20px!important;
+                padding: 0 25px;
+            }
+            img {
+                @include size(20px, 20px);
+            }
+            .border-line {
+                padding: 5px 0px 3px!important;
+            }
         }
         .main-cont {
             margin: 60px 0px!important;
