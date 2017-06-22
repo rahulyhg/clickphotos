@@ -64,6 +64,40 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-10 col-sm-8 col-xs-12 users visible-xs">
+            <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
+                ng-if="photographerData">
+                <div class="thumbnail">
+                    <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
+                    <div class="user-icon">
+                        <div class="border-half">
+                            <div class="user-img" style="background: url('{{list.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="list.profilePic">
+                            </div>
+                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
+                            <!--<img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">-->
+                        </div>
+                    </div>
+                    <hr class="border-line2 text-center">
+                    <div class="caption googleb">
+                        <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
+                        <p class="title-intro">{{list.bio}}</p>
+                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button">View Profile</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3 " ng-if="!photographerData[0]">
+                    <div class="nopht-title">
+                        <div class="ht30">
+                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
+                            <h1 class="fith damionr text-capitalize">Sorry</h1>
+                        </div>
+                        <p>There are no photographers for your search result!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-2 col-sm-4 col-xs-12">
             <h2 class="border-up">City</h2>
             <div class="location">
@@ -92,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-10 col-sm-8 col-xs-12 users">
+        <div class="col-md-10 col-sm-8 col-xs-12 users hidden-xs">
             <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
                 ng-if="photographerData">
                 <div class="thumbnail">
@@ -114,7 +148,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3" ng-if="!photographerData[0]">
+                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3 " ng-if="!photographerData[0]">
                     <div class="nopht-title">
                         <div class="ht30">
                             <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
