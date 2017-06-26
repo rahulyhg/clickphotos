@@ -146,8 +146,8 @@ var model = {
             } else if (_.isEmpty(found)) {
                 callback(null, "noDataFound");
             } else {
-                var test =  [];
-                _.each(found.contestParticipant,function(n){
+                var test = [];
+                _.each(found.contestParticipant, function (n) {
                     test.push(n.photographerId);
                 });
                 //console.log("found.contestParticipant.photographerId",found.contestParticipant)
@@ -175,6 +175,26 @@ var model = {
                 }
             });
         }
+    },
+
+    //
+
+    findPhotoConetst: function (data, callback) {
+        PhotoContest.findOne({
+            _id: data.id
+        }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+                if (_.isEmpty(found)) {
+                    callback(null, "noDataFound");
+                } else {
+                    callback(null, found);
+                }
+            }
+        });
     }
+
 };
 module.exports = _.assign(module.exports, exports, model);

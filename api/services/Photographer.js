@@ -1530,6 +1530,41 @@ var model = {
             }
 
         })
+    },
+
+    findTotalPriceOfGold: function (data, callback) {
+        Photographer.findOne({
+            _id:data._id
+        }, function (err, found) {
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+                if (_.isEmpty(found)) {
+                    callback(null, "noDataFound");
+                } else {
+                    var SilverPackDate = found.silverPackageBroughtDate;
+                    var currentDate = new Date();
+                    var date=currentDate.getDate();
+                    var month=currentDate.getMonth()+1;
+                    var silverpack=moment(SilverPackDate).month() + 1;
+                    console.log("silverpack",silverpack);
+                    if(moment(currentDate).isBefore(SilverPackDateExp) == true){
+                        if(date<=15){
+                            
+                        }
+                        console.log("inside Ifffff");
+                    }
+                    var SilverPackDateExp = new Date(SilverPackDate);
+                    SilverPackDateExp.setYear(SilverPackDateExp.getFullYear() + 1);
+                    console.log("SilverPackDateExp", moment(SilverPackDate).month() + 1);
+                    console.log("currentDate",SilverPackDate);                    
+                    console.log("currentDate",moment(currentDate).isBefore(SilverPackDateExp));                    
+                    
+                    // callback(null, found);
+                }
+            }
+        });
     }
 
 };

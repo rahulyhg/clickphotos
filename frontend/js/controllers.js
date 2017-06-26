@@ -302,7 +302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
                     $scope.validDateForSilver.setYear($scope.validDateForSilver.getFullYear() + 1);
-                    console.log("$scope.validDateForSilver",$scope.validDateForSilver);
+                    // console.log("$scope.validDateForSilver",$scope.validDateForSilver);
                     $scope.validDateForGold = new Date($scope.photographerData.goldPackageBroughtDate);
                     $scope.validDateForGold.setYear($scope.validDateForGold.getFullYear() + 1);
                     if ($scope.photographerData.package) {
@@ -2261,6 +2261,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.filterToBeApplied = {};
         $scope.addFilterValue = function (val, type) {
+            console.log("val-------",val);
             if (_.isEqual(type, "category")) {
                 $scope.filterToBeApplied.category = val._id;
                 $scope.filterToBeApplied.catName = val.name;
