@@ -91,7 +91,8 @@ var schema = new Schema({
     contest: [{
         type: Schema.Types.ObjectId,
         ref: "PhotoContest"
-    }]
+    }],
+    photoContestPackage:String
 
 });
 
@@ -1169,31 +1170,31 @@ var model = {
     // },
 
 
-    payUpdateToGold: function (data, callback) {
-        // request.post({
-        //     url: 'https://secure.ebs.in/pg/ma/payment/request',
-        // params: {
-        //     account_id: "24065",
-        //     address: "Billing Address",
-        //     amount: 1.00,
-        //     channel: 0,
-        //     city: "Billing City",
-        //     country: "IND",
-        //     currency: "INR",
-        //     description: "Test Order Description",
-        //     display_currency: "GBP",
-        //     display_currency_rates: 1,
-        //     email: "name@yourdomain.in",
-        //     mode: "TEST",
-        //     name: "Billing Name",
-        //     phone: "04423452345",
-        //     postal_code: "600001",
-        //     reference_no: 223,
-        //     return_url: "http://localhost/ebs/response.php",
-        //     secure_hash: hs,
-        // }
-        // }, callback);
-    },
+    // payUpdateToGold: function (data, callback) {
+    //     request.post({
+    //         url: 'https://secure.ebs.in/pg/ma/payment/request',
+    //     params: {
+    //         account_id: "24065",
+    //         address: "Billing Address",
+    //         amount: 1.00,
+    //         channel: 0,
+    //         city: "Billing City",
+    //         country: "IND",
+    //         currency: "INR",
+    //         description: "Test Order Description",
+    //         display_currency: "GBP",
+    //         display_currency_rates: 1,
+    //         email: "name@yourdomain.in",
+    //         mode: "TEST",
+    //         name: "Billing Name",
+    //         phone: "04423452345",
+    //         postal_code: "600001",
+    //         reference_no: 223,
+    //         return_url: "http://localhost/ebs/response.php",
+    //         secure_hash: hs,
+    //     }
+    //     }, callback);
+    // },
 
     updateToGold: function (data, callback) {
         console.log("in update gold..");
@@ -1203,7 +1204,6 @@ var model = {
             _id: photographerId[1]
         }, {
             package: photographerId[0],
-            goldPackageBroughtDate: Date.now()
         }, {
             new: true
         }).exec(function (err, found) {
@@ -1545,11 +1545,11 @@ var model = {
                 } else {
                     var SilverPackDate = found.silverPackageBroughtDate;
                     var currentDate = new Date();
-                    var date = currentDate.getDate();
+                    var date = parseInt(currentDate.getDate());
                     var month = currentDate.getMonth() + 1;
                     var SilverPackDateExp = new Date(SilverPackDate);
                     SilverPackDateExp.setYear(SilverPackDateExp.getFullYear() + 1);
-                    // console.log("silverpack", silverpack);
+                    // console.log("date", date);
                     if (moment(currentDate).isBefore(SilverPackDateExp) == true) {
                         if (date <= 15) {
                             var now = moment(new Date()); //todays date
@@ -1557,16 +1557,27 @@ var model = {
                             var duration = moment.duration(end.diff(now));
                             var months = duration.asMonths();
                             var countMonths = parseInt(months);
-                            console.log("dddd----", countMonths);
+                            var totalAmountToPay = countMonths * 180;
+                            console.log("inside iF----", countMonths);
+                            callback(null, totalAmountToPay);
                         } else {
                             var now = moment(new Date()); //todays date
                             var end = moment(SilverPackDateExp); // another date
-                            var duration = moment.duration(now.diff(end));
+                            var duration = moment.duration(end.diff(now));
                             var months = duration.asMonths();
                             var countMonths = parseInt(months) - 1;
-                            console.log("dddd----", countMonths);
+                            var totalAmountToPay = countMonths * 180;
+                            console.log("inside else----", countMonths);
+                            callback(null, totalAmountToPay);
                         }
                     }
+                    // console.log("SilverPackDateExp",SilverPackDateExp);
+                    // var now = moment(new Date()); //todays date
+                    // var end = moment(SilverPackDateExp); // another date
+                    // var duration = moment.duration(end.diff(now));
+                    // var months = duration.asMonths();
+                    // var countMonths = parseInt(months);
+                    // console.log("dddd----", countMonths);
                     // callback(null, found);
                 }
             }

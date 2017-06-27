@@ -90,6 +90,32 @@ var controller = {
                 }
             })
         }
+    },
+
+    uploadContestPhotos: function (req, res) {
+        if (req.body) {
+            PhotoContest.uploadContestPhotos(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    buyPhotoContestPackage: function (req, res) {
+        if (req.body) {
+            PhotoContest.buyPhotoContestPackage(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 };

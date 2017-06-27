@@ -2389,7 +2389,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('photoContestCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+    .controller('photoContestCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal,$rootScope,$state) {
         $scope.template = TemplateService.changecontent("photo-contest"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -2414,6 +2414,158 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 size: 'lg'
             });
         };
+
+         // $rootScope.showStep="";
+        $scope.activeTab = 1;
+        $scope.toggleTab = function (val) {
+            $scope.activeTab = val;
+        };
+        $scope.steps = false;
+        if ($.jStorage.get("photographer")) {
+                $scope.steps = true;
+                $scope.step = "2";
+        } else {
+            $scope.steps = false;
+            $scope.step = "2";
+        }
+        console.log("step",$scope.step)
+             $scope.signUp = function () {
+                $rootScope.showStep = 2;
+                $state.reload();
+            },
+
+            //verify and send mail for signup password
+
+            $scope.showOtpBox = false;
+        $scope.showSucessBox = false;
+        $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
+            if (!terms) {
+                // alert('check box error');
+                $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
+            } else {
+                $scope.registerData = formdata;
+                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                    //console.log("dataForOtp", data);
+                    if (data.data.verifyAcc == false) {
+                        //console.log(data.data);
+                        $scope.signUpOTP();
+                        setTimeout(function (data) {
+                            $scope.signUpOTP.close();
+                        }, 600000);
+                    } else {
+                        toastr.error('User already exist');
+                    }
+                });
+            }
+        };
+
+        $scope.checkOTPForSignUp = function (formdata) {
+            $scope.registerData.otp = formdata.otp;
+            NavigationService.apiCallWithData("Photographer/verifyOTP", $scope.registerData, function (data) {
+                //console.log("dataForOtp", data);
+                if (data.value == true) {
+                    // console.log("email OTP verified");
+                    $.jStorage.set("photographer", data.data);
+                    $scope.showSucessBox = true;
+                } else {
+                    alert("Incorrect OTP!");
+                }
+            });
+        }
+        //verify and send mail for signup password
+
+
+        //sign up otp verification modal
+        $scope.signUpOTP = function () {
+            $scope.signUpOTP = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/signup-otp.html",
+                scope: $scope,
+                windowClass: '',
+                backdropClass: 'black-drop'
+            });
+            $scope.closeModal = function () { // to close modals for ALL OTP
+                $scope.signUpOTP.close();
+            };
+        };
+        //sign up otp verification modal end
+
+        //sign up functtionallity end
+
+
+        $scope.login = function (formdata) {
+            // formdata.serviceRequest = $scope.serviceList;
+            //console.log(formdata);
+            NavigationService.checkLogin(formdata, function (data) {
+                if (data.data.value) {
+                    //console.log(data.data.data);
+                    $rootScope.showStep = 2;
+                    $.jStorage.set("photographer", data.data.data);
+                    $scope.template.profile = data.data.data;
+                    // $state.go("photographer");
+                    $state.reload();
+                    // console.log("im in");
+                } else {
+                    toastr.error('Incorrect credential');
+                }
+            });
+        }
+
+
+        //reset password Funct
+
+        // Forgot password modal
+        $scope.changePwd = function () {
+            $scope.pwdModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/forgotpass.html",
+                scope: $scope,
+                // windowClass: 'modalWidth',
+                backdropClass: 'black-drop'
+            });
+            $scope.closeModal = function () { // to close modals for ALL OTP
+                $scope.pwdModal.close();
+            };
+        };
+        //End of forgot password modal
+
+        //verify and send mail for forgot password
+        $scope.displayCnfirmBox = false;
+        $scope.displayotpBox = false;
+        $scope.displayThanksBox = false;
+        $scope.verifyAndSendEmail = function (formdata) {
+            $scope.displayotpBox = true;
+            NavigationService.apiCallWithData("Photographer/sendOtp", formdata, function (data) {
+                if (data.value) {
+                    $scope.id = data.data._id;
+                }
+            });
+        };
+
+        $scope.checkOTP = function (otp) {
+            NavigationService.apiCallWithData("Photographer/verifyOTPForResetPass", otp, function (data) {
+                //console.log("dataForOtp", data.data);
+                if (data.value == true) {
+                    $scope.displayCnfirmBox = true;
+                    $scope.displayotpBox = false;
+                } else {
+                    toastr.error('Incorrect OTP!');
+                }
+            });
+        }
+
+        $scope.resetPass = function (formdata) {
+            formdata._id = $scope.id;
+            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                if (data.value) {
+                    $scope.displayCnfirmBox = false;
+                    $scope.displayotpBox = false;
+                    $scope.displayThanksBox = true;
+                }
+            });
+        };
+        //verify and send mail for forgot password end
+        //reset password funct end
 
     })
 
