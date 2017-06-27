@@ -2394,16 +2394,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        formData = {};
-        formData._id = $stateParams.photoContestId;
 
         console.log("contestD", formData);
+<<<<<<< HEAD
         $scope.photos = [];
         $scope.uploadImage = function (imagesData) {
             $scope.photos.push(imagesData.image);
             console.log($scope.photos)
         }
         console.log($.jStorage.get("photographer"));
+=======
+
+
+>>>>>>> 90cf6bc6534a6e8aa11aec0c759cd50c1b1ba9b5
         if ($.jStorage.get("photographer")) {
             $scope.isLoggedIn = $.jStorage.get("photographer");
         } else {
@@ -2585,13 +2588,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = $scope.amount[1]._id;
             formdata.amount = $scope.amount[1].amount;
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "ContestaPackUpdate/" + $.jStorage.get("photographer")._id;
+            formdata.type = "ContestaPackUpdate/" + $.jStorage.get("photographer")._id + $stateParams.photoContestId;
             console.log(formdata);
-            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+            NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);
-                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
             });
         };
 

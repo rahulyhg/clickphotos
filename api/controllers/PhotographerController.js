@@ -380,12 +380,8 @@ var controller = {
                 };
                 Order.editData(formData, function (err, data) {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
-                        if (req.body.Description.split("/")[0] === "featured") {
-                            Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                            });
-                        } else {
-                            Photographer.updateToGold(req.body, function (err, data) {
+                        if (req.body.Description.split("/")[0] === "ContestaPackUpdate") {
+                            Photographer.buyPhotoContestPackage(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                         }
