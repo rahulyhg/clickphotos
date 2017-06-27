@@ -2389,11 +2389,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('photoContestCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal,$rootScope,$state) {
+    .controller('photoContestCtrl', function ($stateParams,$scope, TemplateService, NavigationService, $timeout, $uibModal,$rootScope,$state) {
         $scope.template = TemplateService.changecontent("photo-contest"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        formData = {};
+        formData._id = $stateParams.photoContestId;
+
+        console.log("contestD",formData);
 
 
         if ($.jStorage.get("photographer")) {
@@ -2428,7 +2432,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.steps = false;
             $scope.step = "2";
         }
-        console.log("step",$scope.step)
+        // console.log("step",$scope.step)
              $scope.signUp = function () {
                 $rootScope.showStep = 2;
                 $state.reload();
@@ -2566,6 +2570,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
         //verify and send mail for forgot password end
         //reset password funct end
+
+        //PAYMENT
+
+        $scope.ContestPackageUpdate = function () {
+        
+            formdata = {};
+
+            formdata.photographer = $.jStorage.get("photographer")._id;
+            formdata.payAmount = $scope.amount[1]._id;
+            formdata.amount = $scope.amount[1].amount;
+            formdata.email = $.jStorage.get("photographer").email;
+            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.name = $.jStorage.get("photographer").name;
+            formdata.type = "ContestaPackUpdate/" + $.jStorage.get("photographer")._id;
+            console.log(formdata);
+            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                console.log(data);
+                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+            });
+        };
+
+        //PAYMENT End
 
     })
 

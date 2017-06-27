@@ -94,7 +94,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'competitionCtrl'
         })
         .state('photo-contest', {
-            url: "/photo-contest",
+            url: "/photo-contest/:photoContestId",
             templateUrl: "frontend/views/template.html",
             controller: 'photoContestCtrl'
         })
