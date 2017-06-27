@@ -211,6 +211,61 @@ var model = {
                 }
             }
         });
+    },
+
+    uploadContestPhotos: function (data, callback) {
+        PhotoContest.update({
+            _id: data._id,
+            contestParticipant: {
+                $elemMatch: {
+                    photographerId: data.id
+                }
+            }
+        }, {
+            $push: {
+                "contestParticipant.$.Photos": data.photos
+            }
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+        });
+    },
+
+    buyPhotoContestPackage: function (data, callback) {
+        PhotoContest.findOneAndUpdate({
+            _id: data._id
+        }, {
+            $push: {
+                contestParticipant: {
+                    photographerId: data.id
+                }
+            }
+        }, {
+            new: true
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+        });
     }
 
 };
