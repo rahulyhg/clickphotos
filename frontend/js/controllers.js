@@ -2395,8 +2395,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
-        $scope.isLoggedIn = $.jStorage.get("photographer")
 
+        if ($.jStorage.get("photographer")) {
+            $scope.isLoggedIn = $.jStorage.get("photographer");
+        } else {
+            $scope.isLoggedIn = null;
+        }
+
+        //document.getElementById("#tab1").addAttribute("disabled");
+        //angular.element(document.getElementById('#tab1')).addClass('disabled');
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
