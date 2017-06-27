@@ -242,12 +242,14 @@ var model = {
     },
 
     buyPhotoContestPackage: function (data, callback) {
+        console.log(data);
+        var photocontestId = data.Description.split("/");
         PhotoContest.findOneAndUpdate({
-            _id: data._id
+            _id: photocontestId[1]
         }, {
             $push: {
                 contestParticipant: {
-                    photographerId: data.id
+                    photographerId:photocontestId[2]
                 }
             }
         }, {
