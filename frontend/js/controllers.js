@@ -2261,7 +2261,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.filterToBeApplied = {};
         $scope.addFilterValue = function (val, type) {
-            console.log("val-------",val);
+            console.log("val-------", val);
             if (_.isEqual(type, "category")) {
                 $scope.filterToBeApplied.category = val._id;
                 $scope.filterToBeApplied.catName = val.name;
@@ -2365,6 +2365,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        NavigationService.retriveContestResult(function (data) {
+
+            $scope.contest = data.data.data;
+            $scope.currentContest = _.find($scope.contest, {
+                status: "true"
+            });
+
+            $scope.previousContest = _.find($scope.contest, {
+                status: "false"
+            });
+            console.log("participent", $scope.previousContest.contestParticipant)
+            console.log($scope.previousContest.winner)
+            // $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, {
+            //     "photographerId._id": $scope.previousContest.winner,
+            // });
+            $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, function (o) {
+                return o.photographerId._id == $scope.previousContest.winner;
+            });
+            console.log("winnerdetails", $scope.previousContestWinner.Photos);
+        })
 
 
     })
@@ -2375,10 +2395,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
+        $scope.isLoggedIn = $.jStorage.get("photographer")
+
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
-                templateUrl: "frontend/views/modal/upload-photo.html",
+                templateUrl: "frontend/views/modal/photoContestModal.html",
                 scope: $scope,
                 windowClass: 'upload-pic',
                 backdropClass: 'black-drop',

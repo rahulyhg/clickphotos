@@ -181,8 +181,25 @@ var model = {
 
     findPhotoConetst: function (data, callback) {
         PhotoContest.findOne({
-            status:true
+            status: true
         }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
+            if (err) {
+                // console.log(err);
+                callback(err, null);
+            } else {
+                if (_.isEmpty(found)) {
+                    callback(null, "noDataFound");
+                } else {
+                    callback(null, found);
+                }
+            }
+        });
+    },
+
+    findAllPhotoConetst: function (data, callback) {
+        PhotoContest.find({}).sort({
+            createdAt: -1
+        }).limit(2).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
             if (err) {
                 // console.log(err);
                 callback(err, null);

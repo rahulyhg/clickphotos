@@ -77,6 +77,19 @@ var controller = {
                 }
             })
         }
+    },
+
+    findAllPhotoConetst: function (req, res) {
+        if (req.body) {
+            PhotoContest.findAllPhotoConetst(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 };

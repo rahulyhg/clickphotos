@@ -14,13 +14,13 @@
                 </div>
             </div>
             <div class="compet__contest">
-                <h1 class="text-center">CONTEST - 02</h1>
+                <h1 class="text-center">{{currentContest.contestName}}</h1>
                 <div class="compet__contest-img">
-                    <img src="frontend/img/competition/1.jpg" alt="Contest-Image" class="img-responsive">
+                    <img ng-src="{{currentContest.image | serverimage}}" alt="Contest-Image" class="img-responsive">
                 </div>
 
-                <h2><span>Contest Theme:</span>Tribal Culture in India<br>
-                    <span>Winning Prize:</span>1,00000 rupees</h2>
+                <h2><span>Contest Theme:</span>{{currentContest.contestName}}<br>
+                    <span>Winning Prize:</span>{{currentContest.winingPrice}} rupees</h2>
 
                 <div class="text-center"><button class="btn orange-btn" type="button">Enter</button></div>
             </div>
@@ -28,25 +28,25 @@
             <div class="compet__prev-contest">
                 <h1 class="text-center damionr">Previous Contest</h1>
                 <div class="compet__prev-contest__desc">
-                    <h3>Winner Name:<span>Asmara Khan</span></h3>
-                    <h3>Contest Theme:<span>Wedding Photography</span></h3>
+                    <h3>Winner Name:<span>{{previousContestWinner.photographerId.name}}</span></h3>
+                    <h3>Contest Theme:<span>{{previousContest.contestName}}</span></h3>
                     <h3 class="brd-none">Photo Entries:</h3>
                     <div class="row">
                         <div class="col-md-4">
+                            <div class="compet__prev-contest__desc--shadow" ng-repeat="photo in previousContestWinner.Photos ">
+                                <img ng-src="{{photo | serverimage}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        <!--<div class="col-md-4">
                             <div class="compet__prev-contest__desc--shadow">
-                                <img src="frontend/img/competition/2.jpg" alt="" class="img-responsive">
+                                <img src="frontend/img/competition/4.jpg" alt="" class="img-responsive">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="compet__prev-contest__desc--shadow">
                                 <img src="frontend/img/competition/4.jpg" alt="" class="img-responsive">
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="compet__prev-contest__desc--shadow">
-                                <img src="frontend/img/competition/4.jpg" alt="" class="img-responsive">
-                            </div>
-                        </div>
+                    </div>-->
                     </div>
                 </div>
             </div>

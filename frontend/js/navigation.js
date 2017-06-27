@@ -85,6 +85,16 @@ var navigationservice = angular.module('navigationservice', [])
                     withCredentials: true,
                     data: data
                 }).then(callback);
+            },
+
+            retriveContestResult: function (callback) {
+
+                $http({
+                    url: adminurl + 'PhotoContest/findAllPhotoConetst',
+                    method: 'POST',
+                    withCredentials: true,
+
+                }).then(callback);
             }
         };
     });

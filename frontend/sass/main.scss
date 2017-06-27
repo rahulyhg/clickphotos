@@ -4737,6 +4737,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
     right: 12px;
 }
 
+.disabled {
+    pointer-events: none; //This makes it not clickable
+    opacity: 0.6; //This grays it out to look disabled
+}
+
 .profile-holder {
     &:hover {
         .upload-trans {

@@ -13,11 +13,12 @@
                 </div>
             </div>
             <ul class="contest__stp-btn text-center list-unstyled list-inline">
-                <li class="active" ng-init="step = 1" ng-click="step = 1" ng-class="{'active': step == 1}">STEP 1</li>
-                <li ng-click="step = 2" ng-class="{'active': step == 2}">STEP 2</li>
-                <li ng-click="step = 3" ng-class="{'active': step == 3}">STEP 3</li>
+                <li class="active" ng-init="step = 1" ng-click="step = 1" ng-class="{'active': step == 1};{'disabled': isLoggedIn !=null}"
+                    disabled="isLoggedIn != null">STEP 1</li>
+                <li ng-click="step = 2" ng-class="{'active': step == 2}" ng-disabled="isLoggedIn == null">STEP 2</li>
+                <li ng-click="step = 3" ng-class="{'active': step == 3}" ng-disabled="isLoggedIn == null">STEP 3</li>
             </ul>
-            <div class="contest__stp1" ng-if="step == 1">
+            <div class="contest__stp1" ng-if="step == 1" ng-class="{'disabled': isLoggedIn != null}">
                 <form ng-submit="signUp(formData)" name="loginForm" class="ng-pristine ng-invalid ng-invalid-required ng-valid-email">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12 pad-right5">
