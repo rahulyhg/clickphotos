@@ -2389,7 +2389,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('photoContestCtrl', function ($stateParams,$scope, TemplateService, NavigationService, $timeout, $uibModal,$rootScope,$state) {
+    .controller('photoContestCtrl', function ($stateParams, $scope, TemplateService, NavigationService, $timeout, $uibModal, $rootScope, $state) {
         $scope.template = TemplateService.changecontent("photo-contest"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -2397,9 +2397,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formData = {};
         formData._id = $stateParams.photoContestId;
 
-        console.log("contestD",formData);
-
-
+        console.log("contestD", formData);
+        $scope.photos = [];
+        $scope.uploadImage = function (imagesData) {
+            $scope.photos.push(imagesData.image);
+            console.log($scope.photos)
+        }
+        console.log($.jStorage.get("photographer"));
         if ($.jStorage.get("photographer")) {
             $scope.isLoggedIn = $.jStorage.get("photographer");
         } else {
@@ -2419,21 +2423,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-         // $rootScope.showStep="";
+        // $rootScope.showStep="";
         $scope.activeTab = 1;
         $scope.toggleTab = function (val) {
             $scope.activeTab = val;
         };
         $scope.steps = false;
         if ($.jStorage.get("photographer")) {
-                $scope.steps = true;
-                $scope.step = "2";
+            $scope.steps = true;
+            $scope.step = "2";
         } else {
             $scope.steps = false;
             $scope.step = "2";
         }
         // console.log("step",$scope.step)
-             $scope.signUp = function () {
+        $scope.signUp = function () {
                 $rootScope.showStep = 2;
                 $state.reload();
             },
@@ -2574,7 +2578,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //PAYMENT
 
         $scope.ContestPackageUpdate = function () {
-        
+
             formdata = {};
 
             formdata.photographer = $.jStorage.get("photographer")._id;
