@@ -181,7 +181,7 @@ var model = {
 
     findPhotoConetst: function (data, callback) {
         PhotoContest.findOne({
-            _id: data.id
+            status:true
         }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
             if (err) {
                 // console.log(err);

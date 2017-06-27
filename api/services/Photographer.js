@@ -1534,7 +1534,7 @@ var model = {
 
     findTotalPriceOfGold: function (data, callback) {
         Photographer.findOne({
-            _id:data._id
+            _id: data._id
         }, function (err, found) {
             if (err) {
                 // console.log(err);
@@ -1545,22 +1545,28 @@ var model = {
                 } else {
                     var SilverPackDate = found.silverPackageBroughtDate;
                     var currentDate = new Date();
-                    var date=currentDate.getDate();
-                    var month=currentDate.getMonth()+1;
-                    var silverpack=moment(SilverPackDate).month() + 1;
-                    console.log("silverpack",silverpack);
-                    if(moment(currentDate).isBefore(SilverPackDateExp) == true){
-                        if(date<=15){
-                            
-                        }
-                        console.log("inside Ifffff");
-                    }
+                    var date = currentDate.getDate();
+                    var month = currentDate.getMonth() + 1;
                     var SilverPackDateExp = new Date(SilverPackDate);
                     SilverPackDateExp.setYear(SilverPackDateExp.getFullYear() + 1);
-                    console.log("SilverPackDateExp", moment(SilverPackDate).month() + 1);
-                    console.log("currentDate",SilverPackDate);                    
-                    console.log("currentDate",moment(currentDate).isBefore(SilverPackDateExp));                    
-                    
+                    // console.log("silverpack", silverpack);
+                    if (moment(currentDate).isBefore(SilverPackDateExp) == true) {
+                        if (date <= 15) {
+                            var now = moment(new Date()); //todays date
+                            var end = moment(SilverPackDateExp); // another date
+                            var duration = moment.duration(end.diff(now));
+                            var months = duration.asMonths();
+                            var countMonths = parseInt(months);
+                            console.log("dddd----", countMonths);
+                        } else {
+                            var now = moment(new Date()); //todays date
+                            var end = moment(SilverPackDateExp); // another date
+                            var duration = moment.duration(now.diff(end));
+                            var months = duration.asMonths();
+                            var countMonths = parseInt(months) - 1;
+                            console.log("dddd----", countMonths);
+                        }
+                    }
                     // callback(null, found);
                 }
             }
