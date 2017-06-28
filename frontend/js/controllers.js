@@ -2497,8 +2497,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.uploadContestPhotos = function () {
-            $state.go("photographer");
+            var contestInput = {
+                _id: $.jStorage.get("photographer")._id,
+                contestId: [$stateParams.photoContestId]
+            }
+            NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
+
+                if (contestOutput.value) {
+                    toastr.success("Participated Successfully", "Successful");
+                    $state.go("photographer");
+                } else {
+                    toastr.error("There was some error in uploading your photos", "error");
+                }
+                $state.go("photographer");
+            })
         }
+
+
 
         $scope.uploadImage = function (imagesData) {
             var input = {
