@@ -272,27 +272,32 @@ var model = {
         });
     },
 
+
     findAllPhotographersInContest: function (data, callback) {
-        PhotoContest.find({
-            contestParticipant: {
-                $elemMatch: {
-                    photographerId: data.id
+        PhotoContest.aggregate([{
+                $unwind: {
+                    path: "$contestParticipant",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+            {
+                $match: {
+                    "contestParticipant.photographerId": ObjectId(data.photographerId)
                 }
             }
-        }).exec(function (err, found) {
+        ], function (err, found) {
             if (err) {
+                // console.log(err);
                 callback(err, null);
             } else {
-
-                if (found) {
-                    callback(null, found);
+                if (_.isEmpty(found)) {
+                    callback(null, "noDataFound");
                 } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
+                    callback(null, found);
                 }
             }
         });
-    }
+    },
+
 };
 module.exports = _.assign(module.exports, exports, model);
