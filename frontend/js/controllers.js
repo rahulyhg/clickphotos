@@ -273,6 +273,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
 
+
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
         });
@@ -288,6 +289,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+
                 if (data.value === true) {
                     //console.log(data)
                     $scope.showAllTabs = {};
@@ -300,6 +302,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         //     $scope.showAllTabs = 'hide';
                         // }
                     }
+
+                    if ($scope.photographerData) {
+                        if ($scope.photographerData.photoContestPackage == "3") {
+                            var packages = [0, 1, 2];
+                        } else if ($scope.photographerData.photoContestPackage == "6") {
+                            var packages = [0, 1, 2, 3, 4, 5];
+                        } else {
+                            var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                        }
+                        $scope.packageChunk = _.chunk(packages, 3);
+                    }
+
+                    if (!_.isEmpty($scope.photographerData.contest)) {
+                        //bring data for contest for particularuser
+                    }
+
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
                     $scope.validDateForSilver.setYear($scope.validDateForSilver.getFullYear() + 1);
                     // console.log("$scope.validDateForSilver",$scope.validDateForSilver);
@@ -2365,6 +2383,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
         NavigationService.retriveContestResult(function (data) {
 
             $scope.contest = data.data.data;
@@ -2389,11 +2408,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('photoContestCtrl', function ($stateParams, $scope, TemplateService, NavigationService, $timeout, $uibModal, $rootScope, $state) {
+    .controller('photoContestCtrl', function ($stateParams, $scope, toastr, TemplateService, NavigationService, $timeout, $uibModal, $rootScope, $state) {
         $scope.template = TemplateService.changecontent("photo-contest"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        $.jStorage.deleteKey("contestImage");
         if ($.jStorage.get("photographer")) {
             if ($.jStorage.get("photographer").photoContestPackage == "3") {
                 var packages = [0, 1, 2];
@@ -2404,20 +2424,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             $scope.packageChunk = _.chunk(packages, 3);
         }
-        $scope.uploadImage = function (imagesData) {
-            $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : [];
-            $scope.photos.push(imagesData.image);
-            $.jStorage.set('contestImage', $scope.photos);
-        }
-        console.log($.jStorage.get("photographer"));
-        if ($.jStorage.get("photographer")) {
-            $scope.isLoggedIn = $.jStorage.get("photographer");
-        } else {
-            $scope.isLoggedIn = null;
-        }
-
-        //document.getElementById("#tab1").addAttribute("disabled");
-        //angular.element(document.getElementById('#tab1')).addClass('disabled');
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
@@ -2428,6 +2434,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 size: 'lg'
             });
         };
+
+        $scope.uploadImage = function (imagesData) {
+            $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : [];
+            $scope.photos.push(imagesData.image);
+            $.jStorage.set('contestImage', $scope.photos);
+            $scope.imgModal.close();
+        }
+        console.log($.jStorage.get('phootographer'));
+        $scope.uploadContestPhotos = function () {
+            var input = {
+                _id: $stateParams.photoContestId,
+                id: $.jStorage.get("photographer")._id,
+                photos: $scope.photos
+            }
+            NavigationService.uploadContestPhotos(input, function (data) {
+                //update user contestarray in photographer schema
+                var contestInput = {
+                    _id: $.jStorage.get("photographer")._id,
+                    contestId: [$stateParams.photoContestId]
+                }
+                NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
+                    console.log(contestOutput.value)
+                    if (contestOutput.value) {
+                        toastr.success("Participated Successfully", "Successful");
+                        $state.go("photographer");
+                    } else {
+                        toastr.error("There was some error in uploading your photos", "error");
+                    }
+                })
+            })
+        }
+
+        console.log($.jStorage.get("photographer"));
+        if ($.jStorage.get("photographer")) {
+            $scope.isLoggedIn = $.jStorage.get("photographer");
+        } else {
+            $scope.isLoggedIn = null;
+        }
+
+        //document.getElementById("#tab1").addAttribute("disabled");
+        //angular.element(document.getElementById('#tab1')).addClass('disabled');
+
 
         // $rootScope.showStep="";
         $scope.activeTab = 1;
