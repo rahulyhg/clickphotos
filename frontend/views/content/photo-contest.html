@@ -155,84 +155,20 @@
 
             </div>
             <div class="contest__stp3" ng-if="step == 3">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
+                <div class="row" ng-repeat="package in packageChunk">
+                    <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="images in package">
                         <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
                             <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">                                <br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block " ng-click="uploadImg();"><br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();"><br>
-                                <h3>Upload Photos</h3>
+                                <img ng-if="!photos[images]" src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block"
+                                    ng-click="uploadImg();"><br>
+                                <img ng-if="photos[images]" ng-src="{photos[images]}" class="img-responsive center-block" ng-click="uploadImg();"><br>
+                                <h3 ng-if="!photos[images]">Upload Photos</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">                                <br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block " ng-click="uploadImg();"><br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();"><br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">                                <br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block " ng-click="uploadImg();"><br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                        <div class="contest__stp3--box-shd" style="background: url('') no-repeat center center">
-                            <div class="contest__stp3__txt">
-                                <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();"><br>
-                                <h3>Upload Photos</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
                 <div class="submit-btn">
                     <p class="text-center"><button class="btn orange-btn">Submit</button></p>
                 </div>
