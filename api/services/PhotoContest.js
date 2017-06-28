@@ -223,7 +223,9 @@ var model = {
             }
         }, {
             $push: {
-                "contestParticipant.$.Photos": data.photos
+                "contestParticipant.$.Photos": {
+                    $each: data.photos
+                }
             }
         }).exec(function (err, found) {
             if (err) {
@@ -249,7 +251,7 @@ var model = {
         }, {
             $push: {
                 contestParticipant: {
-                    photographerId:photocontestId[2]
+                    photographerId: photocontestId[2]
                 }
             }
         }, {
