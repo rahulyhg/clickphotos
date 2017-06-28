@@ -839,7 +839,7 @@
                                             <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="image in package">
                                                 <div class="upload-photobox" style="background: url({{contest.contestParticipant.Photos[image] | serverimage}}) no-repeat center center">
                                                     <div class="photobox-txt" ng-if="!contest.contestParticipant.Photos[image]">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">
+                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg(contest._id);">
                                                         <br>
                                                         <h3 ng-if="!contest.contestParticipant.Photos[image]">Upload Photos</h3>
                                                     </div>

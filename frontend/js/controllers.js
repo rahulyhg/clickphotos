@@ -289,15 +289,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
 
-            $scope.uploadImage = function (imagesData) {
-                $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : {
-                    images: []
-                };
-                $scope.photos.images.push(imagesData.image);
-                $.jStorage.set('contestImage', $scope.photos);
-                console.log("photos", $scope.photos)
-                $scope.imgModal.close();
-            }
+
 
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
 
@@ -323,6 +315,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
                         }
                         $scope.packageChunk = _.chunk(packages, 3);
+                    }
+
+                    $scope.uploadImage = function (imagesData) {
+                        var input = {
+                            _id: $scope.contestIdModal,
+                            id: $.jStorage.get("photographer")._id,
+                            photos: [imagesData.image]
+                        }
+                        NavigationService.uploadContestPhotos(input, function (data) {
+                            var input = {
+                                photographerId: $.jStorage.get('photographer')._id,
+                            }
+                            NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                                console.log("contestdata", data.data);
+                                $scope.photographerContestData = data.data;
+                                toastr.success("image uploaded sucessfully");
+                                $scope.imgModal.close();
+                                /************************************************ */
+                            })
+                        })
                     }
 
                     if (!_.isEmpty($scope.photographerData.contest)) {
@@ -745,7 +757,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //   //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
         }
 
-        $scope.uploadImg = function () {
+        $scope.uploadImg = function (contest) {
+            $scope.contestIdModal = contest;
             $scope.imgModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/photoContestModal.html",
