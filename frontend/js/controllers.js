@@ -2444,6 +2444,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        NavigationService.callApi("PayAmount/getAll", function (data) {
+            $scope.amount = data.data;
+        });
         $.jStorage.deleteKey("contestImage");
         if ($.jStorage.get('photographer')) {
             var formdata = {
@@ -2685,9 +2688,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //PAYMENT
 
         $scope.PackageUpdateForThree = function () {
-
             formdata = {};
-
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[3]._id;
             formdata.amount = $scope.amount[3].amount;
@@ -2702,17 +2703,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.ContestPackageUpdate = function () {
+        $scope.PackageUpdateForSix = function () {
 
             formdata = {};
-
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[4]._id;
             formdata.amount = $scope.amount[4].amount;
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "ContestaPackUpdate/" + $.jStorage.get("photographer")._id;
+            formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
@@ -2720,17 +2720,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.ContestPackageUpdate = function () {
+
+        $scope.PackageUpdateForNine = function () {
 
             formdata = {};
-
             formdata.photographer = $.jStorage.get("photographer")._id;
-            formdata.payAmount = $scope.amount[1]._id;
-            formdata.amount = $scope.amount[1].amount;
+            formdata.payAmount = $scope.amount[5]._id;
+            formdata.amount = $scope.amount[5].amount;
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "ContestaPackUpdate/" + $.jStorage.get("photographer")._id;
+            formdata.type = "PackageUpdateForNine/" + $.jStorage.get("photographer")._id;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
