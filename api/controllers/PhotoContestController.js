@@ -118,6 +118,18 @@ var controller = {
         }
     },
 
+    findAllPhotographersInContest: function (req, res) {
+        if (req.body) {
+            PhotoContest.findAllPhotographersInContest(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
+    },
     //payment gateway
 
     paymentGatewayResponce: function (req, res) {

@@ -2640,7 +2640,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //PAYMENT
 
-        $scope.ContestPackageUpdate = function () {
+        $scope.PackageUpdateForThree = function () {
+
+            formdata = {};
+
+            formdata.photographer = $.jStorage.get("photographer")._id;
+            formdata.payAmount = $scope.amount[3]._id;
+            formdata.amount = $scope.amount[3].amount;
+            formdata.email = $.jStorage.get("photographer").email;
+            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.name = $.jStorage.get("photographer").name;
+            formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id;
+            console.log(formdata);
+            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                console.log(data);
+                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+            });
+        };
+
+         $scope.ContestPackageUpdate = function () {
+
+            formdata = {};
+
+            formdata.photographer = $.jStorage.get("photographer")._id;
+            formdata.payAmount = $scope.amount[4]._id;
+            formdata.amount = $scope.amount[4].amount;
+            formdata.email = $.jStorage.get("photographer").email;
+            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.name = $.jStorage.get("photographer").name;
+            formdata.type = "ContestaPackUpdate/" + $.jStorage.get("photographer")._id;
+            console.log(formdata);
+            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                console.log(data);
+                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+            });
+        };
+
+         $scope.ContestPackageUpdate = function () {
 
             formdata = {};
 
