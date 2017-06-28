@@ -246,6 +246,7 @@ var model = {
     buyPhotoContestPackage: function (data, callback) {
         console.log(data);
         var photocontestId = data.Description.split("/");
+        console.log("photocontestId", photocontestId);
         PhotoContest.findOneAndUpdate({
             _id: photocontestId[1]
         }, {
