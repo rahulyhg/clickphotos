@@ -143,15 +143,15 @@ var controller = {
                 Order.editData(formData, function (err, data) {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "PackageUpdateForThree") {
-                            Photographer.buyPhotoContestPackage(req.body, function (err, data) {
+                            PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                         } else if (req.body.Description.split("/")[0] === "PackageUpdateForSix") {
-                            Photographer.buyPhotoContestPackage(req.body, function (err, data) {
+                            PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                         } else {
-                            Photographer.buyPhotoContestPackage(req.body, function (err, data) {
+                            PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                         }
