@@ -272,16 +272,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-        if ($.jStorage.get("photographer")) {
-            if ($.jStorage.get("photographer").photoContestPackage == "3") {
-                var packages = [0, 1, 2];
-            } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
-                var packages = [0, 1, 2, 3, 4, 5];
-            } else {
-                var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-            }
-            $scope.packageChunk = _.chunk(packages, 3);
-        }
+
 
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
@@ -298,6 +289,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+
                 if (data.value === true) {
                     //console.log(data)
                     $scope.showAllTabs = {};
@@ -310,6 +302,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         //     $scope.showAllTabs = 'hide';
                         // }
                     }
+
+                    if ($scope.photographerData) {
+                        if ($scope.photographerData.photoContestPackage == "3") {
+                            var packages = [0, 1, 2];
+                        } else if ($scope.photographerData.photoContestPackage == "6") {
+                            var packages = [0, 1, 2, 3, 4, 5];
+                        } else {
+                            var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                        }
+                        $scope.packageChunk = _.chunk(packages, 3);
+                    }
+
+                    if (!_.isEmpty($scope.photographerData.contest)) {
+                        //bring data for contest for particularuser
+                    }
+
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
                     $scope.validDateForSilver.setYear($scope.validDateForSilver.getFullYear() + 1);
                     // console.log("$scope.validDateForSilver",$scope.validDateForSilver);
@@ -2375,6 +2383,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Photo-Contest"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
         NavigationService.retriveContestResult(function (data) {
 
             $scope.contest = data.data.data;
