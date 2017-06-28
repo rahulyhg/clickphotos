@@ -2491,35 +2491,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.uploadImage = function (imagesData) {
-            $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : [];
-            $scope.photos.push(imagesData.image);
-            $.jStorage.set('contestImage', $scope.photos);
 
-
-            $scope.imgModal.close();
-        }
 
         $scope.uploadContestPhotos = function () {
+            $state.go("photographer");
+        }
+
+        $scope.uploadImage = function (imagesData) {
             var input = {
                 _id: $stateParams.photoContestId,
                 id: $.jStorage.get("photographer")._id,
-                photos: $scope.photos
+                photos: [imagesData.image]
             }
             NavigationService.uploadContestPhotos(input, function (data) {
-                //update user contestarray in photographer schema
-                var contestInput = {
-                    _id: $.jStorage.get("photographer")._id,
-                    contestId: [$stateParams.photoContestId]
+                var input = {
+                    photographerId: $.jStorage.get('photographer')._id,
                 }
-                NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
-
-                    if (contestOutput.value) {
-                        toastr.success("Participated Successfully", "Successful");
-                        $state.go("photographer");
-                    } else {
-                        toastr.error("There was some error in uploading your photos", "error");
-                    }
+                NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                    console.log("contestdata", data.data);
+                    console.log($stateParams.catid)
+                    $scope.photographerContestData = data.data;
+                    $scope.result = _.find($scope.photographerContestData, function (o) {
+                        return o._id == $stateParams.photoContestId;
+                    });
+                    console.log("result", $scope.result);
+                    $scope.imgModal.close();
+                    toastr.success("image uploaded successfully");
                 })
             })
         }
