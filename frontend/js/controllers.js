@@ -327,6 +327,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
                     if (!_.isEmpty($scope.photographerData.contest)) {
                         //bring data for contest for particularuser
+                        var input = {
+                            photographerId: $.jStorage.get('photographer')._id,
+                        }
+                        NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                            console.log("contestdata", data.data);
+                            $scope.photographerContestData = data.data;
+                        })
                     }
 
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
@@ -2425,16 +2432,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
         $.jStorage.deleteKey("contestImage");
-        if ($.jStorage.get("photographer")) {
-            if ($.jStorage.get("photographer").photoContestPackage == "3") {
-                var packages = [0, 1, 2];
-            } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
-                var packages = [0, 1, 2, 3, 4, 5];
-            } else {
-                var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        if ($.jStorage.get('photographer')) {
+            var formdata = {
+                _id: $.jStorage.get('photographer')._id
             }
-            $scope.packageChunk = _.chunk(packages, 3);
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                console.log(data);
+                $.jStorage.set('photographer', data.data)
+                if (!_.isEmpty($.jStorage.get('photographer').contest)) {
+                    //bring data for contest for particularuser
+                    var input = {
+                        photographerId: $.jStorage.get('photographer')._id,
+                    }
+                    NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                        console.log("contestdata", data.data);
+                        console.log($stateParams.catid)
+                        $scope.photographerContestData = data.data;
+                        $scope.result = _.find($scope.photographerContestData, function (o) {
+                            return o._id == $stateParams.photoContestId;
+                        });
+                        console.log("result", $scope.result);
+                    })
+                }
+                if ($.jStorage.get("photographer")) {
+                    if ($.jStorage.get("photographer").photoContestPackage == "3") {
+                        var packages = [0, 1, 2];
+                    } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
+                        var packages = [0, 1, 2, 3, 4, 5];
+                    } else {
+                        var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                    }
+                    $scope.packageChunk = _.chunk(packages, 3);
+                }
+            })
         }
+
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
@@ -2450,6 +2482,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : [];
             $scope.photos.push(imagesData.image);
             $.jStorage.set('contestImage', $scope.photos);
+
+
             $scope.imgModal.close();
         }
 
@@ -2658,7 +2692,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-         $scope.ContestPackageUpdate = function () {
+        $scope.ContestPackageUpdate = function () {
 
             formdata = {};
 
@@ -2676,7 +2710,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-         $scope.ContestPackageUpdate = function () {
+        $scope.ContestPackageUpdate = function () {
 
             formdata = {};
 

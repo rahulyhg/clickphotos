@@ -828,21 +828,20 @@
                 <div class="part-4" ng-if="tab == 4">
                     <div class="compete">
                         <uib-accordion close-others="oneAtATime">
-                            <div class="contest2">
+                            <div class="contest2" ng-repeat="contest in photographerContestData">
                                 <div uib-accordion-group class="panel-default" is-open="status.open">
                                     <uib-accordion-heading>
-                                        <span class="contest-heading">Photo Contest 2:Beautiful Nature of India</span>
+                                        <span class="contest-heading">Photo Contest {{$index+1}}:{{contest.contestName}}</span>
                                         <a class="pull-right pls-mns-sign" ng-click="changeSign()"><img alt="ClickToExpand" class="img-responsive" ng-src="{{imgUrl}}"></a>
                                     </uib-accordion-heading>
                                     <div class="upload-photo">
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="package in packageChunk">
-                                                <div class="upload-photobox" style="background: url('') no-repeat center center" ng-repeat="image in package">
-                                                    <div class="photobox-txt">
-                                                        <img ng-if="!photos.images[image]" src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block"
-                                                            ng-click="uploadImg();">
-                                                        <img ng-if="photos.images[image]" ng-src="{{photos[image] | serverimage}}" class="img-responsive center-block">                                                        <br>
-                                                        <h3 ng-if="!photos.images[image]">Upload Photos</h3>
+                                        <div class="row" ng-repeat="package in packageChunk">
+                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="image in package">
+                                                <div class="upload-photobox" style="background: url({{contest.contestParticipant.Photos[image] | serverimage}}) no-repeat center center">
+                                                    <div class="photobox-txt" ng-if="!contest.contestParticipant.Photos[image]">
+                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">
+                                                        <br>
+                                                        <h3 ng-if="!contest.contestParticipant.Photos[image]">Upload Photos</h3>
                                                     </div>
                                                 </div>
                                             </div>
