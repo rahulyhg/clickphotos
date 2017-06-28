@@ -270,7 +270,29 @@ var model = {
                 }
             }
         });
-    }
+    },
 
+    findAllPhotographersInContest: function (data, callback) {
+        PhotoContest.find({
+            contestParticipant: {
+                $elemMatch: {
+                    photographerId: data.id
+                }
+            }
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+        });
+    }
 };
 module.exports = _.assign(module.exports, exports, model);
