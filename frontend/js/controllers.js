@@ -288,6 +288,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($.jStorage.get("photographer")) {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
+
+
+
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
 
                 if (data.value === true) {
@@ -314,8 +317,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.packageChunk = _.chunk(packages, 3);
                     }
 
+                    $scope.uploadImage = function (imagesData) {
+                        var input = {
+                            _id: $scope.contestIdModal,
+                            id: $.jStorage.get("photographer")._id,
+                            photos: [imagesData.image]
+                        }
+                        NavigationService.uploadContestPhotos(input, function (data) {
+                            var input = {
+                                photographerId: $.jStorage.get('photographer')._id,
+                            }
+                            NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                                console.log("contestdata", data.data);
+                                $scope.photographerContestData = data.data;
+                                toastr.success("image uploaded sucessfully");
+                                $scope.imgModal.close();
+                                /************************************************ */
+                            })
+                        })
+                    }
+
                     if (!_.isEmpty($scope.photographerData.contest)) {
                         //bring data for contest for particularuser
+                        var input = {
+                            photographerId: $.jStorage.get('photographer')._id,
+                        }
+                        NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                            console.log("contestdata", data.data);
+                            $scope.photographerContestData = data.data;
+                        })
                     }
 
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
@@ -727,10 +757,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //   //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
         }
 
-        $scope.uploadImg = function () {
+        $scope.uploadImg = function (contest) {
+            $scope.contestIdModal = contest;
             $scope.imgModal = $uibModal.open({
                 animation: true,
-                templateUrl: "frontend/views/modal/upload-photo.html",
+                templateUrl: "frontend/views/modal/photoContestModal.html",
                 scope: $scope,
                 windowClass: 'upload-pic',
                 backdropClass: 'black-drop',
@@ -2417,16 +2448,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.amount = data.data;
         });
         $.jStorage.deleteKey("contestImage");
-        if ($.jStorage.get("photographer")) {
-            if ($.jStorage.get("photographer").photoContestPackage == "3") {
-                var packages = [0, 1, 2];
-            } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
-                var packages = [0, 1, 2, 3, 4, 5];
-            } else {
-                var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        if ($.jStorage.get('photographer')) {
+            var formdata = {
+                _id: $.jStorage.get('photographer')._id
             }
-            $scope.packageChunk = _.chunk(packages, 3);
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                console.log(data);
+                $.jStorage.set('photographer', data.data)
+                if (!_.isEmpty($.jStorage.get('photographer').contest)) {
+                    //bring data for contest for particularuser
+                    var input = {
+                        photographerId: $.jStorage.get('photographer')._id,
+                    }
+                    NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                        console.log("contestdata", data.data);
+                        console.log($stateParams.catid)
+                        $scope.photographerContestData = data.data;
+                        $scope.result = _.find($scope.photographerContestData, function (o) {
+                            return o._id == $stateParams.photoContestId;
+                        });
+                        console.log("result", $scope.result);
+                    })
+                }
+                if ($.jStorage.get("photographer")) {
+                    if ($.jStorage.get("photographer").photoContestPackage == "3") {
+                        var packages = [0, 1, 2];
+                    } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
+                        var packages = [0, 1, 2, 3, 4, 5];
+                    } else {
+                        var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                    }
+                    $scope.packageChunk = _.chunk(packages, 3);
+                }
+            })
         }
+
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
@@ -2438,46 +2494,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.uploadImage = function (imagesData) {
-            $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : [];
-            $scope.photos.push(imagesData.image);
-            $.jStorage.set('contestImage', $scope.photos);
-            $scope.imgModal.close();
-        }
-        console.log($.jStorage.get('phootographer'));
+
+
         $scope.uploadContestPhotos = function () {
+            $state.go("photographer");
+        }
+
+        $scope.uploadImage = function (imagesData) {
             var input = {
                 _id: $stateParams.photoContestId,
                 id: $.jStorage.get("photographer")._id,
-                photos: $scope.photos
+                photos: [imagesData.image]
             }
             NavigationService.uploadContestPhotos(input, function (data) {
-                //update user contestarray in photographer schema
-                var contestInput = {
-                    _id: $.jStorage.get("photographer")._id,
-                    contestId: [$stateParams.photoContestId]
+                var input = {
+                    photographerId: $.jStorage.get('photographer')._id,
                 }
-                NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
-                    console.log(contestOutput.value)
-                    if (contestOutput.value) {
-                        toastr.success("Participated Successfully", "Successful");
-                        $state.go("photographer");
-                    } else {
-                        toastr.error("There was some error in uploading your photos", "error");
-                    }
+                NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+                    console.log("contestdata", data.data);
+                    console.log($stateParams.catid)
+                    $scope.photographerContestData = data.data;
+                    $scope.result = _.find($scope.photographerContestData, function (o) {
+                        return o._id == $stateParams.photoContestId;
+                    });
+                    console.log("result", $scope.result);
+                    $scope.imgModal.close();
+                    toastr.success("image uploaded successfully");
                 })
             })
         }
 
-        console.log($.jStorage.get("photographer"));
+
         if ($.jStorage.get("photographer")) {
             $scope.isLoggedIn = $.jStorage.get("photographer");
         } else {
             $scope.isLoggedIn = null;
         }
 
-        //document.getElementById("#tab1").addAttribute("disabled");
-        //angular.element(document.getElementById('#tab1')).addClass('disabled');
 
 
         // $rootScope.showStep="";
@@ -2653,7 +2706,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.PackageUpdateForSix = function () {
 
             formdata = {};
-
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[4]._id;
             formdata.amount = $scope.amount[4].amount;
@@ -2668,10 +2720,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+
         $scope.PackageUpdateForNine = function () {
 
             formdata = {};
-
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[5]._id;
             formdata.amount = $scope.amount[5].amount;
