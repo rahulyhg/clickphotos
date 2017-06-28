@@ -95,6 +95,15 @@ var navigationservice = angular.module('navigationservice', [])
                     withCredentials: true,
 
                 }).then(callback);
-            }
+            },
+            uploadContestPhotos: function (data, callback) {
+
+                $http({
+                    url: adminurl + 'PhotoContest/uploadContestPhotos',
+                    method: 'POST',
+                    withCredentials: true,
+                    data: data
+                }).then(callback);
+            },
         };
     });
