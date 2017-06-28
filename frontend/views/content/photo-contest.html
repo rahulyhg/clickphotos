@@ -13,11 +13,21 @@
                 </div>
             </div>
             <ul class="contest__stp-btn text-center list-unstyled list-inline">
-                <li id="tab1" ng-click="step = 1" ng-class="{'active': step == 1}">STEP 1</li>
-
-                <li id="tab2" ng-click="step = 2" id="tab2" ng-class="{'active': step == 2}">STEP 2</li>
-
-                <li id="tab3" ng-click="step = 3" id="tab3" ng-class="{'active': step == 3}">STEP 3</li>
+                <div class="inline-block">
+                    <div ng-class="{'disabled': isLoggedIn !=null}">
+                        <li id="tab1" ng-click="step = 1" ng-class="{'active': step == 1}">STEP 1</li>
+                    </div>
+                </div>
+                <div class="inline-block">
+                    <div ng-class="{'disabled': isLoggedIn ==null}">
+                        <li id="tab2" ng-click="step = 2" id="tab2" ng-class="{'active': step == 2}">STEP 2</li>
+                    </div>
+                </div>
+                <div class="inline-block">
+                    <div ng-class="{'disabled': isLoggedIn ==null}">
+                        <li id="tab3" ng-click="step = 3" id="tab3" ng-class="{'active': step == 3}">STEP 3</li>
+                    </div>
+                </div>
             </ul>
             <div class="contest__stp1" ng-if="step == 1">
                 <div class="col-md-6 col-sm-6 pad-right5">
