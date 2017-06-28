@@ -288,6 +288,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($.jStorage.get("photographer")) {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
+
+            $scope.uploadImage = function (imagesData) {
+                $scope.photos = $scope.compareproduct = $.jStorage.get('contestImage') ? $.jStorage.get('contestImage') : {
+                    images: []
+                };
+                $scope.photos.images.push(imagesData.image);
+                $.jStorage.set('contestImage', $scope.photos);
+                console.log("photos", $scope.photos)
+                $scope.imgModal.close();
+            }
+
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
 
                 if (data.value === true) {
@@ -730,7 +741,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.uploadImg = function () {
             $scope.imgModal = $uibModal.open({
                 animation: true,
-                templateUrl: "frontend/views/modal/upload-photo.html",
+                templateUrl: "frontend/views/modal/photoContestModal.html",
                 scope: $scope,
                 windowClass: 'upload-pic',
                 backdropClass: 'black-drop',
@@ -2441,7 +2452,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $.jStorage.set('contestImage', $scope.photos);
             $scope.imgModal.close();
         }
-        console.log($.jStorage.get('phootographer'));
+
         $scope.uploadContestPhotos = function () {
             var input = {
                 _id: $stateParams.photoContestId,
@@ -2455,7 +2466,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     contestId: [$stateParams.photoContestId]
                 }
                 NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
-                    console.log(contestOutput.value)
+
                     if (contestOutput.value) {
                         toastr.success("Participated Successfully", "Successful");
                         $state.go("photographer");
@@ -2466,15 +2477,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             })
         }
 
-        console.log($.jStorage.get("photographer"));
+
         if ($.jStorage.get("photographer")) {
             $scope.isLoggedIn = $.jStorage.get("photographer");
         } else {
             $scope.isLoggedIn = null;
         }
 
-        //document.getElementById("#tab1").addAttribute("disabled");
-        //angular.element(document.getElementById('#tab1')).addClass('disabled');
 
 
         // $rootScope.showStep="";

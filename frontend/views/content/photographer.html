@@ -839,8 +839,10 @@
                                             <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="package in packageChunk">
                                                 <div class="upload-photobox" style="background: url('') no-repeat center center" ng-repeat="image in package">
                                                     <div class="photobox-txt">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">                                                        <br>
-                                                        <h3>Upload Photos</h3>
+                                                        <img ng-if="!photos.images[image]" src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block"
+                                                            ng-click="uploadImg();">
+                                                        <img ng-if="photos.images[image]" ng-src="{{photos[image] | serverimage}}" class="img-responsive center-block">                                                        <br>
+                                                        <h3 ng-if="!photos.images[image]">Upload Photos</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -848,42 +850,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="contest1">
-                                <div uib-accordion-group class="panel-default">
-                                    <uib-accordion-heading>
-                                        <span class="contest-heading">Photo Contest 1:Beautiful Culture of India</span>
-                                        <a class="pull-right pls-mns-sign" ng-click="changeSign1()"><img alt="ClickToExpand" class="img-responsive" ng-src="{{imgUrl}}"></a>
-                                    </uib-accordion-heading>
-                                    <div class="upload-photo">
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                                                <div class="upload-photobox" style="background: url('') no-repeat center center">
-                                                    <div class="photobox-txt">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();">                                                        <br>
-                                                        <h3>Upload Photos</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                                                <div class="upload-photobox" style="background: url('') no-repeat center center">
-                                                    <div class="photobox-txt">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block " ng-click="uploadImg();"><br>
-                                                        <h3>Upload Photos</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center">
-                                                <div class="upload-photobox" style="background: url('') no-repeat center center">
-                                                    <div class="photobox-txt">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg();"><br>
-                                                        <h3>Upload Photos</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </uib-accordion>
                     </div>
                 </div>
