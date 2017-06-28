@@ -1,4 +1,5 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
+var sha512 = require('sha512');
 var controller = {
 
     findOnePhotoContest: function (req, res) {

@@ -2693,13 +2693,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = $scope.amount[3]._id;
             formdata.amount = $scope.amount[3].amount;
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id;
             console.log(formdata);
-            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+            NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);
-                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
             });
         };
 
@@ -2710,13 +2710,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = $scope.amount[4]._id;
             formdata.amount = $scope.amount[4].amount;
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id;
             console.log(formdata);
-            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+            NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);
-                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
             });
         };
 
@@ -2728,13 +2728,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = $scope.amount[5]._id;
             formdata.amount = $scope.amount[5].amount;
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "PackageUpdateForNine/" + $.jStorage.get("photographer")._id;
             console.log(formdata);
-            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+            NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);
-                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
             });
         };
 
