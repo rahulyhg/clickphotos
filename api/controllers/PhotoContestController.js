@@ -147,21 +147,21 @@ var controller = {
                             console.log("req.body--------------------------------", req.body);
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
                                 console.log("buyPhotoContestPackage---------------------------", data);
-                                res.redirect(env.realHost + "/photo-contest/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----------------------------------------3", data);
                             });
                         } else if (req.body.Description.split("/")[0] === "PackageUpdateForSix") {
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/photo-contest/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----6");
                             });
                         } else {
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/photo-contest/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----9");
