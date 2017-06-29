@@ -307,11 +307,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
 
                     if ($scope.photographerData) {
-                        if ($scope.photographerData.photoContestPackage == "3") {
+                        if ($scope.photographerData.photoContestPackage == "PackageUpdateForThree") {
                             var packages = [0, 1, 2];
-                        } else if ($scope.photographerData.photoContestPackage == "6") {
+                        } else if ($scope.photographerData.photoContestPackage == "PackageUpdateForSix") {
                             var packages = [0, 1, 2, 3, 4, 5];
-                        } else if ($scope.photographerData.photoContestPackage == "9") {
+                        } else if ($scope.photographerData.photoContestPackage == "PackageUpdateForNine") {
                             var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
                         }
                         $scope.packageChunk = _.chunk(packages, 3);
@@ -2471,11 +2471,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     })
                 }
                 if ($.jStorage.get("photographer")) {
-                    if ($.jStorage.get("photographer").photoContestPackage == "3") {
+                    if ($.jStorage.get("photographer").photoContestPackage == "PackageUpdateForThree") {
                         var packages = [0, 1, 2];
-                    } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
+                    } else if ($.jStorage.get("photographer").photoContestPackage == "PackageUpdateForSix") {
                         var packages = [0, 1, 2, 3, 4, 5];
-                    } else if ($.jStorage.get("photographer").photoContestPackage == "9") {
+                    } else if ($.jStorage.get("photographer").photoContestPackage == "PackageUpdateForNine") {
                         var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
                     }
                     $scope.packageChunk = _.chunk(packages, 3);
@@ -2703,6 +2703,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //PAYMENT
 
+        // console.log("Stateparam----------", $stateParams.photoContestId);
         $scope.PackageUpdateForThree = function () {
             formdata = {};
             formdata.photographer = $.jStorage.get("photographer")._id;
@@ -2711,7 +2712,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id;
+            formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
             console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log("--------------------------------------", data);
@@ -2728,7 +2729,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id;
+            formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
             console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);
@@ -2746,7 +2747,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "PackageUpdateForNine/" + $.jStorage.get("photographer")._id;
+            formdata.type = "PackageUpdateForNine/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
             console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);

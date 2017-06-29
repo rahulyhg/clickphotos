@@ -144,22 +144,24 @@ var controller = {
                 Order.editData(formData, function (err, data) {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "PackageUpdateForThree") {
+                            console.log("req.body--------------------------------", req.body);
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                console.log("buyPhotoContestPackage---------------------------", data);
+                                res.redirect(env.realHost + "/photo-contest/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
-                                console.log("-----3");
+                                console.log("-----------------------------------------3", data);
                             });
                         } else if (req.body.Description.split("/")[0] === "PackageUpdateForSix") {
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/photo-contest/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----6");
                             });
                         } else {
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                res.redirect(env.realHost + "/photo-contest/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----9");

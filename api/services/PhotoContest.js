@@ -248,11 +248,11 @@ var model = {
         var photocontestId = data.Description.split("/");
         console.log("photocontestId", photocontestId);
         PhotoContest.findOneAndUpdate({
-            _id: photocontestId[1]
+            _id: photocontestId[2]
         }, {
             $push: {
                 contestParticipant: {
-                    photographerId: photocontestId[2]
+                    photographerId: photocontestId[1]
                 }
             }
         }, {
@@ -304,13 +304,12 @@ var model = {
         var photocontestId = data.Description.split("/");
         console.log("photocontestId-----------------", photocontestId);
         Photographer.findOneAndUpdate({
-            _id: photocontestId[2]
+            _id: photocontestId[1]
         }, {
             $push: {
-                "contest": {
-                    $each: photocontestId[1]
-                }
-            }
+                "contest": photocontestId[2],
+            },
+            photoContestPackage: photocontestId[0]
         }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
