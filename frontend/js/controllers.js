@@ -2775,6 +2775,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (data.data.description.split('/')[0] != "featured") {
                     $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
 
+                } else if (data.data.description.split('/')[0] == "PackageUpdateForThree") {
+                    $scope.msg = "You have entered to 3 photos Photo Contest";
+
+                } else if (data.data.description.split('/')[0] == "PackageUpdateForSix") {
+                    $scope.msg = "You have entered to 6 photos Photo Contest";
+
+                } else if (data.data.description.split('/')[0] == "PackageUpdateForNine") {
+                    $scope.msg = "You have entered to 9 photos Photo Contest";
+
                 } else {
                     $scope.msg = "You are now registered as a Featured Photographer for the month of " + data
                         .data.photographer.month;

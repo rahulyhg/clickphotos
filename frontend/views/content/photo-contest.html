@@ -23,11 +23,11 @@
                         <li id="tab2" ng-click="step = 2" id="tab2" ng-class="{'active': step == 2}">STEP 2</li>
                     </div>
                 </div>
-                <div class="inline-block">
+                <!--<div class="inline-block">
                     <div ng-class="{'disabled': isLoggedIn ==null}">
                         <li id="tab3" ng-click="step = 3" id="tab3" ng-class="{'active': step == 3}">STEP 3</li>
                     </div>
-                </div>
+                </div>-->
             </ul>
             <div class="contest__stp1" ng-if="step == 1">
                 <div class="col-md-6 col-sm-6 pad-right5">
@@ -160,11 +160,11 @@
                         <input type="checkbox" name="terms" id="terms">
                         <label for="terms">I agree to the terms and conditions</label>
                     </div>
-                    <p><button class="btn orange-btn">Proceed to Pay</button></p>
+                    <!--<p><button class="btn orange-btn">Proceed to Pay</button></p>-->
                 </div>
 
             </div>
-            <div class="contest__stp3" ng-if="step == 3">
+            <!--<div class="contest__stp3" ng-if="step == 3">
                 <div class="row" ng-repeat="package in packageChunk">
                     <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="images in package">
 
@@ -182,7 +182,7 @@
                 <div class="submit-btn">
                     <p class="text-center"><button class="btn orange-btn" ng-click="uploadContestPhotos()">Submit</button></p>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </section>

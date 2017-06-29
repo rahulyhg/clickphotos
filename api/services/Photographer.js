@@ -1529,7 +1529,7 @@ var model = {
                 }
             }
 
-        })
+        });
     },
 
     findTotalPriceOfGold: function (data, callback) {
