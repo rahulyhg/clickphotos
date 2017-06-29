@@ -303,8 +303,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //console.log(data)
                     $scope.showAllTabs = {};
                     $scope.photographerData = data.data;
-                    $scope.tab4Hide = parseInt($scope.photographerData.contest.length);
-                    console.log("tab4Hide", $scope.tab4Hide);
+
                     if (!_.isEmpty($scope.photographerData.package)) {
                         if (!_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
                             $scope.showAllTabs = 'show';
