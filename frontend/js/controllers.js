@@ -311,7 +311,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             var packages = [0, 1, 2];
                         } else if ($scope.photographerData.photoContestPackage == "6") {
                             var packages = [0, 1, 2, 3, 4, 5];
-                        } else {
+                        } else if ($scope.photographerData.photoContestPackage == "9") {
                             var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
                         }
                         $scope.packageChunk = _.chunk(packages, 3);
@@ -2497,20 +2497,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.uploadContestPhotos = function () {
-            var contestInput = {
-                _id: $.jStorage.get("photographer")._id,
-                contestId: [$stateParams.photoContestId]
-            }
-            NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
+            // var contestInput = {
+            //     _id: $.jStorage.get("photographer")._id,
+            //     contestId: [$stateParams.photoContestId]
+            // }
+            // NavigationService.apiCallWithData('Photographer/addcontestParticipant', contestInput, function (contestOutput) {
 
-                if (contestOutput.value) {
-                    toastr.success("Participated Successfully", "Successful");
-                    $state.go("photographer");
-                } else {
-                    toastr.error("There was some error in uploading your photos", "error");
-                }
-                $state.go("photographer");
-            })
+            //     if (contestOutput.value) {
+            //         toastr.success("Participated Successfully", "Successful");
+            //         $state.go("photographer");
+            //     } else {
+            //         toastr.error("There was some error in uploading your photos", "error");
+            //     }
+            //     $state.go("photographer");
+            // })
+            state.go();
         }
 
 
