@@ -264,13 +264,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //Function to change ths plus & minus sign in photo contest tab
         $scope.imgUrl = 'frontend/img/plus.png';
-        $scope.changeSign = function () {
-            if ($scope.imgUrl === 'frontend/img/plus.png') {
-                $scope.imgUrl = 'frontend/img/minus.png';
+        $scope.changeSign = function (imgUrl) {
+            if (imgUrl === 'frontend/img/plus.png') {
+                return 'frontend/img/minus.png';
             } else {
-                $scope.imgUrl = 'frontend/img/plus.png';
+                // $scope.imgUrl = 
+                return 'frontend/img/plus.png';
             }
         }
+
+        $scope.status = {
+            isCustomHeaderOpen: false,
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
 
 
 
@@ -297,8 +304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //console.log(data)
                     $scope.showAllTabs = {};
                     $scope.photographerData = data.data;
-                    $scope.tab4Hide = parseInt($scope.photographerData.contest.length);
-                    console.log("tab4Hide", $scope.tab4Hide);
+
                     if (!_.isEmpty($scope.photographerData.package)) {
                         if (!_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
                             $scope.showAllTabs = 'show';
@@ -1115,7 +1121,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     toastr.error('Incorrect OTP!');
                 }
             });
-        }
+        };
 
         $scope.resetPass = function (formdata) {
             formdata._id = $scope.id;
@@ -1885,21 +1891,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //feature photographer end
 
         //all categories
-        formData = {};
-        formData._id = $stateParams.catid;
-        NavigationService.apiCallWithData("Categories/getAll", formData, function (data) {
+        // formData = {};
+        // formData._id = $stateParams.catid;
+        NavigationService.callApi("Categories/getAll", function (data) {
             // console.log("catdata", data);
             if (data.value === true) {
                 $scope.category = data.data;
                 $scope.showlessCatImages = _.slice($scope.category, 0, 4);
-                //console.log("Categories", $scope.category)
+                console.log("Categories", $scope.category);
+                console.log("showlessCatImages", $scope.showlessCatImages);
+
             }
         });
         //all categories end
-
+        $scope.shbtn = true;
         //loadmore for categories
-        $scope.LoadMore = function () {
+        $scope.LoadMoreCat = function () {
             $scope.showlessCatImages = $scope.category;
+            $scope.shbtn = false;
+        };
+
+        $scope.LoadLessCat = function () {
+            $scope.showlessCatImages = $scope.showlessCatImages;
+            $scope.shbtn = true;
         };
         //loadmore for categories end
 
@@ -2434,10 +2448,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, {
             //     "photographerId._id": $scope.previousContest.winner,
             // });
-            $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, function (o) {
-                return o.photographerId._id == $scope.previousContest.winner;
-            });
-            console.log("winnerdetails", $scope.previousContestWinner.Photos);
+
+            if (!_.isEmpty($scope.previousContest)) {
+                $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, function (o) {
+                    return o.photographerId._id == $scope.previousContest.winner;
+                });
+                console.log("winnerdetails", $scope.previousContestWinner.Photos);
+            }
         })
 
 
@@ -2787,13 +2804,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForThree") {
-                    $scope.msg = "You have entered to 3 photos Photo Contest";
+                    $scope.msg = "Thankyou! You can start uploading your photos now!";
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForSix") {
-                    $scope.msg = "You have entered to 6 photos Photo Contest";
+                    $scope.msg = "Thankyou! You can start uploading your photos now!";
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForNine") {
-                    $scope.msg = "You have entered to 9 photos Photo Contest";
+                    $scope.msg = "Thankyou! You can start uploading your photos now!";
 
                 } else {
                     $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
