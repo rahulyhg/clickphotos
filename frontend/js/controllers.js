@@ -355,7 +355,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
                             console.log("contestdata", data.data);
                             $scope.photographerContestData = data.data;
-                        })
+                        });
                     }
 
                     $scope.validDateForSilver = new Date($scope.photographerData.silverPackageBroughtDate);
