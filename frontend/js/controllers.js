@@ -2713,7 +2713,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id;
             console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
-                console.log(data);
+                console.log("--------------------------------------", data);
                 window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
             });
         };
