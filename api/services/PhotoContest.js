@@ -248,11 +248,11 @@ var model = {
         var photocontestId = data.Description.split("/");
         console.log("photocontestId", photocontestId);
         PhotoContest.findOneAndUpdate({
-            _id: photocontestId[1]
+            _id: photocontestId[2]
         }, {
             $push: {
                 contestParticipant: {
-                    photographerId: photocontestId[2]
+                    photographerId: photocontestId[1]
                 }
             }
         }, {
@@ -295,6 +295,32 @@ var model = {
                     callback(null, "noDataFound");
                 } else {
                     callback(null, found);
+                }
+            }
+        });
+    },
+
+    addcontestParticipant: function (data, callback) {
+        var photocontestId = data.Description.split("/");
+        console.log("photocontestId-----------------", photocontestId);
+        Photographer.findOneAndUpdate({
+            _id: photocontestId[1]
+        }, {
+            $push: {
+                "contest": photocontestId[2],
+            },
+            photoContestPackage: photocontestId[0]
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
                 }
             }
         });
