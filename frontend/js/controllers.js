@@ -2460,6 +2460,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     var input = {
                         photographerId: $.jStorage.get('photographer')._id,
                     }
+                    $scope.photoContestPackage = $.jStorage.get('photographer').photoContestPackage;
                     NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
                         console.log("contestdata", data.data);
                         console.log($stateParams.catid)
