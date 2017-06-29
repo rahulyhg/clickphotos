@@ -264,11 +264,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //Function to change ths plus & minus sign in photo contest tab
         $scope.imgUrl = 'frontend/img/plus.png';
-        $scope.changeSign = function () {
-            if ($scope.imgUrl === 'frontend/img/plus.png') {
-                $scope.imgUrl = 'frontend/img/minus.png';
+        $scope.changeSign = function (imgUrl) {
+            if (imgUrl === 'frontend/img/plus.png') {
+                return 'frontend/img/minus.png';
             } else {
-                $scope.imgUrl = 'frontend/img/plus.png';
+                // $scope.imgUrl = 
+                return 'frontend/img/plus.png';
             }
         }
 
@@ -2803,13 +2804,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForThree") {
-                    $scope.msg = "You have entered to 3 photos Photo Contest";
+                    $scope.msg = "Thankyou! You can start uploading your photos now!";
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForSix") {
-                    $scope.msg = "You have entered to 6 photos Photo Contest";
+                    $scope.msg = "Thankyou! You can start uploading your photos now!";
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForNine") {
-                    $scope.msg = "You have entered to 9 photos Photo Contest";
+                    $scope.msg = "Thankyou! You can start uploading your photos now!";
 
                 } else {
                     $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
