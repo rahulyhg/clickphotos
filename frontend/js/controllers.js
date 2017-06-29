@@ -325,24 +325,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.packageChunk = _.chunk(packages, 3);
                     }
 
-                    $scope.uploadImage = function (imagesData) {
+                    $scope.uploadImageContest = function (imagesData) {
                         var input = {
                             _id: $scope.contestIdModal,
                             id: $.jStorage.get("photographer")._id,
                             photos: [imagesData.image]
                         }
+                        console.log("imageData", input)
                         NavigationService.uploadContestPhotos(input, function (data) {
                             var input = {
                                 photographerId: $.jStorage.get('photographer')._id,
                             }
+                            console.log("for upload", data);
                             NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
                                 console.log("contestdata", data.data);
                                 $scope.photographerContestData = data.data;
                                 toastr.success("image uploaded sucessfully");
                                 $scope.imgModal.close();
                                 /************************************************ */
-                            })
-                        })
+                            });
+                        });
                     }
 
                     if (!_.isEmpty($scope.photographerData.contest)) {
@@ -778,6 +780,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 size: 'lg'
             });
         };
+
+        $scope.uploadImgForContest = function (contest) {
+            $scope.contestIdModal = contest;
+            $scope.imgModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/photoContestModal.html",
+                scope: $scope,
+                windowClass: 'upload-pic',
+                backdropClass: 'black-drop',
+                size: 'lg'
+            });
+        };
+
 
         $scope.uploadImagePic = function (formdata) {
             //console.log("im in upload image", formdata);
@@ -2505,18 +2520,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             })
         }
 
-        $scope.uploadImg = function () {
-            $scope.imgModal = $uibModal.open({
-                animation: true,
-                templateUrl: "frontend/views/modal/photoContestModal.html",
-                scope: $scope,
-                windowClass: 'upload-pic',
-                backdropClass: 'black-drop',
-                size: 'lg'
-            });
-        };
-
-
 
         $scope.uploadContestPhotos = function () {
             // var contestInput = {
@@ -2804,13 +2807,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForThree") {
-                    $scope.msg = "Thankyou! You can start uploading your photos now!";
+                    $scope.msg = "Thank you! You can start uploading your photos now!";
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForSix") {
-                    $scope.msg = "Thankyou! You can start uploading your photos now!";
+                    $scope.msg = "Thank you! You can start uploading your photos now!";
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForNine") {
-                    $scope.msg = "Thankyou! You can start uploading your photos now!";
+                    $scope.msg = "Thank you! You can start uploading your photos now!";
 
                 } else {
                     $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
