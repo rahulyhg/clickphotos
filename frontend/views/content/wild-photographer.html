@@ -233,7 +233,8 @@
                 </div>
             </div>
             <div class="text-center ">
-                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMore()">View All</button>
+                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreCat();" ng-show="shbtn">View All</button>
+                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreCat()" ng-show="!shbtn"> View less</button>
                 <!--<a ui-sref="categories" class="btn whit-btn view-orang" role="button">View All</a>-->
             </div>
         </div>
