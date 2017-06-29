@@ -2475,7 +2475,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         var packages = [0, 1, 2];
                     } else if ($.jStorage.get("photographer").photoContestPackage == "6") {
                         var packages = [0, 1, 2, 3, 4, 5];
-                    } else {
+                    } else if ($.jStorage.get("photographer").photoContestPackage == "9") {
                         var packages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
                     }
                     $scope.packageChunk = _.chunk(packages, 3);
@@ -2559,7 +2559,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.step = "2";
         } else {
             $scope.steps = false;
-            $scope.step = "2";
+            $scope.step = "1";
         }
         // console.log("step",$scope.step)
         $scope.signUp = function () {
