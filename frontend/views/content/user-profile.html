@@ -472,51 +472,50 @@
         <!-- for send enquiry popup-->
         <div class="send_enquirySlidebar" enquiry-directive="slide">
             <div class="send_enquiry">
-                <p>
-                    <a class="btn orange-btn " type="button" href="#" ng-click="sendEnquiry()"> contact photographer</a>
-                </p>
+                <a class="btn orange-btn " type="button" href="#" ng-click="sendEnquiry()"> contact photographer</a>
             </div>
-            <div class="col-md-12 padd35">
-                <div class="enquiry">
-                    <form name="formEnquiry">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="enquirerName" placeholder="Name" ng-model="enquiryInfo.enquirerName" required>
-                                    <!--<div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>-->
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="enquirerEmail" placeholder="Email Address" ng-model="enquiryInfo.enquirerEmail"
-                                        required>
-                                </div>
-                                <!--<p>Please Enter Your Email</p>-->
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group relative " ng-init="enquiryInfo.enquirercntryCode = '+91'">
-                                    <input type="tel" class="form-control mobNo" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
-                                        required>
-                                    <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
-                                    <input type="tel" class="form-control cntry-code" value="{{enquiryInfo.enquirercntryCode}}" id="enquirercntryCode" ng-model="enquiryInfo.enquirercntryCode">
-                                </div>
-                                <!--<p>Please Enter Your Mobile No</p>-->
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-                                            close-text="Close" ng-model="enquiryInfo.enquirerdate">
-                                        <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openDatePicker();"><i class="glyphicon glyphicon-calendar" ></i></button>
-                                        </span>
+            <div class="row">
+                <div class="col-md-12 padd35">
+                    <div class="enquiry">
+                        <form name="formEnquiry">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="enquirerName" placeholder="Name" ng-model="enquiryInfo.enquirerName" required>
+                                        <!--<div ng-show="formEnquiry.userName.$error.required && formEnquiry.userName.$touched">Please Enter Your Name</div>-->
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="enquirerEmail" placeholder="Email Address" ng-model="enquiryInfo.enquirerEmail"
+                                            required>
+                                    </div>
+                                    <!--<p>Please Enter Your Email</p>-->
+                                </div>
                             </div>
-                            <!--<div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group relative " ng-init="enquiryInfo.enquirercntryCode = '+91'">
+                                        <input type="tel" class="form-control mobNo" id="enquirerMobileNo" placeholder="Mobile No" ng-model="enquiryInfo.enquirerMobileNo"
+                                            required>
+                                        <!--<span class="cntry-code" contenteditable="true"><i class="fa fa-plus"></i></span>-->
+                                        <input type="tel" class="form-control cntry-code" value="{{enquiryInfo.enquirercntryCode}}" id="enquirercntryCode" ng-model="enquiryInfo.enquirercntryCode">
+                                    </div>
+                                    <!--<p>Please Enter Your Mobile No</p>-->
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+                                                close-text="Close" ng-model="enquiryInfo.enquirerdate">
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openDatePicker();"><i class="glyphicon glyphicon-calendar" ></i></button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="col-md-6">
                                 <div class="form-group">
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown">Needed on <i class="fa fa-caret-down" aria-hidden="true"></i></button>
@@ -528,21 +527,22 @@
                                     </div>
                                 </div>
                             </div>-->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea class="form-control" cols="30" rows="5" id="enquirerMsg" ng-model="enquiryInfo.enquirerMsg" required></textarea>
-                                </div>
-                                <!--<p>Please Enter Some Comments</p>-->
                             </div>
-                        </div>
-                        <div class="row">
-                            <!--emailerFunction
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" cols="30" rows="5" id="enquirerMsg" ng-model="enquiryInfo.enquirerMsg" required></textarea>
+                                    </div>
+                                    <!--<p>Please Enter Some Comments</p>-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--emailerFunction
                         sendEnqu(currentProfile)-->
-                            <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile)">Send</a></p>
-                        </div>
-                    </form>
+                                <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile)">Send</a></p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
