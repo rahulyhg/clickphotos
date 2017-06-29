@@ -124,7 +124,7 @@
                                 <h4><i class="fa fa-inr"></i> 500</h4>
                             </div>
                         </div>
-                        <p><button class="btn orange-btn" ng-click="PackageUpdateForThree()">Buy</button></p>
+                        <p><button class="btn orange-btn" ng-click="PackageUpdateForThree()" ng-disabled="accept!=true">Buy</button></p>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-class="{'disabled': photoContestPackage =='PackageUpdateForSix' || photoContestPackage =='PackageUpdateForNine'} ">
                         <div class="contest__stp2--box-shd">
@@ -135,7 +135,7 @@
 
                             </div>
                         </div>
-                        <p><button class="btn orange-btn" ng-click="PackageUpdateForSix()">Buy</button></p>
+                        <p><button class="btn orange-btn" ng-click="PackageUpdateForSix()" ng-disabled="accept!=true">Buy</button></p>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-class="{'disabled': photoContestPackage =='PackageUpdateForNine'}">
                         <div class="contest__stp2--box-shd">
@@ -145,7 +145,7 @@
                                 <h4><i class="fa fa-inr"></i> 1500</h4>
                             </div>
                         </div>
-                        <p><button class="btn orange-btn" ng-click="PackageUpdateForNine()">Buy</button></p>
+                        <p><button class="btn orange-btn" ng-click="PackageUpdateForNine()" ng-disabled="accept!=true">Buy</button></p>
                     </div>
                 </div>
                 <div class="contest__stp2__terms">
@@ -157,7 +157,7 @@
                         <li>Entry will be considered only after full payment is received</li>
                     </ul>
                     <div class="custom-check">
-                        <input type="checkbox" name="terms" id="terms">
+                        <input type="checkbox" name="terms" id="terms" ng-model="accept">
                         <label for="terms">I agree to the terms and conditions</label>
                     </div>
                     <!--<p><button class="btn orange-btn">Proceed to Pay</button></p>-->

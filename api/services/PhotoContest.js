@@ -6,7 +6,7 @@ var schema = new Schema({
         type: String,
         enum: ["true", "false"]
     },
-    winingPrice: Number,
+    winingPrice: String,
     contestCategory: {
         type: String,
         enum: ["three", "six", "nine"]
@@ -314,16 +314,8 @@ var model = {
             if (err) {
                 callback(err, null);
             } else {
-
                 if (found) {
-                    var result = _.uniqBy(found.contest, photocontestId[2]);
-
-                    console.log("result*********************************", result);
-                    if (!_.isEmpty(result)) {
-                        callback(err, null);
-                    } else {
-                        callback(null, found);
-                    }
+                    callback(null, found);
                 } else {
                     callback(null, {
                         message: "No Data Found"
