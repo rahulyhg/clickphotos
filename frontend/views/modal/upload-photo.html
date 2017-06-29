@@ -42,7 +42,7 @@
                     <div class="upload-pic">
                         <!--<input type="file" value="" />-->
                         <div class="upload-imgbtn">{{imagesData.category}}
-                            <button type="button" class="btn btn-default" ng-click="uploadImage(imagesData)" ng-disabled="!imagesData.image">Upload Image</button>
+                            <button type="button" class="btn btn-default" ng-click="uploadImagePic(imagesData)" ng-disabled="!imagesData.image">Upload Image</button>
                         </div>
                         <div class="upload-dire">
                             <upload-image ng-model="imagesData.image" no-view ng-callback="imageSize"></upload-image>

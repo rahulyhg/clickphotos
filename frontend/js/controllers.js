@@ -764,7 +764,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.contestIdModal = contest;
             $scope.imgModal = $uibModal.open({
                 animation: true,
-                templateUrl: "frontend/views/modal/photoContestModal.html",
+                templateUrl: "frontend/views/modal/upload-photo.html",
                 scope: $scope,
                 windowClass: 'upload-pic',
                 backdropClass: 'black-drop',
@@ -772,7 +772,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.uploadImage = function (formdata) {
+        $scope.uploadImagePic = function (formdata) {
             //console.log("im in upload image", formdata);
             formdata.category = $scope.imageData.category;
             formdata._id = $.jStorage.get("photographer")._id;
@@ -2428,8 +2428,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.previousContest = _.find($scope.contest, {
                 status: "false"
             });
-            console.log("participent", $scope.previousContest.contestParticipant)
-            console.log($scope.previousContest.winner)
+            // console.log("participent", $scope.previousContest.contestParticipant)
+            // console.log($scope.previousContest.winner)
             // $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, {
             //     "photographerId._id": $scope.previousContest.winner,
             // });
