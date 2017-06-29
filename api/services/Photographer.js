@@ -1582,31 +1582,6 @@ var model = {
                 }
             }
         });
-    },
-
-    addcontestParticipant: function (data, callback) {
-        Photographer.findOneAndUpdate({
-            _id: data._id
-        }, {
-            $push: {
-                "contest": {
-                    $each: data.contestId
-                }
-            }
-        }).exec(function (err, found) {
-            if (err) {
-                callback(err, null);
-            } else {
-
-                if (found) {
-                    callback(null, found);
-                } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
-                }
-            }
-        });
     }
 
 };

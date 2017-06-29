@@ -298,6 +298,33 @@ var model = {
                 }
             }
         });
+    },
+
+    addcontestParticipant: function (data, callback) {
+        var photocontestId = data.Description.split("/");
+        console.log("photocontestId-----------------", photocontestId);
+        Photographer.findOneAndUpdate({
+            _id: photocontestId[2]
+        }, {
+            $push: {
+                "contest": {
+                    $each: photocontestId[1]
+                }
+            }
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback(null, {
+                        message: "No Data Found"
+                    });
+                }
+            }
+        });
     }
 
 };
