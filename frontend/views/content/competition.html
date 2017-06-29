@@ -32,8 +32,8 @@
                     <h3>Contest Theme:<span>{{previousContest.contestName}}</span></h3>
                     <h3 class="brd-none">Photo Entries:</h3>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="compet__prev-contest__desc--shadow" ng-repeat="photo in previousContestWinner.Photos ">
+                        <div class="col-md-4" ng-repeat="photo in previousContestWinner.Photos ">
+                            <div class="compet__prev-contest__desc--shadow">
                                 <img ng-src="{{photo | serverimage}}" alt="" class="img-responsive">
                             </div>
                         </div>
