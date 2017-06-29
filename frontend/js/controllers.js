@@ -292,14 +292,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
-                $scope.tab4Hide = parseInt($scope.photographerData.contest.length);
-
-
                 console.log($scope.tab4Hide);
                 if (data.value === true) {
                     //console.log(data)
                     $scope.showAllTabs = {};
                     $scope.photographerData = data.data;
+                    $scope.tab4Hide = parseInt($scope.photographerData.contest.length);
+                    console.log("tab4Hide", $scope.tab4Hide);
                     if (!_.isEmpty($scope.photographerData.package)) {
                         if (!_.isEmpty($scope.photographerData.silverPackageBroughtDate) && !_.isEmpty($scope.photographerData.goldPackageBroughtDate)) {
                             $scope.showAllTabs = 'show';
@@ -2777,9 +2776,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formData._id = $stateParams.id;
         NavigationService.apiCallWithData("Order/getOne", formData, function (data) {
             if (data.value === true) {
-                if (data.data.description.split('/')[0] != "featured") {
-                    $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
-
+                if (data.data.description.split('/')[0] == "featured") {
+                    $scope.msg = "You are now registered as a Featured Photographer for the month of " + data
+                        .data.photographer.month;
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForThree") {
                     $scope.msg = "You have entered to 3 photos Photo Contest";
 
@@ -2790,15 +2796,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.msg = "You have entered to 9 photos Photo Contest";
 
                 } else {
-                    $scope.msg = "You are now registered as a Featured Photographer for the month of " + data
-                        .data.photographer.month;
-                    formData = {};
-                    formData._id = $.jStorage.get("photographer")._id;
-                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
-                        if (data.value === true) {
-                            $.jStorage.set("photographer", data.data);
-                        }
-                    });
+                    $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
+
                 }
             }
         });

@@ -316,7 +316,14 @@ var model = {
             } else {
 
                 if (found) {
-                    callback(null, found);
+                    var result = _.uniqBy(found.contest, photocontestId[2]);
+
+                    console.log("result*********************************", result);
+                    if (!_.isEmpty(result)) {
+                        callback(err, null);
+                    } else {
+                        callback(null, found);
+                    }
                 } else {
                     callback(null, {
                         message: "No Data Found"
