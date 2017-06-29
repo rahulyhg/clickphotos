@@ -292,7 +292,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                $scope.tab4Hide = parseInt($scope.photographerData.contest.length);
 
+
+                console.log($scope.tab4Hide);
                 if (data.value === true) {
                     //console.log(data)
                     $scope.showAllTabs = {};
@@ -338,6 +341,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
 
                     if (!_.isEmpty($scope.photographerData.contest)) {
+                        $scope.tab4Hide = $scope.photographerData.contest.length
+
                         //bring data for contest for particularuser
                         var input = {
                             photographerId: $.jStorage.get('photographer')._id,
