@@ -1723,7 +1723,9 @@ $brand-holder: #ccc !default;
         color: white;
         text-transform: capitalize;
     }
-    .upload-photobox {
+    .upload-photobox,
+    .upload-photobox-server {
+        position: relative;
         border: 1px solid #ededed;
         @include padding(5px);
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
@@ -1731,6 +1733,17 @@ $brand-holder: #ccc !default;
         background-size: cover!important;
         background-clip: content-box!important;
         overflow: hidden;
+    }
+    .edit-image {
+        @include position(absolute,
+        5px 5px 5px 5px);
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+    }
+    .upload-photobox-server:hover {
+        .edit-image {
+            display: block;
+        }
     }
     .photobox-txt {
         border: 1px solid #ededed;

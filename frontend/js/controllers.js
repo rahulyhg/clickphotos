@@ -272,6 +272,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
+        $scope.status = {
+            isCustomHeaderOpen: false,
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
+
 
 
         NavigationService.callApi("PayAmount/getAll", function (data) {
@@ -1114,7 +1120,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     toastr.error('Incorrect OTP!');
                 }
             });
-        }
+        };
 
         $scope.resetPass = function (formdata) {
             formdata._id = $scope.id;
@@ -1884,21 +1890,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //feature photographer end
 
         //all categories
-        formData = {};
-        formData._id = $stateParams.catid;
-        NavigationService.apiCallWithData("Categories/getAll", formData, function (data) {
+        // formData = {};
+        // formData._id = $stateParams.catid;
+        NavigationService.callApi("Categories/getAll", function (data) {
             // console.log("catdata", data);
             if (data.value === true) {
                 $scope.category = data.data;
                 $scope.showlessCatImages = _.slice($scope.category, 0, 4);
-                //console.log("Categories", $scope.category)
+                console.log("Categories", $scope.category);
+                console.log("showlessCatImages", $scope.showlessCatImages);
+
             }
         });
         //all categories end
-
+        $scope.shbtn = true;
         //loadmore for categories
-        $scope.LoadMore = function () {
+        $scope.LoadMoreCat = function () {
             $scope.showlessCatImages = $scope.category;
+            $scope.shbtn = false;
+        };
+
+        $scope.LoadLessCat = function () {
+            $scope.showlessCatImages = $scope.showlessCatImages;
+            $scope.shbtn = true;
         };
         //loadmore for categories end
 
@@ -2433,10 +2447,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, {
             //     "photographerId._id": $scope.previousContest.winner,
             // });
-            $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, function (o) {
-                return o.photographerId._id == $scope.previousContest.winner;
-            });
-            console.log("winnerdetails", $scope.previousContestWinner.Photos);
+
+            if (!_.isEmpty($scope.previousContest)) {
+                $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, function (o) {
+                    return o.photographerId._id == $scope.previousContest.winner;
+                });
+                console.log("winnerdetails", $scope.previousContestWinner.Photos);
+            }
         })
 
 
