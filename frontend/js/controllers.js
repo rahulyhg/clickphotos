@@ -1324,8 +1324,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             spec.specialityString = spec.specialityString + ' | ' + spec1.name;
                             //console.log("$scope.specialityString---", spec.specialityString)
                         }
-                    })
-                })
+                    });
+                });
             }
         });
 
@@ -1435,7 +1435,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //     // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
                     // } else {
                     //     //  toastr.warning('Error submitting the form', 'Please try again');
-                )
+                );
                 $scope.bigImageCategory = _.orderBy($scope.bigImageCategory, ['order'], ['asc']);
                 $scope.smallImageCategory = _.orderBy($scope.smallImageCategory, ['order'], ['asc']);
                 $scope.smallCat = _.chunk($scope.smallImageCategory, 2);
@@ -1497,7 +1497,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     } else {
                         $scope.specialityString = $scope.specialityString + ' | ' + spec.name;
                     }
-                })
+                });
                 _.forEach($scope.userData.location, function (loc) {
                     //only required the students avilable projects
                     if (_.isEmpty($scope.locString)) {
@@ -1516,7 +1516,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
                 });
                 //get all related photographers
-                formdata1 = {}
+                formdata1 = {};
                 formdata1.speciality = $scope.userData.speciality;
                 NavigationService.apiCallWithData("Photographer/getRelatedPhotographers", formdata1, function (data) {
                     if (data.value === true) {

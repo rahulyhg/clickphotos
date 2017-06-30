@@ -16,7 +16,11 @@ var schema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Photographer"
         },
-        Photos: [String]
+        Photos: [String],
+        orderId: {
+            type: Schema.Types.ObjectId,
+            ref: "Order"
+        }
     }],
     winner: {
         type: Schema.Types.ObjectId,
@@ -38,7 +42,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('PhotoContest', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "contestParticipant.photographerId winner", "contestParticipant.photographerId winner"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "contestParticipant.photographerId winner contestParticipant.orderId", "contestParticipant.photographerId winner contestParticipant.orderId "));
 var model = {
 
     findOnePhotoContest: function (data, callback) {
@@ -218,7 +222,8 @@ var model = {
             _id: data._id,
             contestParticipant: {
                 $elemMatch: {
-                    photographerId: data.id
+                    photographerId: data.id,
+                    orderId: data.oid
                 }
             }
         }, {
@@ -252,7 +257,8 @@ var model = {
         }, {
             $push: {
                 contestParticipant: {
-                    photographerId: photocontestId[1]
+                    photographerId: photocontestId[1],
+                    orderId: photocontestId[3]
                 }
             }
         }, {
@@ -282,8 +288,27 @@ var model = {
                 }
             },
             {
+                $lookup: {
+                    "from": "orders",
+                    "localField": "contestParticipant.orderId",
+                    "foreignField": "_id",
+                    "as": "contestParticipant.orderId"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$contestParticipant.orderId",
+                    "preserveNullAndEmptyArrays": true
+                }
+            },
+            {
                 $match: {
                     "contestParticipant.photographerId": ObjectId(data.photographerId)
+                }
+            },
+            {
+                $match: {
+                    "contestParticipant.orderId._id": ObjectId(data.orderId)
                 }
             }
         ], function (err, found) {
