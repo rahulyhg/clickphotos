@@ -280,6 +280,9 @@
             padding: 0 35px;
         } //End of users.html
         //Start of user-profile
+        .other-section {
+            overflow: hidden;
+        }
         .userprof-bg {
             margin-top: 55px;
             .userbg-img {
@@ -1317,6 +1320,9 @@
             }
         } //End of user.html page
         //Start of user-profile.html
+        .other-section {
+            overflow: hidden;
+        }
         .main-cont {
             margin: 60px 65px;
         }
@@ -1353,6 +1359,12 @@
         }
         .send-enquiry {
             top: 20%;
+            .enquiry-menu-out {
+                @include transform(translateX(-195px));
+            }
+            .enquiry-menu-in {
+                @include transform(translateX(-610px));
+            }
             .mobNo {
                 width: calc(100% - 35%);
             }
@@ -1518,6 +1530,11 @@
             }
             span {
                 font-size: 17.25px;
+            }
+        }
+        .send-enquiry {
+            .enquiry-menu-out {
+                @include transform(translateX(-205px));
             }
         }
     }
