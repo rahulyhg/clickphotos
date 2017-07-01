@@ -313,6 +313,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // }
                     }
 
+
                     if ($scope.photographerData) {
                         if ($scope.photographerData.photoContestPackage == "PackageUpdateForThree") {
                             var packages = [0, 1, 2];
@@ -325,9 +326,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
 
                     $scope.uploadImageContest = function (imagesData) {
+                        console.log("for ");
                         var input = {
                             _id: $scope.contestIdModal,
                             id: $.jStorage.get("photographer")._id,
+                            oid: $scope.orderIdModal,
                             photos: [imagesData.image]
                         }
                         console.log("imageData", input)
@@ -338,9 +341,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             console.log("for upload", data);
                             NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
                                 console.log("contestdata", data.data);
-                                $scope.photographerContestData = data.data;
+                                $scope.contestDetails = data.data;
                                 toastr.success("image uploaded sucessfully");
                                 $scope.imgModal.close();
+
                                 /************************************************ */
                             });
                         });
@@ -353,9 +357,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         var input = {
                             photographerId: $.jStorage.get('photographer')._id,
                         }
+                        /*****************getting all contest of give photographer***************** */
                         NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+
+                            $scope.contestDetails = data.data;
                             console.log("contestdata", data.data);
-                            $scope.photographerContestData = data.data;
+
                         });
                     }
 
@@ -780,8 +787,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.uploadImgForContest = function (contest) {
+        $scope.uploadImgForContest = function (contest, order) {
             $scope.contestIdModal = contest;
+            $scope.orderIdModal = order;
             $scope.imgModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/photoContestModal.html",
