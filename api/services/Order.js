@@ -100,7 +100,9 @@ var model = {
         if (data._id) {
             this.findOneAndUpdate({
                 _id: data._id
-            }, data).exec(function (err, updated) {
+            }, data, {
+                new: true
+            }).exec(function (err, updated) {
                 if (err) {
                     console.log(err);
                     callback(err, null);
@@ -112,6 +114,6 @@ var model = {
                 }
             });
         }
-    },
+    }
 };
 module.exports = _.assign(module.exports, exports, model);

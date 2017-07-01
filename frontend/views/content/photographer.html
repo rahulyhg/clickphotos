@@ -76,7 +76,7 @@
                         <span class="border-line"></span>
 
 
-                        <div class="inline-block" ng-click="tab = 4" ng-if="tab4Hide">
+                        <div class="inline-block">
                             <div class="btn-1" ng-click="tab = 4" ng-class="{'active':tab == 4}">
                                 <button type="button" class="btn btn-default btn-select">PHOTO CONTEST</button>
                                 <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
@@ -845,7 +845,7 @@
                                             <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="image in package">
                                                 <div class="upload-photobox" ng-if="!contest.contestParticipant.Photos[image]">
                                                     <div class="photobox-txt">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImg(contest._id);">
+                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImgForContest(contest._id);">
                                                         <br>
                                                         <h3>Upload Photos</h3>
                                                     </div>
