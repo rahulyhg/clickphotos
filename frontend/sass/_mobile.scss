@@ -343,31 +343,30 @@
                 width: 25px!important;
                 margin: 0 3px!important;
             }
-        }
-        .send_enquirySlidebar {
-            right: -68%;
-            width: 69%;
-            .padd35 {
-                padding: 0 25px;
-            }
-            .enquiry {
-                height: 315px;
-                padding-right: 16px;
-                overflow-y: scroll;
-                overflow-x: hidden;
-            }
-            .cntry-code {
-                width: 64px;
-            }
-            .mobNo {
-                width: calc(100% - 64px);
-                height: auto;
-                margin-left: 64px;
-            }
-        }
-        .showEnquery {
-            right: 0!important;
-        }
+        } // .send_enquirySlidebar {
+        //     right: -68%;
+        //     width: 69%;
+        //     .padd35 {
+        //         padding: 0 25px;
+        //     }
+        //     .enquiry {
+        //         height: 315px;
+        //         padding-right: 16px;
+        //         overflow-y: scroll;
+        //         overflow-x: hidden;
+        //     }
+        //     .cntry-code {
+        //         width: 64px;
+        //     }
+        //     .mobNo {
+        //         width: calc(100% - 64px);
+        //         height: auto;
+        //         margin-left: 64px;
+        //     }
+        // }
+        // .showEnquery {
+        //     right: 0!important;
+        // }
         .sec-tab p {
             font-size: 40px;
             line-height: 30px;
@@ -1351,6 +1350,12 @@
             .border-line {
                 padding: 9px 0px 6px;
             }
+        }
+        .send-enquiry {
+            top: 20%;
+            .mobNo {
+                width: calc(100% - 35%);
+            }
         } //End of user-profile.html
         //Start of feature-pht.html
         .full-tabs {
@@ -1458,6 +1463,20 @@
             }
         } //End of Thank You for gold, silver & sorry pages
         //Start of competation(Photo Contest UI)
+        .compet__prev-contest {
+            width: 100%;
+            h1 {
+                font-size: 50px;
+            }
+        }
+        .compet__contest {
+            h1 {
+                font-size: 35px;
+            }
+            h2 {
+                font-size: 25px;
+            }
+        }
         .contest {
             .contest__stp-btn {
                 li {

@@ -182,11 +182,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.testimonial = [{ // used for testimonials
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 0the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambledLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been",
-            ceo: "manan vora, CEO & founder Ting"
-        }, {
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 0the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambledLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been",
-            ceo: " manan vora, CEO & founder Ting"
+            name: 'Naveen Kumar',
+            text: "I am <b>Naveen Kumar</b> and I am a finance professional working for an MNC for over a decade now.Photography is my passion and I take special interest in Sports / Wedding / Pre-wedding and Studio Photography. I do photography independently as well as with other professional photographers.",
+            thought: 'I keep upgrading my gear frequently without digging into my salary income. Clickmania is a perfect platform for me.'
+            //ceo: "manan vora, CEO & founder Ting"
         }];
 
         // To scroll down to a particular div
@@ -1456,6 +1455,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+
         $scope.myUrl = $location.absUrl();
         // console.log("myUrl", $scope.myUrl);
 
@@ -1682,8 +1682,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //signup modal close
 
         // this function is used to show Send Enquiry navigation
-        $scope.sendEnquiry = function ($event) {
-            $scope.slide = !$scope.slide;
+        // $scope.sendEnquiry = function ($event) {
+        //     $scope.slide = !$scope.slide;
+        // };
+        $scope.rightSideNav = false; // For toggle sidenavigation
+        $scope.openRightSideNav = function () {
+            if (!$scope.rightSideNav) {
+                $('.enquiry-side-menu').addClass('enquiry-menu-in');
+                $('.enquiry-side-menu').removeClass('enquiry-menu-out');
+                $scope.rightSideNav = true;
+            } else {
+                $('.enquiry-side-menu').addClass('enquiry-menu-out');
+                $('.enquiry-side-menu').removeClass('enquiry-menu-in');
+                $scope.rightSideNav = false;
+            }
         };
         $scope.popup1 = {
             opened: false
