@@ -833,7 +833,7 @@
                 </div>
                 <div class="part-4" ng-if="tab == 4">
                     <div class="compete">
-                        <uib-accordion ng-repeat="contest in photographerContestData">
+                        <uib-accordion close-others="oneAtATime" ng-repeat="contest in contestDetails track by contest.contestParticipant.orderId">
                             <div class="contest2">
                                 <div uib-accordion-group class="panel-default">
                                     <uib-accordion-heading>
@@ -841,16 +841,16 @@
                                         <a class="pull-right pls-mns-sign" ng-click=" imgUrl=changeSign(imgUrl)"><img alt="ClickToExpand" class="img-responsive" ng-src="{{imgUrl}}"></a>
                                     </uib-accordion-heading>
                                     <div class="upload-photo">
-                                        <div class="row" ng-repeat="package in packageChunk">
-                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="image in package">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4 col-xs-12  text-center" ng-repeat="image in contest.contestParticipant.orderDescription">
                                                 <div class="upload-photobox" ng-if="!contest.contestParticipant.Photos[image]">
                                                     <div class="photobox-txt">
-                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImgForContest(contest._id);">
+                                                        <img src="frontend/img/competition/5.png" alt="Click To Add Image" class="img-responsive center-block" ng-click="uploadImgForContest(contest._id,contest.contestParticipant.orderId);">
                                                         <br>
                                                         <h3>Upload Photos</h3>
                                                     </div>
                                                 </div>
-                                                <div class="upload-photobox-server" style="background: url({{contest.contestParticipant.Photos[image] | serverimage}}) no-repeat center center"
+                                                <div class="upload-photobox-server" style="background: url('{{contest.contestParticipant.Photos[image] | serverimage}}') no-repeat center center;"
                                                     ng-if="contest.contestParticipant.Photos[image]">
                                                     <div class="edit-image">
                                                         <div class="edit-uploaded">

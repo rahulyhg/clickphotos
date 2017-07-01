@@ -307,10 +307,24 @@ var model = {
                 }
             },
             {
-                $match: {
-                    "contestParticipant.orderId._id": ObjectId(data.orderId)
+                $project: {
+                    _id: "$_id",
+                    contestName: "$contestName",
+                    contestParticipant: {
+                        orderId: "$contestParticipant.orderId._id",
+                        orderDescription: "$contestParticipant.orderId.description",
+                        Photos: "$contestParticipant.Photos"
+                    }
                 }
             }
+
+
+
+            // {
+            //      $match: {
+            //         "contestParticipant.orderId._id": ObjectId(data.orderId)
+            //      }
+            // }
         ], function (err, found) {
             if (err) {
                 // console.log(err);
@@ -319,7 +333,21 @@ var model = {
                 if (_.isEmpty(found)) {
                     callback(null, "noDataFound");
                 } else {
-                    callback(null, found);
+
+                    var finalResult = _.map(found, function (n) {
+                        var temp = _.split(n.contestParticipant.orderDescription,  '/', 1);
+
+                        if (temp[0] == "PackageUpdateForThree") {
+                            n.contestParticipant.orderDescription = [0, 1, 2];
+                        } else if (temp[0] == "PackageUpdateForSix") {
+                            n.contestParticipant.orderDescription = [0, 1, 2, 3, 4, 5];
+                        } else {
+                            n.contestParticipant.orderDescription = [];
+                        }
+
+                        return n;
+                    })
+                    callback(null, finalResult);
                 }
             }
         });
