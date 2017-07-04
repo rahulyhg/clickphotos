@@ -127,6 +127,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             url: "/thanks-gold",
             templateUrl: "frontend/views/template.html",
             controller: 'thanksGoldCtrl'
+        })
+        .state('artist-of-the-month', {
+            url: "/artist-of-the-month",
+            templateUrl: "frontend/views/template.html",
+            controller: 'ArtistCtrl'
         });
     $locationProvider.html5Mode(isproduction);
 });

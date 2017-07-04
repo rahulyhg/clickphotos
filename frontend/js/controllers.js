@@ -2863,3 +2863,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.name = $.jStorage.get("photographer").name;
         $scope.month = $.jStorage.get("photographer").month;
     })
+
+    .controller('ArtistCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("artist-of-the-month"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Artist"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+        $scope.boxes=[
+        {"Question":"Hi Anurita, tell us something about yourself.",
+        "Answer":"Hello!! I was born and brought up in Bangalore. After my education in Bishop Cotton School and CMS Jain college, I took up a job in the PR department of a corporate, but soon realized it was not my calling. That’s when I decided to follow my heart and become a makeup artist."
+        },
+        {"Question":"So, how did the switch happen?",
+        "Answer":"Actually, It was the mother of my best friend who put the thought in my mind. I used to visit my friend’s place pretty often and being girls we used to doll up for parties or going out somewhere. My friend’s mom noticed my knack for makeup and she suggested me to walk the path."
+        },
+        {"Question":"Quite interesting.",
+        "Answer":"Yes. Then I gave up my job and went to Dubai for an 8 week make up course by IMA, London. During the course, I learned a lot. The first half of the day was when our teachers taught us about various aspect of makeup. During the second half we got a chance to practice live."
+        },
+        {"Question":"And how did it change things?",
+        "Answer":"Well, everything. I came back to Bangalore and became a professional makeup artist. One by one I started to get work. Word of mouth spread fast and the social media also played a vital role. That’s how I am where I am today. But there is still a long way to go."
+        },
+        {"Question":"And what does the future hold? ",
+        "Answer":"I still want to gain more experience and eventually when the time is right, I want to start my own makeup academy in Bangalore."
+        },
+        {"Question":"Coming back to the topic of Bangalore, how do you see the city then and now?",
+        "Answer":"The city has changed beyond imagination. It was a green, quiet and relaxed city back in the days. All that has changed now. But I still love my city for what it is and the opportunities it provides to everyone."
+        },
+        {"Question":"What kind of makeup you enjoy doing the most?",
+        "Answer":"I enjoy doing makeup for catalogues and all other types, but nothing can match the satisfaction of doing a bridal makeup. I normally do a dry run a day prior to the big day. Yet, when the big days comes, the smile and the glow in the bride’s face is the biggest satisfaction that I can get as a makeup artist."
+        },
+        {"Question":"Anurita, you are quite photogenic yourself. Have you ever thought about being in front of the camera?",
+        "Answer":"No no, I am not very comfortable in front of the camera. That is my sister’s forte. She is an actress in the Kannada television industry. Her name is Ashita Chandrappa."
+        },
+        {"Question":"What about your love for dogs?",
+        "Answer":"I cannot imagine my life without a pet dog. I have had a dog since I was 4 years old. Currently I have Django. He is a 4 year old beagle and he is the love of my life."
+        },
+        {"Question":"How was your experience of working with clickmania ?",
+        "Answer":"It was a very nice experience. The team was very cool and non-interfering. Once I was given the brief, it was entirely left to me. Palak is a beautiful model and little Arjun made my day."
+        },
+        {"Question":"Thank you very much. We will surely work again together in future.",
+        "Answer":"Most welcome. It will be a pleasure to work with Clickmania again."
+        }]
+});
