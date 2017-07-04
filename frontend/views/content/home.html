@@ -263,8 +263,9 @@
                 <flex-slider slide="x in testimonial track by $index" animation="slide" slide-show="true" pause-on-hover="true" slideshow-speed="3000">
                     <li>
                         <div class="padd63">
-                            <p>{{x.text}}</p>
-                            <p class="text-right">{{x.ceo}}</p>
+                            <p class="user" ng-bind-html="x.text"></p>
+                            <p class="user"><b>{{x.thought}}</b></p>
+                            <p class="text-right text-capitalize"><b>{{x.name}}</b></p>
                         </div>
                     </li>
                 </flex-slider>

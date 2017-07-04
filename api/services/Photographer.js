@@ -91,9 +91,7 @@ var schema = new Schema({
     contest: [{
         type: Schema.Types.ObjectId,
         ref: "PhotoContest"
-    }],
-    photoContestPackage: String
-
+    }]
 });
 
 schema.plugin(deepPopulate, {

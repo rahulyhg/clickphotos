@@ -9,8 +9,8 @@ var controller = {
                 data: {
                     message: "Invalid Request"
                 }
-            })
+            });
         }
-    },
+    }
 };
 module.exports = _.assign(module.exports, controller);

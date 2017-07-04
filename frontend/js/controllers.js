@@ -182,11 +182,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.testimonial = [{ // used for testimonials
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 0the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambledLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been",
-            ceo: "manan vora, CEO & founder Ting"
-        }, {
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 0the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambledLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been",
-            ceo: " manan vora, CEO & founder Ting"
+            name: 'Naveen Kumar',
+            text: "I am <b>Naveen Kumar</b> and I am a finance professional working for an MNC for over a decade now.Photography is my passion and I take special interest in Sports / Wedding / Pre-wedding and Studio Photography. I do photography independently as well as with other professional photographers.",
+            thought: 'I keep upgrading my gear frequently without digging into my salary income. Clickmania is a perfect platform for me.'
+            //ceo: "manan vora, CEO & founder Ting"
         }];
 
         // To scroll down to a particular div
@@ -314,6 +313,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // }
                     }
 
+
                     if ($scope.photographerData) {
                         if ($scope.photographerData.photoContestPackage == "PackageUpdateForThree") {
                             var packages = [0, 1, 2];
@@ -326,9 +326,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
 
                     $scope.uploadImageContest = function (imagesData) {
+                        console.log("for ");
                         var input = {
                             _id: $scope.contestIdModal,
                             id: $.jStorage.get("photographer")._id,
+                            oid: $scope.orderIdModal,
                             photos: [imagesData.image]
                         }
                         console.log("imageData", input)
@@ -339,9 +341,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             console.log("for upload", data);
                             NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
                                 console.log("contestdata", data.data);
-                                $scope.photographerContestData = data.data;
+                                $scope.contestDetails = data.data;
                                 toastr.success("image uploaded sucessfully");
                                 $scope.imgModal.close();
+
                                 /************************************************ */
                             });
                         });
@@ -354,9 +357,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         var input = {
                             photographerId: $.jStorage.get('photographer')._id,
                         }
+                        /*****************getting all contest of give photographer***************** */
                         NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
+
+                            $scope.contestDetails = data.data;
                             console.log("contestdata", data.data);
-                            $scope.photographerContestData = data.data;
+
                         });
                     }
 
@@ -781,8 +787,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.uploadImgForContest = function (contest) {
+        $scope.uploadImgForContest = function (contest, order) {
             $scope.contestIdModal = contest;
+            $scope.orderIdModal = order;
             $scope.imgModal = $uibModal.open({
                 animation: true,
                 templateUrl: "frontend/views/modal/photoContestModal.html",
@@ -1324,8 +1331,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             spec.specialityString = spec.specialityString + ' | ' + spec1.name;
                             //console.log("$scope.specialityString---", spec.specialityString)
                         }
-                    })
-                })
+                    });
+                });
             }
         });
 
@@ -1435,7 +1442,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     //     // $scope.categoryLvl2 = _.chunk($scope.categoryLvl2, 3);
                     // } else {
                     //     //  toastr.warning('Error submitting the form', 'Please try again');
-                )
+                );
                 $scope.bigImageCategory = _.orderBy($scope.bigImageCategory, ['order'], ['asc']);
                 $scope.smallImageCategory = _.orderBy($scope.smallImageCategory, ['order'], ['asc']);
                 $scope.smallCat = _.chunk($scope.smallImageCategory, 2);
@@ -1471,6 +1478,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+
         $scope.myUrl = $location.absUrl();
         // console.log("myUrl", $scope.myUrl);
 
@@ -1497,7 +1505,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     } else {
                         $scope.specialityString = $scope.specialityString + ' | ' + spec.name;
                     }
-                })
+                });
                 _.forEach($scope.userData.location, function (loc) {
                     //only required the students avilable projects
                     if (_.isEmpty($scope.locString)) {
@@ -1516,7 +1524,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
                 });
                 //get all related photographers
-                formdata1 = {}
+                formdata1 = {};
                 formdata1.speciality = $scope.userData.speciality;
                 NavigationService.apiCallWithData("Photographer/getRelatedPhotographers", formdata1, function (data) {
                     if (data.value === true) {
@@ -1697,8 +1705,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //signup modal close
 
         // this function is used to show Send Enquiry navigation
-        $scope.sendEnquiry = function ($event) {
-            $scope.slide = !$scope.slide;
+        // $scope.sendEnquiry = function ($event) {
+        //     $scope.slide = !$scope.slide;
+        // };
+        $scope.rightSideNav = false; // For toggle sidenavigation
+        $scope.openRightSideNav = function () {
+            if (!$scope.rightSideNav) {
+                $('.enquiry-side-menu').addClass('enquiry-menu-in');
+                $('.enquiry-side-menu').removeClass('enquiry-menu-out');
+                $scope.rightSideNav = true;
+            } else {
+                $('.enquiry-side-menu').addClass('enquiry-menu-out');
+                $('.enquiry-side-menu').removeClass('enquiry-menu-in');
+                $scope.rightSideNav = false;
+            }
         };
         $scope.popup1 = {
             opened: false

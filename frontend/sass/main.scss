@@ -221,6 +221,10 @@ body {
     border-color: $orangeColor;
 }
 
+.text-capitalize {
+    text-transform: capitalize;
+}
+
 .myBtnDarkGray {
     background-color: $lightBlackColor;
     color: $whiteColor;
@@ -1448,13 +1452,12 @@ header>nav div.navbar-toggle>div.icon_float {
     }
     .padd63 {
         position: relative;
-        text-align: justify;
         box-sizing: border-box;
         padding: 15px 63px;
-        line-height: 19px;
-        p:first-child {
+        p.user {
+            font-family: 'hctl';
             color: $lightBlackColor;
-            letter-spacing: 2px;
+            margin-bottom: 0;
         }
         p:last-child {
             color: $orangeColor;
@@ -1728,6 +1731,7 @@ $brand-holder: #ccc !default;
         position: relative;
         border: 1px solid #ededed;
         @include padding(5px);
+        margin-bottom: 5px;
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
         min-height: 220px;
         background-size: cover!important;
@@ -3372,37 +3376,52 @@ header {
         text-transform: capitalize;
     }
 } // this class is used for send enquiry right side navigation
-.send_enquirySlidebar {
+.send-enquiry {
     position: fixed;
-    top: 50%;
-    right: -29%;
-    width: 29%;
-    min-height: 315px;
-    background-color: #ffffff;
-    z-index: 120; // transition: 300ms right;
+    top: 35%; // right: -43px;
+    right: -122px;
+    z-index: 9999;
     @include transition(300ms right ease);
-    @include transform(translateY(-50%));
-    .send_enquiry {
-        // used for static position
-        transform: rotate(-90deg);
-        position: absolute;
-        left: -19px;
-        bottom: -25px;
-        width: 0;
-        .orange-btn {
-            padding: 9px 12px;
-            font-size: 20px;
-            letter-spacing: 1px;
-            border-radius: 0;
-            font-weight: bold;
-            font-family: inherit;
-            width: 340px;
-            border: 1px solid #f1592a;
-        }
+    .enquiry-menu-out {
+        @include transform(translateX(-145px));
+        @include transition(all 300ms ease);
     }
-    .padd35 {
-        // this class is used to give padding for col-md
-        padding: 35px;
+    .enquiry-menu-in {
+        @include transform(translateX(-570px));
+        @include transition(all 300ms ease);
+    }
+    .contact-btn {
+        background-color: $orangeColor;
+        padding: 5px;
+        width: 320px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        display: inline-block;
+        border: 1px solid $orangeColor;
+        position: absolute;
+        left: -179px;
+        top: 135px;
+        @include transform(rotate(-90deg));
+    }
+    .close-it {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        .contact-btn {}
+    }
+    .enquiry-side-menu {
+        position: fixed;
+        right: -570px;
+        top: 35%;
+        width: 425px;
+    }
+    .enquiry {
+        @include padding(25px 45px);
+        background-color: white;
+    }
+    p.title {
+        color: white;
     }
     input:focus {
         border-color: $orangeColor;
@@ -4492,6 +4511,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
             @include padding(5px);
             background-color: $whiteColor;
             box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+            min-height: 170px;
+            background-size: cover!important;
+            background-clip: content-box!important;
+            overflow: hidden;
+            margin-bottom: 15px;
         }
     }
 }
@@ -4588,6 +4612,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
         background-size: cover!important;
         background-clip: content-box!important;
         overflow: hidden;
+        margin-bottom: 15px;
     }
     .contest__stp2__txt {
         h4 {
