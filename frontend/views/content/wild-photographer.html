@@ -58,6 +58,32 @@
 </div>
 <div class="container">
     <div class="row">
+
+        <div class="col-md-4 col-sm-5 text-hide visible-xs">
+                    <div class="search-directive">
+                        <ui-select ng-model="item.selected" on-select="addFilterValue(item.selected,'category')">
+                            <ui-select-match placeholder="Photographer">
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <ui-select ng-model="city.selected" on-select="addFilterValue(city.selected,'city')">
+                            <ui-select-match placeholder="City Name">
+                                <span ng-bind="$select.selected"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="city in (cityFilterForSearch | filter: $select.search) track by city">
+                                <span ng-bind="city"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <button type="button" ng-click="searchBarGo()" class="btn go-btn">GO</button>
+                        <div class="select-arrow">
+                            <img src="frontend//img/photographer/arrow.jpg" height="35" alt="Click Here">
+                        </div>
+                    </div>
+                </div>
+        
         <div class="pull-right btn-marg">
             <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>            <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
             <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>

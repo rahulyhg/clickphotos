@@ -11,10 +11,11 @@ var firstapp = angular.module('firstapp', [
     'toastr'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
-
+ cfpLoadingBarProvider.includeSpinner = false;
+  cfpLoadingBarProvider.includeBar = true;
     $urlRouterProvider.otherwise("/");
     $stateProvider
         .state('home', {

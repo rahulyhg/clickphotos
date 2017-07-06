@@ -9,6 +9,7 @@ $output-bourbon-deprecation-warnings: false !default;
 @import "../../bower_components/fancyBox/source/jquery.fancybox";
 @import "../../bower_components/smart-app-banner/smart-app-banner";
 @import "../../bower_components/angular-toastr/dist/angular-toastr";
+@import "../../bower_components/angular-loading-bar/build/loading-bar";
 
 /* Bootstrap Variables Goes Here */
 
@@ -743,7 +744,7 @@ header>nav div.navbar-toggle>div.icon_float {
         vertical-align: middle;
         color: white;
         font-weight: 600;
-        padding: 2% 2.5%;
+        padding: 5px 8px;
         &:hover {
             background-color: $orangeColor;
             color: white;
@@ -754,7 +755,7 @@ header>nav div.navbar-toggle>div.icon_float {
     }
     .select-arrow {
         @include position(absolute,
-        13px null null 29%);
+        12px null null 29%);
         pointer-events: none;
         cursor: pointer;
     }
@@ -3378,31 +3379,28 @@ header {
 } // this class is used for send enquiry right side navigation
 .send-enquiry {
     position: fixed;
-    top: 35%; // right: -43px;
+    top: 35%; 
+    // right: -43px;
     right: -122px;
     z-index: 9999;
     @include transition(300ms right ease);
     .enquiry-menu-out {
-        @include transform(translateX(-145px));
+        @include transform(translateX(-29%));
         @include transition(all 300ms ease);
     }
     .enquiry-menu-in {
-        @include transform(translateX(-570px));
+        @include transform(translateX(-129%));
         @include transition(all 300ms ease);
     }
     .contact-btn {
-        background-color: $orangeColor;
-        padding: 5px;
-        width: 320px;
-        font-size: 20px;
-        font-weight: bold;
         cursor: pointer;
-        display: inline-block;
-        border: 1px solid $orangeColor;
         position: absolute;
-        left: -179px;
-        top: 135px;
-        @include transform(rotate(-90deg));
+        left: -50px;
+    top: 0px;
+    bottom: 0;
+    img{
+        height: 100%;
+    }
     }
     .close-it {
         position: absolute;
@@ -3412,7 +3410,7 @@ header {
     }
     .enquiry-side-menu {
         position: fixed;
-        right: -570px;
+        // right: -570px;
         top: 35%;
         width: 425px;
     }
@@ -4733,6 +4731,124 @@ only screen and (min-device-pixel-ratio: 1.5) {
         border-radius: 0px;
     }
 } //End of Thank You for gold, silver & sorry pages
+
+.page-margin {
+    margin-bottom: 150px;
+    margin-left: 90px;
+    margin-right: 90px;
+}
+.body-margin{
+    background-color: white;
+    margin: 30px 100px;
+}
+.text-margin{
+    margin: 60px 130px;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    font-weight: bold;
+}
+.border{
+    position: relative;
+    border-radius: 30px;
+    padding: 60px 120px;
+    text-align: justify;
+    border: solid 2px #f1592a;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 0px;
+
+    &:before {
+		content: "";
+    position: absolute;
+    z-index: 1;
+    width: 29px;
+    bottom: -20px;
+    left: -2px;
+    height: 20px;
+    background: white;
+    border-left: 2px solid #f1592a;
+	}
+
+	&:after {
+	content: "";
+    position: absolute;
+    height: 25px;
+    width: 45px;
+    border: 2px solid transparent;
+    border-bottom-color: $orangeColor;
+    bottom: -27px;
+    left: -5px;
+    border-radius: 50%;
+    transform: rotate(157deg);
+    z-index: 3;
+	}
+}
+.question{
+    font-size: 22px;
+    font-weight: bolder;
+    display:flex;
+}
+.question-font{
+    margin-left:5px;
+}
+.anurita{
+    font-weight: bold;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+.text-style{
+    display: flex;
+}
+.answer{
+    font-size: 22px;
+    color: $orangeColor;
+    font-weight: bold;
+}
+.answer-font{
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: 11px;
+    margin-left: 5px;
+}
+.box-margin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.odd-curve{
+    position: relative;
+    border-radius: 30px;
+    padding: 60px 120px;
+    text-align: justify;
+    border: solid 2px $orangeColor;
+    border-bottom-right-radius: 0px;
+
+    &:before {
+	content: "";
+    position: absolute;
+    z-index: 1;
+    width: 29px;
+    bottom: -21px;
+    right: -2px;
+    height: 22px;
+    background: white;
+    border-right: 2px solid #f1592a;
+	}
+
+	&:after {
+		content: "";
+    position: absolute;
+    height: 25px;
+    width: 43px;
+    border: 2px solid transparent;
+    border-bottom-color: $orangeColor;
+    bottom: -27px;
+    right: -5px;
+    border-radius: 50%;
+    transform: rotate(-155deg);
+    z-index: 3;
+	}
+}
+
 //toast
 #toast-container.toast-top-center .toast,
 #toast-container.toast-bottom-center .toast {
@@ -4803,115 +4919,3 @@ only screen and (min-device-pixel-ratio: 1.5) {
 // @import "rishabh";
 // @import "feature-photo";
 @import "mobile";
-
-.body-margin{
-    background-color: white;
-    margin: 30px 8%;
-}
-.text-margin{
-    margin: 60px 120px;
-    font-size: 20px;
-    line-height: 23px;
-    text-align: center;
-    font-weight: bold;
-}
-.border{
-    position: relative;
-    border-radius: 30px;
-    padding: 6% 10%;
-    text-align: justify;
-    border: solid 2px #f1592a;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 0px;
-
-    &:before {
-		content: "";
-    position: absolute;
-    z-index: 1;
-    width: 29px;
-    bottom: -20px;
-    left: -2px;
-    height: 20px;
-    background: white;
-    border-left: 2px solid #f1592a;
-	}
-
-	&:after {
-	content: "";
-    position: absolute;
-    height: 25px;
-    width: 45px;
-    border: 2px solid transparent;
-    border-bottom-color: $orangeColor;
-    bottom: -27px;
-    left: -5px;
-    border-radius: 50%;
-    transform: rotate(157deg);
-    z-index: 3;
-	}
-}
-.question{
-    font-size: 22px;
-    font-weight: bolder;
-    display:flex;
-}
-.question-font{
-    margin-left:5px;
-}
-.anurita{
-    font-weight: bold;
-    margin-top: 7px;
-    margin-left: 5px;
-}
-.text-style{
-    display: flex;
-}
-.answer{
-    font-size: 22px;
-    color: $orangeColor;
-    font-weight: bold;
-}
-.answer-font{
-    font-size: 14px;
-    line-height: 16px;
-    margin-top: 11px;
-    margin-left: 5px;
-}
-.box-margin{
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-.odd-curve{
-    position: relative;
-    border-radius: 30px;
-    padding: 6% 10%;
-    text-align: justify;
-    border: solid 2px $orangeColor;
-    border-bottom-right-radius: 0px;
-
-    &:before {
-	content: "";
-    position: absolute;
-    z-index: 1;
-    width: 29px;
-    bottom: -21px;
-    right: -2px;
-    height: 22px;
-    background: white;
-    border-right: 2px solid #f1592a;
-	}
-
-	&:after {
-		content: "";
-    position: absolute;
-    height: 25px;
-    width: 43px;
-    border: 2px solid transparent;
-    border-bottom-color: $orangeColor;
-    bottom: -27px;
-    right: -5px;
-    border-radius: 50%;
-    transform: rotate(-155deg);
-    z-index: 3;
-	}
-}
