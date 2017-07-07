@@ -6,10 +6,10 @@
                 <h2>Change Password</h2>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="New Password" id="password">
+                    <input type="password" class="form-control" placeholder="New Password" id="password" ng-model="formdata.password">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Confirm Password" id="password" ng-model="formdata.password">
+                    <input type="password" class="form-control" placeholder="Confirm Password" id="password" ng-model="formdata.ConfirmPassword">
                 </div>
                 <p><button class="btn orange-btn cnf-btn" ng-click="resetPass(formdata)">CONFIRM</button></p>
 

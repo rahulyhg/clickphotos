@@ -1,5 +1,6 @@
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload', 'toastr', 'ui.select',
-    'angular-loading-bar'])
+        'angular-loading-bar'
+    ])
 
     .controller('HomeCtrl', function ($state, $scope, $rootScope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll, $uibModal) {
         $scope.template = TemplateService.changecontent("home"); //Use same name of .html file
@@ -1096,19 +1097,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                $scope.registerData = formdata;
-                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    //console.log("dataForOtp", data);
-                    if (data.data.verifyAcc == false) {
-                        //console.log(data.data);
-                        $scope.signUpOTP();
-                        setTimeout(function (data) {
-                            $scope.signUpOTP.close();
-                        }, 600000);
+                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                        $scope.registerData = formdata;
+                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                            //console.log("dataForOtp", data);
+                            if (data.data.verifyAcc == false) {
+                                //console.log(data.data);
+                                $scope.signUpOTP();
+                                setTimeout(function (data) {
+                                    $scope.signUpOTP.close();
+                                }, 600000);
+                            } else {
+                                toastr.error('User already exist');
+                            }
+                        });
                     } else {
-                        toastr.error('User already exist');
+                        toastr.error('Check password');
                     }
-                });
+                } else {
+                    toastr.error('Please enter all details');
+                }
+
             }
         };
 
@@ -1208,14 +1218,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.resetPass = function (formdata) {
-            formdata._id = $scope.id;
-            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                if (data.value) {
-                    $scope.displayCnfirmBox = false;
-                    $scope.displayotpBox = false;
-                    $scope.displayThanksBox = true;
-                }
-            });
+            if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                formdata._id = $scope.id;
+                NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                    if (data.value) {
+                        $scope.displayCnfirmBox = false;
+                        $scope.displayotpBox = false;
+                        $scope.displayThanksBox = true;
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
         };
         //verify and send mail for forgot password end
         //reset password funct end
@@ -2239,18 +2253,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                $scope.registerData = formdata;
-                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    // console.log("dataForOtp", data);
-                    if (data.data.verifyAcc == false) {
-                        $scope.signUpOTP();
-                        setTimeout(function (data) {
-                            $scope.signUpOTP.close();
-                        }, 600000);
+                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                        $scope.registerData = formdata;
+                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                            // console.log("dataForOtp", data);
+                            if (data.data.verifyAcc == false) {
+                                $scope.signUpOTP();
+                                setTimeout(function (data) {
+                                    $scope.signUpOTP.close();
+                                }, 600000);
+                            } else {
+                                toastr.error('User already exist');
+                            }
+                        });
                     } else {
-                        toastr.error('User already exist');
+                        toastr.error('Check password');
                     }
-                });
+                } else {
+                    toastr.error('Please enter all details');
+                }
             }
         };
 
@@ -2378,16 +2400,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.resetPass = function (formdata) {
-            formdata._id = $scope.id;
-            // console.log("doneFormData", formdata);
-            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                console.log("doneFormDatadata", data);
-                if (data.value) {
-                    $scope.displayCnfirmBox = false;
-                    $scope.displayotpBox = false;
-                    $scope.displayThanksBox = true;
-                }
-            });
+            if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                formdata._id = $scope.id;
+                // console.log("doneFormData", formdata);
+                NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                    console.log("doneFormDatadata", data);
+                    if (data.value) {
+                        $scope.displayCnfirmBox = false;
+                        $scope.displayotpBox = false;
+                        $scope.displayThanksBox = true;
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
         };
         //verify and send mail for forgot password end
 
@@ -2684,19 +2710,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                $scope.registerData = formdata;
-                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    //console.log("dataForOtp", data);
-                    if (data.data.verifyAcc == false) {
-                        //console.log(data.data);
-                        $scope.signUpOTP();
-                        setTimeout(function (data) {
-                            $scope.signUpOTP.close();
-                        }, 600000);
+                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                        $scope.registerData = formdata;
+                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                            //console.log("dataForOtp", data);
+                            if (data.data.verifyAcc == false) {
+                                //console.log(data.data);
+                                $scope.signUpOTP();
+                                setTimeout(function (data) {
+                                    $scope.signUpOTP.close();
+                                }, 600000);
+                            } else {
+                                toastr.error('User already exist');
+                            }
+                        });
                     } else {
-                        toastr.error('User already exist');
+                        toastr.error('Check password');
                     }
-                });
+                } else {
+                    toastr.error('Please enter all details');
+                }
+
             }
         };
 
@@ -2796,14 +2831,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.resetPass = function (formdata) {
-            formdata._id = $scope.id;
-            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                if (data.value) {
-                    $scope.displayCnfirmBox = false;
-                    $scope.displayotpBox = false;
-                    $scope.displayThanksBox = true;
-                }
-            });
+            if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                formdata._id = $scope.id;
+                NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                    if (data.value) {
+                        $scope.displayCnfirmBox = false;
+                        $scope.displayotpBox = false;
+                        $scope.displayThanksBox = true;
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
         };
         //verify and send mail for forgot password end
         //reset password funct end

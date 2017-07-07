@@ -15,20 +15,22 @@
           <div class="col-md-6">
             <div class="form-group">
               <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
-              <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span> 
+              <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword" required> 
+              <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
+                required>
               <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword" required>
+              <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="formData.ConfirmPassword"
+                name="ConfirmPassword" required>
             </div>
           </div>
           <!--{{loginForm.ConfirmPassword.$touched}}-->
@@ -37,7 +39,7 @@
         </div>
         <div class="checkbox text-left condition-box" ng-init="terms">
           <p>
-            <input type="checkbox" id="test1" ng-model="terms"/>
+            <input type="checkbox" id="test1" ng-model="terms" />
             <label for="test1" class="tnc">I agree with the <span>Terms &amp; Conditions</span> and <span>Privacy Policy</span> </label>
           </p>
           <p class="alert-text"></p>
