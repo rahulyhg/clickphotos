@@ -74,22 +74,23 @@
         @include padding(20px !important);
         background-color: white;
     width: 200px;
+    height: 200px;
+    overflow: auto;
     }
         .send-enquiry {
             top: 30%;
-            z-index: 0;
             .contact-btn{
-            img{height: 60% !important;}
-                    left: -38px;
+            img{height: 100% !important;}
+                    left: -32px;
             }
         .enquiry-menu-in {
-                @include transform(translateX(-75%) !important);
+                @include transform(translateX(-74%) !important);
             }
             .enquiry-menu-out {
                 @include transform(translateX(-29%) !important);
             }
         .enquiry-side-menu{
-                top: 25% !important;
+                top: 30% !important;
     }
     }
             

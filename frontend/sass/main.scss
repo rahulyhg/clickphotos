@@ -181,6 +181,30 @@ $borderRadius: 4px; // used to overwrite the inheritance for btn class mentioned
     src: url("../fonts/Rupee.ttf");
 }
 
+.spinner {
+position: fixed;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+z-index: 9999;
+opacity: 1;
+}
+
+.spinner-overlay {
+background: url("../img/inv.png")no-repeat center;
+position: fixed;
+top: 50%;
+left: 50%;
+@include transform(translate(-50%,
+-50%));
+z-index: 9999;
+width: 50%;
+height: auto;
+}
+#loading-bar .bar {
+  position: relative;
+}
+
 body {
     //padding-top: 70px;
     font-family: 'dosis-regular';
@@ -334,6 +358,14 @@ nav li:hover .dropdown-menu {
     opacity: 1;
 }
 
+.side-margin{
+    margin:0 20% !important;
+}
+
+.pad-bottom{
+    padding-bottom: 20px;
+}
+
 a,
 .btn,
 [ui-sref] {
@@ -374,6 +406,24 @@ a,
     }
 }
 
+input[type='radio']:checked:after {
+        background-color: #ffa500;
+    }
+
+    .margin-top{
+        margin-top: 8px;
+        color: #999;
+    }
+
+    .margin-right{
+        margin-right: 20px;
+    }
+
+    .bottom{
+        border-bottom: transparent !important;
+        padding-left: 0px !important;
+    }
+
 .flex-control-paging li a {
     background-color: rgba(255, 255, 255, 0.5);
 }
@@ -391,6 +441,7 @@ footer {
     .footer_bgup {
         // footer background up which includes black-gray background
         background-color: #252525; //    min-height: 250px;
+        z-index: 0;
         .footer_padd {
             display: inline-block;
             padding: 15px 0;
