@@ -182,27 +182,28 @@ $borderRadius: 4px; // used to overwrite the inheritance for btn class mentioned
 }
 
 .spinner {
-position: fixed;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-z-index: 9999;
-opacity: 1;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    opacity: 1;
 }
 
 .spinner-overlay {
-background: url("../img/inv.png")no-repeat center;
-position: fixed;
-top: 50%;
-left: 50%;
-@include transform(translate(-50%,
--50%));
-z-index: 9999;
-width: 50%;
-height: auto;
+    background: url("../img/inv.png")no-repeat center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%,
+    -50%));
+    z-index: 9999;
+    width: 50%;
+    height: auto;
 }
+
 #loading-bar .bar {
-  position: relative;
+    position: relative;
 }
 
 body {
@@ -325,6 +326,14 @@ body {
     bottom: 50%;
 } // end of @extend classes
 // CSS transition effects
+.select-class {
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #f1592a;
+    font-size: 16px;
+    color: #999 !important;
+}
+
 
 /*Pulse Grow*/
 
@@ -358,11 +367,11 @@ nav li:hover .dropdown-menu {
     opacity: 1;
 }
 
-.side-margin{
-    margin:0 20% !important;
+.side-margin {
+    margin: 0 20% !important;
 }
 
-.pad-bottom{
+.pad-bottom {
     padding-bottom: 20px;
 }
 
@@ -406,23 +415,77 @@ a,
     }
 }
 
-input[type='radio']:checked:after {
-        background-color: #ffa500;
-    }
+.radio-class{
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #999;
+    font-weight: 300;
+}
+[type="radio"]:checked + label:before{
+    border: 1px solid $orangeColor!important;
+    left: 1px !important;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: transparent;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: $orangeColor;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}}
 
-    .margin-top{
-        margin-top: 8px;
-        color: #999;
-    }
+//End of custom radio box
+.margin-top {
+    margin-top: 8px;
+    color: #999;
+}
 
-    .margin-right{
-        margin-right: 20px;
-    }
+.margin-right {
+    margin-right: 20px;
+}
 
-    .bottom{
-        border-bottom: transparent !important;
-        padding-left: 0px !important;
-    }
+.bottom {
+    border-bottom: transparent !important;
+    padding-left: 0px !important;
+}
 
 .flex-control-paging li a {
     background-color: rgba(255, 255, 255, 0.5);
@@ -3430,8 +3493,7 @@ header {
 } // this class is used for send enquiry right side navigation
 .send-enquiry {
     position: fixed;
-    top: 35%; 
-    // right: -43px;
+    top: 35%; // right: -43px;
     right: -122px;
     z-index: 9999;
     @include transition(300ms right ease);
@@ -3447,11 +3509,11 @@ header {
         cursor: pointer;
         position: absolute;
         left: -50px;
-    top: 0px;
-    bottom: 0;
-    img{
-        height: 100%;
-    }
+        top: 0px;
+        bottom: 0;
+        img {
+            height: 100%;
+        }
     }
     .close-it {
         position: absolute;
@@ -3460,8 +3522,7 @@ header {
         .contact-btn {}
     }
     .enquiry-side-menu {
-        position: fixed;
-        // right: -570px;
+        position: fixed; // right: -570px;
         top: 35%;
         width: 425px;
     }
@@ -4782,24 +4843,26 @@ only screen and (min-device-pixel-ratio: 1.5) {
         border-radius: 0px;
     }
 } //End of Thank You for gold, silver & sorry pages
-
 .page-margin {
     margin-bottom: 150px;
     margin-left: 90px;
     margin-right: 90px;
 }
-.body-margin{
+
+.body-margin {
     background-color: white;
     margin: 30px 100px;
 }
-.text-margin{
+
+.text-margin {
     margin: 60px 130px;
     font-size: 20px;
     line-height: 23px;
     text-align: center;
     font-weight: bold;
 }
-.border{
+
+.border {
     position: relative;
     border-radius: 30px;
     padding: 60px 120px;
@@ -4807,97 +4870,101 @@ only screen and (min-device-pixel-ratio: 1.5) {
     border: solid 2px #f1592a;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 0px;
-
     &:before {
-		content: "";
-    position: absolute;
-    z-index: 1;
-    width: 29px;
-    bottom: -20px;
-    left: -2px;
-    height: 20px;
-    background: white;
-    border-left: 2px solid #f1592a;
-	}
-
-	&:after {
-	content: "";
-    position: absolute;
-    height: 25px;
-    width: 45px;
-    border: 2px solid transparent;
-    border-bottom-color: $orangeColor;
-    bottom: -27px;
-    left: -5px;
-    border-radius: 50%;
-    transform: rotate(157deg);
-    z-index: 3;
-	}
+        content: "";
+        position: absolute;
+        z-index: 1;
+        width: 29px;
+        bottom: -20px;
+        left: -2px;
+        height: 20px;
+        background: white;
+        border-left: 2px solid #f1592a;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        height: 25px;
+        width: 45px;
+        border: 2px solid transparent;
+        border-bottom-color: $orangeColor;
+        bottom: -27px;
+        left: -5px;
+        border-radius: 50%;
+        transform: rotate(157deg);
+        z-index: 3;
+    }
 }
-.question{
+
+.question {
     font-size: 22px;
     font-weight: bolder;
-    display:flex;
+    display: flex;
 }
-.question-font{
-    margin-left:5px;
+
+.question-font {
+    margin-left: 5px;
 }
-.anurita{
+
+.anurita {
     font-weight: bold;
     margin-top: 7px;
     margin-left: 5px;
 }
-.text-style{
+
+.text-style {
     display: flex;
 }
-.answer{
+
+.answer {
     font-size: 22px;
     color: $orangeColor;
     font-weight: bold;
 }
-.answer-font{
+
+.answer-font {
     font-size: 14px;
     line-height: 16px;
     margin-top: 11px;
     margin-left: 5px;
 }
-.box-margin{
+
+.box-margin {
     margin-top: 30px;
     margin-bottom: 30px;
 }
-.odd-curve{
+
+.odd-curve {
     position: relative;
     border-radius: 30px;
     padding: 60px 120px;
     text-align: justify;
     border: solid 2px $orangeColor;
     border-bottom-right-radius: 0px;
-
     &:before {
-	content: "";
-    position: absolute;
-    z-index: 1;
-    width: 29px;
-    bottom: -21px;
-    right: -2px;
-    height: 22px;
-    background: white;
-    border-right: 2px solid #f1592a;
-	}
-
-	&:after {
-		content: "";
-    position: absolute;
-    height: 25px;
-    width: 43px;
-    border: 2px solid transparent;
-    border-bottom-color: $orangeColor;
-    bottom: -27px;
-    right: -5px;
-    border-radius: 50%;
-    transform: rotate(-155deg);
-    z-index: 3;
-	}
+        content: "";
+        position: absolute;
+        z-index: 1;
+        width: 29px;
+        bottom: -21px;
+        right: -2px;
+        height: 22px;
+        background: white;
+        border-right: 2px solid #f1592a;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        height: 25px;
+        width: 43px;
+        border: 2px solid transparent;
+        border-bottom-color: $orangeColor;
+        bottom: -27px;
+        right: -5px;
+        border-radius: 50%;
+        transform: rotate(-155deg);
+        z-index: 3;
+    }
 }
 
 //toast

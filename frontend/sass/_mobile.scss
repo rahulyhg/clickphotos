@@ -70,6 +70,11 @@
             width: 0%;
             left: 50%;
         }
+
+.margin-top{
+        text-align: left !important;
+    }
+
         .enquiry {
         @include padding(20px !important);
         background-color: white;
@@ -465,7 +470,7 @@ padding: 30px 20px !important;
             .full-tabs {
                 li {
                     font-size: 18px!important;
-                    padding: 2px 35px;
+                    padding: 2px 15px;
                 }
             }
             .signup-form {
