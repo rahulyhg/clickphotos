@@ -1006,6 +1006,12 @@ padding: 30px 20px !important;
         {
             height: 3px;
         }
+        .radio-class{
+            [type="radio"]:checked + label,
+        [type="radio"]:not(:checked) + label{
+            padding-left: 25px !important;
+        }
+        }
         .brand-logo {
             width: 171px;
         }
