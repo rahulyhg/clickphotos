@@ -22,9 +22,9 @@
         "validation": ["", "trim", "unique"],
         "url": ""
     },{
-        "name": "Content",
+        "name": "Bio",
         "type": "wysiwyg",
-        "tableRef": "content",
+        "tableRef": "bio",
         "placeholder": "Enter name",
         "id": "input1",
         "validation": ["", "trim", ""],
