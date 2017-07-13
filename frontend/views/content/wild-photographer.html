@@ -63,7 +63,10 @@
                 <button id="split-button" type="button" class="btn btn-default btn-style">City</button>
                 <button class="btn btn-default img-bg" type="button" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg"></button>
                 <ul class="dropdown-menu city" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-                    <li role="menuitem" ng-repeat="city in cities track by $index"><a href="#">{{city}}</a></li>
+                    <li role="menuitem" ng-repeat="dataPoint in cityFilter track by $index"><div class="checkbox checkboxing">
+                        <input type="checkbox" id="{{dataPoint}}" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
+                        <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
+                </div></li>
                 </ul>
             </div>
             <div class="btn-group margin-right" uib-dropdown auto-close="outsideClick">
@@ -71,18 +74,16 @@
                 <button type="button" class="btn btn-default img-bg" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg"></button>
 
                 <div class="dropdown-menu price" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-                    <div class="checkbox check-style">
-                        <input value="" type="checkbox" ng-click="filterPriceAndCity(0)" id="5k-10k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="5k-10k"><span></span><i class="fa fa-inr"></i>5k-10k</label><br>
-                        <input value="" type="checkbox" ng-click="filterPriceAndCity(1)" id="10k-25k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="10k-25k"><span></span><i class="fa fa-inr"></i>10k-25k</label><br>
-                        <input value="" type="checkbox" ng-click="filterPriceAndCity(2)" id="25k-50k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="25k-50k"><span></span><i class="fa fa-inr"></i>25k-50k</label><br>
-                        <input value="" type="checkbox" ng-click="filterPriceAndCity(3)" id="50k-1lakh" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="50k-1lakh"><span></span><i class="fa fa-inr"></i>50k-1lakh</label><br>
-                        <input value="" type="checkbox" ng-click="filterPriceAndCity(4)" id="1lakh plus" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="1lakh plus" class="text-lowercase"><span></span><i class="fa fa-inr"></i>1lakh plus</label><br>
-                    </div>
+                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(0)" id="5k-10k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                        <label for="5k-10k"><span></span><i class="fa fa-inr"></i>5k-10k</label></li>
+                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(1)" id="10k-25k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                        <label for="10k-25k"><span></span><i class="fa fa-inr"></i>10k-25k</label></li>
+                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(2)" id="25k-50k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                        <label for="25k-50k"><span></span><i class="fa fa-inr"></i>25k-50k</label></li>
+                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(3)" id="50k-1lakh" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                        <label for="50k-1lakh"><span></span><i class="fa fa-inr"></i>50k-1lakh</label></li>
+                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(4)" id="1lakh plus" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                        <label for="1lakh plus" class="text-lowercase"><span></span><i class="fa fa-inr"></i>1lakh plus</label></li>
                 </div>
             </div>
                 <button type="button" ng-click="searchBarGo()" class="btn go-btn go-button">GO</button>

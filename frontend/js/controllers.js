@@ -1921,7 +1921,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $scope.cityFill.push(formdata.location);
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
             if (data.value === true) {
-                //console.log("getPhotographersByCategories", data);
+                console.log("getPhotographersByCategories", data);
                 $scope.photographerData = data.data;
                 if (!_.isEmpty($.jStorage.get("photographer"))) {
                     var idToBeRemoved = $.jStorage.get("photographer")._id;
@@ -1937,7 +1937,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             $scope.cityFilter.push(spec1);
                         }
                         // document.getElementById($stateParams.photoLoc).checked = true;
-                        // console.log("$scope.cityFilter", $scope.cityFilter);
+                        console.log("$scope.cityFilter", $scope.cityFilter);
                     })
                 })
             }
