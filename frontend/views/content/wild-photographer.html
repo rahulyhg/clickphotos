@@ -61,7 +61,8 @@
         <div class="col-md-4 col-sm-5 text-hide visible-xs text-center">
             <div class="btn-group margin-right" uib-dropdown>
                 <button id="split-button" type="button" class="btn btn-default btn-style">City</button>
-                <button class="btn btn-default img-bg" type="button" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg"></button>
+                <button class="btn btn-default img-bg" type="button" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg" auto-close="outsideClick"></button>
+                
                 <ul class="dropdown-menu city" uib-dropdown-menu role="menu" aria-labelledby="split-button">
                     <li role="menuitem" ng-repeat="dataPoint in cityFilter track by $index"><div class="checkbox checkboxing">
                         <input type="checkbox" id="{{dataPoint}}" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
