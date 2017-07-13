@@ -5,6 +5,7 @@
         }
         .text-hide {
             display: none;
+            margin-top:10px !important;
         }
         .head-f {
             font-size: 30px!important;
@@ -70,6 +71,10 @@
             width: 0%;
             left: 50%;
         }
+
+        .side-margin {
+    margin: 0 5%!important;
+}
 
 .margin-top{
         text-align: left !important;
@@ -470,7 +475,7 @@ padding: 30px 20px !important;
             .full-tabs {
                 li {
                     font-size: 18px!important;
-                    padding: 2px 15px;
+                    padding: 2px 14px;
                 }
             }
             .signup-form {
