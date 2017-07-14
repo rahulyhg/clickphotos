@@ -575,16 +575,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png');
             });
         };
-
+        $scope.dummy = {}
         $scope.addLocation = function () {
+            console.log("dummytext", $scope.dummy)
             if (!_.isEmpty(document.getElementById("locationCity").value)) {
                 var valText = document.getElementById("locationCity").value;
+                console.log(valText)
                 var valArr = [];
                 //console.log(!/\d/.test(valText)); //returns true if contains numbers
                 if (!/\d/.test(valText)) {
                     valArr = valText.split(",");
                     if (!/\d/.test(valArr[0])) {
                         $scope.arrLocation.push(valArr[0]);
+
+                        $scope.$digest();
                     }
                     document.getElementById("locationCity").value = null
                 }
@@ -972,7 +976,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //console.log("hiiiiiiiiiiiiiiiiiiiiiii");
             var input = document.getElementById('locationCity');
             var autocomplete = new google.maps.places.Autocomplete(input);
-            //console.log("autocomplete", autocomplete);
+            // google.maps.event.addListener(autocomplete, 'click', function () {
+            //     alert('CLicked');
+            // // });
+            autocomplete.addListener('place_changed', function () {
+                $scope.addLocation();
+
+
+            });
+
         }
         //google api autocomplete end
 
@@ -1369,7 +1381,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $rootScope.showStep = 1;
         }
         //console.log($scope.template);
-        $scope.states=["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Pondicherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Tripura","Uttar Pradesh","Uttaranchal","West Bengal"]
+        $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"]
     })
 
     .controller('UsersCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
