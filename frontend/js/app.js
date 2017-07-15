@@ -106,6 +106,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "frontend/views/template.html",
             controller: 'thanksCtrl'
         })
+        .state('billpaygst', {
+            url: "/billpaygst",
+            templateUrl: "frontend/views/template.html",
+            controller: 'BillPayGst'
+        })
         .state('thanks-contest', {
             url: "/thanks-contest",
             templateUrl: "frontend/views/template.html",
