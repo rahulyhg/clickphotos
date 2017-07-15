@@ -48,7 +48,7 @@
         "validation": ["", "trim", ""],
         "url": "PhotoContest/findPhotographerForWinner",
         "params": "_id",
-        "dropDownField": "name",
+        "dropDownField": "orderId",
         "dropDownType": "single",
         "onView": true
     }, {

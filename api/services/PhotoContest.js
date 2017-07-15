@@ -33,6 +33,9 @@ schema.plugin(deepPopulate, {
         "contestParticipant.photographerId": {
             select: ""
         },
+        "contestParticipant.orderId": {
+            select: ""
+        },
         winner: {
             select: ""
         }
@@ -142,7 +145,7 @@ var model = {
         //console.log("DATA", data);
         PhotoContest.findOne({
             _id: data._id
-        }).deepPopulate('contestParticipant.photographerId').select('contestParticipant.photographerId').exec(function (err, found) {
+        }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
             // console.log(found);
             if (err) {
                 //console.log(err);
@@ -152,7 +155,7 @@ var model = {
             } else {
                 var test = [];
                 _.each(found.contestParticipant, function (n) {
-                    test.push(n.photographerId);
+                    test.push(n);
                 });
                 //console.log("found.contestParticipant.photographerId",found.contestParticipant)
                 //console.log("test",test);
