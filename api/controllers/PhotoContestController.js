@@ -143,6 +143,7 @@ var controller = {
                 };
                 Order.editData(formData, function (err, data) {
                     req.body.Description = req.body.Description + "/" + data._id;
+                    // console.log("*****************************", req.body.Description);
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "PackageUpdateForThree") {
                             console.log("req.body--------------------------------", req.body);

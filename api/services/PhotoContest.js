@@ -261,7 +261,7 @@ var model = {
             $push: {
                 contestParticipant: {
                     photographerId: photocontestId[1],
-                    orderId: photocontestId[3]
+                    orderId: photocontestId[5]
                 }
             }
         }, {
