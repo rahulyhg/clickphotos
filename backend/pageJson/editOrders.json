@@ -1,0 +1,118 @@
+{
+    "title": "Edit Orders",
+    "name": "Orders",
+    "jsonPage": "viewOrders",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+            "name": "First Name",
+            "type": "text",
+            "tableRef": "firstName",
+            "placeholder": "Enter firstName",
+            "id": "name",
+            "validation": ["required", "trim", "unique"],
+            "url": "",
+            "disabled": true
+        }, {
+            "name": "Last Name",
+            "type": "text",
+            "tableRef": "lastName",
+            "placeholder": "Enter Name",
+            "id": "name",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        }, {
+            "name": "Address",
+            "type": "wysiwyg",
+            "tableRef": "address",
+            "placeholder": "Enter address",
+            "id": "input1",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        }, {
+            "name": "Country",
+            "type": "text",
+            "tableRef": "country",
+            "placeholder": "Enter country",
+            "id": "country",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        }, {
+            "name": "State",
+            "type": "text",
+            "tableRef": "state",
+            "placeholder": "Enter state",
+            "id": "state",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        }, {
+            "name": "City",
+            "type": "text",
+            "tableRef": "city",
+            "placeholder": "Enter city",
+            "id": "city",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        },
+        {
+            "name": "pincode",
+            "type": "text",
+            "tableRef": "pincode",
+            "placeholder": "Enter pincode",
+            "id": "pincode",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        },
+        {
+            "name": "Gst Number",
+            "type": "text",
+            "tableRef": "gstNumber",
+            "placeholder": "Enter gstNumber",
+            "id": "gstNumber",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        },
+        {
+            "name": "Package Amount",
+            "type": "text",
+            "tableRef": "packageAmount",
+            "placeholder": "Enter packageAmount",
+            "id": "packageAmount",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "disabled": true
+        }
+    ],
+    "action": [{
+        "name": "submit",
+        "action": "submitOrders",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewOrders"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewOrders"
+            }
+        }
+    }],
+    "preApi": {
+        "url": "GstDetails/getOne",
+        "params": "_id"
+    }
+
+}

@@ -5,6 +5,6 @@ Gst.service('GstService', function () {
         var url = "GstDetails/save";
         NavigationService.apiCallWithData(url, data, function (data) {
             callback(data)
-        })
-    }
-})
+        });
+    };
+});

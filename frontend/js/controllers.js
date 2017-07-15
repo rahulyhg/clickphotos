@@ -1314,7 +1314,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         });
 
-        $scope.updateToFeature = function () {
+        $scope.updateToFeature = function (order) {
 
             formdata = {};
 
@@ -1324,7 +1324,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "featured/" + $.jStorage.get("photographer")._id + "/" + $scope.finalMonth + "/" + new Date().getFullYear();
+            formdata.type = "featured/" + $.jStorage.get("photographer")._id + "/" + $scope.finalMonth + "/" + new Date().getFullYear() + "/" + $scope.amount[2].amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
@@ -1390,7 +1390,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var url = "GstDetails/save";
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
                 console.log(data)
-                $scope.updateToFeature()
+                var order = data.data._id;
+                $scope.updateToFeature(order)
             })
 
         }
@@ -2882,7 +2883,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //PAYMENT
 
         // console.log("Stateparam----------", $stateParams.photoContestId);
-        $scope.PackageUpdateForThree = function () {
+        $scope.PackageUpdateForThree = function (order) {
             formdata = {};
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[3]._id;
@@ -2890,7 +2891,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
+            formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId + "/" + $scope.amount[0].amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log("--------------------------------------", data);
@@ -2898,7 +2899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.PackageUpdateForSix = function () {
+        $scope.PackageUpdateForSix = function (order) {
 
             formdata = {};
             formdata.photographer = $.jStorage.get("photographer")._id;
@@ -2907,7 +2908,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
+            formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId + "/" + $scope.amount[0].amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
                 console.log(data);
@@ -2916,22 +2917,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
 
-        $scope.PackageUpdateForNine = function () {
+        // $scope.PackageUpdateForNine = function () {
 
-            formdata = {};
-            formdata.photographer = $.jStorage.get("photographer")._id;
-            formdata.payAmount = $scope.amount[5]._id;
-            formdata.amount = $scope.amount[5].amount;
-            formdata.email = $.jStorage.get("photographer").email;
-            formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
-            formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "PackageUpdateForNine/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
-            console.log(formdata);
-            NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
-                console.log(data);
-                window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
-            });
-        };
+        //     formdata = {};
+        //     formdata.photographer = $.jStorage.get("photographer")._id;
+        //     formdata.payAmount = $scope.amount[5]._id;
+        //     formdata.amount = $scope.amount[5].amount;
+        //     formdata.email = $.jStorage.get("photographer").email;
+        //     formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
+        //     formdata.name = $.jStorage.get("photographer").name;
+        //     formdata.type = "PackageUpdateForNine/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId;
+        //     console.log(formdata);
+        //     NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
+        //         console.log(data);
+        //         window.location.href = adminurl + "PhotoContest/sendToPaymentGateway?id=" + data.data._id;
+        //     });
+        // };
 
         //PAYMENT End
         $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
@@ -2955,10 +2956,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var url = "GstDetails/save";
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
                 console.log(data)
+                var order = data.data._id;
                 if ($scope.numberOfSlot == 3) {
-                    $scope.PackageUpdateForThree()
+                    $scope.PackageUpdateForThree(order)
                 } else if ($scope.numberOfSlot == 6) {
-                    $scope.PackageUpdateForSix();
+                    $scope.PackageUpdateForSix(order);
                 } else {
                     $scope.step = 2;
                 }
@@ -3022,10 +3024,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
         $scope.view = $stateParams.view;
         console.log($scope.view);
+
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
         });
-        $scope.goldMember = function () {
+        $scope.goldMember = function (order) {
 
             formdata = {};
 
@@ -3035,7 +3038,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "Gold/" + $.jStorage.get("photographer")._id;
+            formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + $scope.amount[1].amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
@@ -3045,7 +3048,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         };
 
-        $scope.silverMember = function () {
+        $scope.silverMember = function (order) {
             formdata = {};
             // ABS PAYMENT GATEWAY
             formdata.photographer = $.jStorage.get("photographer")._id;
@@ -3054,7 +3057,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "Silver/" + $.jStorage.get("photographer")._id;
+            formdata.type = "Silver/" + $.jStorage.get("photographer")._id + "/" + $scope.amount[0].amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
@@ -3079,11 +3082,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log($scope.userData)
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
                 console.log(data)
+                var order = data.data._id;
                 if ($scope.view == "silver") {
-                    $scope.silverMember();
+                    $scope.silverMember(order);
 
                 } else if ($scope.view == "gold") {
-                    $scope.goldMember();
+                    $scope.goldMember(order);
                 } else {
                     $state.go("photographer");
                 }
