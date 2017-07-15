@@ -5,7 +5,7 @@
         }
         .text-hide {
             display: none;
-            margin-top:10px !important;
+            margin-top: 10px !important;
         }
         .head-f {
             font-size: 30px!important;
@@ -71,44 +71,41 @@
             width: 0%;
             left: 50%;
         }
-
         .side-margin {
-    margin: 0 5%!important;
-}
-
-.margin-top{
-        text-align: left !important;
-    }
-
+            margin: 0 5%!important;
+        }
+        .margin-top {
+            text-align: left !important;
+        }
         .enquiry {
-        @include padding(20px !important);
-        background-color: white;
-    width: 200px;
-    height: 200px;
-    overflow: auto;
-    }
+            @include padding(20px !important);
+            background-color: white;
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+        }
         .send-enquiry {
             top: 30%;
-            .contact-btn{
-            img{height: 100% !important;}
-                    left: -32px;
+            .contact-btn {
+                img {
+                    height: 100% !important;
+                }
+                left: -32px;
             }
-        .enquiry-menu-in {
+            .enquiry-menu-in {
                 @include transform(translateX(-74%) !important);
             }
             .enquiry-menu-out {
                 @include transform(translateX(-29%) !important);
             }
-        .enquiry-side-menu{
+            .enquiry-side-menu {
                 top: 30% !important;
-    }
-    }
-            
-        //     .mobNo {
+            }
+        } //     .mobNo {
         //         width: calc(100% - 35%);
         //     }
         // } 
-         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
+        // header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
         // {
@@ -118,7 +115,7 @@
             margin-right: 3px;
         }
         .search-directive {
-           text-align: center;
+            text-align: center;
         }
         .photographer {
             //  text-align: left;
@@ -130,36 +127,34 @@
                 width: 52px!important;
                 padding: 5px 8px;
             }
-        }
-//        .enquiry-side-menu {
-//     width: 303px !important;
-// }
-//         .side-menu {
-//             width: 65%;
-//             top: 54px!important;
-//             .list-group-item {
-//                 font-size: 16px;
-//             }
-//         } 
+        } //        .enquiry-side-menu {
+        //     width: 303px !important;
+        // }
+        //         .side-menu {
+        //             width: 65%;
+        //             top: 54px!important;
+        //             .list-group-item {
+        //                 font-size: 16px;
+        //             }
+        //         } 
         //start of artist-of-the-month.html
         .page-margin {
-    margin-bottom: 80px !important;
-    margin-left: 20px !important;
-    margin-right: 20px !important;
-}
+            margin-bottom: 80px !important;
+            margin-left: 20px !important;
+            margin-right: 20px !important;
+        }
         .text-margin {
-        margin: 50px 30px !important;
+            margin: 50px 30px !important;
         }
-        .body-margin{
-    margin: 30px 20px !important;
+        .body-margin {
+            margin: 30px 20px !important;
         }
-        .border{
-padding: 30px 20px !important;
+        .border {
+            padding: 30px 20px !important;
         }
-        .odd-curve{
-padding: 30px 20px !important;
-        }
-        //end of artist-of-the-month.html
+        .odd-curve {
+            padding: 30px 20px !important;
+        } //end of artist-of-the-month.html
         //End of header.html
         //Footer.html
         footer {
@@ -938,6 +933,12 @@ padding: 30px 20px !important;
                 text-align: center;
             }
         } //End of signup.html
+        //Start of billpay.html
+        .billpay {
+            .margin-right {
+                margin-right: 0;
+            }
+        } //End of billpay.html
         .modal-dialog .modal-demo .modal-body {
             .absolute-cross {
                 @include position(absolute, -10px -11px null null);
@@ -1011,11 +1012,11 @@ padding: 30px 20px !important;
         {
             height: 3px;
         }
-        .radio-class{
-            [type="radio"]:checked + label,
-        [type="radio"]:not(:checked) + label{
-            padding-left: 25px !important;
-        }
+        .radio-class {
+            [type="radio"]:checked+label,
+            [type="radio"]:not(:checked)+label {
+                padding-left: 25px !important;
+            }
         }
         .brand-logo {
             width: 171px;
@@ -1038,7 +1039,7 @@ padding: 30px 20px !important;
             .mobNo {
                 width: calc(100% - 35%);
             }
-        } 
+        }
         .search-directive {
             .ui-select-placeholder {
                 font-size: 12px;
@@ -1436,8 +1437,7 @@ padding: 30px 20px !important;
             .border-line {
                 padding: 9px 0px 6px;
             }
-        }
-        // .send-enquiry {
+        } // .send-enquiry {
         //     top: 20%;
         //     .enquiry-menu-out {
         //         @include transform(translateX(-195px));
@@ -1554,26 +1554,24 @@ padding: 30px 20px !important;
                 display: block;
                 margin: 0 auto;
             }
-        } 
-        //Start of artist-of-the-month.html
+        } //Start of artist-of-the-month.html
         .page-margin {
-    margin-bottom: 100px;
-    margin-left: 80px;
-    margin-right: 80px;
-}
+            margin-bottom: 100px;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
         .text-margin {
             margin: 50px 50px;
         }
-        .body-margin{
-    margin: 30px 50px;
+        .body-margin {
+            margin: 30px 50px;
         }
-        .border{
-padding: 30px 60px;
+        .border {
+            padding: 30px 60px;
         }
-        .odd-curve{
-padding: 30px 60px;
-        }
-        //End of artist-of-the-month.html
+        .odd-curve {
+            padding: 30px 60px;
+        } //End of artist-of-the-month.html
         //End of Thank You for gold, silver & sorry pages
         //Start of competation(Photo Contest UI)
         .compet__prev-contest {
