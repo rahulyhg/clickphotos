@@ -1381,7 +1381,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.firstName = userdetails.firstname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
-            $scope.userData.firstName = userdetails.firstname;
+
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
@@ -2946,7 +2946,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.firstName = userdetails.firstname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
-            $scope.userData.firstName = userdetails.firstname;
+
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
@@ -3014,36 +3014,80 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('BillPayGst', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('BillPayGst', function ($scope, $stateParams, $state, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("billpaygst"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Bill Payment"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
         $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
+        $scope.view = $stateParams.view;
+        console.log($scope.view);
+        NavigationService.callApi("PayAmount/getAll", function (data) {
+            $scope.amount = data.data;
+        });
+        $scope.goldMember = function () {
+
+            formdata = {};
+
+            formdata.photographer = $.jStorage.get("photographer")._id;
+            formdata.payAmount = $scope.amount[1]._id;
+            formdata.amount = $scope.amount[1].amount;
+            formdata.email = $.jStorage.get("photographer").email;
+            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.name = $.jStorage.get("photographer").name;
+            formdata.type = "Gold/" + $.jStorage.get("photographer")._id;
+            console.log(formdata);
+            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                console.log(data);
+                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+            });
+
+
+        };
+
+        $scope.silverMember = function () {
+            formdata = {};
+            // ABS PAYMENT GATEWAY
+            formdata.photographer = $.jStorage.get("photographer")._id;
+            formdata.payAmount = $scope.amount[0]._id;
+            formdata.amount = $scope.amount[0].amount;
+            formdata.email = $.jStorage.get("photographer").email;
+            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.name = $.jStorage.get("photographer").name;
+            formdata.type = "Silver/" + $.jStorage.get("photographer")._id;
+            console.log(formdata);
+            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                console.log(data);
+                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+            });
+        };
 
         $scope.gstPayment = function (userdetails) {
-            console.log("userdetails", userdetails);
+            console.log("userdetails", userdetails.fname);
             console.log($scope.numberOfSlot);
             $scope.userData = {};
-            $scope.userData.firstName = userdetails.firstname;
+            $scope.userData.firstName = userdetails.fname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
-            $scope.userData.firstName = userdetails.firstname;
+
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
             $scope.userData.gstNumber = userdetails.GSTNumber;
             $scope.userData.photographer = $.jStorage.get("photographer")._id;
             var url = "GstDetails/save";
+            console.log($scope.userData)
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
                 console.log(data)
-                if ($scope.numberOfSlot == 3) {
-                    $scope.PackageUpdateForThree()
-                } else if ($scope.numberOfSlot == 6) {
-                    $scope.PackageUpdateForSix();
+                if ($scope.view == "silver") {
+                    $scope.silverMember();
+
+                } else if ($scope.view == "gold") {
+                    $scope.goldMember();
                 } else {
-                    $scope.step = 2;
+                    $state.go("photographer");
                 }
+
             })
 
         }
