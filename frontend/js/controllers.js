@@ -1061,14 +1061,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
         $scope.steps = false;
         if ($.jStorage.get("photographer")) {
-            if ($.jStorage.get("photographer").status == true) {
-                $scope.fetrPhoto = true;
-                $state.go("becomefp");
-            } else {
-                $scope.fetrPhoto = false;
-                $scope.steps = true;
-                $scope.showStep = 2;
-            }
+
+            $scope.showStep = 2;
+
         } else {
             $scope.steps = false;
             $scope.showStep = 1;
@@ -1379,6 +1374,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $rootScope.showStep = 2;
         } else {
             $rootScope.showStep = 1;
+        }
+        $scope.gstPayment = function (userdetails) {
+            console.log("userdetails", userdetails)
+            $scope.userData = {};
+            $scope.userData.firstName = userdetails.firstname;
+            $scope.userData.lastName = userdetails.lname;
+            $scope.userData.address = userdetails.address;
+            $scope.userData.firstName = userdetails.firstname;
+            $scope.userData.state = userdetails.state;
+            $scope.userData.city = userdetails.city;
+            $scope.userData.pincode = userdetails.pin;
+            $scope.userData.gstNumber = userdetails.GSTNumber;
+            $scope.userData.photographer = $.jStorage.get("photographer")._id;
+            var url = "GstDetails/save";
+            NavigationService.apiCallWithData(url, $scope.userData, function (data) {
+                console.log(data)
+                $scope.showStep = 3;
+            })
+
+        }
+        $scope.gotoPayment = function () {
+            console.log("inpaymenyt")
+
+            $scope.updateToFeature()
+
         }
         //console.log($scope.template);
         $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"]
