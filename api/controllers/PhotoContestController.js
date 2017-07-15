@@ -153,6 +153,9 @@ var controller = {
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----------------------------------------3", data);
                             });
+                            GstDetails.updatePackageAmtForPhotoContest(req.body, function (err, data) {
+                                console.log("updatePackageAmtForFeature", data);
+                            });
                         } else if (req.body.Description.split("/")[0] === "PackageUpdateForSix") {
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
@@ -160,14 +163,21 @@ var controller = {
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
                                 console.log("-----6");
                             });
-                        } else {
-                            PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                            });
-                            PhotoContest.addcontestParticipant(req.body, function (err, data) {
-                                console.log("-----9");
+                            GstDetails.updatePackageAmtForPhotoContest(req.body, function (err, data) {
+                                console.log("updatePackageAmtForFeature", data);
                             });
                         }
+                        // else {
+                        //     PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
+                        //         res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                        //     });
+                        //     PhotoContest.addcontestParticipant(req.body, function (err, data) {
+                        //         console.log("-----9");
+                        //     });
+                        //     GstDetails.updatePackageAmtForPhotoContest(req.body, function (err, data) {
+                        //         console.log("updatePackageAmtForFeature", data);
+                        //     });
+                        // }
                     } else {
                         res.redirect(env.realHost + "/error");
                     }

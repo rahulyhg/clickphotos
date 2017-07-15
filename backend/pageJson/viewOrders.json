@@ -1,0 +1,49 @@
+{
+    "title": "Orders",
+    "description": "List of Orders",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Photographer Name",
+        "isSort": "",
+        "fieldToBeShown": "name",
+        "type": "fkListView",
+        "tableRef": "photographer"
+    }, {
+        "name": "First Name",
+        "isSort": "",
+        "tableRef": "firstName"
+    }, {
+        "name": "Last Name",
+        "isSort": "",
+        "tableRef": "lastName"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editOrders",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Order",
+        "content": "Are you sure you want to delete Order?",
+        "api": "GstDetails/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [],
+    "apiCall": {
+        "url": "GstDetails/search",
+        "params": "_id"
+    }
+}

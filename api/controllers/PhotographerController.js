@@ -384,9 +384,15 @@ var controller = {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
+                            GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
+                                console.log("updatePackageAmtForFeature", data);
+                            });
                         } else {
                             Photographer.updateToGold(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                            });
+                            GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                console.log("updatePackageAmtForFeature", data);
                             });
                         }
                     } else {
