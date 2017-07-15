@@ -34,7 +34,6 @@ var model = {
 
     updatePackageAmtForFeature: function (data, callback) {
         var orderData = data.Description.split("/");
-        console.log("photocontestId-----------------", photocontestId);
         GstDetails.findOneAndUpdate({
             _id: orderData[5]
         }, {
@@ -56,7 +55,6 @@ var model = {
 
     updatePackageAmtForGandS: function (data, callback) {
         var orderData = data.Description.split("/");
-        console.log("photocontestId-----------------", photocontestId);
         GstDetails.findOneAndUpdate({
             _id: orderData[3]
         }, {
@@ -78,7 +76,6 @@ var model = {
 
     updatePackageAmtForPhotoContest: function (data, callback) {
         var orderData = data.Description.split("/");
-        console.log("photocontestId-----------------", photocontestId);
         GstDetails.findOneAndUpdate({
             _id: orderData[4]
         }, {
