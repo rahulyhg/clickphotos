@@ -2629,10 +2629,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var formdata = {
                 _id: $.jStorage.get('photographer')._id
             }
-            NavigationService.apiCallWithData("PayAmount/getAll", formdata, function (data) {
-                $scope.ThreePhotos = data.amount[3];
-                $scope.sixPhotos = data.amount[4];
-            })
+            NavigationService.callApi("PayAmount/getAll", function (data) {
+
+                $scope.ThreePhotos = data.data[3].amount;
+                $scope.sixPhotos = data.data[4].amount;
+
+            });
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                 console.log(data);
                 $.jStorage.set('photographer', data.data)
