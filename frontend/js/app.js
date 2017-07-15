@@ -11,10 +11,13 @@ var firstapp = angular.module('firstapp', [
     'toastr'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
-
+    cfpLoadingBarProvider.includeSpinner = true;
+    cfpLoadingBarProvider.includeBar = true;
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    cfpLoadingBarProvider.spinnerTemplate = '<div class="spinner-overlay"><img class="spinner" width="50%" src="frontend/img/default.gif"/></div>';
     $urlRouterProvider.otherwise("/");
     $stateProvider
         .state('home', {

@@ -22,6 +22,7 @@
                         <ul class="full-tabs pad60 list-inline">
                             <li ng-class="{'active': showStep == 1}" disabled="!steps">STEP 1</li>
                             <li ng-class="{'active': showStep == 2}" disabled="steps">STEP 2</li>
+                            <li ng-click="showStep=3" ng-class="{'active': showStep == 3}" disabled="steps">STEP 3</li>
                         </ul>
                     </div>
                 </div>
@@ -137,13 +138,78 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div ng-if="showStep == 3">
+                        <div class="col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1 pad-right5">
+                            <form name="bill">
+                                <div class="signup-form">
+                                    <div class="row mr15 light-grey side-margin">
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <h1 class="damionr orange-color forml">Bill To / Service To Address</h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-control" placeholder="First Name" ng-model="formData.fname" name="firstname" required><br>
+                                            <span ng-show="bill.firstname.$touched && bill.firstname.$invalid">Please enter your first name</span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-control" id="lastname" placeholder="Last Name" ng-model="formData.lname" name="lastname" required><br>
+                                            <span ng-show="bill.lastname.$touched && bill.lastname.$invalid">Please enter your last name</span>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <input type="text" class="form-control" id="address" placeholder="Address" ng-model="formData.address" name="address" required><br>
+                                            <span ng-show="bill.address.$touched && bill.address.$invalid">Please enter your address</span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-control" id="india" placeholder="India" ng-model="formData.country" name="india" value="India"
+                                                required readonly><br>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <select class="form-control placeholder select-class" id="state" ng-model="formData.state" name="state" required><option value="" hidden>State</option><option value="State" ng-repeat="state in states">{{state}}</option></select><br>
+                                            <span ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="select" class="form-control" id="city" placeholder="City" ng-model="formData.city" name="city" required><br>
+                                            <span ng-show="bill.city.$touched && bill.city.$invalid">Please enter your City</span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="tel" class="form-control" id="pin" placeholder="Pincode" ng-model="formData.pin" name="pin" required><br>
+                                            <span ng-show="bill.pin.$touched && bill.pin.$invalid">Please enter your pin-code</span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="orange-color">GST Registered</h5>
+                                                </div>
+                                                <div class="col-md-6 margin-top text-right">
+                                                    <div class="radio-class">
+                                                     <input type="radio" id="test1" name="radio-group">
+    <label ng-click="rc='yes'" class="margin-right" for="test1">Yes</label>
+    <input type="radio" id="test2" name="radio-group">
+    <label ng-click="rc='no'" for="test2">No</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-control bottom" id="gst" placeholder="GST Number" ng-disabled="rc=='no'" ng-model="formData.city"
+                                                name="gst" required><br>
+                                        </div>
+                                        <div class="col-xs-12 mr40 text-center">
+                                            <button class="btn orange-btn" type="submit" ng-click="">Proceed to Pay</button>
+                                        </div>
+                                    </div>
+                                </div>
+                    </form>
+                </div>
             </div>
-            <!--<div ng-if="fetrPhoto">
+        </div>
+        <!--<div ng-if="fetrPhoto">
             <h1>You Are already feature Photographer</h1>
         </div>-->
-            <!--<div class="row">
+        <!--<div class="row">
 
     </div>-->
-        </div>
+    </div>
     </div>
 </section>

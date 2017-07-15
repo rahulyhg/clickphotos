@@ -5,6 +5,7 @@
         }
         .text-hide {
             display: none;
+            margin-top:10px !important;
         }
         .head-f {
             font-size: 30px!important;
@@ -69,7 +70,45 @@
             top: 18px;
             width: 0%;
             left: 50%;
-        } // header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
+        }
+
+        .side-margin {
+    margin: 0 5%!important;
+}
+
+.margin-top{
+        text-align: left !important;
+    }
+
+        .enquiry {
+        @include padding(20px !important);
+        background-color: white;
+    width: 200px;
+    height: 200px;
+    overflow: auto;
+    }
+        .send-enquiry {
+            top: 30%;
+            .contact-btn{
+            img{height: 100% !important;}
+                    left: -32px;
+            }
+        .enquiry-menu-in {
+                @include transform(translateX(-74%) !important);
+            }
+            .enquiry-menu-out {
+                @include transform(translateX(-29%) !important);
+            }
+        .enquiry-side-menu{
+                top: 30% !important;
+    }
+    }
+            
+        //     .mobNo {
+        //         width: calc(100% - 35%);
+        //     }
+        // } 
+         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar0,
         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar1,
         // header>nav div.navbar-toggle>div.icon_float>span.icon_bar2,
         // {
@@ -79,7 +118,7 @@
             margin-right: 3px;
         }
         .search-directive {
-            display: none;
+           text-align: center;
         }
         .photographer {
             //  text-align: left;
@@ -92,13 +131,36 @@
                 padding: 5px 8px;
             }
         }
-        .side-menu {
-            width: 65%;
-            top: 54px!important;
-            .list-group-item {
-                font-size: 16px;
-            }
-        } //End of header.html
+//        .enquiry-side-menu {
+//     width: 303px !important;
+// }
+//         .side-menu {
+//             width: 65%;
+//             top: 54px!important;
+//             .list-group-item {
+//                 font-size: 16px;
+//             }
+//         } 
+        //start of artist-of-the-month.html
+        .page-margin {
+    margin-bottom: 80px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+}
+        .text-margin {
+        margin: 50px 30px !important;
+        }
+        .body-margin{
+    margin: 30px 20px !important;
+        }
+        .border{
+padding: 30px 20px !important;
+        }
+        .odd-curve{
+padding: 30px 20px !important;
+        }
+        //end of artist-of-the-month.html
+        //End of header.html
         //Footer.html
         footer {
             .footer_bgdw {
@@ -413,7 +475,7 @@
             .full-tabs {
                 li {
                     font-size: 18px!important;
-                    padding: 2px 35px;
+                    padding: 2px 14px;
                 }
             }
             .signup-form {
@@ -949,6 +1011,12 @@
         {
             height: 3px;
         }
+        .radio-class{
+            [type="radio"]:checked + label,
+        [type="radio"]:not(:checked) + label{
+            padding-left: 25px !important;
+        }
+        }
         .brand-logo {
             width: 171px;
         }
@@ -959,19 +1027,31 @@
         #nav-icon.open span:nth-child(3) {
             width: 85%;
         }
+        .send-enquiry {
+            top: 20%;
+            .enquiry-menu-out {
+                @include transform(translateX(-29%));
+            }
+            .enquiry-menu-in {
+                @include transform(translateX(-127%));
+            }
+            .mobNo {
+                width: calc(100% - 35%);
+            }
+        } 
         .search-directive {
             .ui-select-placeholder {
                 font-size: 12px;
             }
             .select-arrow {
-                @include position(absolute, 12px null null 29%);
+                @include position(absolute, 12px null null 35%);
                 img {
                     @include size(32px, 34px);
                 }
             }
             .go-btn {
                 font-size: 12px;
-                padding: 2.4% 2.3%;
+                padding: 7px 5px;
             }
         }
         .photographer {
@@ -1357,18 +1437,19 @@
                 padding: 9px 0px 6px;
             }
         }
-        .send-enquiry {
-            top: 20%;
-            .enquiry-menu-out {
-                @include transform(translateX(-195px));
-            }
-            .enquiry-menu-in {
-                @include transform(translateX(-610px));
-            }
-            .mobNo {
-                width: calc(100% - 35%);
-            }
-        } //End of user-profile.html
+        // .send-enquiry {
+        //     top: 20%;
+        //     .enquiry-menu-out {
+        //         @include transform(translateX(-195px));
+        //     }
+        //     .enquiry-menu-in {
+        //         @include transform(translateX(-610px));
+        //     }
+        //     .mobNo {
+        //         width: calc(100% - 35%);
+        //     }
+        // } 
+        //End of user-profile.html
         //Start of feature-pht.html
         .full-tabs {
             li {
@@ -1473,7 +1554,27 @@
                 display: block;
                 margin: 0 auto;
             }
-        } //End of Thank You for gold, silver & sorry pages
+        } 
+        //Start of artist-of-the-month.html
+        .page-margin {
+    margin-bottom: 100px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+        .text-margin {
+            margin: 50px 50px;
+        }
+        .body-margin{
+    margin: 30px 50px;
+        }
+        .border{
+padding: 30px 60px;
+        }
+        .odd-curve{
+padding: 30px 60px;
+        }
+        //End of artist-of-the-month.html
+        //End of Thank You for gold, silver & sorry pages
         //Start of competation(Photo Contest UI)
         .compet__prev-contest {
             width: 100%;
@@ -1530,11 +1631,6 @@
             }
             span {
                 font-size: 17.25px;
-            }
-        }
-        .send-enquiry {
-            .enquiry-menu-out {
-                @include transform(translateX(-205px));
             }
         }
     }

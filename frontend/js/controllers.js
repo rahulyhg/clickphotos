@@ -1,4 +1,6 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload', 'toastr', 'ui.select'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'ui.swiper', 'imageupload', 'toastr', 'ui.select',
+        'angular-loading-bar'
+    ])
 
     .controller('HomeCtrl', function ($state, $scope, $rootScope, TemplateService, NavigationService, $timeout, $location, anchorSmoothScroll, $uibModal) {
         $scope.template = TemplateService.changecontent("home"); //Use same name of .html file
@@ -284,6 +286,71 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.amount = data.data;
         });
 
+        //goldpackgeupdateDynamic
+
+        if ($.jStorage.get("photographer").package == "Silver") {
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function (data) {
+                if (data.value === true) {
+                    $scope.dyGoldAmount = data.data;
+                    console.log("$scope.dyGoldAmount", $scope.dyGoldAmount);
+                    if ($scope.amount[6]) {
+                        formdata1 = {};
+                        formdata1._id = $scope.amount[6]._id;
+                        formdata1.name = 'GoldPack';
+                        formdata1.state = 7;
+                        formdata1.amount = $scope.dyGoldAmount;
+                        console.log("formdata1", formdata1);
+                        NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
+                            if (data.value === true) {
+                                console.log("sucessss upadated");
+                            }
+                        });
+                    } else {
+                        formdata1 = {};
+                        formdata1.name = 'GoldPackage';
+                        formdata1.state = 7;
+                        formdata1.amount = $scope.dyGoldAmount;
+                        console.log("formdata1", formdata1);
+                        NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
+                            if (data.value === true) {
+                                console.log("sucessss");
+                            }
+                        });
+                    }
+                }
+            });
+
+            $scope.dyGoldMemberPackage = function () {
+                $scope.noEdit = false;
+                $scope.freeMember = true;
+                $scope.profileSelect = false;
+                $scope.showMembership = true;
+                $scope.goldSub = false;
+                $scope.goldenMember = false;
+                $scope.silverMember = true;
+                $scope.showForm = false;
+                $scope.hideAboutDesc = true;
+                formdata = {};
+
+                formdata.photographer = $.jStorage.get("photographer")._id;
+                formdata.payAmount = $scope.amount[6]._id;
+                formdata.amount = $scope.amount[6].amount;
+                formdata.email = $.jStorage.get("photographer").email;
+                formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+                formdata.name = $.jStorage.get("photographer").name;
+                formdata.type = "Gold/" + $.jStorage.get("photographer")._id;
+                console.log(formdata);
+                NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                    console.log(data);
+                    window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                });
+            };
+        }
+
+        //goldpackgeupdateDynamic end
+
         $scope.imageSize = function (data) {
             //console.log("data------", data);
             if (data == 'More than 3Mb') {
@@ -294,9 +361,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($.jStorage.get("photographer")) {
             formdata = {};
             formdata._id = $.jStorage.get("photographer")._id;
-
-
-
             NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
                 console.log($scope.tab4Hide);
                 if (data.value === true) {
@@ -340,7 +404,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             }
                             console.log("for upload", data);
                             NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
-                                console.log("contestdata", data.data);
+                                //console.log("contestdata", data.data);
                                 $scope.contestDetails = data.data;
                                 toastr.success("image uploaded sucessfully");
                                 $scope.imgModal.close();
@@ -359,9 +423,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                         /*****************getting all contest of give photographer***************** */
                         NavigationService.apiCallWithData("PhotoContest/findAllPhotographersInContest", input, function (data) {
-
                             $scope.contestDetails = data.data;
-                            console.log("contestdata", data.data);
+                            // console.log("contestdata", data.data);
 
                         });
                     }
@@ -512,16 +575,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $('div.absolute-plus > img').attr('src', 'frontend/img/plus.png');
             });
         };
-
+        $scope.dummy = {}
         $scope.addLocation = function () {
+            console.log("dummytext", $scope.dummy)
             if (!_.isEmpty(document.getElementById("locationCity").value)) {
                 var valText = document.getElementById("locationCity").value;
+                console.log(valText)
                 var valArr = [];
                 //console.log(!/\d/.test(valText)); //returns true if contains numbers
                 if (!/\d/.test(valText)) {
                     valArr = valText.split(",");
                     if (!/\d/.test(valArr[0])) {
                         $scope.arrLocation.push(valArr[0]);
+
+                        $scope.$digest();
                     }
                     document.getElementById("locationCity").value = null
                 }
@@ -909,7 +976,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //console.log("hiiiiiiiiiiiiiiiiiiiiiii");
             var input = document.getElementById('locationCity');
             var autocomplete = new google.maps.places.Autocomplete(input);
-            //console.log("autocomplete", autocomplete);
+            // google.maps.event.addListener(autocomplete, 'click', function () {
+            //     alert('CLicked');
+            // // });
+            autocomplete.addListener('place_changed', function () {
+                $scope.addLocation();
+
+
+            });
+
         }
         //google api autocomplete end
 
@@ -1034,19 +1109,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                $scope.registerData = formdata;
-                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    //console.log("dataForOtp", data);
-                    if (data.data.verifyAcc == false) {
-                        //console.log(data.data);
-                        $scope.signUpOTP();
-                        setTimeout(function (data) {
-                            $scope.signUpOTP.close();
-                        }, 600000);
+                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                        $scope.registerData = formdata;
+                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                            //console.log("dataForOtp", data);
+                            if (data.data.verifyAcc == false) {
+                                //console.log(data.data);
+                                $scope.signUpOTP();
+                                setTimeout(function (data) {
+                                    $scope.signUpOTP.close();
+                                }, 600000);
+                            } else {
+                                toastr.error('User already exist');
+                            }
+                        });
                     } else {
-                        toastr.error('User already exist');
+                        toastr.error('Check password');
                     }
-                });
+                } else {
+                    toastr.error('Please enter all details');
+                }
+
             }
         };
 
@@ -1146,14 +1230,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
         $scope.resetPass = function (formdata) {
-            formdata._id = $scope.id;
-            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                if (data.value) {
-                    $scope.displayCnfirmBox = false;
-                    $scope.displayotpBox = false;
-                    $scope.displayThanksBox = true;
-                }
-            });
+            if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                formdata._id = $scope.id;
+                NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                    if (data.value) {
+                        $scope.displayCnfirmBox = false;
+                        $scope.displayotpBox = false;
+                        $scope.displayThanksBox = true;
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
         };
         //verify and send mail for forgot password end
         //reset password funct end
@@ -1293,6 +1381,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $rootScope.showStep = 1;
         }
         //console.log($scope.template);
+        $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"]
     })
 
     .controller('UsersCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -1844,7 +1933,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $scope.cityFill.push(formdata.location);
         NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
             if (data.value === true) {
-                //console.log("getPhotographersByCategories", data);
+                console.log("getPhotographersByCategories", data);
                 $scope.photographerData = data.data;
                 if (!_.isEmpty($.jStorage.get("photographer"))) {
                     var idToBeRemoved = $.jStorage.get("photographer")._id;
@@ -1860,7 +1949,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             $scope.cityFilter.push(spec1);
                         }
                         // document.getElementById($stateParams.photoLoc).checked = true;
-                        // console.log("$scope.cityFilter", $scope.cityFilter);
+                        console.log("$scope.cityFilter", $scope.cityFilter);
                     })
                 })
             }
@@ -2080,7 +2169,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
         // filter end
-
     })
 
     .controller('headerctrl', function ($scope, TemplateService, $uibModal, $location, $window, NavigationService, $state, $rootScope, toastr) {
@@ -2177,18 +2265,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                $scope.registerData = formdata;
-                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    // console.log("dataForOtp", data);
-                    if (data.data.verifyAcc == false) {
-                        $scope.signUpOTP();
-                        setTimeout(function (data) {
-                            $scope.signUpOTP.close();
-                        }, 600000);
+                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                        $scope.registerData = formdata;
+                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                            // console.log("dataForOtp", data);
+                            if (data.data.verifyAcc == false) {
+                                $scope.signUpOTP();
+                                setTimeout(function (data) {
+                                    $scope.signUpOTP.close();
+                                }, 600000);
+                            } else {
+                                toastr.error('User already exist');
+                            }
+                        });
                     } else {
-                        toastr.error('User already exist');
+                        toastr.error('Check password');
                     }
-                });
+                } else {
+                    toastr.error('Please enter all details');
+                }
             }
         };
 
@@ -2316,16 +2412,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.resetPass = function (formdata) {
-            formdata._id = $scope.id;
-            // console.log("doneFormData", formdata);
-            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                console.log("doneFormDatadata", data);
-                if (data.value) {
-                    $scope.displayCnfirmBox = false;
-                    $scope.displayotpBox = false;
-                    $scope.displayThanksBox = true;
-                }
-            });
+            if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                formdata._id = $scope.id;
+                // console.log("doneFormData", formdata);
+                NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                    console.log("doneFormDatadata", data);
+                    if (data.value) {
+                        $scope.displayCnfirmBox = false;
+                        $scope.displayotpBox = false;
+                        $scope.displayThanksBox = true;
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
         };
         //verify and send mail for forgot password end
 
@@ -2622,19 +2722,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                $scope.registerData = formdata;
-                NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                    //console.log("dataForOtp", data);
-                    if (data.data.verifyAcc == false) {
-                        //console.log(data.data);
-                        $scope.signUpOTP();
-                        setTimeout(function (data) {
-                            $scope.signUpOTP.close();
-                        }, 600000);
+                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                        $scope.registerData = formdata;
+                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                            //console.log("dataForOtp", data);
+                            if (data.data.verifyAcc == false) {
+                                //console.log(data.data);
+                                $scope.signUpOTP();
+                                setTimeout(function (data) {
+                                    $scope.signUpOTP.close();
+                                }, 600000);
+                            } else {
+                                toastr.error('User already exist');
+                            }
+                        });
                     } else {
-                        toastr.error('User already exist');
+                        toastr.error('Check password');
                     }
-                });
+                } else {
+                    toastr.error('Please enter all details');
+                }
+
             }
         };
 
@@ -2734,14 +2843,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.resetPass = function (formdata) {
-            formdata._id = $scope.id;
-            NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
-                if (data.value) {
-                    $scope.displayCnfirmBox = false;
-                    $scope.displayotpBox = false;
-                    $scope.displayThanksBox = true;
-                }
-            });
+            if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                formdata._id = $scope.id;
+                NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
+                    if (data.value) {
+                        $scope.displayCnfirmBox = false;
+                        $scope.displayotpBox = false;
+                        $scope.displayThanksBox = true;
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
         };
         //verify and send mail for forgot password end
         //reset password funct end
@@ -2889,38 +3002,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Artist"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        $scope.boxes=[
-        {"Question":"Hi Anurita, tell us something about yourself.",
-        "Answer":"Hello!! I was born and brought up in Bangalore. After my education in Bishop Cotton School and CMS Jain college, I took up a job in the PR department of a corporate, but soon realized it was not my calling. That’s when I decided to follow my heart and become a makeup artist."
-        },
-        {"Question":"So, how did the switch happen?",
-        "Answer":"Actually, It was the mother of my best friend who put the thought in my mind. I used to visit my friend’s place pretty often and being girls we used to doll up for parties or going out somewhere. My friend’s mom noticed my knack for makeup and she suggested me to walk the path."
-        },
-        {"Question":"Quite interesting.",
-        "Answer":"Yes. Then I gave up my job and went to Dubai for an 8 week make up course by IMA, London. During the course, I learned a lot. The first half of the day was when our teachers taught us about various aspect of makeup. During the second half we got a chance to practice live."
-        },
-        {"Question":"And how did it change things?",
-        "Answer":"Well, everything. I came back to Bangalore and became a professional makeup artist. One by one I started to get work. Word of mouth spread fast and the social media also played a vital role. That’s how I am where I am today. But there is still a long way to go."
-        },
-        {"Question":"And what does the future hold? ",
-        "Answer":"I still want to gain more experience and eventually when the time is right, I want to start my own makeup academy in Bangalore."
-        },
-        {"Question":"Coming back to the topic of Bangalore, how do you see the city then and now?",
-        "Answer":"The city has changed beyond imagination. It was a green, quiet and relaxed city back in the days. All that has changed now. But I still love my city for what it is and the opportunities it provides to everyone."
-        },
-        {"Question":"What kind of makeup you enjoy doing the most?",
-        "Answer":"I enjoy doing makeup for catalogues and all other types, but nothing can match the satisfaction of doing a bridal makeup. I normally do a dry run a day prior to the big day. Yet, when the big days comes, the smile and the glow in the bride’s face is the biggest satisfaction that I can get as a makeup artist."
-        },
-        {"Question":"Anurita, you are quite photogenic yourself. Have you ever thought about being in front of the camera?",
-        "Answer":"No no, I am not very comfortable in front of the camera. That is my sister’s forte. She is an actress in the Kannada television industry. Her name is Ashita Chandrappa."
-        },
-        {"Question":"What about your love for dogs?",
-        "Answer":"I cannot imagine my life without a pet dog. I have had a dog since I was 4 years old. Currently I have Django. He is a 4 year old beagle and he is the love of my life."
-        },
-        {"Question":"How was your experience of working with clickmania ?",
-        "Answer":"It was a very nice experience. The team was very cool and non-interfering. Once I was given the brief, it was entirely left to me. Palak is a beautiful model and little Arjun made my day."
-        },
-        {"Question":"Thank you very much. We will surely work again together in future.",
-        "Answer":"Most welcome. It will be a pleasure to work with Clickmania again."
-        }]
-});
+        $scope.boxes = [{
+                "Question": "Hi Anurita, tell us something about yourself.",
+                "Answer": "Hello!! I was born and brought up in Bangalore. After my education in Bishop Cotton School and CMS Jain college, I took up a job in the PR department of a corporate, but soon realized it was not my calling. That’s when I decided to follow my heart and become a makeup artist."
+            },
+            {
+                "Question": "So, how did the switch happen?",
+                "Answer": "Actually, It was the mother of my best friend who put the thought in my mind. I used to visit my friend’s place pretty often and being girls we used to doll up for parties or going out somewhere. My friend’s mom noticed my knack for makeup and she suggested me to walk the path."
+            },
+            {
+                "Question": "Quite interesting.",
+                "Answer": "Yes. Then I gave up my job and went to Dubai for an 8 week make up course by IMA, London. During the course, I learned a lot. The first half of the day was when our teachers taught us about various aspect of makeup. During the second half we got a chance to practice live."
+            },
+            {
+                "Question": "And how did it change things?",
+                "Answer": "Well, everything. I came back to Bangalore and became a professional makeup artist. One by one I started to get work. Word of mouth spread fast and the social media also played a vital role. That’s how I am where I am today. But there is still a long way to go."
+            },
+            {
+                "Question": "And what does the future hold? ",
+                "Answer": "I still want to gain more experience and eventually when the time is right, I want to start my own makeup academy in Bangalore."
+            },
+            {
+                "Question": "Coming back to the topic of Bangalore, how do you see the city then and now?",
+                "Answer": "The city has changed beyond imagination. It was a green, quiet and relaxed city back in the days. All that has changed now. But I still love my city for what it is and the opportunities it provides to everyone."
+            },
+            {
+                "Question": "What kind of makeup you enjoy doing the most?",
+                "Answer": "I enjoy doing makeup for catalogues and all other types, but nothing can match the satisfaction of doing a bridal makeup. I normally do a dry run a day prior to the big day. Yet, when the big days comes, the smile and the glow in the bride’s face is the biggest satisfaction that I can get as a makeup artist."
+            },
+            {
+                "Question": "Anurita, you are quite photogenic yourself. Have you ever thought about being in front of the camera?",
+                "Answer": "No no, I am not very comfortable in front of the camera. That is my sister’s forte. She is an actress in the Kannada television industry. Her name is Ashita Chandrappa."
+            },
+            {
+                "Question": "What about your love for dogs?",
+                "Answer": "I cannot imagine my life without a pet dog. I have had a dog since I was 4 years old. Currently I have Django. He is a 4 year old beagle and he is the love of my life."
+            },
+            {
+                "Question": "How was your experience of working with clickmania ?",
+                "Answer": "It was a very nice experience. The team was very cool and non-interfering. Once I was given the brief, it was entirely left to me. Palak is a beautiful model and little Arjun made my day."
+            },
+            {
+                "Question": "Thank you very much. We will surely work again together in future.",
+                "Answer": "Most welcome. It will be a pleasure to work with Clickmania again."
+            }
+        ]
+    });

@@ -23,6 +23,7 @@ module.exports = [
   'bower_components/angular-toastr/dist/angular-toastr.js',
   'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
   'bower_components/angular-ui-select/dist/select.min.js',
+  'bower_components/angular-loading-bar/src/loading-bar.js',
   //Work files
   'frontend/js/app.js',
   'frontend/js/language.js',

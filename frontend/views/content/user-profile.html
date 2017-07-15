@@ -401,7 +401,11 @@
                 <div class="row pad-up100">
                     <div class="black-custom-slider">
                         <flex-slider slide="user in relatedPhotographerData track by $index" animation="slide" prev-text="" next-text="" item-margin="10"
+<<<<<<< HEAD
                             max-items="4" item-width="270">
+=======
+                            item-width="270">
+>>>>>>> 0f5ee8637bcaca7dc491dd8899b67d0361c0ae6c
                             <li>
                                 <div class="thumbnail shadow">
                                     <img src="frontend/img/userback1.jpg" alt="...">
@@ -478,8 +482,9 @@
             <div class="enquiry-side-menu enquiry-menu-out">
                 <div class="close-it">
                     <div class="contact-btn" ng-click="openRightSideNav()">
-                        <div class="x"></div>
-                        <p class="text-center title">contact photographer</p>
+                        <!--<div class="x"></div>
+                        <p class="text-center title">contact photographer</p>-->
+                        <img src="/frontend/img/cm_button.png" class="img-responsive">
                     </div>
                 </div>
                 <div class="enquiry">
@@ -539,7 +544,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile)">Send</a></p>
+                                <p class="text-center"><a class="btn orange-btn" type="button" ng-click="dataSubmit(enquiryInfo);sendEnqu(currentProfile); openRightSideNav();">Send</a></p>
                             </div>
                         </div>
                     </form>
