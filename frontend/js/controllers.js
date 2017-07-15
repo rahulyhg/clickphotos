@@ -1378,7 +1378,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.gstPayment = function (userdetails) {
             console.log("userdetails", userdetails)
             $scope.userData = {};
-            $scope.userData.firstName = userdetails.firstname;
+            $scope.userData.firstName = userdetails.fname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
 
@@ -2943,7 +2943,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log("userdetails", userdetails);
             console.log($scope.numberOfSlot);
             $scope.userData = {};
-            $scope.userData.firstName = userdetails.firstname;
+            $scope.userData.firstName = userdetails.fname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
 
