@@ -31,7 +31,7 @@ var navigationservice = angular.module('navigationservice', [])
                 classis: "active",
                 sref: "#!/page/viewCategories//",
             },
-             {
+            {
                 name: "Home Page Banner",
                 classis: "active",
                 sref: "#!/page/viewHomePage//",
