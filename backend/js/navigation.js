@@ -45,6 +45,11 @@ var navigationservice = angular.module('navigationservice', [])
                 name: "Photo Contest",
                 classis: "active",
                 sref: "#!/page/viewPhotoContest//",
+            },
+            {
+                name: "Orders",
+                classis: "active",
+                sref: "#!/page/viewOrders//",
             }
         ];
 
