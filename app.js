@@ -26,7 +26,9 @@ mongoose = require('mongoose');
 
 global["database"] = "clickmania";
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/' + database, function (err) {
+mongoose.connect('mongodb://localhost:27017/' + database, {
+    useMongoClient: true
+}, function (err) {
     if (err) {
         console.log(err);
     }
@@ -64,7 +66,7 @@ mongoose.connect('mongodb://localhost:27017/' + database, function (err) {
         }
     }
     //api key for cities
-    sails.api="AIzaSyBeYWrUdZ2n9xHeSTjoCELO_IcvjzXgyS8";
+    sails.api = "AIzaSyBeYWrUdZ2n9xHeSTjoCELO_IcvjzXgyS8";
     //api key for cities end
 
     // Start server
