@@ -4,17 +4,6 @@ var sha512 = require('sha512');
 var curl = require('curlrequest');
 var schema = new Schema({
     name: String,
-    firstName: {
-        type: String,
-        require: true
-    },
-    lastName: String,
-    address: String,
-    country: String,
-    state: String,
-    city: String,
-    pincode: Number,
-    gstNumber: String,
     profilePic: String,
     coverPic: String,
     uploadedImages: [{
