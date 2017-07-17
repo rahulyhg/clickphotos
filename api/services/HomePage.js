@@ -1,6 +1,7 @@
 var schema = new Schema({
     bannerImage: String,
-    url:String
+    mobileBannerImage: String,
+    url: String
 });
 
 schema.plugin(deepPopulate, {});

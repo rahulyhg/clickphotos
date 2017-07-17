@@ -39,7 +39,8 @@
         <swiper autoplay="5000" effect="slide" loop="true">
             <slides>
                 <slide ng-repeat="image in bannerImageData track by $index">
-                    <a href="{{image.url}}"><img ng-src="{{image.bannerImage | serverimage}}" class="img-responsive swiperbg" noloading="true"></a>
+                    <a href="{{image.url}}"><img ng-src="{{image.bannerImage | serverimage}}" class="img-responsive swiperbg hidden-xs" noloading="true"></a>
+                    <a href="{{image.url}}"><img ng-src="{{image.mobileBannerImage | serverimage}}" class="img-responsive swiperbg visible-xs" noloading="true"></a>
                 </slide>
             </slides>
             <prev></prev>
