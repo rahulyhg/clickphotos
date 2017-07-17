@@ -15,7 +15,8 @@ var schema = new Schema({
     city: String,
     pincode: Number,
     gstNumber: String,
-    packageAmount: String
+    packageAmount: String,
+    package: String
 });
 
 schema.plugin(deepPopulate, {
@@ -37,7 +38,8 @@ var model = {
         GstDetails.findOneAndUpdate({
             _id: orderData[5]
         }, {
-            packageAmount: orderData[4]
+            packageAmount: orderData[4],
+            package: orderData[0]
         }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
@@ -58,7 +60,8 @@ var model = {
         GstDetails.findOneAndUpdate({
             _id: orderData[3]
         }, {
-            packageAmount: orderData[2]
+            packageAmount: orderData[2],
+            package: orderData[0]
         }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
@@ -79,7 +82,8 @@ var model = {
         GstDetails.findOneAndUpdate({
             _id: orderData[4]
         }, {
-            packageAmount: orderData[3]
+            packageAmount: orderData[3],
+            package: orderData[0]
         }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
@@ -93,6 +97,40 @@ var model = {
                 }
             }
         });
-    }
+    },
+
+    findGstState: function (data, callback) {
+        GstDetails.findOne({
+            photographer: data.photographerId
+        }).deepPopulate('photographer').exec(function (err, data1) {
+            if (err) {
+                callback(err, null);
+            } else if (data1) {
+                var emailData = {};
+                emailData.amount = data1.packageAmount;
+                emailData.filename = "invoice.ejs";
+                emailData.name = data1.firstName;
+                emailData.address = data1.address;
+                emailData.state = data1.state;
+                emailData.emailOfUser = data1.photographer.email;
+                emailData.from = "admin@clickmania.in";
+                emailData.fromname = "Clickmania Admin";
+                emailData.subject = "Invoice Details";
+                Config.email(emailData, function (err, emailRespo) {
+                    console.log("emailRespo", emailRespo);
+                    if (err) {
+                        console.log(err);
+                        callback(null, data1);
+                    } else if (emailRespo) {
+                        callback(null, data1);
+                    } else {
+                        callback(null, data1);
+                    }
+                });
+            } else {
+                callback("Invalid data", null);
+            }
+        });
+    },
 };
 module.exports = _.assign(module.exports, exports, model);
