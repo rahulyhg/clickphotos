@@ -10,8 +10,8 @@
             table {
                 width: 600px;
                 margin: 0 auto;
-                border:solid 1px #999; 
-                border-collapse:collapse;
+                border: solid 1px #999;
+                border-collapse: collapse;
             }
         </style>
 </head>
@@ -19,87 +19,98 @@
 
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<table cellpadding="10" align="center">
-  <thead><th colspan="2" style="text-align:left;"  width="50%"><img src="../frontend/img/logo.png" width="100" alt="LOGO"></th>
-  <th style="text-align:right; font-size: 34px;" colspan="2"><div>TAX INVOICE</div><div style="color:#999; font-size: 11px;
-    font-weight: 300;">GSTIN No. Of Customer: XXXXXXXXXXXXX</div></th></thead>
-  <tbody>
-  <tr><td colspan="4" style="text-align:right; padding-top: 30px; padding-bottom: 30px; border-bottom:solid 1px #999;"><b>Clickmania (OPC) Private Limited</b><br>
-Flat No G-01, Manjuanatha Residency,<br>
-B Block Kaggadasapura Main Road,<br>
-Bengalore - 560093,<br>
-Karnataka, India.<br><br>
+    <table cellpadding="10" align="center">
+        <thead>
+            <th colspan="2" style="text-align:left;" width="50%"><img src="../frontend/img/logo.png" width="100" alt="LOGO"></th>
+            <th style="text-align:right; font-size: 34px;" colspan="2">
+                <div>TAX INVOICE</div>
+                <div style="color:#999; font-size: 11px;
+    font-weight: 300;">GSTIN No. Of Customer: XXXXXXXXXXXXX</div>
+            </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4" style="text-align:right; padding-top: 30px; padding-bottom: 30px; border-bottom:solid 1px #999;"><b>Clickmania (OPC) Private Limited</b><br> Flat No G-01, Manjuanatha Residency,<br> B Block Kaggadasapura
+                    Main Road,<br> Bengalore - 560093,<br> Karnataka, India.<br><br> CIN: UK74999KA20016OPC096495<br><br>                    Mobile: +91 9845601465<br> www.clickmania.in
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top: 30px; padding-bottom: 30px;"><span style="color:#939393;">BILL TO/ SERVCE TO</span><br><b><%= name %></b><br>
+                    <%= address %>
+                        <br><br>
+                        <%= emailOfUser %>
 
-CIN: UK74999KA20016OPC096495<br><br>
-Mobile: +91 9845601465<br>
-www.clickmania.in
-</td></tr>
-<tr><td colspan="2" style="padding-top: 30px; padding-bottom: 30px;"><span style="color:#939393;">BILL TO/ SERVCE TO</span><br><b>Devang Thakkar</b><br>
-36, Onlooker Building<br>
-Sir P.M. Road, Fort<br>
-Mumbai, Maharashtra 400001<br>
-India<br><br>
-
-devang@anando.in</td>
-<td colspan="2" valign="top" align="right" style="padding-top: 30px;"><b>Invoice Number:<b> CM/001/17-18<br>
+                </td>
+                <td colspan="2" valign="top" align="right" style="padding-top: 30px;"><b>Invoice Number:<b> CM/001/17-18<br>
 <b>Invoice Date:</b> June 30, 2017<br>
-</td>
-</tr>
-<tr style="background-color:#f15a29; color:#fff;">
-<td align="center">Deliverables</td>
-<td align="center">Quantity</td>
-<td align="center">Price</td>
-<td align="center">Amount
-</td>
-</tr>
-<tr style="border-bottom:solid 2px #939393;">
-<td align="center"><b>Silver Package for 1 year</b></td>
-<td align="center">1</td>
-<td align="center">₹2000.00</td>
-<td align="right">₹2000.00</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td align="right"><b>Subtotal:</b></td>
-<td align="right">₹2000.00</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td align="right">CGST 9% (SAC 00440129):</td>
-<td align="right">₹180.00</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td align="right">SGST 9% (SAC 00440129):</td>
-<td align="right">₹180.00</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;"><b>Total:</b></td>
-<td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;">₹2360.00</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td align="right"><b>Amount Due (INR):</b></td>
-<td align="right">₹2360.00</td>
-</tr>
-<tr>
-<td align="left" colspan="4" style="font-size:11px;"><b>Notes</b><br>
-PAN: AAGCC6531M<br>
-TAN: BLRC15450B<br>
-GST: 29AAGCC6531M2Z8<br>
-SAC: 00440129<br>
-THIS IS AN ELECTRONICALLY GENERATED INVOICE/RECEIPT AND DOES NOT REQUIRE ANY SIGNATURE.</td>
-</tr>
-</tbody>
-</table>
+                </td>
+            </tr>
+            <tr style="background-color:#f15a29; color:#fff;">
+                <td align="center">Deliverables</td>
+                <td align="center">Quantity</td>
+                <td align="center">Price</td>
+                <td align="center">Amount
+                </td>
+            </tr>
+            <tr style="border-bottom:solid 2px #939393;">
+                <td align="center"><b>Silver Package for 1 year</b></td>
+                <td align="center">1</td>
+                <td align="center">₹
+                    <%= amount %>
+                </td>
+                <td align="right">₹
+                    <%= amount %>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td align="right"><b>Subtotal:</b></td>
+                <td align="right">₹
+                    <%= amount %>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td align="right">CGST 9% (SAC 00440129):</td>
+                <td align="right">₹
+                    <% var tax = (9/100)*amount %>
+                        <%= tax %>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td align="right">SGST 9% (SAC 00440129):</td>
+                <td align="right">₹
+                    <%= tax %>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;"><b>Total:</b></td>
+                <td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;">₹2360.00</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td align="right"><b>Amount Due (INR):</b></td>
+                <td align="right">₹
+                    <%= amount+tax+tax %>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" colspan="4" style="font-size:11px;"><b>Notes</b><br> PAN: AAGCC6531M<br> TAN: BLRC15450B<br> GST: 29AAGCC6531M2Z8<br> SAC: 00440129<br> THIS
+                    IS AN ELECTRONICALLY GENERATED INVOICE/RECEIPT AND DOES NOT REQUIRE ANY SIGNATURE.</td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
+
 </html>

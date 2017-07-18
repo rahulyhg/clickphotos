@@ -280,73 +280,82 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             isFirstDisabled: false
         };
 
+        $scope.downloadInvoice = function () {
+            console.log("ready ")
+            var data = {};
+            data.photographerId = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("GstDetails/findGstState", data, function (data) {
+                console.log(data)
+            })
 
+        }
 
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
         });
 
         //goldpackgeupdateDynamic
-
-        if ($.jStorage.get("photographer").package == "Silver") {
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function (data) {
-                if (data.value === true) {
-                    $scope.dyGoldAmount = data.data;
-                    console.log("$scope.dyGoldAmount", $scope.dyGoldAmount);
-                    if ($scope.amount[6]) {
-                        formdata1 = {};
-                        formdata1._id = $scope.amount[6]._id;
-                        formdata1.name = 'GoldPack';
-                        formdata1.state = 7;
-                        formdata1.amount = $scope.dyGoldAmount;
-                        console.log("formdata1", formdata1);
-                        NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
-                            if (data.value === true) {
-                                console.log("sucessss upadated");
-                            }
-                        });
-                    } else {
-                        formdata1 = {};
-                        formdata1.name = 'GoldPackage';
-                        formdata1.state = 7;
-                        formdata1.amount = $scope.dyGoldAmount;
-                        console.log("formdata1", formdata1);
-                        NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
-                            if (data.value === true) {
-                                console.log("sucessss");
-                            }
-                        });
-                    }
-                }
-            });
-
-            $scope.dyGoldMemberPackage = function () {
-                $scope.noEdit = false;
-                $scope.freeMember = true;
-                $scope.profileSelect = false;
-                $scope.showMembership = true;
-                $scope.goldSub = false;
-                $scope.goldenMember = false;
-                $scope.silverMember = true;
-                $scope.showForm = false;
-                $scope.hideAboutDesc = true;
+        if ($.jStorage.get("photographer")) {
+            if ($.jStorage.get("photographer").package == "Silver") {
                 formdata = {};
-
-                formdata.photographer = $.jStorage.get("photographer")._id;
-                formdata.payAmount = $scope.amount[6]._id;
-                formdata.amount = $scope.amount[6].amount;
-                formdata.email = $.jStorage.get("photographer").email;
-                formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
-                formdata.name = $.jStorage.get("photographer").name;
-                formdata.type = "Gold/" + $.jStorage.get("photographer")._id;
-                console.log(formdata);
-                NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
-                    console.log(data);
-                    window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                formdata._id = $.jStorage.get("photographer")._id;
+                NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function (data) {
+                    if (data.value === true) {
+                        $scope.dyGoldAmount = data.data;
+                        console.log("$scope.dyGoldAmount", $scope.dyGoldAmount);
+                        if ($scope.amount[6]) {
+                            formdata1 = {};
+                            formdata1._id = $scope.amount[6]._id;
+                            formdata1.name = 'GoldPack';
+                            formdata1.state = 7;
+                            formdata1.amount = $scope.dyGoldAmount;
+                            console.log("formdata1", formdata1);
+                            NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
+                                if (data.value === true) {
+                                    console.log("sucessss upadated");
+                                }
+                            });
+                        } else {
+                            formdata1 = {};
+                            formdata1.name = 'GoldPackage';
+                            formdata1.state = 7;
+                            formdata1.amount = $scope.dyGoldAmount;
+                            console.log("formdata1", formdata1);
+                            NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
+                                if (data.value === true) {
+                                    console.log("sucessss");
+                                }
+                            });
+                        }
+                    }
                 });
-            };
+
+                $scope.dyGoldMemberPackage = function () {
+                    $scope.noEdit = false;
+                    $scope.freeMember = true;
+                    $scope.profileSelect = false;
+                    $scope.showMembership = true;
+                    $scope.goldSub = false;
+                    $scope.goldenMember = false;
+                    $scope.silverMember = true;
+                    $scope.showForm = false;
+                    $scope.hideAboutDesc = true;
+                    formdata = {};
+
+                    formdata.photographer = $.jStorage.get("photographer")._id;
+                    formdata.payAmount = $scope.amount[6]._id;
+                    formdata.amount = $scope.amount[6].amount;
+                    formdata.email = $.jStorage.get("photographer").email;
+                    formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+                    formdata.name = $.jStorage.get("photographer").name;
+                    formdata.type = "Gold/" + $.jStorage.get("photographer")._id;
+                    console.log(formdata);
+                    NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                        console.log(data);
+                        window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+                    });
+                };
+            }
         }
 
         //goldpackgeupdateDynamic end
@@ -1100,6 +1109,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.showOtpBox = false;
         $scope.showSucessBox = false;
         $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
+            console.log("formdata", formdata);
             if (!terms) {
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');

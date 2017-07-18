@@ -52,8 +52,8 @@
                                             <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="ConfirmPassword" name="ConfirmPassword"
-                                                required>
+                                            <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="formData.ConfirmPassword"
+                                                name="ConfirmPassword" required>
                                         </div>
                                         <div>
                                             <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
