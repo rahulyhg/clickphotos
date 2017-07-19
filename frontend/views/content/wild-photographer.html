@@ -62,12 +62,14 @@
             <div class="btn-group margin-right" uib-dropdown auto-close="outsideClick">
                 <button id="split-button" type="button" class="btn btn-default btn-style">City</button>
                 <button class="btn btn-default img-bg" type="button" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg"></button>
-                
+
                 <ul class="dropdown-menu city" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-                    <li role="menuitem" ng-repeat="dataPoint in cityFilter track by $index"><div class="checkbox checkboxing">
-                        <input type="checkbox" id="{{dataPoint}}" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
-                        <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
-                </div></li>
+                    <li role="menuitem" ng-repeat="dataPoint in cityFilter track by $index">
+                        <div class="checkbox checkboxing">
+                            <input type="checkbox" id="{{dataPoint}}" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
+                            <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="btn-group margin-right" uib-dropdown auto-close="outsideClick">
@@ -75,159 +77,165 @@
                 <button type="button" class="btn btn-default img-bg" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg"></button>
 
                 <div class="dropdown-menu price" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(0)" id="5k-10k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="5k-10k"><span></span><i class="fa fa-inr"></i>5k-10k</label></li>
-                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(1)" id="10k-25k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="10k-25k"><span></span><i class="fa fa-inr"></i>10k-25k</label></li>
-                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(2)" id="25k-50k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="25k-50k"><span></span><i class="fa fa-inr"></i>25k-50k</label></li>
-                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(3)" id="50k-1lakh" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="50k-1lakh"><span></span><i class="fa fa-inr"></i>50k-1lakh</label></li>
-                        <li><div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(4)" id="1lakh plus" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                        <label for="1lakh plus" class="text-lowercase"><span></span><i class="fa fa-inr"></i>1lakh plus</label></li>
-                </div>
-            </div>
-                <button type="button" ng-click="searchBarGo()" class="btn go-btn go-button">GO</button>
-        </div>
+                    <li>
+                        <div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(0)" id="5k-10k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                            <label for="5k-10k"><span></span><i class="fa fa-inr"></i>5k-10k</label></li>
+                    <li>
+                        <div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(1)" id="10k-25k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                            <label for="10k-25k"><span></span><i class="fa fa-inr"></i>10k-25k</label></li>
+                    <li>
+                        <div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(2)" id="25k-50k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                            <label for="25k-50k"><span></span><i class="fa fa-inr"></i>25k-50k</label></li>
+                    <li>
+                        <div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(3)" id="50k-1lakh" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                            <label for="50k-1lakh"><span></span><i class="fa fa-inr"></i>50k-1lakh</label></li>
+                    <li>
+                        <div class="checkbox check-style"><input value="" type="checkbox" ng-click="filterPriceAndCity(4)" id="1lakh plus" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                            <label for="1lakh plus" class="text-lowercase"><span></span><i class="fa fa-inr"></i>1lakh plus</label></li>
+                    </div>
+                    </div>
+                    <button type="button" ng-click="searchBarGo()" class="btn go-btn go-button">GO</button>
+                    </div>
 
-        <div class="pull-right btn-marg">
-            <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>            <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
-            <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-10 col-sm-8 col-xs-12 users visible-xs">
-            <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
-                ng-if="photographerData">
-                <div class="thumbnail">
-                    <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
-                    <div class="user-icon">
-                        <div class="border-half">
-                            <div class="user-img" style="background: url('{{list.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="list.profilePic">
-                            </div>
-                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
-                            <!--<img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">-->
-                        </div>
+                    <div class="pull-right btn-marg">
+                        <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>                        <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
+                        <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
                     </div>
-                    <hr class="border-line2 text-center">
-                    <div class="caption googleb">
-                        <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
-                        <p class="title-intro">{{list.bio}}</p>
-                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button">View Profile</a></p>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3 " ng-if="!photographerData[0]">
-                    <div class="nopht-title">
-                        <div class="ht30">
-                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
-                            <h1 class="fith damionr text-capitalize">Sorry</h1>
-                        </div>
-                        <p>There are no photographers for your search result!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-12 hidden-xs">
-            <h2 class="border-up">City</h2>
-            <div class="location checkboxing">
-                <div class="checkbox ">
-                    <!--<input type="checkbox" id="All" ng-click="cityFil('All')">
-                    <label for="All"><span></span> all</label>-->
-                    <div ng-repeat="dataPoint in cityFilter track by $index">
-                        <input type="checkbox" id="{{dataPoint}}" name="{{dataPoint}}" ng-model = "cheboxcheck" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
-                        <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
-                    </div>
-                </div>
-            </div>
-            <h2 class="border-up text-capitalize">Price <small>(per day)</small></h2>
-            <div class="price checkboxing">
-                <div class="checkbox">
-                    <input name="checkbox-1" type="checkbox" ng-click="filterPriceAndCity(0)" id="checkbox-1" >
-                    <label for="checkbox-1"><span></span><i class="fa fa-inr"></i>5k-10k</label><br>
-                    <input name="checkbox-2" type="checkbox" ng-click="filterPriceAndCity(1)" id="checkbox-2">
-                    <label for="checkbox-2"><span></span><i class="fa fa-inr"></i>10k-25k</label><br>
-                    <input name="checkbox-3" type="checkbox" ng-model = "cheboxcheck" ng-click="filterPriceAndCity(2)" id="checkbox-3">
-                    <label for="checkbox-3"><span></span><i class="fa fa-inr"></i>25k-50k</label><br>
-                    <input name="checkbox-4" type="checkbox" ng-click="filterPriceAndCity(3)" id="checkbox-4">
-                    <label for="checkbox-4"><span></span><i class="fa fa-inr"></i>50k-1lakh</label><br>
-                    <input name="checkbox-5" type="checkbox" ng-click="filterPriceAndCity(4)" id="checkbox-5">
-                    <label for="checkbox-5" class="text-lowercase"><span></span><i class="fa fa-inr"></i>₹1lakh plus</label><br>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10 col-sm-8 col-xs-12 users hidden-xs">
-            <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
-                ng-if="photographerData">
-                <div class="thumbnail">
-                    <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
-                    <div class="user-icon">
-                        <div class="border-half">
-                            <div class="user-img" style="background: url('{{list.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="list.profilePic">
-                            </div>
-                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
-                            <!--<img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">-->
-                        </div>
-                    </div>
-                    <hr class="border-line2 text-center">
-                    <div class="caption googleb">
-                        <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
-                        <p class="title-intro">{{list.bio}}</p>
-                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button">View Profile</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3 " ng-if="!photographerData[0]">
-                    <div class="nopht-title">
-                        <div class="ht30">
-                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
-                            <h1 class="fith damionr text-capitalize">Sorry</h1>
-                        </div>
-                        <p>There are no photographers for your search result!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 text-center">
-            <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>            <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
-            <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
-        </div>
-    </div>
-    <div class="black-back black-back-mob">
-        <div class="container">
-            <div class="f-photo-div">
-                <h2 class="head-f white-color">Featured <br> &nbsp;&nbsp;Photographers</h2>
-                <div class="row pad-up100">
-                    <div class="black-custom-slider">
-                        <flex-slider slide="user in featrData track by $index" animation="slide" prev-text="" next-text="" item-margin="10" max-items="4"
-                            item-width="200">
-                            <li>
-                                <div class="thumbnail shadow">
-                                    <img src="frontend/img/userback1.jpg" alt="...">
-                                    <div class="user-ab">
+                    <div class="row">
+                        <div class="col-md-10 col-sm-8 col-xs-12 users visible-xs">
+                            <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
+                                ng-if="photographerData">
+                                <div class="thumbnail">
+                                    <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
+                                    <div class="user-icon">
                                         <div class="border-half">
-                                            <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="user.profilePic">
+                                            <div class="user-img" style="background: url('{{list.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="list.profilePic">
                                             </div>
-                                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
-                                            <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
-                                        </div>
-                                        <div class="intro-profile">
-                                            <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
-                                            <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
+                                            <!--<img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">-->
                                         </div>
                                     </div>
+                                    <hr class="border-line2 text-center">
+                                    <div class="caption googleb">
+                                        <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
+                                        <p class="title-intro">{{list.bio}}</p>
+                                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button">View Profile</a></p>
+                                    </div>
                                 </div>
-                                <div class="text-center">
-                                    <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3 " ng-if="!photographerData[0]">
+                                    <div class="nopht-title">
+                                        <div class="ht30">
+                                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
+                                            <h1 class="fith damionr text-capitalize">Sorry</h1>
+                                        </div>
+                                        <p>There are no photographers for your search result!
+                                        </p>
+                                    </div>
                                 </div>
-                            </li>
-                        </flex-slider>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-12 hidden-xs">
+                            <h2 class="border-up">City</h2>
+                            <div class="location checkboxing">
+                                <div class="checkbox ">
+                                    <!--<input type="checkbox" id="All" ng-click="cityFil('All')">
+                    <label for="All"><span></span> all</label>-->
+                                    <div ng-repeat="dataPoint in cityFilter track by $index">
+                                        <input type="checkbox" id="1{{dataPoint}}" name="1{{dataPoint}}" ng-model="cheboxcheck" ng-checked="checkedLoc==dataPoint"
+                                            ng-click="filterPriceAndCity(dataPoint)">
+                                        <label for="1{{dataPoint}}"><span></span> {{dataPoint}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="border-up text-capitalize">Price <small>(per day)</small></h2>
+                            <div class="price checkboxing">
+                                <div class="checkbox">
+                                    <input name="checkbox-1" type="checkbox" ng-click="filterPriceAndCity(0)" id="checkbox-1">
+                                    <label for="checkbox-1"><span></span><i class="fa fa-inr"></i>5k-10k</label><br>
+                                    <input name="checkbox-2" type="checkbox" ng-click="filterPriceAndCity(1)" id="checkbox-2">
+                                    <label for="checkbox-2"><span></span><i class="fa fa-inr"></i>10k-25k</label><br>
+                                    <input name="checkbox-3" type="checkbox" ng-model="cheboxcheck" ng-click="filterPriceAndCity(2)" id="checkbox-3">
+                                    <label for="checkbox-3"><span></span><i class="fa fa-inr"></i>25k-50k</label><br>
+                                    <input name="checkbox-4" type="checkbox" ng-click="filterPriceAndCity(3)" id="checkbox-4">
+                                    <label for="checkbox-4"><span></span><i class="fa fa-inr"></i>50k-1lakh</label><br>
+                                    <input name="checkbox-5" type="checkbox" ng-click="filterPriceAndCity(4)" id="checkbox-5">
+                                    <label for="checkbox-5" class="text-lowercase"><span></span><i class="fa fa-inr"></i>₹1lakh plus</label><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-8 col-xs-12 users hidden-xs">
+                            <div class="col-sm-6 col-md-4 col-xs-12" ng-repeat="list in photographerData  |  startFrom:currentPage*pageSize | limitTo:pageSize"
+                                ng-if="photographerData">
+                                <div class="thumbnail">
+                                    <img src="frontend/img/userbackthumbanail.jpg" alt="..." class="img-full img-min-h">
+                                    <div class="user-icon">
+                                        <div class="border-half">
+                                            <div class="user-img" style="background: url('{{list.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="list.profilePic">
+                                            </div>
+                                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!list.profilePic">
+                                            <!--<img ng-src="{{list.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img" ng-if="list.profilePic">-->
+                                        </div>
+                                    </div>
+                                    <hr class="border-line2 text-center">
+                                    <div class="caption googleb">
+                                        <p class="title text-capitalize">{{list.name}} | {{list.location[0]}}</p>
+                                        <p class="title-intro">{{list.bio}}</p>
+                                        <p class="text-center"><a ui-sref="user-profile({userid:list._id})" class="btn whit-btn" type="button">View Profile</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7 col-md-offset-4 col-sm-8 col-sm-offset-3 " ng-if="!photographerData[0]">
+                                    <div class="nopht-title">
+                                        <div class="ht30">
+                                            <img src="frontend/img/clickm/6.png" class="imgwt doneLoading" alt="">
+                                            <h1 class="fith damionr text-capitalize">Sorry</h1>
+                                        </div>
+                                        <p>There are no photographers for your search result!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xs-12 text-center">
+                            <button class="btn black-btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-angle-double-left" ></i> Previous</button>                            <button class="btn tans-btn">{{currentPage+1}}</button><span class="sec-span"> of {{numberOfPages()}}</span>
+                            <button class="btn black-btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next <i class="fa fa-angle-double-right" ></i></button>
+                        </div>
                     </div>
-                    <!--<div class="col-sm-4 col-md-3 pad5" ng-repeat="user in featrData">
+                    <div class="black-back black-back-mob">
+                        <div class="container">
+                            <div class="f-photo-div">
+                                <h2 class="head-f white-color">Featured <br> &nbsp;&nbsp;Photographers</h2>
+                                <div class="row pad-up100">
+                                    <div class="black-custom-slider">
+                                        <flex-slider slide="user in featrData track by $index" animation="slide" prev-text="" next-text="" item-margin="10" max-items="4"
+                                            item-width="200">
+                                            <li>
+                                                <div class="thumbnail shadow">
+                                                    <img src="frontend/img/userback1.jpg" alt="...">
+                                                    <div class="user-ab">
+                                                        <div class="border-half">
+                                                            <div class="user-img" style="background: url('{{user.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="user.profilePic">
+                                                            </div>
+                                                            <img src="frontend/img/profile.png" class="img-responsive profile-f-img" alt="" ng-if="!user.profilePic">
+                                                            <!--<img ng-src="{{user.profilePic | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">-->
+                                                        </div>
+                                                        <div class="intro-profile">
+                                                            <p class="name-loc text-capitalize">{{user.name}} | {{user.location[0]}} </p>
+                                                            <p class="spec text-capitalize">Speciality: {{user.speciality[0].name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <a ui-sref="user-profile({userid:user._id})" class="btn orange-btn" role="button">View Profile</a>
+                                                </div>
+                                            </li>
+                                        </flex-slider>
+                                    </div>
+                                    <!--<div class="col-sm-4 col-md-3 pad5" ng-repeat="user in featrData">
                     <div class="thumbnail shadow">
                         <img src="frontend/img/fp_bg1.png" alt="...">
                         <div class="user-ab">
@@ -244,31 +252,31 @@
                         <a ui-sref="user-profile({userid:user._id})" class="btn whit-btn" role="button">View Profile</a>
                     </div>
                 </div>-->
-                </div>
-                <div class="text-center ">
-                    <a ui-sref="users" class="btn whit-btn view-a  white-color" role="button">View All</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="marg-rel">
-            <h2 class="head-f">View other <br> &nbsp;&nbsp;Catergories</h2>
-            <div class="row pad-up100">
-                <div class="col-sm-6 col-md-3 col-xs-12 pad5" ng-repeat="user in showlessCatImages">
-                    <div class="thumbnail shadow">
-                        <img ng-src="{{user.viewOtherCatImage | serverimage}}" alt="...">
+                                </div>
+                                <div class="text-center ">
+                                    <a ui-sref="users" class="btn whit-btn view-a  white-color" role="button">View All</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <a ui-sref="wild-photographer({catid:user._id,catName:user.name})" class="btn orange-btn" role="button">View Catergory</a>
+                    <div class="row">
+                        <div class="marg-rel">
+                            <h2 class="head-f">View other <br> &nbsp;&nbsp;Catergories</h2>
+                            <div class="row pad-up100">
+                                <div class="col-sm-6 col-md-3 col-xs-12 pad5" ng-repeat="user in showlessCatImages">
+                                    <div class="thumbnail shadow">
+                                        <img ng-src="{{user.viewOtherCatImage | serverimage}}" alt="...">
+                                    </div>
+                                    <div class="text-center">
+                                        <a ui-sref="wild-photographer({catid:user._id,catName:user.name})" class="btn orange-btn" role="button">View Catergory</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center ">
+                                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreCat();" ng-show="shbtn">View All</button>
+                                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreCat()" ng-show="!shbtn"> View less</button>
+                                <!--<a ui-sref="categories" class="btn whit-btn view-orang" role="button">View All</a>-->
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="text-center ">
-                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreCat();" ng-show="shbtn">View All</button>
-                <button type="button" class="btn whit-btn view-orang" ng-click="LoadMoreCat()" ng-show="!shbtn"> View less</button>
-                <!--<a ui-sref="categories" class="btn whit-btn view-orang" role="button">View All</a>-->
-            </div>
-        </div>
-    </div>
-</div>
+                    </div>
