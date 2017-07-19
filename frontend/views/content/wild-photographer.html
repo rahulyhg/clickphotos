@@ -59,9 +59,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-sm-5 text-hide visible-xs text-center">
-            <div class="btn-group margin-right" uib-dropdown>
+            <div class="btn-group margin-right" uib-dropdown auto-close="outsideClick">
                 <button id="split-button" type="button" class="btn btn-default btn-style">City</button>
-                <button class="btn btn-default img-bg" type="button" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg" auto-close="outsideClick"></button>
+                <button class="btn btn-default img-bg" type="button" uib-dropdown-toggle><img class="img-responsive" src="frontend/img/photographer/arrow.jpg"></button>
                 
                 <ul class="dropdown-menu city" uib-dropdown-menu role="menu" aria-labelledby="split-button">
                     <li role="menuitem" ng-repeat="dataPoint in cityFilter track by $index"><div class="checkbox checkboxing">
@@ -132,29 +132,29 @@
         </div>
         <div class="col-md-2 col-sm-4 col-xs-12 hidden-xs">
             <h2 class="border-up">City</h2>
-            <div class="location">
-                <div class="checkbox checkboxing">
+            <div class="location checkboxing">
+                <div class="checkbox ">
                     <!--<input type="checkbox" id="All" ng-click="cityFil('All')">
                     <label for="All"><span></span> all</label>-->
                     <div ng-repeat="dataPoint in cityFilter track by $index">
-                        <input type="checkbox" id="{{dataPoint}}" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
+                        <input type="checkbox" id="{{dataPoint}}" name="{{dataPoint}}" ng-model = "cheboxcheck" ng-checked="checkedLoc==dataPoint" ng-click="filterPriceAndCity(dataPoint)">
                         <label for="{{dataPoint}}"><span></span> {{dataPoint}}</label>
                     </div>
                 </div>
             </div>
             <h2 class="border-up text-capitalize">Price <small>(per day)</small></h2>
-            <div class="price">
-                <div class="checkbox checkboxing">
-                    <input value="" type="checkbox" ng-click="filterPriceAndCity(0)" id="5k-10k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="5k-10k"><span></span><i class="fa fa-inr"></i>5k-10k</label><br>
-                    <input value="" type="checkbox" ng-click="filterPriceAndCity(1)" id="10k-25k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="10k-25k"><span></span><i class="fa fa-inr"></i>10k-25k</label><br>
-                    <input value="" type="checkbox" ng-click="filterPriceAndCity(2)" id="25k-50k" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="25k-50k"><span></span><i class="fa fa-inr"></i>25k-50k</label><br>
-                    <input value="" type="checkbox" ng-click="filterPriceAndCity(3)" id="50k-1lakh" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="50k-1lakh"><span></span><i class="fa fa-inr"></i>50k-1lakh</label><br>
-                    <input value="" type="checkbox" ng-click="filterPriceAndCity(4)" id="1lakh plus" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                    <label for="1lakh plus" class="text-lowercase"><span></span><i class="fa fa-inr"></i>₹1lakh plus</label><br>
+            <div class="price checkboxing">
+                <div class="checkbox">
+                    <input name="checkbox-1" type="checkbox" ng-click="filterPriceAndCity(0)" id="checkbox-1" >
+                    <label for="checkbox-1"><span></span><i class="fa fa-inr"></i>5k-10k</label><br>
+                    <input name="checkbox-2" type="checkbox" ng-click="filterPriceAndCity(1)" id="checkbox-2">
+                    <label for="checkbox-2"><span></span><i class="fa fa-inr"></i>10k-25k</label><br>
+                    <input name="checkbox-3" type="checkbox" ng-model = "cheboxcheck" ng-click="filterPriceAndCity(2)" id="checkbox-3">
+                    <label for="checkbox-3"><span></span><i class="fa fa-inr"></i>25k-50k</label><br>
+                    <input name="checkbox-4" type="checkbox" ng-click="filterPriceAndCity(3)" id="checkbox-4">
+                    <label for="checkbox-4"><span></span><i class="fa fa-inr"></i>50k-1lakh</label><br>
+                    <input name="checkbox-5" type="checkbox" ng-click="filterPriceAndCity(4)" id="checkbox-5">
+                    <label for="checkbox-5" class="text-lowercase"><span></span><i class="fa fa-inr"></i>₹1lakh plus</label><br>
                 </div>
             </div>
         </div>

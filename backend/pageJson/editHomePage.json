@@ -14,8 +14,22 @@
         "placeholder": "Enter HomePage Image",
         "id": "input1",
         "validation": ["", "trim", ""],
-        "url": ""
-    },{
+        "url": "",
+        "view": true,
+        "onView": true
+    }, {
+        "name": "Mobile Image",
+        "type": "image",
+        "tableRef": "mobileBannerImage",
+        "size": "705 × 1087px",
+        "option": "single",
+        "placeholder": "Enter Logo",
+        "id": "mobileBannerImage",
+        "validation": ["", "trim", ""],
+        "url": "",
+        "view": true,
+        "onView": true
+    }, {
         "name": "URL",
         "type": "text",
         "tableRef": "url",
