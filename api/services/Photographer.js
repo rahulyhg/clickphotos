@@ -1588,7 +1588,7 @@ cron.schedule('15 10 * * *', function () {
     Photographer.find({}, function (err, found) {
         if (err) {
             console.log("error occured");
-            // callback(err, null);
+            // callback(err, null); 
         } else {
             async.eachSeries(found, function (value, callback1) {
                 if (!_.isEmpty(value.silverPackageBroughtDate) && !_.isEmpty(value.goldPackageBroughtDate)) {
