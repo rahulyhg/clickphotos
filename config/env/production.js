@@ -24,10 +24,11 @@ module.exports = {
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
-
-  port: 80,
-  realHost: "http://clickmania.tingdom.in",
-  emails: ["chintan@wohlig.com", "ashish.zanwar@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com","aditya.ghag@wohlig.com"]
+  //port:80;
+  port: 8080,
+  //realHost: "http://clickmania.tingdom.in",
+  realHost: "http://beta.clickmania.in",
+  emails: ["chintan@wohlig.com", "ashish.zanwar@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "aditya.ghag@wohlig.com"]
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *

@@ -62,8 +62,5 @@
     "tinymce": "4.3.12",
     "ui-router": "*",
     "angular-loading-bar": "^0.9.0"
-  },
-  "resolutions": {
-    "angular": ">1.2.6"
   }
 }
