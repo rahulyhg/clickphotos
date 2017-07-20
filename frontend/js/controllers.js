@@ -1108,33 +1108,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             $scope.showOtpBox = false;
         $scope.showSucessBox = false;
+
         $scope.verifyAndSendSignUpEmail = function (formdata, terms) {
             console.log("formdata", formdata);
             if (!terms) {
                 // alert('check box error');
                 $('.condition-box p.alert-text').text('Please check the terms & condition checkbox').css('text-indent', '32px');
             } else {
-                if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
-                    if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
-                        $scope.registerData = formdata;
-                        NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
-                            //console.log("dataForOtp", data);
-                            if (data.data.verifyAcc == false) {
-                                //console.log(data.data);
-                                $scope.signUpOTP();
-                                setTimeout(function (data) {
-                                    $scope.signUpOTP.close();
-                                }, 600000);
-                            } else {
-                                toastr.error('User already exist');
-                            }
-                        });
-                    } else {
-                        toastr.error('Check password');
-                    }
+                // if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
+                if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
+                    $scope.registerData = formdata;
+                    NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
+                        //console.log("dataForOtp", data);
+                        if (data.data.verifyAcc == false) {
+                            //console.log(data.data);
+                            $scope.signUpOTP();
+                            setTimeout(function (data) {
+                                $scope.signUpOTP.close();
+                            }, 600000);
+                        } else {
+                            toastr.error('User already exist');
+                        }
+                    });
                 } else {
-                    toastr.error('Please enter all details');
+                    toastr.error('Check password');
                 }
+                // } else {
+                //     toastr.error('Please enter all details');
+                // }
 
             }
         };

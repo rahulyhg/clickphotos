@@ -356,7 +356,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-default btn-full" ng-click="dyGoldMemberPackage()">UPGRADE NOW</button>
+                                        <button type="button" class="btn btn-default btn-full" ui-sref="billpaygst({view: 'gold'})">UPGRADE NOW</button>
                                     </div>
                                     <br>
                                 </div>
@@ -481,7 +481,7 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span>{{amount[1].amount}}
+                                            <span class="display-block package-price"><span class="rupee">`</span>{{dyGoldAmount}}
                                             inclusive of all taxes
                                             </span>
 
@@ -627,7 +627,7 @@
                                                 <h1 class="damionr font70 white-color mgb0">Upgrade to <br>Gold</h1>
                                                 <!--<h1 class="damionr font70  white-color mgt-8">Gold</h1>-->
                                                 <h2 class="white-color mgt-8">for Rs {{dyGoldAmount}} only</h2>
-                                                <p class="text-center btn-fix"><a class="btn orange-btn btn-fix" type="button" ng-click="dyGoldMemberPackage()">Click here</a></p>
+                                                <p class="text-center btn-fix"><a class="btn orange-btn btn-fix" type="button" ui-sref="billpaygst({view: 'gold'})">Click here</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -733,6 +733,7 @@
                                                 <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                 <div class="display-inline pkg-info">
                                                     <span class="package-name">SILVER PACKAGE</span>
+
                                                 </div>
                                             </div>
                                             <span class="display-block package-price"> <span class="rupee">`</span>{{amount[0].amount}}
@@ -748,8 +749,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="silver-pack or-cont" ng-if=" packageShow!='Gold'">
+
+                                <div class="col-md-6" ng-if="packageShow!='Gold'">
+                                    <div class="silver-pack or-cont">
                                         <div class="silver-content text-center">
                                             <div class="package-head1">
                                                 <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
