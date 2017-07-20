@@ -188,6 +188,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             text: "I am <b>Naveen Kumar</b> and I am a finance professional working for an MNC for over a decade now.Photography is my passion and I take special interest in Sports / Wedding / Pre-wedding and Studio Photography. I do photography independently as well as with other professional photographers.",
             thought: 'I keep upgrading my gear frequently without digging into my salary income. Clickmania is a perfect platform for me.'
             //ceo: "manan vora, CEO & founder Ting"
+        }, {
+            name: ' Palak Jain ',
+            text: "I am <b> Palak Jain</b> and I am a model based in Mumbai.  I have done commercials for well known brands and appeared in music videos. It is extremely important to have a good portfolio shoot done for achieving the goals in the modelling and acting world. It was wonderful to shoot for Clickmania and getting a portfolio done at the same time. Thank you Clickmania.",
+
+
         }];
 
         // To scroll down to a particular div

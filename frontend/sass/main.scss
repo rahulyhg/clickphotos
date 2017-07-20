@@ -4532,7 +4532,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
             @include margin(45px null null null);
         }
         span {
-            @include padding(null null null 125px);
             color: $orangeColor;
         }
     }
@@ -4684,6 +4683,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
         button {
             @include size(195px,
             auto);
+        }
+        a {
+            text-decoration: none;
+            color: $orangeColor;
         }
     }
     .contest__stp2--box-shd,

@@ -806,6 +806,40 @@
                 padding-bottom: 40px;
             }
         } //End of photo-contest
+        //Start of competation.html
+        .compet {
+            .ht30 {
+                h1 {
+                    font-size: 35px!important;
+                    line-height: 40px;
+                }
+            }
+            .compet__title {
+                p {
+                    text-align: center;
+                    text-indent: 0;
+                }
+            }
+        }
+        .compet__contest {
+            h2 {
+                font-size: 20px!important;
+            }
+        }
+        .compet__prev-contest {
+            h1 {
+                font-size: 30px!important;
+            }
+            .compet__prev-contest__desc {
+                padding: 15px 15px 50px;
+                h3 {
+                    font-size: 14px;
+                }
+                span {
+                    font-size: 11px;
+                }
+            }
+        } //End of competation.html
         //Start of thank, error, thanks-gold, thanks-silver,becomefp .html
         .thanks-title {
             text-align: center;

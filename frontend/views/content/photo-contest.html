@@ -124,7 +124,7 @@
                                 <h4><i class="fa fa-inr"></i> {{ThreePhotos}}</h4>
                             </div>
                         </div>
-                        <p><button class="btn orange-btn" ng-click="showNext(3)" ng-disabled="accept!=true">Buy</button></p>
+                        <p><button class="btn orange-btn" ng-click="showNext(3)" ng-disabled="accept!=true">Submit photos</button></p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12  text-center">
                         <div class="contest__stp2--box-shd">
@@ -135,7 +135,7 @@
 
                             </div>
                         </div>
-                        <p><button class="btn orange-btn" ng-click="showNext(6)" ng-disabled="accept!=true">Buy</button></p>
+                        <p><button class="btn orange-btn" ng-click="showNext(6)" ng-disabled="accept!=true">Submit photos</button></p>
                     </div>
                     <!--<div class="col-md-4 col-sm-4 col-xs-12  text-center">
                         <div class="contest__stp2--box-shd">
@@ -151,10 +151,12 @@
                 <div class="contest__stp2__terms">
                     <h1>Terms and conditions</h1>
                     <ul>
-                        <li>Only 3 photos will be considered</li>
-                        <li>Size of each photo shouldn’t exceed 500KB</li>
-                        <li>Any user can join the contest, you needn’t be a registered member</li>
-                        <li>Entry will be considered only after full payment is received</li>
+
+                        <li>Size of each photo should not exceed 500KB</li>
+                        <li>Entry will be considered only after participation fee is received.</li>
+                        <li>judges decision will be final</li>
+                        <li>All other <a ui-sref "terms">terms and conditions</a>shall apply.</li>
+
                     </ul>
                     <div class="custom-check">
                         <input type="checkbox" name="terms" id="terms" ng-model="accept">
