@@ -1438,7 +1438,7 @@ header>nav div.navbar-toggle>div.icon_float {
     position: relative;
     background-image: url(../img/atm.png);
     width: 100%;
-    height: 447px;
+    min-height: 447px;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -4113,10 +4113,10 @@ hr.border-hr:after {
 
 .list {
     min-height: 373px;
-    background-image: url("/../frontend/img/cam1.png");
+    background-image: url("/../frontend/img/camera.png");
     background-repeat: no-repeat;
-    background-position: 100% 46%;
-    background-size: 34% 100%;
+    background-position: right center;
+    background-size: 35% auto;
     li {
         margin-left: -18px !important;
         padding-bottom: 5px;

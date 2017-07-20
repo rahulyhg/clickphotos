@@ -84,6 +84,12 @@
             height: 200px;
             overflow: auto;
         }
+        .side-menu {
+            top: 55px!important;
+            .list-group-item {
+                font-size: 15px;
+            }
+        }
         .send-enquiry {
             top: 30%;
             .contact-btn {
@@ -695,6 +701,16 @@
                 }
                 h3 {
                     font-size: 15px;
+                }
+            }
+            .upgrade-gd {
+                .upgrd-gold {
+                    h1 {
+                        margin-top: 5px;
+                    }
+                    h2 {
+                        font-size: 16px;
+                    }
                 }
             }
         } //End of photographer.html
@@ -1461,8 +1477,6 @@
         }
         .list {
             min-height: 1px;
-            background-position: right center;
-            background-size: 28% 85%;
         }
         .min-h {
             min-height: 565px;
