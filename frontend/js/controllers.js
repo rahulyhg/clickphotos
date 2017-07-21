@@ -307,7 +307,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function (data) {
                     if (data.value === true) {
                         $scope.dyGoldAmount = data.data;
-                        console.log("$scope.dyGoldAmount", $scope.dyGoldAmount);
+                        console.log("$scope.dyGoldAmount", $scope.dyGoldAmount)
+                        console.log("$scope.dyGoldAmount++++++++++++++++++", $scope.dyGoldAmount);
                         if ($scope.amount[6]) {
                             formdata1 = {};
                             formdata1._id = $scope.amount[6]._id;
