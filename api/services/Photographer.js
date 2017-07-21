@@ -1556,14 +1556,14 @@ var model = {
                             var months = duration.asMonths();
                             var countMonths = parseInt(months);
                             var totalAmountToPay = countMonths * 118;
-                            console.log("inside iF----", countMonths);
+                            console.log("inside iF----", totalAmountToPay);
                             callback(null, totalAmountToPay);
                         } else {
                             var now = moment(new Date()); //todays date
                             var end = moment(SilverPackDateExp); // another date
                             var duration = moment.duration(end.diff(now));
                             var months = duration.asMonths();
-                            var countMonths = parseInt(months) - 1;
+                            var countMonths = parseInt(months) + 1;
                             var totalAmountToPay = countMonths * 118;
                             console.log("inside else----", countMonths);
                             callback(null, totalAmountToPay);
