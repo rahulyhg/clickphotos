@@ -124,26 +124,20 @@
             text-align: center;
         }
         .photographer {
-            //  text-align: left;
+            text-align: left;
+            .photographer_img {
+                width: 19px!important;
+                height: 19px!important;
+            }
             span {
-                font-size: 11.25px!important;
+                font-size: 8px!important;
             }
             button {
                 font-size: 9px!important;
-                width: 52px!important;
+                width: 50px!important;
                 padding: 5px 8px;
             }
-        } //        .enquiry-side-menu {
-        //     width: 303px !important;
-        // }
-        //         .side-menu {
-        //             width: 65%;
-        //             top: 54px!important;
-        //             .list-group-item {
-        //                 font-size: 16px;
-        //             }
-        //         } 
-        //start of artist-of-the-month.html
+        } //start of artist-of-the-month.html
         .page-margin {
             margin-bottom: 80px !important;
             margin-left: 20px !important;
@@ -1096,11 +1090,14 @@
             }
         }
         .search-directive {
+            .ui-select-container {
+                width: 38%;
+            }
             .ui-select-placeholder {
                 font-size: 12px;
             }
             .select-arrow {
-                @include position(absolute, 12px null null 35%);
+                @include position(absolute, 12px null null 24%);
                 img {
                     @include size(32px, 34px);
                 }
@@ -1114,14 +1111,13 @@
             .photographer_img {
                 @include size(25px, 25px);
                 @include margin(0 5px);
-                float: left;
             }
             span {
-                font-size: 12.25px;
+                font-size: 14px;
             }
             button {
                 font-size: 12px;
-                @include size(70px, auto);
+                @include size(65px, auto);
             }
         }
         .side-menu {
@@ -1680,10 +1676,5 @@
         }
         .brand-logo {
             width: 82px!important;
-        }
-        .photographer {
-            span {
-                font-size: 10px !important;
-            }
         }
     }
