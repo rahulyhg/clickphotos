@@ -3051,13 +3051,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
         });
+        var photographer = $.jStorage.get("photographer")
+        console.log("photographer", photographer);
+
         $scope.goldMember = function (order) {
 
             formdata = {};
 
             formdata.photographer = $.jStorage.get("photographer")._id;
-            formdata.payAmount = $scope.amount[1]._id;
-            formdata.amount = $scope.amount[1].amount;
+            if (photographer.package == "Silver") {
+                formdata.payAmount = $scope.amount[6]._id;
+                formdata.amount = $scope.amount[6].amount;
+            } else {
+                formdata.payAmount = $scope.amount[1]._id;
+                formdata.amount = $scope.amount[1].amount;
+
+            }
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
