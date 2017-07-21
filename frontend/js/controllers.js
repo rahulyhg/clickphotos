@@ -307,7 +307,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function (data) {
                     if (data.value === true) {
                         $scope.dyGoldAmount = data.data;
-                        console.log("$scope.dyGoldAmount", $scope.dyGoldAmount)
                         console.log("$scope.dyGoldAmount++++++++++++++++++", $scope.dyGoldAmount);
                         if ($scope.amount[6]) {
                             formdata1 = {};
@@ -358,6 +357,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log(formdata);
                     NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                         console.log(data);
+
                         window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
                     });
                 };
@@ -3010,22 +3010,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     formData = {};
                     formData._id = $.jStorage.get("photographer")._id;
                     NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        console.log("data update", data)
                         if (data.value === true) {
                             $.jStorage.set("photographer", data.data);
                         }
                     });
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForThree") {
                     $scope.msg = "Thank you! You can start uploading your photos now!";
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        console.log("data update", data)
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForSix") {
                     $scope.msg = "Thank you! You can start uploading your photos now!";
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        console.log("data update", data)
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
 
                 } else if (data.data.description.split('/')[0] == "PackageUpdateForNine") {
                     $scope.msg = "Thank you! You can start uploading your photos now!";
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        console.log("data update", data)
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
 
                 } else {
                     $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
-
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        console.log("data update", data)
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
                 }
             }
         });
@@ -3070,10 +3102,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
-            formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + $scope.amount[1].amount + "/" + order;
+            formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
+                formdata = {};
+                formdata._id = $.jStorage.get("photographer")._id;
+                NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                    console.log(data)
+                    $.jStorage.set("photographer", data.data);
+                })
                 window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
             });
 
@@ -3093,6 +3131,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
                 console.log(data);
+                formdata = {};
+                formdata._id = $.jStorage.get("photographer")._id;
+                NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                    console.log(data)
+                    $.jStorage.set("photographer", data.data);
+                })
                 window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
             });
         };
@@ -3142,6 +3186,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
+        formdata = {};
+        formdata._id = $.jStorage.get("photographer")._id;
+        NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+            console.log(data)
+            $.jStorage.set("photographer", data.data);
+        })
 
     })
 
