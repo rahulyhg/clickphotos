@@ -46,16 +46,17 @@
                         <li class="list-group-item navigation-items"><a ui-sref="privacy-policy">Privacy Policy</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="terms">Terms & Conditions</a></li>
                         <li>
-                            <div class="photographer center">
+                            <div class="photographer text-center">
                                 <div class="photographer_img">
-                                    <div class="server-img" style="background: url('{{template.profile.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="template.profile.profilePic"
+                                    <!--<div class="server-img" style="background: url('{{template.profile.profilePic | serverimage}}') no-repeat 50% 50%" ng-if="template.profile.profilePic"
                                         ui-sref="photographer">
-                                    </div>
-                                    <img src="frontend/img/user.png" alt="UserImage" class="img-responsive" ng-if="!template.profile.profilePic">
-                                    <!--<img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer" ng-if="template.profile.profilePic">-->
+                                    </div>-->
+                                    <img src="frontend/img/user.png" alt="UserImage" class="img-responsive">
+                                    <img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-responsive" ui-sref="photographer"
+                                        ng-if="template.profile.profilePic">
                                 </div>
 
-                                <span ng-if="!template.profile" ng-click="uploadSignup()">Sign Up as a Photographer</span>
+                                <span ng-if="!template.profile" ng-click="uploadSignup()">Login / Sign up as a photographer</span>
                                 <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
                                 <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()">Log out</button>
                             </div>

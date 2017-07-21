@@ -864,6 +864,11 @@
                 display: inline;
             }
         }
+        .pht-contest {
+            .small-font {
+                line-height: 0.5;
+            }
+        }
         .silver-pack {
             padding: 0;
             .pkg-info {
@@ -1107,10 +1112,9 @@
         }
         .photographer {
             .photographer_img {
-                @include size(25px, 19px);
-                img {
-                    height: auto;
-                }
+                @include size(25px, 25px);
+                @include margin(0 5px);
+                float: left;
             }
             span {
                 font-size: 12.25px;
@@ -1669,17 +1673,6 @@
     }
 
     @media (max-width: $screen-md-max) {}
-
-    @media only screen and(orientation: landscape) {
-        .photographer {
-            .photographer_img {
-                @include size(35px, 28px);
-            }
-            span {
-                font-size: 17.25px;
-            }
-        }
-    }
 
     @media (min-width: 320px)and(max-width: 375px) {
         #nav-icon {

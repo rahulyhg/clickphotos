@@ -929,40 +929,27 @@ header>nav div.navbar-toggle>div.icon_float {
 // To display photographer's image(user image)
 .photographer {
     padding: 15px 0; //   @include navbar-vertical-align(28px);
-    cursor: pointer; // .photographer_img {
-    //     // @include size(38px,
-    //     // 38px);
-    //     display: inline-block;
-    //     vertical-align: middle;
-    //     padding-right: 6px;
-    //     img {
-    //         width: 35px;
-    //         height: 33px;
-    //         border-radius: 50%;
-    //     }
-    // }
+    cursor: pointer;
     .photographer_img {
         display: inline-block;
-        @include size(40px,
-        33px);
+        @include size(35px,
+        35px);
         vertical-align: middle;
-        padding-right: 6px;
-        .server-img {
-            @include size(auto,
-            100%);
-            background-size: cover!important;
-            overflow: hidden;
-            border-radius: 50%;
-        }
-        img {
-            height: 90%;
-        }
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 10px; // .server-img {
+        //     @include size(auto,
+        //     100%);
+        //     background-size: cover!important;
+        //     overflow: hidden;
+        //     border-radius: 50%;
+        // }
     }
     span {
         display: inline-block;
         vertical-align: middle;
         color: #030303;
-        font-size: 21.25px;
+        font-size: 20px;
         font-weight: 400;
     }
     button {
@@ -2273,6 +2260,13 @@ fieldset[disabled] .form-control {
         text-align: left;
         margin-left: 25%;
         margin-bottom: -5px;
+    }
+}
+
+.pht-contest {
+    .small-font {
+        margin-left: 0;
+        line-height: 0.5;
     }
 }
 
@@ -4648,8 +4642,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
             @include margin(15px null null null);
         }
         button {
-            @include size(120px,
-            auto);
+            // @include size(120px,
+            // auto);
             font-size: 20px;
             font-family: Helvetica, sans-serif;
         }
