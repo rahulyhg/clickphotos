@@ -4423,6 +4423,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
 }
 
+#google-card{
+    .gm-style .place-card-large{
+        display: none !important;
+    }
+}
+
 .aboutus__desc,
 .privacy-policy__desc,
 .terms-condition__desc {
