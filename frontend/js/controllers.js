@@ -308,11 +308,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     if (data.value === true) {
                         $scope.dyGoldAmount = data.data;
                         console.log("$scope.dyGoldAmount++++++++++++++++++", $scope.dyGoldAmount);
-                        if ($scope.amount[6]) {
+                        if ($scope.amount[5]) {
                             formdata1 = {};
-                            formdata1._id = $scope.amount[6]._id;
+                            formdata1._id = $scope.amount[5]._id;
                             formdata1.name = 'GoldPack';
-                            formdata1.state = 7;
+                            formdata1.state = 6;
                             formdata1.amount = $scope.dyGoldAmount;
                             console.log("formdata1", formdata1);
                             NavigationService.apiCallWithData("PayAmount/save", formdata1, function (data) {
@@ -3082,6 +3082,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         NavigationService.callApi("PayAmount/getAll", function (data) {
             $scope.amount = data.data;
+            console.log("PAy amount: ", $scope.amount);
         });
         var photographer = $.jStorage.get("photographer")
         console.log("photographer", photographer);
@@ -3092,12 +3093,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             formdata.photographer = $.jStorage.get("photographer")._id;
             if (photographer.package == "Silver") {
-                formdata.payAmount = $scope.amount[6]._id;
-                formdata.amount = $scope.amount[6].amount;
+                formdata.payAmount = $scope.amount[5]._id;
+                formdata.amount = $scope.amount[5].amount;
+                console.log("if")
             } else {
                 formdata.payAmount = $scope.amount[1]._id;
                 formdata.amount = $scope.amount[1].amount;
-
+                console.log("else")
             }
             formdata.email = $.jStorage.get("photographer").email;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
@@ -3105,7 +3107,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
             console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
-                console.log(data);
+                console.log("resp data", data);
                 formdata = {};
                 formdata._id = $.jStorage.get("photographer")._id;
                 NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
