@@ -35,7 +35,7 @@
           </div>
           <!--{{loginForm.ConfirmPassword.$touched}}-->
           <!--<p ng-if="loginForm.ConfirmPassword.$touched ">enter your password</p>-->
-          <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
+          <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== formData.ConfirmPassword)">check your password</p>
         </div>
         <div class="checkbox text-left condition-box" ng-init="terms">
           <p>
