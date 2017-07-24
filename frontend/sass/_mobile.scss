@@ -801,18 +801,17 @@
             }
         } //End of photo-contest
         //Start of competation.html
-        .compet {
+        .compet__title,
+        .contest__title {
             .ht30 {
                 h1 {
                     font-size: 35px!important;
                     line-height: 40px;
                 }
             }
-            .compet__title {
-                p {
-                    text-align: center;
-                    text-indent: 0;
-                }
+            p {
+                text-align: center;
+                text-indent: 0;
             }
         }
         .compet__contest {
@@ -927,6 +926,9 @@
             @include padding(45px 15px 60px);
         }
         .contactus {
+            #map {
+                min-height: 250px;
+            }
             .contactus__address {
                 position: relative!important;
                 width: 100%!important; //   padding: 15px 45px;

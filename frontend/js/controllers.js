@@ -2598,6 +2598,99 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
+        var initMap = function () {
+            //    alert('map');
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 12.975916,
+                    lng: 77.678441
+                },
+                scrollwheel: false,
+                zoom: 10,
+                styles: [{
+                    "featureType": "water",
+                    "stylers": [{
+                        "color": "#0e171d"
+                    }]
+                }, {
+                    "featureType": "landscape",
+                    "stylers": [{
+                        "color": "white"
+                    }]
+                }, {
+                    "featureType": "poi.park",
+                    "stylers": [{
+                        "color": "white"
+                    }]
+                }, {
+                    "featureType": "transit",
+                    "stylers": [{
+                        "color": "white"
+                    }, {
+                        "visibility": "simplified"
+                    }]
+                }, {
+                    "featureType": "poi",
+                    "elementType": "labels.icon",
+                    "stylers": [{
+                        "color": "#f0c514"
+                    }, {
+                        "visibility": "off"
+                    }]
+                }, {
+                    "featureType": "poi",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [{
+                        "color": "#f16366"
+                    }, {
+                        "visibility": "off"
+                    }]
+                }, {
+                    "featureType": "transit",
+                    "elementType": "labels.text.fill",
+                    "stylers": [{
+                        "color": "#f16366"
+                    }, {
+                        "visibility": "off"
+                    }]
+                }, {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [{
+                        "color": "#f16366"
+                    }]
+                }, {
+                    "featureType": "administrative",
+                    "elementType": "labels",
+                    "stylers": [{
+                        "visibility": "simplified"
+                    }, {
+                        "color": "#e84c3c"
+                    }]
+                }, {
+                    "featureType": "poi",
+                    "stylers": [{
+                        "color": "white"
+                    }, {
+                        "visibility": "off"
+                    }]
+                }]
+            });
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: 12.975916,
+                    lng: 77.678441
+                },
+                title: "Clickmania",
+                // icon: "http://gsourcedata.com/img/landing-logo.png/",
+                map: map
+
+            });
+        };
+
+        //  (initMap)();
+        google.maps.event.addDomListener(window, 'load', initMap);
+
     })
 
     .controller('competitionCtrl', function ($scope, TemplateService, NavigationService, $timeout) {

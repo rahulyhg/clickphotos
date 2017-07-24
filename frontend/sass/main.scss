@@ -4423,8 +4423,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
 }
 
-#google-card{
-    .gm-style .place-card-large{
+#google-card {
+    .gm-style .place-card-large {
         display: none !important;
     }
 }
@@ -4484,10 +4484,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
     .contactus__map {
         position: relative;
         @include margin(65px 0);
-        .gm-style .place-card-large {
-            // for iframe div
-            display: none!important;
-        }
+    }
+    #map {
+        min-height: 500px;
+        background-color: #ccc;
     }
     .contactus__address {
         @include position(absolute,
