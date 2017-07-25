@@ -40,9 +40,9 @@ var controller = {
         }
     },
 
-    findGstState: function (req, res) {
+    invoiceNumberGenerate: function (req, res) {
         if (req.body) {
-            GstDetails.findGstState(req.body, res.callback);
+            GstDetails.invoiceNumberGenerate(req.body, res.callback);
         } else {
             res.json({
                 value: false,

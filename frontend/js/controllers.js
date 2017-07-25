@@ -348,8 +348,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     formdata = {};
 
                     formdata.photographer = $.jStorage.get("photographer")._id;
-                    formdata.payAmount = $scope.amount[6]._id;
-                    formdata.amount = $scope.amount[6].amount;
+                    formdata.payAmount = '';
+                    formdata.amount = $scope.dyGoldAmount;
                     formdata.email = $.jStorage.get("photographer").email;
                     formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
                     formdata.name = $.jStorage.get("photographer").name;
@@ -3086,6 +3086,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
         var photographer = $.jStorage.get("photographer")
         console.log("photographer", photographer);
+
+        //goldpackgeupdateDynamic
+
+        if ($.jStorage.get("photographer")) {
+            if ($.jStorage.get("photographer").package == "Silver") {
+                formdata = {};
+                formdata._id = $.jStorage.get("photographer")._id;
+                NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function (data) {
+                    if (data.value === true) {
+                        $scope.dyGoldAmount = data.data;
+                        console.log("$scope.dyGoldAmount++++++++++++++++++", $scope.dyGoldAmount);
+                    }
+                });
+            }
+        }
+
+        //goldpackgeupdateDynamic end
 
         $scope.goldMember = function (order) {
 

@@ -18,8 +18,7 @@ var schema = new Schema({
     packageAmount: String,
     package: String,
     invoiceNumber: {
-        type: Number,
-        default: 00000
+        type: String
     }
 });
 
@@ -39,111 +38,179 @@ var model = {
 
     updatePackageAmtForFeature: function (data, callback) {
         var orderData = data.Description.split("/");
-        GstDetails.findOneAndUpdate({
-            _id: orderData[5]
-        }, {
-            packageAmount: orderData[4],
-            package: orderData[0]
-        }).exec(function (err, found) {
+        GstDetails.invoiceNumberGenerate(data, function (err, invoiceNumber) {
             if (err) {
-                callback(err, null);
+                callback(err);
             } else {
-                if (found) {
-                    callback(null, found);
-                } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
-                }
+                var invoiceNo = invoiceNumber;
+                console.log(invoiceNo);
+                GstDetails.findOneAndUpdate({
+                    _id: orderData[5]
+                }, {
+                    packageAmount: orderData[4],
+                    package: orderData[0],
+                    invoiceNumber: invoiceNo
+                }).exec(function (err, found) {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        if (found) {
+                            callback(null, found);
+                        } else {
+                            callback(null, {
+                                message: "No Data Found"
+                            });
+                        }
+                    }
+                });
             }
         });
+        // console.log("invoiceNumber", invoiceNumber);
+        // GstDetails.findOneAndUpdate({
+        //     _id: orderData[5]
+        // }, {
+        //     packageAmount: orderData[4],
+        //     package: orderData[0]
+        // }).exec(function (err, found) {
+        //     if (err) {
+        //         callback(err, null);
+        //     } else {
+        //         if (found) {
+        //             callback(null, found);
+        //         } else {
+        //             callback(null, {
+        //                 message: "No Data Found"
+        //             });
+        //         }
+        //     }
+        // });
     },
 
     updatePackageAmtForGandS: function (data, callback) {
         var orderData = data.Description.split("/");
-        GstDetails.findOneAndUpdate({
-            _id: orderData[3]
-        }, {
-            packageAmount: orderData[2],
-            package: orderData[0]
-        }).exec(function (err, found) {
+        GstDetails.invoiceNumberGenerate(data, function (err, invoiceNumber) {
             if (err) {
-                callback(err, null);
+                callback(err);
             } else {
-                if (found) {
-                    callback(null, found);
-                } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
-                }
+                var invoiceNo = invoiceNumber;
+                console.log(invoiceNo);
+                GstDetails.findOneAndUpdate({
+                    _id: orderData[3]
+                }, {
+                    packageAmount: orderData[2],
+                    package: orderData[0],
+                    invoiceNumber: invoiceNo
+                }).exec(function (err, found) {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        if (found) {
+                            callback(null, found);
+                        } else {
+                            callback(null, {
+                                message: "No Data Found"
+                            });
+                        }
+                    }
+                });
             }
         });
+        // GstDetails.findOneAndUpdate({
+        //     _id: orderData[3]
+        // }, {
+        //     packageAmount: orderData[2],
+        //     package: orderData[0]
+        // }).exec(function (err, found) {
+        //     if (err) {
+        //         callback(err, null);
+        //     } else {
+        //         if (found) {
+        //             callback(null, found);
+        //         } else {
+        //             callback(null, {
+        //                 message: "No Data Found"
+        //             });
+        //         }
+        //     }
+        // });
     },
 
     updatePackageAmtForPhotoContest: function (data, callback) {
         var orderData = data.Description.split("/");
-        GstDetails.findOneAndUpdate({
-            _id: orderData[4]
-        }, {
-            packageAmount: orderData[3],
-            package: orderData[0]
-        }).exec(function (err, found) {
+        GstDetails.invoiceNumberGenerate(data, function (err, invoiceNumber) {
             if (err) {
-                callback(err, null);
+                callback(err);
             } else {
-                if (found) {
-                    callback(null, found);
-                } else {
-                    callback(null, {
-                        message: "No Data Found"
-                    });
-                }
+                var invoiceNo = invoiceNumber;
+                console.log(invoiceNo);
+                GstDetails.findOneAndUpdate({
+                    _id: orderData[4]
+                }, {
+                    packageAmount: orderData[3],
+                    package: orderData[0],
+                    invoiceNumber: invoiceNo
+                }).exec(function (err, found) {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        if (found) {
+                            callback(null, found);
+                        } else {
+                            callback(null, {
+                                message: "No Data Found"
+                            });
+                        }
+                    }
+                });
             }
         });
+        // GstDetails.findOneAndUpdate({
+        //     _id: orderData[4]
+        // }, {
+        //     packageAmount: orderData[3],
+        //     package: orderData[0]
+        // }).exec(function (err, found) {
+        //     if (err) {
+        //         callback(err, null);
+        //     } else {
+        //         if (found) {
+        //             callback(null, found);
+        //         } else {
+        //             callback(null, {
+        //                 message: "No Data Found"
+        //             });
+        //         }
+        //     }
+        // });
     },
 
-    findGstState: function (data, callback) {
-        GstDetails.findOneAndUpdate({
-            photographer: data.photographerId
-        }, {
-            $inc: {
-                invoiceNumber: 00001
-            }
-        }, {
-            new: true,
-            upsert: true
-        }).sort({
-            invoiceNumber: -1
-        }).deepPopulate('photographer').exec(function (err, data1) {
+    invoiceNumberGenerate: function (data, callback) {
+        GstDetails.find({}).sort({
+            createdAt: -1
+        }).limit(2).deepPopulate('photographer').exec(function (err, found) {
             if (err) {
                 callback(err, null);
-            } else if (data1) {
-                callback(null, data1);
-                //         var emailData = {};
-                //         emailData.amount = data1.packageAmount;
-                //         emailData.filename = "invoice.ejs";
-                //         emailData.name = data1.firstName;
-                //         emailData.address = data1.address;
-                //         emailData.state = data1.state;
-                //         emailData.emailOfUser = data1.photographer.email;
-                //         emailData.from = "admin@clickmania.in";
-                //         emailData.fromname = "Clickmania Admin";
-                //         emailData.subject = "Invoice Details";
-                //         Config.email(emailData, function (err, emailRespo) {
-                //             console.log("emailRespo", emailRespo);
-                //             if (err) {
-                //                 console.log(err);
-                //                 callback(null, data1);
-                //             } else if (emailRespo) {
-                //                 callback(null, data1);
-                //             } else {
-                //                 callback(null, data1);
-                //             }
-                //         });
             } else {
-                callback("Invalid data", null);
+                if (_.isEmpty(found)) {
+                    callback(null, "noDataFound");
+                } else {
+                    if (_.isEmpty(found[1]) && !found[1].invoiceNumber) {
+                        var year = new Date().getFullYear().toString().substr(-2);
+                        var nextYear = Number(year) + 1;
+                        var invoiceNumber = "CM" + " /" + "1" + "/" + year + "-" + nextYear;
+                        callback(null, invoiceNumber);
+                    } else {
+                        var invoiceData = found[0].invoiceNumber.split("/");
+                        var num = parseInt(invoiceData[1]);
+                        var nextNum = num + 1;
+                        var year = new Date().getFullYear().toString().substr(-2);
+                        var nextYear = Number(year) + 1;
+                        var invoiceNumber = "CM" + " /" + nextNum + "/" + year + "-" + nextYear;
+                        callback(null, invoiceNumber);
+                    }
+                }
             }
+
         });
     },
 };
