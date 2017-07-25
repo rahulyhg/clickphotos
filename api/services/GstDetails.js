@@ -50,12 +50,20 @@ var model = {
                     packageAmount: orderData[4],
                     package: orderData[0],
                     invoiceNumber: invoiceNo
-                }).exec(function (err, found) {
+                }, {
+                    new: true
+                }).deepPopulate("photographer").exec(function (err, found) {
                     if (err) {
                         callback(err, null);
                     } else {
                         if (found) {
+
                             callback(null, found);
+                            // console.log("$$$$$$$$$$$$$$$$$found data for pdf generate$$$$$$$$$$$$$", found)
+                            Config.generatePdf(found, function (err, data) {
+                                console.log("found data for pdf", data, err);
+                            })
+
                         } else {
                             callback(null, {
                                 message: "No Data Found"
@@ -100,12 +108,15 @@ var model = {
                     packageAmount: orderData[2],
                     package: orderData[0],
                     invoiceNumber: invoiceNo
+                }, {
+                    new: true
                 }).exec(function (err, found) {
                     if (err) {
                         callback(err, null);
                     } else {
                         if (found) {
                             callback(null, found);
+
                         } else {
                             callback(null, {
                                 message: "No Data Found"
@@ -149,6 +160,8 @@ var model = {
                     packageAmount: orderData[3],
                     package: orderData[0],
                     invoiceNumber: invoiceNo
+                }, {
+                    new: true
                 }).exec(function (err, found) {
                     if (err) {
                         callback(err, null);
@@ -184,6 +197,7 @@ var model = {
         // });
     },
 
+
     invoiceNumberGenerate: function (data, callback) {
         GstDetails.find({}).sort({
             createdAt: -1
@@ -194,24 +208,32 @@ var model = {
                 if (_.isEmpty(found)) {
                     callback(null, "noDataFound");
                 } else {
-                    if (_.isEmpty(found[1]) && !found[1].invoiceNumber) {
+                    if (_.isEmpty(found[1])) {
                         var year = new Date().getFullYear().toString().substr(-2);
                         var nextYear = Number(year) + 1;
                         var invoiceNumber = "CM" + " /" + "1" + "/" + year + "-" + nextYear;
                         callback(null, invoiceNumber);
                     } else {
-                        var invoiceData = found[0].invoiceNumber.split("/");
-                        var num = parseInt(invoiceData[1]);
-                        var nextNum = num + 1;
-                        var year = new Date().getFullYear().toString().substr(-2);
-                        var nextYear = Number(year) + 1;
-                        var invoiceNumber = "CM" + " /" + nextNum + "/" + year + "-" + nextYear;
-                        callback(null, invoiceNumber);
+                        if (!found[1].invoiceNumber) {
+                            var year = new Date().getFullYear().toString().substr(-2);
+                            var nextYear = Number(year) + 1;
+                            var invoiceNumber = "CM" + " /" + "1" + "/" + year + "-" + nextYear;
+                            callback(null, invoiceNumber);
+                        } else {
+                            var invoiceData = found[1].invoiceNumber.split("/");
+                            var num = parseInt(invoiceData[1]);
+                            var nextNum = num + 1;
+                            var year = new Date().getFullYear().toString().substr(-2);
+                            var nextYear = Number(year) + 1;
+                            var invoiceNumber = "CM" + " /" + nextNum + "/" + year + "-" + nextYear;
+                            callback(null, invoiceNumber);
+                        }
                     }
                 }
             }
 
         });
     },
+
 };
 module.exports = _.assign(module.exports, exports, model);

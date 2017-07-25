@@ -454,25 +454,36 @@ var models = {
 
     generatePdf: function (page, callback) {
         var pdf = require('html-pdf');
-
+        console.log("%%%%%%%%%%%%%%%page data%%%%%%%%%%%%%%%%%%")
+        console.log(page);
+        console.log("%%%%%%%%%%%%data ends%%%%%%%%%%%%%%%%%%");
         // obj = _.assign(obj, page);
         var obj = {};
         var env = {};
-        obj.bills = page.bills;
-        obj.order = page.order;
-        obj.orderid = page.orderid;
-        obj.orderBillStringId = page.bills.orderBillStringId;
-        obj.orderDate = page.orderDate;
-        obj.cst = page.cst;
-        obj.vat = page.vat;
-        obj.discount = page.discount;
-        obj.transportCharges = page.transportCharges;
-        obj.grandTotal = page.grandTotal;
-        obj.subTotal = page.subTotal;
+        // obj.bills = page.bills;
+        // obj.order = page.order;
+        // obj.orderid = page.orderid;
+        // obj.orderBillStringId = page.bills.orderBillStringId;
+        // obj.orderDate = page.orderDate;
+        // obj.cst = page.cst;
+        // obj.vat = page.vat;
+        // obj.discount = page.discount;
+        // obj.transportCharges = page.transportCharges;
+        // obj.grandTotal = page.grandTotal;
+        // obj.subTotal = page.subTotal;
+        obj.firstName = page.firstName;
+        obj.lastName = page.lastName;
+        obj.address = page.address;
+        obj.package = page.package;
+        obj.amount = page.packageAmount;
+        obj.invoice = page.invoiceNumber;
+        obj.emailOfUser = page.photographer.email;
+        var now = moment();
+        var formatted = now.format('YYYY-MM-DD');
 
-
-
-        var file = page.filename;
+        obj.date = formatted
+        console.log("date", obj.date)
+        var file = "invoice";
         var i = 0;
         console.log(file);
         sails.hooks.views.render(file, obj, function (err, html) {
@@ -483,7 +494,7 @@ var models = {
                 console.log("inside else");
                 //var path = "http://104.155.129.33:1337/upload/readFile/";
                 var path = "pdf/";
-                var newFilename = page.bills.orderBillStringId + page.filename + ".pdf";
+                var newFilename = page._id + file + ".pdf";
                 var writestream = fs.createWriteStream(path + newFilename);
                 writestream.on('finish', function (err, res) {
                     if (err) {
