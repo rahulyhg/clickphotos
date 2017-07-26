@@ -1580,41 +1580,183 @@ var model = {
                 }
             }
         });
+    },
+
+    cron: function (data, callback) {
+        Photographer.find({}, function (err, found) {
+            if (err) {
+                console.log("error occured");
+                callback(err, null);
+            } else {
+                async.eachSeries(found, function (value, callback1) {
+                    if (value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
+                        var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
+                        console.log("packgeDate1", PackgeDate);
+                    } else if (!value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
+                        var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
+                        console.log("packgeDate2", PackgeDate);
+                    } else if (value.silverPackageBroughtDate && !value.goldPackageBroughtDate) {
+                        var PackgeDate = moment(value.silverPackageBroughtDate.setFullYear(value.silverPackageBroughtDate.getFullYear() + 1)).format();
+                        console.log("packgeDate3", PackgeDate);
+                    }
+                    if (value.dateOfRagister) {
+                        var current = new Date(value.dateOfRagister.getFullYear(), value.dateOfRagister.getMonth() + 2, 1);
+                        console.log("#########current################", current);
+                    }
+                    // write their api to update status if changed
+
+                    if (PackgeDate == new Date() && value.package != "") {
+                        value.package = "";
+                        value.silverPackageBroughtDate = "";
+                        value.goldPackageBroughtDate = "";
+                        value.save(function () {});
+                        console.log("updated");
+                        var emailData = {};
+                        emailData.from = "admin@clickmania.in";
+                        emailData.name = value.name;
+                        emailData.email = value.email;
+                        emailData.package = value.package;
+                        emailData.filename = "packageExpiry.ejs";
+                        emailData.subject = "Package Expiry";
+                        console.log("emaildata", emailData);
+                        Config.email(emailData, function (err, emailRespo) {
+                            if (err) {
+                                console.log(err);
+                                callback(null, err);
+                            } else if (emailRespo) {
+                                callback(null, emailRespo);
+                            } else {
+                                callback(null, "Invalid data");
+                            }
+                        });
+                    }
+
+                    if (current == new Date() && value.dateOfRagister != "") {
+                        value.status = false;
+                        value.dateOfRagister = "";
+                        value.month = "";
+                        value.year = "";
+                        value.save(function () {});
+                        console.log("updated");
+                        var emailData = {};
+                        emailData.from = "admin@clickmania.in";
+                        emailData.name = value.name;
+                        emailData.email = value.email;
+                        emailData.filename = "featureExpiry.ejs";
+                        emailData.subject = "Feature Expiry";
+                        console.log("emaildata", emailData);
+                        Config.email(emailData, function (err, emailRespo) {
+                            if (err) {
+                                console.log(err);
+                                callback(null, err);
+                            } else if (emailRespo) {
+                                foundData.otp = emailOtp;
+                                callback(null, foundData);
+                            } else {
+                                callback(null, "Invalid data");
+                            }
+                        });
+                    }
+
+                    callback1(null, "go ahead");
+                }, function (error, data) {
+                    if (err) {
+                        console.log("error found in doLogin.callback1");
+                        //callback(null, err);
+                    } else {
+                        //callback(null, "updated");
+                    }
+                });
+            }
+        });
     }
 
 };
 
-cron.schedule('15 10 * * *', function () {
+cron.schedule('8 12 * * *', function () {
     Photographer.find({}, function (err, found) {
         if (err) {
             console.log("error occured");
-            // callback(err, null); 
+            callback(err, null);
         } else {
             async.eachSeries(found, function (value, callback1) {
-                if (!_.isEmpty(value.silverPackageBroughtDate) && !_.isEmpty(value.goldPackageBroughtDate)) {
+                if (value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
-                } else if (_.isEmpty(value.silverPackageBroughtDate) && !_.isEmpty(value.goldPackageBroughtDate)) {
+                    console.log("packgeDate1", PackgeDate);
+                } else if (!value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
-                } else if (!_.isEmpty(value.silverPackageBroughtDate) && _.isEmpty(value.goldPackageBroughtDate)) {
+                    console.log("packgeDate2", PackgeDate);
+                } else if (value.silverPackageBroughtDate && !value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.silverPackageBroughtDate.setFullYear(value.silverPackageBroughtDate.getFullYear() + 1)).format();
+                    console.log("packgeDate3", PackgeDate);
+                }
+                if (value.dateOfRagister) {
+                    var current = new Date(value.dateOfRagister.getFullYear(), value.dateOfRagister.getMonth() + 2, 1);
+                    console.log("#########current################", current);
                 }
                 // write their api to update status if changed
-                console.log("packgeDate", packgeDate);
-                if (packgeDate == new Date() && value.package != "") {
+
+                if (PackgeDate == new Date() && value.package != "") {
                     value.package = "";
-                    value.save(function () {})
+                    value.silverPackageBroughtDate = "";
+                    value.goldPackageBroughtDate = "";
+                    value.save(function () {});
                     console.log("updated");
+                    var emailData = {};
+                    emailData.from = "admin@clickmania.in";
+                    emailData.name = value.name;
+                    emailData.email = value.email;
+                    emailData.package = value.package;
+                    emailData.filename = "packageExpiry.ejs";
+                    emailData.subject = "Package Expiry";
+                    console.log("emaildata", emailData);
+                    Config.email(emailData, function (err, emailRespo) {
+                        if (err) {
+                            console.log(err);
+                            callback(null, err);
+                        } else if (emailRespo) {
+                            callback(null, emailRespo);
+                        } else {
+                            callback(null, "Invalid data");
+                        }
+                    });
+                }
+
+                if (current == new Date() && value.dateOfRagister != "") {
+                    value.status = false;
+                    value.dateOfRagister = "";
+                    value.month = "";
+                    value.year = "";
+                    value.save(function () {});
+                    console.log("updated");
+                    var emailData = {};
+                    emailData.from = "admin@clickmania.in";
+                    emailData.name = value.name;
+                    emailData.email = value.email;
+                    emailData.filename = "featureExpiry.ejs";
+                    emailData.subject = "Feature Expiry";
+                    console.log("emaildata", emailData);
+                    Config.email(emailData, function (err, emailRespo) {
+                        if (err) {
+                            console.log(err);
+                            callback(null, err);
+                        } else if (emailRespo) {
+                            foundData.otp = emailOtp;
+                            callback(null, foundData);
+                        } else {
+                            callback(null, "Invalid data");
+                        }
+                    });
                 }
                 callback1(null, "go ahead");
             }, function (error, data) {
                 if (err) {
-                    console.log("error found in doLogin.callback1")
+                    console.log("error found in doLogin.callback1");
                     //callback(null, err);
                 } else {
                     //callback(null, "updated");
                 }
             });
-            console.log("m in found");
         }
     });
 });

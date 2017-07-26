@@ -585,6 +585,19 @@ var controller = {
         }
     },
 
+    cron: function (req, res) {
+        if (req.body) {
+            Photographer.cron(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
+    },
+
     // smsForOtp: function (req, res) {
     //     if (req.body) {
     //         Photographer.smsForOtp(req.body, res.callback);

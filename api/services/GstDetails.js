@@ -62,7 +62,7 @@ var model = {
                             // console.log("$$$$$$$$$$$$$$$$$found data for pdf generate$$$$$$$$$$$$$", found)
                             Config.generatePdf(found, function (err, data) {
                                 console.log("found data for pdf", data, err);
-                            })
+                            });
 
                         } else {
                             callback(null, {
@@ -110,13 +110,15 @@ var model = {
                     invoiceNumber: invoiceNo
                 }, {
                     new: true
-                }).exec(function (err, found) {
+                }).deepPopulate("photographer").exec(function (err, found) {
                     if (err) {
                         callback(err, null);
                     } else {
                         if (found) {
                             callback(null, found);
-
+                            Config.generatePdf(found, function (err, data) {
+                                console.log("found data for pdf", data, err);
+                            });
                         } else {
                             callback(null, {
                                 message: "No Data Found"
@@ -162,12 +164,15 @@ var model = {
                     invoiceNumber: invoiceNo
                 }, {
                     new: true
-                }).exec(function (err, found) {
+                }).deepPopulate("photographer").exec(function (err, found) {
                     if (err) {
                         callback(err, null);
                     } else {
                         if (found) {
                             callback(null, found);
+                            Config.generatePdf(found, function (err, data) {
+                                console.log("found data for pdf", data, err);
+                            });
                         } else {
                             callback(null, {
                                 message: "No Data Found"
