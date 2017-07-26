@@ -478,6 +478,12 @@ var models = {
         obj.amount = page.packageAmount;
         obj.invoice = page.invoiceNumber;
         obj.emailOfUser = page.photographer.email;
+        obj.gstNumber = page.gstNumber;
+        obj.state = page.state;
+        obj.city = page.city;
+        obj.pincode = page.pincode;
+        obj.tax = (18 / 100) * obj.amount
+        obj.subtotal = obj.amount - obj.tax;
         var now = moment();
         var formatted = now.format('YYYY-MM-DD');
 
