@@ -3203,8 +3203,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             formdata.photographer = $.jStorage.get("photographer")._id;
             if (photographer.package == "Silver") {
-                formdata.payAmount = $scope.amount[5]._id;
-                formdata.amount = $scope.amount[5].amount;
+                formdata.payAmount = null;
+                formdata.amount = $scope.dyGoldAmount;
                 console.log("if")
             } else {
                 formdata.payAmount = $scope.amount[1]._id;
