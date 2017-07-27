@@ -411,6 +411,7 @@ var controller = {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "featured") {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
+                                console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
@@ -418,6 +419,7 @@ var controller = {
                             });
                         } else {
                             Photographer.updateToGold(req.body, function (err, data) {
+                                console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
