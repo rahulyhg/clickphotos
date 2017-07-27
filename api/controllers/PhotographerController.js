@@ -414,17 +414,17 @@ var controller = {
                                 console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
-                            GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
-                            });
+                            // GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
+                            //     console.log("updatePackageAmtForFeature", data);
+                            // });
                         } else {
                             Photographer.updateToGold(req.body, function (err, data) {
                                 console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
-                            GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
-                            });
+                            // GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                            //     console.log("updatePackageAmtForFeature", data);
+                            // });
                         }
                     } else {
                         res.redirect(env.realHost + "/error");
