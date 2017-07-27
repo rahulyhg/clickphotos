@@ -19,7 +19,8 @@ var schema = new Schema({
     package: String,
     invoiceNumber: {
         type: String
-    }
+    },
+    invoiceFile: String
 });
 
 schema.plugin(deepPopulate, {
@@ -43,7 +44,6 @@ var model = {
                 callback(err);
             } else {
                 var invoiceNo = invoiceNumber;
-                console.log(invoiceNo);
                 GstDetails.findOneAndUpdate({
                     _id: orderData[5]
                 }, {
@@ -57,13 +57,20 @@ var model = {
                         callback(err, null);
                     } else {
                         if (found) {
-
                             callback(null, found);
-                            // console.log("$$$$$$$$$$$$$$$$$found data for pdf generate$$$$$$$$$$$$$", found)
+                            var invoiceDate = {};
                             Config.generatePdf(found, function (err, data) {
-                                console.log("found data for pdf", data, err);
+                                if (err) {
+                                    // callback(err, null);
+                                } else if (data) {
+                                    invoiceDate._id = found._id;
+                                    invoiceDate.invoiceFile = data.name;
+                                    GstDetails.saveData(invoiceDate, function (err, data) {});
+                                    console.log("data111111122222", data);
+                                } else {
+                                    // callback("Invalid data", data);
+                                }
                             });
-
                         } else {
                             callback(null, {
                                 message: "No Data Found"

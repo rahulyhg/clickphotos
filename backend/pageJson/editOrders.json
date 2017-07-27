@@ -89,6 +89,17 @@
             "validation": ["", "trim", ""],
             "url": "",
             "disabled": true
+        },
+        {
+            "name": "File",
+            "type": "image",
+            "tableRef": "invoiceFile",
+            "option": "single",
+            "placeholder": "Enter File",
+            "id": "input1",
+            "onView": true,
+            "validation": ["", "trim", ""],
+            "url": ""
         }
     ],
     "action": [{
