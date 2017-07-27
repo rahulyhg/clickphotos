@@ -454,9 +454,6 @@ var models = {
 
     generatePdf: function (page, callback) {
         var pdf = require('html-pdf');
-        console.log("%%%%%%%%%%%%%%%page data%%%%%%%%%%%%%%%%%%")
-        console.log(page);
-        console.log("%%%%%%%%%%%%data ends%%%%%%%%%%%%%%%%%%");
         // obj = _.assign(obj, page);
         var obj = {};
         var env = {};
@@ -486,19 +483,13 @@ var models = {
         obj.subtotal = obj.amount - obj.tax;
         var now = moment();
         var formatted = now.format('YYYY-MM-DD');
-
         obj.date = formatted;
-        console.log("date", obj.date)
         var file = "invoice";
         var i = 0;
-        console.log(file);
         sails.hooks.views.render(file, obj, function (err, html) {
-            console.log("inside sails", html);
             if (err) {
                 callback(err);
             } else {
-                console.log("inside else");
-                // var path = "http://104.155.129.33:1337/upload/readFile/";
                 var path = "pdf/";
                 var newFilename = page._id + file + ".pdf";
                 var writestream = fs.createWriteStream(path + newFilename);
@@ -506,7 +497,7 @@ var models = {
                     if (err) {
                         console.log("Something Fishy", err);
                     } else {
-                        console.log("Finish Is Called");
+                        red("Finish is working");
                         callback(null, {
                             name: newFilename,
                             url: newFilename
@@ -543,6 +534,7 @@ var models = {
                     if (err) {
                         callback(err);
                     } else {
+                        green("IN PDF CREATE");
                         console.log("In Config To generate PDF");
                         i++;
                         stream.pipe(writestream);
