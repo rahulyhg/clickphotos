@@ -392,12 +392,10 @@ var models = {
                 callback(err, null);
             } else if (userdata && userdata.length > 0) {
                 if (data.filename && data.filename != "") {
-                    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", data);
                     request.post({
                         url: requrl + "config/emailReader/",
                         json: data
                     }, function (err, http, body) {
-                        console.log("body : ", body);
                         if (err) {
                             console.log(err);
                             callback(err, null);
@@ -421,15 +419,11 @@ var models = {
 
                                 sg.API(request, function (error, response) {
                                     if (error) {
-                                        callback(null, error);
-                                        console.log('Error response received');
+                                        callback(error);
                                     } else {
-                                        // console.log(response.statusCode)
-                                        // console.log(response.body)
-                                        // console.log(response.headers)
                                         callback(null, response);
                                     }
-                                })
+                                });
                             } else {
                                 callback({
                                     message: "Error while sending mail."
@@ -454,20 +448,8 @@ var models = {
 
     generatePdf: function (page, callback) {
         var pdf = require('html-pdf');
-        // obj = _.assign(obj, page);
         var obj = {};
         var env = {};
-        // obj.bills = page.bills;
-        // obj.order = page.order;
-        // obj.orderid = page.orderid;
-        // obj.orderBillStringId = page.bills.orderBillStringId;
-        // obj.orderDate = page.orderDate;
-        // obj.cst = page.cst;
-        // obj.vat = page.vat;
-        // obj.discount = page.discount;
-        // obj.transportCharges = page.transportCharges;
-        // obj.grandTotal = page.grandTotal;
-        // obj.subTotal = page.subTotal;
         obj.firstName = page.firstName;
         obj.lastName = page.lastName;
         obj.address = page.address;
