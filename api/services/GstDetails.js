@@ -66,7 +66,6 @@ var model = {
                                     invoiceDate._id = found._id;
                                     invoiceDate.invoiceFile = data.name;
                                     GstDetails.saveData(invoiceDate, function (err, data) {});
-                                    console.log("data111111122222", data);
                                 } else {
                                     // callback("Invalid data", data);
                                 }
@@ -105,7 +104,15 @@ var model = {
                         if (found) {
                             callback(null, found);
                             Config.generatePdf(found, function (err, data) {
-                                console.log("found data for pdf", data, err);
+                                if (err) {
+                                    // callback(err, null);
+                                } else if (data) {
+                                    invoiceDate._id = found._id;
+                                    invoiceDate.invoiceFile = data.name;
+                                    GstDetails.saveData(invoiceDate, function (err, data) {});
+                                } else {
+                                    // callback("Invalid data", data);
+                                }
                             });
                         } else {
                             callback(null, {
@@ -141,7 +148,15 @@ var model = {
                         if (found) {
                             callback(null, found);
                             Config.generatePdf(found, function (err, data) {
-                                console.log("found data for pdf", data, err);
+                                if (err) {
+                                    // callback(err, null);
+                                } else if (data) {
+                                    invoiceDate._id = found._id;
+                                    invoiceDate.invoiceFile = data.name;
+                                    GstDetails.saveData(invoiceDate, function (err, data) {});
+                                } else {
+                                    // callback("Invalid data", data);
+                                }
                             });
                         } else {
                             callback(null, {
