@@ -1623,8 +1623,7 @@ cron.schedule('1 12 * * *', function () {
                     console.log("emaildata", emailData);
                     Config.email(emailData, function (err, emailRespo) {
                         if (err) {
-                            console.log(err);
-                            callback(null, err);
+                            callback(err, null);
                         } else if (emailRespo) {
                             callback(null, emailRespo);
                         } else {
@@ -1649,11 +1648,9 @@ cron.schedule('1 12 * * *', function () {
                     console.log("emaildata", emailData);
                     Config.email(emailData, function (err, emailRespo) {
                         if (err) {
-                            console.log(err);
-                            callback(null, err);
+                            callback(err, null);
                         } else if (emailRespo) {
-                            foundData.otp = emailOtp;
-                            callback(null, foundData);
+                            callback(null, emailRespo);
                         } else {
                             callback(null, "Invalid data");
                         }
