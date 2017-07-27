@@ -482,12 +482,12 @@ var models = {
         obj.state = page.state;
         obj.city = page.city;
         obj.pincode = page.pincode;
-        obj.tax = (18 / 100) * obj.amount
+        obj.tax = (18 / 100) * obj.amount;
         obj.subtotal = obj.amount - obj.tax;
         var now = moment();
         var formatted = now.format('YYYY-MM-DD');
 
-        obj.date = formatted
+        obj.date = formatted;
         console.log("date", obj.date)
         var file = "invoice";
         var i = 0;
@@ -498,7 +498,7 @@ var models = {
                 callback(err);
             } else {
                 console.log("inside else");
-                //var path = "http://104.155.129.33:1337/upload/readFile/";
+                // var path = "http://104.155.129.33:1337/upload/readFile/";
                 var path = "pdf/";
                 var newFilename = page._id + file + ".pdf";
                 var writestream = fs.createWriteStream(path + newFilename);

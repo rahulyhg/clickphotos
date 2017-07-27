@@ -73,25 +73,6 @@ var model = {
                 });
             }
         });
-        // console.log("invoiceNumber", invoiceNumber);
-        // GstDetails.findOneAndUpdate({
-        //     _id: orderData[5]
-        // }, {
-        //     packageAmount: orderData[4],
-        //     package: orderData[0]
-        // }).exec(function (err, found) {
-        //     if (err) {
-        //         callback(err, null);
-        //     } else {
-        //         if (found) {
-        //             callback(null, found);
-        //         } else {
-        //             callback(null, {
-        //                 message: "No Data Found"
-        //             });
-        //         }
-        //     }
-        // });
     },
 
     updatePackageAmtForGandS: function (data, callback) {
@@ -128,24 +109,6 @@ var model = {
                 });
             }
         });
-        // GstDetails.findOneAndUpdate({
-        //     _id: orderData[3]
-        // }, {
-        //     packageAmount: orderData[2],
-        //     package: orderData[0]
-        // }).exec(function (err, found) {
-        //     if (err) {
-        //         callback(err, null);
-        //     } else {
-        //         if (found) {
-        //             callback(null, found);
-        //         } else {
-        //             callback(null, {
-        //                 message: "No Data Found"
-        //             });
-        //         }
-        //     }
-        // });
     },
 
     updatePackageAmtForPhotoContest: function (data, callback) {
