@@ -411,16 +411,18 @@ var controller = {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "featured") {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
-                                console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                var urlpath = env.realHost + "/thanks/" + req.body.MerchantRefNo;
+                                console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", urlpath);
+                                res.redirect(urlpath);
                             });
                             // GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
                             //     console.log("updatePackageAmtForFeature", data);
                             // });
                         } else {
                             Photographer.updateToGold(req.body, function (err, data) {
-                                console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                var urlpath = env.realHost + "/thanks/" + req.body.MerchantRefNo;
+                                console.log("(env.realHost + " / thanks / " + req.body.MerchantRefNo", urlpath);
+                                res.redirect(urlpath);
                             });
                             // GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
                             //     console.log("updatePackageAmtForFeature", data);
