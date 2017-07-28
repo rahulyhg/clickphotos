@@ -7,7 +7,7 @@
 
 
 var MaxImageSize = 1600;
-var requrl = "http://104.197.9.210:80/api/";
+var requrl = "http://beta.clickmania.in:8080/api/";
 
 
 
