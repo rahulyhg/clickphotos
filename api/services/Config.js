@@ -415,7 +415,7 @@ var models = {
                                 var base64File = new Buffer(file).toString('base64');
                                 attachment.setContent(base64File);
                                 // attachment.setType('application/text');
-                                attachment.setFilename('Invoice.pdf');
+                                // attachment.setFilename('Invoice.pdf');
                                 attachment.setDisposition('attachment');
                                 mail.addAttachment(attachment);
 
@@ -479,8 +479,10 @@ var models = {
         var i = 0;
         sails.hooks.views.render(file, obj, function (err, html) {
             if (err) {
+                console.log("errr", err);
                 callback(err);
             } else {
+                console.log("else");
                 var path = "pdf/";
                 var newFilename = page._id + file + ".pdf";
                 var writestream = fs.createWriteStream(path + newFilename);

@@ -359,30 +359,31 @@ var model = {
                 console.log(err);
                 callback(err, null);
             } else {
-                console.log("data", updated);
-                var emailData = {};
-                emailData.email = updated.email;
-                emailData.filename = "featuredpht.ejs";
-                emailData.name = updated.name;
-                //emailData.serviceRequest = data1.serviceRequest;
-                // emailData.email = data1.email;
-                //emailData.mobile = data1.mobile;
-                //emailData.query = data1.query;
-                emailData.from = "admin@clickmania.in";
-                emailData.fromname = "Clickmania Admin";
-                emailData.subject = "Feature Photographer";
-                console.log("email data : ", emailData);
-                Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
-                    if (err) {
-                        console.log(err);
-                        callback(err, null);
-                    } else if (emailRespo) {
-                        callback(null, updated);
-                    } else {
-                        callback("Invalid data", null);
-                    }
-                });
+                // console.log("data", updated);
+                // var emailData = {};
+                // emailData.email = updated.email;
+                // emailData.filename = "featuredpht.ejs";
+                // emailData.name = updated.name;
+                // //emailData.serviceRequest = data1.serviceRequest;
+                // // emailData.email = data1.email;
+                // //emailData.mobile = data1.mobile;
+                // //emailData.query = data1.query;
+                // emailData.from = "admin@clickmania.in";
+                // emailData.fromname = "Clickmania Admin";
+                // emailData.subject = "Feature Photographer";
+                // console.log("email data : ", emailData);
+                // Config.email(emailData, function (err, emailRespo) {
+                //     console.log("emailRespo", emailRespo);
+                //     if (err) {
+                //         console.log(err);
+                //         callback(err, null);
+                //     } else if (emailRespo) {
+                //         callback(null, updated);
+                //     } else {
+                //         callback("Invalid data", null);
+                //     }
+                // });
+                callback(null, updated);
             }
         });
     },
