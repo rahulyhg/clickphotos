@@ -59,8 +59,6 @@ var model = {
                         if (found) {
                             async.waterfall([
                                     function (callback) {
-                                        console.log("!!!!!!!!!!!!!!!00000", found);
-
                                         Config.generatePdf(found, function (err, data) {
                                             if (err) {
                                                 // console.log(err);
@@ -69,14 +67,12 @@ var model = {
                                                 if (_.isEmpty(data)) {
                                                     callback(err, null);
                                                 } else {
-                                                    console.log("data----", data);
                                                     callback(null, data);
                                                 }
                                             }
                                         });
                                     },
                                     function (data, callback) {
-                                        console.log("!!!!!!!!!!!!!!!1111", data.name);
                                         var invoiceDate = {};
                                         invoiceDate._id = found._id;
                                         invoiceDate.invoiceFile = data.name;
@@ -91,14 +87,12 @@ var model = {
                                                     var finalData = {};
                                                     finalData.data = data;
                                                     finalData.data1 = data1;
-                                                    console.log("finalData", finalData);
                                                     callback(null, finalData);
                                                 }
                                             }
                                         });
                                     },
                                     function (finalData, callback) {
-                                        console.log("!!!!!!!!!!!!!!!22222222", finalData);
                                         var emailData = {};
                                         emailData.from = "admin@clickmania.in";
                                         emailData.name = found.photographer.name;
@@ -127,44 +121,6 @@ var model = {
                                         // callback(null, found);
                                     }
                                 });
-
-                            // callback(null, found);
-                            // var invoiceDate = {};
-                            // Config.generatePdf(found, function (err, data) {
-                            //     if (err) {
-                            //         // callback(err, null);
-                            //     } else if (data) {
-                            //         invoiceDate._id = found._id;
-                            //         invoiceDate.invoiceFile = data.name;
-                            //         console.log("invoiceDate--------------------", invoiceDate);
-                            //         GstDetails.saveData(invoiceDate, function (err, data1) {
-                            //             if (err) {
-                            //                 console.log("err");
-                            //             } else if (data1) {
-                            //                 var emailData = {};
-                            //                 emailData.from = "admin@clickmania.in";
-                            //                 emailData.name = found.photographer.name;
-                            //                 emailData.email = found.photographer.email;
-                            //                 emailData.file = data.name;
-                            //                 emailData.filename = "featuredpht.ejs";
-                            //                 emailData.subject = "Invoice";
-                            //                 console.log("emaildata#####################", emailData);
-                            //                 Config.email(emailData, function (err, emailRespo) {
-                            //                     if (err) {
-                            //                         console.log(err);
-                            //                         // callback(err);
-                            //                     } else if (emailRespo) {
-                            //                         // callback(null, emailRespo);
-                            //                     } else {
-                            //                         // callback(null, "Invalid data");
-                            //                     }
-                            //                 });
-                            //             }
-                            //         });
-                            //     } else {
-                            //         // callback("Invalid data", data);
-                            //     }
-                            // });
                         } else {
                             callback(null, {
                                 message: "No Data Found"
@@ -197,18 +153,111 @@ var model = {
                         callback(err, null);
                     } else {
                         if (found) {
-                            callback(null, found);
-                            Config.generatePdf(found, function (err, data) {
-                                if (err) {
-                                    // callback(err, null);
-                                } else if (data) {
-                                    invoiceDate._id = found._id;
-                                    invoiceDate.invoiceFile = data.name;
-                                    GstDetails.saveData(invoiceDate, function (err, data) {});
-                                } else {
-                                    // callback("Invalid data", data);
-                                }
-                            });
+                            async.waterfall([
+                                    function (callback) {
+                                        Config.generatePdf(found, function (err, data) {
+                                            if (err) {
+                                                // console.log(err);
+                                                callback(err, null);
+                                            } else {
+                                                if (_.isEmpty(data)) {
+                                                    callback(err, null);
+                                                } else {
+                                                    callback(null, data);
+                                                }
+                                            }
+                                        });
+                                    },
+                                    function (data, callback) {
+                                        var invoiceDate = {};
+                                        invoiceDate._id = found._id;
+                                        invoiceDate.invoiceFile = data.name;
+                                        GstDetails.saveData(invoiceDate, function (err, data1) {
+                                            if (err) {
+                                                console.log(err);
+                                                callback(err, null);
+                                            } else {
+                                                if (_.isEmpty(data1)) {
+                                                    callback(err, null);
+                                                } else {
+                                                    var finalData = {};
+                                                    finalData.data = data;
+                                                    finalData.data1 = data1;
+                                                    callback(null, finalData);
+                                                }
+                                            }
+                                        });
+                                    },
+                                    function (finalData, callback) {
+                                        if (found.package == 'Gold') {
+                                            var emailData = {};
+                                            emailData.from = "admin@clickmania.in";
+                                            emailData.name = found.photographer.name;
+                                            emailData.email = found.photographer.email;
+                                            emailData.file = finalData.data.name;
+                                            emailData.filename = "goldpackage.ejs";
+                                            emailData.subject = "Invcongrats you Have upgraded to Gold Package";
+                                            Config.email(emailData, function (err, emailRespo) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    callback(err);
+                                                } else if (emailRespo) {
+                                                    callback(null, emailRespo);
+                                                } else {
+                                                    callback(null, "Invalid data");
+                                                }
+                                            });
+                                        } else {
+                                            var emailData = {};
+                                            emailData.from = "admin@clickmania.in";
+                                            emailData.name = found.photographer.name;
+                                            emailData.email = found.photographer.email;
+                                            emailData.file = finalData.data.name;
+                                            emailData.filename = "silverpackage.ejs";
+                                            emailData.subject = "congrats you Have upgraded to Silver Package";
+                                            Config.email(emailData, function (err, emailRespo) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    callback(err);
+                                                } else if (emailRespo) {
+                                                    // callback(null, emailRespo);
+                                                    var emailData = {};
+                                                    emailData.email = found.email;
+                                                    emailData.filename = "goldupgrade.ejs";
+                                                    emailData.name = found.name;
+                                                    //emailData.serviceRequest = data1.serviceRequest;
+                                                    // emailData.email = data1.email;
+                                                    //emailData.mobile = data1.mobile;
+                                                    //emailData.query = data1.query;
+                                                    emailData.from = "admin@clickmania.in";
+                                                    emailData.fromname = "Clickmania Admin";
+                                                    emailData.subject = "Please upgrade to Gold";
+
+                                                    Config.email(emailData, function (err, emailRespo) {
+                                                        if (err) {
+                                                            console.log(err);
+                                                            //callback(err, null);
+                                                        } else if (emailRespo) {
+                                                            // callback(null, updated);
+                                                        } else {
+                                                            // callback("Invalid data", updated);
+                                                        }
+                                                    });
+                                                } else {
+                                                    callback(null, "Invalid data");
+                                                }
+                                            });
+                                        }
+                                    }
+                                ],
+                                function (err, found) {
+                                    if (err) {
+                                        // console.log(err);
+                                        // callback(err, null);
+                                    } else {
+                                        // callback(null, found);
+                                    }
+                                });
                         } else {
                             callback(null, {
                                 message: "No Data Found"
@@ -241,18 +290,69 @@ var model = {
                         callback(err, null);
                     } else {
                         if (found) {
-                            callback(null, found);
-                            Config.generatePdf(found, function (err, data) {
-                                if (err) {
-                                    // callback(err, null);
-                                } else if (data) {
-                                    invoiceDate._id = found._id;
-                                    invoiceDate.invoiceFile = data.name;
-                                    GstDetails.saveData(invoiceDate, function (err, data) {});
-                                } else {
-                                    // callback("Invalid data", data);
-                                }
-                            });
+                            async.waterfall([
+                                    function (callback) {
+                                        Config.generatePdf(found, function (err, data) {
+                                            if (err) {
+                                                // console.log(err);
+                                                callback(err, null);
+                                            } else {
+                                                if (_.isEmpty(data)) {
+                                                    callback(err, null);
+                                                } else {
+                                                    callback(null, data);
+                                                }
+                                            }
+                                        });
+                                    },
+                                    function (data, callback) {
+                                        var invoiceDate = {};
+                                        invoiceDate._id = found._id;
+                                        invoiceDate.invoiceFile = data.name;
+                                        GstDetails.saveData(invoiceDate, function (err, data1) {
+                                            if (err) {
+                                                console.log(err);
+                                                callback(err, null);
+                                            } else {
+                                                if (_.isEmpty(data1)) {
+                                                    callback(err, null);
+                                                } else {
+                                                    var finalData = {};
+                                                    finalData.data = data;
+                                                    finalData.data1 = data1;
+                                                    callback(null, finalData);
+                                                }
+                                            }
+                                        });
+                                    },
+                                    function (finalData, callback) {
+                                        var emailData = {};
+                                        emailData.from = "admin@clickmania.in";
+                                        emailData.name = found.photographer.name;
+                                        emailData.email = found.photographer.email;
+                                        emailData.file = finalData.data.name;
+                                        emailData.filename = "featuredpht.ejs";
+                                        emailData.subject = "Invoice";
+                                        Config.email(emailData, function (err, emailRespo) {
+                                            if (err) {
+                                                console.log(err);
+                                                callback(err);
+                                            } else if (emailRespo) {
+                                                callback(null, emailRespo);
+                                            } else {
+                                                callback(null, "Invalid data");
+                                            }
+                                        });
+                                    }
+                                ],
+                                function (err, found) {
+                                    if (err) {
+                                        // console.log(err);
+                                        // callback(err, null);
+                                    } else {
+                                        // callback(null, found);
+                                    }
+                                });
                         } else {
                             callback(null, {
                                 message: "No Data Found"

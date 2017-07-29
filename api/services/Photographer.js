@@ -1070,72 +1070,6 @@ var model = {
     // }
     //smsotp
 
-    //update to gold
-    // updateToGold: function (data, callback) {
-    //     console.log(data);
-    //     var resObj = {};
-    //     Photographer.findOne({
-    //         _id: data._id
-    //     }).exec(function (err, foundOne) {
-    //         if (err) {
-    //             // console.log(err);
-    //             callback(err, null);
-    //         } else if (_.isEmpty(foundOne)) {
-    //             callback(null, "noDataFound");
-    //         } else {
-    //             Photographer.findOneAndUpdate({
-    //                 _id: data._id
-    //             }, {
-    //                 package: data.package,
-    //                 packageBroughtDate: data.packageBroughtDate
-    //             }, {
-    //                 new: true
-    //             }).exec(function (err, foundUpdate) {
-    //                 if (err) {
-    //                     // console.log(err);
-    //                     callback(err, null);
-    //                 } else if (_.isEmpty(foundUpdate)) {
-    //                     callback(null, "noDataFound-update");
-    //                 } else {
-    //                     resObj.oldData = foundOne;
-    //                     resObj.newData = foundUpdate;
-    //                     callback(null, resObj);
-    //                 }
-
-    //             })
-    //             // callback();
-    //         }
-
-    //     })
-    // },
-
-
-    // payUpdateToGold: function (data, callback) {
-    //     request.post({
-    //         url: 'https://secure.ebs.in/pg/ma/payment/request',
-    //     params: {
-    //         account_id: "24065",
-    //         address: "Billing Address",
-    //         amount: 1.00,
-    //         channel: 0,
-    //         city: "Billing City",
-    //         country: "IND",
-    //         currency: "INR",
-    //         description: "Test Order Description",
-    //         display_currency: "GBP",
-    //         display_currency_rates: 1,
-    //         email: "name@yourdomain.in",
-    //         mode: "TEST",
-    //         name: "Billing Name",
-    //         phone: "04423452345",
-    //         postal_code: "600001",
-    //         reference_no: 223,
-    //         return_url: "http://localhost/ebs/response.php",
-    //         secure_hash: hs,
-    //     }
-    //     }, callback);
-    // },
-
     updateToGold: function (data, callback) {
         console.log("in update gold..");
         console.log(data);
@@ -1166,53 +1100,54 @@ var model = {
                                 if (_.isEmpty(updated)) {
                                     callback(null, {});
                                 } else {
-                                    // callback(null, updated);
-                                    //callback(null, found);
-                                    var emailData = {};
-                                    emailData.email = found.email;
-                                    emailData.filename = "silverpackage.ejs";
-                                    emailData.name = found.name;
-                                    //emailData.serviceRequest = data1.serviceRequest;
-                                    // emailData.email = data1.email;
-                                    //emailData.mobile = data1.mobile;
-                                    //emailData.query = data1.query;
-                                    emailData.from = "admin@clickmania.in";
-                                    emailData.fromname = "Clickmania Admin";
-                                    emailData.subject = "congrats you Have upgraded to Silver Package";
+                                    // // callback(null, updated);
+                                    // //callback(null, found);
+                                    // var emailData = {};
+                                    // emailData.email = found.email;
+                                    // emailData.filename = "silverpackage.ejs";
+                                    // emailData.name = found.name;
+                                    // //emailData.serviceRequest = data1.serviceRequest;
+                                    // // emailData.email = data1.email;
+                                    // //emailData.mobile = data1.mobile;
+                                    // //emailData.query = data1.query;
+                                    // emailData.from = "admin@clickmania.in";
+                                    // emailData.fromname = "Clickmania Admin";
+                                    // emailData.subject = "congrats you Have upgraded to Silver Package";
 
-                                    Config.email(emailData, function (err, emailRespo) {
-                                        console.log("emailRespo", emailRespo);
-                                        if (err) {
-                                            console.log(err);
-                                            callback(err, null);
-                                        } else if (emailRespo) {
-                                            //callback(null, "Contact us form saved successfully!!!");
-                                            var emailData = {};
-                                            emailData.email = found.email;
-                                            emailData.filename = "goldupgrade.ejs";
-                                            emailData.name = found.name;
-                                            //emailData.serviceRequest = data1.serviceRequest;
-                                            // emailData.email = data1.email;
-                                            //emailData.mobile = data1.mobile;
-                                            //emailData.query = data1.query;
-                                            emailData.from = "admin@clickmania.in";
-                                            emailData.fromname = "Clickmania Admin";
-                                            emailData.subject = "Please upgrade to Gold";
+                                    // Config.email(emailData, function (err, emailRespo) {
+                                    //     console.log("emailRespo", emailRespo);
+                                    //     if (err) {
+                                    //         console.log(err);
+                                    //         callback(err, null);
+                                    //     } else if (emailRespo) {
+                                    //         //callback(null, "Contact us form saved successfully!!!");
+                                    //         var emailData = {};
+                                    //         emailData.email = found.email;
+                                    //         emailData.filename = "goldupgrade.ejs";
+                                    //         emailData.name = found.name;
+                                    //         //emailData.serviceRequest = data1.serviceRequest;
+                                    //         // emailData.email = data1.email;
+                                    //         //emailData.mobile = data1.mobile;
+                                    //         //emailData.query = data1.query;
+                                    //         emailData.from = "admin@clickmania.in";
+                                    //         emailData.fromname = "Clickmania Admin";
+                                    //         emailData.subject = "Please upgrade to Gold";
 
-                                            Config.email(emailData, function (err, emailRespo) {
-                                                if (err) {
-                                                    console.log(err);
-                                                    callback(err, null);
-                                                } else if (emailRespo) {
-                                                    callback(null, updated);
-                                                } else {
-                                                    callback("Invalid data", updated);
-                                                }
-                                            });
-                                        } else {
-                                            callback("Invalid data", updated);
-                                        }
-                                    });
+                                    //         Config.email(emailData, function (err, emailRespo) {
+                                    //             if (err) {
+                                    //                 console.log(err);
+                                    //                 callback(err, null);
+                                    //             } else if (emailRespo) {
+                                    //                 callback(null, updated);
+                                    //             } else {
+                                    //                 callback("Invalid data", updated);
+                                    //             }
+                                    //         });
+                                    //     } else {
+                                    //         callback("Invalid data", updated);
+                                    //     }
+                                    // });
+                                    callback(null, updated);
                                 }
                             } else {
                                 callback(null, {
@@ -1235,29 +1170,30 @@ var model = {
                                     callback(null, {});
                                 } else {
                                     // callback(null, updated);
-                                    var emailData = {};
-                                    emailData.email = found.email;
-                                    emailData.filename = "goldpackage.ejs";
-                                    emailData.name = found.name;
-                                    //emailData.serviceRequest = data1.serviceRequest;
-                                    // emailData.email = data1.email;
-                                    //emailData.mobile = data1.mobile;
-                                    //emailData.query = data1.query;
-                                    emailData.from = "admin@clickmania.in";
-                                    emailData.fromname = "Clickmania Admin";
-                                    emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
-                                    console.log("email data : ", emailData);
+                                    // var emailData = {};
+                                    // emailData.email = found.email;
+                                    // emailData.filename = "goldpackage.ejs";
+                                    // emailData.name = found.name;
+                                    // //emailData.serviceRequest = data1.serviceRequest;
+                                    // // emailData.email = data1.email;
+                                    // //emailData.mobile = data1.mobile;
+                                    // //emailData.query = data1.query;
+                                    // emailData.from = "admin@clickmania.in";
+                                    // emailData.fromname = "Clickmania Admin";
+                                    // emailData.subject = "congrats you Have upgraded to " + photographerId[0] + " Package";
+                                    // console.log("email data : ", emailData);
 
-                                    Config.email(emailData, function (err, emailRespo) {
-                                        if (err) {
-                                            console.log(err);
-                                            // callback(err, null);
-                                        } else if (emailRespo) {
-                                            callback(null, updated);
-                                        } else {
-                                            // callback("Invalid data", found);
-                                        }
-                                    });
+                                    // Config.email(emailData, function (err, emailRespo) {
+                                    //     if (err) {
+                                    //         console.log(err);
+                                    //         // callback(err, null);
+                                    //     } else if (emailRespo) {
+                                    //         callback(null, updated);
+                                    //     } else {
+                                    //         // callback("Invalid data", found);
+                                    //     }
+                                    // });
+                                    callback(null, updated);
                                 }
                             } else {
                                 callback(null, {
