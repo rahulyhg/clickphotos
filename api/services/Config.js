@@ -402,14 +402,22 @@ var models = {
                         } else {
                             //console.log('email else');
                             if (body && body.value != false) {
-                                var helper = require('sendgrid').mail
+                                var helper = require('sendgrid').mail;
 
-                                from_email = new helper.Email(data.from)
-                                to_email = new helper.Email(data.email)
-                                subject = data.subject
-                                content = new helper.Content("text/html", body)
-                                mail = new helper.Mail(from_email, subject, to_email, content)
+                                from_email = new helper.Email(data.from);
+                                to_email = new helper.Email(data.email);
+                                subject = data.subject;
+                                content = new helper.Content("text/html", body);
+                                mail = new helper.Mail(from_email, subject, to_email, content);
 
+                                var attachment = new helper.Attachment();
+                                var file = fs.readFileSync('pdf/' + data.file);
+                                var base64File = new Buffer(file).toString('base64');
+                                attachment.setContent(base64File);
+                                // attachment.setType('application/text');
+                                attachment.setFilename('Invoice.pdf');
+                                attachment.setDisposition('attachment');
+                                mail.addAttachment(attachment);
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
                                     method: 'POST',
