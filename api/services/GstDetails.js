@@ -65,25 +65,28 @@ var model = {
                                 } else if (data) {
                                     invoiceDate._id = found._id;
                                     invoiceDate.invoiceFile = data.name;
-                                    GstDetails.saveData(invoiceDate, function (err, data) {
-                                        var emailData = {};
-                                        emailData.from = "admin@clickmania.in";
-                                        emailData.name = found.photographer.name;
-                                        emailData.email = found.photographer.email;
-                                        emailData.file = data.name;
-                                        emailData.filename = "featuredpht.ejs";
-                                        emailData.subject = "Invoice";
-                                        console.log("emaildata", emailData);
-                                        Config.email(emailData, function (err, emailRespo) {
-                                            if (err) {
-                                                console.log(err);
-                                                // callback(err);
-                                            } else if (emailRespo) {
-                                                // callback(null, emailRespo);
-                                            } else {
-                                                // callback(null, "Invalid data");
-                                            }
-                                        });
+                                    console.log("invoiceDate--------------------", invoiceDate);
+                                    GstDetails.saveData(invoiceDate, function (err, data1) {
+                                        if (data1) {
+                                            var emailData = {};
+                                            emailData.from = "admin@clickmania.in";
+                                            emailData.name = found.photographer.name;
+                                            emailData.email = found.photographer.email;
+                                            emailData.file = data.name;
+                                            emailData.filename = "featuredpht.ejs";
+                                            emailData.subject = "Invoice";
+                                            console.log("emaildata#####################", emailData);
+                                            Config.email(emailData, function (err, emailRespo) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    // callback(err);
+                                                } else if (emailRespo) {
+                                                    // callback(null, emailRespo);
+                                                } else {
+                                                    // callback(null, "Invalid data");
+                                                }
+                                            });
+                                        }
                                     });
                                 } else {
                                     // callback("Invalid data", data);

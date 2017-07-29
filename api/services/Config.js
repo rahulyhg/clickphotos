@@ -418,6 +418,7 @@ var models = {
                                 attachment.setFilename('Invoice.pdf');
                                 attachment.setDisposition('attachment');
                                 mail.addAttachment(attachment);
+
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
                                     method: 'POST',
