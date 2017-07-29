@@ -200,15 +200,11 @@ var model = {
     },
 
     deleteFeaturedPhotographer: function (data, callback) {
-
-        console.log("DATA", data);
-
         Photographer.update({
             _id: data._id
         }, {
             status: false
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -250,7 +246,6 @@ var model = {
             if (err) {
                 callback(err, null);
             } else if (created) {
-                console.log("data", created);
                 var emailData = {};
                 emailData.email = created.email;
                 emailData.filename = "welcome.ejs";
@@ -262,9 +257,7 @@ var model = {
                 emailData.from = "admin@clickmania.in";
                 emailData.fromname = "Clickmania Admin";
                 emailData.subject = "Welcome To Clickmania";
-                console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
                     if (err) {
                         console.log(err);
                         callback(null, created);
@@ -281,9 +274,7 @@ var model = {
                         emailData.from = "admin@clickmania.in";
                         emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Clickmania Update Profile";
-                        console.log("email data : ", emailData);
                         Config.email(emailData, function (err, emailRespo) {
-                            console.log("emailRespo", emailRespo);
                             if (err) {
                                 console.log(err);
                                 callback(null, created);
@@ -304,7 +295,6 @@ var model = {
     },
 
     uploadPhotos: function (data, callback) {
-        console.log(data);
         Photographer.update({
             _id: data._id
         }, {
@@ -338,7 +328,6 @@ var model = {
     },
 
     updateToFeaturePhotographer: function (data, callback) {
-        console.log("DATA", data);
         // var date = new Date();
         // var monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
         // var mon = monthNames[date.getMonth() + 1];
@@ -354,7 +343,6 @@ var model = {
         }, {
             new: true
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -389,7 +377,6 @@ var model = {
     },
 
     findPhotographer: function (data, callback) {
-        console.log("data", data)
         Photographer.find({
             status: true
         }).exec(function (err, found) {
@@ -419,7 +406,6 @@ var model = {
                     console.log(err);
                     callback(err, null);
                 } else if (updated) {
-                    console.log("hey", updated);
                     callback(null, updated);
                 } else {
                     callback(null, {});
@@ -446,7 +432,6 @@ var model = {
                 }
             }
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -466,14 +451,10 @@ var model = {
             if (err) {
                 callback(err, null);
             } else if (found) {
-                console.log("found---", found);
                 var newreturns = {};
                 var checkmonth = moment(found.dateOfRagister).format();
                 var currentYear = moment(checkmonth).year();
                 var nextYear = Number(currentYear) + 1;
-                console.log("checkmonth", checkmonth);
-                console.log("currentYear", currentYear);
-                console.log("nextYear", nextYear);
                 var match = {};
                 if (!_.isEmpty(found)) {
                     var match = {
@@ -491,16 +472,13 @@ var model = {
                     } else {
                         //newreturns.totalpages = Math.ceil(count / data.pagesize);
                         if (_.isEmpty(found)) {
-                            console.log("found---- ", found);
                             newreturns.totalItems = 0;
-                            console.log("newreturns", newreturns);
                             callback(null, newreturns);
                         } else {
                             newreturns.lastDateOfRegister = found[0].dateOfRagister;
                             newreturns.lastMonth = found[0].month;
                             newreturns.lastYear = found[0].year;
                             newreturns.totalItems = count;
-                            console.log("newreturns", newreturns);
                             callback(null, newreturns);
                         }
                     }
@@ -522,9 +500,7 @@ var model = {
             if (err) {
                 callback(err, null);
             } else {
-
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {
@@ -532,32 +508,8 @@ var model = {
                     });
                 }
             }
-        })
-    },
-
-    //google api for get city unused
-    getCities: function (data, callback) {
-        var api = sails.api;
-        request({
-            // url: "https://www.vamaship.com/api/surface/book",
-            url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?placeid=ChIJkbeSa_BfYzARphNChaFPjNcIndia&input=M&types=(cities)&language=en&key=" + api,
-            method: "POST"
-            //  headers: {
-            //    "Content-Type": "application/json",
-            //    "Authorization": "Bearer " + api
-            //  },
-            //   body: JSON.stringify(userData)
-        }, function (err, httpResponse, body) {
-            // console.log("err : ",err,"httpResponse",httpResponse);
-            console.log("err ::::::::::: ", err);
-            // console.log("httpResponse::::::::::: ", httpResponse);
-            console.log("body::::::::::::: ", body);
-            var bodyData = JSON.parse(body);
-            console.log("bodyData", bodyData);
-            callback(err, bodyData);
         });
     },
-    //google api for get city unused end
 
     getFeatPhotographer: function (data, callback) {
         this.find({
@@ -572,7 +524,6 @@ var model = {
                 if (_.isEmpty(found)) {
                     callback(null, {});
                 } else {
-                    console.log("Found", found);
                     callback(null, found);
                 }
             } else {
@@ -646,7 +597,6 @@ var model = {
                 console.log(err);
                 callback(err, null);
             } else if (found) {
-                console.log("Photographer data : ", found)
                 callback(null, found);
             } else {
                 callback(null, "Invalid found");
@@ -750,16 +700,13 @@ var model = {
     //emailers
 
     sendEnq: function (data, callback) {
-        console.log("data", data);
         // var contact = this(data);
         Photographer.findOne({
             _id: data._id
         }).exec(function (err, data1) {
-            console.log("data1", data1, err);
             if (err) {
                 callback(err, null);
             } else if (data1) {
-                console.log("data", data1);
                 var emailData = {};
                 //console.log("data1-----", data1.enquiry.length);
                 //console.log("data1-----", data1.enquiry[data1.enquiry.length - 1]);
@@ -781,7 +728,6 @@ var model = {
                 emailData.subject = "A potential Client has shown interest in you";
                 // console.log("email data : ", emailData);
                 Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -856,12 +802,9 @@ var model = {
         }, {
             new: true
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
-                console.log("error in updatepass-----", err);
                 callback(err, null);
             } else {
-                console.log(" successfully-----", updated);
                 callback(null, updated);
             }
         });
@@ -938,7 +881,6 @@ var model = {
                             emailData.otp = emailOtp;
                             emailData.filename = "otpForSignUp.ejs";
                             emailData.subject = "Clickmania OTP";
-                            console.log("emaildata", emailData);
                             Config.email(emailData, function (err, emailRespo) {
                                 if (err) {
                                     console.log(err);
@@ -982,7 +924,6 @@ var model = {
                                 emailData.otp = emailOtp;
                                 emailData.filename = "otpForSignUp.ejs";
                                 emailData.subject = "Clickmania OTP";
-                                console.log("emaildata", emailData);
                                 Config.email(emailData, function (err, emailRespo) {
                                     if (err) {
                                         console.log(err);
@@ -1238,7 +1179,6 @@ var model = {
                                     emailData.from = "admin@clickmania.in";
                                     emailData.fromname = "Clickmania Admin";
                                     emailData.subject = "congrats you Have upgraded to Silver Package";
-                                    console.log("email data : ", emailData);
 
                                     Config.email(emailData, function (err, emailRespo) {
                                         console.log("emailRespo", emailRespo);
@@ -1258,10 +1198,8 @@ var model = {
                                             emailData.from = "admin@clickmania.in";
                                             emailData.fromname = "Clickmania Admin";
                                             emailData.subject = "Please upgrade to Gold";
-                                            console.log("email data : ", emailData);
 
                                             Config.email(emailData, function (err, emailRespo) {
-                                                console.log("emailRespo", emailRespo);
                                                 if (err) {
                                                     console.log(err);
                                                     callback(err, null);
@@ -1311,7 +1249,6 @@ var model = {
                                     console.log("email data : ", emailData);
 
                                     Config.email(emailData, function (err, emailRespo) {
-                                        console.log("emailRespo", emailRespo);
                                         if (err) {
                                             console.log(err);
                                             // callback(err, null);
@@ -1370,7 +1307,6 @@ var model = {
                 console.log("email data : ", emailData);
 
                 Config.email(emailData, function (err, emailRespo) {
-                    console.log("emailRespo", emailRespo);
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -1441,7 +1377,6 @@ var model = {
                 callback(err, null);
             } else {
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {
@@ -1497,7 +1432,6 @@ var model = {
                 // contestParticipant: mongoose.Types.ObjectId(data.testid)
             }
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -1557,7 +1491,6 @@ var model = {
                             var months = duration.asMonths();
                             var countMonths = parseInt(months);
                             var totalAmountToPay = countMonths * 118;
-                            console.log("inside iF----", totalAmountToPay);
                             callback(null, totalAmountToPay);
                         } else {
                             var now = moment(new Date()); //todays date
@@ -1566,7 +1499,6 @@ var model = {
                             var months = duration.asMonths();
                             var countMonths = parseInt(months) + 1;
                             var totalAmountToPay = countMonths * 118;
-                            console.log("inside else----", countMonths);
                             callback(null, totalAmountToPay);
                         }
                     }
@@ -1594,17 +1526,13 @@ cron.schedule('1 12 * * *', function () {
             async.eachSeries(found, function (value, callback1) {
                 if (value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
-                    console.log("packgeDate1", PackgeDate);
                 } else if (!value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
-                    console.log("packgeDate2", PackgeDate);
                 } else if (value.silverPackageBroughtDate && !value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.silverPackageBroughtDate.setFullYear(value.silverPackageBroughtDate.getFullYear() + 1)).format();
-                    console.log("packgeDate3", PackgeDate);
                 }
                 if (value.dateOfRagister) {
                     var current = new Date(value.dateOfRagister.getFullYear(), value.dateOfRagister.getMonth() + 2, 1);
-                    console.log("#########current################", current);
                 }
                 // write their api to update status if changed
 
