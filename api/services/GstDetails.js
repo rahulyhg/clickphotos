@@ -207,7 +207,7 @@ var model = {
                                                     callback(null, "Invalid data");
                                                 }
                                             });
-                                        } else {
+                                        } else if (found.package == 'Silver') {
                                             var emailData = {};
                                             emailData.from = "admin@clickmania.in";
                                             emailData.name = found.photographer.name;
@@ -290,69 +290,18 @@ var model = {
                         callback(err, null);
                     } else {
                         if (found) {
-                            async.waterfall([
-                                    function (callback) {
-                                        Config.generatePdf(found, function (err, data) {
-                                            if (err) {
-                                                // console.log(err);
-                                                callback(err, null);
-                                            } else {
-                                                if (_.isEmpty(data)) {
-                                                    callback(err, null);
-                                                } else {
-                                                    callback(null, data);
-                                                }
-                                            }
-                                        });
-                                    },
-                                    function (data, callback) {
-                                        var invoiceDate = {};
-                                        invoiceDate._id = found._id;
-                                        invoiceDate.invoiceFile = data.name;
-                                        GstDetails.saveData(invoiceDate, function (err, data1) {
-                                            if (err) {
-                                                console.log(err);
-                                                callback(err, null);
-                                            } else {
-                                                if (_.isEmpty(data1)) {
-                                                    callback(err, null);
-                                                } else {
-                                                    var finalData = {};
-                                                    finalData.data = data;
-                                                    finalData.data1 = data1;
-                                                    callback(null, finalData);
-                                                }
-                                            }
-                                        });
-                                    },
-                                    function (finalData, callback) {
-                                        var emailData = {};
-                                        emailData.from = "admin@clickmania.in";
-                                        emailData.name = found.photographer.name;
-                                        emailData.email = found.photographer.email;
-                                        emailData.file = finalData.data.name;
-                                        emailData.filename = "featuredpht.ejs";
-                                        emailData.subject = "Invoice";
-                                        Config.email(emailData, function (err, emailRespo) {
-                                            if (err) {
-                                                console.log(err);
-                                                callback(err);
-                                            } else if (emailRespo) {
-                                                callback(null, emailRespo);
-                                            } else {
-                                                callback(null, "Invalid data");
-                                            }
-                                        });
-                                    }
-                                ],
-                                function (err, found) {
-                                    if (err) {
-                                        // console.log(err);
-                                        // callback(err, null);
-                                    } else {
-                                        // callback(null, found);
-                                    }
-                                });
+                            callback(null, found);
+                            Config.generatePdf(found, function (err, data) {
+                                if (err) {
+                                    // callback(err, null);
+                                } else if (data) {
+                                    invoiceDate._id = found._id;
+                                    invoiceDate.invoiceFile = data.name;
+                                    GstDetails.saveData(invoiceDate, function (err, data) {});
+                                } else {
+                                    // callback("Invalid data", data);
+                                }
+                            });
                         } else {
                             callback(null, {
                                 message: "No Data Found"
@@ -362,25 +311,120 @@ var model = {
                 });
             }
         });
-        // GstDetails.findOneAndUpdate({
-        //     _id: orderData[4]
-        // }, {
-        //     packageAmount: orderData[3],
-        //     package: orderData[0]
-        // }).exec(function (err, found) {
-        //     if (err) {
-        //         callback(err, null);
-        //     } else {
-        //         if (found) {
-        //             callback(null, found);
-        //         } else {
-        //             callback(null, {
-        //                 message: "No Data Found"
-        //             });
-        //         }
-        //     }
-        // });
     },
+
+    // updatePackageAmtForPhotoContest: function (data, callback) {
+    //     var orderData = data.Description.split("/");
+    //     GstDetails.invoiceNumberGenerate(data, function (err, invoiceNumber) {
+    //         if (err) {
+    //             callback(err);
+    //         } else {
+    //             var invoiceNo = invoiceNumber;
+    //             console.log(invoiceNo);
+    //             GstDetails.findOneAndUpdate({
+    //                 _id: orderData[4]
+    //             }, {
+    //                 packageAmount: orderData[3],
+    //                 package: orderData[0],
+    //                 invoiceNumber: invoiceNo
+    //             }, {
+    //                 new: true
+    //             }).deepPopulate("photographer").exec(function (err, found) {
+    //                 if (err) {
+    //                     callback(err, null);
+    //                 } else {
+    //                     if (found) {
+    //                         async.waterfall([
+    //                                 function (callback) {
+    //                                     Config.generatePdf(found, function (err, data) {
+    //                                         if (err) {
+    //                                             // console.log(err);
+    //                                             callback(err, null);
+    //                                         } else {
+    //                                             if (_.isEmpty(data)) {
+    //                                                 callback(err, null);
+    //                                             } else {
+    //                                                 callback(null, data);
+    //                                             }
+    //                                         }
+    //                                     });
+    //                                 },
+    //                                 function (data, callback) {
+    //                                     var invoiceDate = {};
+    //                                     invoiceDate._id = found._id;
+    //                                     invoiceDate.invoiceFile = data.name;
+    //                                     GstDetails.saveData(invoiceDate, function (err, data1) {
+    //                                         if (err) {
+    //                                             console.log(err);
+    //                                             callback(err, null);
+    //                                         } else {
+    //                                             if (_.isEmpty(data1)) {
+    //                                                 callback(err, null);
+    //                                             } else {
+    //                                                 var finalData = {};
+    //                                                 finalData.data = data;
+    //                                                 finalData.data1 = data1;
+    //                                                 callback(null, finalData);
+    //                                             }
+    //                                         }
+    //                                     });
+    //                                 },
+    //                                 function (finalData, callback) {
+    //                                     var emailData = {};
+    //                                     emailData.from = "admin@clickmania.in";
+    //                                     emailData.name = found.photographer.name;
+    //                                     emailData.email = found.photographer.email;
+    //                                     emailData.file = finalData.data.name;
+    //                                     emailData.filename = "featuredpht.ejs";
+    //                                     emailData.subject = "Invoice";
+    //                                     Config.email(emailData, function (err, emailRespo) {
+    //                                         if (err) {
+    //                                             console.log(err);
+    //                                             callback(err);
+    //                                         } else if (emailRespo) {
+    //                                             callback(null, emailRespo);
+    //                                         } else {
+    //                                             callback(null, "Invalid data");
+    //                                         }
+    //                                     });
+    //                                 }
+    //                             ],
+    //                             function (err, found) {
+    //                                 if (err) {
+    //                                     // console.log(err);
+    //                                     // callback(err, null);
+    //                                 } else {
+    //                                     // callback(null, found);
+    //                                 }
+    //                             });
+    //                     } else {
+    //                         callback(null, {
+    //                             message: "No Data Found"
+    //                         });
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //     });
+    //     // GstDetails.findOneAndUpdate({
+    //     //     _id: orderData[4]
+    //     // }, {
+    //     //     packageAmount: orderData[3],
+    //     //     package: orderData[0]
+    //     // }).exec(function (err, found) {
+    //     //     if (err) {
+    //     //         callback(err, null);
+    //     //     } else {
+    //     //         if (found) {
+    //     //             callback(null, found);
+    //     //         } else {
+    //     //             callback(null, {
+    //     //                 message: "No Data Found"
+    //     //             });
+    //     //         }
+    //     //     }
+    //     // });
+    // },
 
     invoiceNumberGenerate: function (data, callback) {
         GstDetails.find({}).sort({
