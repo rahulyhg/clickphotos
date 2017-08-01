@@ -353,7 +353,7 @@ var models = {
     sendSms: function (data, callback) {
         if (data.mobile) {
             request.get({
-                url: "https://alerts.solutionsinfini.com/api/v4/?method=sms&api_key=A9b93ff8660e8ea013dc89c6538682361&to=" + data.mobile + "&message=" + data.content + "&format=json"
+                url: "https://alerts.solutionsinfini.com/api/v4/?method=sms&api_key=A9b93ff8660e8ea013dc89c6538682361&to=" + data.mobile + "&sender='CLCKMN'&message=" + data.content + "&format=json"
             }, function (err, http, body) {
                 if (err) {
                     console.log("*************************************************sms gateway error***********************************************")
