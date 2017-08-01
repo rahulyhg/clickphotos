@@ -14,10 +14,17 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
+              <input type="number" class="form-control" id="contact" placeholder="Contact" ng-model="formData.contact" name="contact" required>
+              <span ng-show="loginForm.contact.$touched && loginForm.contact.$invalid">Please enter the proper mobile No.</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
               <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
               <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span>
             </div>
           </div>
+
         </div>
         <div class="row">
           <div class="col-md-6">

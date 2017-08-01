@@ -6,6 +6,7 @@ var schema = new Schema({
     name: String,
     profilePic: String,
     coverPic: String,
+    contact: String,
     uploadedImages: [{
         image: {
             type: String,
@@ -747,7 +748,7 @@ var model = {
     //verify email and send otp on email
 
     sendOtp: function (data, callback) {
-        // console.log("data", data)
+
         var emailOtp = (Math.random() + "").substring(2, 6);
         var foundData = {};
         Photographer.findOneAndUpdate({
@@ -762,6 +763,7 @@ var model = {
             } else {
                 if (found) {
                     var emailData = {};
+
                     emailData.from = "admin@clickmania.in";
                     emailData.fromname = "Clickmania Admin";
                     emailData.name = found.name;
@@ -875,6 +877,23 @@ var model = {
                         } else if (updated) {
                             var foundData = {};
                             var emailData = {};
+                            if (otpData.contact) {
+                                var smsData = {};
+                                smsData.mobile = otpData.contact;
+                                smsData.content = " Please confirm the OTP " + emailOtp + " in Clickmania website to complete your registration.";
+                                console.log("*************************************************sms data from photographer***********************************************", smsData);
+                                Config.sendSms(smsData, function (err, smsRespo) {
+                                    if (err) {
+                                        console.log("*************************************************sms gateway error in photographer***********************************************", err);
+
+                                    } else if (smsRespo) {
+                                        console.log(smsRespo, "*************************************************sms sent partyyy hupppieeee**********************************************");
+
+                                    } else {
+                                        console.log("invalid data")
+                                    }
+                                });
+                            }
                             emailData.from = "admin@clickmania.in";
                             emailData.name = otpData.name;
                             emailData.email = otpData.email;
@@ -917,6 +936,7 @@ var model = {
                             } else {
                                 var foundData = {};
                                 var emailData = {};
+
                                 emailData.from = "admin@clickmania.in";
                                 emailData.fromname = "Clickmania Admin";
                                 emailData.name = updated.name;
@@ -1053,8 +1073,8 @@ var model = {
     // smsForOtp: function (data, callback) {
     //     var smsData = {};
     //     console.log("mobileOtp", mobileOtp);
-    //     smsData.mobile = data.mobile;
-    //     smsData.content = "We regret to inform you that your application has been rejected for SFA Mumbai 2017. For further queries please email us at info@sfanow.in";
+    //     smsData.mobile = data.contact;
+    //     smsData.content = " Please confirm the XXXX in Clickmania website to complete your registration.";
     //     console.log("smsdata", smsData);
     //     Config.sendSms(smsData, function (err, smsRespo) {
     //         if (err) {

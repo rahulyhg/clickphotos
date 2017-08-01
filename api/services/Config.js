@@ -350,25 +350,26 @@ var models = {
     },
 
     //sms
-    // sendSms: function (data, callback) {
-    //     if (data.mobile) {
-    //         request.get({
-    //             url: "http://api-alerts.solutionsinfini.com/v3/?method=sms&api_key=A2673b52d60295c217f83efd42a6ab576&to=" + data.mobile + "&sender=TAGBOS&message=" + data.content + "&format=json"
-    //         }, function (err, http, body) {
-    //             if (err) {
-    //                 console.log(err);
-    //                 callback(err, null);
-    //             } else {
-    //                 console.log("body", body);
-    //                 callback(null, body);
-    //             }
-    //         });
-    //     } else {
-    //         callback({
-    //             message: "Mobile number not found"
-    //         }, null);
-    //     }
-    // },
+    sendSms: function (data, callback) {
+        if (data.mobile) {
+            request.get({
+                url: "https://alerts.solutionsinfini.com/api/v4/?method=sms&api_key=A9b93ff8660e8ea013dc89c6538682361&to=" + data.mobile + "&sender=Clickmania&message=" + data.content + "&format=json"
+            }, function (err, http, body) {
+                if (err) {
+                    console.log("*************************************************sms gateway error***********************************************")
+                    console.log(err);
+                    callback(err, null);
+                } else {
+                    console.log("*************************************************sms sent***********************************************", body);
+                    callback(null, body);
+                }
+            });
+        } else {
+            callback({
+                message: "Mobile number not found"
+            }, null);
+        }
+    },
     //sms end
 
     downloadFromUrl: function (url, callback) {
