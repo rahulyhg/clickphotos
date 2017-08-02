@@ -14,7 +14,7 @@
         "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
-        "name": "Wining Price",
+        "name": "Wining Price   (Example: 1st prize: prize, 2nd prize: prize)",
         "type": "text",
         "tableRef": "winingPrice",
         "placeholder": "Enter winingPrice",

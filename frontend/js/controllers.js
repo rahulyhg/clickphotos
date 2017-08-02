@@ -2705,10 +2705,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.currentContest = _.find($scope.contest, {
                 status: "true"
             });
-
+            $scope.prizes = $scope.currentContest.winingPrice.split(",");
+            console.log($scope.prize)
             $scope.previousContest = _.find($scope.contest, {
                 status: "false"
             });
+
             // console.log("participent", $scope.previousContest.contestParticipant)
             // console.log($scope.previousContest.winner)
             // $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, {
@@ -2717,9 +2719,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             if (!_.isEmpty($scope.previousContest)) {
                 $scope.previousContestWinner = _.find($scope.previousContest.contestParticipant, function (o) {
-                    return o.photographerId._id == $scope.previousContest.winner;
+                    return o._id == $scope.previousContest.winner;
                 });
-                console.log("winnerdetails", $scope.previousContestWinner.Photos);
+
             }
         })
 

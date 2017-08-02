@@ -24,7 +24,7 @@ var schema = new Schema({
     }],
     winner: {
         type: Schema.Types.ObjectId,
-        ref: "Photographer"
+        ref: "Order"
     }
 });
 

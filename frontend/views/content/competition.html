@@ -20,10 +20,13 @@
                 </div>
 
                 <h2><span>Contest Theme:</span>{{currentContest.contestName}}</h2>
-                 <div class="inline-div"><h2><span>Winning Prize:</span></h2></div>
-                 <div class="inline-div"> <h2>{{currentContest.winingPrice}} </h2>
+                <div class="inline-div">
+                    <h2><span>Winning Prize:</span></h2>
                 </div>
-                 <!--<h2><span>Winning Prize:</span>{{currentContest.winingPrice}} </h2>-->
+                <div class="inline-div">
+                    <h2 ng-repeat="prize in prizes">{{prize}} </h2>
+                </div>
+                <!--<h2><span>Winning Prize:</span>{{currentContest.winingPrice}} </h2>-->
 
                 <div class="text-center"><button class="btn orange-btn" type="button" ui-sref="photo-contest({photoContestId:currentContest._id})">Enter</button></div>
             </div>
