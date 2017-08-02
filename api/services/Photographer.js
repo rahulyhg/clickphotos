@@ -709,10 +709,27 @@ var model = {
                 callback(err, null);
             } else if (data1) {
                 var emailData = {};
+                var ind = data1.enquiry.length - 1;
                 //console.log("data1-----", data1.enquiry.length);
                 //console.log("data1-----", data1.enquiry[data1.enquiry.length - 1]);
 
-                var ind = data1.enquiry.length - 1;
+                if (data1.contact) {
+                    var smsData = {};
+                    smsData.mobile = data1.contact;
+                    smsData.content = " Hello, a potential client has shown interest in you in CLICKMANIA. Please contact the client for further details." + "client email id: " + data1.enquiry[ind].enquirerEmail + "client mobile number: " + data1.enquiry[ind].enquirerMobileNo;
+                    console.log("*************************************************sms data from photographer***********************************************", smsData);
+                    Config.sendSms(smsData, function (err, smsRespo) {
+                        if (err) {
+                            console.log("*************************************************sms gateway error in photographer***********************************************", err);
+
+                        } else if (smsRespo) {
+                            console.log(smsRespo, "*************************************************sms sent partyyy hupppieeee**********************************************");
+
+                        } else {
+                            console.log("invalid data")
+                        }
+                    });
+                }
                 emailData.email = data1.email;
                 emailData.filename = "enquiry.ejs";
                 emailData.name = data1.name;
@@ -877,23 +894,23 @@ var model = {
                         } else if (updated) {
                             var foundData = {};
                             var emailData = {};
-                            if (otpData.contact) {
-                                var smsData = {};
-                                smsData.mobile = otpData.contact;
-                                smsData.content = " Please confirm the OTP " + emailOtp + " in Clickmania website to complete your registration.";
-                                console.log("*************************************************sms data from photographer***********************************************", smsData);
-                                Config.sendSms(smsData, function (err, smsRespo) {
-                                    if (err) {
-                                        console.log("*************************************************sms gateway error in photographer***********************************************", err);
+                            // if (otpData.contact) {
+                            //     var smsData = {};
+                            //     smsData.mobile = otpData.contact;
+                            //     smsData.content = " Please confirm the OTP " + emailOtp + " in Clickmania website to complete your registration.";
+                            //     console.log("*************************************************sms data from photographer***********************************************", smsData);
+                            //     Config.sendSms(smsData, function (err, smsRespo) {
+                            //         if (err) {
+                            //             console.log("*************************************************sms gateway error in photographer***********************************************", err);
 
-                                    } else if (smsRespo) {
-                                        console.log(smsRespo, "*************************************************sms sent partyyy hupppieeee**********************************************");
+                            //         } else if (smsRespo) {
+                            //             console.log(smsRespo, "*************************************************sms sent partyyy hupppieeee**********************************************");
 
-                                    } else {
-                                        console.log("invalid data")
-                                    }
-                                });
-                            }
+                            //         } else {
+                            //             console.log("invalid data")
+                            //         }
+                            //     });
+                            // }
                             emailData.from = "admin@clickmania.in";
                             emailData.name = otpData.name;
                             emailData.email = otpData.email;
