@@ -295,9 +295,10 @@ var model = {
                                 if (err) {
                                     // callback(err, null);
                                 } else if (data) {
-                                    invoiceDate._id = found._id;
-                                    invoiceDate.invoiceFile = data.name;
-                                    GstDetails.saveData(invoiceDate, function (err, data) {});
+                                    invoiceData = {};
+                                    invoiceData._id = found._id;
+                                    invoiceData.invoiceFile = data.name;
+                                    GstDetails.saveData(invoiceData, function (err, data) {});
                                 } else {
                                     // callback("Invalid data", data);
                                 }
