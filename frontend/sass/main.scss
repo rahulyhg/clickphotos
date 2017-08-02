@@ -649,9 +649,10 @@ header>nav div.navbar-toggle>div.icon_float {
 
 #nav-icon {
     width: 44px;
+    height:28px;
     position: relative;
     display: inline-block;
-    vertical-align: super;
+    vertical-align: bottom;
     cursor: pointer;
     @include transform(rotate(0deg));
     @include transition(all .5s ease-in-out);
