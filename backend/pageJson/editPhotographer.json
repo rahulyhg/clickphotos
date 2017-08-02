@@ -21,7 +21,15 @@
         "id": "email",
         "validation": ["", "trim", "unique"],
         "url": ""
-    },{
+    }, {
+        "name": "Mobile No",
+        "type": "text",
+        "tableRef": "contact",
+        "placeholder": "Enter Mobile No",
+        "id": "contact",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
         "name": "Bio",
         "type": "wysiwyg",
         "tableRef": "bio",
@@ -29,7 +37,7 @@
         "id": "input1",
         "validation": ["", "trim", ""],
         "url": ""
-    },{
+    }, {
         "name": "Package",
         "type": "tags",
         "tableRef": "package",
@@ -41,7 +49,7 @@
         "dropDownType": "single",
         "onView": true,
         "dropDown": ["Gold", "Silver"]
-    },{
+    }, {
         "name": "Speciality",
         "type": "tags",
         "tableRef": "speciality",

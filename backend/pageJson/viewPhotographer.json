@@ -5,33 +5,33 @@
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Name",
-        "isSort": "",
-        "tableRef": "name"
-    }, {
-        "name": "Package",
-        "isSort": "",
-        "tableRef": "package"
-    },{
-        "name": "Speciality",
-        "type":"enumdisplay",
-        "isSort": "",
-        "tableRef": "speciality"
-    }, {
-        "name": "Status",
-        "isSort": "",
-        "tableRef": "status"
-    },
-    {
-        "name": "Email",
-        "isSort": "",
-        "tableRef": "email"
-    }, {
-        "name": "Joining Date",
-        "isSort": "",
-        "tableRef": "createdAt",
-        "type": "date"
-    }],
+            "name": "Name",
+            "isSort": "",
+            "tableRef": "name"
+        }, {
+            "name": "Package",
+            "isSort": "",
+            "tableRef": "package"
+        }, {
+            "name": "Mobile No",
+            "isSort": "",
+            "tableRef": "contact"
+        }, {
+            "name": "Status",
+            "isSort": "",
+            "tableRef": "status"
+        },
+        {
+            "name": "Email",
+            "isSort": "",
+            "tableRef": "email"
+        }, {
+            "name": "Joining Date",
+            "isSort": "",
+            "tableRef": "createdAt",
+            "type": "date"
+        }
+    ],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
