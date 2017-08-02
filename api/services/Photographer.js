@@ -716,7 +716,7 @@ var model = {
                 if (data1.contact) {
                     var smsData = {};
                     smsData.mobile = data1.contact;
-                    smsData.content = " Hello, a potential client has shown interest in you in CLICKMANIA. Please contact the client for further details." + "client email id: " + data1.enquiry[ind].enquirerEmail + "client mobile number: " + data1.enquiry[ind].enquirerMobileNo;
+                    smsData.content = "client email id: " + data1.enquiry[ind].enquirerEmail + "client mobile number: " + data1.enquiry[ind].enquirerMobileNo;
                     console.log("*************************************************sms data from photographer***********************************************", smsData);
                     Config.sendSms(smsData, function (err, smsRespo) {
                         if (err) {
