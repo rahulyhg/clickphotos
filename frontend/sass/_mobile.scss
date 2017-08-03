@@ -1113,10 +1113,13 @@
                 padding: 7px 5px;
             }
         }
+        .photographer .photographer_img img{
+            height:auto !important;
+        }
         .photographer {
             .photographer_img {
                 @include size(25px, 25px);
-                @include margin(0 5px);
+                @include margin(0 4px);
             }
             span {
                 font-size: 14px;
