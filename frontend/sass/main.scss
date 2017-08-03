@@ -259,14 +259,16 @@ body {
 .dosis-medium {
     font-family: 'dosis-medium';
 }
-.inline-div{
-   display: inline-block; 
-   vertical-align: top;
-       margin-bottom: 30px;
-   h2{
-       margin: 0;
-   }
+
+.inline-div {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 30px;
+    h2 {
+        margin: 0;
+    }
 }
+
 .rupee {
     font-family: 'Foradian';
 }
@@ -649,7 +651,7 @@ header>nav div.navbar-toggle>div.icon_float {
 
 #nav-icon {
     width: 44px;
-    height:28px;
+    height: 28px;
     position: relative;
     display: inline-block;
     vertical-align: bottom;
@@ -744,7 +746,7 @@ header>nav div.navbar-toggle>div.icon_float {
 
 .website-brand {
     padding: 13px 0 6px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .hamburger-cross {
@@ -806,16 +808,16 @@ header>nav div.navbar-toggle>div.icon_float {
                 font-size: 15px;
                 color: black;
                 font-weight: 600;
-                  font-family: 'dosis-regular';
-                  span{
-                          font-family: 'dosis-regular' !important;
-                  }
+                font-family: 'dosis-regular';
+                span {
+                    font-family: 'dosis-regular' !important;
+                }
             }
         }
         .ui-select-choices-row.active>a {
             background-color: $orange;
             color: white;
-              font-family: 'dosis-regular' !important;
+            font-family: 'dosis-regular' !important;
         }
         i.caret {
             display: none;
@@ -850,7 +852,7 @@ header>nav div.navbar-toggle>div.icon_float {
         color: white;
         font-weight: 600;
         padding: 5px 12px;
-         font-family: 'dosis-regular';
+        font-family: 'dosis-regular';
         &:hover {
             background-color: $orangeColor;
             color: white;
@@ -959,10 +961,10 @@ header>nav div.navbar-toggle>div.icon_float {
         //     100%);
         //     background-size: cover!important;
         //     overflow: hidden;
-        //     border-radius: 50%;
+        //     border-radius: 50%;s
         // }
-        img{
-            height:35px !important;
+        .img-user {
+            height: 35px !important;
         }
     }
     span {
@@ -1884,23 +1886,22 @@ fieldset[disabled] .form-control {
         display: -moz-box;
         display: -webkit-box;
         display: box;
-        
     }
     input[type="checkbox"] {
         margin-right: 4px;
     }
-    .form-control:focus{
-             border: 1px solid #ccc !important;
-        }
+    .form-control:focus {
+        border: 1px solid #ccc !important;
+    }
     textarea {
         border: 1px solid #ccc;
         text-align: justify;
         resize: none;
-        &:active{
-             border: 1px solid #ccc !important;
+        &:active {
+            border: 1px solid #ccc !important;
         }
-        &:focus{
-             border: 1px solid #ccc !important;
+        &:focus {
+            border: 1px solid #ccc !important;
         }
     }
     input {
@@ -2012,7 +2013,7 @@ fieldset[disabled] .form-control {
 .text-set {
     max-width: 75%;
     display: inline-block;
-    &:focus{
+    &:focus {
         border: 1px solid #ccc !important;
     }
 }

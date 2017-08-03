@@ -404,8 +404,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.packageChunk = _.chunk(packages, 3);
                     }
 
-                    $scope.uploadImageContest = function (imagesData) {
-                        console.log("for ");
+                    $scope.uploadImageContest = function (imagesData, imageSize) {
+                        console.log("for ", imageSize);
                         var input = {
                             _id: $scope.contestIdModal,
                             id: $.jStorage.get("photographer")._id,
