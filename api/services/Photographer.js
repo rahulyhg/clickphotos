@@ -718,6 +718,7 @@ var model = {
                     smsData.mobile = data1.contact;
                     smsData.content = "Hello, a potential client has shown interest in you in CLICKMANIA. Please contact the client for further details. " + "client email id: " + data1.enquiry[ind].enquirerEmail + " client mobile number: " + data1.enquiry[ind].enquirerMobileNo;
                     console.log("*************************************************sms data from photographer***********************************************", smsData);
+                    console.log("*************************************************ind***********************************************", ind, data1.enquiry.length);
                     Config.sendSms(smsData, function (err, smsRespo) {
                         if (err) {
                             console.log("*************************************************sms gateway error in photographer***********************************************", err);
