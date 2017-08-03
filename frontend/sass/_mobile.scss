@@ -74,6 +74,10 @@
         .side-margin {
             margin: 0 5%!important;
         }
+        #nav-icon{
+                height: 0;
+                vertical-align: super;
+        }
         .margin-top {
             text-align: left !important;
         }
@@ -130,7 +134,7 @@
                 height: 19px!important;
             }
             span {
-                font-size: 12px!important;
+                font-size: 8px!important;
             }
             button {
                   font-size: 12px !important;
