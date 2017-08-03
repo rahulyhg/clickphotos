@@ -1868,7 +1868,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         // this function is used for data submmiting enquiry
         $scope.formEnquiry = {};
-        $scope.dataSubmit = function (data) {
+        $scope.dataSubmit = function (data, currentProfile) {
             //console.log("dataaaa", data);
             $scope.slide = !$scope.slide;
             if (!_.isEmpty(data) || data != undefined) {
@@ -1888,6 +1888,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             //console.log(data);
                             $scope.openModal();
                             $scope.enquiryInfo = null;
+                            $scope.sendEnqu(currentProfile)
                         }
                     });
                 }
