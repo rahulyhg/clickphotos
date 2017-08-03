@@ -355,6 +355,25 @@ var model = {
             }
         });
     },
+    //bulk download
+    // bulkDownload: function (data, callback) {
+    //     PhotoContest.findOne({
+    //         _id: data.id
+    //     }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
+    //         if (err) {
+    //             // console.log(err);
+    //             callback(err, null);
+    //         } else {
+    //             if (_.isEmpty(found)) {
+    //                 callback(null, "noDataFound");
+    //             } else {
+    //                 // console.log("aaa", found.contestParticipant[0].Photos[0]);
+    //                 // download("wohlig.io:1337/api/download/" + "readFile?file=" + found.contestParticipant[0].Photos[0])
+    //                 callback(null, found);
+    //             }
+    //         }
+    //     });
+    // },
 
     addcontestParticipant: function (data, callback) {
         var photocontestId = data.Description.split("/");
