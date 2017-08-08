@@ -5126,6 +5126,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     cursor: default;
 }
 
+.alignment {
+    text-align: left;
+    font-size: 14px;
+    color: red;
+}
+
 .profile-holder {
     &:hover {
         .upload-trans {

@@ -9,20 +9,20 @@
           <div class="col-md-6">
             <div class="form-group">
               <input type="text" class="form-control" id="name" placeholder="Name" ng-model="formData.name" name="name" required>
-              <span ng-show="loginForm.name.$touched && loginForm.name.$invalid">Please enter the name</span>
+              <span class="alignment" ng-show="loginForm.name.$touched && loginForm.name.$invalid">Please enter your name</span>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <input type="number" class="form-control" id="contact" ng-pattern="/^(\+\d[7-9]{1,3}[- ]?)?\d{10}$/" placeholder="Contact"
                 ng-model="formData.contact" name="contact" required>
-              <span ng-show="loginForm.contact.$touched && loginForm.contact.$invalid">Please enter the proper mobile No.</span>
+              <span class="alignment" ng-show="loginForm.contact.$touched && loginForm.contact.$invalid">Please enter valid mobile number</span>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
               <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
-              <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span>
+              <span class="alignment" ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter valid email id</span>
             </div>
           </div>
 
@@ -32,18 +32,18 @@
             <div class="form-group">
               <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
                 required>
-              <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
+              <span class="alignment" ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="formData.ConfirmPassword"
                 name="ConfirmPassword" required>
+              <span class="alignment" ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== formData.ConfirmPassword)">Check your password</span>
             </div>
           </div>
           <!--{{loginForm.ConfirmPassword.$touched}}-->
           <!--<p ng-if="loginForm.ConfirmPassword.$touched ">enter your password</p>-->
-          <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== formData.ConfirmPassword)">check your password</p>
         </div>
         <div class="checkbox text-left condition-box" ng-init="terms">
           <p>
