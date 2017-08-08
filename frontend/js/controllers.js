@@ -2455,7 +2455,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.resetPass = function (formdata) {
             if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
                 formdata._id = $scope.id;
-                // console.log("doneFormData", formdata);
+                console.log("doneFormData", formdata);
                 NavigationService.apiCallWithData("Photographer/updatePass", formdata, function (data) {
                     console.log("doneFormDatadata", data);
                     if (data.value) {
