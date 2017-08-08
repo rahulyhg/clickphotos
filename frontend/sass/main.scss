@@ -3580,6 +3580,22 @@ header {
     }
 }
 
+.alignment {
+    text-align: left;
+    font-size: 14px;
+    color: red;
+}
+
+.pos {
+    position: relative;
+    .fb_artist {
+        position: absolute;
+        right: -120px;
+        top: 5px;
+        width: 40px;
+    }
+}
+
 .showEnquery {
     // this class is used to show an enquiry box from -29% to 0px
     right: 0;
@@ -4060,7 +4076,7 @@ hr.border-hr:after {
 
 .intro-con {
     margin: 0;
-    font-size: 26px;
+    font-size: 24px;
     text-align: justify;
     font-weight: 100;
 }
@@ -4984,6 +5000,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 //Srujana
+a.forgot-pwd {
+    text-decoration: underline;
+    color: $orangeColor;
+}
+
 .spinner {
     position: fixed;
     left: 50%;
@@ -5128,12 +5149,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
     pointer-events: none; //This makes it not clickable
     opacity: 0.6; //This grays it out to look disabled
     cursor: default;
-}
-
-.alignment {
-    text-align: left;
-    font-size: 14px;
-    color: red;
 }
 
 .profile-holder {
