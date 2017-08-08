@@ -7,15 +7,25 @@
 
 module.exports = {
     index: function (req, res) {
+        var uploadLimit = 3145728;
+        if (req.query.uploadLimit) {
+            uploadLimit = req.query.uploadLimit;
+        }
+
         function callback2(err) {
             res.callback(err, fileNames);
         }
         var fileNames = [];
         req.file("file").upload({
-            maxBytes: 3145728 // 10 MB Storage 1 MB = 10^6
+            maxBytes: uploadLimit // 10 MB Storage 1 MB = 10^6
         }, function (err, uploadedFile) {
             if (err) {
-                callback2('Please Upload File Size Upto 3 MB', null);
+                if (req.query.uploadLimit) {
+                    callback2('Please Upload File Size Upto 1 MB', null);
+                } else {
+                    callback2('Please Upload File Size Upto 3 MB', null);
+                }
+
             } else if (uploadedFile && uploadedFile.length > 0) {
                 async.each(uploadedFile, function (n, callback) {
                     Config.uploadFile(n.fd, function (err, value) {

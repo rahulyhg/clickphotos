@@ -204,9 +204,12 @@ firstapp.directive('uploadImage', function ($http, $filter) {
         templateUrl: 'frontend/views/directive/uploadFile.html',
         scope: {
             model: '=ngModel',
-            callback: "=ngCallback"
+            callback: "=ngCallback",
+            limit: "=limit"
         },
         link: function ($scope, element, attrs) {
+            console.log("scope", $scope.limit);
+
             $scope.isMultiple = false;
             $scope.inObject = false;
             if (attrs.multiple || attrs.multiple === "") {
@@ -238,7 +241,15 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                 image.hide = true;
                 var formData = new FormData();
                 formData.append('file', image.file, image.name);
-                $http.post(uploadurl, formData, {
+                var uploadUrl = uploadurl;
+                if ($scope.limit != undefined) {
+                    uploadUrl = uploadUrl + "?uploadLimit=" + $scope.limit;
+                } else {
+                    uploadurl = adminurl + "upload";
+                }
+                console.log("upload url", uploadUrl);
+                console.log(uploadUrl);
+                $http.post(uploadUrl, formData, {
                     headers: {
                         'Content-Type': undefined
                     },
@@ -246,10 +257,14 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                 }).then(function (data) {
                     data = data.data;
                     //console.log("success");
-                    console.log("data", data.value);
+                    console.log("data", data);
                     if (data.value == false) {
-                        console.log('enter');
-                        $scope.callback("More than 3Mb", null);
+                        if (data.error == "Please Upload File Size Upto 1 MB") {
+                            $scope.callback("More than 1Mb", null);
+                        } else {
+                            $scope.callback("More than 3Mb", null);
+                        }
+
                     } else if (data.value == true) {
                         // if ($scope.callback) {
                         //     $scope.callback(data);

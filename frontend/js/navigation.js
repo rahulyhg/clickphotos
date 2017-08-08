@@ -1,4 +1,4 @@
-var uploadurl = adminurl + "upload/";
+var uploadurl = adminurl + "upload/index";
 
 var navigationservice = angular.module('navigationservice', [])
 

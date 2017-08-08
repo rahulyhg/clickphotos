@@ -26,7 +26,7 @@
                         </div>
                     </div>-->
                     <p>We accept the following type <br> <span>.JPG,.PNG</span></p>
-                    <p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
+                    <p>1 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
 
                     <div class="upload-pic">
                         <!--<input type="file" value="" />-->
@@ -34,7 +34,7 @@
                             <button type="button" class="btn btn-default" ng-click="uploadImageContest(imagesData)" ng-disabled="!imagesData.image">Upload Image</button>
                         </div>
                         <div class="upload-dire">
-                            <upload-image ng-model="imagesData.image" no-view ng-callback="imageSize"></upload-image>
+                            <upload-image limit="1048576" ng-model="imagesData.image" no-view ng-callback="imageSize"></upload-image>
                         </div>
 
                     </div>

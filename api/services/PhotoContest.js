@@ -1,3 +1,5 @@
+var JSZip = require("jszip");
+var FileSaver = require('file-saver');
 var schema = new Schema({
     contestName: String,
     contestExpDate: Date,
@@ -356,20 +358,78 @@ var model = {
         });
     },
     //bulk download
-    // bulkDownload: function (data, callback) {
+    // bulkDownload: function (data, res) {
     //     PhotoContest.findOne({
     //         _id: data.id
     //     }).deepPopulate('contestParticipant.photographerId').exec(function (err, found) {
     //         if (err) {
     //             // console.log(err);
-    //             callback(err, null);
+    //             res.callback(err, null);
     //         } else {
     //             if (_.isEmpty(found)) {
-    //                 callback(null, "noDataFound");
+    //                 res.callback(null, "noDataFound");
     //             } else {
-    //                 // console.log("aaa", found.contestParticipant[0].Photos[0]);
-    //                 // download("wohlig.io:1337/api/download/" + "readFile?file=" + found.contestParticipant[0].Photos[0])
-    //                 callback(null, found);
+
+    //                 // var photoZip = zip.folder(found.contestName);
+    //                 async.each(found.contestParticipant, function (file, callback) {
+    //                         if (file.photographerId) {
+    //                             // console.log("file--- ", file.photographerId.name);
+    //                             var JSZip = require("jszip");
+    //                             var zip = new JSZip();
+    //                             var folder = "./.tmp/";
+    //                             var path = file.photographerId.name + ".zip";
+    //                             var finalPath = folder + path;
+    //                             var files = [];
+    //                             async.eachSeries(file.Photos, function (image, callback) {
+    //                                 request(global["env"].realHost + '/api/upload/readFile?file=' + image).pipe(fs.createWriteStream(image)).on('finish', function (images) {
+    //                                     // JSZip generates a readable stream with a "end" event,
+    //                                     // but is piped here in a writable stream which emits a "finish" event.
+    //                                     fs.readFile(image, function (err, imagesData) {
+    //                                         if (err) {
+    //                                             res.callback(err, null);
+    //                                         } else {
+    //                                             //Remove image
+    //                                             fs.unlink(image);
+    //                                             // zip.file("file", content); ... and other manipulations
+    //                                             zip.file(image, imagesData);
+    //                                             callback();
+    //                                         }
+    //                                     });
+    //                                 });
+    //                             }, function () {
+    //                                 //Generate Zip file
+    //                                 zip.generateNodeStream({
+    //                                         type: 'nodebuffer',
+    //                                         streamFiles: true
+    //                                     })
+    //                                     .pipe(fs.createWriteStream(finalPath))
+    //                                     .on('finish', function (zipData) {
+    //                                         // JSZip generates a readable stream with a "end" event,
+    //                                         // but is piped here in a writable stream which emits a "finish" event.
+    //                                         fs.readFile(finalPath, function (err, zip) {
+    //                                             if (err) {
+    //                                                 res.callback(err, null);
+    //                                             } else {
+    //                                                 res.set('Content-Type', "application/octet-stream");
+    //                                                 res.set('Content-Disposition', "attachment;filename=" + path);
+    //                                                 res.send(zip);
+    //                                                 // fs.unlink(finalPath);
+    //                                                 console.log("zip", zip);
+    //                                                 console.log("finalPath", finalPath);
+
+    //                                             }
+    //                                         });
+    //                                     });
+    //                             });
+    //                         }
+    //                     },
+    //                     function (err) {
+    //                         if (err) {
+    //                             console.log('A file failed to process');
+    //                         } else {
+    //                             console.log('All files have been processed successfully');
+    //                         }
+    //                     });
     //             }
     //         }
     //     });

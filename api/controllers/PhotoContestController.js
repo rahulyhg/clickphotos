@@ -79,17 +79,136 @@ var controller = {
             })
         }
     },
+
     bulkDownload: function (req, res) {
-        if (req.body) {
-            PhotoContest.bulkDownload(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid Request"
+        var JSZip = require("jszip");
+        var zip = new JSZip();
+        PhotoContest.findOne({
+            _id: req.query.id
+        }).deepPopulate('contestParticipant.photographerId').lean().exec(function (err, found) {
+            if (err) {
+                // console.log(err);
+                res.callback(err, null);
+            } else {
+                if (_.isEmpty(found)) {
+                    res.callback(null, "noDataFound");
+                } else {
+                    var userPaths = [];
+                    // var photoZip = zip.folder(found.contestName);
+                    async.each(found.contestParticipant, function (file, callback) {
+                            // console.log("filesss", file.photographerId);
+                            if (file.photographerId) {
+                                // console.log("file--- ", file.photographerId.name);
+                                var folder = "./.tmp/";
+                                var path = file.photographerId.name + ".zip";
+                                var finalPath = folder + path;
+                                userPaths.push({
+                                    finalPath: finalPath,
+                                    path: path
+                                });
+                                var files = [];
+                                async.eachSeries(file.Photos, function (image, callback1) {
+                                    request(global["env"].realHost + '/api/upload/readFile?file=' + image).pipe(fs.createWriteStream(image)).on('finish', function (images) {
+                                        // JSZip generates a readable stream with a "end" event,
+                                        // but is piped here in a writable stream which emits a "finish" event.
+                                        fs.readFile(image, function (err, imagesData) {
+                                            if (err) {
+                                                res.callback(err, null);
+                                            } else {
+                                                //Remove image
+                                                // fs.unlink(image);
+                                                // zip.file("file", content); ... and other manipulations
+                                                zip.file(image, imagesData);
+                                                callback1();
+                                            }
+                                        });
+                                    });
+                                }, function () {
+                                    //Generate Zip file
+                                    zip.generateNodeStream({
+                                            type: 'nodebuffer',
+                                            streamFiles: true
+                                        })
+                                        .pipe(fs.createWriteStream(finalPath))
+                                        .on('finish', function (zipData) {
+                                            // JSZip generates a readable stream with a "end" event,
+                                            // but is piped here in a writable stream which emits a "finish" event.
+                                            callback();
+                                        });
+
+                                });
+                            }
+
+                        },
+                        function (err) {
+                            if (err) {
+                                // console.log('A file failed to process');
+                                res.callback(err);
+                            } else {
+                                // console.log('All files have been processed successfully');
+                                var zip = new JSZip();
+                                // var zipFolder = zip.folder('photos');
+                                async.eachSeries(userPaths, function (image, callback1) {
+                                    console.log("iamge", image);
+                                    // JSZip generates a readable stream with a "end" event,
+                                    // but is piped here in a writable stream which emits a "finish" event.
+                                    fs.readFile(image.finalPath, function (err, imagesData) {
+                                        if (err) {
+                                            res.callback(err, null);
+                                        } else {
+                                            //Remove image
+                                            // fs.unlink(image);
+                                            // zip.file("file", content); ... and other manipulations
+                                            zip.file(image.path, imagesData);
+                                            callback1();
+                                        }
+                                    });
+                                }, function () {
+                                    //Generate Zip file
+
+                                    var folder = "./.tmp/";
+                                    var path = found.contestName + ".zip";
+                                    var finalPath = folder + path;
+                                    zip.generateNodeStream({
+                                            type: 'nodebuffer',
+                                            streamFiles: true
+                                        })
+                                        .pipe(fs.createWriteStream(finalPath))
+                                        .on('finish', function (zipData) {
+                                            // JSZip generates a readable stream with a "end" event,
+                                            // but is piped here in a writable stream which emits a "finish" event.
+                                            fs.readFile(finalPath, function (err, zip) {
+                                                if (err) {
+                                                    res.callback(err, null);
+                                                } else {
+                                                    res.set('Content-Type', "application/octet-stream");
+                                                    res.set('Content-Disposition', "attachment;filename=" + path);
+                                                    res.send(zip);
+                                                    fs.unlink(finalPath);
+                                                    // console.log("zip", zip);
+                                                    // console.log("val", val);
+                                                }
+                                            });
+                                            // callback();
+                                        });
+
+                                });
+
+                            }
+                        });
                 }
-            })
-        }
+            }
+        });
+        // if (req.body) {
+        //     PhotoContest.bulkDownload(req.body, res);
+        // } else {
+        //     res.json({
+        //         value: false,
+        //         data: {
+        //             message: "Invalid Request"
+        //         }
+        //     })
+        // }
     },
 
     findAllPhotoConetst: function (req, res) {

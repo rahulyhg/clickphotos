@@ -12,11 +12,11 @@
         "name": "Status",
         "isSort": "",
         "tableRef": "status"
-    },{
+    }, {
         "name": "Date",
         "isSort": "",
         "tableRef": "contestExpDate"
-    },{
+    }, {
         "name": "Wining Price",
         "isSort": "",
         "tableRef": "winingPrice"

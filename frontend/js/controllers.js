@@ -367,9 +367,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //goldpackgeupdateDynamic end
 
         $scope.imageSize = function (data) {
-            //console.log("data------", data);
+            console.log("data------", data);
             if (data == 'More than 3Mb') {
                 toastr.error('Image Size Is More Than 3 Mb');
+            } else {
+                toastr.error('Image Size Is More Than 1 Mb');
             }
         }
 

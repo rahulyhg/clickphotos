@@ -1307,6 +1307,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.projectID = {};
 
 
+        $scope.bulkDownload = function (id) {
+            window.open(adminurl + 'PhotoContest/bulkDownload?id=' + id, '_self');
+            window.close();
+        }
+
+
+
         $scope.findPhotoContest = function () {
             console.log('datttttttta1111');
             NavigationService.apiCall("photoContest/findPhotographer", {
