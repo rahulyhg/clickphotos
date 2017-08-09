@@ -3,6 +3,11 @@
         .mg_t75 {
             margin-top: 55px;
         }
+        .fb_artist {
+            right: 44% !important;
+            top: -30px !important;
+            width: 30px !important;
+        }
         .text-hide {
             display: none;
             margin-top: 10px !important;
@@ -134,7 +139,7 @@
                 height: 19px!important;
             }
             span {
-                font-size: 8px!important;
+                font-size: 10px!important;
             }
             button {
                 font-size: 12px !important;
@@ -1030,6 +1035,9 @@
     @media (max-width: 1024px) {
         // Start of  home page
         //CSS global classes
+        .fb_artist {
+            top: 15px;
+        }
         .font50 {
             font-size: 50px;
         }
@@ -1178,7 +1186,9 @@
                 top: -60px;
             }
             .img_absolute {
-                display: none;
+                width: 30%;
+                top: 0;
+                right: 20px;
             }
             .cam_heading {
                 height: 85px;

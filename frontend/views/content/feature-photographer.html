@@ -168,8 +168,8 @@
                                                 readonly><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <select class="form-control placeholder select-class" id="state" ng-model="formData.state" name="state" required><option value="" hidden>State</option><option value="{{state}}" ng-repeat="state in states">{{state}}</option></select><br>
-                                            <span ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span>
+                                            <select class="form-control placeholder select-class" id="state" ng-model="formData.state" name="state" required><option value="" hidden>State</option><option value="{{state}}" ng-repeat="state in states">{{state}}</option></select>
+                                            <span class="alignment" ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="select" class="form-control" id="city" placeholder="City" ng-model="formData.city" name="city" required>
