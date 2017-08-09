@@ -467,7 +467,13 @@ var models = {
         obj.firstName = page.firstName;
         obj.lastName = page.lastName;
         obj.address = page.address;
-        obj.package = page.package;
+         if(page.package=="Silver"){
+        obj.package = "Silver Package";
+        }else if(page.package=="Gold"){
+             obj.package = "Gold Package";
+        }else{
+            obj.package = page.package;
+        }
         obj.amount = page.packageAmount;
         obj.invoice = page.invoiceNumber;
         obj.emailOfUser = page.photographer.email;
