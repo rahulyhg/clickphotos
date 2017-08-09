@@ -417,6 +417,8 @@ var models = {
                                     var base64File = new Buffer(file).toString('base64');
                                     attachment.setContent(base64File);
                                     // attachment.setType('application/text');
+                                    var pdfgen = data.filename.split(".");
+                                    data.filename = pdfgen[0] + ".pdf";
                                     attachment.setFilename(data.filename);
                                     attachment.setDisposition('attachment');
                                     mail.addAttachment(attachment);
