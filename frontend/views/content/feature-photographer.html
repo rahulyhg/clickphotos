@@ -39,24 +39,22 @@
                                             <h1 class="damionr orange-color forml">Sign up</h1>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-control" id="name" placeholder="First Name" ng-model="formData.name" name="name" required><br>
-                                            <span ng-show="loginForm.name.$touched && loginForm.name.$invalid">Please enter the name</span>
+                                            <input type="text" class="form-control" id="name" placeholder="First Name" ng-model="formData.name" name="name" required>
+                                            <span class="alignment" ng-show="loginForm.name.$touched && loginForm.name.$invalid">Please enter your name</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required><br>
-                                            <span ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter the proper email</span>
+                                            <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
+                                            <span class="alignment" ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter valid email id</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
                                                 required>
-                                            <span ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span>
+                                            <span class="alignment" ng-show="loginForm.passsword.$touched && loginForm.passsword.$invalid">Please enter password</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="formData.ConfirmPassword"
                                                 name="ConfirmPassword" required>
-                                        </div>
-                                        <div>
-                                            <p ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">check your password</p>
+                                            <span class="alignment" ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">Check your password</span><br>
                                         </div>
                                         <div class="col-md-12 col-sm-12">
                                             <div class="checkbox text-left condition-box" ng-init="terms">
@@ -84,18 +82,22 @@
                             </form>
                         </div>
                         <div class="col-md-6 col-sm-6 pad-right5">
-                            <form>
+                            <form name="loginform">
                                 <div class="login-form">
                                     <div class="row mr15 light-grey min-h">
                                         <div class="col-md-12 col-sm-12 text-center">
                                             <h1 class="damionr orange-color forml">Login</h1>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="email" class="form-control" id="emailId" placeholder="Email id" ng-model="formdata.email" required>
+                                            <input type="email" class="form-control" id="emailId" name="emailId" placeholder="Email id" ng-model="formdata.email" required>
+                                            <span class="alignment" ng-show="loginform.emailId.$touched && loginform.emailId.$invalid">Please enter valid email id</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="password" class="form-control" id="passwrd" placeholder="Password" ng-model="formdata.password" required><br>
-                                            <a class="flink" ng-click="changePwd();"> Forgot Password?</a>
+                                            <input type="password" class="form-control" name="passsword" id="passwrd" placeholder="Password" ng-model="formdata.password"
+                                                required>
+                                            <span class="alignment" ng-show="loginform.passsword.$touched && loginform.passsword.$invalid">Please enter password</span><br>
+                                            <p class="pull-right "><a class="forgot-pwd" ng-click="changePwd();"> Forgot password</a></p>
+                                            <!-- <a class="flink" ng-click="changePwd();"> Forgot Password?</a> -->
                                         </div>
                                         <div class="col-xs-12 mr40 text-center">
                                             <button class="btn orange-btn" type="button" ng-click="login(formdata)"> Login</button>
@@ -124,8 +126,8 @@
                         <div class="intro hctl">
                             <strong class="intro-con">Hi {{photographerData.name}},</strong>
                             <p class="intro-con">You can become a featured photographer for the month of <strong>{{finalMonth}}</strong> by only
-                                paying<br>
-                                <i class="fa fa-inr"></i><strong> {{amount[2].amount}}.</strong>
+                                paying
+                                <i class="fa fa-inr"><strong> {{amount[2].amount}}.</strong></i>
                                 <p class="intro-con">In order to become a featured photographer you need to subscribe.</p>
                         </div>
                         <ul class="list pad60">
@@ -150,16 +152,16 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-control" placeholder="First Name" ng-model="formData.fname" name="firstname" required><br>
-                                            <span ng-show="bill.firstname.$touched && bill.firstname.$invalid">Please enter your first name</span>
+                                            <input type="text" class="form-control" placeholder="First Name" ng-model="formData.fname" name="firstname" required>
+                                            <span class="alignment" ng-show="bill.firstname.$touched && bill.firstname.$invalid">Please enter your first name</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-control" id="lastname" placeholder="Last Name" ng-model="formData.lname" name="lastname" required><br>
-                                            <span ng-show="bill.lastname.$touched && bill.lastname.$invalid">Please enter your last name</span>
+                                            <input type="text" class="form-control" id="lastname" placeholder="Last Name" ng-model="formData.lname" name="lastname" required>
+                                            <span class="alignment" ng-show="bill.lastname.$touched && bill.lastname.$invalid">Please enter your last name</span><br>
                                         </div>
                                         <div class="col-md-12 col-sm-12">
-                                            <input type="text" class="form-control" id="address" placeholder="Address" ng-model="formData.address" name="address" required><br>
-                                            <span ng-show="bill.address.$touched && bill.address.$invalid">Please enter your address</span>
+                                            <input type="text" class="form-control" id="address" placeholder="Address" ng-model="formData.address" name="address" required>
+                                            <span class="alignment" ng-show="bill.address.$touched && bill.address.$invalid">Please enter your address</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="text" class="form-control" id="india" placeholder="India" ng-model="formData.country" name="india" value="India"
@@ -170,12 +172,12 @@
                                             <span ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="select" class="form-control" id="city" placeholder="City" ng-model="formData.city" name="city" required><br>
-                                            <span ng-show="bill.city.$touched && bill.city.$invalid">Please enter your City</span>
+                                            <input type="select" class="form-control" id="city" placeholder="City" ng-model="formData.city" name="city" required>
+                                            <span class="alignment" ng-show="bill.city.$touched && bill.city.$invalid">Please enter your City</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="number" class="form-control" id="pin" placeholder="Pincode" ng-model="formData.pin" name="pin" required><br>
-                                            <span ng-show="bill.pin.$touched && bill.pin.$invalid">Please enter your pin-code</span>
+                                            <input type="number" class="form-control" id="pin" placeholder="Pincode" ng-model="formData.pin" name="pin" required>
+                                            <span class="alignment" ng-show="bill.pin.$touched && bill.pin.$invalid">Please enter your pin-code</span><br>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="row">
