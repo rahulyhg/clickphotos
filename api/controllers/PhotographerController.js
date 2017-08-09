@@ -346,7 +346,7 @@ var controller = {
                                 mode: dataConfig[0].name,
                                 reference_no: req.query.id,
                                 name: data.name,
-                                phone: "04423452345",
+                                phone: "00000000000s",
                                 postal_code: "600001",
                                 return_url: data.return_url,
                                 secure_hash: hs
