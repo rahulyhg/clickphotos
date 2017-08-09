@@ -100,7 +100,7 @@ var controller = {
                             if (file.photographerId) {
                                 // console.log("file--- ", file.photographerId.name);
                                 var folder = "./.tmp/";
-                                var path = file.photographerId.name + ".zip";
+                                var path = file.orderId + ".zip";
                                 var finalPath = folder + path;
                                 userPaths.push({
                                     finalPath: finalPath,
@@ -157,7 +157,7 @@ var controller = {
                                             res.callback(err, null);
                                         } else {
                                             //Remove image
-                                            // fs.unlink(image);
+                                            //fs.unlink(image);
                                             // zip.file("file", content); ... and other manipulations
                                             zip.file(image.path, imagesData);
                                             callback1();
@@ -185,6 +185,7 @@ var controller = {
                                                     res.set('Content-Disposition', "attachment;filename=" + path);
                                                     res.send(zip);
                                                     fs.unlink(finalPath);
+
                                                     // console.log("zip", zip);
                                                     // console.log("val", val);
                                                 }
@@ -198,6 +199,7 @@ var controller = {
                         });
                 }
             }
+
         });
         // if (req.body) {
         //     PhotoContest.bulkDownload(req.body, res);
