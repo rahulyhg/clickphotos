@@ -186,6 +186,11 @@ var controller = {
                                                     res.send(zip);
                                                     fs.unlink(finalPath);
 
+                                                    async.each(userPaths, function (image, callback1) {
+                                                        fs.unlink(image.finalPath);
+                                                        callback1();
+                                                    })
+
                                                     // console.log("zip", zip);
                                                     // console.log("val", val);
                                                 }
