@@ -293,6 +293,7 @@ var controller = {
     },
 
     checkoutPayment: function (req, res) {
+        console.log("req.body468646464sd64a6sd4asd", req.body)
         if (req.body) {
             var formData = {
                 name: req.body.name,
@@ -301,6 +302,7 @@ var controller = {
                 payAmount: req.body.payAmount,
                 amount: req.body.amount,
                 email: req.body.email,
+                phone: req.body.phone,
                 return_url: req.body.return_url
             };
             Order.saveData(formData, res.callback);
@@ -322,11 +324,18 @@ var controller = {
                 if (err) {
                     res.callback(err);
                 } else {
+                    console.log("*****************************", data)
+
+                    if (data.phone) {
+                        var phoneno = data.phone
+                    } else {
+                        var phoneno = "0000000000"
+                    }
                     if (data.payAmount != null) {
                         EBSConfig.getAll({}, function (err, dataConfig) {
                             console.log("ggggggggg");
-                            console.log(dataConfig);
-                            var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|0000000000|600001|" + req.query.id + "|" + data.return_url);
+                            console.log(data);
+                            var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');
                             var hs = hashtext.toUpperCase('hex');
                             var reference_no = req.query.id;
@@ -346,7 +355,7 @@ var controller = {
                                 mode: dataConfig[0].name,
                                 reference_no: req.query.id,
                                 name: data.name,
-                                phone: "0000000000",
+                                phone: phoneno,
                                 postal_code: "600001",
                                 return_url: data.return_url,
                                 secure_hash: hs
@@ -357,7 +366,7 @@ var controller = {
                         EBSConfig.getAll({}, function (err, dataConfig) {
                             console.log("ggggggggg");
                             console.log(dataConfig);
-                            var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|0000000000|600001|" + req.query.id + "|" + data.return_url);
+                            var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');
                             var hs = hashtext.toUpperCase('hex');
                             var reference_no = req.query.id;
@@ -377,7 +386,7 @@ var controller = {
                                 mode: dataConfig[0].name,
                                 reference_no: req.query.id,
                                 name: data.name,
-                                phone: "0000000000",
+                                phone: phoneno,
                                 postal_code: "600001",
                                 return_url: data.return_url,
                                 secure_hash: hs

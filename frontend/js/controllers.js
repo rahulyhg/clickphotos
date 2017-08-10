@@ -1333,7 +1333,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         });
 
-        $scope.updateToFeature = function (order) {
+        $scope.updateToFeature = function (order, phone) {
 
             formdata = {};
 
@@ -1341,6 +1341,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = $scope.amount[2]._id;
             formdata.amount = $scope.amount[2].amount;
             formdata.email = $.jStorage.get("photographer").email;
+            formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "featured/" + $.jStorage.get("photographer")._id + "/" + $scope.finalMonth + "/" + new Date().getFullYear() + "/" + $scope.amount[2].amount + "/" + order;
@@ -1400,7 +1401,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.firstName = userdetails.fname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
-
+            $scope.userData.phone = userdetails.phone;
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
@@ -1410,7 +1411,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
                 console.log(data)
                 var order = data.data._id;
-                $scope.updateToFeature(order)
+                $scope.updateToFeature(order, $scope.userData.phone)
             })
 
         }
@@ -3004,12 +3005,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //PAYMENT
 
         // console.log("Stateparam----------", $stateParams.photoContestId);
-        $scope.PackageUpdateForThree = function (order) {
+        $scope.PackageUpdateForThree = function (order, phone) {
             formdata = {};
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[3]._id;
             formdata.amount = $scope.amount[3].amount;
             formdata.email = $.jStorage.get("photographer").email;
+            formdata.phone = phone;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId + "/" + $scope.amount[0].amount + "/" + order;
@@ -3020,13 +3022,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-        $scope.PackageUpdateForSix = function (order) {
+        $scope.PackageUpdateForSix = function (order, phone) {
 
             formdata = {};
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[4]._id;
             formdata.amount = $scope.amount[4].amount;
             formdata.email = $.jStorage.get("photographer").email;
+            formdata.phone = phone;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId + "/" + $scope.amount[0].amount + "/" + order;
@@ -3068,7 +3071,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.firstName = userdetails.fname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
-
+            $scope.userData.phone = userdetails.phone;
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
@@ -3079,9 +3082,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log(data)
                 var order = data.data._id;
                 if ($scope.numberOfSlot == 3) {
-                    $scope.PackageUpdateForThree(order)
+                    $scope.PackageUpdateForThree(order, $scope.userData.phone)
                 } else if ($scope.numberOfSlot == 6) {
-                    $scope.PackageUpdateForSix(order);
+                    $scope.PackageUpdateForSix(order, $scope.userData.phone);
                 } else {
                     $scope.step = 2;
                 }
@@ -3202,7 +3205,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //goldpackgeupdateDynamic end
 
-        $scope.goldMember = function (order) {
+        $scope.goldMember = function (order, phone) {
 
             formdata = {};
 
@@ -3210,6 +3213,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (photographer.package == "Silver") {
                 formdata.payAmount = null;
                 formdata.amount = $scope.dyGoldAmount;
+                formdata.phone = phone;
                 console.log("if")
             } else {
                 formdata.payAmount = $scope.amount[1]._id;
@@ -3235,13 +3239,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         };
 
-        $scope.silverMember = function (order) {
+        $scope.silverMember = function (order, phone) {
             formdata = {};
             // ABS PAYMENT GATEWAY
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = $scope.amount[0]._id;
             formdata.amount = $scope.amount[0].amount;
             formdata.email = $.jStorage.get("photographer").email;
+            formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "Silver/" + $.jStorage.get("photographer")._id + "/" + $scope.amount[0].amount + "/" + order;
@@ -3265,7 +3270,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.firstName = userdetails.fname;
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
-
+            $scope.userData.phone = userdetails.phone
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
@@ -3277,10 +3282,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log(data)
                 var order = data.data._id;
                 if ($scope.view == "silver") {
-                    $scope.silverMember(order);
+                    $scope.silverMember(order, $scope.userData.phone);
 
                 } else if ($scope.view == "gold") {
-                    $scope.goldMember(order);
+                    $scope.goldMember(order, $scope.userData.phone);
                 } else {
                     $state.go("photographer");
                 }
