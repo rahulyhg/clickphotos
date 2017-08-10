@@ -100,7 +100,7 @@ var controller = {
                             if (file.photographerId) {
                                 // console.log("file--- ", file.photographerId.name);
                                 var folder = "./.tmp/";
-                                var path = file.photographerId.name + ".zip";
+                                var path = file.orderId + ".zip";
                                 var finalPath = folder + path;
                                 userPaths.push({
                                     finalPath: finalPath,
@@ -157,7 +157,7 @@ var controller = {
                                             res.callback(err, null);
                                         } else {
                                             //Remove image
-                                            // fs.unlink(image);
+                                            //fs.unlink(image);
                                             // zip.file("file", content); ... and other manipulations
                                             zip.file(image.path, imagesData);
                                             callback1();
@@ -185,6 +185,12 @@ var controller = {
                                                     res.set('Content-Disposition', "attachment;filename=" + path);
                                                     res.send(zip);
                                                     fs.unlink(finalPath);
+
+                                                    async.each(userPaths, function (image, callbackfinal) {
+                                                        fs.unlink(image.finalPath);
+                                                        callbackfinal();
+                                                    })
+
                                                     // console.log("zip", zip);
                                                     // console.log("val", val);
                                                 }
@@ -198,6 +204,7 @@ var controller = {
                         });
                 }
             }
+
         });
         // if (req.body) {
         //     PhotoContest.bulkDownload(req.body, res);
@@ -362,7 +369,7 @@ var controller = {
                     EBSConfig.getAll({}, function (err, dataConfig) {
                         console.log("ggggggggg");
                         console.log(dataConfig);
-                        var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|04423452345|600001|" + req.query.id + "|" + data.return_url);
+                        var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|0000000000|600001|" + req.query.id + "|" + data.return_url);
                         var hashtext = hash.toString('hex');
                         var hs = hashtext.toUpperCase('hex');
                         var reference_no = req.query.id;
@@ -382,7 +389,7 @@ var controller = {
                             mode: dataConfig[0].name,
                             reference_no: req.query.id,
                             name: data.name,
-                            phone: "04423452345",
+                            phone: "0000000000",
                             postal_code: "600001",
                             return_url: data.return_url,
                             secure_hash: hs

@@ -417,6 +417,8 @@ var models = {
                                     var base64File = new Buffer(file).toString('base64');
                                     attachment.setContent(base64File);
                                     // attachment.setType('application/text');
+                                    var pdfgen = data.filename.split(".");
+                                    data.filename = pdfgen[0] + ".pdf";
                                     attachment.setFilename(data.filename);
                                     attachment.setDisposition('attachment');
                                     mail.addAttachment(attachment);
@@ -465,7 +467,15 @@ var models = {
         obj.firstName = page.firstName;
         obj.lastName = page.lastName;
         obj.address = page.address;
-        obj.package = page.package;
+        if (page.package == "Silver") {
+            obj.package = "Silver Package";
+        } else if (page.package == "Gold") {
+            obj.package = "Gold Package";
+        } else if (page.package == "featured") {
+            obj.package = "Featured";
+        } else {
+            obj.package = page.package;
+        }
         obj.amount = page.packageAmount;
         obj.invoice = page.invoiceNumber;
         obj.emailOfUser = page.photographer.email;
