@@ -59,7 +59,7 @@
                                         <div class="col-md-6 col-sm-12">
                                             <input type="password" class="form-control" id="pwd1" placeholder="Confirm Password" ng-model="formData.ConfirmPassword"
                                                 name="ConfirmPassword" required>
-                                            <span class="alignment" ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== ConfirmPassword)">Check your password</span><br>
+                                            <span class="alignment" ng-if="loginForm.ConfirmPassword.$touched && (formData.password !== formData.ConfirmPassword)">Check your password</span><br>
                                         </div>
                                         <div class="col-md-12 col-sm-12">
                                             <div class="checkbox text-left condition-box" ng-init="terms">
