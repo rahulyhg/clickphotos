@@ -467,11 +467,13 @@ var models = {
         obj.firstName = page.firstName;
         obj.lastName = page.lastName;
         obj.address = page.address;
-         if(page.package=="Silver"){
-        obj.package = "Silver Package";
-        }else if(page.package=="Gold"){
-             obj.package = "Gold Package";
-        }else{
+        if (page.package == "Silver") {
+            obj.package = "Silver Package";
+        } else if (page.package == "Gold") {
+            obj.package = "Gold Package";
+        } else if (page.package == "featured") {
+            obj.package = "Featured";
+        } else {
             obj.package = page.package;
         }
         obj.amount = page.packageAmount;
