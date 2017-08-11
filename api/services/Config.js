@@ -7,7 +7,7 @@
 
 
 var MaxImageSize = 1600;
-//var requrl = "http://beta.clickmania.in/api/";
+//var requrl = "http://clickmania.in/api/";
 var requrl = "http://clickmania.in/api/";
 
 
