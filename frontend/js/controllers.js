@@ -2710,7 +2710,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 status: "true"
             });
             $scope.prizes = $scope.currentContest.winingPrice.split(",");
-            console.log($scope.prize)
+
             $scope.previousContest = _.find($scope.contest, {
                 status: "false"
             });
