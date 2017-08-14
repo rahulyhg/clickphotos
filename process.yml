@@ -1,5 +1,6 @@
 apps:
   - script: "app.js"
-    name: "Clickmania Live - 8080"
+#   name: "Clickmania Live - 8080"
+    name: "Clickmania 1337"   
     watch: false
     args: "--prod"
