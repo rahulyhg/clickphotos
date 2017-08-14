@@ -95,6 +95,14 @@ module.exports = mongoose.model('Order', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "photographer payAmount", "photographer payAmount"));
 var model = {
+
+    // what this function will do ?
+    // req data --> ?
+
+    // what this function will do ?
+    // req data --> ?
+
+
     editData: function (data, callback) {
         //        delete data.password;
         if (data._id) {
