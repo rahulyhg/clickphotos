@@ -201,11 +201,11 @@ var model = {
                                             Config.email(emailData, function (err, emailRespo) {
                                                 if (err) {
                                                     console.log(err);
-                                                    callback(err);
+                                                    //callback(err);
                                                 } else if (emailRespo) {
-                                                    callback(null, emailRespo);
+                                                    //callback(null, emailRespo);
                                                 } else {
-                                                    callback(null, "Invalid data");
+                                                    //callback(null, "Invalid data");
                                                 }
                                             });
                                         } else if (found.package == 'Silver') {

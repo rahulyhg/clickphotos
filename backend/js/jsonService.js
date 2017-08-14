@@ -113,6 +113,7 @@ jsonservicemod.service('JsonService', function ($http, TemplateService, $state, 
         sendTo.keyword = JSON.stringify(keyword);
       }
       if (action && action.type == "page") {
+        console.log(" ******* inside jsonSErvice ************ ", sendTo);
         $state.go("page", sendTo);
       } else if (action && action.type == "apiCallConfirm") {
         globalfunction.confDel(function (value2) {
