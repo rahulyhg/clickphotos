@@ -51,6 +51,11 @@ var controller = {
                 }
             })
         }
+    },
+    searchForJson: function (req, res) {
+
+        req.model.searchForJson(req.body, res.callback);
+
     }
 };
 module.exports = _.assign(module.exports, controller);
