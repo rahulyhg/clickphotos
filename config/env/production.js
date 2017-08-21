@@ -24,11 +24,11 @@ module.exports = {
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
-  port: 1337,
+  port: 80,
   //port: 8080,
   //realHost: "http://clickmania.tingdom.in",
   // realHost: "http://clickmania.in",
-  realHost: "http://clickmania.in",
+  realHost: "http://wohlig.io",
   emails: ["chintan@wohlig.com", "ashish.zanwar@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "aditya.ghag@wohlig.com", "bhargav.purohit@wohlig.com"]
 
   /***************************************************************************
