@@ -24,8 +24,8 @@ module.exports = {
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
-  //port: 1337,
-  port: 8080,
+  port: 1337,
+  //port: 8080,
   //realHost: "http://clickmania.tingdom.in",
   // realHost: "http://clickmania.in",
   realHost: "http://clickmania.in",
