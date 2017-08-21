@@ -89,10 +89,12 @@ var model = {
 
     existsSocial: function (user, callback) {
         var Model = this;
+        console.log("existsSocial user: ", user);
         Model.findOne({
             "oauthLogin.socialId": user.id,
             "oauthLogin.socialProvider": user.provider,
         }).exec(function (err, data) {
+            console.log("existsSocial: ", err, data);
             if (err) {
                 callback(err, data);
             } else if (_.isEmpty(data)) {
@@ -107,6 +109,7 @@ var model = {
                 if (user.emails && user.emails.length > 0) {
                     modelUser.email = user.emails[0].value;
                     var envEmailIndex = _.indexOf(env.emails, modelUser.email);
+                    console.log("email index: ", envEmailIndex);
                     if (envEmailIndex >= 0) {
                         modelUser.accessLevel = "Admin";
                     }

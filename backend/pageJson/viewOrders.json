@@ -4,6 +4,7 @@
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
+    "filter": "orderDateFilter",
     "fields": [{
         "name": "Photographer Name",
         "isSort": "",
@@ -43,7 +44,7 @@
     }],
     "button": [],
     "apiCall": {
-        "url": "GstDetails/searchForJson",
+        "url": "GstDetails/search",
         "params": "_id"
     }
 

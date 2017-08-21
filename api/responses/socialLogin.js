@@ -7,6 +7,7 @@ module.exports = function (profile) {
         // res.serverError();
     } else {
         if (req.session.returnUrl) {
+            console.log("SocialLogin profile: ", profile);
             User.existsSocial(profile, function (err, data) {
                 if (err || !data) {
                     res.callback(err, data);

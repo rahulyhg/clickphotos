@@ -506,12 +506,63 @@ var model = {
         // }
 
         var Search = Model.find(data.filter)
-
             .order(options)
             .deepPopulate("photographer")
             .keyword(options)
             .page(options, callback);
-    }
+    },
+
+
+    search: function (data, callback) {
+        var match = {};
+        if (!_.isEmpty(data)) {
+            match = {
+                createdAt: {
+                    $gte: data.fromDate,
+                    $lt: data.toDate
+                }
+            }
+        } else {
+            match = {};
+        }
+        // console.log("new Date(data.fromDate)", new Date(data.fromDate));
+        var finalData = {};
+        var maxRow = Config.maxRow;
+        var page = 1;
+        if (data.page) {
+            page = data.page;
+        }
+        var field = data.field;
+        var options = {
+            field: data.field,
+            filters: {
+                keyword: {
+                    fields: ['firstName'],
+                    term: data.keyword
+                }
+            },
+            sort: {
+                asc: 'createdAt'
+            },
+            start: (page - 1) * maxRow,
+            count: maxRow
+        };
+        GstDetails.find(match).order(options)
+            .keyword(options).page(options, function (err, found) {
+                if (err) {
+                    console.log(err);
+                    callback(err, null);
+                } else {
+                    if (_.isEmpty(found)) {
+                        callback("NoData", null);
+                    } else {
+                        // finalData.results = found;
+                        callback(null, found);
+                        // callback(null, found);
+                    }
+                }
+            });
+    },
 
 };
 module.exports = _.assign(module.exports, exports, model);

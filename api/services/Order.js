@@ -122,6 +122,8 @@ var model = {
                 }
             });
         }
-    }
+    },
+
+
 };
 module.exports = _.assign(module.exports, exports, model);

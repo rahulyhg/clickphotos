@@ -940,8 +940,7 @@ img.uploadingImage {
     }
     .form-builder-hr {
         border-bottom: 1px solid $body-color-font;
-        margin-bottom: -1px;
-        // position: relative;
+        margin-bottom: -1px; // position: relative;
     }
     .form-repeater {
         +.form-repeater {
@@ -1201,6 +1200,15 @@ body {
     background-color: #fff5f5;
     font-size: 12px;
     line-height: 120%;
+}
+
+.h370 {
+    height: 370px;
+    padding: 40px;
+}
+
+.mart {
+    margin-top: 200px;
 }
 
 

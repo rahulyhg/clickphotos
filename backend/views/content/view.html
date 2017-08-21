@@ -24,6 +24,7 @@
                         " ng-model="search.keyword " />
                                 </form>
                                 <a ng-repeat="btn in json.json.button " class="btn " ng-class="btn.class " ng-click="json.eventAction(btn)">{{btn.name}}</a>
+                                <a class="btn btn-default" ng-if="json.json.filter" ng-click="showFilter();">Filter</a>
                             </div>
                             <h3>{{json.json.description}} <span class="tableTotal ">(Total : {{totalItems}}) </span></h3>
                         </div>

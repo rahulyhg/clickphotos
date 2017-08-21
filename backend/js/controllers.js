@@ -10,11 +10,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
     .controller('AccessController', function ($scope, TemplateService, NavigationService, $timeout, $state) {
-        // if ($.jStorage.get("accessToken")) {
+        if ($.jStorage.get("accessToken")) {
 
-        // } else {
-        //     $state.go("login");
-        // }
+        } else {
+            $state.go("login");
+        }
     })
 
     .controller('JagzCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $interval) {
@@ -282,21 +282,67 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('ViewCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams) {
+    .controller('ViewCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, $uibModal, toastr) {
         $scope.json = JsonService;
         $scope.template = TemplateService;
         var i = 0;
+
+        //filter
+        $scope.showFilter = function () {
+            console.log("Filter Clicked");
+            $scope.modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'views/filters/' + $scope.json.json.filter + '.html',
+                size: 'lg',
+                scope: $scope
+            });
+        };
+
+        $scope.popup1 = {
+            opened: false
+        }
+        $scope.openDatePicker = function () { // to open datePicker for sendEnquiry popup
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        }
+        $scope.openDatePicker2 = function () { // to open datePicker for sendEnquiry popup
+            $scope.popup2.opened = true;
+        };
+
+        $scope.clearFilter = function () {
+            if (!_.isEmpty($stateParams.keyword)) {
+                $state.go("page", {
+                    id: $stateParams.id,
+                    page: $stateParams.page,
+                    keyword: ""
+                });
+            } else {
+                $state.reload();
+            }
+        };
+
+        $scope.closeFilter = function () {
+            $scope.modalInstance.close();
+        };
+
+        //filter END
+
+
         if ($stateParams.page && !isNaN(parseInt($stateParams.page))) {
             $scope.currentPage = $stateParams.page;
         } else {
             $scope.currentPage = 1;
         }
+        $scope.adminUrl = adminurl;
 
         $scope.search = {
             keyword: ""
         };
         if ($stateParams.keyword) {
-            $scope.search.keyword = $stateParams.keyword;
+            $scope.search = JSON.parse($stateParams.keyword);
         }
         $scope.changePage = function (page) {
             var goTo = "page";
@@ -306,24 +352,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $state.go(goTo, {
                 id: $stateParams.id,
                 page: page,
-                keyword: $scope.search.keyword
+                keyword: JSON.stringify($scope.search)
             });
         };
 
         $scope.getAllItems = function (keywordChange) {
+            console.log("searchh-----", keywordChange);
             $scope.totalItems = undefined;
             if (keywordChange) {
                 $scope.currentPage = 1;
             }
+            var filters = _.cloneDeep($scope.search);
+            delete filters.keyword;
             NavigationService.search($scope.json.json.apiCall.url, {
                     page: $scope.currentPage,
-                    keyword: $scope.search.keyword
+                    keyword: $scope.search.keyword,
+                    filter: filters
                 }, ++i,
                 function (data, ini) {
                     if (ini == i) {
-                        $scope.items = data.data.results;
-                        $scope.totalItems = data.data.total;
-                        $scope.maxRow = data.data.options.count;
+                        if (data.value == true) {
+                            $scope.items = data.data.results;
+                            $scope.totalItems = data.data.total;
+                            $scope.maxRow = data.data.options.count;
+                        } else {
+                            toastr.error("No Data Found ");
+                        }
                     }
                 });
         };
