@@ -58,9 +58,10 @@ var controller = {
 
     },
 
-    search: function (req, res) {
+    searchDateFilter: function (req, res) {
         if (req.body) {
-            GstDetails.search(req.body, res.callback);
+            console.log("***********************************************************inside date")
+            GstDetails.searchDateFilter(req.body, res.callback);
         } else {
             res.json({
                 value: false,
