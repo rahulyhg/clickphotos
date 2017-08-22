@@ -44,7 +44,7 @@
     }],
     "button": [],
     "apiCall": {
-        "url": "GstDetails/search",
+        "url": "GstDetails/searchForJson",
         "params": "_id"
     }
 
