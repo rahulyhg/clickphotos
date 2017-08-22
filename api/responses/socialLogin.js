@@ -7,7 +7,6 @@ module.exports = function (profile) {
         // res.serverError();
     } else {
         if (req.session.returnUrl) {
-            console.log("SocialLogin profile: ", profile);
             User.existsSocial(profile, function (err, data) {
                 if (err || !data) {
                     res.callback(err, data);
@@ -15,6 +14,7 @@ module.exports = function (profile) {
                     if (data.accessLevel != "Admin") {
                         data.accessToken[0] = "AccessNotAvailable";
                     }
+                    console.log(req.session.returnUrl);
                     res.redirect(req.session.returnUrl + "/" + data.accessToken[0]);
                     req.session.destroy(function () {});
                 }

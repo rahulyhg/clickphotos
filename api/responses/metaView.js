@@ -1,11 +1,11 @@
-module.exports = function(data, options) {
+module.exports = function (data, options) {
     var req = this.req;
     var res = this.res;
     var sails = req._sails;
     if (!data) {
         data = {};
     }
-    var env = require("../../config/env/"+sails.config.environment+".js");
+    var env = require("../../config/env/" + sails.config.environment + ".js");
     res.view(sails.config.environment, {
         jsFiles: jsFiles,
         title: data.title,
