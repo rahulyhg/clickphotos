@@ -29,7 +29,7 @@ module.exports = {
   //realHost: "http://clickmania.tingdom.in",
   // realHost: "http://clickmania.in",
   realHost: "http://clickmania.in",
-  emails: ["chintan@wohlig.com", "ashish.zanwar@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "aditya.ghag@wohlig.com", "bhargav.purohit@wohlig.com"]
+  emails: ["chintan@wohlig.com", "ashish.zanwar@wohlig.com","clickmania.in@gmail.com","manan@ting.in","jamila@tingmail.in","vipin@tingmail.in", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "aditya.ghag@wohlig.com", "bhargav.purohit@wohlig.com"]
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
