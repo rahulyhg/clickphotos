@@ -19,6 +19,31 @@
 
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
+    <!-- Facebook Pixel Code -->
+    <script>
+        ! function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '167680133789469'); // Insert your pixel ID here.
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=167680133789469&ev=PageView&noscript=1"
+        /></noscript>
 </head>
 
 <body>
@@ -28,9 +53,9 @@
     <link rel="stylesheet" type="text/css" href="frontend/css/main.css" />
 
     <script>
-        var adminurl = "<%= ((typeof adminurl) == "undefined") ? "" : adminurl  %>";
+        var adminurl = "<%= ((typeof adminurl) == "undefined ") ? "" : adminurl  %>";
         var isproduction = true;
-        var chintan = function(content) {
+        var chintan = function (content) {
             console.log("%c ---------------------------------------", 'background: #222; color: #bada55');
             console.log(content);
             console.log("%c ---------------------------------------", 'background: #222; color: #bada55');
@@ -40,7 +65,7 @@
         <script src="frontend/js/<%= file %>"></script>
         <% }); %>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn0CGpcYc0qg62O_IVH-Htn0Oltv0UK_w&libraries=places&language=en&region=IN"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn0CGpcYc0qg62O_IVH-Htn0Oltv0UK_w&libraries=places&language=en&region=IN"></script>
 </body>
 
 </html>

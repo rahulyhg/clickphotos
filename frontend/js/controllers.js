@@ -3104,6 +3104,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         formData = {};
         formData._id = $stateParams.id;
         NavigationService.apiCallWithData("Order/getOne", formData, function (data) {
+            $scope.amountFbq = data.data.amount;
+            fbq('track', 'Purchase', {
+                currency: 'INR',
+                value: data.data.amount
+            });
             if (data.value === true) {
                 if (data.data.description.split('/')[0] == "featured") {
                     $scope.msg = "You are now registered as a Featured Photographer for the month of " + data
@@ -3111,7 +3116,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     formData = {};
                     formData._id = $.jStorage.get("photographer")._id;
                     NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
-                        console.log("data update", data)
+                        // console.log("data update", data)
                         if (data.value === true) {
                             $.jStorage.set("photographer", data.data);
                         }
@@ -3121,7 +3126,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     formData = {};
                     formData._id = $.jStorage.get("photographer")._id;
                     NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
-                        console.log("data update", data)
+                        // console.log("data update", data)
                         if (data.value === true) {
                             $.jStorage.set("photographer", data.data);
                         }
