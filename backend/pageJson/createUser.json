@@ -6,42 +6,56 @@
     "pageType": "create",
     "urlFields": ["User"],
     "fields": [{
-        "name": "Name",
-        "type": "text",
-        "tableRef": "name",
-        "placeholder": "Enter Name",
-        "id": "name",
-        "validation": ["required", "trim", "unique"],
-        "url": ""
-    }, {
-        "name": "Email",
-        "type": "text",
-        "tableRef": "email",
-        "placeholder": "Enter Email",
-        "id": "email",
-        "validation": ["", "trim", "unique"],
-        "url": ""
-    }, {
-        "name": "Password",
-        "type": "password",
-        "tableRef": "password",
-        "placeholder": "Enter password",
-        "id": "password",
-        "validation": ["", "trim", "unique"],
-        "url": ""
-    }, {
-        "name": "User type",
-        "type": "tags",
-        "tableRef": "usertype",
-        "placeholder": "Enter Title",
-        "id": "status",
-        "validation": ["", "trim", ""],
-        "url": "",
-        "dropDownField": "",
-        "dropDownType": "single",
-        "onView": true,
-        "dropDown": ["User", "Admin"]
-    }],
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter Name",
+            "id": "name",
+            "validation": ["required", "trim", "unique"],
+            "url": ""
+        }, {
+            "name": "Email",
+            "type": "text",
+            "tableRef": "email",
+            "placeholder": "Enter Email",
+            "id": "email",
+            "validation": ["", "trim", "unique"],
+            "url": ""
+        }, {
+            "name": "Password",
+            "type": "password",
+            "tableRef": "password",
+            "placeholder": "Enter password",
+            "id": "password",
+            "validation": ["", "trim", "unique"],
+            "url": ""
+        }, {
+            "name": "User type",
+            "type": "tags",
+            "tableRef": "usertype",
+            "placeholder": "Enter Title",
+            "id": "status",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": ["User", "Admin"]
+        },
+        {
+            "name": "Access Level",
+            "type": "tags",
+            "tableRef": "accessLevel",
+            "placeholder": "Enter Title",
+            "id": "status",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": ["User", "Admin"]
+        }
+    ],
     "action": [{
         "name": "submit",
         "action": "submitUser",
