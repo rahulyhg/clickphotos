@@ -131,6 +131,9 @@
         }
         .search-directive {
             text-align: center;
+            .select-arrow {
+                left: 28% !important;
+            }
         }
         .photographer {
             text-align: left;
@@ -139,7 +142,7 @@
                 height: 19px!important;
             }
             span {
-                font-size: 10px!important;
+                font-size: 8px!important;
             }
             button {
                 font-size: 12px !important;

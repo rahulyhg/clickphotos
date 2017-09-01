@@ -41,7 +41,7 @@
                         <li class="list-group-item navigation-items"><a ui-sref="categories">Categories</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="users">Featured Photographers</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="competition"> Photo Contest</a></li>
-                        <li class="list-group-item navigation-items"><a href="#">Media</a></li>
+                        <li class="list-group-item navigation-items">Media</li>
                         <li class="list-group-item navigation-items"><a ui-sref="contact-us">Contact Us</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="privacy-policy">Privacy Policy</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="terms">Terms & Conditions</a></li>
@@ -69,56 +69,82 @@
                         <li class="list-group-item navigation-items"><a ui-sref="categories">Categories</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="users">Featured Photographers</a></li>
                         <li class="list-group-item navigation-items"><a ui-sref="competition"> Photo Contest</a></li>
-                        <li class="list-group-item navigation-items"><a href="#">Media</a></li>
-                        <li class="list-group-item navigation-items"><a ui-sref="contact-us">Contact us</a></li>
-                        <li class="list-group-item navigation-items"><a ui-sref="privacy-policy">Privacy Policy</a></li>
-                        <li class="list-group-item navigation-items"><a ui-sref="terms">Terms & conditions</a></li>
+                        <li class="list-group-item navigation-items"><a href="#" style="cursor:default;">Media</a></li>
+                        <li class=" list-group-item navigation-items "><a ui-sref="contact-us ">Contact us</a></li>
+                        <li class="list-group-item navigation-items "><a ui-sref="privacy-policy ">Privacy Policy</a></li>
+                        <li class="list-group-item navigation-items "><a ui-sref="terms ">Terms & conditions</a></li>
                     </ul>
                 </div>
 
-                <div class="col-md-4 col-sm-4 text-hide">
-                    <div class="search-directive">
-                        <ui-select ng-model="item.selected" on-select="addFilterValue(item.selected,'category')">
-                            <ui-select-match placeholder="Photographer">
-                                <span ng-bind="$select.selected.name"></span>
+                <div class="col-md-4 col-sm-4 text-hide ">
+                    <div class="search-directive ">
+                        <ui-select ng-model="item.selected " on-select="addFilterValue(item.selected, 'category') ">
+                            <ui-select-match placeholder="Photographer ">
+                                <span ng-bind="$select.selected.name "></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id">
-                                <span ng-bind="item.name"></span>
+                            <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id ">
+                                <span ng-bind="item.name "></span>
                             </ui-select-choices>
                         </ui-select>
-                        <ui-select ng-model="city.selected" on-select="addFilterValue(city.selected,'city')">
-                            <ui-select-match placeholder="City Name">
-                                <span ng-bind="$select.selected"></span>
+                        <ui-select ng-model="city.selected " on-select="addFilterValue(city.selected, 'city') ">
+                            <ui-select-match placeholder="City Name ">
+                                <span ng-bind="$select.selected "></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="city in (cityFilterForSearch | filter: $select.search) track by city">
-                                <span ng-bind="city"></span>
+                            <ui-select-choices repeat="city in (cityFilterForSearch | filter: $select.search) track by
+                                city ">
+                                <span ng-bind="city "></span>
                             </ui-select-choices>
                         </ui-select>
-                        <button type="button" ng-click="searchBarGo()" class="btn go-btn">GO</button>
-                        <div class="select-arrow">
-                            <img src="frontend//img/photographer/arrow.jpg" height="35" alt="Click Here">
+                        <button type="button " ng-click="searchBarGo() " class="btn go-btn ">GO</button>
+                        <div class="select-arrow ">
+                            <img src="frontend//img/photographer/arrow.jpg " height="35 " alt="Click Here ">
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="col-md-4 col-sm-4 col-xs-6 ">
                     <!--user name with img-->
-                    <div class="photographer text-center">
-                        <div class="photographer_img">
+                    <div class="photographer text-center ">
+                        <div class="photographer_img ">
 
-                            <img src="frontend/img/user.png" alt="UserImage" class="img-responsive " ng-if="!template.profile.profilePic">
-                            <img ng-src="{{template.profile.profilePic | serverimage}}" alt="UserImage" class="img-user img-responsive" ui-sref="photographer"
-                                ng-if="template.profile.profilePic">
+                            <img src="frontend/img/user.png " alt="UserImage " class="img-responsive " ng-if="!template.profile.profilePic ">
+                            <img ng-src="{{template.profile.profilePic | serverimage}} " alt="UserImage " class="img-user
+                                img-responsive " ui-sref="photographer " ng-if="template.profile.profilePic ">
                         </div>
 
-                        <span ng-if="!template.profile" ng-click="uploadSignup()">Login/Sign up as a photographer</span>
-                        <span ng-if="template.profile" ui-sref="photographer">{{template.profile.name}}</span>
-                        <button class="btn orange-btn inline-block" ng-if="template.profile" ng-click="logout()">Log out</button>
+                        <span ng-if="!template.profile " ng-click="uploadSignup() ">Login/Sign up as a photographer</span>
+                        <span ng-if="template.profile " ui-sref="photographer ">{{template.profile.name}}</span>
+                        <button class="btn orange-btn inline-block " ng-if="template.profile " ng-click="logout() ">Log out</button>
                     </div>
                     <!--photographer-->
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 visible-xs">
+                <div class="search-directive ">
+                    <ui-select ng-model="item.selected " on-select="addFilterValue(item.selected, 'category') ">
+                        <ui-select-match placeholder="Photographer ">
+                            <span ng-bind="$select.selected.name "></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (catSearchBar | filter: $select.search) track by item._id ">
+                            <span ng-bind="item.name "></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <ui-select ng-model="city.selected " on-select="addFilterValue(city.selected, 'city') ">
+                        <ui-select-match placeholder="City Name ">
+                            <span ng-bind="$select.selected "></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="city in (cityFilterForSearch | filter: $select.search) track by
+                                city ">
+                            <span ng-bind="city "></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <button type="button " ng-click="searchBarGo() " class="btn go-btn ">GO</button>
+                    <div class="select-arrow ">
+                        <img src="frontend//img/photographer/arrow.jpg " height="35 " alt="Click Here ">
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 </header>
-<div class="clearfix  visible-md"></div>
+<div class="clearfix visible-md"></div>

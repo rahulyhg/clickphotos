@@ -2601,9 +2601,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Contact Us"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-
-        var initMap = function () {
-            //    alert('map');
+        $scope.initMap = function () {
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {
                     lat: 12.975916,
@@ -2612,11 +2610,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 scrollwheel: false,
                 zoom: 10,
                 styles: [{
-                    "featureType": "water",
-                    "stylers": [{
-                        "color": "#0e171d"
-                    }]
-                }, {
                     "featureType": "landscape",
                     "stylers": [{
                         "color": "white"
@@ -2691,9 +2684,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             });
         };
-
-        //  (initMap)();
-        google.maps.event.addDomListener(window, 'load', initMap);
+        // google.maps.event.addDomListener(window, 'load', initMap);
+        // initMap();
 
     })
 
