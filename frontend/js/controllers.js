@@ -1184,7 +1184,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.login = function (formdata) {
             // formdata.serviceRequest = $scope.serviceList;
-            //console.log(formdata);
+            console.log(formdata);
             NavigationService.checkLogin(formdata, function (data) {
                 if (data.data.value) {
                     //console.log(data.data.data);
@@ -2916,9 +2916,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //sign up functtionallity end
 
 
-        $scope.login = function (formdata) {
+        $scope.logincontest = function (formdata) {
             // formdata.serviceRequest = $scope.serviceList;
-            //console.log(formdata);
+            console.log(formdata);
             NavigationService.checkLogin(formdata, function (data) {
                 if (data.data.value) {
                     //console.log(data.data.data);
