@@ -1991,7 +1991,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             $scope.cityFilter.push(spec1);
                         }
                         // document.getElementById($stateParams.photoLoc).checked = true;
-                        console.log("$scope.cityFilter", $scope.cityFilter);
+                        // console.log("$scope.cityFilter", $scope.cityFilter);
                     })
                 })
             }
@@ -2132,7 +2132,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }];
 
         // filter
-        var formdata = {}
         $scope.priceRange = [];
         $scope.priceList = ["5k-10k", "10k-25k", "25k-50k", "50k-1lakh", "1lakh plus"];
         $scope.filterPriceAndCity = function (data) {
@@ -2144,10 +2143,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 $scope.cityFill.push(data);
                 check = data;
-            }
-            //console.log("Doc", check);
+            }            
             if (document.getElementById(check).checked) {
                 // $scope.price.push(priceRange);
+                var formdata = {}                
                 formdata.pricing = $scope.priceRange;
                 formdata.location = $scope.cityFill;
                 NavigationService.apiCallWithData("Photographer/clickFilter", formdata, function (data) {
@@ -2172,12 +2171,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         return n != data;
                     });
                 }
+                // console.log(" $scope.cityFill------------", $scope.cityFill);
                 //console.log("$scope.priceRange", $scope.priceRange);
                 // $scope.price.push(priceRange);
                 if (!_.isEmpty($scope.priceRange) || !_.isEmpty($scope.cityFill)) {
-                    formdata.pricing = $scope.priceRange;
-                    formdata.location = $scope.cityFill;
-                    NavigationService.apiCallWithData("Photographer/clickFilter", formdata, function (data) {
+                    var formdata1 = {}                    
+                    formdata1.pricing = $scope.priceRange;
+                    formdata1.location = $scope.cityFill;
+                    NavigationService.apiCallWithData("Photographer/clickFilter", formdata1, function (data) {
                         //console.log("clickFilter", data);
                         if (data.value === true) {
                             $scope.photographerData = data.data;
@@ -2191,9 +2192,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     });
                 } else {
                     //all photographers
-                    formdata = {};
-                    formdata.speciality = $stateParams.catName;
-                    NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata, function (data) {
+                    var formdata2 = {};
+                    formdata2.speciality = $stateParams.catName;
+                    NavigationService.apiCallWithData("Photographer/getPhotographersByCategories", formdata2, function (data) {
                         if (data.value === true) {
                             //console.log("getPhotographersByCategories", data);
                             $scope.photographerData = data.data;
