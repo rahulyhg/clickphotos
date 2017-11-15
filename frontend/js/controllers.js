@@ -1995,6 +1995,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     })
                 })
             }
+
+            // filter end
+            $scope.currentPage = 0;
+            $scope.pageSize = 9;
+            $scope.data = $scope.photographerData;
+            $scope.q = '';
+
+            $scope.getData = function () {
+                return $filter('filter')($scope.data, $scope.q)
+            }
+
+            $scope.numberOfPages = function () {
+                return Math.ceil($scope.getData().length / $scope.pageSize);
+            }
+
+
         });
 
         // NavigationService.callApi("Photographer/getAllPhotographers", function (data) {
@@ -2064,9 +2080,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 $scope.category = data.data;
                 $scope.showlessCatImages = _.slice($scope.category, 0, 4);
-                console.log("Categories", $scope.category);
-                console.log("showlessCatImages", $scope.showlessCatImages);
-
             }
         });
         //all categories end
@@ -2090,36 +2103,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.checkboxData[key].value = $scope.checkall;
             }
         };
-        $scope.currentPage = 0;
-        $scope.pageSize = 9;
-        $scope.data = [];
-        $scope.q = '';
 
-        $scope.getData = function () {
-            return $filter('filter')($scope.data, $scope.q)
-
-        }
-
-        $scope.numberOfPages = function () {
-            return Math.ceil($scope.getData().length / $scope.pageSize);
-        }
-
-
-        //uib controller
-        // $scope.totalItems = 64;
-        // $scope.currentPage = 1;
-
-        // $scope.setPage = function (pageNo) {
-        //     $scope.currentPage = pageNo;
-        // };
-
-        // $scope.pageChanged = function () {
-        //     $log.log('Page changed to: ' + $scope.currentPage);
-        // };
-
-        // $scope.maxSize = 1;
-        // $scope.bigTotalItems = 175;
-        // $scope.bigCurrentPage = 1;
 
         $scope.categories = [{
             "background": "frontend/img/cat3.jpg"
@@ -2143,10 +2127,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 $scope.cityFill.push(data);
                 check = data;
-            }            
+            }
             if (document.getElementById(check).checked) {
                 // $scope.price.push(priceRange);
-                var formdata = {}                
+                var formdata = {}
                 formdata.pricing = $scope.priceRange;
                 formdata.location = $scope.cityFill;
                 NavigationService.apiCallWithData("Photographer/clickFilter", formdata, function (data) {
@@ -2159,6 +2143,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                 return n._id != idToBeRemove;
                             });
                         }
+                    }
+                    $scope.currentPage = 0;
+                    $scope.pageSize = 9;
+                    $scope.data = $scope.photographerData;
+                    $scope.q = '';
+
+                    $scope.getData = function () {
+                        return $filter('filter')($scope.data, $scope.q)
+                    }
+
+                    $scope.numberOfPages = function () {
+                        return Math.ceil($scope.getData().length / $scope.pageSize);
                     }
                 });
             } else {
@@ -2175,7 +2171,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 //console.log("$scope.priceRange", $scope.priceRange);
                 // $scope.price.push(priceRange);
                 if (!_.isEmpty($scope.priceRange) || !_.isEmpty($scope.cityFill)) {
-                    var formdata1 = {}                    
+                    var formdata1 = {}
                     formdata1.pricing = $scope.priceRange;
                     formdata1.location = $scope.cityFill;
                     NavigationService.apiCallWithData("Photographer/clickFilter", formdata1, function (data) {
@@ -2188,6 +2184,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     return n._id != idToBeRemove;
                                 });
                             }
+                        }
+                        $scope.currentPage = 0;
+                        $scope.pageSize = 9;
+                        $scope.data = $scope.photographerData;
+                        $scope.q = '';
+
+                        $scope.getData = function () {
+                            return $filter('filter')($scope.data, $scope.q)
+                        }
+
+                        $scope.numberOfPages = function () {
+                            return Math.ceil($scope.getData().length / $scope.pageSize);
                         }
                     });
                 } else {
@@ -2204,14 +2212,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     return n._id != idToBeRemove;
                                 });
                             }
-                            //console.log("$scope.photographerData--", $scope.photographerData)
+                            $scope.currentPage = 0;
+                            $scope.pageSize = 9;
+                            $scope.data = $scope.photographerData;
+                            $scope.q = '';
+
+                            $scope.getData = function () {
+                                return $filter('filter')($scope.data, $scope.q)
+                            }
+
+                            $scope.numberOfPages = function () {
+                                return Math.ceil($scope.getData().length / $scope.pageSize);
+                            }
                         }
                     });
                     //all Photographers end
                 }
             }
         }
-        // filter end
+        //uib controller
+        // $scope.totalItems = 64;
+        // $scope.currentPage = 1;
+
+        // $scope.setPage = function (pageNo) {
+        //     $scope.currentPage = pageNo;
+        // };
+
+        // $scope.pageChanged = function () {
+        //     $log.log('Page changed to: ' + $scope.currentPage);
+        // };
+
+        // $scope.maxSize = 1;
+        // $scope.bigTotalItems = 175;
+        // $scope.bigCurrentPage = 1;
     })
 
     .controller('headerctrl', function ($scope, TemplateService, $uibModal, $location, $window, NavigationService, $state, $rootScope, toastr) {
