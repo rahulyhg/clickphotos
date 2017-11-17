@@ -182,7 +182,7 @@ $borderRadius: 4px; // used to overwrite the inheritance for btn class mentioned
 }
 
 body {
-    //padding-top: 70px;
+    padding-top: 66px;
     font-family: 'dosis-regular';
     font-size: 16px; // default size is 16px
     @include transition(background-color .5s);
@@ -251,10 +251,10 @@ body {
     margin-bottom: 53px;
 }
 
-.mg_t75 {
-    // this class is given kz the navbar is at fixed position.
-    margin-top: 65px;
-}
+// .mg_t75 {
+//     // this class is given kz the navbar is at fixed position.
+//     margin-top: 65px;
+// }
 
 .dosis-medium {
     font-family: 'dosis-medium';
@@ -985,7 +985,7 @@ header>nav div.navbar-toggle>div.icon_float {
 // This section contains main background image with side nav menu
 .sliding_bg {
     position: relative;
-    margin-top: 62px;
+   
     height: 100%;
     .sidebar {
         position: absolute;
@@ -3923,7 +3923,7 @@ hr.border-hr:after {
 
 .head-name {
     text-align: center;
-    @extend .mg_t75;
+   // @extend .mg_t75;
     .ht30 {
         display: inline-block;
         height: 130px;

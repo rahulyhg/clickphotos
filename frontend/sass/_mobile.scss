@@ -1,8 +1,11 @@
     @media (max-width: $screen-xs-max) {
+      body{
+        padding-top: 110px;
+      } 
         //Global classes
-        .mg_t75 {
-            margin-top: 55px;
-        }
+        // .mg_t75 {
+        //     margin-top: 55px;
+        // }
         .fb_artist {
             right: 44% !important;
             top: -30px !important;
@@ -180,7 +183,7 @@
         } //End of Footer.html
         //Start of home.html
         .sliding_bg {
-            margin-top: 55px;
+           
             .swiper-container {
                 height: auto;
             }
@@ -353,7 +356,7 @@
             overflow: hidden;
         }
         .userprof-bg {
-            margin-top: 55px;
+            //margin-top: 55px;
             .userbg-img {
                 min-height: 135px;
             }
@@ -482,7 +485,7 @@
             .full-tabs {
                 li {
                     font-size: 18px!important;
-                    padding: 2px 14px;
+                    padding: 2px 10px;
                 }
             }
             .signup-form {
