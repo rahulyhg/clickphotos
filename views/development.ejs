@@ -17,6 +17,23 @@
         <%= ((typeof title) == "undefined") ? "ClickMania" : title  %>
     </title>
 
+     <!-- Facebook -->
+     <meta property="og:site_name" content="CLICKMANIA">
+     <meta property="og:title" content="<%= ((typeof title) == "undefined") ? "CLICKMANIA " : title  %>" />
+     <meta property="og:description" content="Take a look at this photographers profile on Clickmania " />
+     <meta property="og:image"  content="<%= ((typeof image) == "undefined") ? "http://clickmania.in/home/user/Documents/htdocs/clickphotos/frontend/img/social/02_Facebook.jpg" : image  %>" />
+     <meta property="og:type" content="website" />
+     <meta property="og:url" content="<%= ((typeof url) == "undefined") ? "CLICKMANIA" : url  %>" />
+ 
+ 
+     <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+   <meta name="twitter:site" content="@CLICKMANIA" />
+   <meta name="twitter:title" content="<%= ((typeof title) == "undefined") ? "CLICKMANIA " : title  %>" />
+   <meta name="twitter:image" content="http://clickmania.in/home/user/Documents/htdocs/clickphotos/frontend/img/social/04_Twiiter.jpg" />
+   <meta name="twitter:image:alt" content="<%= ((typeof description) == "undefined") ? "CLICKMANIA" : description  %>" />
+   <meta name="twitter:description" content="Take a look at this photographers profile on Clickmania ." />
+
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
     <!-- Facebook Pixel Code -->
