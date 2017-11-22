@@ -3,6 +3,7 @@ templateservicemod.service('TemplateService', function () {
     this.title = "Home";
     this.meta = "Google";
     this.metadesc = "Home";
+    
 
     var d = new Date();
     this.year = d.getFullYear();
@@ -18,6 +19,12 @@ templateservicemod.service('TemplateService', function () {
         this.init();
         var data = this;
         data.content = "frontend/views/content/" + page + ".html";
+        return data;
+    };
+
+    this.getProfileName = function (profilename) {
+        var data = this;
+        data.profileData =profilename;
         return data;
     };
 

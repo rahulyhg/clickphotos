@@ -13,15 +13,15 @@
     <meta name="googlebot" content="noindex">
     <link rel="shortcut icon" href="frontend/img/favicon.ico" />
 
-    <title ng-bind="'Clickmania| '+template.title">
+    <title ng-bind="'Clickmania| '+template.profileData">
         <%= ((typeof title) == "undefined") ? "ClickMania" : title  %>
     </title>
 
      <!-- Facebook -->
      <meta property="og:site_name" content="ClickMania">
-     <meta property="og:title" content="<%= ((typeof title) == "undefined") ? "ClickMania " : title  %>" />
+     <meta property="og:title" content="template.profileData" />
      <meta property="og:description" content="<%= ((typeof description) == "undefined") ? "Take a look at this photographers profile on Clickmania" : description  %>" />
-     <meta property="og:image" content="<%= ((typeof image) == "undefined") ? "http://clickmania.in/frontend/img/social/facebook.png" : image  %>">
+     <meta property="og:image" content="http://clickmania.in/frontend/img/social/facebook.png">
      <meta property="og:type" content="website" />
      <meta property="og:url" content="<%= ((typeof url) == "undefined") ? "ClickMania " : url  %>" />
  
@@ -38,6 +38,7 @@
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
     <!-- Facebook Pixel Code -->
     <script>
+
         ! function (f, b, e, v, n, t, s) {
             if (f.fbq) return;
             n = f.fbq = function () {
