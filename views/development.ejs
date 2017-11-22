@@ -13,13 +13,13 @@
     <meta name="googlebot" content="noindex">
     <link rel="shortcut icon" href="frontend/img/favicon.ico" />
 
-    <title ng-bind="'Clickmania| '+template.profileData">
+    <title ng-bind="'Clickmania| '+template.title">
         <%= ((typeof title) == "undefined") ? "ClickMania" : title  %>
     </title>
 
      <!-- Facebook -->
      <meta property="og:site_name" content="ClickMania">
-     <meta property="og:title" content="template.profileData" />
+     <meta property="og:title" content="{{tempData}}" />
      <meta property="og:description" content="<%= ((typeof description) == "undefined") ? "Take a look at this photographers profile on Clickmania" : description  %>" />
      <meta property="og:image" content="http://clickmania.in/frontend/img/social/facebook.png">
      <meta property="og:type" content="website" />
@@ -64,7 +64,7 @@
         /></noscript>
 </head>
 
-<body>
+<body> 
     <div class="repeated-item" ui-view></div>
 
 

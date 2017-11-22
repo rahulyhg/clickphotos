@@ -1620,6 +1620,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 // console.log(data)
                 $scope.userData = data.data;
+                $rootScope.tempData=$scope.userData.name;
                 TemplateService.getProfileName($scope.userData.name);
                 //console.log(" $scope.userData",$scope.userData.reviewList);
                 $scope.showLessReviews = _.slice($scope.userData.reviewList, 0, 3);
