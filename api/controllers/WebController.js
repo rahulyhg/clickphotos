@@ -45,14 +45,17 @@ module.exports = {
             res.notFound();
         }
     },
-    demo: function (req, res) {
-        sails.renderView('email/welcome', {
-            name: "Pooja",
-            lastname: "Thakre",
-            hobbies: ["cricket", "name", "email", "phone"]
-        }, function (err, view) {
-
-            res.send(view);
-        });
+    profile: function (req, res) {
+        if (req.params) {
+            var userId = req.params[0].split("/");
+            res.metaView({
+                title: "Fancorner - Dharma Production - Score " + score[0],
+                keywords: "Fancorner,dharma,game,production,score",
+                description: "Fancorner - Dharma Production - Score " + score[0],
+                image: "../../frontend/img/rapifire.jpg"
+            });
+        } else {
+            res.metaView();
+        }
     }
 };
