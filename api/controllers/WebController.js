@@ -47,12 +47,22 @@ module.exports = {
     },
     profile: function (req, res) {
         if (req.params) {
-            var userId = req.params[0].split("/");
-            res.metaView({
-                title: "Fancorner - Dharma Production - Score " + score[0],
-                keywords: "Fancorner,dharma,game,production,score",
-                description: "Fancorner - Dharma Production - Score " + score[0],
-                image: "../../frontend/img/rapifire.jpg"
+            var userId = req.params[0];
+            Photographer.getOne({
+                _id: userId
+            }, function(err, data) {
+                if (err) {
+                    res.callback(err, data);
+                } else if (_.isEmpty(data)) {
+                    res.callback(err, data);
+                } else {
+                    var profileData = data;
+                    res.metaView({
+                        title: profileData.name,
+                        description: 'Take a look at this photographers profile on Clickmania',
+                        image: 'http://clickmania.in/frontend/img/social/facebook.png'
+                    });
+                }
             });
         } else {
             res.metaView();

@@ -38,6 +38,13 @@ module.exports.routes = {
         skipAssets: true,
         skipRegex: /api|backend/i
     },
+   
+    'GET /user-profile/*': {
+        controller: "WebController",
+        action: "profile",
+        skipAssets: true,
+        skipRegex: /api|backend/i
+    },
     'GET /gitPull/:data': {
         controller: "WebController",
         action: "gitPull",
