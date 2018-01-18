@@ -1620,7 +1620,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 // console.log(data)
                 $scope.userData = data.data;
-                $rootScope.tempData=$scope.userData.name;
+                $rootScope.tempData = $scope.userData.name;
                 TemplateService.getProfileName($scope.userData.name);
                 //console.log(" $scope.userData",$scope.userData.reviewList);
                 $scope.showLessReviews = _.slice($scope.userData.reviewList, 0, 3);
@@ -3418,4 +3418,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 "Answer": "Most welcome. It will be a pleasure to work with Clickmania again."
             }
         ]
+    })
+    .controller('VirtualGalleryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("virtual-gallery"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Virtual Gallery"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
     });

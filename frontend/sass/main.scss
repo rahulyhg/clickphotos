@@ -251,11 +251,38 @@ body {
     margin-bottom: 53px;
 }
 
+.d-flex {
+    @include display(flex);
+}
+
+.justify-content-start {
+    @include justify-content(flex-start);
+}
+
+.justify-content-center {
+    @include justify-content(center);
+}
+
+.justify-content-end {
+    @include justify-content(flex-end);
+}
+
+.align-items-start {
+    @include align-items(flex-start);
+}
+
+.align-items-center {
+    @include align-items(center);
+}
+
+.align-items-end {
+    @include align-items(flex-end);
+}
+
 // .mg_t75 {
 //     // this class is given kz the navbar is at fixed position.
 //     margin-top: 65px;
 // }
-
 .dosis-medium {
     font-family: 'dosis-medium';
 }
@@ -985,7 +1012,6 @@ header>nav div.navbar-toggle>div.icon_float {
 // This section contains main background image with side nav menu
 .sliding_bg {
     position: relative;
-   
     height: 100%;
     .sidebar {
         position: absolute;
@@ -1379,7 +1405,7 @@ header>nav div.navbar-toggle>div.icon_float {
     position: relative;
     .img_relative {
         position: relative;
-        top: -108px; //  width: 400px;
+        top: -45px; //  width: 400px;
         z-index: -3;
         display: inline-block;
     }
@@ -1441,6 +1467,73 @@ header>nav div.navbar-toggle>div.icon_float {
         display: inline-block;
     }
 } //end of section sign up
+//Start of virtual photo gallery
+.virtual-gallery-home {
+    min-height: inherit;
+    margin-bottom: -135px;
+    background-image: url('../img/Virtual-gallery-home.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    .main-content {
+        min-height: inherit;
+    }
+    .gallery {
+        @include padding(0 15px);
+        margin-right: 45px;
+        @include flex-basis(400px);
+    }
+    .gallery-title h2 {
+        max-width: 245px;
+        margin-top: 0;
+        color: $orangeColor;
+        font-family: 'damion-regular';
+        font-size: 65px;
+        font-weight: 500;
+        line-height: 0.8;
+    }
+    .gallery-msg {
+        color: white;
+        font-size: 25px;
+    }
+    .click-btn {
+        padding-bottom: 25px;
+    }
+}
+
+.virtual-gallery-main {
+    .gallery-search-main-section {
+        width: 1005px;
+        @include padding(25px 35px);
+        margin: auto;
+    }
+    .search-section-one {
+        flex: 0.3;
+        text-align: center;
+    }
+    .search-section-two {
+        position: relative;
+        flex: 1;
+        @include flex-grow(2);
+    }
+    .search-section-three {
+        flex: 0.2;
+        text-align: center;
+    }
+    .search-section-four {
+        flex: 0.7;
+        text-align: left;
+    }
+    .gallerysearch-dropdown {
+        width: 200px;
+        position: absolute;
+        top: 0;
+        right: 39px;
+        z-index: 2;
+    }
+}
+
+//End of virtual  photo gallery
 // start of Artist of the month section
 .atm {
     // artist of the month
@@ -3922,8 +4015,7 @@ hr.border-hr:after {
 }
 
 .head-name {
-    text-align: center;
-   // @extend .mg_t75;
+    text-align: center; // @extend .mg_t75;
     .ht30 {
         display: inline-block;
         height: 130px;
