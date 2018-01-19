@@ -3424,4 +3424,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Virtual Gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+    })
+    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
     });

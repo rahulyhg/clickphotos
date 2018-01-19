@@ -3,14 +3,14 @@
     <div class="container">
         <div class="gallery-search-main-section d-flex align-items-center justify-content-center">
             <div class="search-section-one">
-                search
+                Search
             </div>
             <div class="search-section-two">
                 <div class="gallery-search-bar">
                     <form action="" name="virtualGalleryForm" nonvalidate>
                         <div class="input-group">
-                            <input type="search" class="form-control" id="search">
-                            <span class="input-group-addon">
+                            <input type="search" class="form-control" id="search" placeholder="Type in a Keyword" maxlength="50">
+                            <span class="input-group-addon search-btn">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </span>
                         </div>
@@ -18,8 +18,8 @@
                 </div>
                 <div class="gallerysearch-dropdown">
                     <div class="dropdown">
-                        <button class="btn orange-btn btn-block dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-  <span class="caret"></span></button>
+                        <button class="btn whit-btn btn-block dropdown-toggle" type="button" data-toggle="dropdown">Select Category
+ <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                         <ul class="dropdown-menu">
                             <li><a href="#">HTML</a></li>
                             <li><a href="#">CSS</a></li>
@@ -33,8 +33,22 @@
             </div>
             <div class="search-section-section-four">
                 <div class="gallery-upload-btn">
-                    <a class="btn orange-btn">Upload a Photograph</a>
+                    <a class="btn orange-btn" role="button">Upload a Photograph</a>
                 </div>
+            </div>
+        </div>
+
+        <!--Uploaded photograph section-->
+        <div class="uploaded-photographs-section">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="uploaded-photograph shadow">
+                        <a ui-sref="virtual-gallery-inner"><img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="Uploaded Photograph"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="viewmore-btn-area text-center">
+                <a class="btn orange-btn" role="button">View More</a>
             </div>
         </div>
     </div>

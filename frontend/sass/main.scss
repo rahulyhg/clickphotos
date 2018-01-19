@@ -1503,7 +1503,7 @@ header>nav div.navbar-toggle>div.icon_float {
 
 .virtual-gallery-main {
     .gallery-search-main-section {
-        width: 1005px;
+        max-width: 1005px;
         @include padding(25px 35px);
         margin: auto;
     }
@@ -1524,16 +1524,97 @@ header>nav div.navbar-toggle>div.icon_float {
         flex: 0.7;
         text-align: left;
     }
+    .input-group-addon.search-btn {
+        border: 1px solid $orangeColor;
+        border-radius: 0;
+        background-color: $orangeColor;
+        color: white;
+        .fa-search {
+            font-size: 18px;
+        }
+    }
     .gallerysearch-dropdown {
         width: 200px;
         position: absolute;
         top: 0;
         right: 39px;
-        z-index: 2;
+        z-index: 3;
+        .whit-btn {
+            @include padding(6px 15px);
+            border: 1px solid #ccc!important;
+            border-radius: 0;
+            color: #333;
+            @include ellipsis;
+        }
+        .fa-caret-down {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            @include transform(translateY(-50%));
+        }
+    }
+    .uploaded-photographs-section {
+        padding-bottom: 15px;
+    }
+    .uploaded-photograph {
+        margin-bottom: 10px;
+    }
+}
+
+.viewmore-btn-area {
+    // This class has been used in virtual gllery & virtual gallery inner page page
+    @include padding(25px 0);
+    .orange-btn {
+        @include padding(6px 45px);
     }
 }
 
 //End of virtual  photo gallery
+//Start of virtual gallery-inner page
+.virtual-gallery-inner {
+    .user-profile-section {
+        @include padding(15px 35px);
+    }
+    .user-uploaded-img {
+        @include flex-basis(350px);
+        overflow: hidden;
+    }
+    .user-profile {
+        @include padding(0 15px);
+        flex: 1;
+    }
+    .user-profile .user-profile-img {
+        @include size(100%,
+        100%);
+        border-radius: 50%;
+        background-color: rgba(204, 204, 204, 0.22);
+        @include transform(rotate(-44deg));
+        overflow: hidden;
+    }
+    .user-profile .border-half {
+        margin-left: 0;
+    }
+    .user-profile-info .category,
+    .user-profile-info .image-size,
+    .user-profile-info .img-dimension,
+    .user-profile-info .image-format,
+    .user-profile-info .img-id {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .user-profile-info ul>li {
+        color: #333;
+    }
+    .user-profile-info h3 {
+        margin-top: 5px;
+        color: black;
+    }
+    .user-exception-uploaded {
+        margin-bottom: 10px;
+    }
+}
+
+//End of virtual gallery inner page
 // start of Artist of the month section
 .atm {
     // artist of the month
@@ -1744,7 +1825,7 @@ $brand-holder: #ccc !default;
 
 .profile-block {
     bottom: -6px;
-    left: 7%;
+    left: 3%;
     position: absolute;
 }
 
@@ -1814,7 +1895,7 @@ $brand-holder: #ccc !default;
         border-bottom: 4px solid transparent;
         color: #fff;
         font-family: 'Dosis-Regular';
-        font-size: 32px;
+        font-size: 25px;
         &:active,
         &:focus {
             outline: none;
@@ -1868,6 +1949,28 @@ $brand-holder: #ccc !default;
         vertical-align: top;
         @include size(83%,
         auto);
+    }
+}
+
+.virtual-gallery-part {
+    .free-member {
+        width: 85%;
+    }
+    .free-member .small-font {
+        line-height: 1;
+    } // .gallery-uploaded-section {
+    //     width: 85%;
+    //     margin: 10px auto;
+    // }
+    .gallery-uploaded-title {
+        @include padding(5px);
+        margin-bottom: 10px;
+        background-color: $orangeColor;
+        color: white;
+        font-size: 20px;
+    }
+    .gallery-uploaded-photo {
+        margin-bottom: 10px;
     }
 }
 

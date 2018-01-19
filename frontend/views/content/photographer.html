@@ -74,14 +74,18 @@
                         </div>
 
                         <span class="border-line"></span>
-
-
                         <div class="inline-block">
                             <div class="btn-1" ng-click="tab = 4" ng-class="{'active':tab == 4}">
                                 <button type="button" class="btn btn-default btn-select">PHOTO CONTEST</button>
                                 <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
                             </div>
-
+                        </div>
+                        <span class="border-line"></span>
+                        <div class="inline-block">
+                            <div class="btn-1" ng-click="tab = 5" ng-class="{'active':tab == 5}">
+                                <button type="button" class="btn btn-default btn-select">VIRTUAL GALLERY</button>
+                                <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -897,6 +901,30 @@
                             </div>
 
                         </uib-accordion>
+                    </div>
+                </div>
+                <div class="virtual-gallery-part" ng-if="tab == 5">
+                    <div class="free-member text-center">
+                        <span class="small-font">Your  virtual gallery doesn’t have any photographs Start uploading now! 
+                        </span>
+                        <div class="viewmore-btn-area text-center">
+                            <a class="btn btn-lg orange-btn" role="button" ng-click="uploadImg();">Click to Begin</a>
+                        </div>
+                    </div>
+                    <div class="gallery-uploaded-section free-member">
+                        <div class="gallery-uploaded-title">
+                            Upload your best photographs:
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="gallery-uploaded-photo shadow">
+                                    <img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="User Uploaded Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="viewmore-btn-area text-center">
+                            <a class="btn btn-lg orange-btn" role="button" ng-click="uploadImg()">Upload</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -60,6 +60,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "frontend/views/template.html",
             controller: 'VirtualGalleryCtrl'
         })
+        .state('virtual-gallery-inner', {
+            url: "/virtual-gallery-inner",
+            templateUrl: "frontend/views/template.html",
+            controller: 'VirtualGalleryInnerCtrl'
+        })
         .state('wild-photographer', {
             url: "/wild-photographer/:catid/:catName/:photoLoc",
             templateUrl: "frontend/views/template.html",
