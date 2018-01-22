@@ -41,9 +41,9 @@
         <!--Uploaded photograph section-->
         <div class="uploaded-photographs-section">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="uploaded-photograph shadow">
-                        <a ui-sref="virtual-gallery-inner"><img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="Uploaded Photograph"></a>
+                <div ng-repeat="gallery in virtualGallery track by $index" class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="user-exception-uploaded shadow">
+                        <a ui-sref="virtual-gallery-inner({id:gallery.id})"><img ng-src={{gallery.img}} class="img-responsive" alt="Uploaded Photograph"></a>
                     </div>
                 </div>
             </div>

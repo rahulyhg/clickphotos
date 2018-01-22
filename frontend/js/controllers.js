@@ -3424,10 +3424,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Virtual Gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
+        $scope.virtualGallery = [{
+            id: 1,
+            img: 'frontend/img/photographer/Clicked 2.jpg'
+        }, {
+            id: 2,
+            img: 'frontend/img/bg1.jpg'
+        }];
     })
-    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log) {
         $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        var virtualGallstateParaData = {}; // To push $stateParams obj from $scope.virtualGallery
+        $scope.individualGalleryData = []; // To push a key and value if $stateParams obj is same
+        $scope.virtualGallery = [{
+            id: 1,
+            img: 'frontend/img/photographer/Clicked 2.jpg'
+        }, {
+            id: 2,
+            img: 'frontend/img/bg1.jpg'
+        }];
+        if ($stateParams) {
+            virtualGallstateParaData.id = $stateParams.id;
+            $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
+            // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
+            _.forEach($scope.virtualGallery, function (key, value) {
+                $log.debug('key id', key.id);
+                if (virtualGallstateParaData.id == key.id) {
+                    // $log.debug('loop');
+                    $scope.individualGalleryData.push({
+                        img: key.img
+                    });
+                }
+            });
+        }
+        $log.debug(' $scope.individualGalleryData', $scope.individualGalleryData);
     });

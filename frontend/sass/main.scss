@@ -1556,9 +1556,6 @@ header>nav div.navbar-toggle>div.icon_float {
     .uploaded-photographs-section {
         padding-bottom: 15px;
     }
-    .uploaded-photograph {
-        margin-bottom: 10px;
-    }
 }
 
 .viewmore-btn-area {
@@ -1576,7 +1573,14 @@ header>nav div.navbar-toggle>div.icon_float {
         @include padding(15px 35px);
     }
     .user-uploaded-img {
-        @include flex-basis(350px);
+        width: 350px;
+        min-height: 300px;
+        @include display(flex);
+        @include align-items(center); // background-image: url('../img/photographer/Clicked 2.jpg');
+        // background-clip: content-box;
+        // background-position: center center;
+        // background-repeat: no-repeat;
+        // background-size: cover;
         overflow: hidden;
     }
     .user-profile {
@@ -1588,6 +1592,10 @@ header>nav div.navbar-toggle>div.icon_float {
         100%);
         border-radius: 50%;
         background-color: rgba(204, 204, 204, 0.22);
+        background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
         @include transform(rotate(-44deg));
         overflow: hidden;
     }
@@ -1609,9 +1617,17 @@ header>nav div.navbar-toggle>div.icon_float {
         margin-top: 5px;
         color: black;
     }
-    .user-exception-uploaded {
-        margin-bottom: 10px;
-    }
+}
+
+.user-exception-uploaded {
+    min-height: 227px;
+    margin-bottom: 10px;
+    @include display(flex);
+    @include align-items(center); // background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
+    // background-position: center center;
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // overflow: hidden;
 }
 
 //End of virtual gallery inner page

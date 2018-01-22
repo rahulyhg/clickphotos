@@ -61,7 +61,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'VirtualGalleryCtrl'
         })
         .state('virtual-gallery-inner', {
-            url: "/virtual-gallery-inner",
+            url: "/virtual-gallery-inner/:id",
             templateUrl: "frontend/views/template.html",
             controller: 'VirtualGalleryInnerCtrl'
         })

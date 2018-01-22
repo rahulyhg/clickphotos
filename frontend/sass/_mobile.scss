@@ -1,8 +1,7 @@
     @media (max-width: $screen-xs-max) {
-      body{
-        padding-top: 110px;
-      } 
-        //Global classes
+        body {
+            padding-top: 110px;
+        } //Global classes
         // .mg_t75 {
         //     margin-top: 55px;
         // }
@@ -183,7 +182,6 @@
         } //End of Footer.html
         //Start of home.html
         .sliding_bg {
-           
             .swiper-container {
                 height: auto;
             }
@@ -503,7 +501,23 @@
             display: none;
         }
         .border-divider {
-            border: 0 solid transparent;
+            border: 0 solid transparent; //start of virtual-gallery-inner
+            .virtual-gallery-inner {
+                .user-profile-section {
+                    @include padding(15px 0);
+                    @include flex-direction(column-reverse);
+                }
+                .user-profile {
+                    @include padding(0);
+                    text-align: center;
+                    .border-half {
+                        margin-left: auto;
+                    }
+                }
+                .user-profile-info ul>li {
+                    @include justify-content(center);
+                }
+            } //End of virtual-gallery-inner
         }
         .profile-banner .profile-banner__bg {
             img {
@@ -680,7 +694,7 @@
                 width: 100%;
             }
         }
-        .circular-checkbox .radio-cat {
+        .search-section-one .circular-checkbox .radio-cat {
             width: 100%;
             margin-left: -2px;
         }
@@ -1005,6 +1019,45 @@
                 margin-right: 0;
             }
         } //End of billpay.html
+        //Start of virtual gallery
+        .virtual-gallery-main {
+            .gallery-search-main-section {
+                @include padding(25px 0px);
+                @include flex-direction(column);
+            }
+            .gallerysearch-dropdown {
+                width: 120px!important;
+            }
+            .search-section-one,
+            .search-section-two,
+            .search-section-three {
+                margin-bottom: 5px;
+            }
+        } //End of virtual gallery
+        //start of virtual-gallery-inner
+        .virtual-gallery-inner {
+            .user-profile-section {
+                @include padding(15px 0);
+                @include flex-direction(column-reverse);
+            }
+            .user-uploaded-img {
+                width: 300px;
+                min-height: 260px;
+            }
+            .user-profile {
+                @include padding(0);
+                text-align: center;
+                .border-half {
+                    margin-left: auto;
+                }
+            }
+            .user-profile-info ul>li {
+                @include justify-content(center);
+            }
+        }
+        .user-exception-uploaded {
+            min-height: 250px!important;
+        } //End of virtual-gallery-inner
         .modal-dialog .modal-demo .modal-body {
             .absolute-cross {
                 @include position(absolute, -10px -11px null null);
@@ -1059,7 +1112,7 @@
         .set-1 {
             font-size: 16px;
         }
-        .full-hight {
+        user-uploaded-img .full-hight {
             height: 100%;
         }
         .package-price {
@@ -1687,7 +1740,17 @@
                 padding-top: 30px;
                 padding-bottom: 40px;
             }
-        }
+        } // Start of virtual-gallery-main 
+        .virtual-gallery-main {
+            .gallerysearch-dropdown {
+                width: 160px;
+            }
+        } //End of virtual-gallery-main
+        //Start of virtual-gallery-inner
+        .virtual-gallery-inner {}
+        .user-exception-uploaded {
+            min-height: 298px;
+        } //End of virtual-gallery-inner
     }
 
     @media (max-width: $screen-md-max) {}
