@@ -6,7 +6,7 @@ var uploadurl = imgurl;
 var navigationservice = angular.module('navigationservice', [])
 
     .factory('NavigationService', function ($http) {
-        var navigation = [{
+        var navigation1 = [{
                 name: "Admin",
                 classis: "active",
                 sref: "#!/page/viewUser//",
@@ -50,12 +50,31 @@ var navigationservice = angular.module('navigationservice', [])
                 name: "Orders",
                 classis: "active",
                 sref: "#!/page/viewOrders//",
+            },
+
+            //
+
+            {
+                name: "Another",
+                classis: "active",
+                sref: "#!/page/viewOrders//",
             }
         ];
 
         return {
             getnav: function () {
-                return navigation;
+                var navigation = [];
+                // return navigation;
+                if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin1') {
+                    _.forEach(_.cloneDeep(navigation1), function (val) {
+                        if (_.isEqual(val.name, 'Another')) {
+                            navigation.push(val);
+                        }
+                    });
+                    return navigation;
+                } else if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin') {
+                    return navigation1;
+                }
             },
 
             parseAccessToken: function (data, callback) {
@@ -82,11 +101,11 @@ var navigationservice = angular.module('navigationservice', [])
                 });
             },
             makeactive: function (menuname) {
-                for (var i = 0; i < navigation.length; i++) {
-                    if (navigation[i].name == menuname) {
-                        navigation[i].classis = "active";
+                for (var i = 0; i < navigation1.length; i++) {
+                    if (navigation1[i].name == menuname) {
+                        navigation1[i].classis = "active";
                     } else {
-                        navigation[i].classis = "";
+                        navigation1[i].classis = "";
                     }
                 }
                 return menuname;
