@@ -3447,19 +3447,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             id: 2,
             img: 'frontend/img/bg1.jpg'
         }];
+        //We need to check if $stateParams is true, do the following task
         if ($stateParams) {
             virtualGallstateParaData.id = $stateParams.id;
             $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
             // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
             _.forEach($scope.virtualGallery, function (key, value) {
-                $log.debug('key id', key.id);
+                //  $log.debug('key id', key.id);
                 if (virtualGallstateParaData.id == key.id) {
                     // $log.debug('loop');
                     $scope.individualGalleryData.push({
+                        id: key.id,
                         img: key.img
                     });
                 }
             });
-        }
-        $log.debug(' $scope.individualGalleryData', $scope.individualGalleryData);
+        } // end of if
+
+        /*****Note****
+        We are going to use _.romove function which will remove the objects from the variable which will be an array of object  & return it. So thts'y we need to clone it & store it into the other variable which is  $scope.cpyGalleryData & the removed one will be stored in $scope.removedVirtualGall variable
+        **************/
+        $scope.cpyGalleryData = angular.copy($scope.virtualGallery);
+        $scope.removedVirtualGall = _.remove($scope.cpyGalleryData, function (n) {
+            return virtualGallstateParaData.id != n.id;
+        });
+        // $log.debug(' $scope.removedVirtualGall', $scope.removedVirtualGall);
     });

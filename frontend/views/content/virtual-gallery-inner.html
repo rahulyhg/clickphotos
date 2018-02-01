@@ -37,14 +37,9 @@
         <div class="user-exception-photographs">
             <h4>Similar photographs</h4>
             <div class="row">
-                <div class="col-md-3 col-sm-6">
+                <div ng-repeat="removedGal in removedVirtualGall " class="col-md-3 col-sm-6">
                     <div class="user-exception-uploaded shadow">
-                        <img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="User Uploaded Image">
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="user-exception-uploaded shadow">
-                        <img src="frontend/img/bg1.jpg" class="img-responsive doneLoading" alt="User Uploaded Image">
+                        <img ng-src="{{removedGal.img}}" class="img-responsive" alt="User Uploaded Image">
                     </div>
                 </div>
             </div>
