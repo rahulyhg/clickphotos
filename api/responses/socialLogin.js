@@ -11,7 +11,7 @@ module.exports = function (profile) {
                 if (err || !data) {
                     res.callback(err, data);
                 } else {
-                    if (data.accessLevel != "Admin") {
+                    if (data.accessLevel != "Admin" && data.accessLevel != "Admin1") {
                         data.accessToken[0] = "AccessNotAvailable";
                     }
                     console.log(req.session.returnUrl);
