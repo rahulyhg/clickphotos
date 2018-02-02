@@ -5081,6 +5081,40 @@ only screen and (min-device-pixel-ratio: 1.5) {
         border-radius: 0px;
     }
 } //End of Thank You for gold, silver & sorry pages
+//Start of upload request page
+.upload-request .table-area {
+    padding: 40px;
+}
+
+.upload-request .search-box {
+    width: 200px;
+}
+
+.widget-title {
+    margin-bottom: 15px;
+}
+
+.widget-title .search-area {
+    flex: 1;
+    @include justify-content(flex-end);
+}
+
+.widget-title>h3 {
+    font-size: 19px;
+    margin: 0 0 5px;
+}
+
+.widget-title span.tableTotal {
+    padding: 4px;
+    font-size: 13px;
+}
+
+.upload-request table.upload-photo-table>tbody>tr>td,
+.upload-request table.upload-photo-table>thead>tr>th {
+    width: 295px;
+}
+
+//End of upload request page
 .page-margin {
     margin-bottom: 150px;
     margin-left: 90px;
