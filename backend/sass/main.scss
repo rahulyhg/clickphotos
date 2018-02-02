@@ -92,6 +92,33 @@ a,
     @include box-shadow(none);
 }
 
+.d-flex {
+    @include display(flex);
+}
+.justify-content-start {
+    @include justify-content(flex-start);
+}
+
+.justify-content-center {
+    @include justify-content(center);
+}
+
+.justify-content-end {
+    @include justify-content(flex-end);
+}
+
+.align-items-start {
+    @include align-items(flex-start);
+}
+
+.align-items-center {
+    @include align-items(center);
+}
+
+.align-items-end {
+    @include align-items(flex-end);
+}
+
 .mt20 {
     margin-top: 20px;
 }
@@ -1211,8 +1238,38 @@ body {
     margin-top: 200px;
 }
 
-
 /* Start writing sass here */
+
+//Start of upload request page
+
+.upload-request .search-box {
+    width: 200px;
+}
+
+.widget-title {
+    margin-bottom: 15px;
+}
+
+.widget-title .search-area {
+    flex: 1;
+    @include justify-content(flex-end);
+}
+
+.widget-title>h3 {
+    font-size: 19px;
+    margin: 0 0 5px;
+}
+
+.widget-title span.tableTotal {
+    padding: 4px;
+    font-size: 13px;
+}
+
+.upload-request table.upload-photo-table>tbody>tr>td,
+.upload-request table.upload-photo-table>thead>tr>th {
+    width: 295px;
+}
+
 
 @import "fancybox-override";
 @import "other/mobile";

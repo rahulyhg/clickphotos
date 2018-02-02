@@ -53,11 +53,10 @@ var navigationservice = angular.module('navigationservice', [])
             },
 
             //
-
             {
-                name: "Another",
+                name: "Image upload request",
                 classis: "active",
-                sref: "#!/page/viewOrders//",
+                sref: "#!/upload-request",
             }
         ];
 
@@ -67,7 +66,7 @@ var navigationservice = angular.module('navigationservice', [])
                 // return navigation;
                 if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin1') {
                     _.forEach(_.cloneDeep(navigation1), function (val) {
-                        if (_.isEqual(val.name, 'Another')) {
+                        if (_.isEqual(val.name, 'Image upload request')) {
                             navigation.push(val);
                         }
                     });
@@ -142,6 +141,21 @@ var navigationservice = angular.module('navigationservice', [])
                 $http.post(adminurl + url, formData).then(function (data) {
                     data = data.data;
                     callback(data, i);
+                });
+            },
+
+            apiCallWithData: function (url, formData, callback) {
+                $http.post(adminurl + url, formData).then(function (data) {
+                    data = data.data;
+                    callback(data);
+
+                });
+            },
+
+            callApi: function (url, callback) {
+                $http.post(adminurl + url).then(function (data) {
+                    data = data.data;
+                    callback(data);
                 });
             },
 

@@ -3473,8 +3473,4 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
         // $log.debug(' $scope.removedVirtualGall', $scope.removedVirtualGall);
     })
-    .controller('UploadRequestCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-        $scope.template = TemplateService.changecontent("upload-request"); //Use same name of .html file
-        $scope.menutitle = NavigationService.makeactive("Upload Request"); //This is the Title of the Website
-        TemplateService.title = $scope.menutitle;
-    });
+   

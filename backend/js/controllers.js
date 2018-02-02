@@ -1627,4 +1627,108 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+    })
+
+    .controller('UploadRequestCtrl', function($scope, TemplateService, NavigationService, $timeout,$state,$stateParams) {
+        $scope.template = TemplateService.changecontent("upload-request"); //Use same name of .html file
+        $scope.menutitle = NavigationService.makeactive("Image upload request"); //This is the Title of the Website
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+        //pagination 
+
+        var i = 0;
+        if ($stateParams.page && !isNaN(parseInt($stateParams.page))) {
+            $scope.currentPage = $stateParams.page;
+        } else {
+            $scope.currentPage = 1;
+        }
+
+        $scope.search = {
+            keyword: ""
+        };
+        if ($stateParams.keyword) {
+            $scope.search.keyword = $stateParams.keyword;
+        }
+        $scope.changePage = function (page) {
+            var goTo = "upload-request";
+            $scope.currentPage = page;
+            if ($scope.search.keyword) {
+                goTo = "uploads-request";
+            }
+            $state.go(goTo, {
+                page: page
+            });
+            $scope.getAllItems();
+        };
+
+        $scope.getAllItems = function (keywordChange, count) {
+            if (keywordChange != undefined && keywordChange != true) {
+                $scope.maxCount = keywordChange;
+                $scope.totalItems = undefined;
+                if (keywordChange) { }
+                NavigationService.searchCall("Photos/getApprovedPhotos", {
+                    page: $scope.currentPage,
+                    keyword: $scope.search.keyword,
+                    count: $scope.maxCount,
+                }, ++i,
+                    function (data, ini) {
+                        if (ini == i) {
+                            $scope.photoData  = data.data.results;
+                            $scope.totalItems = data.data.total;
+                            $scope.maxRow = data.data.options.count;
+                        }
+                    });
+            } else {
+                $scope.totalItems = undefined;
+                if (keywordChange) { }
+                NavigationService.searchCall("Photos/getApprovedPhotos", {
+                    page: $scope.currentPage,
+                    keyword: $scope.search.keyword,
+                    count: $scope.maxCount,
+                }, ++i,
+                    function (data, ini) {
+                        if (ini == i) {
+                            $scope.photoData  = data.data.results;
+                            $scope.totalItems = data.data.total;
+                            $scope.maxRow = data.data.options.count;
+                        }
+                    });
+            }
+
+        };
+        //  JsonService.refreshView = $scope.getAllItems;
+        $scope.getAllItems();
+
+        //pagination end 
+
+        // NavigationService.callApi("Photos/getApprovedPhotos", function(data) {
+        //     if (data.value === true) {
+        //         $scope.photoData = data.data.results;
+        //     }
+        // });
+
+        $scope.approveRequest = function(photoDetails) {
+            var formData={};
+            formData._id=photoDetails,
+            formData.status="Approved"
+            NavigationService.apiCallWithData("Photos/save",formData, function(data) {
+                if (data.value === true) {
+                    $state.reload();
+                }
+            });
+        
+        }
+
+        $scope.declineRequest = function(photoDetail) {
+            var formData={};
+            formData._id=photoDetail,
+            formData.status="Rejected"
+            NavigationService.apiCallWithData("Photos/save",formData, function(data) {
+                if (data.value === true) {
+                    $state.reload();
+                }
+            });
+        }
+
     });

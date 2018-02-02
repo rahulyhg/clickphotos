@@ -92,6 +92,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             url: "/jagz",
             templateUrl: "views/jagz.html",
             controller: 'JagzCtrl'
+        })
+
+        .state('upload-request', {
+            url: "/upload-request",
+            templateUrl: "views/template.html",
+            controller: 'UploadRequestCtrl'
         });
 
     $urlRouterProvider.otherwise("/dashboard");

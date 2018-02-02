@@ -65,11 +65,6 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             templateUrl: "frontend/views/template.html",
             controller: 'VirtualGalleryInnerCtrl'
         })
-        .state('upload-request', {
-            url: "/upload-request",
-            templateUrl: "frontend/views/template.html",
-            controller: 'UploadRequestCtrl'
-        })
         .state('wild-photographer', {
             url: "/wild-photographer/:catid/:catName/:photoLoc",
             templateUrl: "frontend/views/template.html",

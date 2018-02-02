@@ -1,0 +1,54 @@
+<section class="upload-request">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-area">
+                <div class="widget-title d-flex align-items-center">
+                    <h3>List of uploaded photos
+                        <span class="tableTotal"></span>
+                    </h3>
+                    <div class="search-area d-flex">
+                        <form name="Search" nonvalidate ng-submit="sendUploadRequest()">
+                            <div class="search-box">
+                                <input type="text " ng-change="getAllItems(true) " placeholder="Search Here...
+                                    " ng-model="search.keyword " /> 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="upload-photo-table table">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Photographer Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="photosData in photoData track by $index">
+                                <td>
+                                    <img ng-src="{{photosData.image | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                </td>
+                                <td>
+                                    {{photosData.photographer.name}}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" role="button" ng-click="approveRequest(photosData._id)">Accept</a>
+                                    <a class="btn btn-primary" role="button" ng-click="declineRequest(photosData._id)">Decline</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="right-side text-right">
+                        <ul ng-if="totalItems " ng-change="changePage(currentPage); " uib-pagination total-items="totalItems
+                                                      " items-per-page="maxRow " ng-model="currentPage " max-size="template.pageMax "
+                            class="pagination-sm
+                                                      " boundary-links="true " force-ellipses="true ">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
