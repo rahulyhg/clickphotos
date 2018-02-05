@@ -76,6 +76,8 @@ var model = {
         };
         Photos.find({
                 status: 'Pending'
+            }).sort({
+                createdAt: -1
             })
             .deepPopulate("categories photographer")
             .order(options)
@@ -89,5 +91,52 @@ var model = {
                     }
                 });
     },
+
+    downloadSelectedPhotos: function (data, callback) {
+        async.eachSeries(data, function (photoId, cb2) {
+            async.waterfall([
+                    function (callback) {
+                        Photos.findOne({
+                            _id: photoId
+                        }).exec(function (err, found) {
+                            if (err || _.isEmpty(found)) {
+                                callback(err, "noData");
+                            } else {
+                                callback(null, found)
+                            }
+                        });
+                    },
+                    function (data, callback) {
+                        var count;
+                        if (data.count) {
+                            count = data.count + 1;
+                        } else {
+                            count = 1;
+                        }
+                        Photos.findOneAndUpdate({
+                            _id: data._id
+                        }, {
+                            count: count
+                        }, {
+                            new: true
+                        }).exec(function (err, found) {
+                            if (err || _.isEmpty(found)) {
+                                callback(err, "noData");
+                            } else {
+                                callback(null, found)
+                            }
+                        });
+                    }
+                ],
+                function (err, found) {
+                    if (err) {
+                        console.log(err);
+                        cb2(err, null);
+                    } else {
+                        cb2(null, found);
+                    }
+                });
+        },callback);
+    }
 };
 module.exports = _.assign(module.exports, exports, model);

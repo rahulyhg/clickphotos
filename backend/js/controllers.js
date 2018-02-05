@@ -1629,7 +1629,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('UploadRequestCtrl', function($scope, TemplateService, NavigationService, $timeout,$state,$stateParams) {
+    .controller('UploadRequestCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams) {
         $scope.template = TemplateService.changecontent("upload-request"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Image upload request"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1666,30 +1666,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (keywordChange != undefined && keywordChange != true) {
                 $scope.maxCount = keywordChange;
                 $scope.totalItems = undefined;
-                if (keywordChange) { }
+                if (keywordChange) {}
                 NavigationService.searchCall("Photos/getApprovedPhotos", {
-                    page: $scope.currentPage,
-                    keyword: $scope.search.keyword,
-                    count: $scope.maxCount,
-                }, ++i,
+                        page: $scope.currentPage,
+                        keyword: $scope.search.keyword,
+                        count: $scope.maxCount,
+                    }, ++i,
                     function (data, ini) {
                         if (ini == i) {
-                            $scope.photoData  = data.data.results;
+                            $scope.photoData = data.data.results;
                             $scope.totalItems = data.data.total;
                             $scope.maxRow = data.data.options.count;
                         }
                     });
             } else {
                 $scope.totalItems = undefined;
-                if (keywordChange) { }
+                if (keywordChange) {}
                 NavigationService.searchCall("Photos/getApprovedPhotos", {
-                    page: $scope.currentPage,
-                    keyword: $scope.search.keyword,
-                    count: $scope.maxCount,
-                }, ++i,
+                        page: $scope.currentPage,
+                        keyword: $scope.search.keyword,
+                        count: $scope.maxCount,
+                    }, ++i,
                     function (data, ini) {
                         if (ini == i) {
-                            $scope.photoData  = data.data.results;
+                            $scope.photoData = data.data.results;
                             $scope.totalItems = data.data.total;
                             $scope.maxRow = data.data.options.count;
                         }
@@ -1702,33 +1702,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //pagination end 
 
-        // NavigationService.callApi("Photos/getApprovedPhotos", function(data) {
-        //     if (data.value === true) {
-        //         $scope.photoData = data.data.results;
-        //     }
+
+        $scope.approveRequest = function (photoDetails) {
+            var formData = {};
+            formData._id = photoDetails,
+                formData.status = "Approved"
+            NavigationService.apiCallWithData("Photos/save", formData, function (data) {
+                if (data.value === true) {
+                    $state.reload();
+                }
+            });
+
+        }
+
+        $scope.declineRequest = function (photoDetail) {
+            var formData = {};
+            formData._id = photoDetail,
+                formData.status = "Rejected"
+            NavigationService.apiCallWithData("Photos/save", formData, function (data) {
+                if (data.value === true) {
+                    $state.reload();
+                }
+            });
+        }
+
+        //for download photos
+
+        // var arrData = ['5a72ffa0a8983d1d98ce46ea', '5a7302a99e269c21db262b9c', '5a7456ebe9c7720d9b11b2db'];
+        // NavigationService.apiCallWithData("Photos/downloadSelectedPhotos", arrData, function (data) {
         // });
-
-        $scope.approveRequest = function(photoDetails) {
-            var formData={};
-            formData._id=photoDetails,
-            formData.status="Approved"
-            NavigationService.apiCallWithData("Photos/save",formData, function(data) {
-                if (data.value === true) {
-                    $state.reload();
-                }
-            });
-        
-        }
-
-        $scope.declineRequest = function(photoDetail) {
-            var formData={};
-            formData._id=photoDetail,
-            formData.status="Rejected"
-            NavigationService.apiCallWithData("Photos/save",formData, function(data) {
-                if (data.value === true) {
-                    $state.reload();
-                }
-            });
-        }
 
     });

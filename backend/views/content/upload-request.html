@@ -27,7 +27,7 @@
                         <tbody>
                             <tr ng-repeat="photosData in photoData track by $index">
                                 <td>
-                                    <img ng-src="{{photosData.image | serverimage}}" alt="" class="img-responsive profile-f-img " ng-if="user.profilePic">
+                                    <img ng-src="{{photosData.image | serverimage}}" alt="" class="img-responsive profile-f-img ">
                                 </td>
                                 <td>
                                     {{photosData.photographer.name}}
