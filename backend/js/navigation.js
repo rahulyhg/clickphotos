@@ -159,6 +159,13 @@ var navigationservice = angular.module('navigationservice', [])
                 });
             },
 
+            getCall: function (url, callback) {
+                $http.get(url).then(function (data) {
+                    data = data.data;
+                    callback(data);
+                });
+            },
+
             getOneCountry: function (id, callback) {
                 $http.post(adminurl + 'country/getOne', {
                     _id: id

@@ -1732,4 +1732,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // NavigationService.apiCallWithData("Photos/downloadSelectedPhotos", arrData, function (data) {
         // });
 
+        // NavigationService.getCall("https://restcountries.eu/rest/v2/all", function (data) {
+        //     console.log("-----------------------------",data);
+        // });
+
     });

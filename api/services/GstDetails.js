@@ -464,6 +464,7 @@ var model = {
 
         });
     },
+
     searchForJson: function (data, callback) {
         var Model = this;
         var Const = this(data);
@@ -511,7 +512,6 @@ var model = {
             .keyword(options)
             .page(options, callback);
     },
-
 
     search: function (data, callback) {
         var match = {};
