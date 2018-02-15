@@ -3433,44 +3433,77 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             img: 'frontend/img/bg1.jpg'
         }];
     })
-    .controller('VirtualGalleryInnerCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, $log) {
-        $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
-        $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
-        TemplateService.title = $scope.menutitle;
-        $scope.navigation = NavigationService.getnav();
-        var virtualGallstateParaData = {}; // To push $stateParams obj from $scope.virtualGallery
-        $scope.individualGalleryData = []; // To push a key and value if $stateParams obj is same
-        $scope.virtualGallery = [{
-            id: 1,
-            img: 'frontend/img/photographer/Clicked 2.jpg'
-        }, {
-            id: 2,
-            img: 'frontend/img/bg1.jpg'
-        }];
-        //We need to check if $stateParams is true, do the following task
-        if ($stateParams) {
-            virtualGallstateParaData.id = $stateParams.id;
-            $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
-            // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
-            _.forEach($scope.virtualGallery, function(key, value) {
-                //  $log.debug('key id', key.id);
-                if (virtualGallstateParaData.id == key.id) {
-                    // $log.debug('loop');
-                    $scope.individualGalleryData.push({
-                        id: key.id,
-                        img: key.img
-                    });
-                }
-            });
-        } // end of if
 
-        /*****Note****
-        We are going to use _.romove function which will remove the objects from the variable which will be an array of object  & return it. So thts'y we need to clone it & store it into the other variable which is  $scope.cpyGalleryData & the removed one will be stored in $scope.removedVirtualGall variable
-        **************/
-        $scope.cpyGalleryData = angular.copy($scope.virtualGallery);
-        $scope.removedVirtualGall = _.remove($scope.cpyGalleryData, function(n) {
-            return virtualGallstateParaData.id != n.id;
+.controller('MyCartCtrl', function($scope, TemplateService, NavigationService, $timeout, $log) {
+    $scope.template = TemplateService.changecontent("mycart"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("My Cart"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.cartAddedImg = [{
+            id: 1,
+            img: 'frontend/img/photographer/Clicked 2.jpg',
+            name: 'crocodile',
+            category: 'wildlife',
+            imageId: 5456,
+            price: 1300
+        },
+        {
+            id: 2,
+            img: 'frontend/img/bg1.jpg',
+            name: 'crocodile1',
+            category: 'wildlife',
+            imageId: 9874,
+            price: 1400
+        }
+    ];
+
+    $scope.removeAddedImg = function(cart) {
+        $log.info("index", cart);
+        $scope.removedElem = _.remove($scope.cartAddedImg, function(n) {
+            $log.info("n", n.id);
+            return n.id === cart.id;
         });
-        // $log.debug(' $scope.removedVirtualGall', $scope.removedVirtualGall);
-    })
-   
+    };
+    // $log.info(" $scope.removedElem", $scope.removedElem, " $scope.cartAddedImg", $scope.cartAddedImg);
+})
+
+.controller('VirtualGalleryInnerCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, $log) {
+    $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    var virtualGallstateParaData = {}; // To push $stateParams obj from $scope.virtualGallery
+    $scope.individualGalleryData = []; // To push a key and value if $stateParams obj is same
+    $scope.virtualGallery = [{
+        id: 1,
+        img: 'frontend/img/photographer/Clicked 2.jpg'
+    }, {
+        id: 2,
+        img: 'frontend/img/bg1.jpg'
+    }];
+    //We need to check if $stateParams is true, do the following task
+    if ($stateParams) {
+        virtualGallstateParaData.id = $stateParams.id;
+        $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
+        // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
+        _.forEach($scope.virtualGallery, function(key, value) {
+            //  $log.debug('key id', key.id);
+            if (virtualGallstateParaData.id == key.id) {
+                // $log.debug('loop');
+                $scope.individualGalleryData.push({
+                    id: key.id,
+                    img: key.img
+                });
+            }
+        });
+    } // end of if
+
+    /*****Note****
+    We are going to use _.romove function which will remove the objects from the variable which will be an array of object  & return it. So thts'y we need to clone it & store it into the other variable which is  $scope.cpyGalleryData & the removed one will be stored in $scope.removedVirtualGall variable
+    **************/
+    $scope.cpyGalleryData = angular.copy($scope.virtualGallery);
+    $scope.removedVirtualGall = _.remove($scope.cpyGalleryData, function(n) {
+        return virtualGallstateParaData.id != n.id;
+    });
+    // $log.debug(' $scope.removedVirtualGall', $scope.removedVirtualGall);
+})

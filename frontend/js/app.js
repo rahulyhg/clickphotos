@@ -65,6 +65,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             templateUrl: "frontend/views/template.html",
             controller: 'VirtualGalleryInnerCtrl'
         })
+        .state('mycart', {
+            url: "/mycart",
+            templateUrl: "frontend/views/template.html",
+            controller: 'MyCartCtrl'
+        })
         .state('wild-photographer', {
             url: "/wild-photographer/:catid/:catName/:photoLoc",
             templateUrl: "frontend/views/template.html",

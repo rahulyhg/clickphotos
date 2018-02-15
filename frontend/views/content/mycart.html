@@ -1,0 +1,71 @@
+<section class="my-cart">
+    <div class="container">
+        <div class="mycart-main-area">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <th align="center" colspan="3">
+                            <div class="d-flex align-items-center justify-content-center mycart-title">
+                                <img src="frontend/img/cart-logo.png " class="img-responsive">
+                                <h2 class="padd-tb15">My cart</h2>
+                            </div>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cart in cartAddedImg track by $index">
+                            <td>
+                                <div class="added-cart-imgbox shadow">
+                                    <img ng-src="{{cart.img}}" class="img-responsive" alt="in cart image">
+                                </div>
+                            </td>
+
+                            <td class="align-middle">
+                                <div class="added-cart-desc">
+                                    <h3 class="text-uppercase">{{cart.name}}</h3>
+                                    <p>
+                                        <ul class="list-unstyled desc-list">
+                                            <li>Category: <span class="text-uppercase">{{cart.category}}</span></li>
+                                            <li>Image ID: <span>{{cart.imageId}}</span></li>
+                                        </ul>
+                                    </p>
+                                    <p>
+                                        <div class="d-flex align-center">
+                                            <div class="d-flex align-items-center close--btn">
+                                                <a class="btn d-flex align-items-center justify-content-center" role="button" ng-click="removeAddedImg(cart)"><i class="fa fa-times"></i></a>
+                                            </div>
+                                            <span>Remove this image</span>
+                                        </div>
+                                    </p>
+                                </div>
+                            </td>
+
+                            <td class="align-middle" align="left">
+                                Price: <strong>&#8377; &nbsp;</strong>{{cart.price}}
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfooter>
+                        <tr>
+                            <td colspan="2" align="right">
+                                <ul class="list-unstyled amount-desc-list">
+                                    <li>SUBTOTAL</li>
+                                    <li>GST@18%</li>
+                                    <li>GRAND TOTAL</li>
+                                </ul>
+                                <p><a class="btn orange-btn">Continue Browsing</a></p>
+                            </td>
+                            <td>
+                                <ul class="list-unstyled amount-list text-center">
+                                    <li>200</li>
+                                    <li>36</li>
+                                    <li>236</li>
+                                </ul>
+                                <p><a class="btn orange-btn">Proceed to payment</a></p>
+                            </td>
+                        </tr>
+                    </tfooter>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

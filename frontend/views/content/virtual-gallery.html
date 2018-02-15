@@ -1,5 +1,5 @@
 <section class="virtual-gallery-main">
-    <img src="frontend/img/Virtual-gallery-main.jpg" class="img-responsive" alt="">
+    <img src="frontend/img/Virtual-gallery-main.png" class="img-responsive" alt="">
     <div class="container">
         <div class="gallery-search-main-section d-flex align-items-center justify-content-center">
             <div class="search-section-one">
@@ -43,7 +43,16 @@
             <div class="row">
                 <div ng-repeat="gallery in virtualGallery track by $index" class="col-md-3 col-sm-6 col-xs-12">
                     <div class="user-exception-uploaded shadow">
-                        <a ui-sref="virtual-gallery-inner({id:gallery.id})"><img ng-src={{gallery.img}} class="img-responsive" alt="Uploaded Photograph"></a>
+                        <a ui-sref="virtual-gallery-inner({id:gallery.id})" class="d-block user-exception-img" style="width:100%;min-height:inherit;background: url('{{gallery.img}}') no-repeat 50% 50%/cover">
+                            <img ng-src={{gallery.img}} class="img-responsive" alt="Uploaded Photograph">
+                        </a>
+                        <a class="d-flex align-items-center justify-content-center cart-area">
+                            <img src="frontend/img/cart-logo.png " alt="Add to cart" class="img-responsive" width="20" title="Click to add cart">
+                        </a>
+                        <div class=" cart-added-box d-flex align-items-center">
+                            <img src="frontend/img/cart-logo1.png " alt="Add to cart" class="img-responsive" width="20" title="Click to add cart">
+                            <div>Add to Cart</div>
+                        </div>
                     </div>
                 </div>
             </div>

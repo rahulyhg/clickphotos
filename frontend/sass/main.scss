@@ -251,6 +251,10 @@ body {
     margin-bottom: 53px;
 }
 
+d-block {
+    display: block;
+}
+
 .d-flex {
     @include display(flex);
 }
@@ -277,6 +281,23 @@ body {
 
 .align-items-end {
     @include align-items(flex-end);
+}
+
+.align-top {
+    vertical-align: top;
+}
+
+.align-middle {
+    vertical-align: middle!important;
+}
+
+.align-bottom {
+    vertical-align: bottom!important;
+}
+
+.padd-tb15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 // .mg_t75 {
@@ -995,7 +1016,7 @@ header>nav div.navbar-toggle>div.icon_float {
         }
     }
     span {
-        display: inline-block;
+        // display: inline-block;
         vertical-align: middle;
         color: #030303;
         font-size: 20px;
@@ -1007,6 +1028,22 @@ header>nav div.navbar-toggle>div.icon_float {
         @include padding(5px 15px);
         @include margin(null null null 5px);
         font-size: 13px;
+    }
+    .cart {
+        position: relative;
+        span {
+            @include size(15px,
+            15px);
+            border: 1px solid $orangeColor;
+            border-radius: 50%;
+            background-color: $orangeColor;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            position: absolute;
+            top: -5px;
+            right: -8px;
+        }
     }
 } //end display photographer's image(user image)
 // This section contains main background image with side nav menu
@@ -1556,6 +1593,22 @@ header>nav div.navbar-toggle>div.icon_float {
     .uploaded-photographs-section {
         padding-bottom: 15px;
     }
+    .cart-area {
+        @include size(35px,
+        35px);
+        background-color: #ccc;
+        position: absolute;
+        top: 9px;
+        right: 9px;
+    }
+    .cart-added-box {
+        @include padding(5px);
+        background-color: $orangeColor;
+        color: white;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
 }
 
 .viewmore-btn-area {
@@ -1617,17 +1670,22 @@ header>nav div.navbar-toggle>div.icon_float {
         margin-top: 5px;
         color: black;
     }
+    a.mail-to-link {
+        color: inherit;
+        text-decoration: underline;
+    }
 }
 
 .user-exception-uploaded {
     min-height: 227px;
     margin-bottom: 10px;
     @include display(flex);
-    @include align-items(center); // background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
+    @include align-items(center);
+    // background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
     // background-position: center center;
     // background-repeat: no-repeat;
-    // background-size: cover;
-    // overflow: hidden;
+    background-size: cover;
+    overflow: hidden;
 }
 
 //End of virtual gallery inner page
@@ -5239,6 +5297,60 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
 }
 
+//Start of mycart page
+.mycart-main-area {
+    width: 90%;
+    margin: auto;
+    .mycart-title img {
+        margin-right: 10px;
+    }
+    .mycart-title h2 {
+        margin-top: 10px;
+        color: $orangeColor;
+        font-size: 65px;
+        font-family: damion-regular;
+    }
+    table>tbody>tr>td:first-child {
+        width: 200px;
+    }
+    .added-cart-imgbox {
+        width: 210px;
+        @include margin(15px 15px 15px 0);
+    }
+    .added-cart-desc h3 {
+        color: $orangeColor;
+    }
+    ul.desc-list>li {
+        font-family: sans-serif;
+    }
+    .close--btn {
+        @include size(27px,
+        27px);
+        border: 1px solid $orangeColor;
+        border-radius: 50%;
+        margin-right: 5px;
+        background-color: $orangeColor;
+        font-family: sans-serif;
+        overflow: hidden;
+        a {
+            @include size(100%,
+            100%);
+            color: white;
+        }
+        .fa-times {
+            font-size: 15px;
+        }
+    }
+    ul.amount-desc-list {
+        padding-right: 50px;
+    }
+    ul.amount-list {
+        width: 150px;
+        display: inline-block;
+    }
+}
+
+//End of mycart page
 //Srujana
 a.forgot-pwd {
     text-decoration: underline;

@@ -104,7 +104,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-6 ">
                     <!--user name with img-->
-                    <div class="photographer text-center ">
+                    <div class="photographer text-center">
                         <div class="photographer_img ">
 
                             <img src="frontend/img/user.png " alt="UserImage " class="img-responsive " ng-if="!template.profile.profilePic ">
@@ -114,6 +114,11 @@
 
                         <span ng-if="!template.profile " ng-click="uploadSignup() ">Login/Sign up as a photographer</span>
                         <span ng-if="template.profile " ui-sref="photographer ">{{template.profile.name}}</span>
+                        <div class="cart pull-right">
+                            <img src="frontend/img/cart-logo.png " width="30" alt="added product">
+                            <span class="d-flex align-items-center justify-content-center">1</span>
+                        </div>
+
                         <button class="btn orange-btn inline-block " ng-if="template.profile " ng-click="logout() ">Log out</button>
                     </div>
                     <!--photographer-->
