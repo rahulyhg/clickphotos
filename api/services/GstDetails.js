@@ -101,7 +101,6 @@ var model = {
                                         emailData.file = finalData.data.name;
                                         emailData.filename = "featuredpht.ejs";
                                         emailData.subject = "Invoice";
-                                        console.log("emaildata#####################", emailData);
                                         Config.email(emailData, function (err, emailRespo) {
                                             if (err) {
                                                 console.log(err);
@@ -140,7 +139,7 @@ var model = {
                 callback(err);
             } else {
                 var invoiceNo = invoiceNumber;
-                console.log(invoiceNo);
+                // console.log(invoiceNo);
                 GstDetails.findOneAndUpdate({
                     _id: orderData[3]
                 }, {
@@ -277,7 +276,7 @@ var model = {
                 callback(err);
             } else {
                 var invoiceNo = invoiceNumber;
-                console.log(invoiceNo);
+                // console.log(invoiceNo);
                 GstDetails.findOneAndUpdate({
                     _id: orderData[4]
                 }, {

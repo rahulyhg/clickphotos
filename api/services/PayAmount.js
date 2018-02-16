@@ -35,9 +35,7 @@ var model = {
             if (err) {
                 callback(err, null);
             } else {
-
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {

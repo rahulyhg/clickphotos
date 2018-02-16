@@ -137,6 +137,30 @@ var model = {
                     }
                 });
         },callback);
+    },
+
+    getAllPhotos:function(data,callback){
+        Photos.find({
+            status:'Approved'
+        },function(err,data){
+            if(err||_.isEmpty(data)){
+                callback(err,"noData")
+            }else{
+                callback(null,data)
+            }
+        })
+    },
+
+    getAllRelatedPhotos:function(data,callback){
+        Photos.find({
+            categories:data.category
+        },function(err,data){
+            if(err||_.isEmpty(data)){
+                callback(err,"noData")
+            }else{
+                callback(null,data)
+            }
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);

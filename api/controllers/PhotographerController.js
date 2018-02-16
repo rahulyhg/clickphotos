@@ -293,7 +293,7 @@ var controller = {
     },
 
     checkoutPayment: function (req, res) {
-        console.log("req.body468646464sd64a6sd4asd", req.body)
+        // console.log("req.body468646464sd64a6sd4asd", req.body)
         if (req.body) {
             var formData = {
                 name: req.body.name,
@@ -324,8 +324,6 @@ var controller = {
                 if (err) {
                     res.callback(err);
                 } else {
-                    console.log("*****************************", data)
-
                     if (data.phone) {
                         var phoneno = data.phone
                     } else {
@@ -333,7 +331,7 @@ var controller = {
                     }
                     if (data.payAmount != null) {
                         EBSConfig.getAll({}, function (err, dataConfig) {
-                            console.log("ggggggggg");
+                            // console.log("ggggggggg");
                             console.log(data);
                             var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');
@@ -364,7 +362,7 @@ var controller = {
                         });
                     } else {
                         EBSConfig.getAll({}, function (err, dataConfig) {
-                            console.log("ggggggggg");
+                            // console.log("ggggggggg");
                             console.log(dataConfig);
                             var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');

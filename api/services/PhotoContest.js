@@ -107,7 +107,6 @@ var model = {
     },
 
     removeContestUsers: function (data, callback) {
-        console.log("DATA", data);
         PhotoContest.update({
             "_id": data._id,
             "contestParticipant": mongoose.Types.ObjectId(data.testid)
@@ -116,7 +115,6 @@ var model = {
                 contestParticipant: mongoose.Types.ObjectId(data.testid)
             }
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -177,7 +175,6 @@ var model = {
                     console.log(err);
                     callback(err, null);
                 } else if (updated) {
-                    console.log("hey", updated);
                     callback(null, updated);
                 } else {
                     callback(null, {});
@@ -254,9 +251,7 @@ var model = {
     },
 
     buyPhotoContestPackage: function (data, callback) {
-        console.log(data);
         var photocontestId = data.Description.split("/");
-        console.log("photocontestId", photocontestId);
         PhotoContest.findOneAndUpdate({
             _id: photocontestId[2]
         }, {
@@ -437,7 +432,6 @@ var model = {
 
     addcontestParticipant: function (data, callback) {
         var photocontestId = data.Description.split("/");
-        console.log("photocontestId-----------------", photocontestId);
         Photographer.findOneAndUpdate({
             _id: photocontestId[1]
         }, {

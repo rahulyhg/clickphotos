@@ -39,5 +39,31 @@ var controller = {
         }
     },
 
+    getAllPhotos: function (req, res) {
+        if (req.body) {
+            Photos.getAllPhotos(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
+    getAllRelatedPhotos: function (req, res) {
+        if (req.body) {
+            Photos.getAllRelatedPhotos(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+
 };
 module.exports = _.assign(module.exports, controller);

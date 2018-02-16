@@ -149,7 +149,7 @@ var controller = {
                                 var zip = new JSZip();
                                 // var zipFolder = zip.folder('photos');
                                 async.eachSeries(userPaths, function (image, callback1) {
-                                    console.log("iamge", image);
+                                    // console.log("iamge", image);
                                     // JSZip generates a readable stream with a "end" event,
                                     // but is piped here in a writable stream which emits a "finish" event.
                                     fs.readFile(image.finalPath, function (err, imagesData) {
@@ -284,26 +284,26 @@ var controller = {
                     // console.log("*****************************", req.body.Description);
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "PackageUpdateForThree") {
-                            console.log("req.body--------------------------------", req.body);
+                            // console.log("req.body--------------------------------", req.body);
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
-                                console.log("buyPhotoContestPackage---------------------------", data);
+                                // console.log("buyPhotoContestPackage---------------------------", data);
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
-                                console.log("-----------------------------------------3", data);
+                                // console.log("-----------------------------------------3", data);
                             });
                             GstDetails.updatePackageAmtForPhotoContest(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
+                                // console.log("updatePackageAmtForFeature", data);
                             });
                         } else if (req.body.Description.split("/")[0] === "PackageUpdateForSix") {
                             PhotoContest.buyPhotoContestPackage(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
                             PhotoContest.addcontestParticipant(req.body, function (err, data) {
-                                console.log("-----6");
+                                // console.log("-----6");
                             });
                             GstDetails.updatePackageAmtForPhotoContest(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
+                                // console.log("updatePackageAmtForFeature", data);
                             });
                         }
                         // else {
@@ -373,7 +373,7 @@ var controller = {
                         var phoneno = "0000000000"
                     }
                     EBSConfig.getAll({}, function (err, dataConfig) {
-                        console.log("ggggggggg");
+                        // console.log("ggggggggg");
                         console.log(dataConfig);
                         var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.payAmount.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                         var hashtext = hash.toString('hex');

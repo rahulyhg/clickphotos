@@ -36,8 +36,6 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
 
     saveCategories: function (data, callback) {
-
-        console.log(data);
         Categories.save({
             name: data.name,
             bigimage: data.bigimage,
@@ -64,15 +62,10 @@ var model = {
     },
 
     removeCategories: function (data, callback) {
-
-        console.log("DATA", data);
         Categories.remove({
-
                 "_id": data._id,
             },
-
             function (err, updated) {
-                console.log(updated);
                 if (err) {
                     console.log(err);
                     callback(err, null);
@@ -87,14 +80,10 @@ var model = {
         Categories.findOne({
             _id: data._id
         }).exec(function (err, found) {
-
             if (err) {
-
                 callback(err, null);
             } else {
-
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {
@@ -106,9 +95,6 @@ var model = {
     },
 
     updateCategories: function (data, callback) {
-
-        console.log("DATA", data);
-
         Categories.update({
             _id: data._id
         }, {
@@ -118,7 +104,6 @@ var model = {
             order: data.order
 
         }, function (err, updated) {
-            console.log(updated);
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -137,9 +122,7 @@ var model = {
             if (err) {
                 callback(err, null);
             } else {
-
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {
@@ -156,7 +139,6 @@ var model = {
         var page = 1;
         if (data.page) {
             page = data.page;
-            console.log("page is", data.page);
         }
         var field = data.field;
         var options = {
@@ -179,9 +161,7 @@ var model = {
             if (err) {
                 callback(err, null);
             } else {
-
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {

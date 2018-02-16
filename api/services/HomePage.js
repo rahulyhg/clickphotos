@@ -19,7 +19,6 @@ var model = {
             } else {
 
                 if (found) {
-                    console.log("Found", found);
                     callback(null, found);
                 } else {
                     callback(null, {

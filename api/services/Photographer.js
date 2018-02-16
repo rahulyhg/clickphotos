@@ -416,10 +416,7 @@ var model = {
     },
 
     removeUpldImg: function (data, callback) {
-
-        console.log("DATA", data);
         Photographer.update({
-
             "_id": data._id,
             "uploadedImages": {
                 $elemMatch: {
@@ -815,7 +812,6 @@ var model = {
     },
 
     updatePass: function (data, callback) {
-        console.log("DATA-----", data);
         Photographer.findOneAndUpdate({
             _id: data._id
         }, {
@@ -1019,9 +1015,7 @@ var model = {
                     emailData.from = "admin@clickmania.in";
                     emailData.fromname = "Clickmania Admin";
                     emailData.subject = "Welcome To Clickmania";
-                    console.log("email data : ", emailData);
                     Config.email(emailData, function (err, emailRespo) {
-                        console.log("emailRespo", emailRespo);
                         if (err) {
                             console.log(err);
                             //callback(null, found);
@@ -1038,9 +1032,7 @@ var model = {
                             emailData.from = "admin@clickmania.in";
                             emailData.fromname = "Clickmania Admin";
                             emailData.subject = "Clickmania Update Profile";
-                            console.log("email data : ", emailData);
                             Config.email(emailData, function (err, emailRespo) {
-                                console.log("emailRespo", emailRespo);
                                 if (err) {
                                     console.log(err);
                                     //callback(null, found);
@@ -1061,10 +1053,8 @@ var model = {
                     // console.log("diff", moment(currentTime).diff(ottym, 'minutes'));
                     var diff = moment(currentTime).diff(ottym, 'minutes');
                     if (diff <= 10) {
-                        console.log("aaa");
                         callback(null, found);
                     } else {
-                        console.log("bbb");
                         Photographer.remove({
                             _id: found._id
                         }).exec(function (error, found1) {
@@ -1110,8 +1100,8 @@ var model = {
     //smsotp
 
     updateToGold: function (data, callback) {
-        console.log("in update gold..");
-        console.log(data);
+        // console.log("in update gold..");
+        // console.log(data);
         var photographerId = data.Description.split("/");
         Photographer.findOneAndUpdate({
             _id: photographerId[1]
@@ -1279,7 +1269,6 @@ var model = {
                 emailData.from = "admin@clickmania.in";
                 emailData.fromname = "Clickmania Admin";
                 emailData.subject = "congrats you Have upgraded to Silver Package";
-                console.log("email data : ", emailData);
 
                 Config.email(emailData, function (err, emailRespo) {
                     if (err) {
@@ -1298,10 +1287,8 @@ var model = {
                         emailData.from = "admin@clickmania.in";
                         emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Please upgrade to Gold";
-                        console.log("email data : ", emailData);
 
                         Config.email(emailData, function (err, emailRespo) {
-                            console.log("emailRespo", emailRespo);
                             if (err) {
                                 console.log(err);
                                 callback(err, null);
@@ -1328,7 +1315,6 @@ var model = {
 
     //searchBar get all photographers city
     findPhotographerCities: function (data, callback) {
-        console.log("data", data)
         Photographer.find({}).exec(function (err, found) {
             if (err) {
                 callback(err, null);
@@ -1388,7 +1374,6 @@ var model = {
     },
 
     removeContestUser: function (data, callback) {
-        console.log("DATA", data);
         Photographer.update({
             "_id": data.testid,
             contestPhotos: {
@@ -1516,7 +1501,6 @@ cron.schedule('1 12 * * *', function () {
                     value.silverPackageBroughtDate = "";
                     value.goldPackageBroughtDate = "";
                     value.save(function () {});
-                    console.log("updated");
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
                     emailData.name = value.name;
@@ -1524,7 +1508,6 @@ cron.schedule('1 12 * * *', function () {
                     emailData.package = value.package;
                     emailData.filename = "packageExpiry.ejs";
                     emailData.subject = "Package Expiry";
-                    console.log("emaildata", emailData);
                     Config.email(emailData, function (err, emailRespo) {
                         if (err) {
                             callback(err, null);
@@ -1542,14 +1525,12 @@ cron.schedule('1 12 * * *', function () {
                     value.month = "";
                     value.year = "";
                     value.save(function () {});
-                    console.log("updated");
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
                     emailData.name = value.name;
                     emailData.email = value.email;
                     emailData.filename = "featureExpiry.ejs";
                     emailData.subject = "Feature Expiry";
-                    console.log("emaildata", emailData);
                     Config.email(emailData, function (err, emailRespo) {
                         if (err) {
                             callback(err, null);

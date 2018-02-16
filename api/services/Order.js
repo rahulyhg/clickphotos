@@ -115,7 +115,6 @@ var model = {
                     console.log(err);
                     callback(err, null);
                 } else if (updated) {
-                    console.log("hey", updated);
                     callback(null, updated);
                 } else {
                     callback(null, {});

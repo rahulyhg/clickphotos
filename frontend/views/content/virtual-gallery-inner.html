@@ -1,20 +1,20 @@
 <section class="virtual-gallery-inner">
     <div class="container">
         <div class="user-profile-section d-flex align-items-center">
-            <div ng-repeat="individualData in individualGalleryData" class="user-uploaded-img shadow">
-                <img ng-src="{{individualData.img}}" class="img-responsive" alt="User Uploaded Image">
+            <div class="user-uploaded-img shadow">
+                <img ng-src="{{individualGalleryData.image | serverimage}}" class="img-responsive" alt="User Uploaded Image">
             </div>
             <div class="user-profile">
                 <div class="border-half">
                     <div class="user-profile-img">
-                        <img src="http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg" alt="Photographer Image" class="img-responsive">
+                        <img src="{{individualGalleryData.photographer.profilePic | serverimage}}" alt="Photographer Image" class="img-responsive">
                     </div>
                 </div>
                 <div class="user-profile-info">
-                    <h3 class="text-uppercase">Prajakta kamble</h3>
+                    <h3 class="text-uppercase">{{individualGalleryData.photographer.name}}</h3>
                     <ul class="list-unstyled">
                         <li class="d-flex">Category:
-                            <div class="text-uppercase category">wildlife</div>
+                            <div class="text-uppercase category">{{individualGalleryData.categories.name}}</div>
                         </li>
                         <li class="d-flex">Size:
                             <div class="image-size text-capitalize">large</div>
@@ -38,14 +38,15 @@
         <div class="user-exception-photographs">
             <h4>Similar photographs</h4>
             <div class="row">
-                <div ng-repeat="removedGal in removedVirtualGall " class="col-md-3 col-sm-6">
-                    <div class="user-exception-uploaded shadow">
-                        <img ng-src="{{removedGal.img}}" class="img-responsive" alt="User Uploaded Image">
+                <div ng-repeat="relatedPic in showRelatedPic " class="col-md-3 col-sm-6">
+                    <div class="user-exception-uploaded shadow" style="background: url('{{relatedPic.image | serverimage}}') no-repeat 50% 50%/cover ">
+                        <!-- <img ng-src="{{relatedPic.image | serverimage}}" class="img-responsive" alt="User Uploaded Image"> -->
                     </div>
                 </div>
             </div>
             <div class="viewmore-btn-area text-center">
-                <a class="btn btn-lg orange-btn" role="button">View More</a>
+                <a class="btn btn-lg orange-btn" role="button" ng-click="loadMore()" ng-show="shbtn">View More</a>
+                <a class="btn btn-lg orange-btn" role="button" ng-click="loadLess()" ng-show="!shbtn">View Less</a>                
             </div>
         </div>
     </div>
