@@ -1263,6 +1263,9 @@
                 }
             }
         } //End of sign up section 
+        .virtual-gallery-home {
+            margin-bottom: 0;
+        }
         //Start of the artist of the month
         .atm {
             min-height: 360px;
@@ -1751,10 +1754,19 @@
         .user-exception-uploaded {
             min-height: 298px;
         } //End of virtual-gallery-inner
+        //Start of mycart
+        .mycart-main-area {
+            .user-exception-uploaded {
+                min-height: 227px!important;
+            }
+            .mycart-title h2 {
+                font-size: 35px;
+            }
+        }
     }
-
+    
     @media (max-width: $screen-md-max) {}
-
+    
     @media (min-width: 320px)and(max-width: 375px) {
         #nav-icon {
             padding: 2px;
