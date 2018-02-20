@@ -144,8 +144,7 @@
                                             </div>
                                             <div class="inline-block speciality-list">
                                                 <p class="check-box" ng-repeat="speciality in specialityData">
-                                                    <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)"
-                                                    />
+                                                    <input type="checkbox" id="{{speciality.name}}" ng-model="formData[speciality.name]" checked="{{speciality.value}}" ng-change="addMe(speciality)" />
                                                     <label for="{{speciality.name}}" class="check-label">{{speciality.name}}</label>
                                                 </p>
                                             </div>
@@ -170,8 +169,7 @@
                                         <div class="form-group">
                                             <label for="bio" class="vat"><img src="frontend/img/photographer/form/edit.png" alt="" class="img-responsive display-inline">Bio:</label>
                                             <div class="inline">
-                                                <textarea class="form-control text-set" id="bio" rows="5" placeholder="Describe yourself as a photographer in less than 250 characters"
-                                                    ng-model="photographerData.bio"></textarea>
+                                                <textarea class="form-control text-set" id="bio" rows="5" placeholder="Describe yourself as a photographer in less than 250 characters" ng-model="photographerData.bio"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -190,8 +188,7 @@
                                                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="price-dropdown">
                                                         <li role="menuitem" ng-repeat="priceRange in fees">
                                                             <div class="checkbox">
-                                                                <input type="checkbox" value="{{priceRange.value}}" id="{{priceRange.name}}" ng-checked="priceRange.status" ng-model="formData[priceRange.name]"
-                                                                    checked="{{priceRange.value}}" ng-change="addPricing(priceRange)">
+                                                                <input type="checkbox" value="{{priceRange.value}}" id="{{priceRange.name}}" ng-checked="priceRange.status" ng-model="formData[priceRange.name]" checked="{{priceRange.value}}" ng-change="addPricing(priceRange)">
                                                                 <label for="{{priceRange.name}}">{{priceRange.name}}
                                                                     </label>
                                                             </div>
@@ -218,8 +215,7 @@
                                 <!--without edit-->
                                 <div class="about-head text-capitalize">about {{photographerData.name}}
                                     <div class="edit-pencil display-inline pull-right" ng-click="showabout()">
-                                        <span>Edit</span><img src="frontend/img/photographer/form/edit-white.png" alt=""
-                                            class="img-responsive display-inline pull-right img-edit">
+                                        <span>Edit</span><img src="frontend/img/photographer/form/edit-white.png" alt="" class="img-responsive display-inline pull-right img-edit">
                                     </div>
                                 </div>
                                 <div class="abt-form">
@@ -299,8 +295,7 @@
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">SILVER PACKAGE</span>
                                                         <span class="display-block package-price">
-                                                      <span class="rupee">`</span>{{amount[0].amount}}
-                                                        inclusive of all taxes</span>
+                                                      <span class="rupee">`</span>{{amount[0].amount}} inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -323,8 +318,7 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price"><span class="rupee">`</span>{{amount[1].amount}}
-                                                        inclusive of all taxes</span>
+                                                        <span class="display-block package-price"><span class="rupee">`</span>{{amount[1].amount}} inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -346,8 +340,7 @@
                                                     <img src="frontend/img/photographer/award-symbolcopy2.png" alt="" class="img-responsive display-inline">
                                                     <div class="display-inline pkg-info">
                                                         <span class="display-block package-name">GOLD PACKAGE</span>
-                                                        <span class="display-block package-price"><span class="rupee">`</span>{{dyGoldAmount}}
-                                                        inclusive of all taxes</span>
+                                                        <span class="display-block package-price"><span class="rupee">`</span>{{dyGoldAmount}} inclusive of all taxes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -463,8 +456,7 @@
                                                     <span class="package-name">SILVER PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"> <span class="rupee">`</span>{{amount[0].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price"> <span class="rupee">`</span>{{amount[0].amount}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
@@ -485,8 +477,7 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span>{{dyGoldAmount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price"><span class="rupee">`</span>{{dyGoldAmount}} inclusive of all taxes
                                             </span>
 
                                             <ul class="package-specs text-left">
@@ -704,8 +695,7 @@
                                     </div>
                                     <div ng-if="showAllTabs=='show'">
                                         <div class="history-sec his-under">
-                                            <p class="">You Subscribed to Silver Package on {{photographerData.silverPackageBroughtDate
-                                                | date}}</p>
+                                            <p class="">You Subscribed to Silver Package on {{photographerData.silverPackageBroughtDate | date}}</p>
                                         </div>
                                         <!--<div class="history-sec his-under">
                                             <p class="">You Subscribed to Gold Package on {{photographerData.goldPackageBroughtDate |
@@ -740,8 +730,7 @@
 
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"> <span class="rupee">`</span>{{amount[0].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price"> <span class="rupee">`</span>{{amount[0].amount}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>30 photos</li>
@@ -763,8 +752,7 @@
                                                     <span class="package-name">GOLD PACKAGE</span>
                                                 </div>
                                             </div>
-                                            <span class="display-block package-price"><span class="rupee">`</span> {{amount[1].amount}}
-                                            inclusive of all taxes
+                                            <span class="display-block package-price"><span class="rupee">`</span> {{amount[1].amount}} inclusive of all taxes
                                             </span>
                                             <ul class="package-specs text-left">
                                                 <li>100 photos</li>
@@ -792,8 +780,7 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">SILVER PACKAGE</span>
-                                                <span class="display-block package-price">    <span class="rupee ">`</span>{{amount[0].amount}}
-                                                inclusive of all taxes</span>
+                                                <span class="display-block package-price">    <span class="rupee ">`</span>{{amount[0].amount}} inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForSilver | date}}</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light ">Online Payment</span></p>
@@ -817,8 +804,7 @@
                                         <div class="valdidity inline-block ">
                                             <div class="inline-block vam ">
                                                 <span class="display-block package-name ">GOLD PACKAGE</span>
-                                                <span class="display-block package-price "><span class="rupee ">`</span>{{amount[1].amount}}
-                                                inclusive of all taxes</span>
+                                                <span class="display-block package-price "><span class="rupee ">`</span>{{amount[1].amount}} inclusive of all taxes</span>
                                             </div>
                                             <p class="dosis-medium set-1 pdt10 ">VALIDITY:<span class="dosis-light ">{{validDateForGold | date}}</span></p>
                                             <p class="dosis-medium set-1 ">PAYMENT METHOD:<span class="dosis-light ">Online Payment</span></p>
@@ -884,12 +870,11 @@
                                                         <h3>Upload Photos</h3>
                                                     </div>
                                                 </div>
-                                                <div class="upload-photobox-server" style="background: url('{{contest.contestParticipant.Photos[image] | serverimage}}') no-repeat center center;"
-                                                    ng-if="contest.contestParticipant.Photos[image]">
+                                                <div class="upload-photobox-server" style="background: url('{{contest.contestParticipant.Photos[image] | serverimage}}') no-repeat center center;" ng-if="contest.contestParticipant.Photos[image]">
                                                     <div class="edit-image">
                                                         <div class="edit-uploaded">
                                                             <a ng-href="{{contest.contestParticipant.Photos[image] | serverimage}}" fancybox-box>
-                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
+                                                                <button type="button" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i>View</button></a>
                                                         </div>
                                                     </div>
 
@@ -912,6 +897,7 @@
                         </div>
                     </div>
                     <div class="gallery-uploaded-section free-member">
+                        <p class="padd-tb text-left"><strong>Keywords:</strong>underwater,whitedress, women,sunlighthroughwater</p>
                         <div class="gallery-uploaded-title">
                             Upload your best photographs:
                         </div>

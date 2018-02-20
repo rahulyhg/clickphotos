@@ -25,17 +25,18 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group" uib-dropdown>
-                            <button id="countryButton" type="button" class="btn btn-block country-btn" uib-dropdown-toggle>
-        Button dropdown <span class="caret"></span>
-      </button>
-                            <ul class="btn-block dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="countryButton">
-                                <li role="menuitem"><a href="#">Action</a></li>
-                                <li role="menuitem"><a href="#">Another action</a></li>
-                                <li role="menuitem"><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li role="menuitem"><a href="#">Separated link</a></li>
-                            </ul>
+                        <div class="form-group">
+                            <!-- <span class="caret"></span> -->
+                            <div class="country-dropdown">
+                                <ui-select ng-model="selectedCountry" on-select="selectCountry($item, $model)">
+                                    <ui-select-match>
+                                        <span>+{{$select.selected.callingCodes[0]}}&nbsp;{{$select.selected.name}}</span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="country in (countryListData| filter: $select.search) track by $index">
+                                        <span>+{{country.callingCodes[0]}}&nbsp;{{country.name}}</span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
                             <!-- <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
               <span class="alignment" ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter valid email id</span> -->
                         </div>

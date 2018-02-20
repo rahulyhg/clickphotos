@@ -504,6 +504,10 @@ a,
     }
 }
 
+textarea.form-control {
+    resize: none;
+}
+
 //End of custom radio box
 .margin-top {
     margin-top: 8px;
@@ -2782,8 +2786,8 @@ fieldset[disabled] .form-control {
     position: relative;
     .upload-pic {
         margin: 15px 0 0;
-        @include position(absolute,
-        null 14% -2% 0);
+        // @include position(absolute,
+        // null 14% -2% 0);
     }
     .note-msg {
         font-family: 'dosis-regular';
@@ -2811,6 +2815,12 @@ fieldset[disabled] .form-control {
         display: inline-block;
         vertical-align: bottom;
     }
+}
+
+.upload-head {
+    font-family: 'damion-regular';
+    color: $orangeColor;
+    font-size: 38px;
 }
 
 .img-holder {
@@ -3223,18 +3233,20 @@ fieldset[disabled] .form-control {
         color: $brand-holder;
         margin: 10px 0 20px;
     }
-    .country-btn {
+    .country-dropdown .btn-default {
+        border: 0;
         border-bottom: 1px solid $orangeColor;
         background-color: white;
-        color: #999;
-        text-align: left;
+        &:hover {
+            background-color: white;
+        }
+        &:focus {
+            border: 0;
+            border-bottom: 1px solid $orangeColor!important;
+        }
     }
-    .country-btn span.caret {
+    .country-dropdown .caret {
         color: $orangeColor;
-        position: absolute;
-        top: 50%;
-        right: 0;
-        @include transform(translateY(-50%));
     }
 }
 

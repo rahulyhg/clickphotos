@@ -3,107 +3,116 @@ var uploadurl = adminurl + "upload/index";
 var navigationservice = angular.module('navigationservice', [])
 
 
-    .factory('NavigationService', function ($http) {
-        var navigation = [{
-            name: "Home",
+.factory('NavigationService', function($http) {
+    var navigation = [{
+        name: "Home",
+        classis: "active",
+        anchor: "home",
+        subnav: [{
+            name: "Subnav1",
             classis: "active",
-            anchor: "home",
-            subnav: [{
-                name: "Subnav1",
-                classis: "active",
-                anchor: "home"
-            }]
-        }, {
-            name: "Form",
-            classis: "active",
-            anchor: "form",
-            subnav: []
-        }];
+            anchor: "home"
+        }]
+    }, {
+        name: "Form",
+        classis: "active",
+        anchor: "form",
+        subnav: []
+    }];
 
-        return {
-            getnav: function () {
-                return navigation;
-            },
-            makeactive: function (menuname) {
-                for (var i = 0; i < navigation.length; i++) {
-                    if (navigation[i].name == menuname) {
-                        navigation[i].classis = "active";
-                    } else {
-                        navigation[i].classis = "";
-                    }
+    return {
+        getnav: function() {
+            return navigation;
+        },
+        makeactive: function(menuname) {
+            for (var i = 0; i < navigation.length; i++) {
+                if (navigation[i].name == menuname) {
+                    navigation[i].classis = "active";
+                } else {
+                    navigation[i].classis = "";
                 }
-                return menuname;
-            },
+            }
+            return menuname;
+        },
 
-            apiCallWithData: function (url, formData, callback) {
-                $http.post(adminurl + url, formData).then(function (data) {
-                    data = data.data;
-                    callback(data);
+        apiCallWithData: function(url, formData, callback) {
+            $http.post(adminurl + url, formData).then(function(data) {
+                data = data.data;
+                callback(data);
 
-                });
-            },
+            });
+        },
 
-            callApi: function (url, callback) {
-                $http.post(adminurl + url).then(function (data) {
-                    data = data.data;
-                    callback(data);
-                });
-            },
+        callApi: function(url, callback) {
+            $http.post(adminurl + url).then(function(data) {
+                data = data.data;
+                callback(data);
+            });
+        },
 
-            sendLogin: function (formdata, callback) {
-                $http({
-                    url: adminurl + 'Photographer/registerUser',
-                    method: 'POST',
-                    data: formdata,
-                    withCredentials: true
-                }).then(function (data) {
-                    callback(data);
-                });
-            },
+        sendLogin: function(formdata, callback) {
+            $http({
+                url: adminurl + 'Photographer/registerUser',
+                method: 'POST',
+                data: formdata,
+                withCredentials: true
+            }).then(function(data) {
+                callback(data);
+            });
+        },
 
-            checkLogin: function (formdata, callback) {
-                $http({
-                    url: adminurl + 'Photographer/doLogin',
-                    method: 'POST',
-                    data: formdata,
-                    withCredentials: true
-                }).then(function (data) {
-                    callback(data);
-                });
-            },
+        checkLogin: function(formdata, callback) {
+            $http({
+                url: adminurl + 'Photographer/doLogin',
+                method: 'POST',
+                data: formdata,
+                withCredentials: true
+            }).then(function(data) {
+                callback(data);
+            });
+        },
 
-            //mailers
+        //mailers
 
-            sendEnquiry: function (id, callback) {
-                console.log(id);
-                var data = {
-                    _id: id
-                };
-                $http({
-                    url: adminurl + 'Photographer/sendEnq',
-                    method: 'POST',
-                    withCredentials: true,
-                    data: data
-                }).then(callback);
-            },
+        sendEnquiry: function(id, callback) {
+            console.log(id);
+            var data = {
+                _id: id
+            };
+            $http({
+                url: adminurl + 'Photographer/sendEnq',
+                method: 'POST',
+                withCredentials: true,
+                data: data
+            }).then(callback);
+        },
 
-            retriveContestResult: function (callback) {
+        retriveContestResult: function(callback) {
 
-                $http({
-                    url: adminurl + 'PhotoContest/findAllPhotoConetst',
-                    method: 'POST',
-                    withCredentials: true,
+            $http({
+                url: adminurl + 'PhotoContest/findAllPhotoConetst',
+                method: 'POST',
+                withCredentials: true,
 
-                }).then(callback);
-            },
-            uploadContestPhotos: function (data, callback) {
+            }).then(callback);
+        },
+        uploadContestPhotos: function(data, callback) {
 
-                $http({
-                    url: adminurl + 'PhotoContest/uploadContestPhotos',
-                    method: 'POST',
-                    withCredentials: true,
-                    data: data
-                }).then(callback);
-            },
-        };
-    });
+            $http({
+                url: adminurl + 'PhotoContest/uploadContestPhotos',
+                method: 'POST',
+                withCredentials: true,
+                data: data
+            }).then(callback);
+        },
+        getAllCountryCode: function(callback, data) {
+            $http({
+                url: 'https://restcountries.eu/rest/v2/all',
+                method: 'GET',
+                withCredentials: false
+            }).then(function(data) {
+                callback(data.data);
+            });
+        }
+    };
+});
