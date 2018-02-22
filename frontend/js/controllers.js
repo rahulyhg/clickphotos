@@ -2584,13 +2584,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // backdropClass: 'black-drop'
         //         });
         //     };
+
+        //To fetch the list of all country
+        NavigationService.getAllCountryCode(function (data) {
+            $scope.countryListData = data;
+        })
+        $scope.selectedCountry = $scope.countryListData;
+
+        // It will give the particular country on selection
+        $scope.selectCountry = function (item, model) {
+            var selectedCountryName = model.name; // it will give the country name 
+            var selectedCountryCode = model.callingCodes; // it will give the country  code 
+            //  console.log("model", selectedCountryName);
+        };
+
     })
 
     .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
 
         $scope.changeLanguage = function () {
             // console.log("Language CLicked");
-
             if (!$.jStorage.get("language")) {
                 $translate.use("hi");
                 $.jStorage.set("language", "hi");
@@ -3418,7 +3431,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         ]
     })
-    .controller('VirtualGalleryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('VirtualGalleryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.changecontent("virtual-gallery"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Virtual Gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -3436,8 +3449,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.callApi("Photos/getAllPhotos", function (data) {
             $scope.virtualGallery = data.data;
         })
-
-
+        //To open upload image modal
+        $scope.uploadImg = function (contest) {
+            $scope.contestIdModal = contest;
+            $scope.imgModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/upload-photo.html",
+                scope: $scope,
+                windowClass: 'upload-pic',
+                backdropClass: 'black-drop',
+                size: 'lg'
+            });
+        };
+        //To close upload image modal
+        $scope.closeModal = function () {
+            $scope.imgModal.close();
+        };
+        //To open image verification modal
+        $scope.imageVerify = function () {
+            $scope.imgModal = $uibModal.open({
+                animation: true,
+                templateUrl: "frontend/views/modal/image-verification.html",
+                scope: $scope,
+                windowClass: 'upload-pic',
+                backdropClass: 'black-drop',
+                size: 'lg'
+            });
+        };
 
     })
 
@@ -3523,9 +3561,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 };
 
             })
-
-
-
+            
             // $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
             // // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
             // _.forEach($scope.virtualGallery, function(key, value) {
@@ -3538,6 +3574,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //         });
             //     }
             // });
+
         } // end of if
 
         /*****Note****
