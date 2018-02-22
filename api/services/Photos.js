@@ -16,7 +16,13 @@ var schema = new Schema({
         type: String,
         default: "Pending",
         enum: ['Pending', 'Approved', 'Rejected']
-    }
+    },
+    mycart: [{
+        type: Schema.Types.ObjectId,
+        ref: 'MyCart',
+        index: true,
+        key: "photos"
+    }]
 });
 
 schema.plugin(deepPopulate, {
@@ -136,29 +142,30 @@ var model = {
                         cb2(null, found);
                     }
                 });
-        },callback);
+        }, callback);
     },
 
-    getAllPhotos:function(data,callback){
+    getAllPhotos: function (data, callback) {
         Photos.find({
-            status:'Approved'
-        },function(err,data){
-            if(err||_.isEmpty(data)){
-                callback(err,"noData")
-            }else{
-                callback(null,data)
+            status: 'Approved'
+        }, function (err, data) {
+            if (err || _.isEmpty(data)) {
+                callback(err, "noData")
+            } else {
+                callback(null, data)
             }
         })
     },
 
-    getAllRelatedPhotos:function(data,callback){
+    getAllRelatedPhotos: function (data, callback) {
         Photos.find({
-            categories:data.category
-        },function(err,data){
-            if(err||_.isEmpty(data)){
-                callback(err,"noData")
-            }else{
-                callback(null,data)
+            categories: data.category,
+            status: 'Approved'
+        }, function (err, data) {
+            if (err || _.isEmpty(data)) {
+                callback(err, "noData")
+            } else {
+                callback(null, data)
             }
         })
     }

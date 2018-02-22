@@ -3497,7 +3497,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 relatedData.category = $scope.individualGalleryData.categories._id
                 NavigationService.apiCallWithData("Photos/getAllRelatedPhotos", relatedData, function (data) {
                     $scope.relatedPhotos = data.data;
-                    $scope.showRelatedPic=_.slice($scope.relatedPhotos, 0, 8);
+                    $scope.showRelatedPic = _.slice($scope.relatedPhotos, 0, 8);
                 })
 
                 $scope.shbtn = true;
@@ -3506,15 +3506,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.showRelatedPic = $scope.relatedPhotos;
                     $scope.shbtn = false;
                 };
-        
+
                 $scope.loadLess = function () {
                     $scope.showRelatedPic = _.slice($scope.relatedPhotos, 0, 8);
                     $scope.shbtn = true;
                 };
 
+                $scope.mycart = function () {
+                    var myCartData = {};
+                    myCartData.photographer = $scope.individualGalleryData.photographer._id;
+                    myCartData.photos = $stateParams.id;
+                    console.log("myCartData-", myCartData);
+                    NavigationService.apiCallWithData("MyCart/addToCart", myCartData, function (data) {
+                        console.log("data----------", data);
+                    })
+                };
+
             })
 
-            
+
 
             // $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
             // // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
@@ -3539,3 +3549,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // });
         // $log.debug(' $scope.removedVirtualGall', $scope.removedVirtualGall);
     })
+
+    .factory("AddToCartSerivce", [function () {
+        function getAddedCartArray() {
+            var addedCartArray = $.jStorage.getItem("addedCartArray"); // It will create an array of local storage with the key name addedCart
+            if (!addedCartArray) {
+                addedCartArray = [];
+                $.jStorage.setItem["addedCart", JSON.stringify(addedCartArray)];
+
+            } else {
+                addedCartArray = JSON.parse(addedCartArray);
+            }
+            return addedCartArray;
+        }
+
+        return {
+            addTCart: function (ipObj) {
+                var addedCartObj = {
+                    id: ipObj.id
+                }; // which will set key and value from the clicked one image
+                var addedCartArray = getAddedCartArray();
+                var key = "addedCart_" + ipObj.id;
+                $.jStorage.setItem(key, JSON.stringify(addedCartObj));
+                addedCartArray.push(key);
+            },
+            getCart: function () {
+                var cartArrayLength = addedCartArray.length;
+                for (var i = 0; i < addedCartArray.length; i++) {
+                    var key = addedCartArray[i];
+                    var value = addedCartArray[key];
+                } // end of for
+                return cartArrayLength;
+            }
+        }
+    }]);
