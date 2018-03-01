@@ -7,7 +7,7 @@
             <div class="user-profile">
                 <div class="border-half">
                     <div class="user-profile-img">
-                        <img src="{{individualGalleryData.photographer.profilePic | serverimage}}" alt="Photographer Image" class="img-responsive">
+                        <img ng-src="{{individualGalleryData.photographer.profilePic | serverimage}}" alt="Photographer Image" class="img-responsive">
                     </div>
                 </div>
                 <div class="user-profile-info">
@@ -46,7 +46,7 @@
             </div>
             <div class="viewmore-btn-area text-center">
                 <a class="btn btn-lg orange-btn" role="button" ng-click="loadMore()" ng-show="shbtn">View More</a>
-                <a class="btn btn-lg orange-btn" role="button" ng-click="loadLess()" ng-show="!shbtn">View Less</a>                
+                <a class="btn btn-lg orange-btn" role="button" ng-click="loadLess()" ng-show="!shbtn">View Less</a>
             </div>
         </div>
     </div>

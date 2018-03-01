@@ -31,4 +31,6 @@ module.exports = [
   'frontend/js/templateservice.js',
   'frontend/js/navigation.js',
   'frontend/js/gstPaymentService.js',
+  // Services
+  'frontend/js/services/CartService.js',
 ];

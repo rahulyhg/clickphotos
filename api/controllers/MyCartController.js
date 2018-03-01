@@ -12,5 +12,29 @@ var controller = {
             })
         }
     },
+    getCart: function (req, res) {
+        if (req.body) {
+            MyCart.getCart(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+    removeProduct: function (req, res) {
+        if (req.body) {
+            MyCart.removeProduct(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);

@@ -1648,8 +1648,7 @@ header>nav div.navbar-toggle>div.icon_float {
         @include size(100%,
         100%);
         border-radius: 50%;
-        background-color: rgba(204, 204, 204, 0.22);
-        background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
+        background-color: rgba(204, 204, 204, 0.22); // background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -1684,8 +1683,7 @@ header>nav div.navbar-toggle>div.icon_float {
     min-height: 227px;
     margin-bottom: 10px;
     @include display(flex);
-    @include align-items(center);
-    // background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
+    @include align-items(center); // background-image: url('http://clickmania.in/api/upload/readFile?file=5958ac6e7ecd665d3c727859.jpg');
     // background-position: center center;
     // background-repeat: no-repeat;
     background-size: cover;
@@ -2785,8 +2783,7 @@ fieldset[disabled] .form-control {
     min-height: 212px;
     position: relative;
     .upload-pic {
-        margin: 15px 0 0;
-        // @include position(absolute,
+        margin: 15px 0 0; // @include position(absolute,
         // null 14% -2% 0);
     }
     .note-msg {

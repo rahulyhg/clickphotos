@@ -6,7 +6,8 @@
 
                 <div class="img-holder">
                     <img src="frontend/img/popup.jpg" alt="" class="img-responsive full-hight" ng-if="!imagesData.image">
-                    <div style="background: url('{{imagesData.image | serverimage}}') no-repeat 50% 50%; height: 100%; background-size: cover!important;" ng-if="imagesData.image">
+                    <div style="background: url('{{imagesData.image | serverimage}}') no-repeat 50% 50%; height: 100%; background-size: cover!important;"
+                        ng-if="imagesData.image">
                     </div>
                     <!--<img ng-src="{{imagesData.image | serverimage}}" alt="" class="img-responsive" ng-if="imagesData.image">-->
                 </div>
@@ -38,7 +39,7 @@
                     <p>We accept the following type <br> <span>.JPG,.PNG</span></p>
                     <p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="comment" placeholder="Type in keywords here"></textarea>
+                        <textarea class="form-control" rows="3" id="comment" placeholder="Type in keywords here" ng-model="imagesData.searchKeyword"></textarea>
                     </div>
 
                     <div class="upload-pic">
