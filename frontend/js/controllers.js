@@ -2251,7 +2251,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $scope.bigCurrentPage = 1;
     })
 
-    .controller('headerctrl', function ($scope, TemplateService, $uibModal, $location, $window, NavigationService, $state, $rootScope, toastr, AddToCartSerivce) {
+    .controller('headerctrl', function ($scope, TemplateService, $uibModal, $location, $window, NavigationService, $state, $rootScope, toastr, AddToCartSerivce, CartService) {
 
         $scope.template = TemplateService;
         $scope.registerData = {};
@@ -2600,8 +2600,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
             //  console.log("model", selectedCountryName);
         };
-        // To update the amount if a user adds a photograph in the cart
-        $rootScope.cartLength = AddToCartSerivce.getCart();
+
+        if ($.jStorage.get("photographer")) {
+            var photographerData = {};
+            photographerData.photographer = $.jStorage.get("photographer")._id;
+            CartService.getCart(photographerData, function (cartData) {
+                if (cartData.data.value) {
+                    $rootScope.myCartData = cartData.data.data;
+                    // To update the amount if a user adds a photograph in the cart
+                    // $rootScope.cartLength = AddToCartSerivce.getCart();
+                    $rootScope.cartLength = $rootScope.myCartData.photos.length;
+                }
+            })
+        }
+
     })
 
     .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
@@ -3449,12 +3461,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //     id: 2,
         //     img: 'frontend/img/bg1.jpg'
         // }];
-        $scope.beforeAddedCart = true;
-        $scope.afterAddedCart = AddToCartSerivce.checkCart(); // to show the Add to cart box
-
         NavigationService.callApi("Photos/getAllPhotos", function (data) {
             $scope.virtualGallery = data.data;
+
         });
+
+        $scope.beforeAddedCart = true;
+        $scope.afterAddedCart = AddToCartSerivce.checkCart(); // to show the Add to cart box
+        if ($.jStorage.get("photographer")) {
+            var photographerData = {};
+            photographerData.photographer = $.jStorage.get("photographer")._id;
+            CartService.getCart(photographerData, function (cartData) {
+                if (cartData.data.value) {
+                    $rootScope.myCartData = cartData.data.data;
+                    // To update the amount if a user adds a photograph in the cart
+                    // $rootScope.cartLength = AddToCartSerivce.getCart();
+                    $rootScope.cartLength = $rootScope.myCartData.photos.length;
+
+                    //to check photograph exist in cart 
+                    _.each($scope.virtualGallery, function (gallery) {
+                        _.each($rootScope.myCartData.photos, function (cartPhoto) {
+                            if (_.isEqual(cartPhoto._id, gallery._id)) {
+                                gallery.myCart = true;
+                            } else {
+                                if (gallery.myCart) {
+                                    gallery.myCart = true;
+                                } else {
+                                    gallery.myCart = false;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+
+        }
 
         //get all categories
         NavigationService.callApi("Categories/getAll", function (data) {
@@ -3532,9 +3573,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (data.value) {}
             });
         };
-        CartService.myFunc("vvvvvvv", function (data) {
-            console.log("##########################", data)
-        });
+
+        //to add in cart
+        $scope.mycart = function (photo) {
+            var myCartData = {};
+            myCartData.photos = photo._id;
+            myCartData.photographer = $.jStorage.get("photographer")._id;
+            _.each($rootScope.myCartData.photos, function (photo) {
+                if (_.isEqual(photo._id, myCartData.photos)) {
+                    $scope.myCartTrue = true;
+                    return $scope.myCartTrue
+                }
+            });
+            if (!$scope.myCartTrue) {
+                CartService.addToCart(myCartData, function (data) {
+                    if (data.data.value) {
+                        $rootScope.myCartData = data.data.data;
+                        $scope.alreadyInCartModal = $uibModal.open({
+                            animation: true,
+                            templateUrl: "frontend/views/modal/cartModal.html",
+                            scope: $scope,
+                            windowClass: 'upload-pic',
+                            backdropClass: 'black-drop',
+                            size: 'sm'
+                        });
+
+                        $timeout(function () {
+                            $scope.alreadyInCartModal.close();
+                            $state.reload();
+                        }, 1000);
+                    }
+                });
+            } else {
+                $scope.alreadyInCartModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: "frontend/views/modal/cartModal.html",
+                    scope: $scope,
+                    windowClass: 'upload-pic',
+                    backdropClass: 'black-drop',
+                    size: 'sm'
+                });
+            }
+
+        };
 
     })
 
@@ -3571,7 +3652,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $log.info(" $scope.removedElem", $scope.removedElem, " $scope.cartAddedImg", $scope.cartAddedImg);
     })
 
-    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log, CartService) {
+    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log, CartService, $rootScope, $uibModal) {
         $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -3588,6 +3669,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //We need to check if $stateParams is true, do the following task
         if ($stateParams) {
             virtualGallstateParaData._id = $stateParams.id;
+            var myCartData = {};
+            myCartData.photographer = $.jStorage.get("photographer")._id;
+            myCartData.photos = $stateParams.id;
             NavigationService.apiCallWithData("Photos/getOne", virtualGallstateParaData, function (data) {
                 $scope.individualGalleryData = data.data;
                 var relatedData = {}
@@ -3608,18 +3692,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.showRelatedPic = _.slice($scope.relatedPhotos, 0, 8);
                     $scope.shbtn = true;
                 };
-
+                $scope.myCartTrue = false;
                 $scope.mycart = function () {
-                    var myCartData = {};
-                    myCartData.photographer = $scope.individualGalleryData.photographer._id;
-                    myCartData.photos = $stateParams.id;
                     console.log("myCartData-", myCartData);
-                    NavigationService.apiCallWithData("MyCart/addToCart", myCartData, function (data) {
-                        console.log("data----------", data);
-                    })
+                    _.each($rootScope.myCartData.photos, function (photo) {
+                        if (_.isEqual(photo._id, myCartData.photos)) {
+                            $scope.myCartTrue = true;
+                            return $scope.myCartTrue
+                        }
+                    });
+                    if (!$scope.myCartTrue) {
+                        CartService.addToCart(myCartData, function (data) {
+                            console.log("data----------", data);
+                            if (data.data.value) {
+                                $rootScope.myCartData = data.data.data;
+                                $scope.alreadyInCartModal = $uibModal.open({
+                                    animation: true,
+                                    templateUrl: "frontend/views/modal/cartModal.html",
+                                    scope: $scope,
+                                    windowClass: 'upload-pic',
+                                    backdropClass: 'black-drop',
+                                    size: 'sm'
+                                });
+                            }
+                        });
+                    } else {
+                        $scope.alreadyInCartModal = $uibModal.open({
+                            animation: true,
+                            templateUrl: "frontend/views/modal/cartModal.html",
+                            scope: $scope,
+                            // windowClass: 'upload-pic',
+                            // backdropClass: 'black-drop',
+                            size: 'sm'
+                        });
+                        // alert("Already in cart");
+                    }
+
                 };
 
             })
+
+
 
             // $log.warn('  virtualGallstateParaData', virtualGallstateParaData.id);
             // // We need to check if $stateparams id is equal to  $scope.virtualGallery.id. So that we are going to use for loop
@@ -3721,10 +3834,10 @@ firstapp.service('CartService', function ($http) {
         }).then(callback);
     }
     //add photo in cart
-    this.addToCart = function (data, callback) {
-        var cart = {};
-        cart.photographer = data.photographerId;
-        cart.photos = data.image;
+    this.addToCart = function (cart, callback) {
+        // var cart = {};
+        // cart.photographer = data.photographerId;
+        // cart.photos = data.image;
         // this.getCart(cart, function (data) {
         //     console.log("after calling get cart", data);
         //     if (!_.isEmpty(data)) {

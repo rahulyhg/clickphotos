@@ -46,10 +46,10 @@
                         <a ui-sref="virtual-gallery-inner({id:gallery._id})" class="d-block user-exception-img" style="width:100%;min-height:inherit;background: url('{{gallery.image | serverimage}}') no-repeat 50% 50%/cover ">
                             <!-- <img ng-src="{{gallery.image | serverimage}}" class="img-responsive" alt="Uploaded Photograph"> -->
                         </a>
-                        <a class="d-flex align-items-center justify-content-center cart-area" ng-click="addToCart(gallery);" ng-if="beforeAddedCart">
+                        <a class="d-flex align-items-center justify-content-center cart-area" ng-if="gallery.myCart">
                             <img src="frontend/img/cart-logo.png " alt="Add to cart" class="img-responsive" width="20" title="Click to add cart">
                         </a>
-                        <div class=" cart-added-box d-flex align-items-center" ng-if="afterAddedCart">
+                        <div class=" cart-added-box d-flex align-items-center" ng-click="mycart(gallery);" ng-if="!gallery.myCart">
                             <img src="frontend/img/cart-logo1.png " alt="Add to cart" class="img-responsive" width="20" title="Click to add cart">
                             <div>Add to Cart</div>
                         </div>
