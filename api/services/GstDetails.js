@@ -247,6 +247,31 @@ var model = {
                                                     callback(null, "Invalid data");
                                                 }
                                             });
+                                        } else {
+                                            var emailData = {};
+                                            emailData.from = "admin@clickmania.in";
+                                            emailData.name = found.photographer.name;
+                                            emailData.email = found.photographer.email;
+                                            emailData.file = finalData.data.name;
+                                            emailData.filename = "virtualGallery.ejs";
+                                            emailData.subject = "congrats you have successfully purchased";
+                                            Config.email(emailData, function (err, emailRespo) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    callback(err);
+                                                } else if (emailRespo) {
+                                                    // callback(null, emailRespo);
+
+                                                    if (emailRespo) {
+                                                        // callback(null, updated);
+                                                    } else {
+                                                        // callback("Invalid data", updated);
+                                                    }
+
+                                                } else {
+                                                    callback(null, "Invalid data");
+                                                }
+                                            });
                                         }
                                     }
                                 ],

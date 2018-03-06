@@ -92,7 +92,9 @@ var schema = new Schema({
     contest: [{
         type: Schema.Types.ObjectId,
         ref: "PhotoContest"
-    }]
+    }],
+    country: String
+
 });
 
 schema.plugin(deepPopulate, {
@@ -871,6 +873,7 @@ var model = {
 
     //send otp
     checkPhotographersForOtp: function (data, callback) {
+        console.log("###########################33", data);
         var otpData = this(data);
         otpData.otpTime = new Date();
         otpData.verifyAcc = false;

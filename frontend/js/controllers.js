@@ -2277,7 +2277,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // //     'width': '36px'
             // // });
             $('#nav-icon').toggleClass('open');
-
             $('.side-menu').addClass('menu-in');
             $('.side-menu').removeClass('menu-out');
             $('.main-overlay').css('opacity', '1');
@@ -2348,6 +2347,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
                 if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
                     $scope.registerData = formdata;
+                    $scope.registerData.country = $scope.selectedCountryName;
                     NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function(data) {
                         // console.log("dataForOtp", data);
                         if (data.data.verifyAcc == false) {
@@ -2596,11 +2596,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     // It will give the particular country on selection
     $scope.selectCountry = function(item, model) {
-        var selectedCountryName = model.name; // it will give the country name 
+        var selectedCountryName = $scope.selectedCountryName = model.name; // it will give the country name 
         var selectedCountryCode = model.callingCodes; // it will give the country  code 
         //  console.log("model", selectedCountryName);
     };
-
     if ($.jStorage.get("photographer")) {
         var photographerData = {};
         photographerData.photographer = $.jStorage.get("photographer")._id;
@@ -2619,7 +2618,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $rootScope.cartLength = 0;
                 }
             }
-        })
+        });
+
+
     }
 
 })
@@ -3033,6 +3034,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.apiCallWithData("Photographer/sendOtp", formdata, function(data) {
             if (data.value) {
                 $scope.id = data.data._id;
+
             }
         });
     };
@@ -3218,6 +3220,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
                 });
 
+            } else if (data.data.description.split('/')[0] == "virtualGallery") {
+                $scope.msg = "Thank you!!";
+                formData = {};
+                formData._id = $.jStorage.get("photographer")._id;
+                NavigationService.apiCallWithData("Photographer/getOne", formData, function(data) {
+                    // console.log("data update", data)
+                    if (data.value === true) {
+                        $.jStorage.set("photographer", data.data);
+                    }
+                });
             } else {
                 $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
                 formData = {};
@@ -3334,7 +3346,149 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // ABS PAYMENT GATEWAY
         formdata.photographer = $.jStorage.get("photographer")._id;
         // formdata.payAmount = $scope.amount[0]._id; // add $jStorage amount value
-        formdata.amount = $scope.amount[0].amount; // add $jStorage amount value
+        formdata.amount = $.jStorage.get("virtualGalleryAmount"); // add $jStorage amount value
+        formdata.email = $.jStorage.get("photographer").email;
+        formdata.phone = phone;
+        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+        formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "virtualGallery/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
+        // console.log(formdata);
+        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function(data) {
+            // console.log(data);
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
+                // console.log(data)
+                $.jStorage.set("photographer", data.data);
+            })
+            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+        });
+    };
+
+    $scope.gstPayment = function(userdetails) {
+        // console.log("userdetails", userdetails.fname);
+        // console.log($scope.numberOfSlot);
+        $scope.userData = {};
+        $scope.userData.firstName = userdetails.fname;
+        $scope.userData.lastName = userdetails.lname;
+        $scope.userData.address = userdetails.address;
+        $scope.userData.phone = userdetails.phone
+        $scope.userData.state = userdetails.state;
+        $scope.userData.city = userdetails.city;
+        $scope.userData.pincode = userdetails.pin;
+        $scope.userData.gstNumber = userdetails.GSTNumber;
+        $scope.userData.photographer = $.jStorage.get("photographer")._id;
+        var url = "GstDetails/save";
+        // console.log($scope.userData)
+        NavigationService.apiCallWithData(url, $scope.userData, function(data) {
+            // console.log(data)
+            var order = data.data._id;
+            if ($scope.view == "silver") {
+                $scope.silverMember(order, $scope.userData.phone);
+
+            } else if ($scope.view == "gold") {
+                $scope.goldMember(order, $scope.userData.phone);
+            } else if ($scope.view == "virtualGallery") {
+                $scope.virtualGalleryPhotoPurchase(order, $scope.userData.phone);
+            } else {
+                $state.go("photographer");
+            }
+        });
+    };
+}).controller('BillPayGst', function($scope, $stateParams, $state, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.changecontent("billpaygst"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Bill Payment"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
+    $scope.view = $stateParams.view;
+    // console.log($scope.view);
+
+    NavigationService.callApi("PayAmount/getAll", function(data) {
+        $scope.amount = data.data;
+        // console.log("PAy amount: ", $scope.amount);
+    });
+    var photographer = $.jStorage.get("photographer")
+        // console.log("photographer", photographer);
+
+    //goldpackgeupdateDynamic
+
+    if ($.jStorage.get("photographer")) {
+        if ($.jStorage.get("photographer").package == "Silver") {
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function(data) {
+                if (data.value === true) {
+                    $scope.dyGoldAmount = data.data;
+                    // console.log("$scope.dyGoldAmount++++++++++++++++++", $scope.dyGoldAmount);
+                }
+            });
+        }
+    }
+
+    //goldpackgeupdateDynamic end
+
+    $scope.goldMember = function(order, phone) {
+        formdata = {};
+        formdata.photographer = $.jStorage.get("photographer")._id;
+        if (photographer.package == "Silver") {
+            formdata.payAmount = null;
+            formdata.amount = $scope.dyGoldAmount;
+            formdata.phone = phone;
+            // console.log("if")
+        } else {
+            formdata.payAmount = $scope.amount[1]._id;
+            formdata.amount = $scope.amount[1].amount;
+            // console.log("else")
+        }
+        formdata.email = $.jStorage.get("photographer").email;
+        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+        formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
+        // console.log(formdata);
+        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function(data) {
+            // console.log("resp data", data);
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
+                // console.log(data)
+                $.jStorage.set("photographer", data.data);
+            })
+            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+        });
+    };
+
+    $scope.silverMember = function(order, phone) {
+        formdata = {};
+        // ABS PAYMENT GATEWAY
+        formdata.photographer = $.jStorage.get("photographer")._id;
+        formdata.payAmount = $scope.amount[0]._id;
+        formdata.amount = $scope.amount[0].amount;
+        formdata.email = $.jStorage.get("photographer").email;
+        formdata.phone = phone;
+        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+        formdata.name = $.jStorage.get("photographer").name;
+        formdata.type = "Silver/" + $.jStorage.get("photographer")._id + "/" + $scope.amount[0].amount + "/" + order;
+        // console.log(formdata);
+        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function(data) {
+            // console.log(data);
+            formdata = {};
+            formdata._id = $.jStorage.get("photographer")._id;
+            NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
+                // console.log(data)
+                $.jStorage.set("photographer", data.data);
+            })
+            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+        });
+    };
+
+    //virtualGallery photograph purchase
+    $scope.virtualGalleryPhotoPurchase = function(order, phone) {
+        formdata = {};
+        // ABS PAYMENT GATEWAY
+        formdata.photographer = $.jStorage.get("photographer")._id;
+        // formdata.payAmount = $scope.amount[0]._id; // add $jStorage amount value
+        formdata.amount = $.jStorage.get("virtualGalleryAmount"); // add $jStorage amount value
         formdata.email = $.jStorage.get("photographer").email;
         formdata.phone = phone;
         formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
@@ -3641,6 +3795,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (_.isEqual(photo._id, myCartData.photos)) {
                     $scope.myCartTrue = true;
                     return $scope.myCartTrue
+
                 }
             });
             if (!$scope.myCartTrue) {
@@ -3713,6 +3868,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.cartAddedImg = cartData.data.data.photos;
                 $scope.price = cartData.data.data.baseValue;
                 $scope.subTotal = $scope.price * cartData.data.data.photos.length;
+                $.jStorage.set("virtualGalleryAmount", $scope.subTotal);
                 // $rootScope.cartLength = $rootScope.myCartData.photos.length;
                 console.log("#######################333", $scope.cartAddedImg);
             }
