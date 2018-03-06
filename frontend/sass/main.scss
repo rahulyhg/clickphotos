@@ -251,7 +251,7 @@ body {
     margin-bottom: 53px;
 }
 
-d-block {
+.d-block {
     display: block;
 }
 
@@ -1034,6 +1034,7 @@ header>nav div.navbar-toggle>div.icon_float {
         font-size: 13px;
     }
     .cart {
+        width: 30px;
         position: relative;
         span {
             @include size(15px,
@@ -1047,6 +1048,7 @@ header>nav div.navbar-toggle>div.icon_float {
             position: absolute;
             top: -5px;
             right: -8px;
+            letter-spacing: 1px;
         }
     }
 } //end display photographer's image(user image)
@@ -1594,6 +1596,15 @@ header>nav div.navbar-toggle>div.icon_float {
             @include transform(translateY(-50%));
         }
     }
+    .ui-select-container {
+        width: 100% !important;
+        .ui-select-match-text {
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
     .uploaded-photographs-section {
         padding-bottom: 15px;
     }
@@ -1612,6 +1623,9 @@ header>nav div.navbar-toggle>div.icon_float {
         position: absolute;
         top: 15px;
         right: 15px;
+        &:hover {
+            text-decoration: none;
+        }
     }
 }
 

@@ -3267,9 +3267,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //goldpackgeupdateDynamic end
 
         $scope.goldMember = function (order, phone) {
-
             formdata = {};
-
             formdata.photographer = $.jStorage.get("photographer")._id;
             if (photographer.package == "Silver") {
                 formdata.payAmount = null;
@@ -3296,8 +3294,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 })
                 window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
             });
-
-
         };
 
         $scope.silverMember = function (order, phone) {
@@ -3349,7 +3345,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
-
         $scope.gstPayment = function (userdetails) {
             // console.log("userdetails", userdetails.fname);
             // console.log($scope.numberOfSlot);
@@ -3378,10 +3373,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 } else {
                     $state.go("photographer");
                 }
-
-            })
-
-        }
+            });
+        };
     })
 
     .controller('thanksSilverCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -3476,7 +3469,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         ]
     })
 
-    .controller('VirtualGalleryCtrl', function ($scope, $rootScope, TemplateService, NavigationService, AddToCartSerivce, $timeout, $uibModal, $log, $state, CartService) {
+    .controller('VirtualGalleryCtrl', function ($scope, $rootScope, TemplateService, NavigationService, AddToCartSerivce, $timeout, $uibModal, $log, $state, CartService, toastr) {
         $scope.template = TemplateService.changecontent("virtual-gallery"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Virtual Gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -3609,44 +3602,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         //to add in cart
         $scope.mycart = function (photo) {
-            var myCartData = {};
-            myCartData.photos = photo._id;
-            myCartData.photographer = $.jStorage.get("photographer")._id;
-            _.each($rootScope.myCartData.photos, function (photo) {
-                if (_.isEqual(photo._id, myCartData.photos)) {
-                    $scope.myCartTrue = true;
-                    return $scope.myCartTrue
-                }
-            });
-            if (!$scope.myCartTrue) {
-                CartService.addToCart(myCartData, function (data) {
-                    if (data.data.value) {
-                        $rootScope.myCartData = data.data.data;
-                        $scope.alreadyInCartModal = $uibModal.open({
-                            animation: true,
-                            templateUrl: "frontend/views/modal/cartModal.html",
-                            scope: $scope,
-                            windowClass: 'upload-pic',
-                            backdropClass: 'black-drop',
-                            size: 'sm'
-                        });
-
-                        $timeout(function () {
-                            $scope.alreadyInCartModal.close();
-                            $state.reload();
-                        }, 1000);
+            if ($.jStorage.get("photographer")) {
+                //first check if a user is logged in
+                var myCartData = {};
+                myCartData.photos = photo._id;
+                myCartData.photographer = $.jStorage.get("photographer")._id;
+                _.each($rootScope.myCartData.photos, function (photo) {
+                    if (_.isEqual(photo._id, myCartData.photos)) {
+                        $scope.myCartTrue = true;
+                        return $scope.myCartTrue
                     }
                 });
-            } else {
-                $scope.alreadyInCartModal = $uibModal.open({
-                    animation: true,
-                    templateUrl: "frontend/views/modal/cartModal.html",
-                    scope: $scope,
-                    windowClass: 'upload-pic',
-                    backdropClass: 'black-drop',
-                    size: 'sm'
-                });
+                if (!$scope.myCartTrue) {
+                    CartService.addToCart(myCartData, function (data) {
+                        if (data.data.value) {
+                            $rootScope.myCartData = data.data.data;
+                            $scope.alreadyInCartModal = $uibModal.open({
+                                animation: true,
+                                templateUrl: "frontend/views/modal/cartModal.html",
+                                scope: $scope,
+                                windowClass: 'upload-pic',
+                                backdropClass: 'black-drop',
+                                size: 'sm'
+                            });
+
+                            $timeout(function () {
+                                $scope.alreadyInCartModal.close();
+                                $state.reload();
+                            }, 1000);
+                        }
+                    });
+                } else {
+                    $scope.alreadyInCartModal = $uibModal.open({
+                        animation: true,
+                        templateUrl: "frontend/views/modal/cartModal.html",
+                        scope: $scope,
+                        windowClass: 'upload-pic',
+                        backdropClass: 'black-drop',
+                        size: 'sm'
+                    });
+                }
+            } //end of if
+            else {
+                // if a user is not logged in, display an error
+                toastr.error('Please login first', 'Error');
             }
+
 
         };
 
@@ -3709,7 +3710,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $log.info(" $scope.removedElem", $scope.removedElem, " $scope.cartAddedImg", $scope.cartAddedImg);
     })
 
-    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log, CartService, $rootScope, $uibModal) {
+    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log, CartService, $rootScope, $uibModal, toastr) {
         $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -3727,7 +3728,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($stateParams) {
             virtualGallstateParaData._id = $stateParams.id;
             var myCartData = {};
-            myCartData.photographer = $.jStorage.get("photographer")._id;
+
             myCartData.photos = $stateParams.id;
             NavigationService.apiCallWithData("Photos/getOne", virtualGallstateParaData, function (data) {
                 $scope.individualGalleryData = data.data;
@@ -3751,39 +3752,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 };
                 $scope.myCartTrue = false;
                 $scope.mycart = function () {
-                    console.log("myCartData-", myCartData);
-                    _.each($rootScope.myCartData.photos, function (photo) {
-                        if (_.isEqual(photo._id, myCartData.photos)) {
-                            $scope.myCartTrue = true;
-                            return $scope.myCartTrue
-                        }
-                    });
-                    if (!$scope.myCartTrue) {
-                        CartService.addToCart(myCartData, function (data) {
-                            console.log("data----------", data);
-                            if (data.data.value) {
-                                $rootScope.myCartData = data.data.data;
-                                $scope.alreadyInCartModal = $uibModal.open({
-                                    animation: true,
-                                    templateUrl: "frontend/views/modal/cartModal.html",
-                                    scope: $scope,
-                                    windowClass: 'upload-pic',
-                                    backdropClass: 'black-drop',
-                                    size: 'sm'
-                                });
+                    if ($.jStorage.get("photographer")) {
+                        //first check if a user is logged in
+                        console.log("myCartData-", myCartData);
+                        _.each($rootScope.myCartData.photos, function (photo) {
+                            console.log("PHOTOS", photos);
+                            if (_.isEqual(photo._id, myCartData.photos)) {
+                                $scope.myCartTrue = true;
+                                return $scope.myCartTrue
                             }
                         });
-                    } else {
-                        $scope.alreadyInCartModal = $uibModal.open({
-                            animation: true,
-                            templateUrl: "frontend/views/modal/cartModal.html",
-                            scope: $scope,
-                            // windowClass: 'upload-pic',
-                            // backdropClass: 'black-drop',
-                            size: 'sm'
-                        });
-                        // alert("Already in cart");
+                        if (!$scope.myCartTrue) {
+                            myCartData.photographer = $.jStorage.get("photographer")._id;
+                            CartService.addToCart(myCartData, function (data) {
+                                console.log("data----------", data);
+                                if (data.data.value) {
+                                    $rootScope.myCartData = data.data.data;
+                                    $scope.alreadyInCartModal = $uibModal.open({
+                                        animation: true,
+                                        templateUrl: "frontend/views/modal/cartModal.html",
+                                        scope: $scope,
+                                        windowClass: 'upload-pic',
+                                        backdropClass: 'black-drop',
+                                        size: 'sm'
+                                    });
+                                }
+                            });
+                        } else {
+                            $scope.alreadyInCartModal = $uibModal.open({
+                                animation: true,
+                                templateUrl: "frontend/views/modal/cartModal.html",
+                                scope: $scope,
+                                // windowClass: 'upload-pic',
+                                // backdropClass: 'black-drop',
+                                size: 'sm'
+                            });
+                            // alert("Already in cart");
+                        }
+                    } //end of if
+                    else {
+                        // if a user is not logged in, display an error
+                        toastr.error('Please login first', 'Error');
                     }
+
 
                 };
 
