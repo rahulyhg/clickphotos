@@ -39,7 +39,7 @@
         <div class="user-exception-photographs">
             <h4>Similar photographs</h4>
             <div class="row">
-                <div ng-repeat="relatedPic in showRelatedPic " class="col-md-3 col-sm-6">
+                <div ng-repeat="relatedPic in relatedPhotos " class="col-md-3 col-sm-6">
                     <div class="user-exception-uploaded shadow" style="background: url('{{relatedPic.image | serverimage}}') no-repeat 50% 50%/cover ">
                         <!-- <img ng-src="{{relatedPic.image | serverimage}}" class="img-responsive" alt="User Uploaded Image"> -->
                     </div>

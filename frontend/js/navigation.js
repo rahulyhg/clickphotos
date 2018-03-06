@@ -71,7 +71,6 @@ var navigationservice = angular.module('navigationservice', [])
                 callback(data);
             });
         },
-
         //mailers
 
         sendEnquiry: function(id, callback) {

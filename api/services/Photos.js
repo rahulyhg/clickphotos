@@ -42,7 +42,8 @@ module.exports = mongoose.model('Photos', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "categories photographer", "categories photographer"));
 var model = {
 
-    searchPhotos: function (data, callback) {
+    searchPhotos: function(data, callback) {
+        console.log("data------", data);
         Photos.aggregate([{
             $match: {
                 "keyword": {
@@ -50,7 +51,7 @@ var model = {
                     $options: "i"
                 }
             }
-        }], function (err, found) {
+        }], function(err, found) {
             if (err || _.isEmpty(found)) {
                 callback(err, null);
             } else {
@@ -59,7 +60,7 @@ var model = {
         });
     },
 
-    getApprovedPhotos: function (data, callback) {
+    getApprovedPhotos: function(data, callback) {
         var maxRow = Config.maxRow;
         var page = 1;
         if (data.page) {
@@ -89,7 +90,7 @@ var model = {
             .order(options)
             .keyword(options)
             .page(options,
-                function (err, found) {
+                function(err, found) {
                     if (err || _.isEmpty(found)) {
                         callback(err, "noData")
                     } else {
@@ -98,13 +99,13 @@ var model = {
                 });
     },
 
-    downloadSelectedPhotos: function (data, callback) {
-        async.eachSeries(data, function (photoId, cb2) {
+    downloadSelectedPhotos: function(data, callback) {
+        async.eachSeries(data, function(photoId, cb2) {
             async.waterfall([
-                    function (callback) {
+                    function(callback) {
                         Photos.findOne({
                             _id: photoId
-                        }).exec(function (err, found) {
+                        }).exec(function(err, found) {
                             if (err || _.isEmpty(found)) {
                                 callback(err, "noData");
                             } else {
@@ -112,7 +113,7 @@ var model = {
                             }
                         });
                     },
-                    function (data, callback) {
+                    function(data, callback) {
                         var count;
                         if (data.count) {
                             count = data.count + 1;
@@ -125,7 +126,7 @@ var model = {
                             count: count
                         }, {
                             new: true
-                        }).exec(function (err, found) {
+                        }).exec(function(err, found) {
                             if (err || _.isEmpty(found)) {
                                 callback(err, "noData");
                             } else {
@@ -134,7 +135,7 @@ var model = {
                         });
                     }
                 ],
-                function (err, found) {
+                function(err, found) {
                     if (err) {
                         console.log(err);
                         cb2(err, null);
@@ -145,10 +146,10 @@ var model = {
         }, callback);
     },
 
-    getAllPhotos: function (data, callback) {
+    getAllPhotos: function(data, callback) {
         Photos.find({
             status: 'Approved'
-        }, function (err, data) {
+        }, function(err, data) {
             if (err || _.isEmpty(data)) {
                 callback(err, "noData")
             } else {
@@ -157,11 +158,11 @@ var model = {
         })
     },
 
-    getAllRelatedPhotos: function (data, callback) {
+    getAllRelatedPhotos: function(data, callback) {
         Photos.find({
             categories: data.category,
             status: 'Approved'
-        }, function (err, data) {
+        }, function(err, data) {
             if (err || _.isEmpty(data)) {
                 callback(err, "noData")
             } else {
