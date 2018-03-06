@@ -10,7 +10,11 @@ var schema = new Schema({
         index: true
     }],
     total: Number,
-    gst: Number
+    gst: Number,
+    baseValue: {
+        type: Number,
+        default: 500
+    }
 });
 
 schema.plugin(deepPopulate, {
@@ -88,10 +92,9 @@ var model = {
      * @param {callback} callback function with err and response
      */
     getCart: function (cart, callback) {
-        console.log("In getCart", cart);
         MyCart.findOne({
             photographer: mongoose.Types.ObjectId(cart.photographer)
-        }).deepPopulate("photos").exec(function (err, data) {
+        }).deepPopulate("photos photos.categories photos.photographer").exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {
@@ -112,7 +115,6 @@ var model = {
      * @param {callback} callback function with err and response
      */
     addToCart: function (cart, callback) {
-        console.log("DDDDDDDDDDDDD", cart);
         MyCart.getCart(cart, function (err, data) {
             if (err) {
                 console.log("in getCartErr", err);
@@ -156,7 +158,7 @@ var model = {
             }
         }, {
             new: true
-        }).exec(function (err, cartData) {
+        }).deepPopulate("photos photos.categories photo.photographer").exec(function (err, cartData) {
             if (err) {
                 console.log("err in removing product from cart");
                 callback(err, null);

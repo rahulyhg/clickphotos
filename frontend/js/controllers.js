@@ -2348,6 +2348,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (formdata.name && formdata.email && formdata.password && formdata.ConfirmPassword) {
                     if (_.isEqual(formdata.password, formdata.ConfirmPassword)) {
                         $scope.registerData = formdata;
+                        $scope.registerData.country = $scope.selectedCountryName;
                         NavigationService.apiCallWithData("Photographer/checkPhotographersForOtp", formdata, function (data) {
                             // console.log("dataForOtp", data);
                             if (data.data.verifyAcc == false) {
@@ -2596,7 +2597,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         // It will give the particular country on selection
         $scope.selectCountry = function (item, model) {
-            var selectedCountryName = model.name; // it will give the country name 
+            var selectedCountryName = $scope.selectedCountryName = model.name; // it will give the country name 
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
             //  console.log("model", selectedCountryName);
         };
@@ -3210,6 +3211,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
 
+                } else if (data.data.description.split('/')[0] == "virtualGallery") {
+                    $scope.msg = "Thank you!!";
+                    formData = {};
+                    formData._id = $.jStorage.get("photographer")._id;
+                    NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
+                        // console.log("data update", data)
+                        if (data.value === true) {
+                            $.jStorage.set("photographer", data.data);
+                        }
+                    });
                 } else {
                     $scope.msg = "You have now been upgraded to a " + data.data.description.split('/')[0] + " Member.";
                     formData = {};
@@ -3326,7 +3337,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // ABS PAYMENT GATEWAY
             formdata.photographer = $.jStorage.get("photographer")._id;
             // formdata.payAmount = $scope.amount[0]._id; // add $jStorage amount value
-            formdata.amount = $scope.amount[0].amount; // add $jStorage amount value
+            formdata.amount = $.jStorage.get("virtualGalleryAmount"); // add $jStorage amount value
             formdata.email = $.jStorage.get("photographer").email;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
@@ -3683,6 +3694,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.cartAddedImg = cartData.data.data.photos;
                     $scope.price = cartData.data.data.baseValue;
                     $scope.subTotal = $scope.price * cartData.data.data.photos.length;
+                    $.jStorage.set("virtualGalleryAmount", $scope.subTotal);
                     // $rootScope.cartLength = $rootScope.myCartData.photos.length;
                     console.log("#######################333", $scope.cartAddedImg);
                 }

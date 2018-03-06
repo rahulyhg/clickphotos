@@ -424,12 +424,19 @@ var controller = {
                                 console.log("updatePackageAmtForFeature", data);
                             });
                         } else {
-                            Photographer.updateToGold(req.body, function (err, data) {
+                            if (req.body.Description.split("/")[0] === "virtualGallery") {
+                                GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                    console.log("updatePackageAmtForFeature", data);
+                                });
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                            });
-                            GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
-                            });
+                            } else {
+                                Photographer.updateToGold(req.body, function (err, data) {
+                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                });
+                                GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                    console.log("updatePackageAmtForFeature", data);
+                                });
+                            }
                         }
                     } else {
                         res.redirect(env.realHost + "/error");
