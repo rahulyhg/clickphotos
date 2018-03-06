@@ -1,13 +1,13 @@
 <section class="virtual-gallery-inner">
     <div class="container">
         <div class="user-profile-section d-flex align-items-center">
-            <div class="user-uploaded-img shadow">
-                <img ng-src="{{individualGalleryData.image | serverimage}}" class="img-responsive" alt="User Uploaded Image">
+            <div class="user-uploaded-img shadow" style="background: url('{{individualGalleryData.image | serverimage}}') no-repeat 50% 50%/cover content-box">
+                <!-- <img ng-src="{{individualGalleryData.image | serverimage}}" class="img-responsive" alt="User Uploaded Image"> -->
             </div>
             <div class="user-profile">
                 <div class="border-half">
-                    <div class="user-profile-img">
-                        <img ng-src="{{individualGalleryData.photographer.profilePic | serverimage}}" alt="Photographer Image" class="img-responsive">
+                    <div class="user-profile-img" style="background:rgba(204, 204, 204, 0.61) url('{{individualGalleryData.photographer.profilePic | serverimage}}') no-repeat 50% 50%/cover content-box">
+                        <!-- <img ng-src="{{individualGalleryData.photographer.profilePic | serverimage}}" alt="Photographer Image" class="img-responsive"> -->
                     </div>
                 </div>
                 <div class="user-profile-info">
@@ -27,7 +27,8 @@
                             </ul> -->
                         </li>
                         <li class="d-flex">Image Id:
-                            <div class="img-id">545454</div>
+                            <div class="img-id">{{individualGalleryData._id|limitTo:-5}}
+                            </div>
                         </li>
                     </ul>
                     <p><a class="btn btn-lg orange-btn" role="button" ng-click="mycart()">Add to Cart</a></p>

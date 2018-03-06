@@ -142,6 +142,7 @@
             .photographer_img {
                 width: 19px!important;
                 height: 19px!important;
+                margin: 1px!important;
             }
             span {
                 font-size: 8px!important;
@@ -150,6 +151,19 @@
                 font-size: 12px !important;
                 width: 50px !important;
                 padding: 5px 5px;
+            }
+            .cart-area {
+                position: absolute;
+                top: 50%;
+                right: 7px;
+                @include transform(translateY(-50%));
+            }
+            .cart {
+                width: 15px;
+                span {
+                    @include size(12px, 12px);
+                    top: -7px;
+                }
             }
         } //start of artist-of-the-month.html
         .page-margin {

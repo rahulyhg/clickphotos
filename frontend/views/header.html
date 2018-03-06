@@ -114,9 +114,11 @@
 
                         <span ng-if="!template.profile " ng-click="uploadSignup() ">Login/Sign up as a photographer</span>
                         <span ng-if="template.profile " ui-sref="photographer ">{{template.profile.name}}</span>
-                        <div class="cart pull-right">
-                            <img src="frontend/img/cart-logo.png " width="30" alt="added product">
-                            <span class="d-flex align-items-center justify-content-center">{{cartLength}}</span>
+                        <div class="cart-area pull-right">
+                            <a class="d-block cart" ui-sref="mycart">
+                                <img src="frontend/img/cart-logo.png " class="img-responsive" alt="added product">
+                                <span class="d-flex align-items-center justify-content-center">{{cartLength}}</span>
+                            </a>
                         </div>
 
                         <button class="btn orange-btn inline-block " ng-if="template.profile " ng-click="logout() ">Log out</button>
