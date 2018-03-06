@@ -15,7 +15,7 @@
                         <tr ng-repeat="cart in cartAddedImg track by $index">
                             <td>
                                 <div class="user-exception-uploaded added-cart-imgbox shadow" style="background: url('{{cart.img}}') no-repeat 50% 50%/cover">
-                                    <!-- <img ng-src="{{cart.img}}" class="img-responsive" alt="in cart image"> -->
+                                    <img ng-src="{{cart.image| serverimage}}" class="img-responsive" alt="in cart image">
                                 </div>
                             </td>
 
@@ -24,8 +24,8 @@
                                     <h3 class="text-uppercase">{{cart.name}}</h3>
                                     <p>
                                         <ul class="list-unstyled desc-list">
-                                            <li>Category: <span class="text-uppercase">{{cart.category}}</span></li>
-                                            <li>Image ID: <span>{{cart.imageId}}</span></li>
+                                            <li>Category: <span class="text-uppercase">{{cart.categories.name}}</span></li>
+                                            <li>Image ID: <span>{{cart._id|limitTo : -5}}</span></li>
                                         </ul>
                                     </p>
                                     <p>
@@ -40,7 +40,7 @@
                             </td>
 
                             <td class="align-middle" align="left">
-                                Price: <strong>&#8377; &nbsp;</strong>{{cart.price}}
+                                Price: <strong>&#8377; &nbsp;</strong>{{price}}
                             </td>
                         </tr>
                     </tbody>
@@ -49,18 +49,18 @@
                             <td colspan="2" align="right">
                                 <ul class="list-unstyled amount-desc-list">
                                     <li>SUBTOTAL</li>
-                                    <li>GST@18%</li>
-                                    <li>GRAND TOTAL</li>
+                                    <!--<li>GST@18%</li>
+                                    <li>GRAND TOTAL</li>-->
                                 </ul>
-                                <p><a class="btn orange-btn">Continue Browsing</a></p>
+                                <p><a ui-sref="virtual-gallery" class="btn orange-btn">Continue Browsing</a></p>
                             </td>
                             <td>
                                 <ul class="list-unstyled amount-list text-center">
-                                    <li>200</li>
-                                    <li>36</li>
-                                    <li>236</li>
+                                    <li>{{subTotal}}</li>
+                                    <!--<li>36</li>
+                                    <li>{{subTotal}}</li>-->
                                 </ul>
-                                <p><a class="btn orange-btn">Proceed to payment</a></p>
+                                <p><a class="btn orange-btn" ui-sref="billpaygst({view: 'virtualGallery'})">Proceed to payment</a></p>
                             </td>
                         </tr>
                     </tfooter>

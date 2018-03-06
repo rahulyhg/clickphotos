@@ -3324,6 +3324,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         };
 
+        //virtualGallery photograph purchase
+        $scope.virtualGalleryPhotoPurchase = function (order, phone) {
+            formdata = {};
+            // ABS PAYMENT GATEWAY
+            formdata.photographer = $.jStorage.get("photographer")._id;
+            // formdata.payAmount = $scope.amount[0]._id; // add $jStorage amount value
+            formdata.amount = $scope.amount[0].amount; // add $jStorage amount value
+            formdata.email = $.jStorage.get("photographer").email;
+            formdata.phone = phone;
+            formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
+            formdata.name = $.jStorage.get("photographer").name;
+            formdata.type = "virtualGallery/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
+            // console.log(formdata);
+            NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
+                // console.log(data);
+                formdata = {};
+                formdata._id = $.jStorage.get("photographer")._id;
+                NavigationService.apiCallWithData("Photographer/getOne", formdata, function (data) {
+                    // console.log(data)
+                    $.jStorage.set("photographer", data.data);
+                })
+                window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
+            });
+        };
+
+
         $scope.gstPayment = function (userdetails) {
             // console.log("userdetails", userdetails.fname);
             // console.log($scope.numberOfSlot);
@@ -3347,6 +3373,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
                 } else if ($scope.view == "gold") {
                     $scope.goldMember(order, $scope.userData.phone);
+                } else if ($scope.view == "virtualGallery") {
+                    $scope.virtualGalleryPhotoPurchase(order, $scope.userData.phone);
                 } else {
                     $state.go("photographer");
                 }
@@ -3550,14 +3578,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.addImages = function (val) {
             console.log("val", val);
             $scope.imageData.category = val;
-            //console.log("$scope.imageData", $scope.imageData.category);
-            //     if (_.isEqual(type, "category")) {
-            //         $scope.filterToBeApplied.category = val._id;
-            //         $scope.filterToBeApplied.catName = val.name;
-            //     } else {
-            //         $scope.filterToBeApplied.city = val;
-            //     }
-            //   //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
+            var relatedData = {
+                category: val._id
+            };
+
+            NavigationService.apiCallWithData("Photos/getAllRelatedPhotos", relatedData, function (data) {
+                console.log("$$$$$$$$$$$$$$$$$$$$$", data);
+                if (data.data == "noData") {
+                    $scope.virtualGallery = {};
+                } else {
+                    $scope.virtualGallery = data.data;
+                }
+            })
+
         }
 
         $scope.uploadImagePic = function (formdata) {
@@ -3619,34 +3652,58 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('MyCartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $log, CartService) {
+    .controller('MyCartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $log, CartService, $rootScope, $state) {
         $scope.template = TemplateService.changecontent("mycart"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("My Cart"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        $scope.cartAddedImg = [{
-                id: 1,
-                img: 'frontend/img/photographer/Clicked 2.jpg',
-                name: 'crocodile',
-                category: 'wildlife',
-                imageId: 5456,
-                price: 1300
-            },
-            {
-                id: 2,
-                img: 'frontend/img/bg1.jpg',
-                name: 'crocodile1',
-                category: 'wildlife',
-                imageId: 9874,
-                price: 1400
-            }
-        ];
+        // $scope.cartAddedImg = [{
+        //         id: 1,
+        //         img: 'frontend/img/photographer/Clicked 2.jpg',
+        //         name: 'crocodile',
+        //         category: 'wildlife',
+        //         imageId: 5456,
+        //         price: 1300
+        //     },
+        //     {
+        //         id: 2,
+        //         img: 'frontend/img/bg1.jpg',
+        //         name: 'crocodile1',
+        //         category: 'wildlife',
+        //         imageId: 9874,
+        //         price: 1400
+        //     }
+        // ];
+        if ($.jStorage.get("photographer")) {
+            var photographerData = {};
+            photographerData.photographer = $.jStorage.get("photographer")._id;
+            CartService.getCart(photographerData, function (cartData) {
+                if (cartData.data.value) {
+                    $scope.cartAddedImg = cartData.data.data.photos;
+                    $scope.price = cartData.data.data.baseValue;
+                    $scope.subTotal = $scope.price * cartData.data.data.photos.length;
+                    // $rootScope.cartLength = $rootScope.myCartData.photos.length;
+                    console.log("#######################333", $scope.cartAddedImg);
+                }
+            });
+        }
 
         $scope.removeAddedImg = function (cart) {
             $log.info("index", cart);
-            $scope.removedElem = _.remove($scope.cartAddedImg, function (n) {
-                $log.info("n", n.id);
-                return n.id === cart.id;
+            var cartData = {};
+            cartData.photographer = $.jStorage.get("photographer")._id;
+            cartData.photos = cart._id;
+            CartService.removeFromCart(cartData, function (myCart) {
+                console.log("&&&&&&&&&&&&&&&&&&&&", myCart);
+                if (myCart.data.value) {
+                    $scope.cartAddedImg = myCart.data.data.photos;
+                    $scope.removedElem = _.remove($scope.cartAddedImg, function (n) {
+                        $log.info("n", n._id);
+                        return n._id === cart._id;
+                    });
+                    $state.reload();
+                }
+
             });
         };
         // $log.info(" $scope.removedElem", $scope.removedElem, " $scope.cartAddedImg", $scope.cartAddedImg);
@@ -3857,7 +3914,7 @@ firstapp.service('CartService', function ($http) {
     }
 
     //remove photo in cart
-    this.removeFromCart = function (data, callbck) {
+    this.removeFromCart = function (cart, callback) {
         $http({
             url: adminurl + 'MyCart/removeProduct',
             method: 'POST',
