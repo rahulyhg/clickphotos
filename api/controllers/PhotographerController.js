@@ -303,6 +303,7 @@ var controller = {
                 amount: req.body.amount,
                 email: req.body.email,
                 phone: req.body.phone,
+                country: req.body.country,
                 return_url: req.body.return_url
             };
             Order.saveData(formData, res.callback);
@@ -375,7 +376,7 @@ var controller = {
                                 amount: data.amount,
                                 channel: "0",
                                 city: "Billing City",
-                                country: "IND",
+                                country: data.country,
                                 currency: "INR",
                                 description: data.description,
                                 display_currency: "GBP",
@@ -420,22 +421,42 @@ var controller = {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
-                            GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
-                            });
-                        } else {
-                            if (req.body.Description.split("/")[0] === "virtualGallery") {
-                                GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                            if (data.country == "India") {
+                                GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
                                     console.log("updatePackageAmtForFeature", data);
                                 });
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                            } else {
+                                GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
+                                    console.log("updatePackageOtherCountry", data);
+                                });
+
+                            }
+                        } else {
+                            if (req.body.Description.split("/")[0] === "virtualGallery") {
+                                if (data.country == "India") {
+                                    GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                        console.log("updatePackageAmtForFeature", data);
+                                    });
+                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                } else {
+                                    GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
+                                        console.log("updatePackageOtherCountry", data);
+                                    });
+                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                }
                             } else {
                                 Photographer.updateToGold(req.body, function (err, data) {
                                     res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 });
-                                GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
-                                    console.log("updatePackageAmtForFeature", data);
-                                });
+                                if (data.country == "India") {
+                                    GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                        console.log("updatePackageAmtForFeature", data);
+                                    });
+                                } else {
+                                    GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
+                                        console.log("updatePackageOtherCountry", data);
+                                    });
+                                }
                             }
                         }
                     } else {

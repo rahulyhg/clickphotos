@@ -588,5 +588,34 @@ var model = {
             });
     },
 
+    updatePackageOtherCountry: function (data, callback) {
+        var orderData = data.Description.split("/");
+        GstDetails.invoiceNumberGenerate(data, function (err, invoiceNumber) {
+            if (err) {
+                callback(err);
+            } else {
+                var invoiceNo = invoiceNumber;
+                // console.log(invoiceNo);
+                GstDetails.findOneAndUpdate({
+                    _id: orderData[3]
+                }, {
+                    packageAmount: orderData[2],
+                    package: orderData[0],
+                    invoiceNumber: invoiceNo
+                }, {
+                    new: true
+                }).deepPopulate("photographer").exec(function (err, found) {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        if (found) {
+                            callback(null, found);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
 };
 module.exports = _.assign(module.exports, exports, model);
