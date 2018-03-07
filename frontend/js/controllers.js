@@ -3395,148 +3395,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
     };
-}).controller('BillPayGst', function($scope, $stateParams, $state, TemplateService, NavigationService, $timeout) {
-    $scope.template = TemplateService.changecontent("billpaygst"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Bill Payment"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
-    $scope.view = $stateParams.view;
-    // console.log($scope.view);
-
-    NavigationService.callApi("PayAmount/getAll", function(data) {
-        $scope.amount = data.data;
-        // console.log("PAy amount: ", $scope.amount);
-    });
-    var photographer = $.jStorage.get("photographer")
-        // console.log("photographer", photographer);
-
-    //goldpackgeupdateDynamic
-
-    if ($.jStorage.get("photographer")) {
-        if ($.jStorage.get("photographer").package == "Silver") {
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/findTotalPriceOfGold", formdata, function(data) {
-                if (data.value === true) {
-                    $scope.dyGoldAmount = data.data;
-                    // console.log("$scope.dyGoldAmount++++++++++++++++++", $scope.dyGoldAmount);
-                }
-            });
-        }
-    }
-
-    //goldpackgeupdateDynamic end
-
-    $scope.goldMember = function(order, phone) {
-        formdata = {};
-        formdata.photographer = $.jStorage.get("photographer")._id;
-        if (photographer.package == "Silver") {
-            formdata.payAmount = null;
-            formdata.amount = $scope.dyGoldAmount;
-            formdata.phone = phone;
-            // console.log("if")
-        } else {
-            formdata.payAmount = $scope.amount[1]._id;
-            formdata.amount = $scope.amount[1].amount;
-            // console.log("else")
-        }
-        formdata.email = $.jStorage.get("photographer").email;
-        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
-        formdata.name = $.jStorage.get("photographer").name;
-        formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
-        // console.log(formdata);
-        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function(data) {
-            // console.log("resp data", data);
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
-                // console.log(data)
-                $.jStorage.set("photographer", data.data);
-            })
-            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
-        });
-    };
-
-    $scope.silverMember = function(order, phone) {
-        formdata = {};
-        // ABS PAYMENT GATEWAY
-        formdata.photographer = $.jStorage.get("photographer")._id;
-        formdata.payAmount = $scope.amount[0]._id;
-        formdata.amount = $scope.amount[0].amount;
-        formdata.email = $.jStorage.get("photographer").email;
-        formdata.phone = phone;
-        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
-        formdata.name = $.jStorage.get("photographer").name;
-        formdata.type = "Silver/" + $.jStorage.get("photographer")._id + "/" + $scope.amount[0].amount + "/" + order;
-        // console.log(formdata);
-        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function(data) {
-            // console.log(data);
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
-                // console.log(data)
-                $.jStorage.set("photographer", data.data);
-            })
-            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
-        });
-    };
-
-    //virtualGallery photograph purchase
-    $scope.virtualGalleryPhotoPurchase = function(order, phone) {
-        formdata = {};
-        // ABS PAYMENT GATEWAY
-        formdata.photographer = $.jStorage.get("photographer")._id;
-        // formdata.payAmount = $scope.amount[0]._id; // add $jStorage amount value
-        formdata.amount = $.jStorage.get("virtualGalleryAmount"); // add $jStorage amount value
-        formdata.email = $.jStorage.get("photographer").email;
-        formdata.phone = phone;
-        formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
-        formdata.name = $.jStorage.get("photographer").name;
-        formdata.type = "virtualGallery/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
-        // console.log(formdata);
-        NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function(data) {
-            // console.log(data);
-            formdata = {};
-            formdata._id = $.jStorage.get("photographer")._id;
-            NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
-                // console.log(data)
-                $.jStorage.set("photographer", data.data);
-            })
-            window.location.href = adminurl + "photographer/sendToPaymentGateway?id=" + data.data._id;
-        });
-    };
-
-    $scope.gstPayment = function(userdetails) {
-        // console.log("userdetails", userdetails.fname);
-        // console.log($scope.numberOfSlot);
-        $scope.userData = {};
-        $scope.userData.firstName = userdetails.fname;
-        $scope.userData.lastName = userdetails.lname;
-        $scope.userData.address = userdetails.address;
-        $scope.userData.phone = userdetails.phone
-        $scope.userData.state = userdetails.state;
-        $scope.userData.city = userdetails.city;
-        $scope.userData.pincode = userdetails.pin;
-        $scope.userData.gstNumber = userdetails.GSTNumber;
-        $scope.userData.photographer = $.jStorage.get("photographer")._id;
-        var url = "GstDetails/save";
-        // console.log($scope.userData)
-        NavigationService.apiCallWithData(url, $scope.userData, function(data) {
-            // console.log(data)
-            var order = data.data._id;
-            if ($scope.view == "silver") {
-                $scope.silverMember(order, $scope.userData.phone);
-
-            } else if ($scope.view == "gold") {
-                $scope.goldMember(order, $scope.userData.phone);
-            } else if ($scope.view == "virtualGallery") {
-                $scope.virtualGalleryPhotoPurchase(order, $scope.userData.phone);
-            } else {
-                $state.go("photographer");
-            }
-        });
-    };
 })
 
 .controller('thanksSilverCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -3748,9 +3606,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.virtualGallery = {};
                 } else {
                     $scope.virtualGallery = data.data;
+                    //to check photograph exist in cart 
+                    _.each($scope.virtualGallery, function(gallery) {
+                        _.each($rootScope.myCartData.photos, function(cartPhoto) {
+                            if (_.isEqual(cartPhoto._id, gallery._id)) {
+                                gallery.myCart = true;
+                            } else {
+                                if (gallery.myCart) {
+                                    gallery.myCart = true;
+                                } else {
+                                    gallery.myCart = false;
+                                }
+                            }
+                        }); // end of inner each
+                    }); // end of outer each
                 }
-            })
-
+            });
         }
         // to get the category wise data when the user types in into the search box
     $scope.getCategoryWisePhoto = function(userIp) {
@@ -3761,6 +3632,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.apiCallWithData("Photos/searchPhotos", categoryToSend, function(data) {
             //$log.debug("data-----------------------", data);
             $scope.virtualGallery = data.data;
+            //for checking product is added in the cart or not
+            _.each($scope.virtualGallery, function(gallery) {
+                _.each($rootScope.myCartData.photos, function(cartPhoto) {
+                    if (_.isEqual(cartPhoto._id, gallery._id)) {
+                        gallery.myCart = true;
+                    } else {
+                        if (gallery.myCart) {
+                            gallery.myCart = true;
+                        } else {
+                            gallery.myCart = false;
+                        }
+                    }
+                }); // end of inner each
+            }); // end of outer each
             if (data.data == "No Data Found") {
                 //   $log.warn("no data");
                 //  $log.debug(" $scope.virtualGallery", $scope.virtualGallery);
@@ -3945,10 +3830,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.mycart = function() {
                     if ($.jStorage.get("photographer")) {
                         //first check if a user is logged in
-                        console.log("myCartData-", myCartData);
+
                         if (!_.isEmpty($rootScope.myCartData.photos)) {
                             _.each($rootScope.myCartData.photos, function(photo) {
-                                console.log("PHOTOS", photos);
                                 if (_.isEqual(photo._id, myCartData.photos)) {
                                     $scope.myCartTrue = true;
                                     return $scope.myCartTrue
