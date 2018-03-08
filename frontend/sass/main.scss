@@ -5389,6 +5389,21 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 //End of mycart page
+//Start of bill pay gst
+.billpay {
+    .ui-select-toggle {
+        border: 0;
+        border-bottom: 1px solid $orangeColor;
+        background-color: #f6f6f6;
+        &::focus,
+        &::active {
+            border: 0;
+            border-bottom: 1px solid $orangeColor;
+            background-color: #f6f6f6;
+        }
+    }
+}
+
 //Srujana
 a.forgot-pwd {
     text-decoration: underline;
