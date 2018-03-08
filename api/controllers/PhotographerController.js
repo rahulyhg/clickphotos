@@ -421,16 +421,9 @@ var controller = {
                             Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             });
-                            if (data.country == "India") {
-                                GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
-                                    console.log("updatePackageAmtForFeature", data);
-                                });
-                            } else {
-                                GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
-                                    console.log("updatePackageOtherCountry", data);
-                                });
-
-                            }
+                            GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
+                                console.log("updatePackageAmtForFeature", data);
+                            });
                         } else {
                             if (req.body.Description.split("/")[0] === "virtualGallery") {
                                 if (data.country == "India") {
@@ -448,15 +441,9 @@ var controller = {
                                 Photographer.updateToGold(req.body, function (err, data) {
                                     res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 });
-                                if (data.country == "India") {
-                                    GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
-                                        console.log("updatePackageAmtForFeature", data);
-                                    });
-                                } else {
-                                    GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
-                                        console.log("updatePackageOtherCountry", data);
-                                    });
-                                }
+                                GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                    console.log("updatePackageAmtForFeature", data);
+                                });
                             }
                         }
                     } else {

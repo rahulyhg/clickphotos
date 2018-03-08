@@ -72,6 +72,12 @@ var navigationservice = angular.module('navigationservice', [])
                     });
                     return navigation;
                 } else if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin') {
+                    _.forEach(_.cloneDeep(navigation1), function (val) {
+                        // navigation.push(val);
+                        var evens = _.remove(navigation1, function (n) {
+                            return n.name == 'Image upload request';
+                        });
+                    });
                     return navigation1;
                 }
             },
