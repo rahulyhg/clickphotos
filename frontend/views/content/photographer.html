@@ -889,22 +889,22 @@
                     </div>
                 </div>
                 <div class="virtual-gallery-part" ng-if="tab == 5">
-                    <div class="free-member text-center">
+                    <div class="free-member text-center" ng-if="!virtualGalleryShow">
                         <span class="small-font">Your  virtual gallery doesn’t have any photographs Start uploading now! 
                         </span>
                         <div class="viewmore-btn-area text-center">
                             <a class="btn btn-lg orange-btn" role="button" ng-click="uploadImg();">Click to Begin</a>
                         </div>
                     </div>
-                    <div class="gallery-uploaded-section free-member">
-                        <p class="padd-tb text-left"><strong>Keywords:</strong>underwater,whitedress, women,sunlighthroughwater</p>
+                    <div class="gallery-uploaded-section free-member" ng-if="virtualGalleryShow">
+                        <!-- <p class="padd-tb text-left"><strong>Keywords:</strong>underwater,whitedress, women,sunlighthroughwater</p> -->
                         <div class="gallery-uploaded-title">
                             Upload your best photographs:
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="gallery-uploaded-photo shadow">
-                                    <img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="User Uploaded Image">
+                            <div class="col-md-3 col-sm-6- col-xs-12" ng-repeat="photos in virtualGallery">
+                                <div class="gallery-uploaded-photo d-flex align-items-center  shadow" style="background: url('{{photos.image | serverimage}}') no-repeat 50% 50%/cover content-box">
+                                    <!-- <img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="User Uploaded Image"> -->
                                 </div>
                             </div>
                         </div>
