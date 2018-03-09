@@ -484,8 +484,19 @@ var models = {
         obj.state = page.state;
         obj.city = page.city;
         obj.pincode = page.pincode;
-        obj.tax = (18 / 100) * obj.amount;
-        obj.subtotal = obj.amount - obj.tax;
+        if (page.photographer.country) {
+            var country = page.photographer.country;
+        } else {
+            var country = "India";
+        }
+        obj.country = country;
+        if (country == "India") {
+            obj.tax = (18 / 100) * obj.amount;
+            obj.subtotal = obj.amount - obj.tax;
+        } else {
+            obj.tax = 0;
+            obj.subtotal = obj.amount - obj.tax;
+        }
         var now = moment();
         var formatted = now.format('YYYY-MM-DD');
         obj.date = formatted;

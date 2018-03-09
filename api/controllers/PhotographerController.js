@@ -418,12 +418,19 @@ var controller = {
                 Order.editData(formData, function (err, data) {
                     if (parseFloat(data.amount) === parseFloat(req.body.Amount)) {
                         if (req.body.Description.split("/")[0] === "featured") {
-                            Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
+                            if (data.country == "India") {
+                                Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
+                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                });
+                                GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
+                                    console.log("updatePackageAmtForFeature", data);
+                                });
+                            } else {
+                                GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
+                                    console.log("updatePackageOtherCountry", data);
+                                });
                                 res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                            });
-                            GstDetails.updatePackageAmtForFeature(req.body, function (err, data) {
-                                console.log("updatePackageAmtForFeature", data);
-                            });
+                            }
                         } else {
                             if (req.body.Description.split("/")[0] === "virtualGallery") {
                                 if (data.country == "India") {
@@ -438,12 +445,20 @@ var controller = {
                                     res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 }
                             } else {
-                                Photographer.updateToGold(req.body, function (err, data) {
+                                if (data.country == "India") {
+                                    Photographer.updateToGold(req.body, function (err, data) {
+                                        res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                    });
+                                    GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
+                                        console.log("updatePackageAmtForFeature", data);
+                                    });
+                                } else {
+                                    GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
+                                        console.log("updatePackageOtherCountry", data);
+                                    });
                                     res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
-                                });
-                                GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
-                                    console.log("updatePackageAmtForFeature", data);
-                                });
+                                }
+
                             }
                         }
                     } else {

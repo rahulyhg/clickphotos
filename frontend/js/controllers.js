@@ -3338,8 +3338,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.goldMember = function (order, phone) {
             formdata = {};
-            var goldPackageAmount = 3000;
-            var goldPackgeGst = 3000 * (18 / 100);
+            if ($.jStorage.get("photographer").country) {
+                var country = $.jStorage.get("photographer").country;
+            } else {
+                var country = "India";
+            }
+            if (country != "India") {
+                var goldPackageAmount = 3000;
+                var goldPackgeGst = 0;
+            } else {
+                var goldPackageAmount = 3000;
+                var goldPackgeGst = 3000 * (18 / 100);
+            }
 
             formdata.photographer = $.jStorage.get("photographer")._id;
             if (photographer.package == "Silver") {
@@ -3355,11 +3365,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // console.log("else")
             }
             formdata.email = $.jStorage.get("photographer").email;
-            if ($.jStorage.get("photographer").country) {
-                formdata.country = $.jStorage.get("photographer").country;
-            } else {
-                formdata.country = "India";
-            }
+            formdata.country = country;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
@@ -3378,9 +3384,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.silverMember = function (order, phone) {
             formdata = {};
-            var silverPackageAmount = 2000;
-            var silverPackgeGst = 2000 * (18 / 100);
-
+            if ($.jStorage.get("photographer").country) {
+                var country = $.jStorage.get("photographer").country;
+            } else {
+                var country = "India";
+            }
+            if (country != "India") {
+                var goldPackageAmount = 2000;
+                var goldPackgeGst = 0;
+            } else {
+                var silverPackageAmount = 2000;
+                var silverPackgeGst = 2000 * (18 / 100);
+            }
             // ABS PAYMENT GATEWAY
             formdata.photographer = $.jStorage.get("photographer")._id;
             // formdata.payAmount = $scope.amount[0]._id;
@@ -3388,11 +3403,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = null;
             formdata.amount = silverPackageAmount + silverPackgeGst;
             formdata.email = $.jStorage.get("photographer").email;
-            if ($.jStorage.get("photographer").country) {
-                formdata.country = $.jStorage.get("photographer").country;
-            } else {
-                formdata.country = "India";
-            }
+            formdata.country = country;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
@@ -3413,10 +3424,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //virtualGallery photograph purchase
         $scope.virtualGalleryPhotoPurchase = function (order, phone) {
             formdata = {};
+            if ($.jStorage.get("photographer").country) {
+                var country = $.jStorage.get("photographer").country;
+            } else {
+                var country = "India";
+            }
             // ABS PAYMENT GATEWAY
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = null;
-            if ($.jStorage.get("photographer").country == "India") {
+            if (country == "India") {
                 formdata.amount = $.jStorage.get("virtualGalleryAmount") + ($.jStorage.get("virtualGalleryAmount") * 18 / 100); // add $jStorage amount value
             } else {
                 formdata.amount = $.jStorage.get("virtualGalleryAmount") // add $jStorage amount value

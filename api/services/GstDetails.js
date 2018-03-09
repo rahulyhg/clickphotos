@@ -609,7 +609,80 @@ var model = {
                         callback(err, null);
                     } else {
                         if (found) {
-                            callback(null, found);
+                            async.waterfall([
+                                    function (callback) {
+                                        Config.generatePdf(found, function (err, data) {
+                                            if (err) {
+                                                // console.log(err);
+                                                callback(err, null);
+                                            } else {
+                                                if (_.isEmpty(data)) {
+                                                    callback(err, null);
+                                                } else {
+                                                    callback(null, data);
+                                                }
+                                            }
+                                        });
+                                    },
+                                    function (data, callback) {
+                                        var invoiceDate = {};
+                                        invoiceDate._id = found._id;
+                                        invoiceDate.invoiceFile = data.name;
+                                        GstDetails.saveData(invoiceDate, function (err, data1) {
+                                            if (err) {
+                                                console.log(err);
+                                                callback(err, null);
+                                            } else {
+                                                if (_.isEmpty(data1)) {
+                                                    callback(err, null);
+                                                } else {
+                                                    var finalData = {};
+                                                    finalData.data = data;
+                                                    finalData.data1 = data1;
+                                                    callback(null, finalData);
+                                                }
+                                            }
+                                        });
+                                    },
+                                    function (finalData, callback) {
+                                        var emailData = {};
+                                        emailData.from = "admin@clickmania.in";
+                                        emailData.name = found.photographer.name;
+                                        emailData.email = found.photographer.email;
+                                        emailData.file = finalData.data.name;
+                                        emailData.filename = "virtualGallery.ejs";
+                                        emailData.subject = "congrats you have successfully purchased";
+                                        Config.email(emailData, function (err, emailRespo) {
+                                            if (err) {
+                                                console.log(err);
+                                                callback(err);
+                                            } else if (emailRespo) {
+                                                // callback(null, emailRespo);
+
+                                                if (emailRespo) {
+                                                    // callback(null, updated);
+                                                } else {
+                                                    // callback("Invalid data", updated);
+                                                }
+
+                                            } else {
+                                                callback(null, "Invalid data");
+                                            }
+                                        });
+                                    }
+                                ],
+                                function (err, found) {
+                                    if (err) {
+                                        // console.log(err);
+                                        // callback(err, null);
+                                    } else {
+                                        // callback(null, found);
+                                    }
+                                });
+                        } else {
+                            callback(null, {
+                                message: "No Data Found"
+                            });
                         }
                     }
                 });

@@ -66,51 +66,72 @@
             <tr style="border-bottom:solid 2px #939393;">
                 <td align="center"><b><%= package %></b></td>
                 <td align="center">1</td>
-                <td align="center">₹<%= parseFloat(subtotal).toFixed( 2 )  %></td>
-                <td align="right">₹<%= parseFloat(amount).toFixed( 2 ) %></td>
+                <td align="center">₹
+                    <%= parseFloat(subtotal).toFixed( 2 )  %>
+                </td>
+                <td align="right">₹
+                    <%= parseFloat(amount).toFixed( 2 ) %>
+                </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td align="right"><b>Subtotal:</b></td>
-                <td align="right">₹<%= parseFloat(subtotal).toFixed( 2 ) %></td>
+                <td align="right">₹
+                    <%= parseFloat(subtotal).toFixed( 2 ) %>
+                </td>
             </tr>
-            <% if(state != 'Karnataka'){ %>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td align="right">IGST 18% (SAC 00440129):</td>
-                    <td align="right">₹<%= parseFloat(tax).toFixed( 2 ) %></td>
-                </tr>
-                <% }else{ %>
+            <% if(country == 'India'){ %>
+                <% if(state != 'Karnataka'){ %>
                     <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td align="right">CGST 9% (SAC 00440129):</td>
-                        <td align="right">₹<%= parseFloat(tax/2).toFixed( 2 ) %></td>
+                        <td align="right">IGST 18% (SAC 00440129):</td>
+                        <td align="right">₹
+                            <%= parseFloat(tax).toFixed( 2 ) %>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td align="right">SGST 9% (SAC 00440129):</td>
-                        <td align="right">₹<%=  parseFloat(tax/2).toFixed( 2 ) %></td>
-                    </tr>
-                    <% } %>
+                    <% }else{ %>
                         <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;"><b>Total:</b></td>
-                            <td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;">₹<%= parseFloat(amount).toFixed( 2 ) %></td>
+                            <td align="right">CGST 9% (SAC 00440129):</td>
+                            <td align="right">₹
+                                <%= parseFloat(tax/2).toFixed( 2 ) %>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td align="right"><b>Amount Due (INR):</b></td>
-                            <td align="right">₹<%= parseFloat(amount).toFixed( 2 ) %></td>
+                            <td align="right">SGST 9% (SAC 00440129):</td>
+                            <td align="right">₹
+                                <%=  parseFloat(tax/2).toFixed( 2 ) %>
+                            </td>
                         </tr>
-                        <tr>
-                            <td align="left" colspan="4" style="font-size:11px;"><b>Notes</b><br> PAN: AAGCC6531M<br> TAN: BLRC15450B<br> GST: 29AAGCC6531M2Z8<br> SAC: 00440129<br> THIS IS AN ELECTRONICALLY GENERATED INVOICE/RECEIPT AND DOES NOT REQUIRE ANY SIGNATURE.</td>
-                        </tr>
+                        <% } %>
+                            <% } %>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;"><b>Total:</b></td>
+                                    <td align="right" style="border-top: solid 1px #939393; border-bottom: solid 2px #939393; padding-top: 15px; padding-bottom: 15px;">₹
+                                        <%= parseFloat(amount).toFixed( 2 ) %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td align="right"><b>Amount Due (INR):</b></td>
+                                    <td align="right">₹
+                                        <%= parseFloat(amount).toFixed( 2 ) %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" colspan="4" style="font-size:11px;"><b>Notes</b><br> PAN: AAGCC6531M<br> TAN: BLRC15450B<br> GST: 29AAGCC6531M2Z8<br> SAC:
+                                        00440129
+                                        <br> THIS IS AN ELECTRONICALLY GENERATED INVOICE/RECEIPT AND DOES NOT REQUIRE ANY
+                                        SIGNATURE.</td>
+                                </tr>
         </tbody>
     </table>
 
