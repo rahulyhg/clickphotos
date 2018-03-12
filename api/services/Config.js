@@ -9,6 +9,7 @@
 var MaxImageSize = 1600;
 //var requrl = "http://clickmania.in/api/";
 var requrl = "http://clickmania.in/api/";
+// var requrl = "http://localhost:1337/api/";
 
 
 
@@ -402,7 +403,7 @@ var models = {
                             console.log(err);
                             callback(err, null);
                         } else {
-                            //console.log('email else');
+                            // console.log('email else', body);
                             if (body && body.value != false) {
                                 var helper = require('sendgrid').mail;
 
@@ -492,10 +493,16 @@ var models = {
         obj.country = country;
         if (country == "India") {
             obj.tax = (18 / 100) * obj.amount;
-            obj.subtotal = obj.amount - obj.tax;
+            if (obj.package == "virtualGallery") {
+                obj.subtotal = parseFloat(obj.amount) - obj.tax;
+                obj.quantity = parseFloat(obj.amount) / 500;
+            } else {
+                obj.subtotal = obj.amount - obj.tax;
+            }
         } else {
             obj.tax = 0;
-            obj.subtotal = obj.amount - obj.tax;
+            obj.subtotal = obj.amount;
+            obj.quantity = parseFloat(obj.amount) / 500;
         }
         var now = moment();
         var formatted = now.format('YYYY-MM-DD');
@@ -507,7 +514,7 @@ var models = {
                 console.log("errr", err);
                 callback(err);
             } else {
-                console.log("else");
+                console.log("else**************");
                 var path = "pdf/";
                 var newFilename = page._id + file + ".pdf";
                 var writestream = fs.createWriteStream(path + newFilename);
@@ -524,7 +531,8 @@ var models = {
                 });
 
                 var options = {
-                    "phantomPath": "node_modules/phantomjs/bin/phantomjs",
+                    // "phantomPath": "node_modules/phantomjs/bin/phantomjs",
+                    "phantomPath": "/home/wohlig/Documents/htdocs/clickphotos/phantomjs-1.9.7-linux-x86_64/bin/phantomjs",
                     // Export options 
                     "directory": "/tmp",
                     "height": "10.5in", // allowed units: mm, cm, in, px

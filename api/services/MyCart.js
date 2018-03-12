@@ -98,7 +98,7 @@ var model = {
             if (err) {
                 callback(err, null);
             } else if (data) {
-                console.log("in getCart", data);
+                // console.log("in getCart", data);
                 callback(null, data);
             } else {
                 callback(null, []);
@@ -172,6 +172,29 @@ var model = {
                 }, null);
             }
         })
-    }
+    },
+    /**
+     * this function to delete cart after purchase
+     * @param {cart.photographer} input photographerId
+     * @param {callback} callback function with err and response
+     */
+    deleteCart: function (cart, callback) {
+        MyCart.remove({
+            photographer: cart.photographer
+        }).exec(function (err, cartData) {
+            if (err) {
+                console.log("err in removing product from cart");
+                callback(err, null);
+            } else if (!_.isEmpty(cartData)) {
+                callback(null, cartData);
+            } else {
+                callback({
+                    message: {
+                        data: "Invalid credentials!for remove product"
+                    }
+                }, null);
+            }
+        })
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

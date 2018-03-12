@@ -2624,7 +2624,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         // It will give the particular country on selection
         $scope.selectCountry = function (item, model) {
-            var selectedCountryName = $scope.selectedCountryName = model.name; // it will give the country name 
+            $scope.selectedCountryName = model.name; // it will give the country name 
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
             //  console.log("model", selectedCountryName);
         };
@@ -3296,7 +3296,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.navigation = NavigationService.getnav();
         $scope.states = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
         $scope.view = $stateParams.view;
-        var selectedCountryName; //to store the country name after clicking in country dropdown
+        $scope.selectedCountryName; //to store the country name after clicking in country dropdown
         var selectedCountryCode // to store the country code after clicking in country dropdown
         // console.log($scope.view);
 
@@ -3308,12 +3308,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.getAllCountryCode(function (data) {
             $scope.countryListData = data;
             $scope.byDefaultCountry = $scope.countryListData[104];
+            $scope.selectedCountryName = $scope.countryListData[104].name;
+            $scope.countryCurrency = $scope.countryListData[104].currencies[0].code
         });
         // It will give the particular country on selection
         $scope.selectCountry = function (item, model) {
-            selectedCountryName = model.name; // it will give the country name 
+            $scope.selectedCountryName = model.name; // it will give the country name 
             selectedCountryCode = model.callingCodes; // it will give the country  code 
-            //  console.log("model", selectedCountryName);
+            $scope.countryCurrency = model.currencies[0].code; //it will give country currencys
         };
 
         var photographer = $.jStorage.get("photographer")
@@ -3366,6 +3368,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             formdata.email = $.jStorage.get("photographer").email;
             formdata.country = country;
+            formdata.currency = $scope.countryCurrency;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
@@ -3404,6 +3407,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.amount = silverPackageAmount + silverPackgeGst;
             formdata.email = $.jStorage.get("photographer").email;
             formdata.country = country;
+            formdata.currency = $scope.countryCurrency;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
@@ -3443,6 +3447,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 formdata.country = "India";
             }
+            formdata.currency = $scope.countryCurrency;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
@@ -3468,16 +3473,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.lastName = userdetails.lname;
             $scope.userData.address = userdetails.address;
             $scope.userData.phone = userdetails.phone;
-            $scope.userData.country = selectedCountryName;
+            $scope.userData.country = $scope.selectedCountryName;
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
+            $scope.userData.currency = $scope.countryCurrency;
             $scope.userData.pincode = userdetails.pin;
             $scope.userData.gstNumber = userdetails.GSTNumber;
             $scope.userData.photographer = $.jStorage.get("photographer")._id;
             var url = "GstDetails/save";
-            console.log($scope.userData);
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
-                // console.log(data)
+                console.log(data)
                 var order = data.data._id;
                 if ($scope.view == "silver") {
                     $scope.silverMember(order, $scope.userData.phone);
@@ -3841,7 +3846,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (cartData.data.value) {
                     $scope.cartAddedImg = cartData.data.data.photos;
                     $scope.price = cartData.data.data.baseValue;
-                    $scope.subTotal = $scope.price * cartData.data.data.photos.length;
+                    $scope.amount = $scope.price * cartData.data.data.photos.length;
+                    if ($.jStorage.get("photographer").country) {
+                        var country = $.jStorage.get("photographer").country;
+                    } else {
+                        var country = "India";
+                    }
+                    if (country == "India") {
+                        $scope.subTotal = $scope.amount;
+                    } else {
+                        $scope.subTotal = $scope.amount;
+                    }
                     $.jStorage.set("virtualGalleryAmount", $scope.subTotal);
                     // $rootScope.cartLength = $rootScope.myCartData.photos.length;
                     console.log("#######################333", $scope.cartAddedImg);

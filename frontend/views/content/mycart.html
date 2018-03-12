@@ -49,16 +49,16 @@
                             <td colspan="2" align="right">
                                 <ul class="list-unstyled amount-desc-list">
                                     <li>SUBTOTAL</li>
-                                    <!--<li>GST@18%</li>
-                                    <li>GRAND TOTAL</li>-->
+                                    <li>GST@18%</li>
+                                    <li>GRAND TOTAL</li>
                                 </ul>
                                 <p><a ui-sref="virtual-gallery" class="btn orange-btn">Continue Browsing</a></p>
                             </td>
                             <td>
                                 <ul class="list-unstyled amount-list text-center">
                                     <li>{{subTotal}}</li>
-                                    <!--<li>36</li>
-                                    <li>{{subTotal}}</li>-->
+                                    <li>{{subTotal*18/100}}</li>
+                                    <li>{{subTotal}}</li>
                                 </ul>
                                 <p><a class="btn orange-btn" ui-sref="billpaygst({view: 'virtualGallery'})">Proceed to payment</a></p>
                             </td>

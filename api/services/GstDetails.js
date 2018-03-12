@@ -14,6 +14,7 @@ var schema = new Schema({
     phone: String,
     state: String,
     city: String,
+    currency: String,
     pincode: Number,
     gstNumber: String,
     packageAmount: String,
@@ -222,9 +223,9 @@ var model = {
                                                 } else if (emailRespo) {
                                                     // callback(null, emailRespo);
                                                     var emailData = {};
-                                                    emailData.email = found.email;
+                                                    emailData.email = found.photographer.email;
                                                     emailData.filename = "goldupgrade.ejs";
-                                                    emailData.name = found.name;
+                                                    emailData.name = found.photographer.name;
                                                     //emailData.serviceRequest = data1.serviceRequest;
                                                     // emailData.email = data1.email;
                                                     //emailData.mobile = data1.mobile;
@@ -588,6 +589,13 @@ var model = {
             });
     },
 
+    /**
+     * this function update the packages of phographers
+     * and generate invoice pdf and send mail to user 
+     * whoes country in other than India
+     * @param {data.Description} input decription of package with amount
+     * @param {callback} callback function with err and response
+     */
     updatePackageOtherCountry: function (data, callback) {
         var orderData = data.Description.split("/");
         GstDetails.invoiceNumberGenerate(data, function (err, invoiceNumber) {
@@ -639,6 +647,12 @@ var model = {
                                                     var finalData = {};
                                                     finalData.data = data;
                                                     finalData.data1 = data1;
+                                                    if (orderData[0] == "virtualGallery") {
+                                                        var cart = {
+                                                            photographer: found.photographer._id
+                                                        }
+                                                        MyCart.deleteCart(cart, function (err, data) {});
+                                                    }
                                                     callback(null, finalData);
                                                 }
                                             }

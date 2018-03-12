@@ -304,6 +304,7 @@ var controller = {
                 email: req.body.email,
                 phone: req.body.phone,
                 country: req.body.country,
+                currency: req.body.currency,
                 return_url: req.body.return_url
             };
             Order.saveData(formData, res.callback);
@@ -377,7 +378,7 @@ var controller = {
                                 channel: "0",
                                 city: "Billing City",
                                 country: data.country,
-                                currency: "INR",
+                                currency: data.currency,
                                 description: data.description,
                                 display_currency: "GBP",
                                 display_currency_rates: "1",
@@ -426,10 +427,12 @@ var controller = {
                                     console.log("updatePackageAmtForFeature", data);
                                 });
                             } else {
+                                Photographer.updateToFeaturePhotographer(req.body, function (err, data) {
+                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                });
                                 GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
                                     console.log("updatePackageOtherCountry", data);
                                 });
-                                res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                             }
                         } else {
                             if (req.body.Description.split("/")[0] === "virtualGallery") {
@@ -453,10 +456,13 @@ var controller = {
                                         console.log("updatePackageAmtForFeature", data);
                                     });
                                 } else {
+                                    Photographer.updateToGold(req.body, function (err, data) {
+                                        res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                    });
                                     GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
                                         console.log("updatePackageOtherCountry", data);
                                     });
-                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                    // res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
                                 }
 
                             }
