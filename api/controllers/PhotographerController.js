@@ -363,14 +363,15 @@ var controller = {
                             res.view("payu", formData);
                         });
                     } else {
+                        console.log("EEEEEEEEEEEEE");
                         EBSConfig.getAll({}, function (err, dataConfig) {
-                            // console.log("ggggggggg");
+                            console.log("ggggggggg");
                             console.log(dataConfig);
                             var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');
                             var hs = hashtext.toUpperCase('hex');
                             var reference_no = req.query.id;
-
+                            console.log("  var hs", hs);
                             var formData = {
                                 account_id: dataConfig[0].account,
                                 address: "Billing Address",
@@ -391,6 +392,7 @@ var controller = {
                                 return_url: data.return_url,
                                 secure_hash: hs
                             };
+                            console.log("DDDDDDDDDDDDDDDD", formData);
                             res.view("payu", formData);
                         });
                     }
@@ -409,6 +411,7 @@ var controller = {
     },
 
     paymentGatewayResponce: function (req, res) {
+        console.log("##############req.body paymentGatewayResponce", req.body);
         if (req.body) {
             if (req.body.ResponseMessage == "Transaction Successful") {
                 var formData = {
