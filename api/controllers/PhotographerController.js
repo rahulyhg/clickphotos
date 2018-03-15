@@ -363,15 +363,12 @@ var controller = {
                             res.view("payu", formData);
                         });
                     } else {
-                        console.log("EEEEEEEEEEEEE");
                         EBSConfig.getAll({}, function (err, dataConfig) {
-                            console.log("ggggggggg");
                             console.log(dataConfig);
                             var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');
                             var hs = hashtext.toUpperCase('hex');
                             var reference_no = req.query.id;
-                            console.log("  var hs", hs);
                             var formData = {
                                 account_id: dataConfig[0].account,
                                 address: "Billing Address",
@@ -390,9 +387,12 @@ var controller = {
                                 phone: phoneno,
                                 postal_code: "600001",
                                 return_url: data.return_url,
-                                secure_hash: hs
+                                secure_hash: hs,
+                                string_before_sha512: (dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url),
+                                hash512_hash: hash,
+                                hash_to_string: hashtext,
+                                final_secure_hash: hashtext.toUpperCase('hex')
                             };
-                            console.log("DDDDDDDDDDDDDDDD", formData);
                             res.view("payu", formData);
                         });
                     }
