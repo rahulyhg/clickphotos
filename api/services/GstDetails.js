@@ -11,6 +11,7 @@ var schema = new Schema({
     lastName: String,
     address: String,
     country: String,
+    codeCountry: String,
     phone: String,
     state: String,
     city: String,

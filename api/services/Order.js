@@ -44,6 +44,7 @@ var schema = new Schema({
         type: String,
         default: 'INR'
     },
+    codeCountry: String,
     description: {
         type: String,
         default: 'Test Order Description'

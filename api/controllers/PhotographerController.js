@@ -304,6 +304,7 @@ var controller = {
                 email: req.body.email,
                 phone: req.body.phone,
                 country: req.body.country,
+                codeCountry: req.body.codeCountry,
                 currency: req.body.currency,
                 return_url: req.body.return_url
             };
@@ -375,7 +376,7 @@ var controller = {
                                 amount: data.amount,
                                 channel: "0",
                                 city: "Billing City",
-                                country: data.country,
+                                country: data.codeCountry,
                                 currency: data.currency,
                                 description: data.description,
                                 display_currency: "GBP",
@@ -387,11 +388,7 @@ var controller = {
                                 phone: phoneno,
                                 postal_code: "600001",
                                 return_url: data.return_url,
-                                secure_hash: hs,
-                                string_before_sha512: (dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url),
-                                hash512_hash: hash,
-                                hash_to_string: hashtext,
-                                final_secure_hash: hashtext.toUpperCase('hex')
+                                secure_hash: hs
                             };
                             res.view("payu", formData);
                         });

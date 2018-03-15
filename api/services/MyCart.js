@@ -13,7 +13,7 @@ var schema = new Schema({
     gst: Number,
     baseValue: {
         type: Number,
-        default: 500
+        default: 100
     }
 });
 

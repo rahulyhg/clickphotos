@@ -494,8 +494,11 @@ var models = {
         if (country == "India") {
             obj.tax = (18 / 100) * obj.amount;
             if (obj.package == "virtualGallery") {
+                obj.tax = parseFloat(obj.amount) - ((parseFloat(obj.amount)) * 100 / 118);
                 obj.subtotal = parseFloat(obj.amount) - obj.tax;
-                obj.quantity = parseFloat(obj.amount) / 500;
+                obj.quantity = parseFloat(obj.subtotal) / 100;
+                obj.quantityPrice = obj.quantity * 100;
+                obj.actualPrice = 100;
             } else {
                 obj.subtotal = obj.amount - obj.tax;
             }

@@ -3264,6 +3264,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // console.log("data update", data)
                         if (data.value === true) {
                             $.jStorage.set("photographer", data.data);
+                            var cart = {
+                                photographer: data.data._id
+                            }
+                            CartService.deleteCart(cart, function (data) {
+                                console.log("@@@@@@@@@@@@@@@@@@@@@@@@@", data);
+                            });
                         }
                     });
                 } else {
@@ -3310,12 +3316,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.byDefaultCountry = $scope.countryListData[104];
             $scope.selectedCountryName = $scope.countryListData[104].name;
             $scope.countryCurrency = $scope.countryListData[104].currencies[0].code
+            $scope.selectedCountryCode = $scope.countryListData[104].alpha3Code;
         });
         // It will give the particular country on selection
         $scope.selectCountry = function (item, model) {
             $scope.selectedCountryName = model.name; // it will give the country name 
             selectedCountryCode = model.callingCodes; // it will give the country  code 
             $scope.countryCurrency = model.currencies[0].code; //it will give country currencys
+            $scope.selectedCountryCode = model.alpha3Code;
         };
 
         var photographer = $.jStorage.get("photographer")
@@ -3367,8 +3375,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // console.log("else")
             }
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.country = country;
+            formdata.country = $scope.selectedCountryName;
             formdata.currency = $scope.countryCurrency;
+            formdata.codeCountry = $scope.selectedCountryCode;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
@@ -3406,8 +3415,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = null;
             formdata.amount = silverPackageAmount + silverPackgeGst;
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.country = country;
+            formdata.country = $scope.selectedCountryName;
             formdata.currency = $scope.countryCurrency;
+            formdata.codeCountry = $scope.selectedCountryCode;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
@@ -3436,18 +3446,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // ABS PAYMENT GATEWAY
             formdata.photographer = $.jStorage.get("photographer")._id;
             formdata.payAmount = null;
-            if (country == "India") {
-                formdata.amount = $.jStorage.get("virtualGalleryAmount") + ($.jStorage.get("virtualGalleryAmount") * 18 / 100); // add $jStorage amount value
-            } else {
-                formdata.amount = $.jStorage.get("virtualGalleryAmount") // add $jStorage amount value
-            }
+            formdata.amount = $.jStorage.get("virtualGalleryAmount"); // add $jStorage amount value
             formdata.email = $.jStorage.get("photographer").email;
-            if ($.jStorage.get("photographer").country) {
-                formdata.country = $.jStorage.get("photographer").country;
-            } else {
-                formdata.country = "India";
-            }
+            formdata.country = $scope.selectedCountryName;
             formdata.currency = $scope.countryCurrency;
+            formdata.codeCountry = $scope.selectedCountryCode;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
@@ -3477,6 +3480,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.state = userdetails.state;
             $scope.userData.city = userdetails.city;
             $scope.userData.currency = $scope.countryCurrency;
+            $scope.userData.codeCountry = $scope.selectedCountryCode;
             $scope.userData.pincode = userdetails.pin;
             $scope.userData.gstNumber = userdetails.GSTNumber;
             $scope.userData.photographer = $.jStorage.get("photographer")._id;
@@ -3847,13 +3851,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.cartAddedImg = cartData.data.data.photos;
                     $scope.price = cartData.data.data.baseValue;
                     $scope.amount = $scope.price * cartData.data.data.photos.length;
+                    $scope.tax = $scope.amount * 18 / 100;
                     if ($.jStorage.get("photographer").country) {
                         var country = $.jStorage.get("photographer").country;
                     } else {
                         var country = "India";
                     }
                     if (country == "India") {
-                        $scope.subTotal = $scope.amount;
+                        $scope.subTotal = $scope.amount + ($scope.amount * 18 / 100);
                     } else {
                         $scope.subTotal = $scope.amount;
                     }
@@ -4108,5 +4113,13 @@ firstapp.service('CartService', function ($http) {
             withCredentials: false
         }).then(callback);
     }
-
+    //delete cart
+    this.deleteCart = function (cart, callback) {
+        $http({
+            url: adminurl + 'MyCart/deleteCart',
+            method: 'POST',
+            data: cart,
+            withCredentials: false
+        }).then(callback);
+    }
 })
