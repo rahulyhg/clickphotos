@@ -1,0 +1,16 @@
+<% if(status == 'Approved'){ %>
+    <div>Hello,
+        <%= name %>
+            <br>
+            <p>Your Photo is Accepted</p>
+    </div>
+
+    <% } %>
+        <% if(status == 'Rejected'){ %>
+            <div>Hello,
+                <%= name %>
+                    <br>
+                    <p>Your Photo is declined</p>
+            </div>
+
+            <% } %>

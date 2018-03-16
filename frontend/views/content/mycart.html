@@ -45,7 +45,7 @@
                         </tr>
                     </tbody>
                     <tfooter>
-                        <tr>
+                        <tr ng-if="!cartNotFound">
                             <td colspan="2" align="right">
                                 <ul class="list-unstyled amount-desc-list">
                                     <li>SUBTOTAL</li>
@@ -65,6 +65,9 @@
                         </tr>
                     </tfooter>
                 </table>
+            </div>
+            <div class="mycart-title text-center" ng-if="cartNotFound">
+                <h2>No Photographs in Cart</h2>
             </div>
         </div>
     </div>

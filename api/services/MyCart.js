@@ -101,7 +101,7 @@ var model = {
                 // console.log("in getCart", data);
                 callback(null, data);
             } else {
-                callback(null, []);
+                callback(null, null);
             }
         })
     },

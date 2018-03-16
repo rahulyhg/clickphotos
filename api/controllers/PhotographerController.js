@@ -366,7 +366,7 @@ var controller = {
                     } else {
                         EBSConfig.getAll({}, function (err, dataConfig) {
                             console.log(dataConfig);
-                            var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
+                            var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|" + data.codeCountry + "|" + data.currency + "|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                             var hashtext = hash.toString('hex');
                             var hs = hashtext.toUpperCase('hex');
                             var reference_no = req.query.id;
@@ -626,8 +626,19 @@ var controller = {
                 }
             });
         }
+    },
+    approvedDeclineMail: function (req, res) {
+        if (req.body) {
+            Photographer.approvedDeclineMail(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
     }
-
     // smsForOtp: function (req, res) {
     //     if (req.body) {
     //         Photographer.smsForOtp(req.body, res.callback);

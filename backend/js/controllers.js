@@ -1704,11 +1704,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.approveRequest = function (photoDetails) {
+            console.log("in approve request", photoDetails);
             var formData = {};
-            formData._id = photoDetails,
+            formData._id = photoDetails._id,
                 formData.status = "Approved"
             NavigationService.apiCallWithData("Photos/save", formData, function (data) {
                 if (data.value === true) {
+                    formData.photographer = photoDetails.photographer._id;
+                    NavigationService.apiCallWithData("Photographer/approvedDeclineMail", formData, function (data1) {
+                        console.log("after accepting", data1);
+                    });
                     $state.reload();
                 }
             });
@@ -1717,10 +1722,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.declineRequest = function (photoDetail) {
             var formData = {};
-            formData._id = photoDetail,
+            formData._id = photoDetail._id,
                 formData.status = "Rejected"
             NavigationService.apiCallWithData("Photos/save", formData, function (data) {
                 if (data.value === true) {
+                    formData.photographer = photoDetail.photographer._id;
+                    NavigationService.apiCallWithData("Photographer/approvedDeclineMail", formData, function (data1) {
+                        console.log("after decline", data1);
+                    });
                     $state.reload();
                 }
             });

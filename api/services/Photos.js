@@ -49,7 +49,8 @@ var model = {
                 "keyword": {
                     $regex: data.keyword,
                     $options: "i"
-                }
+                },
+                "status": "Approved"
             }
         }], function (err, found) {
             if (err || _.isEmpty(found)) {

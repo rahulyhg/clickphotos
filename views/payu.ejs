@@ -1,21 +1,21 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
 <form action="https://secure.ebs.in/pg/ma/payment/request" name="payment" method="POST">
-    <input value="<%= account_id %>" name="account_id" />
-    <input value="<%= address %>" name="address" />
-    <input value="<%= amount %>" name="amount" />
-    <input value="<%= channel %>" name="channel" />
-    <input value="<%= city %>" name="city" />
-    <input value="<%= country %>" name="country" />
-    <input value="<%= currency %>" name="currency" />
-    <input value="<%= description %>" name="description" />
-    <input value="<%= display_currency %>" name="display_currency" />
-    <input value="<%= display_currency_rates %>" name="display_currency_rates" />
-    <input value="<%= email %>" name="email" />
-    <input value="<%= mode %>" name="mode" />
-    <input value="<%= name %>" name="name" />
-    <input value="<%= phone %>" name="phone" />
-    <input value="<%= postal_code %>" name="postal_code" />
+    <input hidden value="<%= account_id %>" name="account_id" />
+    <input hidden value="<%= address %>" name="address" />
+    <input hidden value="<%= amount %>" name="amount" />
+    <input hidden value="<%= channel %>" name="channel" />
+    <input hidden value="<%= city %>" name="city" />
+    <input hidden value="<%= country %>" name="country" />
+    <input hidden value="<%= currency %>" name="currency" />
+    <input hidden value="<%= description %>" name="description" />
+    <input hidden value="<%= display_currency %>" name="display_currency" />
+    <input hidden value="<%= display_currency_rates %>" name="display_currency_rates" />
+    <input hidden value="<%= email %>" name="email" />
+    <input hidden value="<%= mode %>" name="mode" />
+    <input hidden value="<%= name %>" name="name" />
+    <input hidden value="<%= phone %>" name="phone" />
+    <input hidden value="<%= postal_code %>" name="postal_code" />
     <div><label>reference_no</label>
         <input value="<%= reference_no %>" name="reference_no" />
     </div>
@@ -26,7 +26,7 @@
     <div><label>secure_hash</label>
         <input value="<%= secure_hash %>" name="secure_hash" />
     </div>
-    <button type="submit" class="submitForm"> SUBMIT </button>
+    <button type="submit" style="display:none" class="submitForm"> SUBMIT </button>
 </form>
 <div class="container">
     <h3 class="text-center" style="padding:20%;">Loading EBS Payment Gateway</h3>
@@ -35,6 +35,6 @@
     crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
-        // $(".submitForm").click();
+        $(".submitForm").click();
     });
 </script>

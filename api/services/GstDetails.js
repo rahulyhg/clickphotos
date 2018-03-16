@@ -198,7 +198,7 @@ var model = {
                                             emailData.email = found.photographer.email;
                                             emailData.file = finalData.data.name;
                                             emailData.filename = "goldpackage.ejs";
-                                            emailData.subject = "Invcongrats you Have upgraded to Gold Package";
+                                            emailData.subject = "congrats you Have upgraded to Gold Package";
                                             Config.email(emailData, function (err, emailRespo) {
                                                 if (err) {
                                                     console.log(err);

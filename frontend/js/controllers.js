@@ -286,6 +286,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
+
         //Function to change ths plus & minus sign in photo contest tab
         $scope.imgUrl = 'frontend/img/plus.png';
         $scope.changeSign = function (imgUrl) {
@@ -864,8 +865,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.imageData = {};
         $scope.addImages = function (val) {
-            //console.log("val", val);
-            $scope.imageData.category = val.name;
+            // console.log("val", val);
+            $scope.imageData.category = val;
             //console.log("$scope.imageData", $scope.imageData.category);
             //     if (_.isEqual(type, "category")) {
             //         $scope.filterToBeApplied.category = val._id;
@@ -877,14 +878,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.uploadImg = function (contest) {
-            $scope.contestIdModal = contest;
-            $scope.imgModal = $uibModal.open({
-                animation: true,
-                templateUrl: "frontend/views/modal/upload-photo.html",
-                scope: $scope,
-                windowClass: 'upload-pic',
-                backdropClass: 'black-drop',
-                size: 'lg'
+            //get all categories
+            NavigationService.callApi("Categories/getAll", function (data) {
+                if (data.value === true) {
+                    // console.log(data.data);
+                    $scope.photographerData = {};
+                    $scope.photographerData.catego = data.data;
+                    $scope.category = data.data;
+                    // _.forEach($scope.category, function (value) {
+                    //     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!", value);
+                    //     $scope.catSearchBar.push(value);
+                    //     //console.log("Cat-data", $scope.catSearchBar);
+                    // });
+                    $scope.contestIdModal = contest;
+                    $scope.imgModal = $uibModal.open({
+                        animation: true,
+                        templateUrl: "frontend/views/modal/upload-photo.html",
+                        scope: $scope,
+                        windowClass: 'upload-pic',
+                        backdropClass: 'black-drop',
+                        size: 'lg'
+                    });
+                }
             });
         };
 
@@ -903,27 +918,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.uploadImagePic = function (formdata) {
-            //console.log("im in upload image", formdata);
+            // console.log("im in upload image", $scope.imageData.category, "ddddd", formdata);
             formdata.category = $scope.imageData.category;
             formdata._id = $.jStorage.get("photographer")._id;
-            // NavigationService.apiCallWithData("Photographer/uploadPhotos", formdata, function(data) {
-            //     //console.log("data", data);
-            //     if (data.value) {
-            //         //console.log("dataaaaaaaaaa", data);
-            //         $scope.imgModal.close();
-            //         //console.log("modal close");
-            //         NavigationService.apiCallWithData("Photographer/getOne", formdata, function(data) {
-            //             if (data.value === true) {
-            //                 $scope.photographerData = data.data;
-            //                 $scope.uploadImgData = $scope.photographerData.uploadedImages;
-            //                 $scope.showSixPhotos = _.slice($scope.uploadImgData, 0, 6);
-            //                 $scope.uploadImgLength = $scope.uploadImgData.length;
-            //                 $scope.uniqueCategory = _.uniqBy($scope.uploadImgData, 'category');
-            //                 $scope.dataArr = [];
-            //             }
-            //         })
-            //     }
-            // });
 
             $scope.imageUploadRequest = {};
             $scope.imageUploadRequest.image = formdata.image;
@@ -932,13 +929,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.imageUploadRequest.keyword = _.map(formdata.searchKeyword.split(','), function (n) {
                 return _.trim(n);
             });
-            $scope.close();
+            $scope.imgModal.close();
             NavigationService.apiCallWithData("Photos/save", $scope.imageUploadRequest, function (data) {
-                if (data.value) {}
+                if (data.value) {
+                    $scope.thankYouUpload = $uibModal.open({
+                        animation: true,
+                        templateUrl: "frontend/views/modal/image-verification.html",
+                        scope: $scope,
+                        windowClass: 'upload-pic',
+                        backdropClass: 'black-drop',
+                        size: 'lg'
+                    });
+                }
             });
         };
         //upload image end
 
+        $scope.closeThankYouModal = function () {
+            $scope.thankYouUpload.close();
+        }
 
         //upload profile pic
 
@@ -3195,7 +3204,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     })
 
-    .controller('thanksCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+    .controller('thanksCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, CartService, $rootScope) {
 
         $scope.template = TemplateService.changecontent("thanks"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thank-You"); //This is the Title of the Website
@@ -3259,6 +3268,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 } else if (data.data.description.split('/')[0] == "virtualGallery") {
                     $scope.msg = "Thank you!!";
                     formData = {};
+                    console.log("$.jStorage.get('photographer')._id", $.jStorage.get("photographer")._id)
                     formData._id = $.jStorage.get("photographer")._id;
                     NavigationService.apiCallWithData("Photographer/getOne", formData, function (data) {
                         // console.log("data update", data)
@@ -3269,6 +3279,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             }
                             CartService.deleteCart(cart, function (data) {
                                 console.log("@@@@@@@@@@@@@@@@@@@@@@@@@", data);
+                                $rootScope.cartLength = 0;
+                                $state.reload();
                             });
                         }
                     });
@@ -3594,7 +3606,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         ]
     })
 
-    .controller('VirtualGalleryCtrl', function ($scope, $rootScope, TemplateService, NavigationService, AddToCartSerivce, $timeout, $uibModal, $log, $state, CartService, toastr, $window) {
+    .controller('VirtualGalleryCtrl', function ($scope, $rootScope, TemplateService, NavigationService, AddToCartSerivce, $timeout, $uibModal, $log, $state, CartService, toastr, $window, $cacheFactory) {
         $scope.template = TemplateService.changecontent("virtual-gallery"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Virtual Gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -3604,9 +3616,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.virtualGallery = data.data;
 
         });
-
-        $scope.beforeAddedCart = true;
-        $scope.afterAddedCart = AddToCartSerivce.checkCart(); // to show the Add to cart box
         if ($.jStorage.get("photographer")) {
             var photographerData = {};
             photographerData.photographer = $.jStorage.get("photographer")._id;
@@ -3640,13 +3649,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
 
         }
+        $scope.beforeAddedCart = true;
+        $scope.afterAddedCart = AddToCartSerivce.checkCart(); // to show the Add to cart box
+
 
         //get all categories
         NavigationService.callApi("Categories/getAll", function (data) {
             if (data.value === true) {
                 console.log(data);
                 $scope.photographerData = {};
-                $scope.photographerData.speciality = data.data;
+                $scope.photographerData.catego = data.data;
                 $scope.category = data.data;
                 // _.forEach($scope.category, function (value) {
                 //     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!", value);
@@ -3664,15 +3676,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
         //To open upload image modal
         $scope.uploadImg = function (contest) {
-            $scope.contestIdModal = contest;
-            $scope.imgModal = $uibModal.open({
-                animation: true,
-                templateUrl: "frontend/views/modal/upload-photo.html",
-                scope: $scope,
-                windowClass: 'upload-pic',
-                backdropClass: 'black-drop',
-                size: 'lg'
-            });
+            if ($.jStorage.get("photographer")) {
+                $scope.contestIdModal = contest;
+                $scope.imgModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: "frontend/views/modal/upload-photo.html",
+                    scope: $scope,
+                    windowClass: 'upload-pic',
+                    backdropClass: 'black-drop',
+                    size: 'lg'
+                });
+            } else {
+                toastr.error('Please login first', 'Error');
+            }
         };
         //To close upload image modal
         $scope.closeModal = function () {
@@ -3752,6 +3768,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         }
 
+        $scope.imageSize = function (data) {
+            // console.log("data------", data);
+            if (data == 'More than 3Mb') {
+                toastr.error('Image Size Is More Than 3 Mb');
+            } else {
+                toastr.error('Image Size Is More Than 1 Mb');
+            }
+        }
         $scope.uploadImagePic = function (formdata) {
             $scope.imageUploadRequest = {};
             $scope.imageUploadRequest.image = formdata.image;
@@ -3762,10 +3786,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
             $scope.closeModal();
             NavigationService.apiCallWithData("Photos/save", $scope.imageUploadRequest, function (data) {
-                if (data.value) {}
-                $state.reload();
+                if (data.value) {
+                    $scope.thankYouUpload = $uibModal.open({
+                        animation: true,
+                        templateUrl: "frontend/views/modal/image-verification.html",
+                        scope: $scope,
+                        windowClass: 'upload-pic',
+                        backdropClass: 'black-drop',
+                        size: 'md'
+                    });
+                }
+                // $state.reload();
             });
         };
+
+        $scope.closeThankYouModal = function () {
+            $scope.thankYouUpload.close();
+            $state.reload();
+        }
 
         //to add in cart
         $scope.mycart = function (photo) {
@@ -3774,13 +3812,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 var myCartData = {};
                 myCartData.photos = photo._id;
                 myCartData.photographer = $.jStorage.get("photographer")._id;
-                _.each($rootScope.myCartData.photos, function (photo) {
-                    if (_.isEqual(photo._id, myCartData.photos)) {
-                        $scope.myCartTrue = true;
-                        return $scope.myCartTrue
+                if ($rootScope.myCartData) {
+                    _.each($rootScope.myCartData.photos, function (photo) {
+                        if (_.isEqual(photo._id, myCartData.photos)) {
+                            $scope.myCartTrue = true;
+                            return $scope.myCartTrue
 
-                    }
-                });
+                        }
+                    });
+                } else {
+                    $scope.myCartTrue = false;
+                }
                 if (!$scope.myCartTrue) {
                     CartService.addToCart(myCartData, function (data) {
                         if (data.data.value) {
@@ -3809,6 +3851,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         backdropClass: 'black-drop',
                         size: 'sm'
                     });
+
                 }
             } //end of if
             else {
@@ -3818,7 +3861,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         };
-
+        //to remove from Cart
+        $scope.removeFromCart = function (photo) {
+            var myCartData = {};
+            myCartData.photos = photo._id;
+            myCartData.photographer = $.jStorage.get("photographer")._id;
+            CartService.removeFromCart(myCartData, function (data) {
+                // console.log("#################", $cacheFactory.removeAll());
+                if (data.data.value) {
+                    $state.reload();
+                }
+            });
+        }
     })
 
     .controller('MyCartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $log, CartService, $rootScope, $state) {
@@ -3848,23 +3902,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             photographerData.photographer = $.jStorage.get("photographer")._id;
             CartService.getCart(photographerData, function (cartData) {
                 if (cartData.data.value) {
-                    $scope.cartAddedImg = cartData.data.data.photos;
-                    $scope.price = cartData.data.data.baseValue;
-                    $scope.amount = $scope.price * cartData.data.data.photos.length;
-                    $scope.tax = $scope.amount * 18 / 100;
-                    if ($.jStorage.get("photographer").country) {
-                        var country = $.jStorage.get("photographer").country;
+                    if (cartData.data.data.photos.length != 0) {
+                        $scope.cartNotFound = false;
+                        $scope.cartAddedImg = cartData.data.data.photos;
+                        $scope.price = cartData.data.data.baseValue;
+                        $scope.amount = $scope.price * cartData.data.data.photos.length;
+                        $scope.tax = $scope.amount * 18 / 100;
+                        if ($.jStorage.get("photographer").country) {
+                            var country = $.jStorage.get("photographer").country;
+                        } else {
+                            var country = "India";
+                        }
+                        if (country == "India") {
+                            $scope.subTotal = $scope.amount + ($scope.amount * 18 / 100);
+                        } else {
+                            $scope.subTotal = $scope.amount;
+                        }
+                        $.jStorage.set("virtualGalleryAmount", $scope.subTotal);
+                        // $rootScope.cartLength = $rootScope.myCartData.photos.length;
+                        // console.log("#######################333", $scope.cartAddedImg);
                     } else {
-                        var country = "India";
+                        $scope.cartNotFound = true;
                     }
-                    if (country == "India") {
-                        $scope.subTotal = $scope.amount + ($scope.amount * 18 / 100);
-                    } else {
-                        $scope.subTotal = $scope.amount;
-                    }
-                    $.jStorage.set("virtualGalleryAmount", $scope.subTotal);
-                    // $rootScope.cartLength = $rootScope.myCartData.photos.length;
-                    console.log("#######################333", $scope.cartAddedImg);
+                } else {
+                    $scope.cartNotFound = true;
                 }
             });
         }
@@ -3875,7 +3936,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             cartData.photographer = $.jStorage.get("photographer")._id;
             cartData.photos = cart._id;
             CartService.removeFromCart(cartData, function (myCart) {
-                console.log("&&&&&&&&&&&&&&&&&&&&", myCart);
+                // console.log("&&&&&&&&&&&&&&&&&&&&", myCart);
                 if (myCart.data.value) {
                     $scope.cartAddedImg = myCart.data.data.photos;
                     $scope.removedElem = _.remove($scope.cartAddedImg, function (n) {

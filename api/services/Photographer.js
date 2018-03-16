@@ -1476,6 +1476,36 @@ var model = {
                 }
             }
         });
+    },
+
+    approvedDeclineMail: function (data, callback) {
+        Photographer.findOne({
+            _id: data.photographer
+        }).exec(function (err, photographer) {
+            if (err) {
+                callback(err, null);
+            } else if (!_.isEmpty(photographer)) {
+                var emailData = {};
+                emailData.from = "admin@clickmania.in";
+                emailData.name = photographer.name;
+                emailData.email = photographer.email;
+                emailData.filename = "acceptDecline.ejs";
+                emailData.subject = "upload photo";
+                emailData.status = data.status;
+                Config.email(emailData, function (err, emailRespo) {
+                    if (err) {
+                        console.log(err);
+                        callback(err);
+                    } else if (!_.isEmpty(emailRespo)) {
+                        callback(null, emailRespo);
+                    } else {
+                        callback(null, "Invalid data");
+                    }
+                });
+            } else {
+                callback(null, false)
+            }
+        })
     }
 
 };
