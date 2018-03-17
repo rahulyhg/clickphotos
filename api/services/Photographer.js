@@ -1477,7 +1477,12 @@ var model = {
             }
         });
     },
-
+    /**
+     * this function to send mail after decline and accepting 
+     * upload request
+     * @param {photographer} input photographers Id
+     * @param {callback} callback function with err and response
+     */
     approvedDeclineMail: function (data, callback) {
         Photographer.findOne({
             _id: data.photographer

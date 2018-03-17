@@ -188,6 +188,43 @@ var model = {
                 callback(null, photos)
             }
         })
+    },
+    /**
+     * this function to send mail after decline and accepting 
+     * upload request
+     * @param {photographer} input photographers Id
+     * @param {callback} callback function with err and response
+     */
+    uploadPhotoMail: function (data, callback) {
+        Photos.findOne({
+            photographer: data.photographer
+        }).deepPopulate("photographer").exec(function (err, photographer) {
+            if (err) {
+                callback(err, null);
+            } else if (!_.isEmpty(photographer)) {
+
+                var emailData = {};
+                emailData.from = "admin@clickmania.in";
+                emailData.name = photographer.photographer.name;
+                emailData.email = photographer.photographer.email;
+                emailData.filename = "uploadPhotoMail.ejs";
+                emailData.subject = "upload photo";
+                emailData.status = data.status;
+                Config.email(emailData, function (err, emailRespo) {
+                    if (err) {
+                        console.log(err);
+                        callback(err);
+                    } else if (!_.isEmpty(emailRespo)) {
+                        callback(null, emailRespo);
+                    } else {
+                        callback(null, "Invalid data");
+                    }
+                });
+            } else {
+                callback(null, false)
+            }
+        })
     }
+
 };
 module.exports = _.assign(module.exports, exports, model);

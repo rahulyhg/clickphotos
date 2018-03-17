@@ -876,7 +876,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //     }
             //   //  console.log("$scope.filterToBeApplied ", $scope.filterToBeApplied);
         }
-
+        $scope.addImagesUploadPhotos = function (val) {
+            console.log("val", val);
+            $scope.imageData.category = val;
+            var relatedData = {
+                category: val._id
+            };
+        }
         $scope.uploadImg = function (contest) {
             //get all categories
             NavigationService.callApi("Categories/getAll", function (data) {
@@ -939,6 +945,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         windowClass: 'upload-pic',
                         backdropClass: 'black-drop',
                         size: 'lg'
+                    });
+                    NavigationService.apiCallWithData("Photos/uploadPhotoMail", $scope.imageUploadRequest, function (data) {
+                        if (data.value) {
+
+                        }
                     });
                 }
             });
@@ -3278,7 +3289,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                 photographer: data.data._id
                             }
                             CartService.deleteCart(cart, function (data) {
-                                console.log("@@@@@@@@@@@@@@@@@@@@@@@@@", data);
                                 $rootScope.cartLength = 0;
                                 $state.reload();
                             });
@@ -3714,27 +3724,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             };
 
             NavigationService.apiCallWithData("Photos/getAllRelatedPhotos", relatedData, function (data) {
-                console.log("$$$$$$$$$$$$$$$$$$$$$", data);
                 if (data.data == "noData") {
                     $scope.virtualGallery = {};
                 } else {
                     $scope.virtualGallery = data.data;
                     //to check photograph exist in cart 
-                    _.each($scope.virtualGallery, function (gallery) {
-                        _.each($rootScope.myCartData.photos, function (cartPhoto) {
-                            if (_.isEqual(cartPhoto._id, gallery._id)) {
-                                gallery.myCart = true;
-                            } else {
-                                if (gallery.myCart) {
+                    if ($rootScope.myCartData) {
+                        _.each($scope.virtualGallery, function (gallery) {
+                            _.each($rootScope.myCartData.photos, function (cartPhoto) {
+                                if (_.isEqual(cartPhoto._id, gallery._id)) {
                                     gallery.myCart = true;
                                 } else {
-                                    gallery.myCart = false;
+                                    if (gallery.myCart) {
+                                        gallery.myCart = true;
+                                    } else {
+                                        gallery.myCart = false;
+                                    }
                                 }
-                            }
-                        }); // end of inner each
-                    }); // end of outer each
+                            }); // end of inner each
+                        }); // end of outer each
+                    }
                 }
             });
+        }
+        $scope.addImagesUploadPhotos = function (val) {
+            console.log("val", val);
+            $scope.imageData.category = val;
+            var relatedData = {
+                category: val._id
+            };
         }
         // to get the category wise data when the user types in into the search box
         $scope.getCategoryWisePhoto = function (userIp) {
@@ -3794,6 +3812,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         windowClass: 'upload-pic',
                         backdropClass: 'black-drop',
                         size: 'md'
+                    });
+                    NavigationService.apiCallWithData("Photos/uploadPhotoMail", $scope.imageUploadRequest, function (data) {
+                        if (data.value) {
+
+                        }
                     });
                 }
                 // $state.reload();
