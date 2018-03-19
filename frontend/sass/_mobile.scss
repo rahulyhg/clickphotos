@@ -148,9 +148,10 @@
                 font-size: 8px!important;
             }
             button {
-                font-size: 12px !important;
+                font-size: 10px !important;
                 width: 50px !important;
-                padding: 5px 5px;
+                padding: 5px;
+                margin-left: 1px;
             }
             .cart-area {
                 position: absolute;
@@ -1203,8 +1204,19 @@
                 font-size: 14px;
             }
             button {
+                width: auto;
+                padding: 5px;
                 font-size: 12px;
-                @include size(65px, auto);
+            }
+            .cart {
+                width: 20px;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                @include transform(translateY(-50%));
+            }
+            .cart span {
+                @include size(13px, 13px);
             }
         }
         .side-menu {
@@ -1694,7 +1706,15 @@
                 display: block;
                 margin: 0 auto;
             }
-        } //Start of artist-of-the-month.html
+        }
+        //Start of thanks-virtual-section
+        .thanks-virtual-section {
+            .thanks-title {
+                text-align: center;
+            }
+        }
+        //end of thanks-virtual-section
+        //Start of artist-of-the-month.html
         .page-margin {
             margin-bottom: 100px;
             margin-left: 80px;

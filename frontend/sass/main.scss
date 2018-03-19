@@ -5177,6 +5177,28 @@ only screen and (min-device-pixel-ratio: 1.5) {
         border-radius: 0px;
     }
 } //End of Thank You for gold, silver & sorry pages
+//Start of thanks-virtual-section
+.thanks-virtual-section {
+    padding: 35px 0;
+    background-image: url("../img/thanks-virtual-bg.png");
+    background-size: 442px;
+    background-position: left top;
+    background-repeat: no-repeat;
+    .thanks-title {
+        h1 {
+            color: $orangeColor;
+        }
+    }
+    .img-download-area {
+        padding: 65px 0;
+    }
+    .user-action-one,
+    .user-action-two {
+        margin: 5px;
+    }
+}
+
+//End of thanks-virtual-section
 //Start of upload request page
 .upload-request .table-area {
     padding: 40px;

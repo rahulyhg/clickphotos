@@ -116,11 +116,17 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             controller: 'photoContestCtrl'
         })
         .state('thanks', {
-            url: "/thanks/:id",
+            url: "/thanks",
             templateUrl: "frontend/views/template.html",
             controller: 'thanksCtrl'
         })
-        .state('billpaygst', {
+        .state('thanks-virtual', {
+            url: "/thanks-virtual",
+            templateUrl: "frontend/views/template.html",
+            controller: 'ThanksVirtualCtrl'
+        })
+
+    .state('billpaygst', {
             url: "/billpaygst/:view",
             templateUrl: "frontend/views/template.html",
             controller: 'BillPayGst'
