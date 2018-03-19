@@ -3874,7 +3874,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         backdropClass: 'black-drop',
                         size: 'sm'
                     });
-
+                    $timeout(function () {
+                        $scope.alreadyInCartModal.close();
+                        $state.reload();
+                    }, 1000);
                 }
             } //end of if
             else {
@@ -3975,7 +3978,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $log.info(" $scope.removedElem", $scope.removedElem, " $scope.cartAddedImg", $scope.cartAddedImg);
     })
 
-    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log, CartService, $rootScope, $uibModal, toastr) {
+    .controller('VirtualGalleryInnerCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $log, CartService, $rootScope, $uibModal, toastr, $state) {
         $scope.template = TemplateService.changecontent("virtual-gallery-inner"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Photographer's gallery"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -4046,6 +4049,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                         backdropClass: 'black-drop',
                                         size: 'sm'
                                     });
+                                    $timeout(function () {
+                                        $scope.alreadyInCartModal.close();
+                                        $state.reload();
+                                    }, 1000);
                                 }
                             });
                         } else {
@@ -4057,6 +4064,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                 // backdropClass: 'black-drop',
                                 size: 'sm'
                             });
+                            $timeout(function () {
+                                $scope.alreadyInCartModal.close();
+                                $state.reload();
+                            }, 1000);
                             // alert("Already in cart");
                         }
                     } //end of if

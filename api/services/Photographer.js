@@ -93,8 +93,11 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "PhotoContest"
     }],
-    country: String
-
+    country: String,
+    dowmloadPhotos: [{
+        type: Schema.Types.ObjectId,
+        ref: "Photos"
+    }]
 });
 
 schema.plugin(deepPopulate, {

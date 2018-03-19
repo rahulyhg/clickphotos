@@ -179,22 +179,55 @@ var model = {
      * @param {callback} callback function with err and response
      */
     deleteCart: function (cart, callback) {
-        MyCart.remove({
+        MyCart.findOne({
             photographer: cart.photographer
-        }).exec(function (err, cartData) {
+        }).exec(function (err, cartData1) {
             if (err) {
-                console.log("err in removing product from cart");
+                console.log("err in finding cart");
                 callback(err, null);
-            } else if (!_.isEmpty(cartData)) {
-                callback(null, cartData);
             } else {
-                callback({
-                    message: {
-                        data: "Invalid credentials!for remove product"
-                    }
-                }, null);
+                if (!_.isEmpty(cartData1)) {
+                    Photographer.findOneAndUpdate({
+                        _id: cart.photographer
+                    }, {
+                        $push: {
+                            "dowmloadPhotos": cartData1.photos
+                        }
+                    }, {
+                        'new': true
+                    }).exec(function (err, data) {
+                        if (err) {
+                            callback(err, null);
+                        } else if (_.isEmpty(data)) {
+                            callback(null, null);
+                        } else {
+                            MyCart.remove({
+                                photographer: cart.photographer
+                            }).exec(function (err, cartData) {
+                                if (err) {
+                                    console.log("err in removing product from cart");
+                                    callback(err, null);
+                                } else if (!_.isEmpty(cartData)) {
+                                    callback(null, cartData);
+                                } else {
+                                    callback({
+                                        message: {
+                                            data: "Invalid credentials!for remove product"
+                                        }
+                                    }, null);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    callback({
+                        message: {
+                            data: "Invalid credentials!for remove product"
+                        }
+                    }, null);
+                }
             }
-        })
+        });
     },
 };
 module.exports = _.assign(module.exports, exports, model);
