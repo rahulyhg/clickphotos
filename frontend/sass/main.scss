@@ -1019,7 +1019,8 @@ header>nav div.navbar-toggle>div.icon_float {
             height: 35px !important;
         }
     }
-    span {
+    span.photographer-no-name,
+    span.photographer-name {
         // display: inline-block;
         vertical-align: middle;
         color: #030303;
@@ -1859,6 +1860,9 @@ $brand-holder: #ccc !default;
         // overflow-y: hidden;
         // max-height: 440px; // background-size: cover!important;
     }
+    .menu-choice {
+        text-align: right;
+    }
     .change-cover {
         position: absolute;
         top: 15%;
@@ -1972,7 +1976,7 @@ $brand-holder: #ccc !default;
 .btn-1 {
     position: relative;
     display: inline-block;
-    padding: 0 20px;
+    padding: 0 15px;
     img {
         position: absolute;
         bottom: -12px;

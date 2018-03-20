@@ -144,8 +144,12 @@
                 height: 19px!important;
                 margin: 1px!important;
             }
-            span {
+            span.photographer-no-name,
+            span.photographer-name {
                 font-size: 8px!important;
+            }
+            span.photographer-name {
+                width: 50px!important;
             }
             button {
                 font-size: 10px !important;
@@ -153,16 +157,24 @@
                 padding: 5px;
                 margin-left: 1px;
             }
+            .sign-out-btn-area a .fa-sign-out {
+                padding: 0 5px;
+                color: $orangeColor;
+                vertical-align: middle;
+                font-size: 18px;
+            }
             .cart-area {
                 position: absolute;
                 top: 50%;
-                right: 7px;
+                right: 0px;
                 @include transform(translateY(-50%));
             }
             .cart {
-                width: 15px;
+                width: 18px!important;
+                right: 10px!important;
                 span {
-                    @include size(12px, 12px);
+                    width: 13px!important;
+                    height: 13px!important;
                     top: -7px;
                 }
             }
@@ -534,6 +546,9 @@
                 }
             } //End of virtual-gallery-inner
         }
+        .profile-banner .menu-choice {
+            text-align: left;
+        }
         .profile-banner .profile-banner__bg {
             img {
                 width: 100%;
@@ -541,7 +556,7 @@
             }
         }
         .profile-block {
-            bottom: 33px;
+            bottom: 62px!important;
             width: 100%;
             left: 1%;
             .profile-holder {
@@ -601,11 +616,12 @@
         .btn-1 {
             padding: 0;
             .btn-select {
-                font-size: 13px!important;
+                padding: 6px 5px;
+                font-size: 11px!important;
             }
         }
         .border-line {
-            padding: 0;
+            padding: 0!important;
         }
         .circular-checkbox {
             p {
@@ -881,6 +897,11 @@
         .thanks-title {
             text-align: center;
         }
+        //Start of thanks-virtual-section
+        .thanks-virtual-section {
+            background: none;
+        }
+        //End of thanks-virtual-section
         .free-member {
             width: 100%!important;
             padding: 65px 10px 65px;
@@ -1195,13 +1216,25 @@
                 padding: 7px 5px;
             }
         }
+        .border-line {
+            padding: 8px 0;
+        }
         .photographer {
             .photographer_img {
                 @include size(25px, 25px);
                 @include margin(0 4px);
             }
-            span {
+            span.photographer-name,
+            span.photographer-no-name {
                 font-size: 14px;
+            }
+            span.photographer-name {
+                width: 70px;
+                text-align: left;
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             button {
                 width: auto;
@@ -1209,14 +1242,15 @@
                 font-size: 12px;
             }
             .cart {
-                width: 20px;
+                width: 25px;
                 position: absolute;
                 top: 50%;
                 right: 0;
                 @include transform(translateY(-50%));
             }
             .cart span {
-                @include size(13px, 13px);
+                @include size(15px, 15px);
+                text-align: center;
             }
         }
         .side-menu {
@@ -1364,6 +1398,17 @@
         .change-cover {
             display: none;
         }
+        .profile-block {
+            bottom: 35px;
+        }
+        .loc-span {
+            max-height: 130px;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .name-sec {
             @include size(505px, auto);
             margin-bottom: 30px;
@@ -1377,8 +1422,9 @@
             }
         }
         .btn-1 {
+            padding: 0 5px;
             .btn-select {
-                font-size: 20px;
+                font-size: 18px;
             }
             .form-horizontal {
                 .selected-data {
