@@ -14,19 +14,19 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-2 img-download-area">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="user-exception-uploaded shadow">
-                            <img src="frontend/img/photographer/Clicked 2.jpg" alt="" class="img-responsive">
+                    <div class="col-md-3 col-sm-6 col-xs-12 text-center" ng-repeat="photo in downloadPhoto">
+                        <div class="user-exception-uploaded shadow" style="background: url('{{photo.image|serverimage}}') no-repeat 50% 50%/cover ">
+                            <!--<img ng-src={{photo.image|serverimage}} alt="" class="img-responsive">-->
                         </div>
-                        <p>Image ID: 5464464446</p>
-                        <p><a class="btn orange-btn" role="button">Download</a></p>
+                        <p>Image ID: {{photo._id|limitTo:-5}}</p>
+                        <p><a class="btn orange-btn" role="button" href={{photo.image|serverimage}} download>Download</a></p>
                     </div>
                 </div>
             </div>
         </div>
         <p class="text-center">
-            <a class="btn orange-btn user-action-one" role="button">Continue to Account</a>
-            <a class="btn orange-btn user-action-two" role="button">Continue to Homepage</a>
+            <a class="btn orange-btn user-action-one" role="button" ui-sref="photographer">Continue to Account</a>
+            <a class="btn orange-btn user-action-two" role="button" ui-sref="home">Continue to Homepage</a>
         </p>
     </div>
 </div>

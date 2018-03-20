@@ -94,7 +94,7 @@ var schema = new Schema({
         ref: "PhotoContest"
     }],
     country: String,
-    dowmloadPhotos: [{
+    downloadPhotos: [{
         type: Schema.Types.ObjectId,
         ref: "Photos"
     }]
@@ -1514,8 +1514,28 @@ var model = {
                 callback(null, false)
             }
         })
+    },
+    /**
+     * this function to get photo for which payment is done
+     * @param {photographer} input photographers Id
+     * @param {callback} callback function with err and response
+     */
+    getDownloadPhoto: function (data, callback) {
+        Photographer.findOne({
+            _id: data._id
+        }).lean().deepPopulate("downloadPhotos").exec(function (err, photographer) {
+            if (err) {
+                callback(err, null);
+            } else if (!_.isEmpty(photographer)) {
+                console.log("%%%%%%%%%%%%%%55", photographer.downloadPhotos)
+                var downloadPhoto = photographer.downloadPhotos[photographer.downloadPhotos.length - 1];
+                console.log("downloadPhoto", downloadPhoto)
+                callback(null, downloadPhoto);
+            } else {
+                callback(null, "no Data Found");
+            }
+        });
     }
-
 };
 
 cron.schedule('1 12 * * *', function () {

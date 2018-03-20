@@ -191,10 +191,10 @@ var model = {
                         _id: cart.photographer
                     }, {
                         $push: {
-                            "dowmloadPhotos": cartData1.photos
+                            "downloadPhotos": cartData1.photos
                         }
                     }, {
-                        'new': true
+                        new: true
                     }).exec(function (err, data) {
                         if (err) {
                             callback(err, null);
@@ -222,7 +222,7 @@ var model = {
                 } else {
                     callback({
                         message: {
-                            data: "Invalid credentials!for remove product"
+                            data: "Invalid credentials!forfinding cart"
                         }
                     }, null);
                 }

@@ -11,7 +11,7 @@ var firstapp = angular.module('firstapp', [
     'toastr'
 ]);
 
-firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
     cfpLoadingBarProvider.includeSpinner = true;
@@ -116,17 +116,17 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             controller: 'photoContestCtrl'
         })
         .state('thanks', {
-            url: "/thanks",
+            url: "/thanks/:id",
             templateUrl: "frontend/views/template.html",
             controller: 'thanksCtrl'
         })
         .state('thanks-virtual', {
-            url: "/thanks-virtual",
+            url: "/thanks-virtual/:id",
             templateUrl: "frontend/views/template.html",
             controller: 'ThanksVirtualCtrl'
         })
 
-    .state('billpaygst', {
+        .state('billpaygst', {
             url: "/billpaygst/:view",
             templateUrl: "frontend/views/template.html",
             controller: 'BillPayGst'
@@ -164,8 +164,8 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     $locationProvider.html5Mode(isproduction);
 });
 
-firstapp.filter('startFrom', function() {
-    return function(input, start) {
+firstapp.filter('startFrom', function () {
+    return function (input, start) {
         if (input != undefined) {
             start = +start; //parse to int
             return input.slice(start);
@@ -174,28 +174,28 @@ firstapp.filter('startFrom', function() {
 });
 
 //url share profile
-firstapp.filter('urlEncode', [function() {
+firstapp.filter('urlEncode', [function () {
     return window.encodeURIComponent;
 }]);
 //url share profile end
 
-firstapp.config(function(toastrConfig) {
+firstapp.config(function (toastrConfig) {
     angular.extend(toastrConfig, {
         preventOpenDuplicates: true,
         positionClass: "toast-top-center",
     });
 });
 
-firstapp.directive('img', function($compile, $parse) {
+firstapp.directive('img', function ($compile, $parse) {
     return {
         restrict: 'E',
         replace: false,
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             var $element = $(element);
             if (!attrs.noloading) {
                 $element.after("<img src='frontend/img/loading.gif' class='loading' />");
                 var $loading = $element.next(".loading");
-                $element.load(function() {
+                $element.load(function () {
                     $loading.remove();
                     $(this).addClass("doneLoading");
                 });
@@ -208,18 +208,18 @@ firstapp.directive('img', function($compile, $parse) {
 
 //image upload
 
-firstapp.directive('imageonload', function() {
+firstapp.directive('imageonload', function () {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('load', function() {
+        link: function (scope, element, attrs) {
+            element.bind('load', function () {
                 scope.$apply(attrs.imageonload);
             });
         }
     };
 });
 
-firstapp.directive('uploadImage', function($http, $filter) {
+firstapp.directive('uploadImage', function ($http, $filter) {
     return {
         templateUrl: 'frontend/views/directive/uploadFile.html',
         scope: {
@@ -227,7 +227,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
             callback: "=ngCallback",
             limit: "=limit"
         },
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             console.log("scope", $scope.limit);
 
             $scope.isMultiple = false;
@@ -242,7 +242,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
             if ($scope.model) {
                 if (_.isArray($scope.model)) {
                     $scope.image = [];
-                    _.each($scope.model, function(n) {
+                    _.each($scope.model, function (n) {
                         $scope.image.push({
                             url: $filter("uploadpath")(n)
                         });
@@ -253,10 +253,10 @@ firstapp.directive('uploadImage', function($http, $filter) {
             if (attrs.inobj || attrs.inobj === "") {
                 $scope.inObject = true;
             }
-            $scope.clearOld = function() {
+            $scope.clearOld = function () {
                 $scope.model = [];
             };
-            $scope.uploadNow = function(image) {
+            $scope.uploadNow = function (image) {
                 var Template = this;
                 image.hide = true;
                 var formData = new FormData();
@@ -274,7 +274,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
                         'Content-Type': undefined
                     },
                     transformRequest: angular.identity
-                }).then(function(data) {
+                }).then(function (data) {
                     data = data.data;
                     //console.log("success");
                     console.log("data", data);
@@ -333,11 +333,11 @@ firstapp.directive('uploadImage', function($http, $filter) {
 //         }
 //     };
 // });
-firstapp.directive('fancyboxBox', function($document) {
+firstapp.directive('fancyboxBox', function ($document) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function(scope, element, attr) {
+        link: function (scope, element, attr) {
             var $element = $(element);
             var target;
             if (attr.rel) {
@@ -360,11 +360,11 @@ firstapp.directive('fancyboxBox', function($document) {
     };
 });
 
-firstapp.directive('autoHeight', function($compile, $parse) {
+firstapp.directive('autoHeight', function ($compile, $parse) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             var $element = $(element);
             var windowHeight = $(window).height();
             $element.css("min-height", windowHeight);
@@ -379,14 +379,14 @@ firstapp.directive('autoHeight', function($compile, $parse) {
 //     }
 // });
 
-firstapp.config(function($translateProvider) {
+firstapp.config(function ($translateProvider) {
     $translateProvider.translations('en', LanguageEnglish);
     $translateProvider.translations('hi', LanguageHindi);
     $translateProvider.preferredLanguage('en');
 });
 
-firstapp.filter('serverimage', function() {
-    return function(image) {
+firstapp.filter('serverimage', function () {
+    return function (image) {
         if (image && image !== null) {
             return adminurl + "upload/readFile?file=" + image;
         } else {
@@ -395,8 +395,8 @@ firstapp.filter('serverimage', function() {
     }
 });
 
-firstapp.filter('serverimage1', function() {
-    return function(input, width, height, style) {
+firstapp.filter('serverimage1', function () {
+    return function (input, width, height, style) {
         var other = "";
         if (width && width !== "") {
             other += "&width=" + width;
@@ -417,9 +417,9 @@ firstapp.filter('serverimage1', function() {
     };
 });
 
-firstapp.service('anchorSmoothScroll', function() {
+firstapp.service('anchorSmoothScroll', function () {
 
-    this.scrollTo = function(eID) {
+    this.scrollTo = function (eID) {
         // this is scrolling function
         var startY = currentYPosition();
         var stopY = elemPosition(eID);
@@ -484,17 +484,17 @@ firstapp.service('anchorSmoothScroll', function() {
 
 });
 // This function is used to show left sibar navigation when a user clicks on the X button. This direction is created in home.html file
-firstapp.directive('sidebarDirective', function() {
+firstapp.directive('sidebarDirective', function () {
 
     return {
-        link: function(scope, element, attr) {
+        link: function (scope, element, attr) {
 
-            scope.$watch(attr.sidebarDirective, function(newVal) {
+            scope.$watch(attr.sidebarDirective, function (newVal) {
                 var sidebarOpen = false;
 
                 if (newVal) {
 
-                    $('div.icon_float').children().removeClass(function(index, className) {
+                    $('div.icon_float').children().removeClass(function (index, className) {
                         return (className.match(/\bicon_\S+/g) || []).join(' ');
                     });
 
@@ -508,7 +508,7 @@ firstapp.directive('sidebarDirective', function() {
                     $('#sidenav-overlay').show();
                     $('body').css('overflow-y', 'hidden');
                     element.addClass('show');
-                    $('.sidebar').on('click', function() {
+                    $('.sidebar').on('click', function () {
                         sidebarOpen = true;
                         if (sidebarOpen) {
                             $('body').css('overflow-y', 'scroll');
@@ -518,7 +518,7 @@ firstapp.directive('sidebarDirective', function() {
                     return;
                 } else {
                     if ($('div.icon_float').hasClass('hamburger-cross')) {
-                        $('div.icon_float').children().addClass(function(n) {
+                        $('div.icon_float').children().addClass(function (n) {
                             $('div.icon_float').removeClass('hamburger-cross');
                             $('div.icon_float > span.icon-bar').removeAttr('style');
                             $('section .mg_lft').css('margin-left', '0');
@@ -538,11 +538,11 @@ firstapp.directive('sidebarDirective', function() {
 });
 
 // This function is used to show sibar menu for send enquiry 
-firstapp.directive('enquiryDirective', function() {
+firstapp.directive('enquiryDirective', function () {
 
     return {
-        link: function(scope, element, attr) {
-            scope.$watch(attr.enquiryDirective, function(newVal) {
+        link: function (scope, element, attr) {
+            scope.$watch(attr.enquiryDirective, function (newVal) {
                 if (newVal) {
                     //console.log('new value', newVal);
                     element.addClass('showEnquery');

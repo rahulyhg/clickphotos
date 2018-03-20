@@ -440,12 +440,12 @@ var controller = {
                                     GstDetails.updatePackageAmtForGandS(req.body, function (err, data) {
                                         console.log("updatePackageAmtForFeature", data);
                                     });
-                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                    res.redirect(env.realHost + "/thanks-virtual/" + req.body.MerchantRefNo);
                                 } else {
                                     GstDetails.updatePackageOtherCountry(req.body, function (err, data) {
                                         console.log("updatePackageOtherCountry", data);
                                     });
-                                    res.redirect(env.realHost + "/thanks/" + req.body.MerchantRefNo);
+                                    res.redirect(env.realHost + "/thanks-virtual/" + req.body.MerchantRefNo);
                                 }
                             } else {
                                 if (data.country == "India") {
@@ -630,6 +630,18 @@ var controller = {
     approvedDeclineMail: function (req, res) {
         if (req.body) {
             Photographer.approvedDeclineMail(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
+    },
+    getDownloadPhoto: function (req, res) {
+        if (req.body) {
+            Photographer.getDownloadPhoto(req.body, res.callback);
         } else {
             res.json({
                 value: false,
