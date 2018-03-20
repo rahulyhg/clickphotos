@@ -3316,7 +3316,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.navigation = NavigationService.getnav();
 
     })
-    .controller('ThanksVirtualCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, CartService, $rootScope) {
+    .controller('ThanksVirtualCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, CartService, $rootScope, $http) {
 
         $scope.template = TemplateService.changecontent("thanks-virtual"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thanks"); //This is the Title of the Website
@@ -3355,6 +3355,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             }
         });
+        $scope.imageDownload = function (data) {
+            $scope.imageName = data
+            $http({
+                method: 'GET',
+                url: adminurl + "upload/readFile?file=" + data,
+                // name: $scope.drafterInstSheet.fileName,
+                responseType: 'arraybuffer'
+            }).then(function (response) {
+                var header = response.headers('Content-Disposition')
+                var fileName = $scope.imageName;
+                var blob = new Blob([response.data], {
+                    type: 'content-type'
+                });
+                var objectUrl = (window.URL || window.webkitURL).createObjectURL(blob);
+                var link = angular.element('<a/>');
+                link.attr({
+                    href: objectUrl,
+                    download: fileName
+                })[0].click();
+            })
+            // .error(function (data) {
+            //     console.log(data);
+            // });
+        };
+
+
+
+
 
     })
 
