@@ -1535,6 +1535,26 @@ var model = {
                 callback(null, "no Data Found");
             }
         });
+    },
+
+    /**
+     * this function to get all download photos of particular photographer
+     * @param {data} input photographers Id
+     * @param {callback} callback function with err and response
+     */
+    getAllDownloadPhotos: function (data, callback) {
+        Photographer.findOne({
+            _id: data._id
+        }).lean().deepPopulate("downloadPhotos").exec(function (err, photographer) {
+            if (err) {
+                callback(err, null);
+            } else if (!_.isEmpty(photographer)) {
+                var downloadPhotos = photographer.downloadPhotos;
+                callback(null, downloadPhotos);
+            } else {
+                callback(null, false);
+            }
+        })
     }
 };
 

@@ -650,6 +650,18 @@ var controller = {
                 }
             });
         }
+    },
+    getAllDownloadPhotos: function (req, res) {
+        if (req.body) {
+            Photographer.getAllDownloadPhotos(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            });
+        }
     }
     // smsForOtp: function (req, res) {
     //     if (req.body) {
