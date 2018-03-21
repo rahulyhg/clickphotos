@@ -56,34 +56,38 @@
                             </div>-->
                         </div>
                     </div>
-                    <div class="row text-center">
-                        <!-- <div class=""> -->
-                        <div class="btn-1" ng-click="tab = 1" ng-class="{'active':tab == 1}">
-                            <button type="button" class="btn btn-default btn-select">ABOUT</button>
-                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
-                        </div>
-                        <span class="border-line"></span>
-                        <div class="btn-1" ng-click="tab = 2" ng-class="{'active':tab == 2}">
-                            <button type="button" class="btn btn-default btn-select">CLICKS</button>
-                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
-                        </div>
-                        <span class="border-line"></span>
-                        <div class="btn-1" ng-click="tab = 3" ng-class="{'active':tab == 3}">
-                            <button type="button" class="btn btn-default btn-select">PACKAGES</button>
-                            <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
-                        </div>
+                    <div class="row">
+                        <div class="menu-choice">
+                            <div class="btn-1" ng-click="tab = 1" ng-class="{'active':tab == 1}">
+                                <button type="button" class="btn btn-default btn-select">ABOUT</button>
+                                <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                            </div>
+                            <span class="border-line"></span>
+                            <div class="btn-1" ng-click="tab = 2" ng-class="{'active':tab == 2}">
+                                <button type="button" class="btn btn-default btn-select">CLICKS</button>
+                                <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                            </div>
+                            <span class="border-line"></span>
+                            <div class="btn-1" ng-click="tab = 3" ng-class="{'active':tab == 3}">
+                                <button type="button" class="btn btn-default btn-select">PACKAGES</button>
+                                <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                            </div>
 
-                        <span class="border-line"></span>
-                        <div class="inline-block">
+                            <span class="border-line"></span>
+
                             <div class="btn-1" ng-click="tab = 4" ng-class="{'active':tab == 4}">
                                 <button type="button" class="btn btn-default btn-select">PHOTO CONTEST</button>
                                 <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
                             </div>
-                        </div>
-                        <span class="border-line"></span>
-                        <div class="inline-block">
+                            <span class="border-line"></span>
+
                             <div class="btn-1" ng-click="tab = 5" ng-class="{'active':tab == 5}">
                                 <button type="button" class="btn btn-default btn-select">VIRTUAL GALLERY</button>
+                                <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
+                            </div>
+                            <span class="border-line"></span>
+                            <div class="btn-1" ng-click="tab = 6" ng-class="{'active':tab == 6}">
+                                <button type="button" class="btn btn-default btn-select">DOWNLOAD</button>
                                 <img src="frontend/img/photographer/under.png" alt="" class="img-responsive">
                             </div>
                         </div>
@@ -902,7 +906,7 @@
                             Upload your best photographs:
                         </div>
                         <div class="row">
-                            <div class="col-md-3 col-sm-6- col-xs-12" ng-repeat="photos in virtualGallery">
+                            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="photos in virtualGallery">
                                 <div class="gallery-uploaded-photo d-flex align-items-center  shadow" style="background: url('{{photos.image | serverimage}}') no-repeat 50% 50%/cover content-box">
                                     <!-- <img src="frontend/img/photographer/Clicked 2.jpg" class="img-responsive" alt="User Uploaded Image"> -->
                                 </div>
@@ -910,6 +914,24 @@
                         </div>
                         <div class="viewmore-btn-area text-center">
                             <a class="btn btn-lg orange-btn" role="button" ng-click="uploadImg()">Upload</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-part" ng-if="tab == 6">
+                    <div class="free-member">
+                        <div ng-if="purchasedData">
+                            <span class="small-font">You have no photos</span>
+                            <span class="orange-color big-font">to download</span>
+                            <!-- <span class="small-font deny-msg">Photo Contest yet!</span> -->
+                        </div>
+                        <div class="row" ng-if="!purchasedData">
+                            <div class="col-md-4 col-sm-6" ng-repeat="purchase in deepPurchasedPhotos">
+                                <div class="user-exception-uploaded shadow" style="background: url('{{purchase.image | serverimage}}') no-repeat 50% 50%/cover ">
+                                    <!-- <img ng-src="{{}}" alt="" class="img-responsive"> -->
+                                </div>
+                                <p>Image ID: {{purchase._id | limitTo:-5}}</p>
+                                <p><a class="btn orange-btn" role="button" ng-click="imageDownload(purchase.image)">Download</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
