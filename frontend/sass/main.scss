@@ -10,7 +10,6 @@ $output-bourbon-deprecation-warnings: false !default;
 @import "../../bower_components/smart-app-banner/smart-app-banner";
 @import "../../bower_components/angular-toastr/dist/angular-toastr";
 @import "../../bower_components/angular-loading-bar/build/loading-bar";
-
 /* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
@@ -20,8 +19,8 @@ $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 $orangeColor: #f1592a !default;
 $whiteColor: #ffffff !default;
-$blue:#7D76FF!default;
-$orange:#FA6945!default;
+$blue:#7D76FF !default;
+$orange:#FA6945 !default;
 $lightBlackColor:#1e1e1e; // rgba(55, 55, 55, 0.92);
 $borderRadius: 4px; // used to overwrite the inheritance for btn class mentioned in Node-framework
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -186,33 +185,31 @@ body {
     font-family: 'dosis-regular';
     font-size: 16px; // default size is 16px
     @include transition(background-color .5s);
-    overflow-x: hidden!important; // It is must to keep it as an imp
+    overflow-x: hidden !important; // It is must to keep it as an imp
 } // used for scroll Bar design
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 5px;
     background-color: rgba(0, 0, 0, 0.80);
 }
 
-
 /* Track */
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 
-
 /* Handle */
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: $orangeColor;
     -webkit-box-shadow: inset 0 0 6px rgba(244, 81, 30, 0.5);
     box-shadow: inset 0 0 6px rgba(244, 81, 30, 0.5);
 }
 
- ::-webkit-scrollbar-thumb:window-inactive {
+::-webkit-scrollbar-thumb:window-inactive {
     background: $orangeColor;
 } //used for @extend
 .myBtnOrange {
@@ -288,11 +285,11 @@ body {
 }
 
 .align-middle {
-    vertical-align: middle!important;
+    vertical-align: middle !important;
 }
 
 .align-bottom {
-    vertical-align: bottom!important;
+    vertical-align: bottom !important;
 }
 
 .padd-tb15 {
@@ -365,7 +362,6 @@ body {
     font-size: 16px;
     color: #999 !important;
 }
-
 
 /*Pulse Grow*/
 
@@ -464,7 +460,7 @@ a,
         font-weight: 300;
     }
     [type="radio"]:checked+label:before {
-        border: 1px solid $orangeColor!important;
+        border: 1px solid $orangeColor !important;
         left: 1px !important;
     }
     [type="radio"]:checked+label:before,
@@ -658,7 +654,6 @@ footer {
     }
 }
 
-
 /* Start writing sass here */
 
 .content {
@@ -670,7 +665,7 @@ footer {
     display: block;
 } // Header section which includes navbar design
 header>nav.navbar {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
 }
 
 header>nav>div.navbar-header>button.navbar-toggle {
@@ -692,7 +687,7 @@ header>nav div.navbar-toggle {
     border: none;
     cursor: pointer;
     &:hover {
-        background-color: $whiteColor!important;
+        background-color: $whiteColor !important;
         @include transition(all 300ms linear);
     }
 }
@@ -845,9 +840,9 @@ header>nav div.navbar-toggle>div.icon_float {
         vertical-align: middle;
         font-family: 'dosis-regular';
         input[type="search"] {
-            width: 100%!important;
+            width: 100% !important;
         }
-         ::-webkit-scrollbar {
+        ::-webkit-scrollbar {
             width: 4px;
             background-color: rgba(0, 0, 0, 0.80);
         }
@@ -1300,7 +1295,7 @@ header>nav div.navbar-toggle>div.icon_float {
         }
     }
     .flex-control-nav {
-        display: none!important; // for dots navigation 
+        display: none !important; // for dots navigation 
     }
 }
 
@@ -1324,7 +1319,7 @@ header>nav div.navbar-toggle>div.icon_float {
         @include transform(rotate(-57deg));
     }
     .user-img {
-        background-size: cover!important;
+        background-size: cover !important;
         overflow: hidden;
         border-radius: 50%;
         height: 100%;
@@ -1352,7 +1347,7 @@ header>nav div.navbar-toggle>div.icon_float {
     }
     .jumbotron {
         @extend .myJumbotron;
-        padding-top: 0!important;
+        padding-top: 0 !important;
         .ht100 {
             position: relative;
             height: 100px;
@@ -1585,7 +1580,7 @@ header>nav div.navbar-toggle>div.icon_float {
         z-index: 3;
         .whit-btn {
             @include padding(6px 15px);
-            border: 1px solid #ccc!important;
+            border: 1px solid #ccc !important;
             border-radius: 0;
             color: #333;
             @include ellipsis;
@@ -1702,7 +1697,7 @@ header>nav div.navbar-toggle>div.icon_float {
     // background-position: center center;
     // background-repeat: no-repeat;
     background-size: cover;
-    background-clip: content-box!important;
+    background-clip: content-box !important;
     overflow: hidden;
 }
 
@@ -1737,7 +1732,7 @@ header>nav div.navbar-toggle>div.icon_float {
                     transform: rotate(-44deg);
                 }
                 .user-img {
-                    background-size: cover!important;
+                    background-size: cover !important;
                     height: 100%;
                     border-radius: 50%;
                     transform: rotate(-44deg);
@@ -1830,7 +1825,6 @@ header>nav div.navbar-toggle>div.icon_float {
         }
     }
 } // end of testimonial 
-
 /*Rishabh CSS started. CSS for photographer module*/
 
 $brand-holder: #ccc !default;
@@ -1903,7 +1897,7 @@ $brand-holder: #ccc !default;
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    background-size: cover!important;
+    background-size: cover !important;
     img {
         border-radius: 50%;
     }
@@ -2095,7 +2089,7 @@ $brand-holder: #ccc !default;
 }
 
 .compete // for photo contest-tab
-{
+    {
     margin: 35px 150px;
     .panel-default {
         margin-bottom: 15px;
@@ -2125,8 +2119,8 @@ $brand-holder: #ccc !default;
         margin-bottom: 5px;
         box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
         min-height: 220px;
-        background-size: cover!important;
-        background-clip: content-box!important;
+        background-size: cover !important;
+        background-clip: content-box !important;
         overflow: hidden;
     }
     .edit-image {
@@ -2724,7 +2718,7 @@ fieldset[disabled] .form-control {
 
 .black-drop {
     background-color: #000;
-    opacity: 0.8!important;
+    opacity: 0.8 !important;
 }
 
 .select_join {
@@ -2845,7 +2839,7 @@ fieldset[disabled] .form-control {
     @include size(null,
     215px);
     background-color: #ededed;
-    background-size: cover!important;
+    background-size: cover !important;
     overflow-y: hidden;
     box-shadow: 4px 5px 3px #c0c0c0;
 }
@@ -2991,7 +2985,7 @@ fieldset[disabled] .form-control {
     }
     .collapse {
         display: inline-block;
-        min-height: 45px!important;
+        min-height: 45px !important;
         overflow: hidden;
     }
     .absolute-plus {
@@ -3013,8 +3007,8 @@ fieldset[disabled] .form-control {
 }
 
 .btn-fix {
-    width: auto!important;
-    float: none!important;
+    width: auto !important;
+    float: none !important;
 }
 
 .upgrade-gd {
@@ -3094,7 +3088,7 @@ fieldset[disabled] .form-control {
 }
 
 .head-gold {
-    background: linear-gradient(to right, #c9b459, #f9ef76)!important;
+    background: linear-gradient(to right, #c9b459, #f9ef76) !important;
 } //history
 .history-sec {
     font-size: 19px;
@@ -3258,7 +3252,7 @@ fieldset[disabled] .form-control {
         }
         &:focus {
             border: 0;
-            border-bottom: 1px solid $orangeColor!important;
+            border-bottom: 1px solid $orangeColor !important;
         }
     }
     .country-dropdown .caret {
@@ -3372,9 +3366,7 @@ fieldset[disabled] .form-control {
     line-height: 1;
 }
 
-
 /* end of Photographer module*/
-
 
 /*Start of Future Photographer module (Antu Ram)*/
 
@@ -3487,7 +3479,7 @@ header {
     position: relative;
     .thumbnail {
         .user-img {
-            background-size: cover!important;
+            background-size: cover !important;
             overflow: hidden;
             border-radius: 50%;
             height: 100%;
@@ -3593,7 +3585,7 @@ header {
     position: relative;
     margin: 50px 0 0;
     .profile-f-img {
-        height: 125px!important;
+        height: 125px !important;
         transform: rotate(-44deg);
     }
 }
@@ -3609,7 +3601,7 @@ header {
         }
     }
     .user-img {
-        background-size: cover!important;
+        background-size: cover !important;
         overflow: hidden;
         border-radius: 50%;
         height: 100%;
@@ -3677,7 +3669,7 @@ header {
 }
 
 .cover-img {
-    height: 440px!important;
+    height: 440px !important;
 }
 
 .ab {
@@ -3717,7 +3709,7 @@ header {
         height: 100%;
         border-radius: 50%;
         overflow: hidden;
-        background-size: cover!important;
+        background-size: cover !important;
         @include transform(rotate(-58deg));
     }
 }
@@ -4064,7 +4056,7 @@ header {
     }
     .collapse {
         display: block;
-        min-height: 45px!important;
+        min-height: 45px !important;
         overflow: hidden;
     }
     .absolute-plus {
@@ -4105,7 +4097,7 @@ header {
     .server-img {
         height: 226px;
         overflow: hidden;
-        background-size: cover!important; // img {
+        background-size: cover !important; // img {
     }
 } // used for share your profile on social sites
 .share_profile {
@@ -4159,7 +4151,7 @@ header {
         color: #ffffff;
         background-color: lightgrey;
         &.active,
-         :hover {
+        :hover {
             background-color: #f15a29;
             color: white;
         }
@@ -4277,8 +4269,8 @@ hr.border-hr:after {
     background: #f6f6f6;
     margin-bottom: 15px;
     &:active,
-     :focus,
-     :hover {
+    :focus,
+    :hover {
         box-shadow: none;
         border-color: #f15a29 !important;
     }
@@ -4558,7 +4550,7 @@ hr.border-hr:after {
             transform: rotate(-44deg);
         }
         .user-img {
-            background-size: cover!important;
+            background-size: cover !important;
             overflow: hidden;
             border-radius: 50%;
             height: 100%;
@@ -4582,7 +4574,7 @@ hr.border-hr:after {
 }
 
 .circle-img {
-    background-size: cover!important;
+    background-size: cover !important;
     height: 125px;
     border-radius: 50%;
     @include transform(rotate(-50deg));
@@ -4702,9 +4694,7 @@ hr.border-hr:after {
 // .checkboxdemoSelectAll .demo-select-all-checkboxes {
 //     padding-left: 30px;
 // }
-
 /*End of Future Photographer (Antu Ram)*/
-
 
 /* fancybox-override */
 
@@ -4722,7 +4712,6 @@ hr.border-hr:after {
 #fancybox-loading div {
     background: url('../img/fancybox_loading.gif') center center no-repeat;
 }
-
 
 /*Retina graphics!*/
 
@@ -4762,7 +4751,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .fancybox-nav.fancybox-prev span {
     background-image: url(../img/prev.png);
 }
-
 
 /* end of fancybox-override */
 
@@ -4815,7 +4803,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
     .list-group-item.number {
         //list-style-type: disc;
-        display: list-item!important;
+        display: list-item !important;
     }
     .custom-check [type="checkbox"]:checked+label:before,
     .custom-check [type="checkbox"]:not(:checked)+label:before {
@@ -4956,8 +4944,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
             background-color: $whiteColor;
             box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
             min-height: 170px;
-            background-size: cover!important;
-            background-clip: content-box!important;
+            background-size: cover !important;
+            background-clip: content-box !important;
             overflow: hidden;
             margin-bottom: 15px;
         }
@@ -4965,7 +4953,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 .brd-none {
-    border-bottom: 1px solid transparent!important;
+    border-bottom: 1px solid transparent !important;
 } //End of  competition page
 //Start of Contest @page
 .contest {
@@ -4997,7 +4985,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
             input {
                 border: 0;
                 border-bottom: 1px solid #f1592a;
-                background-color: transparent!important;
+                background-color: transparent !important;
             }
         }
     }
@@ -5057,8 +5045,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
     .contest__stp3--box-shd {
         min-height: 220px;
-        background-size: cover!important;
-        background-clip: content-box!important;
+        background-size: cover !important;
+        background-clip: content-box !important;
         overflow: hidden;
         margin-bottom: 15px;
     }
@@ -5194,7 +5182,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
         }
     }
     .img-download-area {
-        padding: 65px 0;
+        padding: 65px 15px;
     }
     .user-action-one,
     .user-action-two {
