@@ -6,8 +6,7 @@
 
                 <div class="img-holder">
                     <img src="frontend/img/popup.jpg" alt="" class="img-responsive full-hight" ng-if="!imagesData.image">
-                    <div style="background: url('{{imagesData.image | serverimage}}') no-repeat 50% 50%; height: 100%; background-size: cover!important;"
-                        ng-if="imagesData.image">
+                    <div style="background: url('{{imagesData.image | serverimage}}') no-repeat 50% 50%; height: 100%; background-size: cover!important;" ng-if="imagesData.image">
                     </div>
                     <!--<img ng-src="{{imagesData.image | serverimage}}" alt="" class="img-responsive" ng-if="imagesData.image">-->
                 </div>
@@ -25,33 +24,34 @@
                             <img src="frontend//img/photographer/arrow.jpg" alt="Click Here">
                         </div>
                     </div>-->
-                    <div class="select-catopt">
-                        <ui-select ng-model="cat.category1" on-select="addImagesUploadPhotos(cat.category1)" style="width: 200px;" title="Select Category">
-                            <ui-select-match placeholder="Select Category">
-                                <span ng-bind="$select.selected.name"></span>
-                            </ui-select-match>
-                            <!--<ui-select-match placeholder="Select Category">{{cat.name}}</ui-select-match>-->
-                            <ui-select-choices repeat="cat in photographerData.catego">
-                                <span ng-bind-html="cat.name"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <p>We accept the following type <br> <span>.JPG,.PNG</span></p>
-                    <p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3" id="comment" placeholder="Type in keywords here" ng-model="imagesData.searchKeyword"></textarea>
-                    </div>
-
-                    <div class="upload-pic">
-                        <!--<input type="file" value="" />-->
-                        <div class="upload-imgbtn">{{imagesData.category}}
-                            <button type="button" class="btn btn-default" ng-click="uploadImagePic(imagesData)" ng-disabled="!imagesData.image">Upload Image</button>
+                    <form novalidate name="uploadData">
+                        <div class="select-catopt">
+                            <ui-select ng-model="cat.category1" on-select="addImagesUploadPhotos(cat.category1)" style="width: 200px;" title="Select Category" name="cat1">
+                                <ui-select-match placeholder="Select Category">
+                                    <span ng-bind="$select.selected.name"></span>
+                                </ui-select-match>
+                                <!--<ui-select-match placeholder="Select Category">{{cat.name}}</ui-select-match>-->
+                                <ui-select-choices repeat="cat in photographerData.catego">
+                                    <span ng-bind-html="cat.name"></span>
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
-                        <div class="upload-dire">
-                            <upload-image ng-model="imagesData.image" no-view ng-callback="imageSize"></upload-image>
+                        <p class="text-danger">{{errCat}}</p>
+                        <p>We accept the following type <br> <span>.JPG,.PNG</span></p>
+                        <p>3 MB Maximum file size. <br><span>Files may take anywhere from a few seconds to a few minutes to upload</span></p>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" id="comment" name="searchKeyword" placeholder="Type in keywords here" ng-model="imagesData.searchKeyword" required></textarea>
                         </div>
-
-                    </div>
+                        <div class="upload-pic">
+                            <!--<input type="file" value="" />-->
+                            <div class="upload-imgbtn">
+                                <button type="button" class="btn btn-default" ng-click="uploadImagePic(imagesData)" ng-disabled="!imagesData.image ||uploadData.searchKeyword.$invalid">Upload Image</button>
+                            </div>
+                            <div class="upload-dire">
+                                <upload-image ng-model="imagesData.image" no-view ng-callback="imageSize"></upload-image>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
