@@ -28,22 +28,22 @@
                                 <span class="alignment" ng-show="bill.contact.$touched && bill.contact.$invalid">Please enter valid mobile number</span><br>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <!-- <input type="text" class="form-control" id="india" placeholder="India" ng-model="formData.country" name="india" value="India"
-                                    readonly><br> -->
-                                <ui-select ng-model="byDefaultCountry" on-select="selectCountry($item, $model)">
+                                <input type="text" class="form-control" id="india" placeholder="India" ng-model="formData.country" name="india" value="India"
+                                    readonly><br>
+                                <!--<ui-select ng-model="byDefaultCountry" on-select="selectCountry($item, $model)">
                                     <ui-select-match>
                                         <span>{{$select.selected.name}}</span>
                                     </ui-select-match>
                                     <ui-select-choices repeat="country in (countryListData| filter: $select.search) track by $index">
                                         <span>{{country.name}}</span>
                                     </ui-select-choices>
-                                </ui-select>
+                                </ui-select>-->
                             </div>
-                            <div class="col-md-6 col-sm-12" ng-if="selectedCountryName=='India'">
+                            <div class="col-md-6 col-sm-12" ng-if="formData.country=='India'">
                                 <select class="form-control placeholder select-class" id="state" ng-model="formData.state" name="state" required><option value="" hidden>State</option><option value="{{state}}" ng-repeat="state in states">{{state}}</option></select>
                                 <span class="alignment" ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span><br>
                             </div>
-                            <div class="col-md-6 col-sm-12" ng-if="selectedCountryName!='India'">
+                            <div class="col-md-6 col-sm-12" ng-if="formData.country!='India'">
                                 <input type="select" class="form-control" id="state" placeholder="State" ng-model="formData.state" name="state" required>
                                 <span class="alignment" ng-show="bill.state.$touched && bill.state.$invalid">Please enter your state</span><br>
                             </div>

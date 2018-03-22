@@ -94,6 +94,8 @@ var schema = new Schema({
         ref: "PhotoContest"
     }],
     country: String,
+    currency: String,
+    codeCountry: String,
     downloadPhotos: [{
         type: Schema.Types.ObjectId,
         ref: "Photos"
@@ -120,7 +122,7 @@ module.exports = mongoose.model('Photographer', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "speciality reviewList.user contestPhotos.contestId", " speciality reviewList.user contestPhotos.contestId"));
 var model = {
 
-    getPhotographers: function(data, callback) {
+    getPhotographers: function (data, callback) {
         var maxRow = Config.maxRow;
         var page = 1;
         if (data.page) {
@@ -150,7 +152,7 @@ var model = {
             .order(options)
             .keyword(options)
             .page(options,
-                function(err, found) {
+                function (err, found) {
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -163,7 +165,7 @@ var model = {
     },
 
     //backend get all photographers
-    getAllPhotographersForBack: function(data, callback) {
+    getAllPhotographersForBack: function (data, callback) {
         var maxRow = Config.maxRow;
         var page = 1;
         if (data.page) {
@@ -193,7 +195,7 @@ var model = {
             .order(options)
             .keyword(options)
             .page(options,
-                function(err, found) {
+                function (err, found) {
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -205,12 +207,12 @@ var model = {
                 });
     },
 
-    deleteFeaturedPhotographer: function(data, callback) {
+    deleteFeaturedPhotographer: function (data, callback) {
         Photographer.update({
             _id: data._id
         }, {
             status: false
-        }, function(err, updated) {
+        }, function (err, updated) {
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -220,13 +222,13 @@ var model = {
         });
     },
 
-    doLogin: function(data, callback) {
+    doLogin: function (data, callback) {
         // console.log("data", data)
         Photographer.findOne({
             email: data.email,
             password: md5(data.password),
             verifyAcc: true
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
             if (err) {
 
                 callback(err, null);
@@ -245,10 +247,10 @@ var model = {
         });
     },
 
-    registerUser: function(data, callback) {
+    registerUser: function (data, callback) {
         var photographer = this(data);
         photographer.password = md5(photographer.password);
-        photographer.save(function(err, created) {
+        photographer.save(function (err, created) {
             if (err) {
                 callback(err, null);
             } else if (created) {
@@ -263,7 +265,7 @@ var model = {
                 emailData.from = "admin@clickmania.in";
                 emailData.fromname = "Clickmania Admin";
                 emailData.subject = "Welcome To Clickmania";
-                Config.email(emailData, function(err, emailRespo) {
+                Config.email(emailData, function (err, emailRespo) {
                     if (err) {
                         console.log(err);
                         callback(null, created);
@@ -280,7 +282,7 @@ var model = {
                         emailData.from = "admin@clickmania.in";
                         emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Clickmania Update Profile";
-                        Config.email(emailData, function(err, emailRespo) {
+                        Config.email(emailData, function (err, emailRespo) {
                             if (err) {
                                 console.log(err);
                                 callback(null, created);
@@ -300,7 +302,7 @@ var model = {
         });
     },
 
-    uploadPhotos: function(data, callback) {
+    uploadPhotos: function (data, callback) {
         Photographer.update({
             _id: data._id
         }, {
@@ -313,7 +315,7 @@ var model = {
                     }]
                 }
             }
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
 
             if (err) {
                 // console.log(err);
@@ -333,7 +335,7 @@ var model = {
         })
     },
 
-    updateToFeaturePhotographer: function(data, callback) {
+    updateToFeaturePhotographer: function (data, callback) {
         // var date = new Date();
         // var monthNames = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
         // var mon = monthNames[date.getMonth() + 1];
@@ -348,7 +350,7 @@ var model = {
             year: data.Description.split("/")[3]
         }, {
             new: true
-        }, function(err, updated) {
+        }, function (err, updated) {
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -382,10 +384,10 @@ var model = {
         });
     },
 
-    findPhotographer: function(data, callback) {
+    findPhotographer: function (data, callback) {
         Photographer.find({
             status: true
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -401,13 +403,13 @@ var model = {
         });
     },
 
-    allUpdate: function(data, callback) {
+    allUpdate: function (data, callback) {
         // delete data.password;
         var photographer = this(data);
         if (data._id) {
             this.findOneAndUpdate({
                 _id: data._id
-            }, data).exec(function(err, updated) {
+            }, data).exec(function (err, updated) {
                 if (err) {
                     console.log(err);
                     callback(err, null);
@@ -420,7 +422,7 @@ var model = {
         }
     },
 
-    removeUpldImg: function(data, callback) {
+    removeUpldImg: function (data, callback) {
         Photographer.update({
             "_id": data._id,
             "uploadedImages": {
@@ -434,7 +436,7 @@ var model = {
                     "_id": data.id
                 }
             }
-        }, function(err, updated) {
+        }, function (err, updated) {
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -444,13 +446,13 @@ var model = {
         });
     },
 
-    getLastFeaturedPhotographer: function(data, callback) {
+    getLastFeaturedPhotographer: function (data, callback) {
 
         Photographer.find({
             status: true,
         }).sort({
             dateOfRagister: -1
-        }).limit(1).exec(function(err, found) {
+        }).limit(1).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else if (found) {
@@ -468,7 +470,7 @@ var model = {
                         }
                     }
                 }
-                Photographer.find(match).count(function(err, count) {
+                Photographer.find(match).count(function (err, count) {
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -494,12 +496,12 @@ var model = {
         })
     },
 
-    getRelatedPhotographers: function(data, callback) {
+    getRelatedPhotographers: function (data, callback) {
         Photographer.find({
             speciality: {
                 $in: data.speciality
             }
-        }).deepPopulate("speciality").exec(function(err, found) {
+        }).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -514,13 +516,13 @@ var model = {
         });
     },
 
-    getFeatPhotographer: function(data, callback) {
+    getFeatPhotographer: function (data, callback) {
         this.find({
             status: true,
             month: data.month
         }).sort({
             month: -1
-        }).limit(12).deepPopulate("speciality").exec(function(err, found) {
+        }).limit(12).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else if (found) {
@@ -537,7 +539,7 @@ var model = {
         })
     },
 
-    getPhotographersByCategories: function(data, callback) {
+    getPhotographersByCategories: function (data, callback) {
         //console.log("data--------------------------------------",data);
         if (!_.isEmpty(data.speciality) && !_.isEmpty(data.location)) {
             var pipeline = [
@@ -594,7 +596,7 @@ var model = {
 
         }
 
-        Photographer.aggregate(pipeline, function(err, found) {
+        Photographer.aggregate(pipeline, function (err, found) {
             // console.log("found",found);
             if (err) {
                 console.log(err);
@@ -641,7 +643,7 @@ var model = {
     //     })
     // },
 
-    clickFilter: function(data, callback) {
+    clickFilter: function (data, callback) {
         //console.log("Datataaaa", data)
         if (!_.isEmpty(data.pricing)) {
             //console.log("inside pricing")
@@ -683,7 +685,7 @@ var model = {
                 }
             }
         }
-        Photographer.find(matchArr).deepPopulate("speciality").exec(function(err, found) {
+        Photographer.find(matchArr).deepPopulate("speciality").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -702,11 +704,11 @@ var model = {
 
     //emailers
 
-    sendEnq: function(data, callback) {
+    sendEnq: function (data, callback) {
         // var contact = this(data);
         Photographer.findOne({
             _id: data._id
-        }).exec(function(err, data1) {
+        }).exec(function (err, data1) {
             if (err) {
                 callback(err, null);
             } else if (data1) {
@@ -722,7 +724,7 @@ var model = {
                     smsData.content = "Hello, a potential client has shown interest in you in CLICKMANIA. Please contact the client for further details. " + "client email id: " + data1.enquiry[ind].enquirerEmail + " client mobile number: " + data1.enquiry[ind].enquirerMobileNo;
                     console.log("*************************************************sms data from photographer***********************************************", smsData);
 
-                    Config.sendSms(smsData, function(err, smsRespo) {
+                    Config.sendSms(smsData, function (err, smsRespo) {
                         if (err) {
                             console.log("*************************************************sms gateway error in photographer***********************************************", err);
 
@@ -749,7 +751,7 @@ var model = {
                 emailData.fromname = "Clickmania Admin";
                 emailData.subject = "A potential Client has shown interest in you";
                 // console.log("email data : ", emailData);
-                Config.email(emailData, function(err, emailRespo) {
+                Config.email(emailData, function (err, emailRespo) {
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -768,7 +770,7 @@ var model = {
 
     //verify email and send otp on email
 
-    sendOtp: function(data, callback) {
+    sendOtp: function (data, callback) {
 
         var emailOtp = (Math.random() + "").substring(2, 6);
         var foundData = {};
@@ -778,7 +780,7 @@ var model = {
             otp: emailOtp
         }, {
             new: true
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -793,7 +795,7 @@ var model = {
                     emailData.filename = "otpemail.ejs";
                     emailData.subject = "Clickmania OTP";
                     console.log("emaildata", emailData);
-                    Config.email(emailData, function(err, emailRespo) {
+                    Config.email(emailData, function (err, emailRespo) {
                         if (err) {
                             console.log(err);
                             callback(null, err);
@@ -816,14 +818,14 @@ var model = {
         });
     },
 
-    updatePass: function(data, callback) {
+    updatePass: function (data, callback) {
         Photographer.findOneAndUpdate({
             _id: data._id
         }, {
             password: md5(data.password)
         }, {
             new: true
-        }, function(err, updated) {
+        }, function (err, updated) {
             if (err) {
                 callback(err, null);
             } else {
@@ -832,10 +834,10 @@ var model = {
         });
     },
 
-    verifyOTPForResetPass: function(data, callback) {
+    verifyOTPForResetPass: function (data, callback) {
         Photographer.findOne({
             otp: data.otp,
-        }).exec(function(error, found) {
+        }).exec(function (error, found) {
             if (error || found == undefined) {
                 callback(error, null);
             } else {
@@ -875,7 +877,7 @@ var model = {
     // },
 
     //send otp
-    checkPhotographersForOtp: function(data, callback) {
+    checkPhotographersForOtp: function (data, callback) {
         console.log("###########################33", data);
         var otpData = this(data);
         otpData.otpTime = new Date();
@@ -885,13 +887,13 @@ var model = {
         otpData.otp = emailOtp;
         Photographer.findOne({
             email: data.email
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
                 if (!found) {
                     // dataObj._id = new mongoose.mongo.ObjectID();
-                    otpData.save(function(err, updated) {
+                    otpData.save(function (err, updated) {
                         if (err) {
                             console.log("errrrrrrr", err);
                             callback(err, null);
@@ -903,7 +905,7 @@ var model = {
                                 smsData.mobile = otpData.contact;
                                 smsData.content = " Please confirm the OTP " + emailOtp + " in Clickmania website to complete your registration.";
                                 console.log("*************************************************sms data from photographer***********************************************", smsData);
-                                Config.sendSms(smsData, function(err, smsRespo) {
+                                Config.sendSms(smsData, function (err, smsRespo) {
                                     if (err) {
                                         console.log("*************************************************sms gateway error in photographer***********************************************", err);
 
@@ -921,7 +923,7 @@ var model = {
                             emailData.otp = emailOtp;
                             emailData.filename = "otpForSignUp.ejs";
                             emailData.subject = "Clickmania OTP";
-                            Config.email(emailData, function(err, emailRespo) {
+                            Config.email(emailData, function (err, emailRespo) {
                                 if (err) {
                                     console.log(err);
                                     callback(null, err);
@@ -948,7 +950,7 @@ var model = {
                         otp: emailOtp
                     }, {
                         new: true
-                    }, function(err, updated) {
+                    }, function (err, updated) {
                         if (err) {
                             callback(err, null);
                         } else if (updated) {
@@ -965,7 +967,7 @@ var model = {
                                 emailData.otp = emailOtp;
                                 emailData.filename = "otpForSignUp.ejs";
                                 emailData.subject = "Clickmania OTP";
-                                Config.email(emailData, function(err, emailRespo) {
+                                Config.email(emailData, function (err, emailRespo) {
                                     if (err) {
                                         console.log(err);
                                         callback(null, err);
@@ -991,7 +993,7 @@ var model = {
     },
 
     //verify otp
-    verifyOTP: function(data, callback) {
+    verifyOTP: function (data, callback) {
         var currentTime = new Date();
         Photographer.findOneAndUpdate({
             otp: data.otp,
@@ -1000,7 +1002,7 @@ var model = {
             verifyAcc: true
         }, {
             new: true
-        }).exec(function(error, found) {
+        }).exec(function (error, found) {
             if (error || found == undefined) {
                 console.log("User >>> verifyOTP >>> User.findOne >>> error >>>", error);
                 callback(error, null);
@@ -1021,7 +1023,7 @@ var model = {
                     emailData.from = "admin@clickmania.in";
                     emailData.fromname = "Clickmania Admin";
                     emailData.subject = "Welcome To Clickmania";
-                    Config.email(emailData, function(err, emailRespo) {
+                    Config.email(emailData, function (err, emailRespo) {
                         if (err) {
                             console.log(err);
                             //callback(null, found);
@@ -1038,7 +1040,7 @@ var model = {
                             emailData.from = "admin@clickmania.in";
                             emailData.fromname = "Clickmania Admin";
                             emailData.subject = "Clickmania Update Profile";
-                            Config.email(emailData, function(err, emailRespo) {
+                            Config.email(emailData, function (err, emailRespo) {
                                 if (err) {
                                     console.log(err);
                                     //callback(null, found);
@@ -1063,7 +1065,7 @@ var model = {
                     } else {
                         Photographer.remove({
                             _id: found._id
-                        }).exec(function(error, found1) {
+                        }).exec(function (error, found1) {
                             if (error) {
                                 callback(error, null);
                             } else if (found1) {
@@ -1105,7 +1107,7 @@ var model = {
     // }
     //smsotp
 
-    updateToGold: function(data, callback) {
+    updateToGold: function (data, callback) {
         // console.log("in update gold..");
         // console.log(data);
         var photographerId = data.Description.split("/");
@@ -1115,7 +1117,7 @@ var model = {
             package: photographerId[0],
         }, {
             new: true
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
             if (err) {
                 // console.log(err);
                 callback(err, null);
@@ -1128,7 +1130,7 @@ var model = {
                             silverPackageBroughtDate: Date.now()
                         }, {
                             new: true
-                        }, function(err, updated) {
+                        }, function (err, updated) {
                             if (err) {
                                 callback(err, null);
                             } else if (updated) {
@@ -1197,7 +1199,7 @@ var model = {
                             goldPackageBroughtDate: Date.now()
                         }, {
                             new: true
-                        }, function(err, updated) {
+                        }, function (err, updated) {
                             if (err) {
                                 callback(err, null);
                             } else if (updated) {
@@ -1249,7 +1251,7 @@ var model = {
     //update to Gold end
 
     //update to silverpackage
-    updateToSilver: function(data, callback) {
+    updateToSilver: function (data, callback) {
         console.log(data);
         Photographer.findOneAndUpdate({
             _id: data._id
@@ -1258,7 +1260,7 @@ var model = {
             silverPackageBroughtDate: data.packageBroughtDate
         }, {
             new: true
-        }).exec(function(err, found) {
+        }).exec(function (err, found) {
             if (err) {
                 // console.log(err);
                 callback(err, null);
@@ -1276,7 +1278,7 @@ var model = {
                 emailData.fromname = "Clickmania Admin";
                 emailData.subject = "congrats you Have upgraded to Silver Package";
 
-                Config.email(emailData, function(err, emailRespo) {
+                Config.email(emailData, function (err, emailRespo) {
                     if (err) {
                         console.log(err);
                         callback(err, null);
@@ -1294,7 +1296,7 @@ var model = {
                         emailData.fromname = "Clickmania Admin";
                         emailData.subject = "Please upgrade to Gold";
 
-                        Config.email(emailData, function(err, emailRespo) {
+                        Config.email(emailData, function (err, emailRespo) {
                             if (err) {
                                 console.log(err);
                                 callback(err, null);
@@ -1320,8 +1322,8 @@ var model = {
     //update to silverpackage end
 
     //searchBar get all photographers city
-    findPhotographerCities: function(data, callback) {
-        Photographer.find({}).exec(function(err, found) {
+    findPhotographerCities: function (data, callback) {
+        Photographer.find({}).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -1338,8 +1340,8 @@ var model = {
     },
     //searchBar get all photographers city end
 
-    getAllPhotographers: function(data, callback) {
-        Photographer.find({}).exec(function(err, found) {
+    getAllPhotographers: function (data, callback) {
+        Photographer.find({}).exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -1356,14 +1358,14 @@ var model = {
 
     //PhotoContest
 
-    findContest: function(data, callback) {
+    findContest: function (data, callback) {
         Photographer.find({
             contestPhotos: {
                 $elemMatch: {
                     contestId: data._id
                 }
             }
-        }).deepPopulate("contestPhotos.contestId").exec(function(err, found) {
+        }).deepPopulate("contestPhotos.contestId").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -1379,7 +1381,7 @@ var model = {
         })
     },
 
-    removeContestUser: function(data, callback) {
+    removeContestUser: function (data, callback) {
         Photographer.update({
             "_id": data.testid,
             contestPhotos: {
@@ -1397,7 +1399,7 @@ var model = {
                 }
                 // contestParticipant: mongoose.Types.ObjectId(data.testid)
             }
-        }, function(err, updated) {
+        }, function (err, updated) {
             if (err) {
                 console.log(err);
                 callback(err, null);
@@ -1407,7 +1409,7 @@ var model = {
         });
     },
 
-    findContestPhotos: function(data, callback) {
+    findContestPhotos: function (data, callback) {
         Photographer.find({
             _id: data.testid,
             contestPhotos: {
@@ -1415,7 +1417,7 @@ var model = {
                     contestId: data._id
                 }
             }
-        }).deepPopulate("contestPhotos.contestId").exec(function(err, found) {
+        }).deepPopulate("contestPhotos.contestId").exec(function (err, found) {
             if (err) {
                 callback(err, null);
             } else {
@@ -1431,10 +1433,10 @@ var model = {
         });
     },
 
-    findTotalPriceOfGold: function(data, callback) {
+    findTotalPriceOfGold: function (data, callback) {
         Photographer.findOne({
             _id: data._id
-        }, function(err, found) {
+        }, function (err, found) {
             if (err) {
                 // console.log(err);
                 callback(err, null);
@@ -1486,10 +1488,10 @@ var model = {
      * @param {photographer} input photographers Id
      * @param {callback} callback function with err and response
      */
-    approvedDeclineMail: function(data, callback) {
+    approvedDeclineMail: function (data, callback) {
         Photographer.findOne({
             _id: data.photographer
-        }).exec(function(err, photographer) {
+        }).exec(function (err, photographer) {
             if (err) {
                 callback(err, null);
             } else if (!_.isEmpty(photographer)) {
@@ -1500,7 +1502,7 @@ var model = {
                 emailData.filename = "acceptDecline.ejs";
                 emailData.subject = "upload photo";
                 emailData.status = data.status;
-                Config.email(emailData, function(err, emailRespo) {
+                Config.email(emailData, function (err, emailRespo) {
                     if (err) {
                         console.log(err);
                         callback(err);
@@ -1520,10 +1522,10 @@ var model = {
      * @param {photographer} input photographers Id
      * @param {callback} callback function with err and response
      */
-    getDownloadPhoto: function(data, callback) {
+    getDownloadPhoto: function (data, callback) {
         Photographer.findOne({
             _id: data._id
-        }).lean().deepPopulate("downloadPhotos").exec(function(err, photographer) {
+        }).lean().deepPopulate("downloadPhotos").exec(function (err, photographer) {
             if (err) {
                 callback(err, null);
             } else if (!_.isEmpty(photographer)) {
@@ -1540,10 +1542,10 @@ var model = {
      * @param {data._id} input photographers Id
      * @param {callback} callback function with err and response
      */
-    getAllDownloadPhotos: function(data, callback) {
+    getAllDownloadPhotos: function (data, callback) {
         Photographer.findOne({
             _id: data._id
-        }).lean().deepPopulate("downloadPhotos").exec(function(err, photographer) {
+        }).lean().deepPopulate("downloadPhotos").exec(function (err, photographer) {
             if (err) {
                 callback(err, null);
             } else if (!_.isEmpty(photographer)) {
@@ -1556,13 +1558,13 @@ var model = {
     }
 };
 
-cron.schedule('1 12 * * *', function() {
-    Photographer.find({}, function(err, found) {
+cron.schedule('1 12 * * *', function () {
+    Photographer.find({}, function (err, found) {
         if (err) {
             console.log("error occured");
             callback(err, null);
         } else {
-            async.eachSeries(found, function(value, callback1) {
+            async.eachSeries(found, function (value, callback1) {
                 if (value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
                     var PackgeDate = moment(value.goldPackageBroughtDate.setFullYear(value.goldPackageBroughtDate.getFullYear() + 1)).format();
                 } else if (!value.silverPackageBroughtDate && value.goldPackageBroughtDate) {
@@ -1579,7 +1581,7 @@ cron.schedule('1 12 * * *', function() {
                     value.package = "";
                     value.silverPackageBroughtDate = "";
                     value.goldPackageBroughtDate = "";
-                    value.save(function() {});
+                    value.save(function () {});
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
                     emailData.name = value.name;
@@ -1587,7 +1589,7 @@ cron.schedule('1 12 * * *', function() {
                     emailData.package = value.package;
                     emailData.filename = "packageExpiry.ejs";
                     emailData.subject = "Package Expiry";
-                    Config.email(emailData, function(err, emailRespo) {
+                    Config.email(emailData, function (err, emailRespo) {
                         if (err) {
                             callback(err, null);
                         } else if (emailRespo) {
@@ -1603,14 +1605,14 @@ cron.schedule('1 12 * * *', function() {
                     value.dateOfRagister = "";
                     value.month = "";
                     value.year = "";
-                    value.save(function() {});
+                    value.save(function () {});
                     var emailData = {};
                     emailData.from = "admin@clickmania.in";
                     emailData.name = value.name;
                     emailData.email = value.email;
                     emailData.filename = "featureExpiry.ejs";
                     emailData.subject = "Feature Expiry";
-                    Config.email(emailData, function(err, emailRespo) {
+                    Config.email(emailData, function (err, emailRespo) {
                         if (err) {
                             callback(err, null);
                         } else if (emailRespo) {
@@ -1621,7 +1623,7 @@ cron.schedule('1 12 * * *', function() {
                     });
                 }
                 callback1(null, "go ahead");
-            }, function(error, data) {
+            }, function (error, data) {
                 if (err) {
                     console.log("error found in doLogin.callback1");
                     //callback(null, err);
