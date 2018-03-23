@@ -62,24 +62,24 @@ var navigationservice = angular.module('navigationservice', [])
 
         return {
             getnav: function () {
-                var navigation = [];
-                // return navigation;
-                if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin1') {
-                    _.forEach(_.cloneDeep(navigation1), function (val) {
-                        if (_.isEqual(val.name, 'Image upload request')) {
-                            navigation.push(val);
-                        }
-                    });
-                    return navigation;
-                } else if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin') {
-                    _.forEach(_.cloneDeep(navigation1), function (val) {
-                        // navigation.push(val);
-                        var evens = _.remove(navigation1, function (n) {
-                            return n.name == 'Image upload request';
-                        });
-                    });
-                    return navigation1;
-                }
+                // var navigation = [];
+                return navigation1;
+                // if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin1') {
+                //     _.forEach(_.cloneDeep(navigation1), function (val) {
+                //         if (_.isEqual(val.name, 'Image upload request')) {
+                //             navigation.push(val);
+                //         }
+                //     });
+                //     return navigation;
+                // } else if ($.jStorage.get("profile") && $.jStorage.get("profile").accessLevel == 'Admin') {
+                //     _.forEach(_.cloneDeep(navigation1), function (val) {
+                //         // navigation.push(val);
+                //         var evens = _.remove(navigation1, function (n) {
+                //             return n.name == 'Image upload request';
+                //         });
+                //     });
+                //     return navigation1;
+                // }
             },
 
             parseAccessToken: function (data, callback) {
