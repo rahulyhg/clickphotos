@@ -1457,6 +1457,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
+            formdata.country = $.jStorage.get("photographer").country;
+            formdata.currency = $.jStorage.get("photographer").currency;
+            formdata.codeCountry = $.jStorage.get("photographer").codeCountry;
             formdata.type = "featured/" + $.jStorage.get("photographer")._id + "/" + $scope.finalMonth + "/" + new Date().getFullYear() + "/" + formdata.amount + "/" + order;
             // console.log(formdata);
             NavigationService.apiCallWithData("Photographer/checkoutPayment", formdata, function (data) {
@@ -1520,6 +1523,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.pincode = userdetails.pin;
             $scope.userData.gstNumber = userdetails.GSTNumber;
             $scope.userData.photographer = $.jStorage.get("photographer")._id;
+            $scope.userData.country = $.jStorage.get("photographer").country;
+            $scope.userData.currency = $.jStorage.get("photographer").currency;
+            $scope.userData.codeCountry = $.jStorage.get("photographer").codeCountry;
             var url = "GstDetails/save";
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
                 // console.log(data)
@@ -3226,6 +3232,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.phone = phone;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
+            formdata.country = $.jStorage.get("photographer").country;
+            formdata.currency = $.jStorage.get("photographer").currency;
+            formdata.codeCountry = $.jStorage.get("photographer").codeCountry;
             formdata.type = "PackageUpdateForThree/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId + "/" + formdata.amount + "/" + order;
             // console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
@@ -3248,6 +3257,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.phone = phone;
             formdata.return_url = adminurl + "PhotoContest/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
+            formdata.country = $.jStorage.get("photographer").country;
+            formdata.currency = $.jStorage.get("photographer").currency;
+            formdata.codeCountry = $.jStorage.get("photographer").codeCountry;
             formdata.type = "PackageUpdateForSix/" + $.jStorage.get("photographer")._id + "/" + $stateParams.photoContestId + "/" + $scope.amount[0].amount + "/" + order;
             // console.log(formdata);
             NavigationService.apiCallWithData("PhotoContest/checkoutPayment", formdata, function (data) {
@@ -3294,6 +3306,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.userData.city = userdetails.city;
             $scope.userData.pincode = userdetails.pin;
             $scope.userData.gstNumber = userdetails.GSTNumber;
+            $scope.userData.country = $.jStorage.get("photographer").country;
+            $scope.userData.currency = $.jStorage.get("photographer").currency;
+            $scope.userData.codeCountry = $.jStorage.get("photographer").codeCountry;
             $scope.userData.photographer = $.jStorage.get("photographer")._id;
             var url = "GstDetails/save";
             NavigationService.apiCallWithData(url, $scope.userData, function (data) {
@@ -3564,9 +3579,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // console.log("else")
             }
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.country = $scope.selectedCountryName;
-            formdata.currency = $scope.countryCurrency;
-            formdata.codeCountry = $scope.selectedCountryCode;
+            formdata.country = $.jStorage.get("photographer").country;
+            formdata.currency = $.jStorage.get("photographer").currency;
+            formdata.codeCountry = $.jStorage.get("photographer").codeCountry;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
             formdata.type = "Gold/" + $.jStorage.get("photographer")._id + "/" + formdata.amount + "/" + order;
@@ -3604,9 +3619,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = null;
             formdata.amount = silverPackageAmount + silverPackgeGst;
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.country = $scope.selectedCountryName;
-            formdata.currency = $scope.countryCurrency;
-            formdata.codeCountry = $scope.selectedCountryCode;
+            formdata.country = $.jStorage.get("photographer").country;
+            formdata.currency = $.jStorage.get("photographer").currency;
+            formdata.codeCountry = $.jStorage.get("photographer").codeCountry;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
@@ -3637,9 +3652,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             formdata.payAmount = null;
             formdata.amount = $.jStorage.get("virtualGalleryAmount"); // add $jStorage amount value
             formdata.email = $.jStorage.get("photographer").email;
-            formdata.country = $scope.selectedCountryName;
-            formdata.currency = $scope.countryCurrency;
-            formdata.codeCountry = $scope.selectedCountryCode;
+            formdata.country = $.jStorage.get("photographer").country;
+            formdata.currency = $.jStorage.get("photographer").currency;
+            formdata.codeCountry = $.jStorage.get("photographer").codeCountry;
             formdata.phone = phone;
             formdata.return_url = adminurl + "Photographer/paymentGatewayResponce";
             formdata.name = $.jStorage.get("photographer").name;
