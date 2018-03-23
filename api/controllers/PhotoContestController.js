@@ -373,9 +373,9 @@ var controller = {
                         var phoneno = "0000000000"
                     }
                     EBSConfig.getAll({}, function (err, dataConfig) {
-                        // console.log("ggggggggg");
+                        // console.log("ggggggggg", data);
                         console.log(dataConfig);
-                        var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|IND|INR|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
+                        var hash = sha512(dataConfig[0].secret + "|" + dataConfig[0].account + "|Billing Address|" + data.amount + "|0|Billing City|" + data.photographer.codeCountry + "|" + data.photographer.currency + "|" + data.description + "|GBP|1|" + data.email + "|" + dataConfig[0].name + "|" + data.name + "|" + phoneno + "|600001|" + req.query.id + "|" + data.return_url);
                         var hashtext = hash.toString('hex');
                         var hs = hashtext.toUpperCase('hex');
                         var reference_no = req.query.id;
@@ -383,11 +383,11 @@ var controller = {
                         var formData = {
                             account_id: dataConfig[0].account,
                             address: "Billing Address",
-                            amount: data.payAmount.amount,
+                            amount: data.amount,
                             channel: "0",
                             city: "Billing City",
-                            country: "IND",
-                            currency: "INR",
+                            country: data.photographer.codeCountry,
+                            currency: data.photographer.currency,
                             description: data.description,
                             display_currency: "GBP",
                             display_currency_rates: "1",
