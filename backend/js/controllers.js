@@ -13,7 +13,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($.jStorage.get("accessToken")) {
 
         } else {
-            $state.go("login");
+            // $state.go("login");
         }
     })
 
@@ -645,21 +645,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.template = TemplateService;
         $scope.currentHost = window.location.origin;
-        if ($stateParams.id) {
-            if ($stateParams.id === "AccessNotAvailable") {
-                toastr.error("You do not have access for the Backend.");
-            } else {
-                NavigationService.parseAccessToken($stateParams.id, function () {
-                    NavigationService.profile(function () {
-                        $state.go("dashboard");
-                    }, function () {
-                        $state.go("login");
-                    });
-                });
-            }
-        } else {
-            NavigationService.removeAccessToken();
-        }
+        // if ($stateParams.id) {
+        //     if ($stateParams.id === "AccessNotAvailable") {
+        //         toastr.error("You do not have access for the Backend.");
+        //     } else {
+        //         NavigationService.parseAccessToken($stateParams.id, function () {
+        //             NavigationService.profile(function () {
+        //                 $state.go("dashboard");
+        //             }, function () {
+        //                 $state.go("login");
+        //             });
+        //         });
+        //     }
+        // } else {
+        //     NavigationService.removeAccessToken();
+        // }
 
     })
 
