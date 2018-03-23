@@ -5584,7 +5584,25 @@ a.forgot-pwd {
             }
         }
     }
-} //toast end
+}
+
+.signup-form,
+.contest__stp1 {
+    .country-dropdown .btn-default {
+        border: 0;
+        border-bottom: 1px solid $orangeColor;
+        background-color: white;
+        &:hover {
+            background-color: white;
+        }
+        &:focus {
+            border: 0;
+            border-bottom: 1px solid $orangeColor !important;
+        }
+    }
+}
+
+//toast end
 //Start of competition page
 //@import "fancybox-override";
 // @import "rishabh";

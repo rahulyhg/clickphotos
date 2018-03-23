@@ -1176,6 +1176,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.selectedCountryName = model.name; // it will give the country name 
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
             //  console.log("model", selectedCountryName);
+            $scope.selectedCountry = model;
         };
 
         // $rootScope.showStep="";
@@ -1529,6 +1530,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
         $scope.gotoPayment = function () {
             // console.log("inpaymenyt")
+            $scope.formData = {};
+            $scope.formData.country = $.jStorage.get("photographer").country;
             $scope.showStep = 3;
 
 
@@ -2934,8 +2937,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         // It will give the particular country on selection
         $scope.selectCountry = function (item, model) {
+            console.log("$$$$$$$$$$$$$44", model)
             $scope.selectedCountryName = model.name; // it will give the country name 
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
+            $scope.selectedCountry = model;
             //  console.log("model", selectedCountryName);
         };
 
@@ -3274,6 +3279,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showNext = function (nos) {
             $scope.numberOfSlot = nos;
             $scope.step = 3
+            $scope.formData = {};
+            $scope.formData.country = $.jStorage.get("photographer").country;
         }
         $scope.gstPayment = function (userdetails) {
             // console.log("userdetails", userdetails);
@@ -3799,6 +3806,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.selectedCountryName = model.name; // it will give the country name 
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
             //  console.log("model", selectedCountryName);
+            $scope.selectedCountry = model;
         };
         NavigationService.callApi("Photos/getAllPhotos", function (data) {
             $scope.virtualGallery = data.data;
@@ -4299,6 +4307,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.selectedCountryName = model.name; // it will give the country name 
             var selectedCountryCode = model.callingCodes; // it will give the country  code 
             //  console.log("model", selectedCountryName);
+            $scope.selectedCountry = model;
         };
 
         //We need to check if $stateParams is true, do the following task

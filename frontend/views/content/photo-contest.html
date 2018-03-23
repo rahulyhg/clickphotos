@@ -50,6 +50,24 @@
                                     <input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
                                     <span class="alignment" ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter your valid email id</span><br>
                                 </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <!--<input type="email" class="form-control" id="email" placeholder="Email id" ng-model="formData.email" name="email" required>
+                                    <span class="alignment" ng-show="loginForm.email.$touched && loginForm.email.$invalid">Please enter your valid email id</span><br>-->
+
+                                    <div class="form-group">
+                                        <!-- <span class="caret"></span> -->
+                                        <div class="country-dropdown">
+                                            <ui-select ng-model="selectedCountry" on-select="selectCountry($item, $model)">
+                                                <ui-select-match>
+                                                    <span>+{{$select.selected.callingCodes[0]}}&nbsp;{{$select.selected.name}}</span>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="country in (countryListData| filter: $select.search) track by $index">
+                                                    <span>+{{country.callingCodes[0]}}&nbsp;{{country.name}}</span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="password" class="form-control" id="pwd" placeholder="Password" ng-model="formData.password" name="passsword"
                                         required>
@@ -197,11 +215,14 @@
                                         <span class="alignment" ng-show="bill.contact.$touched && bill.contact.$invalid">Please enter valid mobile number</span><br>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" id="india" placeholder="India" ng-model="formData.country" name="india" value="India"
-                                            readonly>
+                                        <input type="text" class="form-control" id="india" ng-model="formData.country" name="india" readonly>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-6 col-sm-12" ng-if="formData.country=='India'">
                                         <select class="form-control placeholder select-class" id="state" ng-model="formData.state" name="state" required><option value="" hidden>State</option><option value="{{state}}" ng-repeat="state in states">{{state}}</option></select>
+                                        <span class="alignment" ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span><br>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12" ng-if="formData.country!='India'">
+                                        <input type="text" class="form-control placeholder select-class" id="state" ng-model="formData.state" name="state" required>
                                         <span class="alignment" ng-show="bill.state.$touched && bill.state.$invalid">Please select your State</span><br>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
