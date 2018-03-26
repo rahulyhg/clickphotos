@@ -43,16 +43,29 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "categories ph
 var model = {
 
     searchPhotos: function (data, callback) {
-        console.log("data------", data);
-        Photos.aggregate([{
-            $match: {
-                "keyword": {
-                    $regex: data.keyword,
-                    $options: "i"
-                },
-                "status": "Approved"
+        if (data.cat) {
+            var pipeline = {
+                $match: {
+                    "keyword": {
+                        $regex: data.keyword,
+                        $options: "i"
+                    },
+                    "status": "Approved",
+                    "categories": mongoose.Types.ObjectId(data.cat._id)
+                }
             }
-        }], function (err, found) {
+        } else {
+            var pipeline = {
+                $match: {
+                    "keyword": {
+                        $regex: data.keyword,
+                        $options: "i"
+                    },
+                    "status": "Approved"
+                }
+            }
+        }
+        Photos.aggregate([pipeline], function (err, found) {
             if (err || _.isEmpty(found)) {
                 callback(err, null);
             } else {
@@ -224,6 +237,51 @@ var model = {
                 callback(null, false)
             }
         })
+    },
+
+    /**
+     * this function to search photos according keyword and category
+     * @param {data.keyword} input keyword
+     * @param {data.category} input category Id
+     * @param {callback} callback function with err and response
+     */
+    getSearchPhoto: function (data, callback) {
+        if (data.keyword && data.category) {
+            var pipeline = {
+                $match: {
+                    "keyword": {
+                        $regex: data.keyword,
+                        $options: "i"
+                    },
+                    "status": "Approved",
+                    "categories": mongoose.Types.ObjectId(data.category)
+                }
+            }
+        } else if (data.keyword && !data.category) {
+            var pipeline = {
+                $match: {
+                    "keyword": {
+                        $regex: data.keyword,
+                        $options: "i"
+                    },
+                    "status": "Approved"
+                }
+            }
+        } else if (!data.keyword && data.category) {
+            var pipeline = {
+                $match: {
+                    "status": "Approved",
+                    "categories": mongoose.Types.ObjectId(data.category)
+                }
+            }
+        }
+        Photos.aggregate([pipeline], function (err, found) {
+            if (err || _.isEmpty(found)) {
+                callback(err, null);
+            } else {
+                callback(null, found)
+            }
+        });
     }
 
 };

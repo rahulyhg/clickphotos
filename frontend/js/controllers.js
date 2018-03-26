@@ -3924,6 +3924,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var relatedData = {
                 category: val._id
             };
+            if ($scope.categoryToSend) {
+                relatedData.keyword = $scope.categoryToSend.keyword;
+            }
             NavigationService.apiCallWithData("Photos/getAllRelatedPhotos", relatedData, function (data) {
                 if (data.data == "noData") {
                     $scope.virtualGallery = {};
@@ -3959,13 +3962,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.getCategoryWisePhoto = function (userIp) {
             $log.debug("Data", userIp);
             var blankArray = []; // to copy into $scope.virtualGallery if no data found on search
-            var categoryToSend = {};
-            categoryToSend.keyword = userIp; // need to set it as per API's searchPhotos function
+            $scope.categoryToSend = {};
+            $scope.categoryToSend.keyword = userIp; // need to set it as per API's searchPhotos function
             if ($scope.imageData.category) {
-                categoryToSend.cat = $scope.imageData.category;
+                $scope.categoryToSend.cat = $scope.imageData.category;
             }
-            NavigationService.apiCallWithData("Photos/searchPhotos", categoryToSend, function (data) {
+            NavigationService.apiCallWithData("Photos/searchPhotos", $scope.categoryToSend, function (data) {
                 //$log.debug("data-----------------------", data);
+                $scope.virtualGallery = data.data;
+                //for checking product is added in the cart or not
+                if ($rootScope.myCartData) {
+                    _.each($scope.virtualGallery, function (gallery) {
+                        _.each($rootScope.myCartData.photos, function (cartPhoto) {
+                            if (_.isEqual(cartPhoto._id, gallery._id)) {
+                                gallery.myCart = true;
+                            } else {
+                                if (gallery.myCart) {
+                                    gallery.myCart = true;
+                                } else {
+                                    gallery.myCart = false;
+                                }
+                            }
+                        }); // end of inner each
+                    }); // end of outer each
+                }
+                if (data.data == "No Data Found") {
+                    $log.warn("no data");
+                    //  $log.debug(" $scope.virtualGallery", $scope.virtualGallery);
+                    toastr.error('No Photos found', 'Error');
+                    $scope.virtualGallery = [];
+                }
+            });
+        }
+
+        //search photos category and keyword wise
+        $scope.getSearchPhoto = function () {
+            var searchPhoto = {};
+            if ($scope.categoryToSend) {
+                searchPhoto.keyword = $scope.categoryToSend.keyword;
+            }
+            if ($scope.imageData.category) {
+                searchPhoto.category = $scope.imageData.category._id;
+            }
+            NavigationService.apiCallWithData("Photos/getSearchPhoto", searchPhoto, function (data) {
                 $scope.virtualGallery = data.data;
                 //for checking product is added in the cart or not
                 if ($rootScope.myCartData) {
